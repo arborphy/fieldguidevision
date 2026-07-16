@@ -104,6 +104,8 @@ def classification_metrics(records: list[TrialRecord] | tuple[TrialRecord, ...])
 def write_trial_records(path: str | Path, records: list[TrialRecord] | tuple[TrialRecord, ...]) -> None:
     """Write raw responses and immutable release provenance as one JSON artifact."""
     output = Path(path)
+    if output.exists():
+        raise FileExistsError(f"Trial artifact already exists: {output}")
     output.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "records": [asdict(record) for record in records],

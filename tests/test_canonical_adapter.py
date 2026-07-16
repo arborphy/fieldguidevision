@@ -88,6 +88,14 @@ class TrialMetricTests(unittest.TestCase):
         self.assertEqual(serialized["case"]["canonical_value_id"], self.case.canonical_value_id)
         self.assertEqual(payload["metrics"]["classification_accuracy"], None)
 
+    def test_write_rejects_existing_destination(self) -> None:
+        record = TrialRecord(self.provenance, self.case, "response", "abstained", None)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "trial.json"
+            write_trial_records(path, [record])
+            with self.assertRaises(FileExistsError):
+                write_trial_records(path, [record])
+
     def test_trial_rejects_release_provenance_mismatch(self) -> None:
         mismatch = TrialProvenance(
             **{**self.provenance.__dict__, "release_id": "sha256:" + "0" * 64}
