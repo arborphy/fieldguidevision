@@ -1,0 +1,34 @@
+{
+  "manifest": {
+    "contract_version": "1.0.0-rc.2",
+    "release_id": "sha256:92d6531e3fbbdcb7fad7cbe50e9e7e18fea13f0b851dcb3eb558b355f054b7a9",
+    "source": {
+      "devo_name": "gobotany",
+      "version": "api-first woody-angiosperms",
+      "content_hash": "sha256:683b1f2f3fd760bd51b147519d69aacc1ce6f3514b79547713bffdc0018f7073"
+    }
+  },
+  "devo_registry": [{"devo_name": "gobotany"}],
+  "devo_features": [{"devo_name": "gobotany", "feature_name": "leaf_arrangement_wa"}],
+  "devo_feature_values": [{
+    "devo_name": "gobotany",
+    "vocab_id": "leaf_arrangement_wa-2_leaves_per_node",
+    "feature_name": "leaf_arrangement_wa",
+    "source_value_id": "leaf_arrangement_wa:0"
+  }],
+  "devo_images": [],
+  "devo_annotations": [],
+  "devo_taxa": [{
+    "devo_name": "gobotany",
+    "taxon_name": "Acer campestre",
+    "source_taxon_id": "1520"
+  }],
+  "devo_taxon_feature_value": [{
+    "devo_name": "gobotany",
+    "taxon_name": "Acer campestre",
+    "feature_name": "leaf_arrangement_wa",
+    "vocab_id": "leaf_arrangement_wa-2_leaves_per_node",
+    "assertion_source": "api",
+    "source_context_id": "gobotany:scope:woody-angiosperms"
+  }]
+}
