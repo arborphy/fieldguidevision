@@ -8,3 +8,12 @@ dependencies = [
     "duckdb>=1.1.0",
     "pandas>=2.2.0",
 ]
+
+[project.optional-dependencies]
+segmentation = [
+    "opencv-python-headless>=4.10.0",
+    "pillow>=10.4.0",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "transformers>=5.0.0",
+]
