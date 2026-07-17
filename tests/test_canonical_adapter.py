@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -20,7 +21,10 @@ from canonical_adapter.trials import write_trial_records  # noqa: E402
 
 
 FIXTURE = Path(__file__).parent / "fixtures" / "gobotany_canonical_release.json"
-P4_RELEASE = FIELDGUIDEVISION_ROOT.parent / "arq-refdata" / "gobotany_extract" / "outputs" / "api_pilot" / "gobotany_release.json"
+P4_RELEASE = Path(os.environ.get(
+    "ARBORPHY_P4_RELEASE",
+    FIELDGUIDEVISION_ROOT.parent / "arq-refdata" / "gobotany_extract" / "outputs" / "api_pilot" / "gobotany_release.json",
+))
 
 
 class CanonicalReleaseTests(unittest.TestCase):
@@ -38,6 +42,10 @@ class CanonicalReleaseTests(unittest.TestCase):
         self.assertEqual(case.source_value_id, "leaf_arrangement_wa:0")
 
     def test_reader_consumes_approved_p4_release(self) -> None:
+        if not P4_RELEASE.is_file():
+            self.skipTest(
+                "P4 release unavailable; set ARBORPHY_P4_RELEASE to run this integration check"
+            )
         release = load_canonical_release(P4_RELEASE)
 
         self.assertEqual(release.contract_version, "1.0.0-rc.2")
