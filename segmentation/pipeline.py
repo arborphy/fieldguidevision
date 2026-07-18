@@ -54,6 +54,8 @@ class CaptureFrame:
     observation_id: str
     image_url: str
     subject_id: str
+    image_sha256: str | None = None
+    local_path: str | None = None
     species_name: str | None = None
     photo_id: str | None = None
     license: str | None = None
@@ -186,6 +188,8 @@ class BatchResult:
                     "observation_id": frame.observation_id,
                     "photo_id": frame.photo_id,
                     "image_url": frame.image_url,
+                    "image_sha256": frame.image_sha256,
+                    "local_path": frame.local_path,
                     "subject_id": frame.subject_id,
                     "species_name": frame.species_name,
                     "license": frame.license,

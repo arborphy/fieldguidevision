@@ -7,6 +7,7 @@ PyTorch. Install the ``segmentation`` extra before using this backend.
 from __future__ import annotations
 
 from io import BytesIO
+from pathlib import Path
 from urllib.request import Request, urlopen
 
 from .pipeline import CaptureFrame, RawSegment, canonical_organ_label
@@ -60,6 +61,8 @@ class GroundedSam2Segmenter:
     def _load_image(url: str):
         from PIL import Image
 
+        if url.startswith("file://"):
+            return Image.open(Path(url.removeprefix("file://"))).convert("RGB")
         request = Request(url, headers={"User-Agent": "ArborphyFieldguidevision/0.1"})
         with urlopen(request, timeout=30) as response:
             return Image.open(BytesIO(response.read())).convert("RGB")
@@ -78,8 +81,10 @@ class GroundedSam2Segmenter:
         return tuple((float(x) / width, float(y) / height) for x, y in simplified)
 
     def segment(self, frame: CaptureFrame, prompts) -> tuple[RawSegment, ...]:
+        from PIL import Image
+
         torch = self._torch
-        image = self._load_image(frame.image_url)
+        image = Image.open(frame.local_path).convert("RGB") if frame.local_path else self._load_image(frame.image_url)
         labels = [[str(prompt) for prompt in prompts]]
         detector_inputs = self._detector_processor(
             images=image, text=labels, return_tensors="pt"
