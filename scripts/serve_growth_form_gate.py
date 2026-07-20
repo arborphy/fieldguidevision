@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Serve real Grounding-DINO + SAM 2.1 growth-form gate evaluations.
+"""Serve real Grounding-DINO + SAM 2.1 organ gate evaluations.
 
-This is a local/LAN development service for the mobile field loop. It accepts a
-sampled camera frame, returns only visual growth-form geometry/confidence, and
-never emits a taxon or source-vocabulary assertion.
+This local/LAN development service evaluates one visual organ per sampled camera
+frame. It returns geometry/confidence only and never emits a taxon or
+source-vocabulary assertion.
 """
 
 from __future__ import annotations
@@ -37,17 +37,20 @@ class GrowthFormGate:
         self.telemetry.append({"received_at": datetime.now(timezone.utc).isoformat(), **event})
         del self.telemetry[:-200]
 
-    def evaluate(self, image_base64: str, threshold: float) -> dict:
+    def evaluate(self, image_base64: str, threshold: float, layer: str) -> dict:
+        prompts = {"growth_form": "whole plant", "leaf": "leaf"}
+        if layer not in prompts:
+            raise ValueError("layer must be growth_form or leaf")
         encoded = image_base64.split(",", 1)[-1]
         payload = base64.b64decode(encoded)
         with tempfile.NamedTemporaryFile(suffix=".jpg") as image:
             image.write(payload)
             image.flush()
             frame = CaptureFrame(
-                observation_id="live-growth-form-gate", image_url="live://camera",
-                local_path=image.name, subject_id="live-growth-form",
+                observation_id=f"live-{layer}-gate", image_url="live://camera",
+                local_path=image.name, subject_id=f"live-{layer}",
             )
-            segments = self.segmenter.segment(frame, ("whole plant",))
+            segments = self.segmenter.segment(frame, (prompts[layer],))
         proposals = []
         for index, segment in enumerate(segments):
             confidence = round(0.5 * segment.detection_confidence + 0.5 * segment.mask_quality, 6)
@@ -55,7 +58,7 @@ class GrowthFormGate:
             if polygon and polygon[0] != polygon[-1]:
                 polygon.append(polygon[0])
             proposals.append({
-                "proposal_id": f"live-growth-form-{index}", "category": "whole plant",
+                "proposal_id": f"live-{layer}-{index}", "category": prompts[layer],
                 "polygon": polygon, "confidence": confidence,
                 "detector_confidence": segment.detection_confidence,
                 "mask_quality": segment.mask_quality, "prompt": segment.prompt,
@@ -64,11 +67,11 @@ class GrowthFormGate:
         best = proposals[0] if proposals else None
         return {
             "provider": {"name": "grounding-dino+sam2.1", "version": self.segmenter.model_version},
-            "layer": "growth_form", "threshold": threshold,
+            "layer": layer, "threshold": threshold,
             "confidence": best["confidence"] if best else 0.0,
             "gate_open": bool(best and best["confidence"] >= threshold),
             "proposal": best, "proposal_count": len(proposals),
-            "taxon_bets": {"state": "blocked", "reason": "Growth-form geometry is not a taxonomic claim."},
+            "taxon_bets": {"state": "blocked", "reason": "Organ geometry is not a taxonomic claim."},
         }
 
 
@@ -104,7 +107,7 @@ def handler_for(gate: GrowthFormGate):
                 threshold = float(request.get("threshold", 0.75))
                 if not 0 <= threshold <= 1:
                     raise ValueError("threshold must be between 0 and 1")
-                self._json(200, gate.evaluate(request["image_base64"], threshold))
+                self._json(200, gate.evaluate(request["image_base64"], threshold, request.get("layer", "growth_form")))
             except Exception as error:
                 self._json(422, {"detail": str(error)})
 
