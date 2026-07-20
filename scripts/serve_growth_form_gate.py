@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Serve real Grounding-DINO + SAM 2.1 organ gate evaluations.
 
-This local/LAN development service evaluates one visual organ per sampled camera
-frame. It returns geometry/confidence only and never emits a taxon or
-source-vocabulary assertion.
+This local/LAN development service evaluates one DeVo noticing category per
+sampled camera frame. It returns geometry/confidence only and never emits a
+taxon or source-vocabulary assertion.
 """
 
 from __future__ import annotations
@@ -38,9 +38,12 @@ class GrowthFormGate:
         del self.telemetry[:-200]
 
     def evaluate(self, image_base64: str, threshold: float, layer: str) -> dict:
-        prompts = {"growth_form": "whole plant", "leaf": "leaf"}
+        prompts = {
+            "growth_form": "whole plant", "leaf": "leaf", "bark": "bark",
+            "stem": "stem", "bud": "bud", "flower": "flower", "fruit": "fruit",
+        }
         if layer not in prompts:
-            raise ValueError("layer must be growth_form or leaf")
+            raise ValueError(f"unsupported organ layer: {layer}")
         encoded = image_base64.split(",", 1)[-1]
         payload = base64.b64decode(encoded)
         with tempfile.NamedTemporaryFile(suffix=".jpg") as image:
