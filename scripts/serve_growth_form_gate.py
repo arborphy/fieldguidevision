@@ -12,6 +12,7 @@ import argparse
 import base64
 import json
 import tempfile
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import sys
@@ -29,6 +30,12 @@ class GrowthFormGate:
         self.segmenter = GroundedSam2Segmenter(
             device=device, detector_model=detector_model, segmenter_model=segmenter_model,
         )
+        self.telemetry: list[dict] = []
+
+    def record_event(self, event: dict) -> None:
+        """Keep a bounded local trace for the active field-debug session."""
+        self.telemetry.append({"received_at": datetime.now(timezone.utc).isoformat(), **event})
+        del self.telemetry[:-200]
 
     def evaluate(self, image_base64: str, threshold: float) -> dict:
         encoded = image_base64.split(",", 1)[-1]
@@ -84,18 +91,28 @@ def handler_for(gate: GrowthFormGate):
             self.end_headers()
 
         def do_POST(self):  # noqa: N802
-            if self.path != "/growth-form-gate":
+            if self.path not in {"/growth-form-gate", "/growth-form-gate/telemetry"}:
                 self._json(404, {"detail": "not found"})
                 return
             try:
                 size = int(self.headers.get("Content-Length", "0"))
                 request = json.loads(self.rfile.read(size))
+                if self.path.endswith("/telemetry"):
+                    gate.record_event(request)
+                    self._json(202, {"accepted": True, "events": len(gate.telemetry)})
+                    return
                 threshold = float(request.get("threshold", 0.75))
                 if not 0 <= threshold <= 1:
                     raise ValueError("threshold must be between 0 and 1")
                 self._json(200, gate.evaluate(request["image_base64"], threshold))
             except Exception as error:
                 self._json(422, {"detail": str(error)})
+
+        def do_GET(self):  # noqa: N802
+            if self.path == "/growth-form-gate/telemetry":
+                self._json(200, {"events": gate.telemetry, "count": len(gate.telemetry)})
+                return
+            self._json(404, {"detail": "not found"})
 
         def log_message(self, format, *args):  # noqa: A003
             return
