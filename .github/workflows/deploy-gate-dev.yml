@@ -1,0 +1,116 @@
+name: Deploy Fieldguidevision gate (dev)
+
+# Deploys the DeVo noticing gate (Grounding-DINO + SAM 2.1 organ geometry)
+# to Cloud Run behind https://dev.arborphy.ai/growth-form-gate with X-API-Key
+# auth. Mirrors arq-api/.github/workflows/deploy-dev.yml's pattern: docker
+# build on the runner, blue/green traffic shift, failure issue. Model weights
+# are baked into the image at build time (see Dockerfile), so builds take a
+# while and cold starts never touch Hugging Face.
+
+on:
+  push:
+    # Deploys from the active P9 working branch until the gate work merges to
+    # main via PR (main is protected — see program rules). Switch the branch
+    # to main once merged.
+    branches: [p9-tuckaway-real-batch]
+    paths:
+      - 'scripts/serve_growth_form_gate.py'
+      - 'segmentation/**'
+      - 'Dockerfile'
+      - '.github/workflows/deploy-gate-dev.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  id-token: write # required for Workload Identity Federation
+  issues: write   # failure issue creation
+
+env:
+  PROJECT_ID: arborphy-dev-2d36f4
+  REGION: us-east4
+  SERVICE: fieldguidevision-gate-dev
+  AR_REPO: fieldguidevision-gate
+  WIF_PROVIDER: projects/555727880932/locations/global/workloadIdentityPools/github-actions-dev/providers/github
+  DEPLOYER_SA: fgv-gate-deployer-dev@arborphy-dev-2d36f4.iam.gserviceaccount.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60 # weight download + torch wheels make this build slow
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOYER_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push image
+        run: |
+          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/gate:${{ github.sha }}"
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy to Cloud Run (blue/green)
+        id: deploy
+        run: |
+          REVISION_SUFFIX="${GITHUB_SHA::8}-${GITHUB_RUN_NUMBER}"
+          REVISION="${{ env.SERVICE }}-${REVISION_SUFFIX}"
+          gcloud run deploy ${{ env.SERVICE }} \
+            --project ${{ env.PROJECT_ID }} \
+            --region ${{ env.REGION }} \
+            --image "$IMAGE" \
+            --revision-suffix "$REVISION_SUFFIX" \
+            --no-traffic \
+            --quiet
+
+          gcloud run services update-traffic ${{ env.SERVICE }} \
+            --project ${{ env.PROJECT_ID }} \
+            --region ${{ env.REGION }} \
+            --to-revisions "$REVISION=100" \
+            --quiet
+
+          SERVICE_JSON=$(gcloud run services describe ${{ env.SERVICE }} \
+            --project ${{ env.PROJECT_ID }} \
+            --region ${{ env.REGION }} \
+            --format=json)
+          READY_REVISION=$(jq -r '.status.latestReadyRevisionName' <<<"$SERVICE_JSON")
+          SERVING_REVISION=$(jq -r '.status.traffic[] | select(.percent == 100) | .revisionName' <<<"$SERVICE_JSON")
+
+          if [[ "$READY_REVISION" != "$REVISION" || "$SERVING_REVISION" != "$REVISION" ]]; then
+            echo "Expected ready/serving revision: $REVISION"
+            echo "Latest ready revision: $READY_REVISION"
+            echo "100% traffic revision: $SERVING_REVISION"
+            exit 1
+          fi
+
+          echo "revision=$REVISION" >> "$GITHUB_OUTPUT"
+          echo "Deployment verified: $REVISION is ready and serving 100% of traffic."
+
+      - name: Auth smoke check (expect 401 without a key)
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://dev.arborphy.ai/growth-form-gate" \
+            -H "Content-Type: application/json" -d '{}')
+          if [ "$code" != "401" ]; then
+            echo "Expected 401 from unauthenticated gate call, got $code"
+            exit 1
+          fi
+
+      - name: Report deployment failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --repo "${{ github.repository }}" \
+            --assignee "${{ github.actor }}" \
+            --title "Dev gate deployment failed: ${GITHUB_SHA::8}" \
+            --body "The dev gate build, deploy, or traffic verification failed.\n\nWorkflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\nCommit: ${{ github.sha }}\nService: ${{ env.SERVICE }}"

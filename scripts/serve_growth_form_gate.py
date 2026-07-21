@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hmac
 import json
+import os
 import tempfile
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -79,7 +81,18 @@ class GrowthFormGate:
 
 
 def handler_for(gate: GrowthFormGate):
+    # Baked-client-key auth: when GATE_API_KEY is set, every endpoint requires
+    # the X-API-Key header. Deployed APKs carry the key; revocation is a
+    # secret rotation + app rebuild. When unset (local dev), the gate is open.
+    required_key = os.environ.get("GATE_API_KEY") or None
+
     class Handler(BaseHTTPRequestHandler):
+        def _authorized(self) -> bool:
+            if required_key is None:
+                return True
+            presented = self.headers.get("X-API-Key") or ""
+            return hmac.compare_digest(presented.encode(), required_key.encode())
+
         def _json(self, status: int, payload: dict) -> None:
             body = json.dumps(payload).encode()
             self.send_response(status)
@@ -92,13 +105,16 @@ def handler_for(gate: GrowthFormGate):
         def do_OPTIONS(self):  # noqa: N802
             self.send_response(204)
             self.send_header("Access-Control-Allow-Origin", "*")
-            self.send_header("Access-Control-Allow-Headers", "Content-Type")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, X-API-Key")
             self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
             self.end_headers()
 
         def do_POST(self):  # noqa: N802
             if self.path not in {"/growth-form-gate", "/growth-form-gate/telemetry"}:
                 self._json(404, {"detail": "not found"})
+                return
+            if not self._authorized():
+                self._json(401, {"detail": "invalid or missing X-API-Key"})
                 return
             try:
                 size = int(self.headers.get("Content-Length", "0"))
@@ -116,6 +132,9 @@ def handler_for(gate: GrowthFormGate):
 
         def do_GET(self):  # noqa: N802
             if self.path == "/growth-form-gate/telemetry":
+                if not self._authorized():
+                    self._json(401, {"detail": "invalid or missing X-API-Key"})
+                    return
                 self._json(200, {"events": gate.telemetry, "count": len(gate.telemetry)})
                 return
             self._json(404, {"detail": "not found"})
