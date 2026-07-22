@@ -39,13 +39,20 @@ class GrowthFormGate:
         self.telemetry.append({"received_at": datetime.now(timezone.utc).isoformat(), **event})
         del self.telemetry[:-200]
 
-    def evaluate(self, image_base64: str, threshold: float, layer: str) -> dict:
-        prompts = {
+    def evaluate(self, image_base64: str, threshold: float, layer: str, prompts: tuple[str, ...] = ()) -> dict:
+        organ_prompts = {
             "growth_form": "whole plant", "leaf": "leaf", "bark": "bark",
             "stem": "stem", "bud": "bud", "flower": "flower", "fruit": "fruit",
         }
-        if layer not in prompts:
-            raise ValueError(f"unsupported organ layer: {layer}")
+        if prompts:
+            # Term-probe mode: the curator supplies the exact Grounding-DINO
+            # text prompts to try. Geometry only; nothing is treated as an
+            # organ-category evaluation, and the API never pools these.
+            active_prompts = tuple(prompts)
+        else:
+            if layer not in organ_prompts:
+                raise ValueError(f"unsupported organ layer: {layer}")
+            active_prompts = (organ_prompts[layer],)
         encoded = image_base64.split(",", 1)[-1]
         payload = base64.b64decode(encoded)
         with tempfile.NamedTemporaryFile(suffix=".jpg") as image:
@@ -55,7 +62,7 @@ class GrowthFormGate:
                 observation_id=f"live-{layer}-gate", image_url="live://camera",
                 local_path=image.name, subject_id=f"live-{layer}",
             )
-            segments = self.segmenter.segment(frame, (prompts[layer],))
+            segments = self.segmenter.segment(frame, active_prompts)
         proposals = []
         for index, segment in enumerate(segments):
             confidence = round(0.5 * segment.detection_confidence + 0.5 * segment.mask_quality, 6)
@@ -63,7 +70,7 @@ class GrowthFormGate:
             if polygon and polygon[0] != polygon[-1]:
                 polygon.append(polygon[0])
             proposals.append({
-                "proposal_id": f"live-{layer}-{index}", "category": prompts[layer],
+                "proposal_id": f"live-{layer}-{index}", "category": segment.prompt,
                 "polygon": polygon, "confidence": confidence,
                 "detector_confidence": segment.detection_confidence,
                 "mask_quality": segment.mask_quality, "prompt": segment.prompt,
@@ -73,9 +80,11 @@ class GrowthFormGate:
         return {
             "provider": {"name": "grounding-dino+sam2.1", "version": self.segmenter.model_version},
             "layer": layer, "threshold": threshold,
+            "prompts": list(active_prompts),
             "confidence": best["confidence"] if best else 0.0,
             "gate_open": bool(best and best["confidence"] >= threshold),
             "proposal": best, "proposal_count": len(proposals),
+            "proposals": proposals,
             "taxon_bets": {"state": "blocked", "reason": "Organ geometry is not a taxonomic claim."},
         }
 
@@ -126,7 +135,15 @@ def handler_for(gate: GrowthFormGate):
                 threshold = float(request.get("threshold", 0.75))
                 if not 0 <= threshold <= 1:
                     raise ValueError("threshold must be between 0 and 1")
-                self._json(200, gate.evaluate(request["image_base64"], threshold, request.get("layer", "growth_form")))
+                raw_prompts = request.get("prompts") or ()
+                if isinstance(raw_prompts, str):
+                    raw_prompts = (raw_prompts,)
+                prompts = tuple(str(term).strip() for term in raw_prompts if str(term).strip())
+                if len(prompts) > 10:
+                    raise ValueError("at most 10 probe prompts per request")
+                if any(len(term) > 80 for term in prompts):
+                    raise ValueError("probe prompts must be 80 characters or fewer")
+                self._json(200, gate.evaluate(request["image_base64"], threshold, request.get("layer", "growth_form"), prompts))
             except Exception as error:
                 self._json(422, {"detail": str(error)})
 
