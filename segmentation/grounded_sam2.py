@@ -23,6 +23,7 @@ class GroundedSam2Segmenter:
         segmenter_model: str = "facebook/sam2.1-hiera-small",
         box_threshold: float = 0.25,
         text_threshold: float = 0.2,
+        iou_threshold: float | None = 0.3,
         polygon_epsilon: float = 0.003,
         device: str | None = None,
     ) -> None:
@@ -54,6 +55,7 @@ class GroundedSam2Segmenter:
         self._sam.eval()
         self._box_threshold = box_threshold
         self._text_threshold = text_threshold
+        self._iou_threshold = iou_threshold
         self._polygon_epsilon = polygon_epsilon
         self.model_version = f"{detector_model}|{segmenter_model}"
 
@@ -83,14 +85,18 @@ class GroundedSam2Segmenter:
     def segment(self, frame: CaptureFrame, prompts) -> tuple[RawSegment, ...]:
         from PIL import Image
 
-        torch = self._torch
         image = Image.open(frame.local_path).convert("RGB") if frame.local_path else self._load_image(frame.image_url)
-        labels = [[str(prompt) for prompt in prompts]]
-        detector_inputs = self._detector_processor(
-            images=image, text=labels, return_tensors="pt"
-        ).to(self._device)
-        with torch.inference_mode():
-            detector_outputs = self._detector(**detector_inputs)
+        return self.segment_image(image, prompts)
+
+    def segment_image(self, image, prompts) -> tuple[RawSegment, ...]:
+        from .gpu_lock import MPS_LOCK
+
+        with MPS_LOCK:
+            detector_inputs = self._detector_processor(
+                images=image, text=labels, return_tensors="pt"
+            ).to(self._device)
+            with torch.inference_mode():
+                detector_outputs = self._detector(**detector_inputs)
         detected = self._detector_processor.post_process_grounded_object_detection(
             detector_outputs,
             detector_inputs.input_ids,
@@ -101,19 +107,37 @@ class GroundedSam2Segmenter:
         boxes = detected["boxes"]
         if len(boxes) == 0:
             return ()
-        sam_inputs = self._sam_processor(
-            images=image,
-            input_boxes=[boxes.detach().cpu().tolist()],
-            return_tensors="pt",
-        ).to(self._device)
-        with torch.inference_mode():
-            sam_outputs = self._sam(**sam_inputs, multimask_output=False)
+            
+        import torchvision
+        
+        if self._iou_threshold is not None:
+            import torchvision
+            label_list = detected.get("text_labels") or detected.get("labels")
+            scores = detected["scores"]
+            label_to_idx = {lbl: idx for idx, lbl in enumerate(set(label_list))}
+            class_idxs = torch.tensor([label_to_idx[lbl] for lbl in label_list], device=boxes.device)
+            keep_indices = torchvision.ops.batched_nms(boxes, scores, class_idxs, iou_threshold=self._iou_threshold)
+            boxes = boxes[keep_indices]
+            scores = scores[keep_indices]
+            text_labels = [label_list[i] for i in keep_indices.cpu().tolist()]
+        else:
+            text_labels = detected.get("text_labels") or detected.get("labels")
+            scores = detected["scores"]
+
+        with MPS_LOCK:
+            sam_inputs = self._sam_processor(
+                images=image,
+                input_boxes=[boxes.detach().cpu().tolist()],
+                return_tensors="pt",
+            ).to(self._device)
+            with torch.inference_mode():
+                sam_outputs = self._sam(**sam_inputs, multimask_output=False)
         masks = self._sam_processor.post_process_masks(
             sam_outputs.pred_masks.cpu(), sam_inputs["original_sizes"]
         )[0]
-        text_labels = detected.get("text_labels") or detected.get("labels")
+        
         results: list[RawSegment] = []
-        for index, (label, detection_score) in enumerate(zip(text_labels, detected["scores"])):
+        for index, (label, detection_score) in enumerate(zip(text_labels, scores)):
             mask = masks[index, 0].numpy()
             polygon = self._mask_to_polygon(mask, image.width, image.height)
             if len(polygon) < 3:
