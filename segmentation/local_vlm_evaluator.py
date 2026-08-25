@@ -48,7 +48,11 @@ class LocalVlmEvaluator:
 
     def __call__(self, image: Image.Image, payload: SemanticContextPayload) -> SemanticAnchorDecision:
         prompt_text = payload.format_vlm_prompt()
-        
+        response_text = self.generate_text(image, prompt_text)
+        return self._parse_decision(response_text)
+
+    def generate_text(self, image: Image.Image, prompt_text: str) -> str:
+        """Run one VLM turn and return the raw response text (for agent loops)."""
         messages = [
             {
                 "role": "user",
@@ -104,7 +108,7 @@ class LocalVlmEvaluator:
                 
         response_text = response_text.replace("<end_of_turn>", "").replace("<eos>", "").replace("<|end|>", "").strip()
         logger.info("VLM Parsed Response (len=%d):\n%s", len(response_text), response_text)
-        return self._parse_decision(response_text)
+        return response_text
 
     def _parse_decision(self, text: str) -> SemanticAnchorDecision:
         """Robustly parse JSON schema output from the VLM."""
