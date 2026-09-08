@@ -1,0 +1,41 @@
+{
+  "PXL_20260716_095206726.RAW-01.MP.JPG": {
+    "tags": ["leaf", "fruit"],
+    "regions": [
+      {
+        "id": "leaf-surface",
+        "organ": "leaf",
+        "subject_hint": "Assistant QA markup: foreground leaf, tentative subject A",
+        "polygon": [[1500, 1700], [1810, 1700], [1920, 2220], [1730, 3020], [1580, 2610], [1510, 2090]]
+      },
+      {
+        "id": "fruit-region",
+        "organ": "fruit",
+        "subject_hint": "Assistant QA markup: spiny structure behind leaf; subject linkage not established",
+        "bbox": [1290, 200, 1870, 800]
+      }
+    ]
+  },
+  "PXL_20260716_095530270.RAW-01.jpg": {
+    "tags": ["flower", "leaf"],
+    "regions": [
+      {
+        "id": "flower-cluster",
+        "organ": "flower",
+        "subject_hint": "Assistant QA markup: lower-right pink flower cluster, tentative subject B",
+        "bbox": [3130, 2020, 3700, 2500]
+      }
+    ]
+  },
+  "PXL_20260716_101343073.RAW-01.jpg": {
+    "tags": ["bark"],
+    "regions": [
+      {
+        "id": "bark-patch",
+        "organ": "bark",
+        "subject_hint": "Assistant QA markup: central foreground trunk, tentative subject C",
+        "bbox": [1500, 1400, 2000, 2600]
+      }
+    ]
+  }
+}
