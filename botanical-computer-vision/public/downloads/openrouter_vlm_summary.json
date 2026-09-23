@@ -1,0 +1,144 @@
+{
+  "protocol": {
+    "images": 1899,
+    "species": 85,
+    "individuals": 492,
+    "candidate_set": "85 scientific names with vernacular aliases",
+    "ground_truth_hidden": true,
+    "ground_truth_isolation": "The API inference manifest contained no per-image species labels. Ground truth was read only after both models completed all requested predictions.",
+    "image_preprocessing": "EXIF transpose, RGB conversion, longest side capped at 1536px, JPEG quality 90, metadata removed",
+    "concurrency": 10,
+    "seed": 42
+  },
+  "models": {
+    "bioclip_zero_shot": {
+      "model": "BioCLIP 2.5 zero-shot",
+      "model_key": "bioclip_zero_shot",
+      "images": 1899,
+      "species": 85,
+      "successful_images": 1899,
+      "top1_correct": 1472,
+      "top1_accuracy": 0.775144813059505,
+      "top5_correct": 1769,
+      "top5_accuracy": 0.9315429173249078,
+      "macro_top1_accuracy": 0.7805439031495628
+    },
+    "gemini_flash_lite": {
+      "model": "Gemini 2.5 Flash Lite",
+      "model_key": "gemini_flash_lite",
+      "images": 1899,
+      "species": 85,
+      "successful_images": 1899,
+      "top1_correct": 672,
+      "top1_accuracy": 0.353870458135861,
+      "top5_correct": 1205,
+      "top5_accuracy": 0.6345444971037388,
+      "macro_top1_accuracy": 0.35572916239428665,
+      "mean_reported_confidence": 0.7645866245392311,
+      "median_latency_seconds": 1.1539206070000034,
+      "p95_latency_seconds": 2.363836526899999,
+      "mean_latency_seconds": 1.4026832317340707,
+      "max_latency_seconds": 20.738871252999985,
+      "retried_images": 12,
+      "cached_images": 10,
+      "prompt_tokens": 5299939,
+      "cached_tokens": 10368,
+      "completion_tokens": 180868,
+      "reasoning_tokens": 2,
+      "actual_cost_usd": 0.6041849799999999,
+      "mean_cost_per_image_usd": 0.0003181595471300684,
+      "wall_seconds": 271.430704082
+    },
+    "gpt_5_4": {
+      "model": "GPT-5.4",
+      "model_key": "gpt_5_4",
+      "images": 1899,
+      "species": 85,
+      "successful_images": 1899,
+      "top1_correct": 737,
+      "top1_accuracy": 0.38809899947340704,
+      "top5_correct": 1203,
+      "top5_accuracy": 0.6334913112164297,
+      "macro_top1_accuracy": 0.4006272956637095,
+      "mean_reported_confidence": 0.7018009478672986,
+      "median_latency_seconds": 6.331922966000093,
+      "p95_latency_seconds": 10.612494021499991,
+      "mean_latency_seconds": 6.756306041021589,
+      "max_latency_seconds": 45.69907162200002,
+      "retried_images": 13,
+      "cached_images": 1174,
+      "prompt_tokens": 4703383,
+      "cached_tokens": 1655296,
+      "completion_tokens": 527847,
+      "reasoning_tokens": 389093,
+      "actual_cost_usd": 8.074656000000001,
+      "mean_cost_per_image_usd": 0.0042520568720379156,
+      "wall_seconds": 1292.527934328
+    }
+  },
+  "pairwise": {
+    "gpt_vs_gemini": {
+      "first": "gpt_5_4",
+      "second": "gemini_flash_lite",
+      "both_correct": 455,
+      "first_only": 282,
+      "second_only": 217,
+      "both_wrong": 945,
+      "top1_delta": 0.03422854133754605,
+      "top5_delta": -0.0010531858873091826,
+      "top1_cluster_bootstrap_95_ci": [
+        -0.005143417945690646,
+        0.07559837164437759
+      ],
+      "top5_cluster_bootstrap_95_ci": [
+        -0.032275263743069035,
+        0.029512079924242252
+      ],
+      "exact_mcnemar_p": 0.004124198838996254
+    },
+    "gpt_vs_bioclip": {
+      "first": "gpt_5_4",
+      "second": "bioclip_zero_shot",
+      "both_correct": 672,
+      "first_only": 65,
+      "second_only": 800,
+      "both_wrong": 362,
+      "top1_delta": -0.38704581358609796,
+      "top5_delta": -0.29805160610847814,
+      "top1_cluster_bootstrap_95_ci": [
+        -0.42580652956859316,
+        -0.3478975289001777
+      ],
+      "top5_cluster_bootstrap_95_ci": [
+        -0.3295349327778587,
+        -0.26731490281632847
+      ],
+      "exact_mcnemar_p": 7.331854164215922e-162
+    },
+    "gemini_vs_bioclip": {
+      "first": "gemini_flash_lite",
+      "second": "bioclip_zero_shot",
+      "both_correct": 610,
+      "first_only": 62,
+      "second_only": 862,
+      "both_wrong": 365,
+      "top1_delta": -0.421274354923644,
+      "top5_delta": -0.29699842022116896,
+      "top1_cluster_bootstrap_95_ci": [
+        -0.47183208626760564,
+        -0.3721290522442352
+      ],
+      "top5_cluster_bootstrap_95_ci": [
+        -0.33163265306122447,
+        -0.2610217346615895
+      ],
+      "exact_mcnemar_p": 4.428034954807168e-181
+    }
+  },
+  "run": {
+    "total_actual_cost_usd": 8.678840979999999,
+    "total_run_seconds": 1571.360843347,
+    "dataset_download_and_extract_seconds": 7.300672941
+  },
+  "confidence_note": "VLM confidence is a self-reported score requested in the response schema. It is not a normalized model probability; the five scores need not sum to one."
+}

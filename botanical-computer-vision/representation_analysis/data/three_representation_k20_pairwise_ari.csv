@@ -1,0 +1,4 @@
+k,representation_a,representation_b,adjusted_rand_index
+20,bioclip,dinov3,0.19537558678879638
+20,bioclip,efficientnet_b0,0.09079741052373456
+20,dinov3,efficientnet_b0,0.3409993765693877

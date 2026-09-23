@@ -1,0 +1,342 @@
+[
+  {
+    "scientific_name": "Acer negundo",
+    "vernacular": "boxelder"
+  },
+  {
+    "scientific_name": "Acer nigrum",
+    "vernacular": "black maple"
+  },
+  {
+    "scientific_name": "Acer platanoides",
+    "vernacular": "Norway maple"
+  },
+  {
+    "scientific_name": "Acer rubrum",
+    "vernacular": "red maple"
+  },
+  {
+    "scientific_name": "Acer saccharinum",
+    "vernacular": "silver maple"
+  },
+  {
+    "scientific_name": "Acer saccharum",
+    "vernacular": "sugar maple"
+  },
+  {
+    "scientific_name": "Aesculus glabra",
+    "vernacular": "Ohio buckeye"
+  },
+  {
+    "scientific_name": "Aesculus hippocastanum",
+    "vernacular": "horse chestnut"
+  },
+  {
+    "scientific_name": "Ailanthus altissima",
+    "vernacular": "tree of heaven"
+  },
+  {
+    "scientific_name": "Amelanchier arborea",
+    "vernacular": "common serviceberry"
+  },
+  {
+    "scientific_name": "Betula alleghaniensis",
+    "vernacular": "yellow birch"
+  },
+  {
+    "scientific_name": "Betula lenta",
+    "vernacular": "sweet birch"
+  },
+  {
+    "scientific_name": "Betula papyrifera",
+    "vernacular": "paper birch"
+  },
+  {
+    "scientific_name": "Carpinus caroliniana",
+    "vernacular": "American hornbeam"
+  },
+  {
+    "scientific_name": "Carya cordiformis",
+    "vernacular": "bitternut hickory"
+  },
+  {
+    "scientific_name": "Carya laciniosa",
+    "vernacular": "shellbark hickory"
+  },
+  {
+    "scientific_name": "Carya ovata",
+    "vernacular": "shagbark hickory"
+  },
+  {
+    "scientific_name": "Castanea dentata",
+    "vernacular": "American chestnut"
+  },
+  {
+    "scientific_name": "Celtis occidentalis",
+    "vernacular": "common hackberry"
+  },
+  {
+    "scientific_name": "Cephalanthus occidentalis",
+    "vernacular": "common buttonbush"
+  },
+  {
+    "scientific_name": "Cercis canadensis",
+    "vernacular": "eastern redbud"
+  },
+  {
+    "scientific_name": "Cornus amomum",
+    "vernacular": "silky dogwood"
+  },
+  {
+    "scientific_name": "Cornus florida",
+    "vernacular": "flowering dogwood"
+  },
+  {
+    "scientific_name": "Cornus racemosa",
+    "vernacular": "gray dogwood"
+  },
+  {
+    "scientific_name": "Cornus sericea",
+    "vernacular": "redosier dogwood"
+  },
+  {
+    "scientific_name": "Dirca palustris",
+    "vernacular": "eastern leatherwood"
+  },
+  {
+    "scientific_name": "Fagus grandifolia",
+    "vernacular": "American beech"
+  },
+  {
+    "scientific_name": "Fraxinus americana",
+    "vernacular": "white ash"
+  },
+  {
+    "scientific_name": "Fraxinus pennsylvanica",
+    "vernacular": "green ash"
+  },
+  {
+    "scientific_name": "Fraxinus quadrangulata",
+    "vernacular": "blue ash"
+  },
+  {
+    "scientific_name": "Ginkgo biloba",
+    "vernacular": "maidenhair tree"
+  },
+  {
+    "scientific_name": "Gleditsia triacanthos",
+    "vernacular": "honeylocust"
+  },
+  {
+    "scientific_name": "Gymnocladus dioicus",
+    "vernacular": "Kentucky coffeetree"
+  },
+  {
+    "scientific_name": "Hamamelis virginiana",
+    "vernacular": "American witchhazel"
+  },
+  {
+    "scientific_name": "Ilex verticillata",
+    "vernacular": "common winterberry"
+  },
+  {
+    "scientific_name": "Juglans cinerea",
+    "vernacular": "butternut"
+  },
+  {
+    "scientific_name": "Juglans nigra",
+    "vernacular": "black walnut"
+  },
+  {
+    "scientific_name": "Juniperus communis",
+    "vernacular": "common juniper"
+  },
+  {
+    "scientific_name": "Juniperus virginiana",
+    "vernacular": "eastern redcedar"
+  },
+  {
+    "scientific_name": "Lindera benzoin",
+    "vernacular": "northern spicebush"
+  },
+  {
+    "scientific_name": "Lonicera morrowii",
+    "vernacular": "Morrow's honeysuckle"
+  },
+  {
+    "scientific_name": "Magnolia acuminata",
+    "vernacular": "cucumber-tree"
+  },
+  {
+    "scientific_name": "Nyssa sylvatica",
+    "vernacular": "blackgum"
+  },
+  {
+    "scientific_name": "Ostrya virginiana",
+    "vernacular": "hophornbeam"
+  },
+  {
+    "scientific_name": "Picea glauca",
+    "vernacular": "white spruce"
+  },
+  {
+    "scientific_name": "Picea mariana",
+    "vernacular": "black spruce"
+  },
+  {
+    "scientific_name": "Picea rubens",
+    "vernacular": "red spruce"
+  },
+  {
+    "scientific_name": "Pinus resinosa",
+    "vernacular": "red pine"
+  },
+  {
+    "scientific_name": "Pinus rigida",
+    "vernacular": "pitch pine"
+  },
+  {
+    "scientific_name": "Pinus strobus",
+    "vernacular": "eastern white pine"
+  },
+  {
+    "scientific_name": "Platanus occidentalis",
+    "vernacular": "American sycamore"
+  },
+  {
+    "scientific_name": "Populus deltoides",
+    "vernacular": "eastern cottonwood"
+  },
+  {
+    "scientific_name": "Populus grandidentata",
+    "vernacular": "bigtooth aspen"
+  },
+  {
+    "scientific_name": "Populus tremuloides",
+    "vernacular": "quaking aspen"
+  },
+  {
+    "scientific_name": "Prunus pensylvanica",
+    "vernacular": "pin cherry"
+  },
+  {
+    "scientific_name": "Prunus serotina",
+    "vernacular": "black cherry"
+  },
+  {
+    "scientific_name": "Prunus virginiana",
+    "vernacular": "chokecherry"
+  },
+  {
+    "scientific_name": "Pyrus calleryana",
+    "vernacular": "Callery pear"
+  },
+  {
+    "scientific_name": "Quercus alba",
+    "vernacular": "white oak"
+  },
+  {
+    "scientific_name": "Quercus bicolor",
+    "vernacular": "swamp white oak"
+  },
+  {
+    "scientific_name": "Quercus macrocarpa",
+    "vernacular": "bur oak"
+  },
+  {
+    "scientific_name": "Quercus muehlenbergii",
+    "vernacular": "chinkapin oak"
+  },
+  {
+    "scientific_name": "Quercus palustris",
+    "vernacular": "pin oak"
+  },
+  {
+    "scientific_name": "Quercus rubra",
+    "vernacular": "northern red oak"
+  },
+  {
+    "scientific_name": "Quercus velutina",
+    "vernacular": "black oak"
+  },
+  {
+    "scientific_name": "Rhus aromatica",
+    "vernacular": "fragrant sumac"
+  },
+  {
+    "scientific_name": "Rhus copallinum",
+    "vernacular": "winged sumac"
+  },
+  {
+    "scientific_name": "Rhus glabra",
+    "vernacular": "smooth sumac"
+  },
+  {
+    "scientific_name": "Robinia pseudoacacia",
+    "vernacular": "black locust"
+  },
+  {
+    "scientific_name": "Salix nigra",
+    "vernacular": "black willow"
+  },
+  {
+    "scientific_name": "Sambucus nigra",
+    "vernacular": "American black elderberry"
+  },
+  {
+    "scientific_name": "Sambucus racemosa",
+    "vernacular": "red elderberry"
+  },
+  {
+    "scientific_name": "Sassafras albidum",
+    "vernacular": "sassafras"
+  },
+  {
+    "scientific_name": "Sorbus americana",
+    "vernacular": "American mountain ash"
+  },
+  {
+    "scientific_name": "Staphylea trifolia",
+    "vernacular": "American bladdernut"
+  },
+  {
+    "scientific_name": "Thuja occidentalis",
+    "vernacular": "arborvitae"
+  },
+  {
+    "scientific_name": "Tilia americana",
+    "vernacular": "white basswood"
+  },
+  {
+    "scientific_name": "Toxicodendron radicans",
+    "vernacular": "eastern poison ivy"
+  },
+  {
+    "scientific_name": "Tsuga canadensis",
+    "vernacular": "eastern hemlock"
+  },
+  {
+    "scientific_name": "Ulmus americana",
+    "vernacular": "American elm"
+  },
+  {
+    "scientific_name": "Ulmus rubra",
+    "vernacular": "slippery elm"
+  },
+  {
+    "scientific_name": "Viburnum lantanoides",
+    "vernacular": "hobblebush"
+  },
+  {
+    "scientific_name": "Viburnum opulus",
+    "vernacular": "American cranberrybush"
+  },
+  {
+    "scientific_name": "Yucca filamentosa",
+    "vernacular": "Adam's needle"
+  },
+  {
+    "scientific_name": "Zanthoxylum americanum",
+    "vernacular": "common pricklyash"
+  }
+]

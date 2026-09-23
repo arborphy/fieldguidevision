@@ -1,0 +1,8 @@
+bucket,description,image_count,image_fraction,observation_count,species_count
+embedding_disagreement,BioCLIP and DINOv3 predict different species.,101,0.4786729857819905,46,46
+all_four_correct,All four models are Top-1 correct.,43,0.2037914691943128,18,18
+bioclip_only_correct,BioCLIP is correct and the other three models are wrong.,40,0.1895734597156398,21,21
+bioclip_and_dino_wrong,"Both embedding-based baselines are wrong, regardless of VLM outcomes.",20,0.0947867298578199,11,11
+all_four_wrong,All four models are Top-1 wrong.,17,0.08056872037914692,10,10
+vlm_embedding_consensus_conflict,GPT and Gemini agree; BioCLIP and DINO agree; the two groups disagree.,10,0.04739336492890995,8,8
+bioclip_wrong_vlm_rescue,BioCLIP is wrong and GPT-5.4 or Gemini is correct.,4,0.018957345971563982,3,3

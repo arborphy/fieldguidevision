@@ -1,0 +1,141 @@
+{
+  "source_integrity": {
+    "dataset_images": 1899,
+    "unique_image_ids": 1899,
+    "unique_filenames": 1899,
+    "decoded_and_reencoded": 1899,
+    "jpeg_rgb_outputs": 1899,
+    "base64_roundtrip_exact": 1899,
+    "metadata_free_outputs": 1899,
+    "dimension_mismatches": 0,
+    "filename_mismatches_vs_benchmark": 0,
+    "truth_mismatches_vs_benchmark": 0
+  },
+  "candidate_and_request_integrity": {
+    "candidate_count": 85,
+    "unique_scientific_names": 85,
+    "unique_vernacular_names": 85,
+    "full_rows": 3798,
+    "unique_model_image_pairs": 3798,
+    "successful_rows": 3798,
+    "valid_distinct_in_list_top5_rows": 3798,
+    "raw_response_rows": 3798,
+    "unique_generation_ids": 3798,
+    "gpt_served_model_counts": {
+      "openai/gpt-5.4": 1899
+    },
+    "gpt_service_tier_counts": {
+      "flex": 1899
+    }
+  },
+  "label_and_metric_integrity": {
+    "same_image_ids_as_bioclip": true,
+    "filename_mismatches_vs_bioclip": 0,
+    "truth_mismatches_vs_bioclip": 0,
+    "gpt_correct_flag_mismatches": 0,
+    "gpt_top1_correct": 737,
+    "gpt_top1_accuracy": 0.38809899947340704,
+    "gpt_top5_correct": 1203,
+    "gpt_top5_accuracy": 0.6334913112164297,
+    "bioclip_top1_correct": 1472,
+    "bioclip_top1_accuracy": 0.775144813059505,
+    "pairwise_top1": {
+      "both_correct": 672,
+      "gpt_only": 65,
+      "bioclip_only": 800,
+      "both_wrong": 362
+    }
+  },
+  "candidate_order_sensitivity": {
+    "fixed_order_prediction_position_spearman": -0.34187581673247897,
+    "predicted_share_positions_1_to_20": 0.4486571879936809,
+    "truth_share_positions_1_to_20": 0.2353870458135861,
+    "shared_valid_pilot_images": 56,
+    "prediction_agreement_fixed_vs_per_image_shuffle": 0.6071428571428571,
+    "per_image_shuffle_top1_accuracy": 0.2857142857142857,
+    "fixed_order_top1_accuracy_same_images": 0.32142857142857145
+  },
+  "high_reasoning_audit": {
+    "requested_images": 63,
+    "successful_images": 12,
+    "failure_reason": "response content was null after the 2,000-token completion cap; high reasoning consumed the output budget before JSON",
+    "mean_success_latency_seconds": 87.99987163633334,
+    "successful_subset_high_top1_correct": 7,
+    "same_subset_minimal_top1_correct": 5,
+    "conclusion": "inconclusive because only 12/63 completed and completion success is not a random subset"
+  },
+  "organ_accuracy_gpt": [
+    {
+      "organ_category": "leaf",
+      "images": 492,
+      "top1_accuracy": 0.4186991869918699,
+      "top5_accuracy": 0.7296747967479674
+    },
+    {
+      "organ_category": "whole tree (or vine)",
+      "images": 333,
+      "top1_accuracy": 0.3153153153153153,
+      "top5_accuracy": 0.5285285285285285
+    },
+    {
+      "organ_category": "inflorescence",
+      "images": 312,
+      "top1_accuracy": 0.47435897435897434,
+      "top5_accuracy": 0.7211538461538461
+    },
+    {
+      "organ_category": "fruit",
+      "images": 245,
+      "top1_accuracy": 0.5306122448979592,
+      "top5_accuracy": 0.8163265306122449
+    },
+    {
+      "organ_category": "twig",
+      "images": 240,
+      "top1_accuracy": 0.2833333333333333,
+      "top5_accuracy": 0.45416666666666666
+    },
+    {
+      "organ_category": "bark",
+      "images": 197,
+      "top1_accuracy": 0.17258883248730963,
+      "top5_accuracy": 0.34517766497461927
+    },
+    {
+      "organ_category": "cone",
+      "images": 38,
+      "top1_accuracy": 0.7105263157894737,
+      "top5_accuracy": 0.868421052631579
+    },
+    {
+      "organ_category": "whole tree",
+      "images": 26,
+      "top1_accuracy": 0.5,
+      "top5_accuracy": 0.8461538461538461
+    },
+    {
+      "organ_category": "seed",
+      "images": 12,
+      "top1_accuracy": 0.3333333333333333,
+      "top5_accuracy": 0.75
+    },
+    {
+      "organ_category": "unspecified",
+      "images": 2,
+      "top1_accuracy": 0.0,
+      "top5_accuracy": 0.0
+    },
+    {
+      "organ_category": "stem",
+      "images": 1,
+      "top1_accuracy": 1.0,
+      "top5_accuracy": 1.0
+    },
+    {
+      "organ_category": "whole plant",
+      "images": 1,
+      "top1_accuracy": 1.0,
+      "top5_accuracy": 1.0
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "seed": 42,
+  "images": 1641,
+  "test_images": 211,
+  "cluster_rows": 160,
+  "all_four_wrong_queries": 17,
+  "confusion_pairs": [
+    [
+      "Quercus palustris",
+      "Quercus alba"
+    ],
+    [
+      "Quercus macrocarpa",
+      "Quercus alba"
+    ],
+    [
+      "Quercus palustris",
+      "Quercus rubra"
+    ],
+    [
+      "Quercus bicolor",
+      "Quercus alba"
+    ],
+    [
+      "Sambucus racemosa",
+      "Sambucus nigra"
+    ]
+  ],
+  "neighbor_comparison": {
+    "cross_observation_neighbor_overlap_at_10_mean": 0.2838862559241706,
+    "cross_observation_neighbor_overlap_at_10_median": 0.3
+  },
+  "download_status": {
+    "downloaded": 1418
+  }
+}

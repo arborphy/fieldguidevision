@@ -1,0 +1,212 @@
+image_id,individual_id,organ_category,ground_truth_species,bioclip_zero_shot_prediction,bioclip_zero_shot_confidence,bioclip_zero_shot_correct,bioclip_zero_shot_top5_correct,bioclip_probe_prediction,bioclip_probe_confidence,bioclip_probe_correct,bioclip_probe_top5_correct,dinov3_probe_prediction,dinov3_probe_confidence,dinov3_probe_correct,dinov3_probe_top5_correct
+baskauf/10432,ind-baskauf/10432,bark,Fagus grandifolia,Fagus grandifolia,0.99959069,True,True,Fagus grandifolia,0.46027868,True,True,Carpinus caroliniana,0.46160825,False,True
+baskauf/10502,vanderbilt/12-126,twig,Ginkgo biloba,Ginkgo biloba,0.99313545,True,True,Ginkgo biloba,0.96768563,True,True,Ginkgo biloba,0.38533916,True,True
+baskauf/10550,ind-baskauf/10432,fruit,Fagus grandifolia,Fagus grandifolia,1.0,True,True,Fagus grandifolia,0.97833137,True,True,Platanus occidentalis,0.65410457,False,True
+baskauf/10554,vanderbilt/12-126,cone,Ginkgo biloba,Ginkgo biloba,0.99998796,True,True,Ginkgo biloba,0.84701918,True,True,Ginkgo biloba,0.89376993,True,True
+baskauf/10556,vanderbilt/12-126,leaf,Ginkgo biloba,Ginkgo biloba,0.24933225,True,True,Ginkgo biloba,0.16875825,True,True,Ginkgo biloba,0.95484931,True,True
+baskauf/10557,vanderbilt/12-126,twig,Ginkgo biloba,Ginkgo biloba,0.99996936,True,True,Ginkgo biloba,0.99011912,True,True,Ginkgo biloba,0.92703828,True,True
+baskauf/10904,ind-baskauf/10904,whole tree (or vine),Ailanthus altissima,Ailanthus altissima,0.99999321,True,True,Ailanthus altissima,0.9861043,True,True,Gleditsia triacanthos,0.38346931,False,True
+baskauf/10938,ind-baskauf/10938,leaf,Rhus copallinum,Rhus copallinum,0.97061926,True,True,Rhus copallinum,0.98834757,True,True,Juglans nigra,0.41119166,False,True
+baskauf/10939,ind-baskauf/10938,leaf,Rhus copallinum,Rhus copallinum,0.99806911,True,True,Rhus copallinum,0.98969288,True,True,Juglans nigra,0.48710879,False,True
+baskauf/10942,ind-baskauf/10938,twig,Rhus copallinum,Rhus glabra,0.73002172,False,True,Rhus copallinum,0.43124375,True,True,Lindera benzoin,0.19684103,False,True
+baskauf/11037,ind-baskauf/11037,leaf,Ulmus rubra,Ulmus rubra,0.99330336,True,True,Ulmus rubra,0.97645018,True,True,Tilia americana,0.34325743,False,False
+baskauf/11038,ind-baskauf/11037,leaf,Ulmus rubra,Ulmus rubra,0.99477899,True,True,Ulmus rubra,0.93965196,True,True,Betula alleghaniensis,0.34123859,False,False
+baskauf/11064,ind-baskauf/11064,fruit,Populus deltoides,Populus deltoides,0.99999213,True,True,Populus deltoides,0.99490924,True,True,Populus deltoides,0.80870731,True,True
+baskauf/11066,ind-baskauf/11064,bark,Populus deltoides,Populus deltoides,0.99998963,True,True,Populus deltoides,0.94894964,True,True,Quercus rubra,0.15861197,False,True
+baskauf/11070,ind-baskauf/11064,leaf,Populus deltoides,Populus deltoides,0.99998701,True,True,Populus deltoides,0.99031535,True,True,Populus deltoides,0.33146024,True,True
+baskauf/11449,ind-baskauf/11449,bark,Betula alleghaniensis,Betula alleghaniensis,0.92396325,True,True,Betula lenta,0.78294595,False,True,Prunus serotina,0.25348712,False,True
+baskauf/11492,ind-baskauf/11492,whole tree,Tsuga canadensis,Tsuga canadensis,0.99999809,True,True,Tsuga canadensis,0.98905952,True,True,Tsuga canadensis,0.97667109,True,True
+baskauf/11493,ind-baskauf/11492,bark,Tsuga canadensis,Tsuga canadensis,0.99999559,True,True,Tsuga canadensis,0.96791765,True,True,Tsuga canadensis,0.4153552,True,True
+baskauf/11522,ind-baskauf/11522,whole tree,Juniperus virginiana,Juniperus virginiana,1.0,True,True,Juniperus virginiana,0.96591058,True,True,Juniperus virginiana,0.80078144,True,True
+baskauf/11524,ind-baskauf/11522,bark,Juniperus virginiana,Juniperus virginiana,1.0,True,True,Juniperus virginiana,0.90384562,True,True,Quercus alba,0.38775121,False,True
+baskauf/11534,ind-baskauf/11534,bark,Castanea dentata,Castanea dentata,0.72563386,True,True,Castanea dentata,0.75381327,True,True,Castanea dentata,0.28263073,True,True
+baskauf/11653,ind-baskauf/11653,twig,Tilia americana,Tilia americana,0.99981409,True,True,Tilia americana,0.98979193,True,True,Tilia americana,0.38240295,True,True
+baskauf/11656,ind-baskauf/11653,twig,Tilia americana,Tilia americana,0.99886864,True,True,Tilia americana,0.94536634,True,True,Tilia americana,0.79005759,True,True
+baskauf/11687,ind-baskauf/11687,leaf,Ulmus americana,Ulmus americana,0.99591583,True,True,Ulmus americana,0.87011838,True,True,Betula alleghaniensis,0.23327088,False,True
+baskauf/11688,ind-baskauf/11687,leaf,Ulmus americana,Ulmus americana,0.99941862,True,True,Ulmus americana,0.83918242,True,True,Ulmus americana,0.30093759,True,True
+baskauf/11689,ind-baskauf/11687,leaf,Ulmus americana,Ulmus americana,0.99592859,True,True,Ulmus americana,0.914601,True,True,Betula alleghaniensis,0.21415828,False,True
+baskauf/11690,ind-baskauf/11687,bark,Ulmus americana,Robinia pseudoacacia,0.93680865,False,False,Robinia pseudoacacia,0.88749119,False,False,Carya ovata,0.41536965,False,False
+baskauf/11812,ind-baskauf/11812,bark,Juglans cinerea,Gleditsia triacanthos,0.38796893,False,False,Gleditsia triacanthos,0.28633193,False,True,Gymnocladus dioicus,0.16334151,False,False
+baskauf/11813,ind-baskauf/11812,bark,Juglans cinerea,Juglans cinerea,0.99224782,True,True,Juglans cinerea,0.86214471,True,True,Robinia pseudoacacia,0.52385797,False,True
+baskauf/11815,ind-baskauf/11812,whole tree (or vine),Juglans cinerea,Juglans cinerea,0.99719572,True,True,Juglans cinerea,0.75091311,True,True,Robinia pseudoacacia,0.19782651,False,True
+baskauf/11961,ind-baskauf/11961,leaf,Prunus serotina,Prunus serotina,0.99996281,True,True,Prunus serotina,0.98688706,True,True,Salix nigra,0.19743788,False,True
+baskauf/11962,ind-baskauf/11961,leaf,Prunus serotina,Prunus serotina,0.99992347,True,True,Prunus serotina,0.98976491,True,True,Prunus serotina,0.52076862,True,True
+baskauf/11964,ind-baskauf/11961,fruit,Prunus serotina,Prunus serotina,0.99999511,True,True,Prunus serotina,0.99245349,True,True,Nyssa sylvatica,0.62110126,False,True
+baskauf/11966,ind-baskauf/11961,fruit,Prunus serotina,Prunus serotina,0.99999762,True,True,Prunus serotina,0.99318037,True,True,Prunus serotina,0.62668723,True,True
+baskauf/11993,ind-baskauf/11993,leaf,Carya cordiformis,Carya cordiformis,0.99993956,True,True,Carya cordiformis,0.94259729,True,True,Carya cordiformis,0.520124,True,True
+baskauf/11995,ind-baskauf/11993,twig,Carya cordiformis,Carya cordiformis,0.91697967,True,True,Carya cordiformis,0.41070248,True,True,Tilia americana,0.31408489,False,True
+baskauf/11996,ind-baskauf/11993,whole tree (or vine),Carya cordiformis,Carya cordiformis,0.88550961,True,True,Carya cordiformis,0.5669917,True,True,Robinia pseudoacacia,0.1862655,False,False
+baskauf/11997,ind-baskauf/11993,twig,Carya cordiformis,Carya cordiformis,0.99939871,True,True,Carya cordiformis,0.93054443,True,True,Fraxinus pennsylvanica,0.3639806,False,True
+baskauf/12021,ind-baskauf/12021,bark,Ostrya virginiana,Ostrya virginiana,0.99983239,True,True,Ostrya virginiana,0.89234999,True,True,Robinia pseudoacacia,0.50957417,False,False
+baskauf/12050,ind-baskauf/12050,bark,Quercus muehlenbergii,Quercus muehlenbergii,0.68389326,True,True,Quercus muehlenbergii,0.42032263,True,True,Carya ovata,0.32526021,False,False
+baskauf/12055,ind-baskauf/12050,whole tree (or vine),Quercus muehlenbergii,Quercus muehlenbergii,0.93977171,True,True,Quercus muehlenbergii,0.43430496,True,True,Tilia americana,0.25967358,False,False
+baskauf/12403,vanderbilt/7-324,leaf,Quercus alba,Quercus alba,0.99844801,True,True,Quercus alba,0.9957976,True,True,Quercus alba,0.97492667,True,True
+baskauf/12405,vanderbilt/7-324,fruit,Quercus alba,Quercus alba,0.99890435,True,True,Quercus alba,0.99843839,True,True,Quercus alba,0.88861441,True,True
+baskauf/12407,vanderbilt/7-324,leaf,Quercus alba,Quercus alba,0.99967754,True,True,Quercus alba,0.99905547,True,True,Quercus alba,0.98721352,True,True
+baskauf/12409,vanderbilt/7-324,whole tree (or vine),Quercus alba,Quercus alba,0.71185577,True,True,Quercus alba,0.40820081,True,True,Quercus muehlenbergii,0.34764925,False,True
+baskauf/12511,vanderbilt/7-324,leaf,Quercus alba,Quercus alba,0.90161812,True,True,Quercus alba,0.97711379,True,True,Quercus alba,0.84696641,True,True
+baskauf/12516,vanderbilt/7-324,leaf,Quercus alba,Quercus alba,0.99957901,True,True,Quercus alba,0.99899163,True,True,Quercus alba,0.92567102,True,True
+baskauf/12528,vanderbilt/7-324,leaf,Quercus alba,Quercus muehlenbergii,0.83252007,False,True,Quercus muehlenbergii,0.62606128,False,True,Quercus macrocarpa,0.31583215,False,False
+baskauf/13650,ind-baskauf/13650,bark,Carya ovata,Carya ovata,0.99966466,True,True,Carya ovata,0.86775668,True,True,Robinia pseudoacacia,0.19992929,False,False
+baskauf/13654,ind-baskauf/13650,whole tree (or vine),Carya ovata,Carya ovata,0.99987662,True,True,Carya ovata,0.71862925,True,True,Quercus alba,0.39361739,False,False
+baskauf/15103,ind-baskauf/15103,fruit,Cornus florida,Cornus florida,0.99956948,True,True,Cornus florida,0.99144336,True,True,Cornus florida,0.9157878,True,True
+baskauf/15104,ind-baskauf/15103,twig,Cornus florida,Cornus florida,0.9988305,True,True,Cornus florida,0.99639182,True,True,Cornus florida,0.98130185,True,True
+baskauf/15105,ind-baskauf/15103,twig,Cornus florida,Cornus florida,0.9988305,True,True,Cornus florida,0.99634684,True,True,Cornus florida,0.98256549,True,True
+baskauf/15307,ind-baskauf/15307,leaf,Acer negundo,Acer negundo,0.99126446,True,True,Acer negundo,0.99655081,True,True,Acer negundo,0.96674357,True,True
+baskauf/15308,ind-baskauf/15307,twig,Acer negundo,Acer negundo,0.99721587,True,True,Acer negundo,0.76871518,True,True,Juglans nigra,0.30618783,False,True
+baskauf/15313,ind-baskauf/15307,leaf,Acer negundo,Acer negundo,0.99981254,True,True,Acer negundo,0.99616236,True,True,Acer negundo,0.98463857,True,True
+baskauf/15316,ind-baskauf/15307,leaf,Acer negundo,Acer negundo,0.98481768,True,True,Acer negundo,0.92443151,True,True,Acer negundo,0.5672077,True,True
+baskauf/15320,ind-baskauf/15307,bark,Acer negundo,Acer negundo,0.99767119,True,True,Acer negundo,0.99285606,True,True,Ulmus rubra,0.19056031,False,False
+baskauf/15477,ind-baskauf/15477,whole tree (or vine),Rhus glabra,Rhus glabra,0.97068125,True,True,Rhus glabra,0.98565389,True,True,Rhus copallinum,0.37835396,False,True
+baskauf/15615,vanderbilt/6-135,fruit,Quercus macrocarpa,Quercus macrocarpa,0.99999166,True,True,Quercus macrocarpa,0.98030291,True,True,Quercus alba,0.65126906,False,False
+baskauf/15620,vanderbilt/6-135,twig,Quercus macrocarpa,Quercus macrocarpa,0.55942434,True,True,Quercus bicolor,0.75670537,False,True,Quercus alba,0.77827649,False,True
+baskauf/15624,vanderbilt/6-135,leaf,Quercus macrocarpa,Quercus macrocarpa,0.97551471,True,True,Quercus bicolor,0.959071,False,True,Quercus bicolor,0.39480956,False,True
+baskauf/15643,vanderbilt/7-306,leaf,Quercus rubra,Quercus rubra,0.95211172,True,True,Quercus rubra,0.91516169,True,True,Quercus rubra,0.64122675,True,True
+baskauf/15687,ind-baskauf/15687,fruit,Sambucus nigra,Sambucus nigra,0.99293935,True,True,Sambucus nigra,0.96511855,True,True,Rhus copallinum,0.50447003,False,True
+baskauf/15688,ind-baskauf/15687,fruit,Sambucus nigra,Sambucus nigra,0.99949574,True,True,Sambucus nigra,0.9565778,True,True,Sambucus racemosa,0.34080687,False,True
+baskauf/15984,vanderbilt/12-177,whole tree (or vine),Gymnocladus dioicus,Gymnocladus dioicus,0.99998903,True,True,Gymnocladus dioicus,0.8753406,True,True,Acer saccharum,0.24182814,False,False
+baskauf/15988,vanderbilt/12-177,bark,Gymnocladus dioicus,Gleditsia triacanthos,0.73100847,False,True,Gleditsia triacanthos,0.34850257,False,True,Gymnocladus dioicus,0.29892333,True,True
+baskauf/17542,vanderbilt/6-15,twig,Pinus strobus,Pinus strobus,0.99999964,True,True,Pinus strobus,0.99243118,True,True,Pinus strobus,0.92004147,True,True
+baskauf/17544,vanderbilt/6-15,bark,Pinus strobus,Pinus strobus,0.98624086,True,True,Pinus strobus,0.62021212,True,True,Quercus bicolor,0.18682411,False,False
+baskauf/17546,vanderbilt/6-15,bark,Pinus strobus,Pinus strobus,0.99980134,True,True,Pinus strobus,0.82613401,True,True,Pinus strobus,0.45403212,True,True
+baskauf/21454,ind-baskauf/21454,inflorescence,Salix nigra,Salix nigra,1.0,True,True,Salix nigra,0.98888049,True,True,Salix nigra,0.33706915,True,True
+baskauf/21457,ind-baskauf/21454,inflorescence,Salix nigra,Salix nigra,0.9999615,True,True,Salix nigra,0.95687231,True,True,Quercus palustris,0.27255315,False,True
+baskauf/21465,ind-baskauf/21454,fruit,Salix nigra,Salix nigra,0.99984097,True,True,Salix nigra,0.97837166,True,True,Salix nigra,0.24366051,True,True
+baskauf/21865,ind-baskauf/21860,bark,Fraxinus quadrangulata,Fraxinus quadrangulata,0.97408789,True,True,Robinia pseudoacacia,0.19621765,False,False,Sorbus americana,0.08411937,False,False
+baskauf/21999,ind-baskauf/21999,inflorescence,Robinia pseudoacacia,Robinia pseudoacacia,0.99999523,True,True,Robinia pseudoacacia,0.99349354,True,True,Robinia pseudoacacia,0.90317925,True,True
+baskauf/22004,ind-baskauf/21999,inflorescence,Robinia pseudoacacia,Robinia pseudoacacia,0.99999523,True,True,Robinia pseudoacacia,0.994886,True,True,Robinia pseudoacacia,0.68785005,True,True
+baskauf/22014,ind-baskauf/21999,inflorescence,Robinia pseudoacacia,Robinia pseudoacacia,0.9999994,True,True,Robinia pseudoacacia,0.99733596,True,True,Robinia pseudoacacia,0.95455604,True,True
+baskauf/23022,ind-baskauf/23021,inflorescence,Juglans nigra,Juglans nigra,0.98194045,True,True,Juglans nigra,0.98793458,True,True,Juglans nigra,0.88518229,True,True
+baskauf/23025,ind-baskauf/23021,inflorescence,Juglans nigra,Juglans nigra,0.73053116,True,True,Juglans nigra,0.97384353,True,True,Rhus glabra,0.45810997,False,True
+baskauf/26131,ind-baskauf/26128,leaf,Picea rubens,Picea rubens,0.99999893,True,True,Picea rubens,0.96496987,True,True,Picea rubens,0.87639903,True,True
+baskauf/26308,ind-baskauf/26298,twig,Viburnum lantanoides,Viburnum lantanoides,1.0,True,True,Viburnum lantanoides,0.97666629,True,True,Viburnum lantanoides,0.46383419,True,True
+baskauf/26311,ind-baskauf/26298,leaf,Viburnum lantanoides,Viburnum lantanoides,1.0,True,True,Viburnum lantanoides,0.97870514,True,True,Viburnum lantanoides,0.79104252,True,True
+baskauf/26321,ind-baskauf/26298,fruit,Viburnum lantanoides,Viburnum lantanoides,0.99999988,True,True,Viburnum lantanoides,0.91471325,True,True,Tilia americana,0.79349141,False,True
+baskauf/26325,ind-baskauf/26298,fruit,Viburnum lantanoides,Viburnum lantanoides,0.99999917,True,True,Viburnum lantanoides,0.92566599,True,True,Tilia americana,0.42868081,False,True
+baskauf/27132,ind-baskauf/27131,fruit,Yucca filamentosa,Yucca filamentosa,0.99578887,True,True,Yucca filamentosa,0.55319556,True,True,Gymnocladus dioicus,0.31371723,False,True
+baskauf/27137,ind-baskauf/27131,fruit,Yucca filamentosa,Yucca filamentosa,0.98776245,True,True,Yucca filamentosa,0.44266451,True,True,Gymnocladus dioicus,0.70709649,False,True
+baskauf/27139,ind-baskauf/27131,bark,Yucca filamentosa,Yucca filamentosa,0.4924655,True,True,Yucca filamentosa,0.1594834,True,True,Rhus glabra,0.24100876,False,True
+baskauf/27143,ind-baskauf/27131,twig,Yucca filamentosa,Yucca filamentosa,0.77829295,True,True,Yucca filamentosa,0.48950918,True,True,Juglans nigra,0.30233382,False,False
+baskauf/28751,ind-baskauf/28751,fruit,Sambucus racemosa,Sambucus racemosa,0.99906296,True,True,Sambucus racemosa,0.98578348,True,True,Sambucus racemosa,0.59857721,True,True
+baskauf/28754,ind-baskauf/28751,fruit,Sambucus racemosa,Sambucus racemosa,0.99849355,True,True,Sambucus racemosa,0.980797,True,True,Sambucus racemosa,0.4755589,True,True
+baskauf/28756,ind-baskauf/28751,leaf,Sambucus racemosa,Sambucus racemosa,0.99435222,True,True,Sambucus racemosa,0.98773697,True,True,Sambucus racemosa,0.9517528,True,True
+baskauf/29683,ind-baskauf/10432,leaf,Fagus grandifolia,Fagus grandifolia,0.9999975,True,True,Fagus grandifolia,0.99698311,True,True,Fagus grandifolia,0.41074913,True,True
+baskauf/29685,ind-baskauf/10432,twig,Fagus grandifolia,Fagus grandifolia,1.0,True,True,Fagus grandifolia,0.99740216,True,True,Fagus grandifolia,0.45231315,True,True
+baskauf/29773,ind-baskauf/10432,whole tree (or vine),Fagus grandifolia,Fagus grandifolia,0.95202702,True,True,Fagus grandifolia,0.85014303,True,True,Fagus grandifolia,0.33102635,True,True
+baskauf/30941,ind-baskauf/30937,twig,Cornus amomum,Cornus amomum,0.99977857,True,True,Cornus amomum,0.96970257,True,True,Cornus amomum,0.43767693,True,True
+baskauf/32255,ind-baskauf/32253,whole tree (or vine),Rhus aromatica,Rhus aromatica,0.98762673,True,True,Rhus aromatica,0.69389022,True,True,Sassafras albidum,0.72278278,False,True
+baskauf/32257,ind-baskauf/32253,inflorescence,Rhus aromatica,Rhus aromatica,0.81545663,True,True,Rhus aromatica,0.75713386,True,True,Sassafras albidum,0.20575655,False,False
+baskauf/32478,ind-baskauf/32477,fruit,Amelanchier arborea,Amelanchier arborea,1.0,True,True,Amelanchier arborea,0.99188036,True,True,Amelanchier arborea,0.68204084,True,True
+baskauf/32481,ind-baskauf/32477,fruit,Amelanchier arborea,Amelanchier arborea,1.0,True,True,Amelanchier arborea,0.98821553,True,True,Amelanchier arborea,0.83790123,True,True
+baskauf/32482,ind-baskauf/32477,leaf,Amelanchier arborea,Amelanchier arborea,1.0,True,True,Amelanchier arborea,0.98511601,True,True,Amelanchier arborea,0.6476323,True,True
+baskauf/32768,ind-baskauf/32766,leaf,Pyrus calleryana,Rhus copallinum,0.68902433,False,True,Pyrus calleryana,0.90087346,True,True,Pyrus calleryana,0.96457867,True,True
+baskauf/32770,ind-baskauf/32766,leaf,Pyrus calleryana,Amelanchier arborea,0.9999696,False,False,Pyrus calleryana,0.83057869,True,True,Pyrus calleryana,0.50827469,True,True
+baskauf/35627,ind-baskauf/35627,inflorescence,Ilex verticillata,Ilex verticillata,1.0,True,True,Ilex verticillata,0.99289894,True,True,Ilex verticillata,0.57859908,True,True
+baskauf/35633,ind-baskauf/35627,inflorescence,Ilex verticillata,Ilex verticillata,0.99999988,True,True,Ilex verticillata,0.98695793,True,True,Ilex verticillata,0.65403466,True,True
+baskauf/37287,ind-baskauf/37284,bark,Betula lenta,Prunus serotina,0.83887666,False,True,Betula lenta,0.40275955,True,True,Betula alleghaniensis,0.23740053,False,True
+baskauf/37293,ind-baskauf/37284,bark,Betula lenta,Betula alleghaniensis,0.93834269,False,True,Betula alleghaniensis,0.61597808,False,False,Prunus serotina,0.21063469,False,False
+baskauf/37296,ind-baskauf/37284,twig,Betula lenta,Amelanchier arborea,0.61507678,False,True,Betula alleghaniensis,0.49797494,False,True,Rhus aromatica,0.2114889,False,False
+baskauf/39140,ind-baskauf/39138,twig,Acer saccharum,Acer saccharum,0.98234326,True,True,Nyssa sylvatica,0.50405963,False,True,Ailanthus altissima,0.66808757,False,False
+baskauf/39144,ind-baskauf/39138,twig,Acer saccharum,Acer saccharum,0.95025802,True,True,Acer saccharum,0.34830582,True,True,Ailanthus altissima,0.21073092,False,False
+baskauf/39161,ind-baskauf/39138,twig,Acer saccharum,Acer saccharum,0.9999944,True,True,Acer saccharum,0.98658894,True,True,Quercus palustris,0.24372844,False,False
+baskauf/39181,ind-baskauf/39138,twig,Acer saccharum,Acer saccharum,0.99989307,True,True,Acer saccharum,0.87699457,True,True,Ailanthus altissima,0.67579712,False,False
+baskauf/39880,ind-baskauf/39879,fruit,Aesculus glabra,Aesculus glabra,0.99998689,True,True,Aesculus glabra,0.99515773,True,True,Aesculus glabra,0.92049981,True,True
+baskauf/43789,vanderbilt/6-189,fruit,Carpinus caroliniana,Carpinus caroliniana,0.99999213,True,True,Carpinus caroliniana,0.99742299,True,True,Carpinus caroliniana,0.20288979,True,True
+baskauf/43792,vanderbilt/6-189,fruit,Carpinus caroliniana,Carpinus caroliniana,0.99956948,True,True,Carpinus caroliniana,0.99308869,True,True,Carpinus caroliniana,0.17983348,True,True
+baskauf/49335,ind-baskauf/49335,whole tree (or vine),Sorbus americana,Sorbus americana,1.0,True,True,Sorbus americana,0.94356768,True,True,Ailanthus altissima,0.4979974,False,True
+baskauf/49339,ind-baskauf/49335,inflorescence,Sorbus americana,Sorbus americana,0.99966371,True,True,Sorbus americana,0.95299761,True,True,Sorbus americana,0.4949796,True,True
+baskauf/49341,ind-baskauf/49335,inflorescence,Sorbus americana,Sorbus americana,0.99999726,True,True,Sorbus americana,0.95760454,True,True,Sorbus americana,0.25789501,True,True
+baskauf/49344,ind-baskauf/49335,inflorescence,Sorbus americana,Sorbus americana,0.99999917,True,True,Sorbus americana,0.94501687,True,True,Prunus serotina,0.22906415,False,True
+baskauf/50460,ind-baskauf/50458,inflorescence,Lindera benzoin,Lindera benzoin,0.99999976,True,True,Lindera benzoin,0.9778232,True,True,Lindera benzoin,0.54851916,True,True
+baskauf/50462,ind-baskauf/50458,inflorescence,Lindera benzoin,Lindera benzoin,0.99999774,True,True,Lindera benzoin,0.94462659,True,True,Lindera benzoin,0.37464496,True,True
+baskauf/50467,ind-baskauf/50458,whole tree (or vine),Lindera benzoin,Lindera benzoin,1.0,True,True,Lindera benzoin,0.98733031,True,True,Lindera benzoin,0.35999884,True,True
+baskauf/50597,vanderbilt/6-189,inflorescence,Carpinus caroliniana,Carpinus caroliniana,0.98545849,True,True,Carpinus caroliniana,0.89626982,True,True,Carpinus caroliniana,0.75366569,True,True
+baskauf/50598,vanderbilt/6-189,inflorescence,Carpinus caroliniana,Carpinus caroliniana,0.99998701,True,True,Carpinus caroliniana,0.98988427,True,True,Carpinus caroliniana,0.82522776,True,True
+baskauf/50601,vanderbilt/6-189,inflorescence,Carpinus caroliniana,Carpinus caroliniana,0.98877305,True,True,Carpinus caroliniana,0.51353879,True,True,Carpinus caroliniana,0.49617565,True,True
+baskauf/50973,vanderbilt/6-215,inflorescence,Sassafras albidum,Sassafras albidum,0.99997246,True,True,Sassafras albidum,0.99189504,True,True,Fraxinus pennsylvanica,0.22545329,False,True
+baskauf/50974,vanderbilt/6-215,inflorescence,Sassafras albidum,Sassafras albidum,0.99998701,True,True,Sassafras albidum,0.99179449,True,True,Sassafras albidum,0.41179985,True,True
+baskauf/50977,vanderbilt/6-215,inflorescence,Sassafras albidum,Sassafras albidum,0.99999571,True,True,Sassafras albidum,0.9777554,True,True,Sassafras albidum,0.59436946,True,True
+baskauf/50978,vanderbilt/6-215,inflorescence,Sassafras albidum,Sassafras albidum,0.99989331,True,True,Sassafras albidum,0.81148085,True,True,Fraxinus pennsylvanica,0.43630862,False,True
+baskauf/50992,vanderbilt/12-33,inflorescence,Celtis occidentalis,Celtis occidentalis,1.0,True,True,Celtis occidentalis,0.99310053,True,True,Viburnum lantanoides,0.36854451,False,True
+baskauf/50993,vanderbilt/12-33,inflorescence,Celtis occidentalis,Celtis occidentalis,1.0,True,True,Celtis occidentalis,0.99484481,True,True,Acer negundo,0.31299563,False,True
+baskauf/51183,vanderbilt/12-11,inflorescence,Quercus bicolor,Quercus muehlenbergii,0.79827452,False,True,Quercus palustris,0.26637408,False,True,Quercus bicolor,0.22148149,True,True
+baskauf/51186,vanderbilt/12-11,inflorescence,Quercus bicolor,Quercus palustris,0.89822119,False,True,Quercus palustris,0.94866402,False,False,Quercus palustris,0.31776012,False,True
+baskauf/51397,vanderbilt/6-239,inflorescence,Nyssa sylvatica,Sassafras albidum,0.40656304,False,True,Nyssa sylvatica,0.98894963,True,True,Nyssa sylvatica,0.58223987,True,True
+baskauf/51398,vanderbilt/6-239,inflorescence,Nyssa sylvatica,Lindera benzoin,0.64254552,False,False,Nyssa sylvatica,0.1794584,True,True,Cornus amomum,0.2205907,False,True
+baskauf/51402,vanderbilt/6-239,inflorescence,Nyssa sylvatica,Nyssa sylvatica,0.89608264,True,True,Nyssa sylvatica,0.99242978,True,True,Nyssa sylvatica,0.66133075,True,True
+baskauf/51406,vanderbilt/6-239,inflorescence,Nyssa sylvatica,Amelanchier arborea,0.58522868,False,True,Nyssa sylvatica,0.94420224,True,True,Nyssa sylvatica,0.22742427,True,True
+baskauf/51813,ind-baskauf/51813,inflorescence,Zanthoxylum americanum,Zanthoxylum americanum,0.99998832,True,True,Zanthoxylum americanum,0.42603816,True,True,Quercus palustris,0.21162798,False,False
+baskauf/51814,ind-baskauf/51813,inflorescence,Zanthoxylum americanum,Zanthoxylum americanum,0.99999356,True,True,Zanthoxylum americanum,0.97536469,True,True,Gleditsia triacanthos,0.47153093,False,True
+baskauf/51815,ind-baskauf/51813,inflorescence,Zanthoxylum americanum,Zanthoxylum americanum,0.99987388,True,True,Zanthoxylum americanum,0.59842324,True,True,Acer negundo,0.1738343,False,True
+baskauf/51816,ind-baskauf/51813,twig,Zanthoxylum americanum,Zanthoxylum americanum,0.99999952,True,True,Zanthoxylum americanum,0.98073868,True,True,Quercus palustris,0.3452518,False,True
+baskauf/52483,vanderbilt/12-11,leaf,Quercus bicolor,Quercus bicolor,0.91679919,True,True,Quercus bicolor,0.63600699,True,True,Quercus bicolor,0.40479378,True,True
+baskauf/54564,ind-baskauf/54562,whole tree (or vine),Lonicera morrowii,Lonicera morrowii,0.73094869,True,True,Lonicera morrowii,0.88841674,True,True,Ilex verticillata,0.28597807,False,True
+baskauf/54565,ind-baskauf/54562,fruit,Lonicera morrowii,Lonicera morrowii,0.99979347,True,True,Lonicera morrowii,0.7653225,True,True,Ilex verticillata,0.27153401,False,True
+baskauf/54568,ind-baskauf/54562,fruit,Lonicera morrowii,Lonicera morrowii,0.99568164,True,True,Lonicera morrowii,0.76469625,True,True,Pyrus calleryana,0.31253008,False,False
+baskauf/65657,ind-baskauf/65657,whole tree (or vine),Dirca palustris,Lindera benzoin,0.89642239,False,True,Dirca palustris,0.88000332,True,True,Dirca palustris,0.70589868,True,True
+baskauf/66180,ind-baskauf/66180,whole tree (or vine),Gleditsia triacanthos,Gleditsia triacanthos,0.99998736,True,True,Gleditsia triacanthos,0.98738308,True,True,Gleditsia triacanthos,0.23201954,True,True
+baskauf/66181,ind-baskauf/66180,bark,Gleditsia triacanthos,Gleditsia triacanthos,0.9999994,True,True,Gleditsia triacanthos,0.99736154,True,True,Gleditsia triacanthos,0.97647758,True,True
+baskauf/66182,ind-baskauf/66180,bark,Gleditsia triacanthos,Gleditsia triacanthos,0.99999714,True,True,Gleditsia triacanthos,0.99517416,True,True,Gleditsia triacanthos,0.75076048,True,True
+baskauf/66183,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.99999666,True,True,Gleditsia triacanthos,0.99717441,True,True,Gleditsia triacanthos,0.97175039,True,True
+baskauf/66184,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.9999994,True,True,Gleditsia triacanthos,0.99782898,True,True,Gleditsia triacanthos,0.87268755,True,True
+baskauf/66185,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.99999857,True,True,Gleditsia triacanthos,0.99657211,True,True,Rhus glabra,0.38372584,False,True
+baskauf/66187,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.99979573,True,True,Gleditsia triacanthos,0.9871629,True,True,Gleditsia triacanthos,0.23086144,True,True
+baskauf/66188,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.99999058,True,True,Gleditsia triacanthos,0.99779923,True,True,Gleditsia triacanthos,0.94058116,True,True
+baskauf/66190,ind-baskauf/66180,twig,Gleditsia triacanthos,Gleditsia triacanthos,0.99997735,True,True,Gleditsia triacanthos,0.99416323,True,True,Gleditsia triacanthos,0.98569808,True,True
+baskauf/66191,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.99994648,True,True,Gleditsia triacanthos,0.99249254,True,True,Gleditsia triacanthos,0.94900217,True,True
+baskauf/66192,ind-baskauf/66180,inflorescence,Gleditsia triacanthos,Gleditsia triacanthos,0.93984699,True,True,Gleditsia triacanthos,0.69182377,True,True,Gleditsia triacanthos,0.89626863,True,True
+baskauf/89376,vanderbilt/7-306,whole tree (or vine),Quercus rubra,Fagus grandifolia,0.76808923,False,True,Ulmus americana,0.31554733,False,False,Ulmus americana,0.47096377,False,True
+baskauf/89381,vanderbilt/7-298,whole tree (or vine),Acer rubrum,Gleditsia triacanthos,0.9854123,False,False,Gleditsia triacanthos,0.30757642,False,False,Juglans cinerea,0.21052764,False,False
+baskauf/89954,vanderbilt/11-283,whole tree (or vine),Platanus occidentalis,Platanus occidentalis,1.0,True,True,Platanus occidentalis,0.99709644,True,True,Platanus occidentalis,0.9662499,True,True
+baskauf/89955,vanderbilt/11-283,bark,Platanus occidentalis,Platanus occidentalis,0.99998522,True,True,Platanus occidentalis,0.67944225,True,True,Aesculus glabra,0.32765915,False,False
+baskauf/89960a,vanderbilt/11-283,whole tree (or vine),Platanus occidentalis,Platanus occidentalis,1.0,True,True,Platanus occidentalis,0.99556758,True,True,Platanus occidentalis,0.97135946,True,True
+baskauf/89963,vanderbilt/11-283,whole tree (or vine),Platanus occidentalis,Platanus occidentalis,1.0,True,True,Platanus occidentalis,0.99696135,True,True,Platanus occidentalis,0.9605602,True,True
+baskauf/90661,vanderbilt/6-135,whole tree (or vine),Quercus macrocarpa,Quercus macrocarpa,0.69323432,True,True,Quercus bicolor,0.3286148,False,True,Fraxinus pennsylvanica,0.3511053,False,False
+baskauf/90785a,vanderbilt/9-89,whole tree (or vine),Fraxinus pennsylvanica,Fraxinus pennsylvanica,0.77577966,True,True,Fraxinus americana,0.95053433,False,True,Juglans nigra,0.47252183,False,True
+baskauf/90789,vanderbilt/9-89,whole tree (or vine),Fraxinus pennsylvanica,Quercus macrocarpa,0.68653321,False,True,Fraxinus pennsylvanica,0.68860832,True,True,Fraxinus pennsylvanica,0.55699944,True,True
+baskauf/90799,vanderbilt/9-89,whole tree (or vine),Fraxinus pennsylvanica,Fraxinus pennsylvanica,0.945364,True,True,Fraxinus pennsylvanica,0.87518577,True,True,Quercus rubra,0.34494723,False,True
+baskauf/90872,vanderbilt/11-283,whole tree (or vine),Platanus occidentalis,Platanus occidentalis,1.0,True,True,Platanus occidentalis,0.98685814,True,True,Platanus occidentalis,0.93090966,True,True
+baskauf/90874,vanderbilt/11-283,whole tree (or vine),Platanus occidentalis,Platanus occidentalis,1.0,True,True,Platanus occidentalis,0.98443943,True,True,Platanus occidentalis,0.98635439,True,True
+baskauf/90969,vanderbilt/7-306,whole tree (or vine),Quercus rubra,Amelanchier arborea,0.92158687,False,False,Fraxinus americana,0.17841453,False,True,Quercus rubra,0.1847519,True,True
+baskauf/90972,vanderbilt/7-306,whole tree (or vine),Quercus rubra,Amelanchier arborea,0.92292809,False,True,Fraxinus americana,0.30443425,False,True,Fraxinus americana,0.21943117,False,True
+baskauf/91011,vanderbilt/7-298,whole tree (or vine),Acer rubrum,Acer saccharum,0.99014777,False,True,Acer saccharum,0.61116346,False,False,Ginkgo biloba,0.19653423,False,False
+baskauf/91016,vanderbilt/7-298,whole tree (or vine),Acer rubrum,Pyrus calleryana,0.95014876,False,True,Pyrus calleryana,0.24957142,False,False,Quercus bicolor,0.15531439,False,False
+baskauf/91056,vanderbilt/6-215,whole tree (or vine),Sassafras albidum,Sassafras albidum,0.54089016,True,True,Fraxinus americana,0.6044868,False,True,Quercus macrocarpa,0.31510001,False,False
+baskauf/91059,vanderbilt/6-189,whole tree (or vine),Carpinus caroliniana,Fagus grandifolia,0.52703249,False,True,Betula lenta,0.2042515,False,True,Cornus florida,0.17821449,False,False
+baskauf/91065,vanderbilt/6-239,whole tree (or vine),Nyssa sylvatica,Ilex verticillata,0.51074648,False,False,Nyssa sylvatica,0.59073506,True,True,Tilia americana,0.21988692,False,True
+baskauf/91110,vanderbilt/12-11,whole tree (or vine),Quercus bicolor,Ostrya virginiana,0.73424089,False,False,Fraxinus americana,0.40338478,False,True,Fraxinus americana,0.24221475,False,False
+baskauf/91126,vanderbilt/12-126,whole tree,Ginkgo biloba,Ginkgo biloba,0.92769545,True,True,Ginkgo biloba,0.98046131,True,True,Ginkgo biloba,0.67286474,True,True
+baskauf/91144,vanderbilt/12-177,whole tree (or vine),Gymnocladus dioicus,Gymnocladus dioicus,0.95047671,True,True,Fraxinus americana,0.1506282,False,True,Fraxinus americana,0.5311235,False,False
+kaufmannm/ke064,ind-kaufmannm/ke064,whole tree (or vine),Populus tremuloides,Populus tremuloides,1.0,True,True,Populus tremuloides,0.95658706,True,True,Populus tremuloides,0.8722459,True,True
+kirchoff/em2338,ind-kirchoff/mason19,whole tree (or vine),Quercus palustris,Quercus palustris,0.99994934,True,True,Quercus palustris,0.98141459,True,True,Quercus palustris,0.49648021,True,True
+kirchoff/em2339,ind-kirchoff/mason19,bark,Quercus palustris,Quercus palustris,0.9998405,True,True,Quercus palustris,0.91170084,True,True,Quercus palustris,0.96185306,True,True
+kirchoff/em2341,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99999249,True,True,Quercus palustris,0.99868589,True,True,Quercus palustris,0.97282013,True,True
+kirchoff/em2342,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99978083,True,True,Quercus palustris,0.97626404,True,True,Quercus palustris,0.86929251,True,True
+kirchoff/em2343,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99987435,True,True,Quercus palustris,0.98857867,True,True,Quercus palustris,0.60389985,True,True
+kirchoff/em2344,ind-kirchoff/mason19,twig,Quercus palustris,Quercus palustris,0.99846268,True,True,Quercus palustris,0.96251106,True,True,Quercus rubra,0.69175399,False,True
+kirchoff/em2347,ind-kirchoff/mason19,fruit,Quercus palustris,Quercus palustris,0.99999774,True,True,Quercus palustris,0.99989724,True,True,Quercus palustris,0.96146411,True,True
+kirchoff/em2348,ind-kirchoff/mason19,fruit,Quercus palustris,Quercus palustris,0.99999833,True,True,Quercus palustris,0.99673399,True,True,Quercus palustris,0.97842567,True,True
+kirchoff/em2349,ind-kirchoff/mason19,fruit,Quercus palustris,Quercus palustris,0.99989343,True,True,Quercus palustris,0.99759276,True,True,Quercus palustris,0.88371894,True,True
+kirchoff/em2350,ind-kirchoff/mason19,fruit,Quercus palustris,Quercus palustris,0.99996209,True,True,Quercus palustris,0.98464555,True,True,Quercus palustris,0.85227883,True,True
+kirchoff/em2352,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.9999994,True,True,Quercus palustris,0.99969854,True,True,Quercus palustris,0.85961527,True,True
+kirchoff/em2353,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99911278,True,True,Quercus palustris,0.82369138,True,True,Quercus rubra,0.55896381,False,True
+kirchoff/em2354,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99999332,True,True,Quercus palustris,0.99922735,True,True,Quercus palustris,0.93624657,True,True
+kirchoff/em2355,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99999034,True,True,Quercus palustris,0.99916317,True,True,Quercus palustris,0.94596432,True,True
+kirchoff/em2356,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.76591861,True,True,Quercus rubra,0.70609778,False,True,Quercus palustris,0.76126675,True,True
+kirchoff/em2358,ind-kirchoff/mason19,leaf,Quercus palustris,Quercus palustris,0.99820375,True,True,Quercus rubra,0.5231809,False,True,Quercus palustris,0.92565416,True,True
+ssmv/2-638-01,vanderbilt/3-108,bark,Fraxinus americana,Fraxinus pennsylvanica,0.58801085,False,True,Fraxinus americana,0.47762936,True,True,Sassafras albidum,0.48752604,False,True
+ssmv/2-638-02,vanderbilt/3-108,whole tree (or vine),Fraxinus americana,Quercus palustris,0.64122391,False,False,Fraxinus americana,0.84780909,True,True,Quercus alba,0.4874627,False,True
+ssmv/2-638-03,vanderbilt/3-108,leaf,Fraxinus americana,Fraxinus pennsylvanica,0.61914062,False,True,Fraxinus americana,0.40742682,True,True,Fraxinus americana,0.33081418,True,True
+ssmv/2-638-04,vanderbilt/3-108,whole tree (or vine),Fraxinus americana,Quercus palustris,0.68342853,False,False,Fraxinus americana,0.77772513,True,True,Quercus alba,0.45695058,False,True
+thomas/0049-08-01,thomas/0049-08,whole tree (or vine),Cercis canadensis,Cercis canadensis,0.99999976,True,True,Cercis canadensis,0.98660749,True,True,Cercis canadensis,0.94969576,True,True
+thomas/0049-08-02,thomas/0049-08,inflorescence,Cercis canadensis,Cercis canadensis,1.0,True,True,Cercis canadensis,0.98764756,True,True,Cercis canadensis,0.98509729,True,True
+thomas/0049-08-03,thomas/0049-08,inflorescence,Cercis canadensis,Cercis canadensis,1.0,True,True,Cercis canadensis,0.99298453,True,True,Cercis canadensis,0.96142237,True,True
+thomas/0049-08-04,thomas/0049-08,inflorescence,Cercis canadensis,Cercis canadensis,1.0,True,True,Cercis canadensis,0.99367721,True,True,Cercis canadensis,0.55036742,True,True
+thomas/0049-08-05,thomas/0049-08,inflorescence,Cercis canadensis,Cercis canadensis,1.0,True,True,Cercis canadensis,0.99463016,True,True,Cercis canadensis,0.9441813,True,True
+thomas/0104-01-01,thomas/0104-01,inflorescence,Cephalanthus occidentalis,Cephalanthus occidentalis,1.0,True,True,Cephalanthus occidentalis,0.97381796,True,True,Cephalanthus occidentalis,0.98662826,True,True
+thomas/0104-01-02,thomas/0104-01,inflorescence,Cephalanthus occidentalis,Cephalanthus occidentalis,1.0,True,True,Cephalanthus occidentalis,0.92138172,True,True,Cephalanthus occidentalis,0.49193484,True,True
+thomas/0104-01-03,thomas/0104-01,inflorescence,Cephalanthus occidentalis,Cephalanthus occidentalis,0.99999988,True,True,Cephalanthus occidentalis,0.33022875,True,True,Cephalanthus occidentalis,0.89498152,True,True
+thomas/0104-01-04,thomas/0104-01,leaf,Cephalanthus occidentalis,Cephalanthus occidentalis,1.0,True,True,Cephalanthus occidentalis,0.99389952,True,True,Cephalanthus occidentalis,0.94362247,True,True
+thomas/0301-02-01,thomas/0301-02,inflorescence,Toxicodendron radicans,Toxicodendron radicans,1.0,True,True,Toxicodendron radicans,0.99666859,True,True,Toxicodendron radicans,0.90942092,True,True
+thomas/0301-02-02,thomas/0301-02,leaf,Toxicodendron radicans,Toxicodendron radicans,1.0,True,True,Toxicodendron radicans,0.99089708,True,True,Toxicodendron radicans,0.98282091,True,True
+thomas/0301-02-03,thomas/0301-02,inflorescence,Toxicodendron radicans,Toxicodendron radicans,0.99999988,True,True,Toxicodendron radicans,0.99444628,True,True,Toxicodendron radicans,0.93335694,True,True

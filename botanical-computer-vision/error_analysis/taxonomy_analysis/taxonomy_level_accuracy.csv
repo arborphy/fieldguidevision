@@ -1,0 +1,13 @@
+model_key,model,candidate_species,taxonomy_level,correct,total,accuracy
+bioclip,BioCLIP 2.5 zero-shot,63,species,181,211,0.8578199052132701
+bioclip,BioCLIP 2.5 zero-shot,63,genus,189,211,0.8957345971563981
+bioclip,BioCLIP 2.5 zero-shot,63,family,192,211,0.909952606635071
+dinov3,DINOv3 frozen + linear probe,63,species,119,211,0.5639810426540285
+dinov3,DINOv3 frozen + linear probe,63,genus,130,211,0.6161137440758294
+dinov3,DINOv3 frozen + linear probe,63,family,132,211,0.6255924170616114
+gpt_5_4,GPT-5.4 direct VLM,85,species,83,211,0.3933649289099526
+gpt_5_4,GPT-5.4 direct VLM,85,genus,103,211,0.4881516587677725
+gpt_5_4,GPT-5.4 direct VLM,85,family,119,211,0.5639810426540285
+gemini_flash_lite,Gemini 2.5 Flash Lite direct VLM,85,species,85,211,0.4028436018957346
+gemini_flash_lite,Gemini 2.5 Flash Lite direct VLM,85,genus,132,211,0.6255924170616114
+gemini_flash_lite,Gemini 2.5 Flash Lite direct VLM,85,family,141,211,0.6682464454976303

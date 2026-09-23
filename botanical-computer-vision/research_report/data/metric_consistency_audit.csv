@@ -1,0 +1,8 @@
+metric,value,population,source,explanation
+BioCLIP zero-shot full,77.5% Top-1,"1,899 images / 85 species",outputs/bioclip25_baseline/summary.json,Full original-image benchmark
+BioCLIP zero-shot strict,85.8% Top-1,211 images / 63 species,outputs/bioclip25_strict_zero_shot/summary.json,"Different, observation-disjoint test subset and smaller candidate set"
+BioCLIP linear probe strict,87.2% Top-1,211 images / 63 species,outputs/bioclip25_strict_embeddings/summary.json,"Supervised probe trained on 1,430 train+validation images"
+GPT full,38.8% Top-1,"1,899 images / 85 species",outputs/openrouter_vlm_full/summary.json,Full fixed-order direct-VLM protocol
+GPT strict subset,39.3% Top-1,211 images but 85 candidates,error_analysis/data/model_summary.csv,Subset of the same full predictions; not rerun with 63 candidates
+Gemini full,35.4% Top-1,"1,899 images / 85 species",outputs/openrouter_vlm_full/summary.json,Full fixed-order direct-VLM protocol
+Gemini strict subset,40.3% Top-1,211 images but 85 candidates,error_analysis/data/model_summary.csv,Subset of the same full predictions; not rerun with 63 candidates

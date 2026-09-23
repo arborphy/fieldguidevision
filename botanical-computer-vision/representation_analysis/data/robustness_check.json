@@ -1,0 +1,110 @@
+{
+  "protocol": {
+    "k_values": [
+      10,
+      20,
+      50
+    ],
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "kmeans_n_init_per_seed": 1,
+    "stability": "mean/std/min/max pairwise ARI over 45 seed pairs",
+    "distance_pairs": "all unordered cross-observation image pairs; identical pair masks in all spaces"
+  },
+  "clustering_metric_winners": [
+    {
+      "k": 10,
+      "metric": "species_nmi_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 10,
+      "metric": "species_purity_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 10,
+      "metric": "organ_nmi_mean",
+      "winner": "efficientnet_b0"
+    },
+    {
+      "k": 10,
+      "metric": "organ_purity_mean",
+      "winner": "efficientnet_b0"
+    },
+    {
+      "k": 20,
+      "metric": "species_nmi_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 20,
+      "metric": "species_purity_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 20,
+      "metric": "organ_nmi_mean",
+      "winner": "dinov3"
+    },
+    {
+      "k": 20,
+      "metric": "organ_purity_mean",
+      "winner": "dinov3"
+    },
+    {
+      "k": 50,
+      "metric": "species_nmi_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 50,
+      "metric": "species_purity_mean",
+      "winner": "bioclip"
+    },
+    {
+      "k": 50,
+      "metric": "organ_nmi_mean",
+      "winner": "dinov3"
+    },
+    {
+      "k": 50,
+      "metric": "organ_purity_mean",
+      "winner": "dinov3"
+    }
+  ],
+  "distance_metric_winners": [
+    {
+      "comparison": "species",
+      "metric": "mean_difference_same_minus_different",
+      "winner": "bioclip"
+    },
+    {
+      "comparison": "species",
+      "metric": "cohens_d",
+      "winner": "bioclip"
+    },
+    {
+      "comparison": "normalized_organ",
+      "metric": "mean_difference_same_minus_different",
+      "winner": "efficientnet_b0"
+    },
+    {
+      "comparison": "normalized_organ",
+      "metric": "cohens_d",
+      "winner": "efficientnet_b0"
+    }
+  ],
+  "species_clustering_winner_consistent": true,
+  "organ_clustering_winner_consistent": false
+}

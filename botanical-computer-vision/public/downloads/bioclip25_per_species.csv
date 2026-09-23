@@ -1,0 +1,86 @@
+species,vernacular,total,top1_correct,top1_accuracy,top5_correct,top5_accuracy
+Acer negundo,boxelder,30,28,0.9333333333333333,29,0.9666666666666667
+Acer nigrum,black maple,15,0,0.0,12,0.8
+Acer platanoides,Norway maple,15,15,1.0,15,1.0
+Acer rubrum,red maple,24,19,0.7916666666666666,22,0.9166666666666666
+Acer saccharinum,silver maple,14,13,0.9285714285714286,14,1.0
+Acer saccharum,sugar maple,32,23,0.71875,29,0.90625
+Yucca filamentosa,Adam's needle,16,15,0.9375,16,1.0
+Rhus aromatica,fragrant sumac,14,10,0.7142857142857143,12,0.8571428571428571
+Rhus copallinum,winged sumac,24,23,0.9583333333333334,24,1.0
+Rhus glabra,smooth sumac,19,17,0.8947368421052632,18,0.9473684210526315
+Toxicodendron radicans,eastern poison ivy,27,26,0.9629629629629629,27,1.0
+Ilex verticillata,common winterberry,17,17,1.0,17,1.0
+Betula alleghaniensis,yellow birch,14,11,0.7857142857142857,12,0.8571428571428571
+Betula lenta,sweet birch,12,1,0.08333333333333333,7,0.5833333333333334
+Betula papyrifera,paper birch,6,6,1.0,6,1.0
+Carpinus caroliniana,American hornbeam,41,38,0.926829268292683,40,0.975609756097561
+Ostrya virginiana,hophornbeam,18,13,0.7222222222222222,16,0.8888888888888888
+Lonicera morrowii,Morrow's honeysuckle,15,14,0.9333333333333333,14,0.9333333333333333
+Sambucus nigra,American black elderberry,12,11,0.9166666666666666,12,1.0
+Sambucus racemosa,red elderberry,19,19,1.0,19,1.0
+Viburnum lantanoides,hobblebush,14,13,0.9285714285714286,13,0.9285714285714286
+Viburnum opulus,American cranberrybush,13,11,0.8461538461538461,12,0.9230769230769231
+Cornus amomum,silky dogwood,16,3,0.1875,16,1.0
+Cornus florida,flowering dogwood,33,31,0.9393939393939394,33,1.0
+Cornus racemosa,gray dogwood,13,10,0.7692307692307693,12,0.9230769230769231
+Cornus sericea,redosier dogwood,10,9,0.9,9,0.9
+Nyssa sylvatica,blackgum,32,14,0.4375,21,0.65625
+Juniperus communis,common juniper,1,1,1.0,1,1.0
+Juniperus virginiana,eastern redcedar,16,16,1.0,16,1.0
+Thuja occidentalis,arborvitae,8,4,0.5,8,1.0
+Cercis canadensis,eastern redbud,29,26,0.896551724137931,28,0.9655172413793104
+Gleditsia triacanthos,honeylocust,55,53,0.9636363636363636,54,0.9818181818181818
+Gymnocladus dioicus,Kentucky coffeetree,33,24,0.7272727272727273,31,0.9393939393939394
+Robinia pseudoacacia,black locust,35,30,0.8571428571428571,33,0.9428571428571428
+Castanea dentata,American chestnut,11,8,0.7272727272727273,9,0.8181818181818182
+Fagus grandifolia,American beech,46,44,0.9565217391304348,46,1.0
+Quercus alba,white oak,54,39,0.7222222222222222,53,0.9814814814814815
+Quercus bicolor,swamp white oak,31,16,0.5161290322580645,29,0.9354838709677419
+Quercus macrocarpa,bur oak,22,16,0.7272727272727273,21,0.9545454545454546
+Quercus muehlenbergii,chinkapin oak,20,16,0.8,20,1.0
+Quercus palustris,pin oak,114,110,0.9649122807017544,114,1.0
+Quercus rubra,northern red oak,53,25,0.4716981132075472,45,0.8490566037735849
+Quercus velutina,black oak,32,19,0.59375,27,0.84375
+Ginkgo biloba,maidenhair tree,27,16,0.5925925925925926,21,0.7777777777777778
+Hamamelis virginiana,American witchhazel,17,15,0.8823529411764706,15,0.8823529411764706
+Aesculus glabra,Ohio buckeye,25,17,0.68,24,0.96
+Aesculus hippocastanum,horse chestnut,11,10,0.9090909090909091,11,1.0
+Carya cordiformis,bitternut hickory,25,21,0.84,23,0.92
+Carya laciniosa,shellbark hickory,21,3,0.14285714285714285,20,0.9523809523809523
+Carya ovata,shagbark hickory,15,9,0.6,13,0.8666666666666667
+Juglans cinerea,butternut,33,24,0.7272727272727273,29,0.8787878787878788
+Juglans nigra,black walnut,35,19,0.5428571428571428,30,0.8571428571428571
+Lindera benzoin,northern spicebush,18,17,0.9444444444444444,18,1.0
+Sassafras albidum,sassafras,30,24,0.8,29,0.9666666666666667
+Magnolia acuminata,cucumber-tree,26,23,0.8846153846153846,26,1.0
+Fraxinus americana,white ash,32,6,0.1875,21,0.65625
+Fraxinus pennsylvanica,green ash,28,18,0.6428571428571429,23,0.8214285714285714
+Fraxinus quadrangulata,blue ash,15,10,0.6666666666666666,15,1.0
+Picea glauca,white spruce,8,6,0.75,8,1.0
+Picea mariana,black spruce,1,1,1.0,1,1.0
+Picea rubens,red spruce,8,4,0.5,8,1.0
+Pinus resinosa,red pine,8,5,0.625,8,1.0
+Pinus rigida,pitch pine,9,9,1.0,9,1.0
+Pinus strobus,eastern white pine,22,17,0.7727272727272727,22,1.0
+Tsuga canadensis,eastern hemlock,15,14,0.9333333333333333,15,1.0
+Platanus occidentalis,American sycamore,34,32,0.9411764705882353,33,0.9705882352941176
+Amelanchier arborea,common serviceberry,19,18,0.9473684210526315,19,1.0
+Prunus pensylvanica,pin cherry,6,5,0.8333333333333334,6,1.0
+Prunus serotina,black cherry,19,13,0.6842105263157895,19,1.0
+Prunus virginiana,chokecherry,7,7,1.0,7,1.0
+Pyrus calleryana,Callery pear,43,23,0.5348837209302325,34,0.7906976744186046
+Sorbus americana,American mountain ash,19,19,1.0,19,1.0
+Cephalanthus occidentalis,common buttonbush,25,23,0.92,24,0.96
+Zanthoxylum americanum,common pricklyash,17,17,1.0,17,1.0
+Populus deltoides,eastern cottonwood,19,18,0.9473684210526315,19,1.0
+Populus grandidentata,bigtooth aspen,6,6,1.0,6,1.0
+Populus tremuloides,quaking aspen,12,12,1.0,12,1.0
+Salix nigra,black willow,19,17,0.8947368421052632,18,0.9473684210526315
+Ailanthus altissima,tree of heaven,28,25,0.8928571428571429,26,0.9285714285714286
+Staphylea trifolia,American bladdernut,11,10,0.9090909090909091,11,1.0
+Dirca palustris,eastern leatherwood,19,5,0.2631578947368421,11,0.5789473684210527
+Tilia americana,white basswood,24,23,0.9583333333333334,23,0.9583333333333334
+Celtis occidentalis,common hackberry,17,15,0.8823529411764706,16,0.9411764705882353
+Ulmus americana,American elm,36,29,0.8055555555555556,34,0.9444444444444444
+Ulmus rubra,slippery elm,15,10,0.6666666666666666,14,0.9333333333333333

@@ -1,0 +1,4 @@
+Perform closed-set botanical species identification from the image. Use visible morphology only. Select exactly five distinct candidates from the list, rank them most likely first, and return each scientific name exactly as written in ranked_species. Put the five corresponding self-assessed scores between 0 and 1 in confidences; they need not sum to 1. Do not use filenames, metadata, web search, or any information outside the image and candidate list.
+
+Candidates:
+- [85 scientific names, with vernacular alias in parentheses]

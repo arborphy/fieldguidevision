@@ -1,0 +1,4 @@
+representation,model,embedding_dimension,selected_C,species_top1_correct,species_top1_accuracy,species_top5_correct,species_top5_accuracy,genus_top1_correct,genus_top1_accuracy,family_top1_correct,family_top1_accuracy,test_images
+bioclip,BioCLIP 2.5 frozen + linear probe,1024,100.0,184,0.8720379146919431,203,0.9620853080568721,197,0.933649289099526,199,0.943127962085308,211
+dinov3,DINOv3 frozen + linear probe,768,100.0,119,0.5639810426540285,176,0.8341232227488151,130,0.6161137440758294,132,0.6255924170616114,211
+efficientnet_b0,EfficientNet-B0 ImageNet frozen + linear probe,1280,100.0,46,0.21800947867298578,101,0.4786729857819905,62,0.2938388625592417,71,0.33649289099526064,211

@@ -1,0 +1,41 @@
+{
+  "images": 1641,
+  "representations": [
+    "bioclip",
+    "dinov3",
+    "efficientnet_b0"
+  ],
+  "k_values": [
+    10,
+    20,
+    50
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "cluster_runs": 90,
+  "organ_mapping_rows": 12,
+  "normalized_organs": [
+    "bark",
+    "cone",
+    "fruit",
+    "inflorescence",
+    "leaf",
+    "other",
+    "seed",
+    "twig",
+    "whole plant"
+  ],
+  "distance_protocol": "all unordered cross-observation pairs",
+  "projection_images": 9,
+  "reference_contact_sheets": 60
+}

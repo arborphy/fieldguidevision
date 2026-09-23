@@ -1,0 +1,2283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BioImages representation analysis</title>
+  <style>
+    :root { --ink:#17221d; --muted:#667069; --line:#d8ded9; --soft:#f3f5f3; --paper:#fff; --accent:#315f4a; --warn:#8c4b2e; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.45; }
+    main { width:min(1540px,calc(100% - 40px)); margin:0 auto; padding:48px 0 80px; }
+    h1,h2,h3,h4 { font-family:Georgia,"Times New Roman",serif; font-weight:400; }
+    h1 { font-size:clamp(2.2rem,5vw,4.6rem); line-height:1; margin:8px 0 16px; }
+    h2 { font-size:clamp(1.7rem,3vw,2.6rem); margin:0 0 12px; }
+    h3 { margin:26px 0 12px; } h4 { margin:0; font-size:1.15rem; }
+    .eyebrow,.small,figcaption { color:var(--muted); font-size:.82rem; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.11em; font-weight:650; }
+    .page-header { max-width:940px; padding-bottom:30px; border-bottom:1px solid var(--line); }
+    .protocol { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:24px; }
+    .protocol div { background:var(--paper); padding:14px; } .protocol b { display:block; font-size:1.25rem; }
+    section.major { padding-top:56px; }
+    .note { border-left:3px solid var(--accent); padding:10px 14px; color:var(--muted); background:var(--soft); max-width:960px; }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:.86rem; }
+    th,td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); white-space:nowrap; }
+    th { color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; }
+    .cluster-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:18px; }
+    .cluster-card { border:1px solid var(--line); min-width:0; } .cluster-card>img { width:100%; display:block; border-bottom:1px solid var(--line); }
+    .cluster-copy { padding:13px 15px 15px; } .cluster-copy p { margin:6px 0; }
+    .metric-line { display:flex; flex-wrap:wrap; gap:8px 14px; font-size:.82rem; margin-top:9px; }
+    .flag { font:600 .68rem ui-sans-serif,sans-serif; color:var(--warn); text-transform:uppercase; letter-spacing:.06em; }
+    details { border-top:1px solid var(--line); padding:14px 0; } summary { cursor:pointer; font-weight:650; }
+    .two-up { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    figure { margin:0; min-width:0; } figure img { width:100%; display:block; border:1px solid var(--line); } figcaption { margin-top:6px; }
+    .nn-case,.pair-block { padding:24px 0; border-top:1px solid var(--line); } .nn-case header h3 { margin:0; } .nn-case header p { margin:3px 0 14px; color:var(--muted); }
+    .projection { margin-top:24px; } .projection img { width:100%; display:block; border:1px solid var(--line); }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .downloads a { color:var(--accent); margin-right:16px; }
+    footer { margin-top:64px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:.82rem; }
+    @media(max-width:900px) { .protocol { grid-template-columns:repeat(2,1fr); } .cluster-grid,.two-up { grid-template-columns:1fr; } }
+    @media(max-width:520px) { main { width:calc(100% - 24px); padding-top:28px; } .protocol { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body><main>
+  <header class="page-header">
+    <div class="eyebrow">BioImages · exploratory representation analysis</div>
+    <h1>Visual structure before labels</h1>
+    <p>Frozen BioCLIP and DINOv3 embeddings are examined as perceptual spaces. K-means and nearest-neighbor retrieval use no species label. Labels, organs and benchmark outcomes are joined only afterward for analysis.</p>
+    <p><a href="efficientnet_control.html">Open the final BioCLIP / DINOv3 / EfficientNet multi-seed representation comparison.</a></p>
+    <div class="protocol"><div><b>1,641</b>embedded images</div><div><b>211</b>strict test images</div><div><b>10 / 20 / 50</b>K-means values</div><div><b>1418/1418</b>source images available</div></div>
+  </header>
+
+  <section class="major">
+    <h2>Representation structure</h2>
+    <p class="note">NMI and purity are post-hoc label summaries, not clustering inputs. ARI compares BioCLIP and DINO cluster assignments at the same k. Higher values indicate stronger association or agreement, not necessarily a better representation.</p>
+    <div class="table-wrap"><table><thead><tr><th>Space</th><th>k</th><th>Species NMI</th><th>Organ NMI</th><th>Species purity</th><th>Organ purity</th><th>Cluster size min/median/max</th><th>Cross-space ARI</th></tr></thead><tbody><tr><td>BioCLIP</td><td>10</td><td>0.449</td><td>0.129</td><td>20.6%</td><td>35.0%</td><td>96/136/302</td><td>0.159</td></tr><tr><td>BioCLIP</td><td>20</td><td>0.615</td><td>0.163</td><td>33.3%</td><td>39.7%</td><td>29/74/200</td><td>0.195</td></tr><tr><td>BioCLIP</td><td>50</td><td>0.752</td><td>0.196</td><td>63.4%</td><td>44.7%</td><td>13/29/103</td><td>0.208</td></tr><tr><td>DINOv3</td><td>10</td><td>0.236</td><td>0.473</td><td>12.3%</td><td>68.9%</td><td>123/164/209</td><td>0.159</td></tr><tr><td>DINOv3</td><td>20</td><td>0.316</td><td>0.522</td><td>16.5%</td><td>79.6%</td><td>33/80/140</td><td>0.195</td></tr><tr><td>DINOv3</td><td>50</td><td>0.454</td><td>0.499</td><td>28.8%</td><td>83.2%</td><td>8/30/82</td><td>0.208</td></tr></tbody></table></div>
+    <p>Mean cross-observation BioCLIP/DINO neighbor overlap@10: <b>28.4%</b>; median: <b>30.0%</b>.</p>
+  </section>
+
+  <section class="major">
+    <h2>Error-enriched cluster review</h2>
+    <p class="note">Shown clusters are ranked within each space and k by BioCLIP-error or all-four-wrong enrichment. “FDR-enriched” uses a one-sided hypergeometric test with BH q≤0.10; “descriptively enriched” means at least 5 test images plus ≥1.5× BioCLIP-error or ≥2× all-four-wrong enrichment. No cluster is automatically named.</p>
+    <h3>BioCLIP · k=10</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_05.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 <span class='flag'>FDR-enriched</span></h4>
+          <p>180 images · 23 test · species purity 8.3% · organ purity 82.8%</p>
+          <p><b>Species</b> Ulmus americana 15, Fraxinus americana 15, Quercus rubra 13, Quercus alba 13</p>
+          <p><b>Organs</b> whole tree (or vine) 149, bark 20, whole tree 7, inflorescence 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 47.8%</span><span><b>DINOv3</b> 21.7%</span><span><b>GPT-5.4</b> 13.0%</span><span><b>Gemini</b> 21.7%</span></div>
+          <p class="small">BioCLIP error enrichment 3.67× · all-four-wrong enrichment 4.32×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_01.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 <span class='flag'>FDR-enriched</span></h4>
+          <p>248 images · 31 test · species purity 8.5% · organ purity 22.2%</p>
+          <p><b>Species</b> Pyrus calleryana 21, Gymnocladus dioicus 18, Ginkgo biloba 15, Dirca palustris 10</p>
+          <p><b>Organs</b> leaf 55, bark 49, twig 49, inflorescence 44</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 67.7%</span><span><b>DINOv3</b> 38.7%</span><span><b>GPT-5.4</b> 25.8%</span><span><b>Gemini</b> 25.8%</span></div>
+          <p class="small">BioCLIP error enrichment 2.27× · all-four-wrong enrichment 2.80×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_04.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>96 images · 13 test · species purity 39.6% · organ purity 47.9%</p>
+          <p><b>Species</b> Quercus alba 38, Quercus bicolor 25, Quercus macrocarpa 13, Quercus muehlenbergii 13</p>
+          <p><b>Organs</b> leaf 46, inflorescence 16, twig 11, bark 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 84.6%</span><span><b>DINOv3</b> 53.8%</span><span><b>GPT-5.4</b> 46.2%</span><span><b>Gemini</b> 38.5%</span></div>
+          <p class="small">BioCLIP error enrichment 1.08× · all-four-wrong enrichment 0.95×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_02.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>115 images · 7 test · species purity 20.9% · organ purity 27.0%</p>
+          <p><b>Species</b> Juglans cinerea 24, Juglans nigra 23, Carya cordiformis 17, Fraxinus pennsylvanica 13</p>
+          <p><b>Organs</b> leaf 31, twig 25, fruit 19, inflorescence 16</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 85.7%</span><span><b>DINOv3</b> 42.9%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 1.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article><h3>BioCLIP · k=20</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_11.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 11">
+        <div class="cluster-copy">
+          <h4>Cluster 11 <span class='flag'>FDR-enriched</span></h4>
+          <p>121 images · 16 test · species purity 12.4% · organ purity 82.6%</p>
+          <p><b>Species</b> Quercus alba 15, Fraxinus americana 13, Quercus palustris 12, Quercus rubra 10</p>
+          <p><b>Organs</b> whole tree (or vine) 100, bark 16, whole tree 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 18.8%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 18.8%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 4.65×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_03.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 <span class='flag'>FDR-enriched</span></h4>
+          <p>200 images · 24 test · species purity 9.0% · organ purity 22.5%</p>
+          <p><b>Species</b> Ginkgo biloba 18, Gymnocladus dioicus 16, Yucca filamentosa 12, Dirca palustris 10</p>
+          <p><b>Organs</b> twig 45, bark 41, leaf 37, inflorescence 36</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 66.7%</span><span><b>DINOv3</b> 25.0%</span><span><b>GPT-5.4</b> 29.2%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.34× · all-four-wrong enrichment 3.62×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_17.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 17">
+        <div class="cluster-copy">
+          <h4>Cluster 17 <span class='flag'>FDR-enriched</span></h4>
+          <p>122 images · 14 test · species purity 9.8% · organ purity 61.5%</p>
+          <p><b>Species</b> Acer saccharum 12, Juglans cinerea 11, Ulmus americana 8, Acer rubrum 8</p>
+          <p><b>Organs</b> whole tree (or vine) 75, bark 28, inflorescence 6, fruit 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.1%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 21.4%</span></div>
+          <p class="small">BioCLIP error enrichment 3.01× · all-four-wrong enrichment 2.66×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_12.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>descriptively enriched</span></h4>
+          <p>48 images · 5 test · species purity 47.9% · organ purity 37.5%</p>
+          <p><b>Species</b> Pyrus calleryana 23, Amelanchier arborea 18, Sorbus americana 3, Acer rubrum 1</p>
+          <p><b>Organs</b> inflorescence 18, leaf 10, fruit 8, twig 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 60.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.81× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article><h3>BioCLIP · k=50</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_12.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>FDR-enriched</span></h4>
+          <p>103 images · 5 test · species purity 4.9% · organ purity 35.0%</p>
+          <p><b>Species</b> Dirca palustris 5, Nyssa sylvatica 5, Rhus aromatica 4, Toxicodendron radicans 4</p>
+          <p><b>Organs</b> twig 36, bark 26, leaf 23, inflorescence 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 40.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 4.22× · all-four-wrong enrichment 7.45×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_33.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 33">
+        <div class="cluster-copy">
+          <h4>Cluster 33 <span class='flag'>FDR-enriched</span></h4>
+          <p>100 images · 16 test · species purity 13.0% · organ purity 89.0%</p>
+          <p><b>Species</b> Fraxinus americana 13, Ulmus americana 12, Fraxinus pennsylvanica 7, Juglans nigra 7</p>
+          <p><b>Organs</b> whole tree (or vine) 89, whole tree 5, bark 3, unspecified 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 37.5%</span><span><b>DINOv3</b> 12.5%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 18.8%</span></div>
+          <p class="small">BioCLIP error enrichment 4.40× · all-four-wrong enrichment 5.43×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_09.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 <span class='flag'>descriptively enriched</span></h4>
+          <p>44 images · 10 test · species purity 25.0% · organ purity 50.0%</p>
+          <p><b>Species</b> Juglans cinerea 11, Robinia pseudoacacia 6, Castanea dentata 3, Fraxinus americana 3</p>
+          <p><b>Organs</b> whole tree (or vine) 22, bark 18, fruit 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 60.0%</span><span><b>DINOv3</b> 20.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 10.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.81× · all-four-wrong enrichment 3.72×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_37.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 37">
+        <div class="cluster-copy">
+          <h4>Cluster 37 <span class='flag'>descriptively enriched</span></h4>
+          <p>57 images · 7 test · species purity 42.1% · organ purity 45.6%</p>
+          <p><b>Species</b> Quercus bicolor 24, Quercus muehlenbergii 13, Quercus macrocarpa 8, Quercus alba 6</p>
+          <p><b>Organs</b> leaf 26, inflorescence 15, twig 8, whole tree (or vine) 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.1%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.01× · all-four-wrong enrichment 3.55×</p>
+        </div>
+      </article><h3>DINOv3 · k=10</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_07.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 <span class='flag'>FDR-enriched</span></h4>
+          <p>155 images · 26 test · species purity 9.0% · organ purity 92.9%</p>
+          <p><b>Species</b> Fraxinus americana 14, Quercus palustris 12, Quercus rubra 12, Quercus alba 11</p>
+          <p><b>Organs</b> whole tree (or vine) 144, whole tree 8, bark 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.7%</span><span><b>DINOv3</b> 34.6%</span><span><b>GPT-5.4</b> 30.8%</span><span><b>Gemini</b> 34.6%</span></div>
+          <p class="small">BioCLIP error enrichment 2.98× · all-four-wrong enrichment 3.82×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_06.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 <span class='flag'>descriptively enriched</span></h4>
+          <p>156 images · 21 test · species purity 7.7% · organ purity 94.2%</p>
+          <p><b>Species</b> Quercus palustris 12, Quercus alba 9, Carpinus caroliniana 7, Quercus rubra 6</p>
+          <p><b>Organs</b> bark 147, whole tree (or vine) 7, leaf 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 76.2%</span><span><b>DINOv3</b> 19.0%</span><span><b>GPT-5.4</b> 23.8%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 1.67× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_01.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 <span class='flag'>descriptively enriched</span></h4>
+          <p>160 images · 12 test · species purity 6.9% · organ purity 54.4%</p>
+          <p><b>Species</b> Sassafras albidum 11, Dirca palustris 9, Quercus bicolor 9, Quercus alba 8</p>
+          <p><b>Organs</b> leaf 87, twig 46, fruit 23, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 1.03×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_05.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>184 images · 21 test · species purity 11.4% · organ purity 52.2%</p>
+          <p><b>Species</b> Quercus palustris 21, Juglans cinerea 20, Pyrus calleryana 14, Juglans nigra 8</p>
+          <p><b>Organs</b> twig 96, fruit 50, seed 12, bark 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 81.0%</span><span><b>DINOv3</b> 47.6%</span><span><b>GPT-5.4</b> 23.8%</span><span><b>Gemini</b> 14.3%</span></div>
+          <p class="small">BioCLIP error enrichment 1.34× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article><h3>DINOv3 · k=20</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_03.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 <span class='flag'>FDR-enriched</span></h4>
+          <p>140 images · 25 test · species purity 9.3% · organ purity 94.3%</p>
+          <p><b>Species</b> Fraxinus americana 13, Quercus palustris 12, Quercus rubra 11, Ulmus americana 11</p>
+          <p><b>Organs</b> whole tree (or vine) 132, whole tree 6, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 56.0%</span><span><b>DINOv3</b> 32.0%</span><span><b>GPT-5.4</b> 28.0%</span><span><b>Gemini</b> 32.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.09× · all-four-wrong enrichment 3.97×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_07.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 <span class='flag'>descriptively enriched</span></h4>
+          <p>61 images · 5 test · species purity 11.5% · organ purity 100.0%</p>
+          <p><b>Species</b> Pyrus calleryana 7, Quercus bicolor 6, Quercus macrocarpa 3, Quercus muehlenbergii 3</p>
+          <p><b>Organs</b> leaf 61</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 40.0%</span><span><b>DINOv3</b> 60.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 4.22× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_14.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 14">
+        <div class="cluster-copy">
+          <h4>Cluster 14 <span class='flag'>descriptively enriched</span></h4>
+          <p>74 images · 9 test · species purity 6.8% · organ purity 89.2%</p>
+          <p><b>Species</b> Platanus occidentalis 5, Juglans cinerea 5, Acer saccharum 4, Fagus grandifolia 4</p>
+          <p><b>Organs</b> twig 66, bark 3, leaf 3, stem 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 77.8%</span><span><b>DINOv3</b> 22.2%</span><span><b>GPT-5.4</b> 11.1%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.56× · all-four-wrong enrichment 2.76×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_04.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 <span class='flag'>descriptively enriched</span></h4>
+          <p>81 images · 10 test · species purity 13.6% · organ purity 100.0%</p>
+          <p><b>Species</b> Quercus palustris 11, Quercus alba 8, Quercus bicolor 5, Quercus rubra 5</p>
+          <p><b>Organs</b> bark 81</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 70.0%</span><span><b>DINOv3</b> 30.0%</span><span><b>GPT-5.4</b> 10.0%</span><span><b>Gemini</b> 30.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.11× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article><h3>DINOv3 · k=50</h3>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_33.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 33">
+        <div class="cluster-copy">
+          <h4>Cluster 33 <span class='flag'>descriptively enriched</span></h4>
+          <p>45 images · 6 test · species purity 13.3% · organ purity 97.8%</p>
+          <p><b>Species</b> Quercus alba 6, Quercus palustris 5, Quercus rubra 5, Fraxinus americana 4</p>
+          <p><b>Organs</b> whole tree (or vine) 44, bark 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 33.3%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 16.7%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 4.69× · all-four-wrong enrichment 4.14×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_00.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 <span class='flag'>descriptively enriched</span></h4>
+          <p>52 images · 12 test · species purity 21.2% · organ purity 94.2%</p>
+          <p><b>Species</b> Ulmus americana 11, Fraxinus americana 7, Platanus occidentalis 7, Fraxinus pennsylvanica 5</p>
+          <p><b>Organs</b> whole tree (or vine) 49, whole tree 2, bark 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 66.7%</span><span><b>DINOv3</b> 41.7%</span><span><b>GPT-5.4</b> 41.7%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.34× · all-four-wrong enrichment 4.14×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_44.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 44">
+        <div class="cluster-copy">
+          <h4>Cluster 44 <span class='flag'>descriptively enriched</span></h4>
+          <p>22 images · 6 test · species purity 50.0% · organ purity 81.8%</p>
+          <p><b>Species</b> Nyssa sylvatica 11, Tilia americana 4, Toxicodendron radicans 3, Viburnum lantanoides 1</p>
+          <p><b>Organs</b> inflorescence 18, leaf 2, cone 1, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 83.3%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 16.7%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 2.07×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_26.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 26">
+        <div class="cluster-copy">
+          <h4>Cluster 26 <span class='flag'>descriptively enriched</span></h4>
+          <p>53 images · 8 test · species purity 9.4% · organ purity 96.2%</p>
+          <p><b>Species</b> Platanus occidentalis 5, Acer saccharum 4, Fagus grandifolia 4, Gymnocladus dioicus 3</p>
+          <p><b>Organs</b> twig 51, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 12.5%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+  </section>
+
+  <section class="major">
+    <h2>Complete cluster atlas</h2>
+    <p>Every cluster has a centroid-nearest contact sheet with up to 20 images. Image IDs are shown, but no generated morphology labels are added.</p>
+    <details><summary>BioCLIP · k=10 · 10 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_00.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 </h4>
+          <p>142 images · 20 test · species purity 26.8% · organ purity 34.5%</p>
+          <p><b>Species</b> Carpinus caroliniana 38, Fagus grandifolia 33, Ulmus americana 17, Ostrya virginiana 14</p>
+          <p><b>Organs</b> leaf 49, inflorescence 26, fruit 23, twig 18</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 95.0%</span><span><b>DINOv3</b> 45.0%</span><span><b>GPT-5.4</b> 30.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.35× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_01.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 <span class='flag'>FDR-enriched</span></h4>
+          <p>248 images · 31 test · species purity 8.5% · organ purity 22.2%</p>
+          <p><b>Species</b> Pyrus calleryana 21, Gymnocladus dioicus 18, Ginkgo biloba 15, Dirca palustris 10</p>
+          <p><b>Organs</b> leaf 55, bark 49, twig 49, inflorescence 44</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 67.7%</span><span><b>DINOv3</b> 38.7%</span><span><b>GPT-5.4</b> 25.8%</span><span><b>Gemini</b> 25.8%</span></div>
+          <p class="small">BioCLIP error enrichment 2.27× · all-four-wrong enrichment 2.80×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_02.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>115 images · 7 test · species purity 20.9% · organ purity 27.0%</p>
+          <p><b>Species</b> Juglans cinerea 24, Juglans nigra 23, Carya cordiformis 17, Fraxinus pennsylvanica 13</p>
+          <p><b>Organs</b> leaf 31, twig 25, fruit 19, inflorescence 16</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 85.7%</span><span><b>DINOv3</b> 42.9%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 1.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_03.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 </h4>
+          <p>302 images · 43 test · species purity 7.6% · organ purity 25.5%</p>
+          <p><b>Species</b> Platanus occidentalis 23, Sassafras albidum 23, Acer negundo 22, Cornus florida 22</p>
+          <p><b>Organs</b> inflorescence 77, leaf 72, fruit 51, whole tree (or vine) 51</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 72.1%</span><span><b>GPT-5.4</b> 55.8%</span><span><b>Gemini</b> 51.2%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_04.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>96 images · 13 test · species purity 39.6% · organ purity 47.9%</p>
+          <p><b>Species</b> Quercus alba 38, Quercus bicolor 25, Quercus macrocarpa 13, Quercus muehlenbergii 13</p>
+          <p><b>Organs</b> leaf 46, inflorescence 16, twig 11, bark 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 84.6%</span><span><b>DINOv3</b> 53.8%</span><span><b>GPT-5.4</b> 46.2%</span><span><b>Gemini</b> 38.5%</span></div>
+          <p class="small">BioCLIP error enrichment 1.08× · all-four-wrong enrichment 0.95×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_05.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 <span class='flag'>FDR-enriched</span></h4>
+          <p>180 images · 23 test · species purity 8.3% · organ purity 82.8%</p>
+          <p><b>Species</b> Ulmus americana 15, Fraxinus americana 15, Quercus rubra 13, Quercus alba 13</p>
+          <p><b>Organs</b> whole tree (or vine) 149, bark 20, whole tree 7, inflorescence 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 47.8%</span><span><b>DINOv3</b> 21.7%</span><span><b>GPT-5.4</b> 13.0%</span><span><b>Gemini</b> 21.7%</span></div>
+          <p class="small">BioCLIP error enrichment 3.67× · all-four-wrong enrichment 4.32×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_06.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 </h4>
+          <p>112 images · 16 test · species purity 43.8% · organ purity 25.0%</p>
+          <p><b>Species</b> Gleditsia triacanthos 49, Robinia pseudoacacia 25, Ailanthus altissima 19, Gymnocladus dioicus 9</p>
+          <p><b>Organs</b> inflorescence 28, leaf 23, fruit 18, twig 17</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 87.5%</span><span><b>GPT-5.4</b> 75.0%</span><span><b>Gemini</b> 93.8%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_07.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 </h4>
+          <p>130 images · 16 test · species purity 73.8% · organ purity 53.8%</p>
+          <p><b>Species</b> Quercus palustris 96, Quercus rubra 33, Platanus occidentalis 1</p>
+          <p><b>Organs</b> leaf 70, twig 17, fruit 17, bark 16</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 87.5%</span><span><b>GPT-5.4</b> 56.2%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_08.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>122 images · 18 test · species purity 14.8% · organ purity 27.9%</p>
+          <p><b>Species</b> Sambucus racemosa 18, Aesculus glabra 18, Tilia americana 18, Sorbus americana 14</p>
+          <p><b>Organs</b> inflorescence 34, leaf 34, whole tree (or vine) 22, fruit 20</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 94.4%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 27.8%</span><span><b>Gemini</b> 27.8%</span></div>
+          <p class="small">BioCLIP error enrichment 0.39× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k10/cluster_09.jpg" alt="Centroid-nearest images for bioclip k=10 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 </h4>
+          <p>194 images · 24 test · species purity 8.2% · organ purity 18.6%</p>
+          <p><b>Species</b> Pinus strobus 16, Acer saccharum 14, Pyrus calleryana 13, Acer rubrum 12</p>
+          <p><b>Organs</b> leaf 36, inflorescence 30, whole tree (or vine) 29, bark 28</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 87.5%</span><span><b>DINOv3</b> 62.5%</span><span><b>GPT-5.4</b> 37.5%</span><span><b>Gemini</b> 54.2%</span></div>
+          <p class="small">BioCLIP error enrichment 0.88× · all-four-wrong enrichment 0.52×</p>
+        </div>
+      </article></div></details><details><summary>BioCLIP · k=20 · 20 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_00.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 </h4>
+          <p>111 images · 15 test · species purity 17.1% · organ purity 31.5%</p>
+          <p><b>Species</b> Aesculus glabra 19, Tilia americana 19, Acer saccharum 14, Lonicera morrowii 13</p>
+          <p><b>Organs</b> leaf 35, inflorescence 28, fruit 19, twig 14</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 93.3%</span><span><b>DINOv3</b> 26.7%</span><span><b>GPT-5.4</b> 26.7%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.47× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_01.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 </h4>
+          <p>129 images · 16 test · species purity 74.4% · organ purity 53.5%</p>
+          <p><b>Species</b> Quercus palustris 96, Quercus rubra 33</p>
+          <p><b>Organs</b> leaf 69, twig 17, fruit 17, bark 16</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 87.5%</span><span><b>GPT-5.4</b> 56.2%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_02.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>55 images · 13 test · species purity 32.7% · organ purity 36.4%</p>
+          <p><b>Species</b> Sambucus racemosa 18, Sorbus americana 15, Sambucus nigra 11, Viburnum lantanoides 11</p>
+          <p><b>Organs</b> inflorescence 20, leaf 14, fruit 10, whole tree (or vine) 9</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 53.8%</span><span><b>GPT-5.4</b> 38.5%</span><span><b>Gemini</b> 46.2%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_03.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 <span class='flag'>FDR-enriched</span></h4>
+          <p>200 images · 24 test · species purity 9.0% · organ purity 22.5%</p>
+          <p><b>Species</b> Ginkgo biloba 18, Gymnocladus dioicus 16, Yucca filamentosa 12, Dirca palustris 10</p>
+          <p><b>Organs</b> twig 45, bark 41, leaf 37, inflorescence 36</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 66.7%</span><span><b>DINOv3</b> 25.0%</span><span><b>GPT-5.4</b> 29.2%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.34× · all-four-wrong enrichment 3.62×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_04.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>92 images · 16 test · species purity 32.6% · organ purity 27.2%</p>
+          <p><b>Species</b> Platanus occidentalis 30, Acer negundo 24, Sassafras albidum 23, Acer rubrum 11</p>
+          <p><b>Organs</b> leaf 25, inflorescence 19, whole tree (or vine) 19, fruit 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 62.5%</span><span><b>GPT-5.4</b> 37.5%</span><span><b>Gemini</b> 43.8%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_05.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>77 images · 11 test · species purity 49.4% · organ purity 39.0%</p>
+          <p><b>Species</b> Carpinus caroliniana 38, Ostrya virginiana 15, Betula alleghaniensis 11, Betula lenta 6</p>
+          <p><b>Organs</b> leaf 30, bark 14, inflorescence 12, fruit 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 90.9%</span><span><b>DINOv3</b> 54.5%</span><span><b>GPT-5.4</b> 18.2%</span><span><b>Gemini</b> 36.4%</span></div>
+          <p class="small">BioCLIP error enrichment 0.64× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_06.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 </h4>
+          <p>65 images · 11 test · species purity 36.9% · organ purity 36.9%</p>
+          <p><b>Species</b> Cornus florida 24, Cercis canadensis 24, Robinia pseudoacacia 13, Yucca filamentosa 4</p>
+          <p><b>Organs</b> inflorescence 24, fruit 16, whole tree (or vine) 11, leaf 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 90.9%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_07.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 </h4>
+          <p>91 images · 12 test · species purity 39.6% · organ purity 50.5%</p>
+          <p><b>Species</b> Quercus alba 36, Quercus bicolor 23, Quercus macrocarpa 13, Quercus muehlenbergii 13</p>
+          <p><b>Organs</b> leaf 46, inflorescence 15, twig 11, bark 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 91.7%</span><span><b>DINOv3</b> 58.3%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 41.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.59× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_08.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>51 images · 4 test · species purity 27.5% · organ purity 47.1%</p>
+          <p><b>Species</b> Fraxinus pennsylvanica 14, Fraxinus quadrangulata 14, Fraxinus americana 12, Gymnocladus dioicus 5</p>
+          <p><b>Organs</b> leaf 24, twig 9, inflorescence 6, fruit 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_09.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 </h4>
+          <p>90 images · 8 test · species purity 24.4% · organ purity 25.6%</p>
+          <p><b>Species</b> Toxicodendron radicans 22, Ailanthus altissima 21, Rhus copallinum 20, Rhus glabra 17</p>
+          <p><b>Organs</b> leaf 23, fruit 21, whole tree (or vine) 19, inflorescence 19</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 37.5%</span><span><b>GPT-5.4</b> 25.0%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_10.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 10">
+        <div class="cluster-copy">
+          <h4>Cluster 10 </h4>
+          <p>81 images · 11 test · species purity 25.9% · organ purity 33.3%</p>
+          <p><b>Species</b> Cephalanthus occidentalis 21, Nyssa sylvatica 16, Lindera benzoin 15, Ilex verticillata 14</p>
+          <p><b>Organs</b> inflorescence 27, leaf 20, twig 13, fruit 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 90.9%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 36.4%</span><span><b>Gemini</b> 45.5%</span></div>
+          <p class="small">BioCLIP error enrichment 0.64× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_11.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 11">
+        <div class="cluster-copy">
+          <h4>Cluster 11 <span class='flag'>FDR-enriched</span></h4>
+          <p>121 images · 16 test · species purity 12.4% · organ purity 82.6%</p>
+          <p><b>Species</b> Quercus alba 15, Fraxinus americana 13, Quercus palustris 12, Quercus rubra 10</p>
+          <p><b>Organs</b> whole tree (or vine) 100, bark 16, whole tree 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 18.8%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 18.8%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 4.65×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_12.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>descriptively enriched</span></h4>
+          <p>48 images · 5 test · species purity 47.9% · organ purity 37.5%</p>
+          <p><b>Species</b> Pyrus calleryana 23, Amelanchier arborea 18, Sorbus americana 3, Acer rubrum 1</p>
+          <p><b>Organs</b> inflorescence 18, leaf 10, fruit 8, twig 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 60.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.81× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_13.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 13">
+        <div class="cluster-copy">
+          <h4>Cluster 13 </h4>
+          <p>64 images · 10 test · species purity 78.1% · organ purity 26.6%</p>
+          <p><b>Species</b> Gleditsia triacanthos 50, Robinia pseudoacacia 9, Gymnocladus dioicus 5</p>
+          <p><b>Organs</b> twig 17, leaf 15, inflorescence 13, bark 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 90.0%</span><span><b>GPT-5.4</b> 70.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_14.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 14">
+        <div class="cluster-copy">
+          <h4>Cluster 14 </h4>
+          <p>72 images · 5 test · species purity 30.6% · organ purity 23.6%</p>
+          <p><b>Species</b> Juglans nigra 22, Juglans cinerea 19, Carya cordiformis 15, Carya ovata 10</p>
+          <p><b>Organs</b> leaf 17, twig 17, fruit 16, inflorescence 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 40.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_15.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 15">
+        <div class="cluster-copy">
+          <h4>Cluster 15 </h4>
+          <p>29 images · 4 test · species purity 55.2% · organ purity 34.5%</p>
+          <p><b>Species</b> Populus deltoides 16, Populus tremuloides 11, Quercus palustris 2</p>
+          <p><b>Organs</b> whole tree (or vine) 10, leaf 7, inflorescence 4, fruit 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 75.0%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_16.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 16">
+        <div class="cluster-copy">
+          <h4>Cluster 16 </h4>
+          <p>44 images · 3 test · species purity 88.6% · organ purity 29.5%</p>
+          <p><b>Species</b> Fagus grandifolia 39, Castanea dentata 5</p>
+          <p><b>Organs</b> leaf 13, inflorescence 11, twig 8, fruit 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_17.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 17">
+        <div class="cluster-copy">
+          <h4>Cluster 17 <span class='flag'>FDR-enriched</span></h4>
+          <p>122 images · 14 test · species purity 9.8% · organ purity 61.5%</p>
+          <p><b>Species</b> Acer saccharum 12, Juglans cinerea 11, Ulmus americana 8, Acer rubrum 8</p>
+          <p><b>Organs</b> whole tree (or vine) 75, bark 28, inflorescence 6, fruit 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.1%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 21.4%</span></div>
+          <p class="small">BioCLIP error enrichment 3.01× · all-four-wrong enrichment 2.66×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_18.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 18">
+        <div class="cluster-copy">
+          <h4>Cluster 18 </h4>
+          <p>54 images · 7 test · species purity 29.6% · organ purity 38.9%</p>
+          <p><b>Species</b> Juniperus virginiana 16, Pinus strobus 16, Tsuga canadensis 13, Picea rubens 8</p>
+          <p><b>Organs</b> cone 21, whole tree 11, bark 9, leaf 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 85.7%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 85.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k20/cluster_19.jpg" alt="Centroid-nearest images for bioclip k=20 cluster 19">
+        <div class="cluster-copy">
+          <h4>Cluster 19 </h4>
+          <p>45 images · 6 test · species purity 40.0% · organ purity 28.9%</p>
+          <p><b>Species</b> Prunus serotina 18, Pyrus calleryana 14, Salix nigra 12, Nyssa sylvatica 1</p>
+          <p><b>Organs</b> leaf 13, fruit 13, bark 6, twig 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article></div></details><details><summary>BioCLIP · k=50 · 50 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_00.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 </h4>
+          <p>15 images · 4 test · species purity 93.3% · organ purity 26.7%</p>
+          <p><b>Species</b> Zanthoxylum americanum 14, Rhus copallinum 1</p>
+          <p><b>Organs</b> twig 4, leaf 3, fruit 3, whole tree (or vine) 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_01.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 </h4>
+          <p>40 images · 3 test · species purity 87.5% · organ purity 30.0%</p>
+          <p><b>Species</b> Fagus grandifolia 35, Castanea dentata 5</p>
+          <p><b>Organs</b> leaf 12, inflorescence 11, twig 8, fruit 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_02.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>34 images · 6 test · species purity 85.3% · organ purity 64.7%</p>
+          <p><b>Species</b> Quercus alba 29, Quercus macrocarpa 5</p>
+          <p><b>Organs</b> leaf 22, fruit 3, twig 3, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 83.3%</span><span><b>GPT-5.4</b> 83.3%</span><span><b>Gemini</b> 83.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_03.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 </h4>
+          <p>66 images · 7 test · species purity 56.1% · organ purity 36.4%</p>
+          <p><b>Species</b> Carpinus caroliniana 37, Ostrya virginiana 14, Betula alleghaniensis 10, Betula lenta 5</p>
+          <p><b>Organs</b> leaf 24, inflorescence 12, bark 11, fruit 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 71.4%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_04.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>15 images · 3 test · species purity 100.0% · organ purity 46.7%</p>
+          <p><b>Species</b> Amelanchier arborea 15</p>
+          <p><b>Organs</b> inflorescence 7, fruit 5, leaf 2, whole tree (or vine) 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_05.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>53 images · 5 test · species purity 37.7% · organ purity 28.3%</p>
+          <p><b>Species</b> Rhus copallinum 20, Rhus glabra 17, Sambucus nigra 10, Rhus aromatica 6</p>
+          <p><b>Organs</b> fruit 15, inflorescence 13, leaf 12, whole tree (or vine) 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 60.0%</span><span><b>Gemini</b> 60.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_06.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 </h4>
+          <p>13 images · 2 test · species purity 69.2% · organ purity 53.8%</p>
+          <p><b>Species</b> Fagus grandifolia 9, Betula lenta 1, Carpinus caroliniana 1, Nyssa sylvatica 1</p>
+          <p><b>Organs</b> whole tree (or vine) 7, bark 5, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_07.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 </h4>
+          <p>35 images · 2 test · species purity 80.0% · organ purity 54.3%</p>
+          <p><b>Species</b> Quercus rubra 28, Quercus palustris 7</p>
+          <p><b>Organs</b> leaf 19, twig 8, inflorescence 4, fruit 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_08.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>38 images · 2 test · species purity 57.9% · organ purity 31.6%</p>
+          <p><b>Species</b> Juglans nigra 22, Gymnocladus dioicus 9, Juglans cinerea 5, Ailanthus altissima 2</p>
+          <p><b>Organs</b> twig 12, leaf 9, whole tree (or vine) 6, inflorescence 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_09.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 <span class='flag'>descriptively enriched</span></h4>
+          <p>44 images · 10 test · species purity 25.0% · organ purity 50.0%</p>
+          <p><b>Species</b> Juglans cinerea 11, Robinia pseudoacacia 6, Castanea dentata 3, Fraxinus americana 3</p>
+          <p><b>Organs</b> whole tree (or vine) 22, bark 18, fruit 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 60.0%</span><span><b>DINOv3</b> 20.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 10.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.81× · all-four-wrong enrichment 3.72×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_10.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 10">
+        <div class="cluster-copy">
+          <h4>Cluster 10 </h4>
+          <p>75 images · 13 test · species purity 100.0% · organ purity 66.7%</p>
+          <p><b>Species</b> Quercus palustris 75</p>
+          <p><b>Organs</b> leaf 50, fruit 16, twig 8, whole tree (or vine) 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 84.6%</span><span><b>GPT-5.4</b> 61.5%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_11.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 11">
+        <div class="cluster-copy">
+          <h4>Cluster 11 </h4>
+          <p>40 images · 7 test · species purity 37.5% · organ purity 30.0%</p>
+          <p><b>Species</b> Lindera benzoin 15, Ilex verticillata 13, Dirca palustris 8, Rhus aromatica 3</p>
+          <p><b>Organs</b> leaf 12, inflorescence 9, whole tree (or vine) 7, twig 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 71.4%</span><span><b>GPT-5.4</b> 28.6%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_12.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>FDR-enriched</span></h4>
+          <p>103 images · 5 test · species purity 4.9% · organ purity 35.0%</p>
+          <p><b>Species</b> Dirca palustris 5, Nyssa sylvatica 5, Rhus aromatica 4, Toxicodendron radicans 4</p>
+          <p><b>Organs</b> twig 36, bark 26, leaf 23, inflorescence 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 40.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 4.22× · all-four-wrong enrichment 7.45×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_13.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 13">
+        <div class="cluster-copy">
+          <h4>Cluster 13 </h4>
+          <p>30 images · 5 test · species purity 96.7% · organ purity 40.0%</p>
+          <p><b>Species</b> Acer negundo 29, Toxicodendron radicans 1</p>
+          <p><b>Organs</b> leaf 12, whole tree (or vine) 7, bark 3, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 60.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 20.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_14.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 14">
+        <div class="cluster-copy">
+          <h4>Cluster 14 </h4>
+          <p>20 images · 2 test · species purity 95.0% · organ purity 40.0%</p>
+          <p><b>Species</b> Aesculus glabra 19, Dirca palustris 1</p>
+          <p><b>Organs</b> inflorescence 8, leaf 7, whole tree (or vine) 3, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_15.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 15">
+        <div class="cluster-copy">
+          <h4>Cluster 15 </h4>
+          <p>16 images · 2 test · species purity 100.0% · organ purity 43.8%</p>
+          <p><b>Species</b> Juniperus virginiana 16</p>
+          <p><b>Organs</b> cone 7, whole tree 4, bark 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_16.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 16">
+        <div class="cluster-copy">
+          <h4>Cluster 16 </h4>
+          <p>21 images · 3 test · species purity 100.0% · organ purity 38.1%</p>
+          <p><b>Species</b> Cephalanthus occidentalis 21</p>
+          <p><b>Organs</b> inflorescence 8, leaf 4, fruit 3, twig 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_17.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 17">
+        <div class="cluster-copy">
+          <h4>Cluster 17 </h4>
+          <p>35 images · 7 test · species purity 51.4% · organ purity 37.1%</p>
+          <p><b>Species</b> Sambucus racemosa 18, Sorbus americana 16, Sambucus nigra 1</p>
+          <p><b>Organs</b> inflorescence 13, leaf 8, whole tree (or vine) 7, fruit 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 71.4%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 57.1%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_18.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 18">
+        <div class="cluster-copy">
+          <h4>Cluster 18 </h4>
+          <p>31 images · 2 test · species purity 19.4% · organ purity 100.0%</p>
+          <p><b>Species</b> Quercus alba 6, Quercus bicolor 4, Pyrus calleryana 3, Gymnocladus dioicus 3</p>
+          <p><b>Organs</b> bark 31</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_19.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 19">
+        <div class="cluster-copy">
+          <h4>Cluster 19 </h4>
+          <p>30 images · 4 test · species purity 53.3% · organ purity 36.7%</p>
+          <p><b>Species</b> Populus deltoides 16, Populus tremuloides 11, Quercus palustris 2, Quercus rubra 1</p>
+          <p><b>Organs</b> whole tree (or vine) 11, leaf 7, inflorescence 4, fruit 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 75.0%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_20.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 20">
+        <div class="cluster-copy">
+          <h4>Cluster 20 </h4>
+          <p>13 images · 1 test · species purity 100.0% · organ purity 46.2%</p>
+          <p><b>Species</b> Yucca filamentosa 13</p>
+          <p><b>Organs</b> inflorescence 6, leaf 3, fruit 1, whole tree (or vine) 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_21.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 21">
+        <div class="cluster-copy">
+          <h4>Cluster 21 </h4>
+          <p>32 images · 6 test · species purity 40.6% · organ purity 43.8%</p>
+          <p><b>Species</b> Gymnocladus dioicus 13, Yucca filamentosa 3, Gleditsia triacanthos 3, Aesculus glabra 3</p>
+          <p><b>Organs</b> inflorescence 14, fruit 8, seed 4, twig 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 33.3%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_22.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 22">
+        <div class="cluster-copy">
+          <h4>Cluster 22 </h4>
+          <p>25 images · 3 test · species purity 100.0% · organ purity 36.0%</p>
+          <p><b>Species</b> Robinia pseudoacacia 25</p>
+          <p><b>Organs</b> inflorescence 9, twig 5, leaf 4, fruit 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_23.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 23">
+        <div class="cluster-copy">
+          <h4>Cluster 23 </h4>
+          <p>58 images · 4 test · species purity 37.9% · organ purity 69.0%</p>
+          <p><b>Species</b> Quercus palustris 22, Quercus rubra 12, Quercus alba 8, Quercus macrocarpa 7</p>
+          <p><b>Organs</b> whole tree (or vine) 40, bark 18</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_24.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 24">
+        <div class="cluster-copy">
+          <h4>Cluster 24 </h4>
+          <p>21 images · 2 test · species purity 71.4% · organ purity 47.6%</p>
+          <p><b>Species</b> Pyrus calleryana 15, Sorbus americana 2, Robinia pseudoacacia 1, Carya ovata 1</p>
+          <p><b>Organs</b> leaf 10, inflorescence 8, fruit 2, whole tree (or vine) 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 0.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 7.03× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_25.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 25">
+        <div class="cluster-copy">
+          <h4>Cluster 25 </h4>
+          <p>31 images · 6 test · species purity 100.0% · organ purity 38.7%</p>
+          <p><b>Species</b> Platanus occidentalis 31</p>
+          <p><b>Organs</b> whole tree (or vine) 12, twig 6, inflorescence 4, leaf 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 83.3%</span><span><b>GPT-5.4</b> 83.3%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_26.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 26">
+        <div class="cluster-copy">
+          <h4>Cluster 26 </h4>
+          <p>23 images · 3 test · species purity 95.7% · organ purity 34.8%</p>
+          <p><b>Species</b> Toxicodendron radicans 22, Rhus aromatica 1</p>
+          <p><b>Organs</b> inflorescence 8, leaf 6, whole tree (or vine) 5, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_27.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 27">
+        <div class="cluster-copy">
+          <h4>Cluster 27 </h4>
+          <p>18 images · 2 test · species purity 88.9% · organ purity 38.9%</p>
+          <p><b>Species</b> Pinus strobus 16, Ginkgo biloba 1, Tsuga canadensis 1</p>
+          <p><b>Organs</b> cone 7, bark 4, whole tree 3, leaf 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_28.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 28">
+        <div class="cluster-copy">
+          <h4>Cluster 28 </h4>
+          <p>24 images · 1 test · species purity 95.8% · organ purity 25.0%</p>
+          <p><b>Species</b> Ailanthus altissima 23, Carya cordiformis 1</p>
+          <p><b>Organs</b> fruit 6, whole tree (or vine) 6, leaf 5, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_29.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 29">
+        <div class="cluster-copy">
+          <h4>Cluster 29 </h4>
+          <p>32 images · 5 test · species purity 56.2% · organ purity 34.4%</p>
+          <p><b>Species</b> Carya cordiformis 18, Carya ovata 11, Juglans nigra 2, Salix nigra 1</p>
+          <p><b>Organs</b> leaf 11, bark 6, twig 5, inflorescence 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 20.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_30.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 30">
+        <div class="cluster-copy">
+          <h4>Cluster 30 </h4>
+          <p>24 images · 5 test · species purity 100.0% · organ purity 33.3%</p>
+          <p><b>Species</b> Cercis canadensis 24</p>
+          <p><b>Organs</b> inflorescence 8, whole tree (or vine) 7, fruit 6, leaf 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_31.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 31">
+        <div class="cluster-copy">
+          <h4>Cluster 31 </h4>
+          <p>24 images · 5 test · species purity 75.0% · organ purity 29.2%</p>
+          <p><b>Species</b> Prunus serotina 18, Betula alleghaniensis 1, Betula lenta 1, Carpinus caroliniana 1</p>
+          <p><b>Organs</b> bark 7, leaf 6, fruit 4, twig 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 80.0%</span><span><b>DINOv3</b> 40.0%</span><span><b>GPT-5.4</b> 80.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.41× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_32.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 32">
+        <div class="cluster-copy">
+          <h4>Cluster 32 </h4>
+          <p>39 images · 1 test · species purity 35.9% · organ purity 43.6%</p>
+          <p><b>Species</b> Fraxinus pennsylvanica 14, Fraxinus americana 12, Fraxinus quadrangulata 12, Aesculus glabra 1</p>
+          <p><b>Organs</b> leaf 17, twig 6, inflorescence 6, fruit 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 0.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 7.03× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_33.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 33">
+        <div class="cluster-copy">
+          <h4>Cluster 33 <span class='flag'>FDR-enriched</span></h4>
+          <p>100 images · 16 test · species purity 13.0% · organ purity 89.0%</p>
+          <p><b>Species</b> Fraxinus americana 13, Ulmus americana 12, Fraxinus pennsylvanica 7, Juglans nigra 7</p>
+          <p><b>Organs</b> whole tree (or vine) 89, whole tree 5, bark 3, unspecified 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 37.5%</span><span><b>DINOv3</b> 12.5%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 18.8%</span></div>
+          <p class="small">BioCLIP error enrichment 4.40× · all-four-wrong enrichment 5.43×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_34.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 34">
+        <div class="cluster-copy">
+          <h4>Cluster 34 </h4>
+          <p>30 images · 6 test · species purity 63.3% · organ purity 36.7%</p>
+          <p><b>Species</b> Tilia americana 19, Viburnum lantanoides 11</p>
+          <p><b>Organs</b> leaf 11, inflorescence 6, twig 5, whole tree (or vine) 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 16.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_35.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 35">
+        <div class="cluster-copy">
+          <h4>Cluster 35 </h4>
+          <p>23 images · 4 test · species purity 100.0% · organ purity 39.1%</p>
+          <p><b>Species</b> Sassafras albidum 23</p>
+          <p><b>Organs</b> inflorescence 9, leaf 7, whole tree (or vine) 3, fruit 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_36.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 36">
+        <div class="cluster-copy">
+          <h4>Cluster 36 </h4>
+          <p>14 images · 3 test · species purity 100.0% · organ purity 42.9%</p>
+          <p><b>Species</b> Lonicera morrowii 14</p>
+          <p><b>Organs</b> inflorescence 6, whole tree (or vine) 4, fruit 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_37.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 37">
+        <div class="cluster-copy">
+          <h4>Cluster 37 <span class='flag'>descriptively enriched</span></h4>
+          <p>57 images · 7 test · species purity 42.1% · organ purity 45.6%</p>
+          <p><b>Species</b> Quercus bicolor 24, Quercus muehlenbergii 13, Quercus macrocarpa 8, Quercus alba 6</p>
+          <p><b>Organs</b> leaf 26, inflorescence 15, twig 8, whole tree (or vine) 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.1%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.01× · all-four-wrong enrichment 3.55×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_38.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 38">
+        <div class="cluster-copy">
+          <h4>Cluster 38 </h4>
+          <p>18 images · 3 test · species purity 100.0% · organ purity 55.6%</p>
+          <p><b>Species</b> Nyssa sylvatica 18</p>
+          <p><b>Organs</b> inflorescence 10, leaf 4, fruit 3, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 33.3%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 4.69× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_39.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 39">
+        <div class="cluster-copy">
+          <h4>Cluster 39 </h4>
+          <p>17 images · 3 test · species purity 100.0% · organ purity 23.5%</p>
+          <p><b>Species</b> Salix nigra 17</p>
+          <p><b>Organs</b> leaf 4, whole tree (or vine) 3, inflorescence 3, fruit 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_40.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 40">
+        <div class="cluster-copy">
+          <h4>Cluster 40 </h4>
+          <p>21 images · 0 test · species purity 100.0% · organ purity 33.3%</p>
+          <p><b>Species</b> Pyrus calleryana 21</p>
+          <p><b>Organs</b> fruit 7, leaf 5, twig 4, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_41.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 41">
+        <div class="cluster-copy">
+          <h4>Cluster 41 </h4>
+          <p>37 images · 7 test · species purity 54.1% · organ purity 43.2%</p>
+          <p><b>Species</b> Ulmus americana 20, Ulmus rubra 13, Celtis occidentalis 4</p>
+          <p><b>Organs</b> leaf 16, fruit 8, inflorescence 5, twig 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 14.3%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 57.1%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_42.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 42">
+        <div class="cluster-copy">
+          <h4>Cluster 42 </h4>
+          <p>30 images · 3 test · species purity 96.7% · organ purity 30.0%</p>
+          <p><b>Species</b> Cornus florida 29, Quercus alba 1</p>
+          <p><b>Organs</b> fruit 9, inflorescence 6, leaf 6, twig 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_43.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 43">
+        <div class="cluster-copy">
+          <h4>Cluster 43 </h4>
+          <p>19 images · 0 test · species purity 94.7% · organ purity 31.6%</p>
+          <p><b>Species</b> Acer rubrum 18, Acer saccharum 1</p>
+          <p><b>Organs</b> fruit 6, inflorescence 4, whole tree (or vine) 4, leaf 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_44.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 44">
+        <div class="cluster-copy">
+          <h4>Cluster 44 </h4>
+          <p>50 images · 10 test · species purity 98.0% · organ purity 26.0%</p>
+          <p><b>Species</b> Gleditsia triacanthos 49, Gymnocladus dioicus 1</p>
+          <p><b>Organs</b> twig 13, inflorescence 12, leaf 10, bark 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 90.0%</span><span><b>GPT-5.4</b> 70.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_45.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 45">
+        <div class="cluster-copy">
+          <h4>Cluster 45 </h4>
+          <p>23 images · 3 test · species purity 95.7% · organ purity 26.1%</p>
+          <p><b>Species</b> Acer saccharum 22, Acer negundo 1</p>
+          <p><b>Organs</b> fruit 6, inflorescence 5, leaf 5, twig 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_46.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 46">
+        <div class="cluster-copy">
+          <h4>Cluster 46 </h4>
+          <p>21 images · 0 test · species purity 71.4% · organ purity 57.1%</p>
+          <p><b>Species</b> Juglans cinerea 15, Juglans nigra 2, Castanea dentata 1, Ginkgo biloba 1</p>
+          <p><b>Organs</b> fruit 12, seed 7, cone 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_47.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 47">
+        <div class="cluster-copy">
+          <h4>Cluster 47 </h4>
+          <p>21 images · 3 test · species purity 61.9% · organ purity 33.3%</p>
+          <p><b>Species</b> Tsuga canadensis 13, Picea rubens 8</p>
+          <p><b>Organs</b> cone 7, whole tree 5, leaf 4, bark 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_48.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 48">
+        <div class="cluster-copy">
+          <h4>Cluster 48 </h4>
+          <p>14 images · 1 test · species purity 100.0% · organ purity 35.7%</p>
+          <p><b>Species</b> Cornus amomum 14</p>
+          <p><b>Organs</b> twig 5, inflorescence 3, leaf 3, whole tree (or vine) 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/bioclip/k50/cluster_49.jpg" alt="Centroid-nearest images for bioclip k=50 cluster 49">
+        <div class="cluster-copy">
+          <h4>Cluster 49 </h4>
+          <p>28 images · 4 test · species purity 64.3% · organ purity 35.7%</p>
+          <p><b>Species</b> Ginkgo biloba 18, Dirca palustris 5, Nyssa sylvatica 1, Gymnocladus dioicus 1</p>
+          <p><b>Organs</b> leaf 10, cone 10, twig 5, fruit 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article></div></details><details><summary>DINOv3 · k=10 · 10 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_00.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 </h4>
+          <p>180 images · 42 test · species purity 7.2% · organ purity 72.8%</p>
+          <p><b>Species</b> Pyrus calleryana 13, Aesculus glabra 12, Nyssa sylvatica 11, Cephalanthus occidentalis 10</p>
+          <p><b>Organs</b> inflorescence 131, fruit 39, twig 7, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 95.2%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 47.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.33× · all-four-wrong enrichment 0.30×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_01.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 <span class='flag'>descriptively enriched</span></h4>
+          <p>160 images · 12 test · species purity 6.9% · organ purity 54.4%</p>
+          <p><b>Species</b> Sassafras albidum 11, Dirca palustris 9, Quercus bicolor 9, Quercus alba 8</p>
+          <p><b>Organs</b> leaf 87, twig 46, fruit 23, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 1.03×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_02.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>209 images · 27 test · species purity 7.2% · organ purity 49.3%</p>
+          <p><b>Species</b> Ginkgo biloba 15, Carpinus caroliniana 14, Cercis canadensis 11, Pinus strobus 10</p>
+          <p><b>Organs</b> inflorescence 103, fruit 55, cone 26, leaf 13</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 92.6%</span><span><b>DINOv3</b> 74.1%</span><span><b>GPT-5.4</b> 51.9%</span><span><b>Gemini</b> 55.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.52× · all-four-wrong enrichment 0.46×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_03.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 </h4>
+          <p>169 images · 19 test · species purity 11.2% · organ purity 75.1%</p>
+          <p><b>Species</b> Fagus grandifolia 19, Carpinus caroliniana 15, Acer negundo 12, Ulmus americana 11</p>
+          <p><b>Organs</b> leaf 127, fruit 15, twig 13, whole tree (or vine) 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 73.7%</span><span><b>GPT-5.4</b> 26.3%</span><span><b>Gemini</b> 52.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_04.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>171 images · 14 test · species purity 4.7% · organ purity 74.3%</p>
+          <p><b>Species</b> Juglans cinerea 8, Robinia pseudoacacia 8, Cercis canadensis 8, Platanus occidentalis 7</p>
+          <p><b>Organs</b> whole tree (or vine) 127, bark 10, whole tree 10, leaf 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 85.7%</span><span><b>DINOv3</b> 57.1%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_05.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>184 images · 21 test · species purity 11.4% · organ purity 52.2%</p>
+          <p><b>Species</b> Quercus palustris 21, Juglans cinerea 20, Pyrus calleryana 14, Juglans nigra 8</p>
+          <p><b>Organs</b> twig 96, fruit 50, seed 12, bark 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 81.0%</span><span><b>DINOv3</b> 47.6%</span><span><b>GPT-5.4</b> 23.8%</span><span><b>Gemini</b> 14.3%</span></div>
+          <p class="small">BioCLIP error enrichment 1.34× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_06.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 <span class='flag'>descriptively enriched</span></h4>
+          <p>156 images · 21 test · species purity 7.7% · organ purity 94.2%</p>
+          <p><b>Species</b> Quercus palustris 12, Quercus alba 9, Carpinus caroliniana 7, Quercus rubra 6</p>
+          <p><b>Organs</b> bark 147, whole tree (or vine) 7, leaf 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 76.2%</span><span><b>DINOv3</b> 19.0%</span><span><b>GPT-5.4</b> 23.8%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 1.67× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_07.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 <span class='flag'>FDR-enriched</span></h4>
+          <p>155 images · 26 test · species purity 9.0% · organ purity 92.9%</p>
+          <p><b>Species</b> Fraxinus americana 14, Quercus palustris 12, Quercus rubra 12, Quercus alba 11</p>
+          <p><b>Organs</b> whole tree (or vine) 144, whole tree 8, bark 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 57.7%</span><span><b>DINOv3</b> 34.6%</span><span><b>GPT-5.4</b> 30.8%</span><span><b>Gemini</b> 34.6%</span></div>
+          <p class="small">BioCLIP error enrichment 2.98× · all-four-wrong enrichment 3.82×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_08.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>123 images · 17 test · species purity 47.2% · organ purity 88.6%</p>
+          <p><b>Species</b> Quercus palustris 58, Quercus rubra 24, Quercus alba 18, Quercus bicolor 9</p>
+          <p><b>Organs</b> leaf 109, twig 13, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 76.5%</span><span><b>GPT-5.4</b> 76.5%</span><span><b>Gemini</b> 23.5%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k10/cluster_09.jpg" alt="Centroid-nearest images for dinov3 k=10 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 </h4>
+          <p>134 images · 12 test · species purity 23.1% · organ purity 44.0%</p>
+          <p><b>Species</b> Gleditsia triacanthos 31, Robinia pseudoacacia 13, Rhus copallinum 12, Ailanthus altissima 12</p>
+          <p><b>Organs</b> leaf 59, inflorescence 29, fruit 19, twig 14</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 91.7%</span><span><b>DINOv3</b> 58.3%</span><span><b>GPT-5.4</b> 41.7%</span><span><b>Gemini</b> 58.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.59× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article></div></details><details><summary>DINOv3 · k=20 · 20 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_00.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 </h4>
+          <p>33 images · 2 test · species purity 33.3% · organ purity 60.6%</p>
+          <p><b>Species</b> Pinus strobus 11, Juniperus virginiana 8, Tsuga canadensis 7, Picea rubens 6</p>
+          <p><b>Organs</b> cone 20, leaf 9, twig 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_01.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 </h4>
+          <p>79 images · 10 test · species purity 7.6% · organ purity 88.6%</p>
+          <p><b>Species</b> Carya cordiformis 6, Quercus alba 4, Populus tremuloides 4, Cephalanthus occidentalis 4</p>
+          <p><b>Organs</b> twig 70, leaf 4, inflorescence 3, cone 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 80.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 20.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.41× · all-four-wrong enrichment 1.24×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_02.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>59 images · 9 test · species purity 8.5% · organ purity 72.9%</p>
+          <p><b>Species</b> Quercus palustris 5, Robinia pseudoacacia 4, Juglans cinerea 4, Quercus rubra 3</p>
+          <p><b>Organs</b> whole tree (or vine) 43, bark 11, leaf 3, whole tree 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 88.9%</span><span><b>DINOv3</b> 33.3%</span><span><b>GPT-5.4</b> 22.2%</span><span><b>Gemini</b> 22.2%</span></div>
+          <p class="small">BioCLIP error enrichment 0.78× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_03.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 <span class='flag'>FDR-enriched</span></h4>
+          <p>140 images · 25 test · species purity 9.3% · organ purity 94.3%</p>
+          <p><b>Species</b> Fraxinus americana 13, Quercus palustris 12, Quercus rubra 11, Ulmus americana 11</p>
+          <p><b>Organs</b> whole tree (or vine) 132, whole tree 6, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 56.0%</span><span><b>DINOv3</b> 32.0%</span><span><b>GPT-5.4</b> 28.0%</span><span><b>Gemini</b> 32.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.09× · all-four-wrong enrichment 3.97×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_04.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 <span class='flag'>descriptively enriched</span></h4>
+          <p>81 images · 10 test · species purity 13.6% · organ purity 100.0%</p>
+          <p><b>Species</b> Quercus palustris 11, Quercus alba 8, Quercus bicolor 5, Quercus rubra 5</p>
+          <p><b>Organs</b> bark 81</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 70.0%</span><span><b>DINOv3</b> 30.0%</span><span><b>GPT-5.4</b> 10.0%</span><span><b>Gemini</b> 30.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.11× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_05.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>83 images · 18 test · species purity 10.8% · organ purity 73.5%</p>
+          <p><b>Species</b> Sassafras albidum 9, Gymnocladus dioicus 8, Acer saccharum 7, Fraxinus pennsylvanica 6</p>
+          <p><b>Organs</b> inflorescence 61, fruit 14, twig 5, cone 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 38.9%</span><span><b>GPT-5.4</b> 22.2%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_06.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 </h4>
+          <p>91 images · 7 test · species purity 19.8% · organ purity 78.0%</p>
+          <p><b>Species</b> Fagus grandifolia 18, Carpinus caroliniana 14, Ulmus americana 10, Ostrya virginiana 7</p>
+          <p><b>Organs</b> leaf 71, twig 10, fruit 5, inflorescence 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 57.1%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 57.1%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_07.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 <span class='flag'>descriptively enriched</span></h4>
+          <p>61 images · 5 test · species purity 11.5% · organ purity 100.0%</p>
+          <p><b>Species</b> Pyrus calleryana 7, Quercus bicolor 6, Quercus macrocarpa 3, Quercus muehlenbergii 3</p>
+          <p><b>Organs</b> leaf 61</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 40.0%</span><span><b>DINOv3</b> 60.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 4.22× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_08.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>91 images · 18 test · species purity 8.8% · organ purity 89.0%</p>
+          <p><b>Species</b> Cephalanthus occidentalis 8, Aesculus glabra 7, Sorbus americana 7, Toxicodendron radicans 7</p>
+          <p><b>Organs</b> inflorescence 81, fruit 7, twig 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 88.9%</span><span><b>DINOv3</b> 72.2%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 44.4%</span></div>
+          <p class="small">BioCLIP error enrichment 0.78× · all-four-wrong enrichment 0.69×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_09.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 </h4>
+          <p>39 images · 1 test · species purity 38.5% · organ purity 59.0%</p>
+          <p><b>Species</b> Juglans cinerea 15, Gymnocladus dioicus 4, Carya cordiformis 3, Juglans nigra 3</p>
+          <p><b>Organs</b> fruit 23, seed 11, twig 3, cone 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_10.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 10">
+        <div class="cluster-copy">
+          <h4>Cluster 10 </h4>
+          <p>118 images · 15 test · species purity 48.3% · organ purity 90.7%</p>
+          <p><b>Species</b> Quercus palustris 57, Quercus rubra 23, Quercus alba 18, Quercus bicolor 8</p>
+          <p><b>Organs</b> leaf 107, twig 11</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 86.7%</span><span><b>GPT-5.4</b> 80.0%</span><span><b>Gemini</b> 26.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_11.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 11">
+        <div class="cluster-copy">
+          <h4>Cluster 11 </h4>
+          <p>69 images · 8 test · species purity 11.6% · organ purity 91.3%</p>
+          <p><b>Species</b> Aesculus glabra 8, Rhus glabra 7, Rhus copallinum 5, Fraxinus americana 5</p>
+          <p><b>Organs</b> leaf 63, twig 3, whole tree (or vine) 2, inflorescence 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 87.5%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 25.0%</span><span><b>Gemini</b> 12.5%</span></div>
+          <p class="small">BioCLIP error enrichment 0.88× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_12.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>descriptively enriched</span></h4>
+          <p>80 images · 9 test · species purity 8.8% · organ purity 90.0%</p>
+          <p><b>Species</b> Carpinus caroliniana 7, Gleditsia triacanthos 5, Acer negundo 4, Dirca palustris 4</p>
+          <p><b>Organs</b> bark 72, twig 7, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 77.8%</span><span><b>DINOv3</b> 33.3%</span><span><b>GPT-5.4</b> 55.6%</span><span><b>Gemini</b> 55.6%</span></div>
+          <p class="small">BioCLIP error enrichment 1.56× · all-four-wrong enrichment 1.38×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_13.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 13">
+        <div class="cluster-copy">
+          <h4>Cluster 13 </h4>
+          <p>82 images · 10 test · species purity 15.9% · organ purity 51.2%</p>
+          <p><b>Species</b> Cercis canadensis 13, Robinia pseudoacacia 10, Ginkgo biloba 8, Carpinus caroliniana 7</p>
+          <p><b>Organs</b> fruit 42, inflorescence 30, leaf 7, cone 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 80.0%</span><span><b>Gemini</b> 90.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_14.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 14">
+        <div class="cluster-copy">
+          <h4>Cluster 14 <span class='flag'>descriptively enriched</span></h4>
+          <p>74 images · 9 test · species purity 6.8% · organ purity 89.2%</p>
+          <p><b>Species</b> Platanus occidentalis 5, Juglans cinerea 5, Acer saccharum 4, Fagus grandifolia 4</p>
+          <p><b>Organs</b> twig 66, bark 3, leaf 3, stem 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 77.8%</span><span><b>DINOv3</b> 22.2%</span><span><b>GPT-5.4</b> 11.1%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.56× · all-four-wrong enrichment 2.76×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_15.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 15">
+        <div class="cluster-copy">
+          <h4>Cluster 15 </h4>
+          <p>77 images · 6 test · species purity 42.9% · organ purity 32.5%</p>
+          <p><b>Species</b> Gleditsia triacanthos 33, Robinia pseudoacacia 7, Ailanthus altissima 7, Rhus glabra 6</p>
+          <p><b>Organs</b> leaf 25, inflorescence 18, fruit 13, whole tree (or vine) 10</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 83.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_16.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 16">
+        <div class="cluster-copy">
+          <h4>Cluster 16 </h4>
+          <p>91 images · 15 test · species purity 18.7% · organ purity 84.6%</p>
+          <p><b>Species</b> Quercus palustris 17, Cornus florida 10, Pyrus calleryana 9, Quercus alba 4</p>
+          <p><b>Organs</b> fruit 77, twig 6, cone 3, inflorescence 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 73.3%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_17.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 17">
+        <div class="cluster-copy">
+          <h4>Cluster 17 </h4>
+          <p>79 images · 16 test · species purity 8.9% · organ purity 81.0%</p>
+          <p><b>Species</b> Salix nigra 7, Populus deltoides 7, Carpinus caroliniana 5, Rhus copallinum 4</p>
+          <p><b>Organs</b> inflorescence 64, fruit 11, twig 2, cone 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 87.5%</span><span><b>DINOv3</b> 81.2%</span><span><b>GPT-5.4</b> 37.5%</span><span><b>Gemini</b> 56.2%</span></div>
+          <p class="small">BioCLIP error enrichment 0.88× · all-four-wrong enrichment 0.78×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_18.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 18">
+        <div class="cluster-copy">
+          <h4>Cluster 18 </h4>
+          <p>83 images · 10 test · species purity 14.5% · organ purity 66.3%</p>
+          <p><b>Species</b> Acer negundo 12, Toxicodendron radicans 9, Sassafras albidum 8, Lindera benzoin 8</p>
+          <p><b>Organs</b> leaf 55, whole tree (or vine) 18, fruit 8, inflorescence 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 90.0%</span><span><b>DINOv3</b> 80.0%</span><span><b>GPT-5.4</b> 30.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.70× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k20/cluster_19.jpg" alt="Centroid-nearest images for dinov3 k=20 cluster 19">
+        <div class="cluster-copy">
+          <h4>Cluster 19 </h4>
+          <p>131 images · 8 test · species purity 6.9% · organ purity 71.0%</p>
+          <p><b>Species</b> Cercis canadensis 9, Acer rubrum 7, Platanus occidentalis 7, Juglans cinerea 5</p>
+          <p><b>Organs</b> whole tree (or vine) 93, inflorescence 10, whole tree 10, fruit 8</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 62.5%</span><span><b>GPT-5.4</b> 75.0%</span><span><b>Gemini</b> 87.5%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article></div></details><details><summary>DINOv3 · k=50 · 50 clusters</summary><div class='cluster-grid'>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_00.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 0">
+        <div class="cluster-copy">
+          <h4>Cluster 00 <span class='flag'>descriptively enriched</span></h4>
+          <p>52 images · 12 test · species purity 21.2% · organ purity 94.2%</p>
+          <p><b>Species</b> Ulmus americana 11, Fraxinus americana 7, Platanus occidentalis 7, Fraxinus pennsylvanica 5</p>
+          <p><b>Organs</b> whole tree (or vine) 49, whole tree 2, bark 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 66.7%</span><span><b>DINOv3</b> 41.7%</span><span><b>GPT-5.4</b> 41.7%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.34× · all-four-wrong enrichment 4.14×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_01.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 1">
+        <div class="cluster-copy">
+          <h4>Cluster 01 </h4>
+          <p>32 images · 5 test · species purity 59.4% · organ purity 93.8%</p>
+          <p><b>Species</b> Quercus alba 19, Sassafras albidum 8, Quercus macrocarpa 4, Quercus bicolor 1</p>
+          <p><b>Organs</b> leaf 30, inflorescence 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 80.0%</span><span><b>GPT-5.4</b> 80.0%</span><span><b>Gemini</b> 80.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_02.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 2">
+        <div class="cluster-copy">
+          <h4>Cluster 02 </h4>
+          <p>29 images · 1 test · species purity 31.0% · organ purity 48.3%</p>
+          <p><b>Species</b> Rhus copallinum 9, Rhus glabra 5, Ailanthus altissima 5, Sambucus racemosa 4</p>
+          <p><b>Organs</b> whole tree (or vine) 14, inflorescence 9, fruit 4, leaf 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_03.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 3">
+        <div class="cluster-copy">
+          <h4>Cluster 03 </h4>
+          <p>33 images · 7 test · species purity 18.2% · organ purity 69.7%</p>
+          <p><b>Species</b> Carya cordiformis 6, Ilex verticillata 4, Ostrya virginiana 2, Celtis occidentalis 2</p>
+          <p><b>Organs</b> twig 23, inflorescence 7, stem 1, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 85.7%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 1.00× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_04.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 4">
+        <div class="cluster-copy">
+          <h4>Cluster 04 </h4>
+          <p>18 images · 0 test · species purity 22.2% · organ purity 55.6%</p>
+          <p><b>Species</b> Juglans nigra 4, Pinus strobus 4, Juglans cinerea 2, Ailanthus altissima 2</p>
+          <p><b>Organs</b> twig 10, leaf 5, bark 2, unspecified 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_05.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 5">
+        <div class="cluster-copy">
+          <h4>Cluster 05 </h4>
+          <p>28 images · 5 test · species purity 28.6% · organ purity 60.7%</p>
+          <p><b>Species</b> Acer saccharum 8, Zanthoxylum americanum 4, Ginkgo biloba 3, Acer rubrum 2</p>
+          <p><b>Organs</b> inflorescence 17, fruit 7, cone 2, twig 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 20.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 20.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_06.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 6">
+        <div class="cluster-copy">
+          <h4>Cluster 06 </h4>
+          <p>39 images · 4 test · species purity 28.2% · organ purity 84.6%</p>
+          <p><b>Species</b> Acer negundo 11, Toxicodendron radicans 9, Fraxinus quadrangulata 6, Lindera benzoin 4</p>
+          <p><b>Organs</b> leaf 33, whole tree (or vine) 5, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_07.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 7">
+        <div class="cluster-copy">
+          <h4>Cluster 07 </h4>
+          <p>31 images · 4 test · species purity 29.0% · organ purity 93.5%</p>
+          <p><b>Species</b> Aesculus glabra 9, Sassafras albidum 7, Toxicodendron radicans 5, Lonicera morrowii 4</p>
+          <p><b>Organs</b> inflorescence 29, fruit 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_08.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 8">
+        <div class="cluster-copy">
+          <h4>Cluster 08 </h4>
+          <p>59 images · 7 test · species purity 10.2% · organ purity 93.2%</p>
+          <p><b>Species</b> Quercus alba 6, Quercus palustris 5, Quercus rubra 4, Dirca palustris 3</p>
+          <p><b>Organs</b> twig 55, leaf 2, unspecified 1, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 42.9%</span><span><b>GPT-5.4</b> 14.3%</span><span><b>Gemini</b> 28.6%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_09.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 9">
+        <div class="cluster-copy">
+          <h4>Cluster 09 </h4>
+          <p>82 images · 10 test · species purity 68.3% · organ purity 91.5%</p>
+          <p><b>Species</b> Quercus palustris 56, Quercus rubra 20, Platanus occidentalis 3, Acer saccharum 2</p>
+          <p><b>Organs</b> leaf 75, twig 7</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 90.0%</span><span><b>GPT-5.4</b> 80.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_10.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 10">
+        <div class="cluster-copy">
+          <h4>Cluster 10 </h4>
+          <p>47 images · 6 test · species purity 10.6% · organ purity 91.5%</p>
+          <p><b>Species</b> Rhus copallinum 5, Rhus glabra 5, Juglans nigra 5, Fraxinus americana 5</p>
+          <p><b>Organs</b> leaf 43, twig 3, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 83.3%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 16.7%</span></div>
+          <p class="small">BioCLIP error enrichment 1.17× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_11.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 11">
+        <div class="cluster-copy">
+          <h4>Cluster 11 </h4>
+          <p>13 images · 3 test · species purity 84.6% · organ purity 61.5%</p>
+          <p><b>Species</b> Ginkgo biloba 11, Populus tremuloides 2</p>
+          <p><b>Organs</b> leaf 8, cone 4, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_12.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 12">
+        <div class="cluster-copy">
+          <h4>Cluster 12 <span class='flag'>descriptively enriched</span></h4>
+          <p>82 images · 10 test · species purity 13.4% · organ purity 100.0%</p>
+          <p><b>Species</b> Quercus palustris 11, Quercus alba 8, Quercus rubra 6, Quercus bicolor 5</p>
+          <p><b>Organs</b> bark 82</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 70.0%</span><span><b>DINOv3</b> 30.0%</span><span><b>GPT-5.4</b> 10.0%</span><span><b>Gemini</b> 30.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.11× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_13.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 13">
+        <div class="cluster-copy">
+          <h4>Cluster 13 <span class='flag'>descriptively enriched</span></h4>
+          <p>65 images · 7 test · species purity 9.2% · organ purity 96.9%</p>
+          <p><b>Species</b> Carpinus caroliniana 6, Fagus grandifolia 4, Dirca palustris 4, Betula alleghaniensis 4</p>
+          <p><b>Organs</b> bark 63, twig 1, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 71.4%</span><span><b>DINOv3</b> 14.3%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 42.9%</span></div>
+          <p class="small">BioCLIP error enrichment 2.01× · all-four-wrong enrichment 1.77×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_14.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 14">
+        <div class="cluster-copy">
+          <h4>Cluster 14 </h4>
+          <p>40 images · 7 test · species purity 32.5% · organ purity 67.5%</p>
+          <p><b>Species</b> Carpinus caroliniana 13, Salix nigra 6, Populus deltoides 5, Ostrya virginiana 4</p>
+          <p><b>Organs</b> inflorescence 27, fruit 12, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 85.7%</span><span><b>GPT-5.4</b> 42.9%</span><span><b>Gemini</b> 57.1%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_15.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 15">
+        <div class="cluster-copy">
+          <h4>Cluster 15 </h4>
+          <p>32 images · 1 test · species purity 37.5% · organ purity 90.6%</p>
+          <p><b>Species</b> Fagus grandifolia 12, Quercus bicolor 11, Nyssa sylvatica 3, Quercus muehlenbergii 3</p>
+          <p><b>Organs</b> leaf 29, twig 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_16.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 16">
+        <div class="cluster-copy">
+          <h4>Cluster 16 </h4>
+          <p>18 images · 2 test · species purity 44.4% · organ purity 50.0%</p>
+          <p><b>Species</b> Gleditsia triacanthos 8, Robinia pseudoacacia 3, Zanthoxylum americanum 2, Acer negundo 1</p>
+          <p><b>Organs</b> twig 9, bark 8, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_17.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 17">
+        <div class="cluster-copy">
+          <h4>Cluster 17 </h4>
+          <p>23 images · 3 test · species purity 56.5% · organ purity 73.9%</p>
+          <p><b>Species</b> Cornus florida 13, Rhus aromatica 4, Lindera benzoin 3, Ilex verticillata 2</p>
+          <p><b>Organs</b> fruit 17, twig 3, whole tree (or vine) 2, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_18.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 18">
+        <div class="cluster-copy">
+          <h4>Cluster 18 </h4>
+          <p>37 images · 4 test · species purity 13.5% · organ purity 89.2%</p>
+          <p><b>Species</b> Cercis canadensis 5, Populus tremuloides 4, Acer rubrum 3, Platanus occidentalis 3</p>
+          <p><b>Organs</b> whole tree (or vine) 33, leaf 1, whole tree 1, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 75.0%</span><span><b>Gemini</b> 75.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_19.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 19">
+        <div class="cluster-copy">
+          <h4>Cluster 19 </h4>
+          <p>9 images · 0 test · species purity 100.0% · organ purity 77.8%</p>
+          <p><b>Species</b> Juniperus virginiana 9</p>
+          <p><b>Organs</b> cone 7, leaf 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_20.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 20">
+        <div class="cluster-copy">
+          <h4>Cluster 20 </h4>
+          <p>32 images · 2 test · species purity 18.8% · organ purity 75.0%</p>
+          <p><b>Species</b> Yucca filamentosa 6, Ailanthus altissima 4, Ulmus americana 4, Acer rubrum 3</p>
+          <p><b>Organs</b> fruit 24, inflorescence 6, whole tree (or vine) 1, whole plant 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_21.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 21">
+        <div class="cluster-copy">
+          <h4>Cluster 21 </h4>
+          <p>30 images · 7 test · species purity 30.0% · organ purity 96.7%</p>
+          <p><b>Species</b> Robinia pseudoacacia 9, Cercis canadensis 8, Amelanchier arborea 6, Pyrus calleryana 6</p>
+          <p><b>Organs</b> inflorescence 29, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_22.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 22">
+        <div class="cluster-copy">
+          <h4>Cluster 22 </h4>
+          <p>35 images · 1 test · species purity 42.9% · organ purity 60.0%</p>
+          <p><b>Species</b> Juglans cinerea 15, Gymnocladus dioicus 3, Carya cordiformis 3, Pyrus calleryana 3</p>
+          <p><b>Organs</b> fruit 21, seed 11, cone 2, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_23.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 23">
+        <div class="cluster-copy">
+          <h4>Cluster 23 </h4>
+          <p>17 images · 3 test · species purity 35.3% · organ purity 64.7%</p>
+          <p><b>Species</b> Sambucus racemosa 6, Sambucus nigra 5, Sorbus americana 4, Rhus copallinum 1</p>
+          <p><b>Organs</b> inflorescence 11, fruit 6</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 33.3%</span><span><b>Gemini</b> 66.7%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_24.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 24">
+        <div class="cluster-copy">
+          <h4>Cluster 24 </h4>
+          <p>32 images · 2 test · species purity 9.4% · organ purity 96.9%</p>
+          <p><b>Species</b> Robinia pseudoacacia 3, Quercus alba 3, Quercus palustris 3, Quercus rubra 3</p>
+          <p><b>Organs</b> whole tree (or vine) 31, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_25.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 25">
+        <div class="cluster-copy">
+          <h4>Cluster 25 </h4>
+          <p>38 images · 2 test · species purity 10.5% · organ purity 100.0%</p>
+          <p><b>Species</b> Quercus bicolor 4, Dirca palustris 2, Acer saccharum 2, Ailanthus altissima 2</p>
+          <p><b>Organs</b> leaf 38</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 6.21×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_26.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 26">
+        <div class="cluster-copy">
+          <h4>Cluster 26 <span class='flag'>descriptively enriched</span></h4>
+          <p>53 images · 8 test · species purity 9.4% · organ purity 96.2%</p>
+          <p><b>Species</b> Platanus occidentalis 5, Acer saccharum 4, Fagus grandifolia 4, Gymnocladus dioicus 3</p>
+          <p><b>Organs</b> twig 51, bark 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 75.0%</span><span><b>DINOv3</b> 12.5%</span><span><b>GPT-5.4</b> 12.5%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.76× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_27.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 27">
+        <div class="cluster-copy">
+          <h4>Cluster 27 </h4>
+          <p>23 images · 10 test · species purity 87.0% · organ purity 60.9%</p>
+          <p><b>Species</b> Gleditsia triacanthos 20, Juglans nigra 2, Salix nigra 1</p>
+          <p><b>Organs</b> inflorescence 14, twig 4, fruit 4, bark 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 80.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 90.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_28.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 28">
+        <div class="cluster-copy">
+          <h4>Cluster 28 </h4>
+          <p>36 images · 5 test · species purity 11.1% · organ purity 77.8%</p>
+          <p><b>Species</b> Tsuga canadensis 4, Castanea dentata 3, Dirca palustris 3, Lonicera morrowii 3</p>
+          <p><b>Organs</b> whole tree (or vine) 28, bark 4, whole tree 4</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 80.0%</span><span><b>DINOv3</b> 60.0%</span><span><b>GPT-5.4</b> 40.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 1.41× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_29.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 29">
+        <div class="cluster-copy">
+          <h4>Cluster 29 </h4>
+          <p>29 images · 1 test · species purity 17.2% · organ purity 86.2%</p>
+          <p><b>Species</b> Cornus florida 5, Pyrus calleryana 5, Nyssa sylvatica 4, Dirca palustris 4</p>
+          <p><b>Organs</b> leaf 25, whole tree (or vine) 2, fruit 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_30.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 30">
+        <div class="cluster-copy">
+          <h4>Cluster 30 </h4>
+          <p>45 images · 5 test · species purity 26.7% · organ purity 82.2%</p>
+          <p><b>Species</b> Carpinus caroliniana 12, Ulmus americana 9, Ostrya virginiana 5, Betula alleghaniensis 4</p>
+          <p><b>Organs</b> leaf 37, twig 6, fruit 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 40.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 40.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_31.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 31">
+        <div class="cluster-copy">
+          <h4>Cluster 31 </h4>
+          <p>28 images · 7 test · species purity 17.9% · organ purity 92.9%</p>
+          <p><b>Species</b> Sorbus americana 5, Ilex verticillata 4, Cornus amomum 4, Pyrus calleryana 3</p>
+          <p><b>Organs</b> inflorescence 26, twig 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 71.4%</span><span><b>GPT-5.4</b> 57.1%</span><span><b>Gemini</b> 57.1%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_32.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 32">
+        <div class="cluster-copy">
+          <h4>Cluster 32 <span class='flag'>descriptively enriched</span></h4>
+          <p>48 images · 8 test · species purity 14.6% · organ purity 93.8%</p>
+          <p><b>Species</b> Quercus palustris 7, Quercus rubra 4, Fagus grandifolia 4, Nyssa sylvatica 3</p>
+          <p><b>Organs</b> whole tree (or vine) 45, whole tree 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 62.5%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 25.0%</span><span><b>Gemini</b> 12.5%</span></div>
+          <p class="small">BioCLIP error enrichment 2.64× · all-four-wrong enrichment 3.10×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_33.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 33">
+        <div class="cluster-copy">
+          <h4>Cluster 33 <span class='flag'>descriptively enriched</span></h4>
+          <p>45 images · 6 test · species purity 13.3% · organ purity 97.8%</p>
+          <p><b>Species</b> Quercus alba 6, Quercus palustris 5, Quercus rubra 5, Fraxinus americana 4</p>
+          <p><b>Organs</b> whole tree (or vine) 44, bark 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 33.3%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 16.7%</span><span><b>Gemini</b> 33.3%</span></div>
+          <p class="small">BioCLIP error enrichment 4.69× · all-four-wrong enrichment 4.14×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_34.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 34">
+        <div class="cluster-copy">
+          <h4>Cluster 34 </h4>
+          <p>26 images · 7 test · species purity 15.4% · organ purity 92.3%</p>
+          <p><b>Species</b> Nyssa sylvatica 4, Amelanchier arborea 4, Cornus amomum 3, Lonicera morrowii 2</p>
+          <p><b>Organs</b> fruit 24, twig 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 28.6%</span><span><b>GPT-5.4</b> 71.4%</span><span><b>Gemini</b> 42.9%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_35.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 35">
+        <div class="cluster-copy">
+          <h4>Cluster 35 </h4>
+          <p>23 images · 4 test · species purity 78.3% · organ purity 95.7%</p>
+          <p><b>Species</b> Quercus palustris 18, Quercus alba 2, Quercus bicolor 1, Quercus muehlenbergii 1</p>
+          <p><b>Organs</b> fruit 22, seed 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 25.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_36.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 36">
+        <div class="cluster-copy">
+          <h4>Cluster 36 </h4>
+          <p>15 images · 2 test · species purity 66.7% · organ purity 66.7%</p>
+          <p><b>Species</b> Gymnocladus dioicus 10, Yucca filamentosa 2, Lonicera morrowii 2, Fraxinus pennsylvanica 1</p>
+          <p><b>Organs</b> inflorescence 10, fruit 5</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_37.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 37">
+        <div class="cluster-copy">
+          <h4>Cluster 37 </h4>
+          <p>13 images · 0 test · species purity 61.5% · organ purity 76.9%</p>
+          <p><b>Species</b> Cercis canadensis 8, Gymnocladus dioicus 2, Robinia pseudoacacia 2, Gleditsia triacanthos 1</p>
+          <p><b>Organs</b> fruit 10, leaf 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_38.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 38">
+        <div class="cluster-copy">
+          <h4>Cluster 38 <span class='flag'>descriptively enriched</span></h4>
+          <p>42 images · 5 test · species purity 9.5% · organ purity 90.5%</p>
+          <p><b>Species</b> Fraxinus pennsylvanica 4, Lindera benzoin 4, Quercus bicolor 4, Populus deltoides 3</p>
+          <p><b>Organs</b> inflorescence 38, fruit 2, twig 1, cone 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 60.0%</span><span><b>DINOv3</b> 60.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 20.0%</span></div>
+          <p class="small">BioCLIP error enrichment 2.81× · all-four-wrong enrichment 2.48×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_39.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 39">
+        <div class="cluster-copy">
+          <h4>Cluster 39 </h4>
+          <p>19 images · 5 test · species purity 15.8% · organ purity 52.6%</p>
+          <p><b>Species</b> Juglans cinerea 3, Toxicodendron radicans 2, Quercus muehlenbergii 2, Quercus palustris 2</p>
+          <p><b>Organs</b> whole tree (or vine) 10, bark 7, leaf 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 20.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_40.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 40">
+        <div class="cluster-copy">
+          <h4>Cluster 40 </h4>
+          <p>23 images · 2 test · species purity 39.1% · organ purity 56.5%</p>
+          <p><b>Species</b> Pinus strobus 9, Tsuga canadensis 7, Picea rubens 6, Yucca filamentosa 1</p>
+          <p><b>Organs</b> cone 13, leaf 7, twig 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_41.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 41">
+        <div class="cluster-copy">
+          <h4>Cluster 41 </h4>
+          <p>47 images · 3 test · species purity 10.6% · organ purity 72.3%</p>
+          <p><b>Species</b> Acer saccharum 5, Pinus strobus 4, Juniperus virginiana 4, Gleditsia triacanthos 3</p>
+          <p><b>Organs</b> whole tree (or vine) 34, whole tree 8, leaf 2, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 66.7%</span><span><b>GPT-5.4</b> 66.7%</span><span><b>Gemini</b> 100.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_42.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 42">
+        <div class="cluster-copy">
+          <h4>Cluster 42 </h4>
+          <p>17 images · 2 test · species purity 52.9% · organ purity 88.2%</p>
+          <p><b>Species</b> Pyrus calleryana 9, Zanthoxylum americanum 3, Ginkgo biloba 2, Prunus serotina 2</p>
+          <p><b>Organs</b> fruit 15, cone 2</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 50.0%</span><span><b>GPT-5.4</b> 100.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_43.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 43">
+        <div class="cluster-copy">
+          <h4>Cluster 43 </h4>
+          <p>29 images · 4 test · species purity 37.9% · organ purity 51.7%</p>
+          <p><b>Species</b> Fagus grandifolia 11, Cephalanthus occidentalis 10, Platanus occidentalis 4, Toxicodendron radicans 1</p>
+          <p><b>Organs</b> inflorescence 15, fruit 12, twig 1, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 50.0%</span><span><b>Gemini</b> 50.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_44.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 44">
+        <div class="cluster-copy">
+          <h4>Cluster 44 <span class='flag'>descriptively enriched</span></h4>
+          <p>22 images · 6 test · species purity 50.0% · organ purity 81.8%</p>
+          <p><b>Species</b> Nyssa sylvatica 11, Tilia americana 4, Toxicodendron radicans 3, Viburnum lantanoides 1</p>
+          <p><b>Organs</b> inflorescence 18, leaf 2, cone 1, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 83.3%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 16.7%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 2.07×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_45.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 45">
+        <div class="cluster-copy">
+          <h4>Cluster 45 </h4>
+          <p>17 images · 0 test · species purity 11.8% · organ purity 47.1%</p>
+          <p><b>Species</b> Acer rubrum 2, Rhus glabra 2, Platanus occidentalis 2, Populus deltoides 2</p>
+          <p><b>Organs</b> inflorescence 8, fruit 8, leaf 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_46.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 46">
+        <div class="cluster-copy">
+          <h4>Cluster 46 </h4>
+          <p>8 images · 0 test · species purity 87.5% · organ purity 87.5%</p>
+          <p><b>Species</b> Cornus florida 7, Yucca filamentosa 1</p>
+          <p><b>Organs</b> inflorescence 7, fruit 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> —</span><span><b>DINOv3</b> —</span><span><b>GPT-5.4</b> —</span><span><b>Gemini</b> —</span></div>
+          <p class="small">BioCLIP error enrichment —× · all-four-wrong enrichment —×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_47.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 47">
+        <div class="cluster-copy">
+          <h4>Cluster 47 </h4>
+          <p>19 images · 1 test · species purity 42.1% · organ purity 89.5%</p>
+          <p><b>Species</b> Aesculus glabra 8, Carya ovata 3, Castanea dentata 2, Carya cordiformis 2</p>
+          <p><b>Organs</b> leaf 17, whole tree (or vine) 1, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 100.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_48.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 48">
+        <div class="cluster-copy">
+          <h4>Cluster 48 </h4>
+          <p>33 images · 4 test · species purity 21.2% · organ purity 97.0%</p>
+          <p><b>Species</b> Pyrus calleryana 7, Tilia americana 3, Ulmus rubra 2, Juglans nigra 2</p>
+          <p><b>Organs</b> leaf 32, twig 1</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 50.0%</span><span><b>DINOv3</b> 75.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 25.0%</span></div>
+          <p class="small">BioCLIP error enrichment 3.52× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article>
+      <article class="cluster-card">
+        <img loading="lazy" src="assets/cluster_sheets/dinov3/k50/cluster_49.jpg" alt="Centroid-nearest images for dinov3 k=50 cluster 49">
+        <div class="cluster-copy">
+          <h4>Cluster 49 </h4>
+          <p>28 images · 1 test · species purity 60.7% · organ purity 53.6%</p>
+          <p><b>Species</b> Gleditsia triacanthos 17, Robinia pseudoacacia 6, Juglans nigra 2, Ailanthus altissima 2</p>
+          <p><b>Organs</b> leaf 15, twig 6, inflorescence 3, fruit 3</p>
+          <div class="metric-line"><span><b>BioCLIP</b> 100.0%</span><span><b>DINOv3</b> 0.0%</span><span><b>GPT-5.4</b> 0.0%</span><span><b>Gemini</b> 0.0%</span></div>
+          <p class="small">BioCLIP error enrichment 0.00× · all-four-wrong enrichment 0.00×</p>
+        </div>
+      </article></div></details>
+  </section>
+
+  <section class="major">
+    <h2>All-four-wrong nearest neighbors</h2>
+    <p class="note">Each query is followed by its eight closest images after excluding every image from the same observation. Similarity is cosine similarity in the named frozen embedding space.</p>
+    
+            <article class="nn-case">
+              <header><h3><i>Acer rubrum</i></h3><p>baskauf/89381 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__89381.jpg" alt="BioCLIP nearest neighbors for baskauf/89381"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__89381.jpg" alt="DINOv3 nearest neighbors for baskauf/89381"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Acer rubrum</i></h3><p>baskauf/91011 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__91011.jpg" alt="BioCLIP nearest neighbors for baskauf/91011"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__91011.jpg" alt="DINOv3 nearest neighbors for baskauf/91011"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Acer rubrum</i></h3><p>baskauf/91016 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__91016.jpg" alt="BioCLIP nearest neighbors for baskauf/91016"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__91016.jpg" alt="DINOv3 nearest neighbors for baskauf/91016"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Betula lenta</i></h3><p>baskauf/37293 · bark</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__37293.jpg" alt="BioCLIP nearest neighbors for baskauf/37293"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__37293.jpg" alt="DINOv3 nearest neighbors for baskauf/37293"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Betula lenta</i></h3><p>baskauf/37296 · twig</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__37296.jpg" alt="BioCLIP nearest neighbors for baskauf/37296"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__37296.jpg" alt="DINOv3 nearest neighbors for baskauf/37296"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Fraxinus americana</i></h3><p>ssmv/2-638-01 · bark</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/ssmv__2-638-01.jpg" alt="BioCLIP nearest neighbors for ssmv/2-638-01"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/ssmv__2-638-01.jpg" alt="DINOv3 nearest neighbors for ssmv/2-638-01"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Fraxinus americana</i></h3><p>ssmv/2-638-02 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/ssmv__2-638-02.jpg" alt="BioCLIP nearest neighbors for ssmv/2-638-02"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/ssmv__2-638-02.jpg" alt="DINOv3 nearest neighbors for ssmv/2-638-02"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Juglans cinerea</i></h3><p>baskauf/11812 · bark</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__11812.jpg" alt="BioCLIP nearest neighbors for baskauf/11812"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__11812.jpg" alt="DINOv3 nearest neighbors for baskauf/11812"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Nyssa sylvatica</i></h3><p>baskauf/51398 · inflorescence</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__51398.jpg" alt="BioCLIP nearest neighbors for baskauf/51398"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__51398.jpg" alt="DINOv3 nearest neighbors for baskauf/51398"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Nyssa sylvatica</i></h3><p>baskauf/91065 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__91065.jpg" alt="BioCLIP nearest neighbors for baskauf/91065"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__91065.jpg" alt="DINOv3 nearest neighbors for baskauf/91065"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Quercus alba</i></h3><p>baskauf/12528 · leaf</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__12528.jpg" alt="BioCLIP nearest neighbors for baskauf/12528"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__12528.jpg" alt="DINOv3 nearest neighbors for baskauf/12528"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Quercus bicolor</i></h3><p>baskauf/51186 · inflorescence</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__51186.jpg" alt="BioCLIP nearest neighbors for baskauf/51186"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__51186.jpg" alt="DINOv3 nearest neighbors for baskauf/51186"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Quercus bicolor</i></h3><p>baskauf/91110 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__91110.jpg" alt="BioCLIP nearest neighbors for baskauf/91110"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__91110.jpg" alt="DINOv3 nearest neighbors for baskauf/91110"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Quercus rubra</i></h3><p>baskauf/89376 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__89376.jpg" alt="BioCLIP nearest neighbors for baskauf/89376"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__89376.jpg" alt="DINOv3 nearest neighbors for baskauf/89376"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Quercus rubra</i></h3><p>baskauf/90972 · whole tree (or vine)</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__90972.jpg" alt="BioCLIP nearest neighbors for baskauf/90972"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__90972.jpg" alt="DINOv3 nearest neighbors for baskauf/90972"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Rhus copallinum</i></h3><p>baskauf/10942 · twig</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__10942.jpg" alt="BioCLIP nearest neighbors for baskauf/10942"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__10942.jpg" alt="DINOv3 nearest neighbors for baskauf/10942"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+            <article class="nn-case">
+              <header><h3><i>Ulmus americana</i></h3><p>baskauf/11690 · bark</p></header>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/nn_galleries/bioclip/baskauf__11690.jpg" alt="BioCLIP nearest neighbors for baskauf/11690"><figcaption>BioCLIP</figcaption></figure>
+                <figure><img loading="lazy" src="assets/nn_galleries/dinov3/baskauf__11690.jpg" alt="DINOv3 nearest neighbors for baskauf/11690"><figcaption>DINOv3</figcaption></figure>
+              </div>
+            </article>
+  </section>
+
+  <section class="major">
+    <h2>Repeated within-genus confusion pairs</h2>
+    <p class="note">Within-species similarity excludes same-observation image pairs. Nearest-neighbor rates also exclude the query observation. These values describe local geometry; they do not establish a causal explanation for a classification error.</p>
+    
+            <section class="pair-block">
+              <h3><i>Quercus palustris</i> → <i>Quercus alba</i></h3>
+              <p class="small">Repeated confusion count across the four baselines: 14 model-prediction occurrences.</p>
+              <div class="table-wrap"><table><thead><tr><th>Space</th><th>Images A/B</th><th>Centroid cosine</th><th>Within A</th><th>Within B</th><th>Cross-species</th><th>NN same species</th><th>NN other pair species</th></tr></thead><tbody><tr><td>BioCLIP</td><td>114/54</td><td>0.694</td><td>0.628</td><td>0.532</td><td>0.411</td><td>85.1%</td><td>2.4%</td></tr><tr><td>DINOv3</td><td>114/54</td><td>0.765</td><td>0.320</td><td>0.226</td><td>0.220</td><td>73.2%</td><td>4.8%</td></tr></tbody></table></div>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/pair_sheets/bioclip/Quercus_palustris--Quercus_alba.jpg" alt="BioCLIP representative images for confusion pair"><figcaption>BioCLIP centroid-nearest examples</figcaption></figure>
+                <figure><img loading="lazy" src="assets/pair_sheets/dinov3/Quercus_palustris--Quercus_alba.jpg" alt="DINOv3 representative images for confusion pair"><figcaption>DINOv3 centroid-nearest examples</figcaption></figure>
+              </div>
+            </section>
+            <section class="pair-block">
+              <h3><i>Quercus macrocarpa</i> → <i>Quercus alba</i></h3>
+              <p class="small">Repeated confusion count across the four baselines: 9 model-prediction occurrences.</p>
+              <div class="table-wrap"><table><thead><tr><th>Space</th><th>Images A/B</th><th>Centroid cosine</th><th>Within A</th><th>Within B</th><th>Cross-species</th><th>NN same species</th><th>NN other pair species</th></tr></thead><tbody><tr><td>BioCLIP</td><td>22/54</td><td>0.885</td><td>0.514</td><td>0.532</td><td>0.491</td><td>56.6%</td><td>9.2%</td></tr><tr><td>DINOv3</td><td>22/54</td><td>0.856</td><td>0.152</td><td>0.226</td><td>0.201</td><td>36.8%</td><td>14.5%</td></tr></tbody></table></div>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/pair_sheets/bioclip/Quercus_macrocarpa--Quercus_alba.jpg" alt="BioCLIP representative images for confusion pair"><figcaption>BioCLIP centroid-nearest examples</figcaption></figure>
+                <figure><img loading="lazy" src="assets/pair_sheets/dinov3/Quercus_macrocarpa--Quercus_alba.jpg" alt="DINOv3 representative images for confusion pair"><figcaption>DINOv3 centroid-nearest examples</figcaption></figure>
+              </div>
+            </section>
+            <section class="pair-block">
+              <h3><i>Quercus palustris</i> → <i>Quercus rubra</i></h3>
+              <p class="small">Repeated confusion count across the four baselines: 9 model-prediction occurrences.</p>
+              <div class="table-wrap"><table><thead><tr><th>Space</th><th>Images A/B</th><th>Centroid cosine</th><th>Within A</th><th>Within B</th><th>Cross-species</th><th>NN same species</th><th>NN other pair species</th></tr></thead><tbody><tr><td>BioCLIP</td><td>114/53</td><td>0.894</td><td>0.628</td><td>0.526</td><td>0.528</td><td>82.6%</td><td>6.0%</td></tr><tr><td>DINOv3</td><td>114/53</td><td>0.905</td><td>0.320</td><td>0.240</td><td>0.273</td><td>65.9%</td><td>12.6%</td></tr></tbody></table></div>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/pair_sheets/bioclip/Quercus_palustris--Quercus_rubra.jpg" alt="BioCLIP representative images for confusion pair"><figcaption>BioCLIP centroid-nearest examples</figcaption></figure>
+                <figure><img loading="lazy" src="assets/pair_sheets/dinov3/Quercus_palustris--Quercus_rubra.jpg" alt="DINOv3 representative images for confusion pair"><figcaption>DINOv3 centroid-nearest examples</figcaption></figure>
+              </div>
+            </section>
+            <section class="pair-block">
+              <h3><i>Quercus bicolor</i> → <i>Quercus alba</i></h3>
+              <p class="small">Repeated confusion count across the four baselines: 6 model-prediction occurrences.</p>
+              <div class="table-wrap"><table><thead><tr><th>Space</th><th>Images A/B</th><th>Centroid cosine</th><th>Within A</th><th>Within B</th><th>Cross-species</th><th>NN same species</th><th>NN other pair species</th></tr></thead><tbody><tr><td>BioCLIP</td><td>31/54</td><td>0.868</td><td>0.537</td><td>0.532</td><td>0.493</td><td>63.5%</td><td>4.7%</td></tr><tr><td>DINOv3</td><td>31/54</td><td>0.781</td><td>0.236</td><td>0.226</td><td>0.214</td><td>35.3%</td><td>15.3%</td></tr></tbody></table></div>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/pair_sheets/bioclip/Quercus_bicolor--Quercus_alba.jpg" alt="BioCLIP representative images for confusion pair"><figcaption>BioCLIP centroid-nearest examples</figcaption></figure>
+                <figure><img loading="lazy" src="assets/pair_sheets/dinov3/Quercus_bicolor--Quercus_alba.jpg" alt="DINOv3 representative images for confusion pair"><figcaption>DINOv3 centroid-nearest examples</figcaption></figure>
+              </div>
+            </section>
+            <section class="pair-block">
+              <h3><i>Sambucus racemosa</i> → <i>Sambucus nigra</i></h3>
+              <p class="small">Repeated confusion count across the four baselines: 4 model-prediction occurrences.</p>
+              <div class="table-wrap"><table><thead><tr><th>Space</th><th>Images A/B</th><th>Centroid cosine</th><th>Within A</th><th>Within B</th><th>Cross-species</th><th>NN same species</th><th>NN other pair species</th></tr></thead><tbody><tr><td>BioCLIP</td><td>19/12</td><td>0.692</td><td>0.822</td><td>0.760</td><td>0.565</td><td>93.5%</td><td>3.2%</td></tr><tr><td>DINOv3</td><td>19/12</td><td>0.732</td><td>0.278</td><td>0.271</td><td>0.249</td><td>58.1%</td><td>3.2%</td></tr></tbody></table></div>
+              <div class="two-up">
+                <figure><img loading="lazy" src="assets/pair_sheets/bioclip/Sambucus_racemosa--Sambucus_nigra.jpg" alt="BioCLIP representative images for confusion pair"><figcaption>BioCLIP centroid-nearest examples</figcaption></figure>
+                <figure><img loading="lazy" src="assets/pair_sheets/dinov3/Sambucus_racemosa--Sambucus_nigra.jpg" alt="DINOv3 representative images for confusion pair"><figcaption>DINOv3 centroid-nearest examples</figcaption></figure>
+              </div>
+            </section>
+    <div class="two-up projection">
+      <figure><img loading="lazy" src="assets/plots/bioclip_confusion_pairs.png" alt="BioCLIP PCA and UMAP plots for confusion pairs"><figcaption>BioCLIP global PCA and UMAP; pair species highlighted.</figcaption></figure>
+      <figure><img loading="lazy" src="assets/plots/dinov3_confusion_pairs.png" alt="DINOv3 PCA and UMAP plots for confusion pairs"><figcaption>DINOv3 global PCA and UMAP; pair species highlighted.</figcaption></figure>
+    </div>
+    <p class="small">PCA and UMAP are two-dimensional projections of the full 1,641-image space. Apparent separation or overlap can change under projection and should not be over-interpreted.</p>
+  </section>
+
+  <section class="major downloads">
+    <h2>Data exports</h2>
+    <p><a href="data/cluster_summary.csv">cluster summary</a><a href="data/cluster_assignments.csv">cluster assignments</a><a href="data/nearest_neighbors.csv">nearest neighbors</a><a href="data/confusion_pair_metrics.csv">confusion-pair metrics</a><a href="data/structure_summary.csv">structure summary</a></p>
+  </section>
+
+  <footer>Seed 42. K-means uses normalized frozen embeddings with n_init=20. No backbone training, classifier training, automatic cluster naming or LLM morphology annotation is used in this report.</footer>
+</main></body></html>

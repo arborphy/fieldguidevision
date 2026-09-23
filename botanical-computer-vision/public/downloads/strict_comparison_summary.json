@@ -1,0 +1,99 @@
+{
+  "protocol": {
+    "test_images": 211,
+    "species": 63,
+    "seed": 42,
+    "test_groups_per_species": 1,
+    "individual_disjoint": true,
+    "candidate_set_identical": true,
+    "train_images": 1181,
+    "validation_images": 249
+  },
+  "bioclip_zero_shot": {
+    "model": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "method": "zero-shot closed-set cosine similarity",
+    "top1_correct": 181,
+    "top1_accuracy": 0.8578199052132701,
+    "top5_correct": 201,
+    "top5_accuracy": 0.95260663507109,
+    "macro_top1_accuracy": 0.8540816326530611
+  },
+  "bioclip_linear_probe": {
+    "model": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "method": "frozen BioCLIP image embedding + multinomial logistic regression",
+    "top1_correct": 184,
+    "top1_accuracy": 0.8720379146919431,
+    "top5_correct": 203,
+    "top5_accuracy": 0.9620853080568721,
+    "macro_top1_accuracy": 0.866912320483749,
+    "embedding_dimension": 1024,
+    "best_C": 100.0
+  },
+  "dinov3_linear_probe": {
+    "model": "facebook/dinov3-vitb16-pretrain-lvd1689m",
+    "method": "frozen DINOv3 CLS embedding + multinomial logistic regression",
+    "top1_correct": 119,
+    "top1_accuracy": 0.5639810426540285,
+    "top5_correct": 176,
+    "top5_accuracy": 0.8341232227488151,
+    "macro_top1_accuracy": 0.5124080945509517,
+    "embedding_dimension": 768,
+    "best_C": 100.0
+  },
+  "pairwise": {
+    "bioclip_probe_vs_zero_shot": {
+      "both_correct": 170,
+      "first_only": 14,
+      "second_only": 11,
+      "both_wrong": 16,
+      "same_prediction": 179,
+      "top1_delta": 0.014218009478672985,
+      "top5_delta": 0.009478672985781991,
+      "top1_paired_bootstrap_95_ci": [
+        -0.03317535545023697,
+        0.061611374407582936
+      ],
+      "top5_paired_bootstrap_95_ci": [
+        -0.023696682464454975,
+        0.04265402843601896
+      ],
+      "exact_mcnemar_p": 0.6900379657745361
+    },
+    "bioclip_probe_vs_dinov3": {
+      "both_correct": 114,
+      "first_only": 70,
+      "second_only": 5,
+      "both_wrong": 22,
+      "same_prediction": 120,
+      "top1_delta": 0.3080568720379147,
+      "top5_delta": 0.12796208530805686,
+      "top1_paired_bootstrap_95_ci": [
+        0.24170616113744076,
+        0.3791469194312796
+      ],
+      "top5_paired_bootstrap_95_ci": [
+        0.08056872037914692,
+        0.18009478672985782
+      ],
+      "exact_mcnemar_p": 9.817755603717254e-16
+    },
+    "zero_shot_vs_dinov3": {
+      "both_correct": 109,
+      "first_only": 72,
+      "second_only": 10,
+      "both_wrong": 20,
+      "same_prediction": 110,
+      "top1_delta": 0.2938388625592417,
+      "top5_delta": 0.11848341232227488,
+      "top1_paired_bootstrap_95_ci": [
+        0.21800947867298578,
+        0.3696682464454976
+      ],
+      "top5_paired_bootstrap_95_ci": [
+        0.06635071090047394,
+        0.17535545023696683
+      ],
+      "exact_mcnemar_p": 1.0224592793857492e-12
+    }
+  }
+}

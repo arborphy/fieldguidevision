@@ -1,0 +1,327 @@
+{
+  "seed": 42,
+  "common_images": 211,
+  "observations": 63,
+  "species": 63,
+  "protocol_note": "BioCLIP/DINO use 63 candidates; GPT/Gemini use 85 candidates.",
+  "model_ids": {
+    "bioclip": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "dinov3": "facebook/dinov3-vitb16-pretrain-lvd1689m",
+    "gpt_5_4": "openai/gpt-5.4",
+    "gemini_flash_lite": "google/gemini-2.5-flash-lite"
+  },
+  "methods": {
+    "bioclip": "zero-shot closed-set cosine similarity",
+    "dinov3": "frozen CLS embedding + multinomial logistic regression",
+    "gpt_5_4": "direct image + 85-species candidate prompt",
+    "gemini_flash_lite": "direct image + 85-species candidate prompt"
+  },
+  "dino_split": {
+    "train_images": 1181,
+    "validation_images": 249,
+    "test_images": 211,
+    "individual_disjoint": true,
+    "embedding_dimension": 768,
+    "linear_probe_C": 100.0
+  },
+  "models": [
+    {
+      "model_key": "bioclip",
+      "model": "BioCLIP 2.5 zero-shot (strict 63-class)",
+      "model_id": "hf-hub:imageomics/bioclip-2.5-vith14",
+      "method": "zero-shot closed-set cosine similarity",
+      "candidate_species": 63,
+      "image_count": 211,
+      "image_top1_correct": 181,
+      "image_top1_accuracy": 0.8578199052132701,
+      "image_top5_correct": 201,
+      "image_top5_accuracy": 0.95260663507109,
+      "observation_count": 63,
+      "observation_majority_correct": 57,
+      "observation_majority_accuracy": 0.9047619047619048,
+      "observations_with_any_correct_image": 58
+    },
+    {
+      "model_key": "dinov3",
+      "model": "DINOv3 frozen + linear probe (strict 63-class)",
+      "model_id": "facebook/dinov3-vitb16-pretrain-lvd1689m",
+      "method": "frozen CLS embedding + multinomial logistic regression",
+      "candidate_species": 63,
+      "image_count": 211,
+      "image_top1_correct": 119,
+      "image_top1_accuracy": 0.5639810426540285,
+      "image_top5_correct": 176,
+      "image_top5_accuracy": 0.8341232227488151,
+      "observation_count": 63,
+      "observation_majority_correct": 40,
+      "observation_majority_accuracy": 0.6349206349206349,
+      "observations_with_any_correct_image": 43
+    },
+    {
+      "model_key": "gpt_5_4",
+      "model": "GPT-5.4 direct VLM (85-class)",
+      "model_id": "openai/gpt-5.4",
+      "method": "direct image + 85-species candidate prompt",
+      "candidate_species": 85,
+      "image_count": 211,
+      "image_top1_correct": 83,
+      "image_top1_accuracy": 0.3933649289099526,
+      "image_top5_correct": 137,
+      "image_top5_accuracy": 0.6492890995260664,
+      "observation_count": 63,
+      "observation_majority_correct": 28,
+      "observation_majority_accuracy": 0.4444444444444444,
+      "observations_with_any_correct_image": 36
+    },
+    {
+      "model_key": "gemini_flash_lite",
+      "model": "Gemini 2.5 Flash Lite direct VLM (85-class)",
+      "model_id": "google/gemini-2.5-flash-lite",
+      "method": "direct image + 85-species candidate prompt",
+      "candidate_species": 85,
+      "image_count": 211,
+      "image_top1_correct": 85,
+      "image_top1_accuracy": 0.4028436018957346,
+      "image_top5_correct": 138,
+      "image_top5_accuracy": 0.6540284360189573,
+      "observation_count": 63,
+      "observation_majority_correct": 26,
+      "observation_majority_accuracy": 0.4126984126984127,
+      "observations_with_any_correct_image": 32
+    }
+  ],
+  "buckets": [
+    {
+      "bucket": "embedding_disagreement",
+      "description": "BioCLIP and DINOv3 predict different species.",
+      "image_count": 101,
+      "image_fraction": 0.4786729857819905,
+      "observation_count": 46,
+      "species_count": 46
+    },
+    {
+      "bucket": "all_four_correct",
+      "description": "All four models are Top-1 correct.",
+      "image_count": 43,
+      "image_fraction": 0.2037914691943128,
+      "observation_count": 18,
+      "species_count": 18
+    },
+    {
+      "bucket": "bioclip_only_correct",
+      "description": "BioCLIP is correct and the other three models are wrong.",
+      "image_count": 40,
+      "image_fraction": 0.1895734597156398,
+      "observation_count": 21,
+      "species_count": 21
+    },
+    {
+      "bucket": "bioclip_and_dino_wrong",
+      "description": "Both embedding-based baselines are wrong, regardless of VLM outcomes.",
+      "image_count": 20,
+      "image_fraction": 0.0947867298578199,
+      "observation_count": 11,
+      "species_count": 11
+    },
+    {
+      "bucket": "all_four_wrong",
+      "description": "All four models are Top-1 wrong.",
+      "image_count": 17,
+      "image_fraction": 0.08056872037914692,
+      "observation_count": 10,
+      "species_count": 10
+    },
+    {
+      "bucket": "vlm_embedding_consensus_conflict",
+      "description": "GPT and Gemini agree; BioCLIP and DINO agree; the two groups disagree.",
+      "image_count": 10,
+      "image_fraction": 0.04739336492890995,
+      "observation_count": 8,
+      "species_count": 8
+    },
+    {
+      "bucket": "bioclip_wrong_vlm_rescue",
+      "description": "BioCLIP is wrong and GPT-5.4 or Gemini is correct.",
+      "image_count": 4,
+      "image_fraction": 0.018957345971563982,
+      "observation_count": 3,
+      "species_count": 3
+    }
+  ],
+  "correctness_patterns": [
+    {
+      "correctness_pattern": "1111",
+      "bioclip_correct": true,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": true,
+      "image_count": 43,
+      "image_fraction": 0.2037914691943128,
+      "species_count": 18,
+      "observation_count": 18,
+      "example_image_ids": "[\"baskauf/29685\", \"baskauf/11492\", \"baskauf/11522\", \"baskauf/15103\", \"baskauf/15105\"]"
+    },
+    {
+      "correctness_pattern": "1000",
+      "bioclip_correct": true,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": false,
+      "image_count": 40,
+      "image_fraction": 0.1895734597156398,
+      "species_count": 21,
+      "observation_count": 21,
+      "example_image_ids": "[\"baskauf/10904\", \"baskauf/10938\", \"baskauf/10939\", \"baskauf/11449\", \"baskauf/11687\"]"
+    },
+    {
+      "correctness_pattern": "1100",
+      "bioclip_correct": true,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": false,
+      "image_count": 32,
+      "image_fraction": 0.15165876777251186,
+      "species_count": 20,
+      "observation_count": 20,
+      "example_image_ids": "[\"baskauf/11070\", \"baskauf/11534\", \"baskauf/11653\", \"baskauf/11688\", \"baskauf/11993\"]"
+    },
+    {
+      "correctness_pattern": "0000",
+      "bioclip_correct": false,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": false,
+      "image_count": 17,
+      "image_fraction": 0.08056872037914692,
+      "species_count": 10,
+      "observation_count": 10,
+      "example_image_ids": "[\"baskauf/10942\", \"baskauf/11690\", \"baskauf/11812\", \"baskauf/37293\", \"baskauf/37296\"]"
+    },
+    {
+      "correctness_pattern": "1101",
+      "bioclip_correct": true,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": true,
+      "image_count": 17,
+      "image_fraction": 0.08056872037914692,
+      "species_count": 14,
+      "observation_count": 14,
+      "example_image_ids": "[\"baskauf/29683\", \"baskauf/11493\", \"baskauf/11656\", \"baskauf/15307\", \"baskauf/21465\"]"
+    },
+    {
+      "correctness_pattern": "1110",
+      "bioclip_correct": true,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": false,
+      "image_count": 17,
+      "image_fraction": 0.08056872037914692,
+      "species_count": 10,
+      "observation_count": 10,
+      "example_image_ids": "[\"baskauf/29773\", \"baskauf/11064\", \"baskauf/11962\", \"baskauf/11966\", \"baskauf/15104\"]"
+    },
+    {
+      "correctness_pattern": "1001",
+      "bioclip_correct": true,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": true,
+      "image_count": 12,
+      "image_fraction": 0.05687203791469194,
+      "species_count": 11,
+      "observation_count": 11,
+      "example_image_ids": "[\"baskauf/11037\", \"baskauf/11038\", \"baskauf/11524\", \"baskauf/11689\", \"baskauf/11961\"]"
+    },
+    {
+      "correctness_pattern": "1011",
+      "bioclip_correct": true,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": true,
+      "image_count": 11,
+      "image_fraction": 0.052132701421800945,
+      "species_count": 8,
+      "observation_count": 8,
+      "example_image_ids": "[\"baskauf/10432\", \"baskauf/10550\", \"baskauf/15477\", \"baskauf/15687\", \"baskauf/15688\"]"
+    },
+    {
+      "correctness_pattern": "0100",
+      "bioclip_correct": false,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": false,
+      "image_count": 9,
+      "image_fraction": 0.04265402843601896,
+      "species_count": 7,
+      "observation_count": 7,
+      "example_image_ids": "[\"baskauf/32768\", \"baskauf/32770\", \"baskauf/65657\", \"baskauf/51183\", \"baskauf/15988\"]"
+    },
+    {
+      "correctness_pattern": "1010",
+      "bioclip_correct": true,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": false,
+      "image_count": 9,
+      "image_fraction": 0.04265402843601896,
+      "species_count": 9,
+      "observation_count": 9,
+      "example_image_ids": "[\"baskauf/11066\", \"baskauf/11964\", \"baskauf/12021\", \"baskauf/13650\", \"baskauf/27137\"]"
+    },
+    {
+      "correctness_pattern": "0001",
+      "bioclip_correct": false,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": false,
+      "gemini_flash_lite_correct": true,
+      "image_count": 1,
+      "image_fraction": 0.004739336492890996,
+      "species_count": 1,
+      "observation_count": 1,
+      "example_image_ids": "[\"baskauf/91059\"]"
+    },
+    {
+      "correctness_pattern": "0010",
+      "bioclip_correct": false,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": false,
+      "image_count": 1,
+      "image_fraction": 0.004739336492890996,
+      "species_count": 1,
+      "observation_count": 1,
+      "example_image_ids": "[\"ssmv/2-638-04\"]"
+    },
+    {
+      "correctness_pattern": "0011",
+      "bioclip_correct": false,
+      "dinov3_correct": false,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": true,
+      "image_count": 1,
+      "image_fraction": 0.004739336492890996,
+      "species_count": 1,
+      "observation_count": 1,
+      "example_image_ids": "[\"baskauf/37287\"]"
+    },
+    {
+      "correctness_pattern": "0110",
+      "bioclip_correct": false,
+      "dinov3_correct": true,
+      "gpt_5_4_correct": true,
+      "gemini_flash_lite_correct": false,
+      "image_count": 1,
+      "image_fraction": 0.004739336492890996,
+      "species_count": 1,
+      "observation_count": 1,
+      "example_image_ids": "[\"ssmv/2-638-03\"]"
+    }
+  ],
+  "any_model_correct_images": 194,
+  "all_four_wrong_images": 17,
+  "unique_annotation_images": 60,
+  "download_status": {
+    "cached": 60
+  }
+}

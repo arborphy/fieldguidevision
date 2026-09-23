@@ -1,0 +1,5 @@
+model_key,model,species_error_count,correct_genus_wrong_species,correct_genus_wrong_species_fraction,wrong_genus,wrong_genus_fraction,correct_family_wrong_genus,correct_family_wrong_genus_fraction,wrong_family,wrong_family_fraction
+bioclip,BioCLIP 2.5 zero-shot,30,8,0.26666666666666666,22,0.7333333333333333,3,0.1,19,0.6333333333333333
+dinov3,DINOv3 frozen + linear probe,92,11,0.11956521739130435,81,0.8804347826086957,2,0.021739130434782608,79,0.8586956521739131
+gpt_5_4,GPT-5.4 direct VLM,128,20,0.15625,108,0.84375,16,0.125,92,0.71875
+gemini_flash_lite,Gemini 2.5 Flash Lite direct VLM,126,47,0.373015873015873,79,0.626984126984127,9,0.07142857142857142,70,0.5555555555555556

@@ -1,0 +1,13 @@
+original_organ_category,normalized_organ,image_count,rationale
+bark,bark,171,identity mapping
+cone,cone,33,identity mapping
+fruit,fruit,209,identity mapping
+inflorescence,inflorescence,277,identity mapping
+leaf,leaf,416,identity mapping
+seed,seed,12,identity mapping
+stem,other,1,non-specific or rare non-primary organ category
+twig,twig,201,identity mapping
+unspecified,other,2,non-specific or rare non-primary organ category
+whole plant,whole plant,1,semantically equivalent whole-plant view
+whole tree,whole plant,18,semantically equivalent whole-plant view
+whole tree (or vine),whole plant,300,semantically equivalent whole-plant view

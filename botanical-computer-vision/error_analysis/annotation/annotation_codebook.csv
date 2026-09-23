@@ -1,0 +1,6 @@
+field,suggested_values,definition
+human_identifiable,yes|maybe|no,Can a careful human identify the species from this image alone?
+failure_primary,free text for now,Primary failure category; intentionally not pre-labeled by a model.
+useful_organ_visible,yes|partial|no,Is a diagnostically useful plant organ visible?
+better_photo_would_help,yes|maybe|no,"Would a better angle, scale, focus, or additional view likely help?"
+notes,free text,"Human observations, candidate taxonomy notes, or follow-up questions."

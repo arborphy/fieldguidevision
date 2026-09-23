@@ -1,0 +1,33 @@
+genus,ground_truth_species,predicted_species,total_occurrences,unique_image_count,observation_count,model_count,models,bioclip_count,dinov3_count,gpt_5_4_count,gemini_flash_lite_count,organ_categories,example_image_ids
+Quercus,Quercus palustris,Quercus alba,14,11,1,2,gemini_flash_lite|gpt_5_4,0,0,3,11,bark|fruit|leaf|twig|whole tree (or vine),kirchoff/em2338|kirchoff/em2339|kirchoff/em2342|kirchoff/em2344|kirchoff/em2347
+Quercus,Quercus macrocarpa,Quercus alba,9,4,1,3,dinov3|gemini_flash_lite|gpt_5_4,0,2,3,4,fruit|leaf|twig|whole tree (or vine),baskauf/15615|baskauf/15620|baskauf/15624|baskauf/90661
+Quercus,Quercus palustris,Quercus rubra,9,8,1,3,dinov3|gemini_flash_lite|gpt_5_4,0,2,2,5,leaf|twig,kirchoff/em2341|kirchoff/em2343|kirchoff/em2344|kirchoff/em2353|kirchoff/em2354
+Quercus,Quercus bicolor,Quercus alba,6,4,1,2,gemini_flash_lite|gpt_5_4,0,0,2,4,inflorescence|leaf|whole tree (or vine),baskauf/51183|baskauf/51186|baskauf/52483|baskauf/91110
+Sambucus,Sambucus racemosa,Sambucus nigra,4,3,1,2,gemini_flash_lite|gpt_5_4,0,0,1,3,fruit|leaf,baskauf/28751|baskauf/28754|baskauf/28756
+Quercus,Quercus rubra,Quercus alba,4,4,1,1,gemini_flash_lite,0,0,0,4,leaf|whole tree (or vine),baskauf/15643|baskauf/89376|baskauf/90969|baskauf/90972
+Acer,Acer rubrum,Acer saccharum,3,2,1,2,bioclip|gemini_flash_lite,1,0,0,2,whole tree (or vine),baskauf/91011|baskauf/91016
+Populus,Populus deltoides,Populus tremuloides,3,2,1,2,gemini_flash_lite|gpt_5_4,0,0,1,2,fruit|leaf,baskauf/11064|baskauf/11070
+Fraxinus,Fraxinus pennsylvanica,Fraxinus americana,3,3,1,1,gpt_5_4,0,0,3,0,whole tree (or vine),baskauf/90785a|baskauf/90789|baskauf/90799
+Aesculus,Aesculus glabra,Aesculus hippocastanum,2,1,1,2,gemini_flash_lite|gpt_5_4,0,0,1,1,fruit,baskauf/39880
+Betula,Betula lenta,Betula alleghaniensis,2,2,1,2,bioclip|dinov3,1,1,0,0,bark,baskauf/37287|baskauf/37293
+Picea,Picea rubens,Picea glauca,2,1,1,2,gemini_flash_lite|gpt_5_4,0,0,1,1,leaf,baskauf/26131
+Quercus,Quercus alba,Quercus muehlenbergii,2,2,1,2,bioclip|dinov3,1,1,0,0,leaf|whole tree (or vine),baskauf/12409|baskauf/12528
+Quercus,Quercus bicolor,Quercus palustris,2,1,1,2,bioclip|dinov3,1,1,0,0,inflorescence,baskauf/51186
+Fraxinus,Fraxinus americana,Fraxinus pennsylvanica,2,2,1,1,bioclip,2,0,0,0,bark|leaf,ssmv/2-638-01|ssmv/2-638-03
+Prunus,Prunus serotina,Prunus virginiana,2,2,1,1,gemini_flash_lite,0,0,0,2,fruit,baskauf/11964|baskauf/11966
+Viburnum,Viburnum lantanoides,Viburnum opulus,2,2,1,1,gemini_flash_lite,0,0,0,2,fruit|leaf,baskauf/26311|baskauf/26321
+Acer,Acer negundo,Acer saccharum,1,1,1,1,gemini_flash_lite,0,0,0,1,leaf,baskauf/15313
+Betula,Betula alleghaniensis,Betula papyrifera,1,1,1,1,gemini_flash_lite,0,0,0,1,bark,baskauf/11449
+Cornus,Cornus amomum,Cornus sericea,1,1,1,1,gpt_5_4,0,0,1,0,twig,baskauf/30941
+Cornus,Cornus florida,Cornus sericea,1,1,1,1,gemini_flash_lite,0,0,0,1,twig,baskauf/15104
+Juglans,Juglans cinerea,Juglans nigra,1,1,1,1,gemini_flash_lite,0,0,0,1,bark,baskauf/11812
+Juglans,Juglans nigra,Juglans cinerea,1,1,1,1,gpt_5_4,0,0,1,0,inflorescence,baskauf/23022
+Quercus,Quercus alba,Quercus macrocarpa,1,1,1,1,dinov3,0,1,0,0,leaf,baskauf/12528
+Quercus,Quercus bicolor,Quercus muehlenbergii,1,1,1,1,bioclip,1,0,0,0,inflorescence,baskauf/51183
+Quercus,Quercus bicolor,Quercus rubra,1,1,1,1,gpt_5_4,0,0,1,0,inflorescence,baskauf/51183
+Quercus,Quercus macrocarpa,Quercus bicolor,1,1,1,1,dinov3,0,1,0,0,leaf,baskauf/15624
+Quercus,Quercus muehlenbergii,Quercus alba,1,1,1,1,gemini_flash_lite,0,0,0,1,whole tree (or vine),baskauf/12055
+Rhus,Rhus copallinum,Rhus glabra,1,1,1,1,bioclip,1,0,0,0,twig,baskauf/10942
+Rhus,Rhus glabra,Rhus copallinum,1,1,1,1,dinov3,0,1,0,0,whole tree (or vine),baskauf/15477
+Sambucus,Sambucus nigra,Sambucus racemosa,1,1,1,1,dinov3,0,1,0,0,fruit,baskauf/15688
+Ulmus,Ulmus americana,Ulmus rubra,1,1,1,1,gemini_flash_lite,0,0,0,1,leaf,baskauf/11687
