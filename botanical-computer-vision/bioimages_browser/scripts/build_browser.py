@@ -132,6 +132,11 @@ def build(corpus_path: Path) -> dict:
         raise ValueError("Unexpected corpus size; expected 1,899 images and 85 species")
 
     predictions = read_predictions()
+    tagging_path = OUT / "tagging" / "analysis_data.json"
+    tagging_payload = json.loads(tagging_path.read_text()) if tagging_path.exists() else None
+    tagging_by_id = {
+        item["image_id"]: item for item in (tagging_payload or {}).get("images", [])
+    }
     images: list[dict] = []
     species_rows: list[dict] = []
     seen_ids: set[str] = set()
@@ -182,6 +187,7 @@ def build(corpus_path: Path) -> dict:
                 "establishment_means": source.get("establishment_means", ""),
                 "title": source.get("title", ""),
                 "prediction": predictions.get(image_id),
+                "tagging": tagging_by_id.get(image_id),
                 "review_flags": [
                     flag
                     for flag, present in (
@@ -277,6 +283,16 @@ def build(corpus_path: Path) -> dict:
         "manual_review_images": len(review_images),
     }
 
+    tagging_summary = {"available": False}
+    if tagging_payload:
+        tagging_summary = {
+            "available": True,
+            "method": tagging_payload["method"],
+            "vocabulary": tagging_payload["vocabulary"],
+            "summary": tagging_payload["summary"],
+            "per_tag": tagging_payload["per_tag"],
+            "gemma_images": len(tagging_payload["images"]),
+        }
     data = {
         "meta": {
             "title": "BioImages Browser",
@@ -303,6 +319,7 @@ def build(corpus_path: Path) -> dict:
             ],
         },
         "model_evaluation": read_model_evaluation(),
+        "tagging_analysis": tagging_summary,
         "review": {
             "image_ids": [i["id"] for i in review_images],
             "missing_primary_label_ids": missing_primary,

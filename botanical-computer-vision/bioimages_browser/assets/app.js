@@ -77,12 +77,131 @@
   function updateNav() {
     const view = new URLSearchParams(location.search).get("view") || "home";
     document.querySelectorAll("nav a").forEach((anchor) => {
-      const anchorView = new URL(anchor.href, location.href).searchParams.get("view");
+      const anchorView = new URL(anchor.href, location.href).searchParams.get("view") || "home";
       anchor.classList.toggle("active", anchorView === view || (view === "image" && anchorView === "images"));
     });
   }
 
+  function analysisCategories(image, modelKey) {
+    const prediction = image.tagging?.models?.[modelKey];
+    if (!prediction) return [];
+    const categories = [];
+    if (prediction.bioimages_match === true && prediction.gemma_f1 >= 0.67) categories.push("good match");
+    if (prediction.bioimages_match === false) categories.push("BioImages mismatch");
+    if (prediction.gemma_jaccard < 0.33) categories.push("Gemma disagreement");
+    if (image.tagging.model_disagreement) categories.push("model disagreement");
+    return categories;
+  }
+
+  function tagPills(tags, withScores = false) {
+    if (!tags?.length) return '<span class="muted">None</span>';
+    return `<span class="tag-list">${tags.map((item) => {
+      const tag = typeof item === "string" ? item : item.tag;
+      const score = typeof item === "string" ? "" : ` ${(item.confidence * 100).toFixed(0)}%`;
+      return `<span class="tag-pill">${escapeHtml(tag)}${withScores ? score : ""}</span>`;
+    }).join("")}</span>`;
+  }
+
+  function analysisCard(entry) {
+    const { image, modelKey } = entry;
+    const prediction = image.tagging.models[modelKey];
+    const status = prediction.bioimages_match === null ? "not evaluable" : prediction.bioimages_match ? "BioImages match ✓" : "BioImages mismatch ✗";
+    const categories = analysisCategories(image, modelKey);
+    return `<article class="analysis-card">
+      <a class="analysis-image" href="${url({ view: "image", id: image.id })}" data-route><img src="${escapeHtml(image.thumbnail_url)}" alt="${escapeHtml(image.title)}" loading="lazy"></a>
+      <div class="analysis-copy">
+        <p class="analysis-species"><i>${escapeHtml(image.species)}</i> <span>${escapeHtml(prediction.model)}</span></p>
+        <h3>Model tags</h3>${tagPills(prediction.tags, true)}
+        <h3>BioImages</h3><p>${escapeHtml(image.tagging.bioimages_label)}</p>
+        <h3>Gemma</h3>${tagPills(image.tagging.gemma_tags)}
+        <p class="analysis-score"><span class="${prediction.bioimages_match ? "match" : "mismatch"}">${status}</span><span>Gemma F1 ${(prediction.gemma_f1 * 100).toFixed(0)}%</span><span>Jaccard ${(prediction.gemma_jaccard * 100).toFixed(0)}%</span></p>
+        <p class="analysis-issues">${categories.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</p>
+      </div>
+    </article>`;
+  }
+
+  function mountAnalysisGallery(element, entries, batchSize = 36) {
+    let shown = Math.min(batchSize, entries.length);
+    const draw = () => {
+      element.innerHTML = `<div class="analysis-grid">${entries.slice(0, shown).map(analysisCard).join("")}</div>` +
+        (shown < entries.length ? `<button class="load-more" type="button">Show ${Math.min(batchSize, entries.length - shown)} more</button>` : "") +
+        (!entries.length ? '<p class="empty">No images match these filters.</p>' : "");
+      element.querySelector(".load-more")?.addEventListener("click", () => { shown = Math.min(entries.length, shown + batchSize); draw(); });
+    };
+    draw();
+  }
+
+  function renderTaggingHome() {
+    const analysis = data.tagging_analysis;
+    const models = analysis.summary;
+    const modelKeys = models.map((row) => row.model_key);
+    const allEntries = data.images.flatMap((image) => modelKeys.map((modelKey) => ({ image, modelKey })));
+    const goodEntries = allEntries
+      .filter(({ image, modelKey }) => analysisCategories(image, modelKey).includes("good match"))
+      .sort((a, b) => b.image.tagging.models[b.modelKey].gemma_f1 - a.image.tagging.models[a.modelKey].gemma_f1);
+    const issueEntries = allEntries
+      .filter(({ image, modelKey }) => analysisCategories(image, modelKey).some((category) => category !== "good match"))
+      .sort((a, b) => {
+        const ap = a.image.tagging.models[a.modelKey]; const bp = b.image.tagging.models[b.modelKey];
+        return Number(ap.bioimages_match) - Number(bp.bioimages_match) || ap.gemma_jaccard - bp.gemma_jaccard || a.image.tagging.mean_pairwise_jaccard - b.image.tagging.mean_pairwise_jaccard;
+      });
+    const modelOptions = models.map((row) => `<option value="${row.model_key}">${escapeHtml(row.model)}</option>`).join("");
+    const tagOptions = analysis.vocabulary.map((item) => `<option value="${escapeHtml(item.tag)}">${escapeHtml(item.tag)}</option>`).join("");
+    const speciesOptions = data.species.map((item) => `<option value="${escapeHtml(item.name)}">${escapeHtml(item.name)}</option>`).join("");
+    const summaryRows = models.map((row) => `<tr><td>${escapeHtml(row.model)}</td><td class="number">${(row.bioimages_match_rate * 100).toFixed(1)}%</td><td class="number">${(row.top1_exact_match * 100).toFixed(1)}%</td><td class="number">${(row.gemma_micro_f1 * 100).toFixed(1)}%</td><td class="number">${(row.gemma_mean_jaccard * 100).toFixed(1)}%</td><td class="number">${row.mean_predicted_tags.toFixed(1)}</td></tr>`).join("");
+    const bestBioImages = [...models].sort((a, b) => b.bioimages_match_rate - a.bioimages_match_rate)[0];
+    const bestGemma = [...models].sort((a, b) => b.gemma_micro_f1 - a.gemma_micro_f1)[0];
+    const headlineConclusion = bestBioImages.model_key === bestGemma.model_key
+      ? `${bestBioImages.model} leads both comparisons: ${(bestBioImages.bioimages_match_rate * 100).toFixed(1)}% BioImages match and ${(bestGemma.gemma_micro_f1 * 100).toFixed(1)}% held-out Gemma agreement.`
+      : `${bestBioImages.model} leads BioImages match; ${bestGemma.model} leads held-out Gemma agreement.`;
+    setPage(`<section class="hero tagging-hero"><div class="wrap">
+      <p class="eyebrow">Full-corpus multi-label tagging</p><h1>What each model sees in every BioImages photograph.</h1>
+      <p class="lede">DINOv3, BioCLIP 2.5, and EfficientNet-B0 each tag all 1,899 images with one or more visible structures and views. BioImages supplies one canonical reference label; Gemma supplies multi-label teacher/reference annotations.</p>
+      <div class="stats"><div class="stat"><strong>1,899</strong><span>images tagged per model</span></div><div class="stat"><strong>3</strong><span>frozen visual models</span></div><div class="stat"><strong>${analysis.vocabulary.length}</strong><span>auditable tags</span></div><div class="stat"><strong>${nf.format(analysis.gemma_images)}</strong><span>Gemma references</span></div><div class="stat"><strong>0</strong><span>fine-tuned backbones</span></div></div>
+    </div></section>
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Headline comparison</p><h2>Which model produces the most useful tags?</h2><p>BioImages match asks whether its single coarse label appears anywhere in the model’s multi-label set. Gemma agreement is micro multi-label F1 on normalized tags.</p></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Model</th><th class="number">BioImages match</th><th class="number">Top-1 exact</th><th class="number">Gemma agreement</th><th class="number">Mean Jaccard</th><th class="number">Tags / image</th></tr></thead><tbody>${summaryRows}</tbody></table></div>
+      <p class="notice result-note"><strong>Result:</strong> ${escapeHtml(headlineConclusion)}</p>
+      <p class="method-note">${escapeHtml(analysis.method.name)}. Every reported prediction is out-of-fold by <code>individual_id</code>; Gemma labels for the held-out image never enter its model fit, and no backbone was fine-tuned. Gemma is not human ground truth.</p>
+    </div></section>
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Tag-level results</p><h2>Performance by visible structure and view</h2><p>BioImages match is available for its coarse canonical structures. Gemma F1 evaluates both structures and finer view tags.</p></div><label class="inline-filter">Model<select id="per-tag-model">${modelOptions}</select></label></div><div class="table-wrap"><table><thead><tr><th>Tag</th><th>Type</th><th class="number">BioImages support</th><th class="number">BioImages match</th><th class="number">Gemma support</th><th class="number">Gemma precision</th><th class="number">Gemma recall</th><th class="number">Gemma F1</th></tr></thead><tbody id="per-tag-body"></tbody></table></div></div></section>
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Good matches</p><h2>Images where references and model agree</h2><p>BioImages canonical tag is present and Gemma multi-label F1 is at least 0.67.</p></div><span class="count" id="good-count"></span></div>
+      <div class="toolbar compact-toolbar"><label>Model<select id="good-model"><option value="">All models</option>${modelOptions}</select></label><label>Tag<select id="good-tag"><option value="">All tags</option>${tagOptions}</select></label><label>Species<select id="good-species"><option value="">All species</option>${speciesOptions}</select></label></div><div id="good-gallery"></div></div></section>
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Error and disagreement gallery</p><h2>Inspect every important mismatch</h2><p>Filter the full set of BioImages misses, low Gemma overlap, and cross-model disagreements. Click any image for all three tag sets.</p></div><span class="count" id="issue-count"></span></div>
+      <div class="toolbar analysis-toolbar"><label>Issue<select id="issue-category"><option value="">Any issue</option><option>BioImages mismatch</option><option>Gemma disagreement</option><option>model disagreement</option></select></label><label>Model<select id="issue-model"><option value="">All models</option>${modelOptions}</select></label><label>Tag<select id="issue-tag"><option value="">Any predicted tag</option>${tagOptions}</select></label><label>Species<select id="issue-species"><option value="">All species</option>${speciesOptions}</select></label></div><div id="issue-gallery"></div>
+    </div></section>
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Collection browser</p><h2>Continue browsing BioImages</h2><p>The species, organ, view, and individual indexes are unchanged.</p></div>${routeLink("Browse organs and views →", { view: "organs" }, "text-link")}</div><div class="organ-grid">${data.organ_groups.filter((g) => g.slug !== "other").map(organCard).join("")}</div></div></section>`, "Tagging analysis");
+
+    const vocabByTag = new Map(analysis.vocabulary.map((item) => [item.tag, item]));
+    const perTagSelect = document.querySelector("#per-tag-model");
+    const drawPerTag = () => {
+      const rows = analysis.per_tag.filter((row) => row.model_key === perTagSelect.value);
+      document.querySelector("#per-tag-body").innerHTML = rows.map((row) => `<tr><td>${escapeHtml(row.tag)}</td><td>${escapeHtml(vocabByTag.get(row.tag)?.kind || "")}</td><td class="number">${row.bioimages_support || "—"}</td><td class="number">${row.bioimages_match_rate === "" ? "—" : (row.bioimages_match_rate * 100).toFixed(1) + "%"}</td><td class="number">${row.gemma_support}</td><td class="number">${(row.gemma_precision * 100).toFixed(1)}%</td><td class="number">${(row.gemma_recall * 100).toFixed(1)}%</td><td class="number">${(row.gemma_f1 * 100).toFixed(1)}%</td></tr>`).join("");
+    };
+    perTagSelect.addEventListener("change", drawPerTag); drawPerTag();
+
+    const wireGallery = (prefix, entries, issueMode = false) => {
+      const model = document.querySelector(`#${prefix}-model`); const tag = document.querySelector(`#${prefix}-tag`); const species = document.querySelector(`#${prefix}-species`); const category = issueMode ? document.querySelector("#issue-category") : null;
+      const draw = () => {
+        const filtered = entries.filter((entry) => {
+          const tags = entry.image.tagging.models[entry.modelKey].tags.map((item) => item.tag);
+          const categories = analysisCategories(entry.image, entry.modelKey);
+          return (!model.value || entry.modelKey === model.value) && (!tag.value || tags.includes(tag.value)) && (!species.value || entry.image.species === species.value) && (!category || !category.value || categories.includes(category.value));
+        });
+        document.querySelector(`#${prefix}-count`).textContent = `${nf.format(filtered.length)} model–image results`;
+        mountAnalysisGallery(document.querySelector(`#${prefix}-gallery`), filtered);
+      };
+      [model, tag, species, category].filter(Boolean).forEach((control) => control.addEventListener("change", draw)); draw();
+    };
+    wireGallery("good", goodEntries); wireGallery("issue", issueEntries, true);
+  }
+
   function renderHome() {
+    if (data.tagging_analysis?.available) renderTaggingHome();
+    else renderCatalogHome();
+  }
+
+  function renderCatalogHome() {
     const stats = data.stats;
     setPage(`<section class="hero"><div class="wrap">
       <p class="eyebrow">A modern BioImages collection</p>
@@ -258,15 +377,21 @@
     const location = [image.locality, image.county, image.state_province, image.country_code].filter(Boolean).join(", ");
     const captured = image.captured_at ? new Date(image.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "Not recorded";
     const prediction = image.prediction?.organ_category || image.prediction?.organ_tag;
-    const predictionHtml = prediction ? `<div class="prediction"><h3>Auxiliary model prediction</h3>
+    const predictionHtml = prediction && !image.tagging ? `<div class="prediction"><h3>Auxiliary model prediction</h3>
       <p>Predicted organ: <strong>${escapeHtml(prediction.label)}</strong> · ${(prediction.confidence * 100).toFixed(1)}% confidence</p>
       <p>BioImages organ: <strong>${escapeHtml(image.organ_category)}</strong> · <span class="${prediction.match ? "match" : "mismatch"}">${prediction.match ? "match" : "mismatch"}</span></p>
       <p class="image-meta">DINOv3 frozen linear probe, ${escapeHtml(prediction.protocol)}. The model does not predict the fine subview.</p></div>` : "";
+    const taggingHtml = image.tagging ? `<section class="detail-tagging"><p class="eyebrow">Full-corpus multi-label analysis</p>
+      <div class="reference-block"><h3>BioImages canonical annotation</h3><p><strong>${escapeHtml(image.tagging.bioimages_label)}</strong>${image.tagging.bioimages_canonical_tag ? ` · comparison tag <span class="tag-pill">${escapeHtml(image.tagging.bioimages_canonical_tag)}</span>` : " · not evaluable as a visual tag"}</p></div>
+      <div class="reference-block"><h3>Gemma free visual tags</h3>${tagPills(image.tagging.gemma_tags)}<p class="image-meta">Normalized for scoring: ${escapeHtml(image.tagging.gemma_normalized_tags.join(", "))}</p></div>
+      <div class="model-tag-stack">${Object.values(image.tagging.models).map((item) => `<div class="model-tag-row"><div><h3>${escapeHtml(item.model)}</h3><p class="image-meta">${item.bioimages_match === null ? "BioImages not evaluable" : item.bioimages_match ? "BioImages match ✓" : "BioImages mismatch ✗"} · Gemma F1 ${(item.gemma_f1 * 100).toFixed(0)}% · Jaccard ${(item.gemma_jaccard * 100).toFixed(0)}%</p></div>${tagPills(item.tags, true)}</div>`).join("")}</div>
+      ${image.tagging.model_disagreement ? `<p class="notice review"><strong>Model disagreement:</strong> mean pairwise tag-set Jaccard ${(image.tagging.mean_pairwise_jaccard * 100).toFixed(0)}%.</p>` : ""}
+    </section>` : "";
     const reviewHtml = image.review_flags.length ? `<p class="notice review"><strong>Manual metadata review:</strong> ${escapeHtml(image.review_flags.join(", "))}.</p>` : "";
     setPage(`<div class="wrap"><p class="crumbs">${routeLink("All images", { view: "images" })} / ${escapeHtml(image.id)}</p>
       <div class="detail"><div class="detail-image"><a href="${escapeHtml(image.image_url)}"><img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(image.title)}"></a></div>
       <div class="detail-copy"><p class="eyebrow">Image detail</p><h1><i>${escapeHtml(image.species)}</i></h1><p>${escapeHtml(image.common_name)}</p>
-        <p class="primary-label">${escapeHtml(image.organ_category)} · ${escapeHtml(image.subview)}</p>${reviewHtml}${predictionHtml}
+        <p class="primary-label">${escapeHtml(image.organ_category)} · ${escapeHtml(image.subview)}</p>${reviewHtml}${taggingHtml}${predictionHtml}
         <dl class="definition">
           <div><dt>Primary label</dt><dd>${escapeHtml(image.primary_label)}</dd></div>
           <div><dt>Coarse tag</dt><dd>${escapeHtml(image.organ_tag)}</dd></div>

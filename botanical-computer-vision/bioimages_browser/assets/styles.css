@@ -135,6 +135,35 @@ td.number, th.number { text-align: right; }
 .matrix-grid figcaption { padding: .7rem; border-top: 1px solid var(--line); font-weight: 600; }
 .matrix-grid img { width: 100%; }
 
+.tagging-hero h1 { max-width: 900px; }
+.method-note { margin: 1rem 0 0; color: var(--muted); font-size: 12px; }
+.result-note { margin: 1rem 0 0; }
+.inline-filter { display: grid; gap: .25rem; min-width: 210px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+.inline-filter select { min-height: 40px; padding: .5rem; border: 1px solid var(--line); background: #fff; }
+.muted { color: var(--muted); }
+.tag-list { display: flex; flex-wrap: wrap; gap: .3rem; }
+.tag-pill { display: inline-block; padding: .18rem .4rem; border: 1px solid #c6d5c9; background: var(--green-2); color: #244f34; font-size: 11px; line-height: 1.25; }
+.analysis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.analysis-card { display: grid; grid-template-columns: 150px 1fr; min-height: 245px; border: 1px solid var(--line); background: #fff; }
+.analysis-image { min-height: 100%; background: var(--soft); }
+.analysis-image img { width: 100%; height: 100%; object-fit: cover; }
+.analysis-copy { min-width: 0; padding: .8rem; }
+.analysis-copy h3, .reference-block h3, .model-tag-row h3 { margin: .7rem 0 .3rem; font: 700 11px/1.25 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-transform: uppercase; letter-spacing: .045em; }
+.analysis-copy p { margin: .25rem 0; font-size: 12px; }
+.analysis-species { display: flex; justify-content: space-between; gap: .5rem; padding-bottom: .5rem; border-bottom: 1px solid var(--line); }
+.analysis-species span { color: var(--muted); font-size: 10px; text-align: right; }
+.analysis-score { display: flex; flex-wrap: wrap; gap: .25rem .65rem; padding-top: .65rem; color: var(--muted); }
+.analysis-issues { display: flex; flex-wrap: wrap; gap: .25rem; }
+.analysis-issues span { padding: .14rem .35rem; border: 1px solid var(--line); background: var(--soft); color: var(--muted); font-size: 10px; }
+.analysis-toolbar { grid-template-columns: repeat(4, 1fr); }
+.compact-toolbar { grid-template-columns: repeat(3, 1fr); }
+.detail-tagging { margin: 1.3rem 0; padding-top: 1rem; border-top: 2px solid var(--ink); }
+.reference-block { padding: .7rem 0; border-top: 1px solid var(--line); }
+.reference-block p { margin: .4rem 0; }
+.model-tag-stack { border-top: 1px solid var(--line); }
+.model-tag-row { padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.model-tag-row h3 { margin-top: 0; }
+
 footer { padding: 2.2rem max(1.1rem, calc((100vw - var(--max)) / 2)); border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 footer p { max-width: 900px; margin: .35rem 0; }
 .loading { padding: 5rem 1rem; text-align: center; color: var(--muted); }
@@ -146,6 +175,8 @@ footer p { max-width: 900px; margin: .35rem 0; }
   .gallery { grid-template-columns: repeat(4, 1fr); }
   .detail { grid-template-columns: 1fr; }
   .matrix-grid { grid-template-columns: 1fr; }
+  .analysis-grid { grid-template-columns: repeat(2, 1fr); }
+  .analysis-card { grid-template-columns: 130px 1fr; }
 }
 
 @media (max-width: 700px) {
@@ -156,6 +187,7 @@ footer p { max-width: 900px; margin: .35rem 0; }
   nav a { padding: .65rem 0; }
   .hero { padding: 3rem 0 2rem; }
   .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .section-head, .page-head { align-items: start; flex-direction: column; gap: .4rem; }
   .toolbar { grid-template-columns: 1fr 1fr; }
   .species-grid, .individual-grid { grid-template-columns: 1fr; }
@@ -163,11 +195,14 @@ footer p { max-width: 900px; margin: .35rem 0; }
   .organ-collage { grid-template-columns: repeat(4, 1fr); }
   .organ-collage img:nth-child(5) { display: none; }
   .definition div { grid-template-columns: 95px 1fr; }
+  .analysis-grid { grid-template-columns: 1fr; }
+  .analysis-toolbar, .compact-toolbar { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 460px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .toolbar { grid-template-columns: 1fr; }
+  .analysis-toolbar, .compact-toolbar { grid-template-columns: 1fr; }
   .stat strong { font-size: 1.45rem; }
   .image-label { font-size: 12px; }
 }

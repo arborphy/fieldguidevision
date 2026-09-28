@@ -1,0 +1,48 @@
+organ_tag,organ_category,subview,bioimages_canonical_comparison_tag,mapped_visible_tags,images
+bark,bark,of a large tree,bark,"[""trunk"", ""bark"", ""large-tree bark""]",106
+bark,bark,of a medium tree or large branch,bark,"[""bark"", ""branch"", ""medium-tree or large-branch bark""]",47
+bark,bark,of a small tree or small branch,bark,"[""bark"", ""branch"", ""small-tree or branch bark""]",42
+bark,bark,unspecified,bark,"[""bark""]",2
+cone,cone,female - closed,cone,"[""cone"", ""female reproductive structure"", ""closed cone""]",13
+cone,cone,female - mature open,cone,"[""cone"", ""female reproductive structure"", ""open cone""]",10
+cone,cone,female - receptive,cone,"[""cone"", ""female reproductive structure"", ""receptive cone""]",8
+cone,cone,male,cone,"[""cone"", ""male reproductive structure""]",7
+flower,inflorescence,close-up of flower interior,flower,"[""flower"", ""inflorescence"", ""flower close-up"", ""flower interior""]",5
+flower,inflorescence,frontal view of flower,flower,"[""flower"", ""inflorescence"", ""flower close-up"", ""frontal flower view""]",49
+flower,inflorescence,lateral view of flower,flower,"[""flower"", ""inflorescence"", ""flower close-up"", ""lateral flower view""]",53
+flower,inflorescence,unspecified,flower,"[""flower"", ""inflorescence""]",3
+flower,inflorescence,ventral view of flower + perianth,flower,"[""flower"", ""inflorescence"", ""flower close-up"", ""frontal flower view""]",7
+flower,inflorescence,whole - female,flower,"[""flower"", ""inflorescence"", ""female reproductive structure""]",29
+flower,inflorescence,whole - male,flower,"[""flower"", ""inflorescence"", ""male reproductive structure""]",52
+flower,inflorescence,whole - unspecified,flower,"[""flower"", ""inflorescence""]",114
+fruit,fruit,as borne on the plant,fruit,"[""fruit"", ""fruit borne on plant""]",82
+fruit,fruit,immature,fruit,"[""fruit"", ""immature fruit""]",54
+fruit,fruit,lateral or general close-up,fruit,"[""fruit"", ""fruit close-up""]",89
+fruit,fruit,section or open,fruit,"[""fruit"", ""opened or sectioned fruit""]",18
+fruit,fruit,unspecified,fruit,"[""fruit""]",2
+leaf,leaf,basal or on lower stem,leaf,"[""leaf""]",1
+leaf,leaf,margin of upper + lower surface,leaf,"[""leaf"", ""leaf margin""]",101
+leaf,leaf,showing orientation on twig,leaf,"[""twig"", ""leaf"", ""leaf arrangement on twig""]",125
+leaf,leaf,unspecified,leaf,"[""leaf""]",44
+leaf,leaf,whole upper surface,leaf,"[""leaf"", ""leaf upper surface""]",194
+needle,leaf,entire needle,needle,"[""leaf"", ""needle""]",11
+needle,leaf,showing orientation on twig,needle,"[""twig"", ""leaf"", ""needle"", ""leaf arrangement on twig""]",12
+needle,leaf,unspecified,needle,"[""leaf"", ""needle""]",4
+seed,seed,general view,seed,"[""seed""]",11
+seed,seed,unspecified,seed,"[""seed""]",1
+stem,stem,showing leaf bases,stem,"[""stem""]",1
+twig,twig,after fallen needles,twig,"[""twig""]",2
+twig,twig,close-up winter leaf scar/bud,twig,"[""twig"", ""bud"", ""winter twig"", ""leaf scar""]",26
+twig,twig,close-up winter terminal bud,twig,"[""twig"", ""bud"", ""winter twig"", ""terminal bud""]",23
+twig,twig,orientation of petioles,twig,"[""twig"", ""leaf"", ""petiole arrangement""]",128
+twig,twig,showing attachment of needles,twig,"[""twig"", ""needle"", ""needle attachment""]",11
+twig,twig,unspecified,twig,"[""twig""]",18
+twig,twig,winter overall,twig,"[""twig"", ""bud"", ""winter twig""]",32
+unspecified,unspecified,unspecified,not evaluable,[],2
+whole plant,whole plant,in flower - general view,whole plant,"[""whole plant"", ""flower""]",1
+whole plant,whole tree,general,whole plant,"[""whole plant""]",22
+whole plant,whole tree,view up trunk,whole plant,"[""whole plant"", ""trunk"", ""view up trunk""]",4
+whole plant,whole tree (or vine),general,whole plant,"[""whole plant""]",245
+whole plant,whole tree (or vine),unspecified,whole plant,"[""whole plant""]",1
+whole plant,whole tree (or vine),view up trunk,whole plant,"[""whole plant"", ""trunk"", ""view up trunk""]",55
+whole plant,whole tree (or vine),winter,whole plant,"[""whole plant"", ""winter habit""]",32

@@ -43,6 +43,44 @@ def main() -> None:
     assert sum(group["count"] for group in data["organ_groups"]) == 1899
     assert data["stats"]["prediction_images"] == 211
 
+    tagging = data.get("tagging_analysis", {})
+    assert tagging.get("available") is True
+    assert tagging["gemma_images"] == 1899
+    assert len(tagging["summary"]) == 3
+    assert len(tagging["vocabulary"]) >= 30
+    assert {row["model_key"] for row in tagging["summary"]} == {
+        "dinov3", "bioclip", "efficientnet_b0",
+    }
+    assert tagging["method"]["fine_tuning"] is False
+    for image in images:
+        result = image.get("tagging")
+        assert result, image["id"]
+        assert result["gemma_tags"], image["id"]
+        assert result["gemma_normalized_tags"], image["id"]
+        assert set(result["models"]) == {"dinov3", "bioclip", "efficientnet_b0"}
+        for prediction in result["models"].values():
+            assert prediction["tags"], (image["id"], prediction["model"])
+            assert all(0 <= item["confidence"] <= 1 for item in prediction["tags"])
+
+    tagging_root = ROOT / "tagging"
+    with (tagging_root / "gemma_reference.csv").open(newline="") as handle:
+        gemma_rows = list(csv.DictReader(handle))
+    assert len(gemma_rows) == 1899
+    assert {row["image_id"] for row in gemma_rows} == image_ids
+    assert all(row["model"] != "synthetic-test-only" for row in gemma_rows)
+    for model_key in ("dinov3", "bioclip", "efficientnet_b0"):
+        with (tagging_root / "predictions" / f"{model_key}.csv").open(newline="") as handle:
+            prediction_rows = list(csv.DictReader(handle))
+        assert len(prediction_rows) == 1899
+        assert {row["image_id"] for row in prediction_rows} == image_ids
+    with (tagging_root / "per_image_comparison.csv").open(newline="") as handle:
+        comparison_rows = list(csv.DictReader(handle))
+    assert len(comparison_rows) == 1899 * 3
+    with (tagging_root / "metrics" / "fold_audit.csv").open(newline="") as handle:
+        fold_rows = list(csv.DictReader(handle))
+    assert len(fold_rows) == 15
+    assert all(row["individual_leakage"].lower() == "false" for row in fold_rows)
+
     with (ROOT / "data" / "image_manifest.csv").open(newline="") as handle:
         manifest = list(csv.DictReader(handle))
     assert len(manifest) == 1899
@@ -76,6 +114,8 @@ def main() -> None:
         "exact_primary_labels": data["stats"]["exact_primary_labels"],
         "prediction_images": data["stats"]["prediction_images"],
         "manual_review_images": data["stats"]["manual_review_images"],
+        "tagging_models": len(tagging["summary"]),
+        "gemma_reference_images": tagging["gemma_images"],
         "reachable_thumbnail_urls": audit["reachable_images"] if audit_path.exists() else None,
     }, indent=2))
 
