@@ -1,0 +1,41 @@
+{
+  "seed": 42,
+  "embedding_universe_images": 1641,
+  "embedding_universe_species": 63,
+  "individual_disjoint": {
+    "counts": {
+      "train": 1181,
+      "validation": 249,
+      "test": 211
+    },
+    "individual_counts": {
+      "test": 63,
+      "train": 339,
+      "validation": 63
+    },
+    "overlap": {
+      "train_validation": [],
+      "train_test": [],
+      "validation_test": []
+    },
+    "passed": true
+  },
+  "species_disjoint": {
+    "counts": {
+      "train": 1144,
+      "test": 259,
+      "validation": 238
+    },
+    "species_counts": {
+      "test": 10,
+      "train": 44,
+      "validation": 9
+    },
+    "overlap": {
+      "train_validation": [],
+      "train_test": [],
+      "validation_test": []
+    },
+    "passed": true
+  }
+}

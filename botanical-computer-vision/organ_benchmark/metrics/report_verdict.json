@@ -1,0 +1,5 @@
+{
+  "verdict": "Supported in this benchmark: DINOv3 is stronger than BioCLIP 2.5 on both species-disjoint canonical organ classification and cross-species organ retrieval, consistent with a more species-invariant morphology representation.",
+  "dino_beats_bioclip_species_disjoint_macro_f1": true,
+  "dino_beats_bioclip_cross_species_retrieval_p5": true
+}

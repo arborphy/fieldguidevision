@@ -1,0 +1,79 @@
+{
+  "model": "EfficientNet-B0",
+  "model_key": "efficientnet_b0",
+  "protocol": "individual_disjoint",
+  "task": "organ_tag",
+  "seed": 42,
+  "classifier": "LogisticRegression(class_weight='balanced', solver='lbfgs')",
+  "selected_C": 10.0,
+  "selection_metric": "validation macro F1",
+  "refit": "train + validation",
+  "train_images": 1181,
+  "validation_images": 249,
+  "test_images": 211,
+  "train_individuals": 339,
+  "test_individuals": 63,
+  "train_species": 63,
+  "test_species": 63,
+  "classes_fit": [
+    "bark",
+    "cone",
+    "flower",
+    "fruit",
+    "leaf",
+    "needle",
+    "seed",
+    "stem",
+    "twig",
+    "unspecified",
+    "whole plant"
+  ],
+  "test_classes": [
+    "bark",
+    "cone",
+    "flower",
+    "fruit",
+    "leaf",
+    "needle",
+    "twig",
+    "whole plant"
+  ],
+  "unsupported_validation_labels_during_selection": [
+    "stem"
+  ],
+  "unsupported_test_labels": [],
+  "top1_accuracy": 0.8720379146919431,
+  "top3_recall": 0.990521327014218,
+  "macro_f1": 0.7307377128295485,
+  "weighted_f1": 0.8740995948064476,
+  "individual_id_bootstrap_95_ci": {
+    "top1_accuracy": {
+      "point": 0.8720379146919431,
+      "lower_95": 0.8135571265478178,
+      "upper_95": 0.9227550346649058,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "top3_recall": {
+      "point": 0.990521327014218,
+      "lower_95": 0.9749904822335025,
+      "upper_95": 1.0,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "macro_f1": {
+      "point": 0.7307377128295485,
+      "lower_95": 0.619870467930015,
+      "upper_95": 0.8921465122138513,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "weighted_f1": {
+      "point": 0.8740995948064476,
+      "lower_95": 0.8106255652574298,
+      "upper_95": 0.9253386652822573,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    }
+  }
+}

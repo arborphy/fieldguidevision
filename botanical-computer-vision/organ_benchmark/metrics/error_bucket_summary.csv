@@ -1,0 +1,5 @@
+bucket,images,fraction
+both correct,163,0.7725118483412322
+DINO correct / BioCLIP wrong,26,0.12322274881516587
+both wrong,14,0.06635071090047394
+BioCLIP correct / DINO wrong,8,0.037914691943127965

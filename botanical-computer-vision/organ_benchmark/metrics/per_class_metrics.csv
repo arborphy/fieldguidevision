@@ -1,0 +1,97 @@
+model,model_key,protocol,task,canonical_label,precision,recall,f1,support
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,bark,0.9090909090909091,0.8,0.851063829787234,25
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,cone,0.0,0.0,0.0,1
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,flower,0.8113207547169812,0.8775510204081632,0.8431372549019608,49
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,fruit,0.7142857142857143,0.7407407407407407,0.7272727272727273,27
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,leaf,0.8636363636363636,0.95,0.9047619047619048,40
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,needle,0.5,0.5,0.5,2
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,twig,0.7083333333333334,0.7083333333333334,0.7083333333333334,24
+BioCLIP 2.5,bioclip,individual_disjoint,organ_tag,whole plant,0.9142857142857143,0.7441860465116279,0.8205128205128205,43
+DINOv3,dinov3,individual_disjoint,organ_tag,bark,1.0,0.92,0.9583333333333334,25
+DINOv3,dinov3,individual_disjoint,organ_tag,cone,0.0,0.0,0.0,1
+DINOv3,dinov3,individual_disjoint,organ_tag,flower,0.8653846153846154,0.9183673469387755,0.8910891089108911,49
+DINOv3,dinov3,individual_disjoint,organ_tag,fruit,0.88,0.8148148148148148,0.8461538461538461,27
+DINOv3,dinov3,individual_disjoint,organ_tag,leaf,0.9523809523809523,1.0,0.975609756097561,40
+DINOv3,dinov3,individual_disjoint,organ_tag,needle,0.5,0.5,0.5,2
+DINOv3,dinov3,individual_disjoint,organ_tag,twig,0.7391304347826086,0.7083333333333334,0.723404255319149,24
+DINOv3,dinov3,individual_disjoint,organ_tag,whole plant,1.0,0.9534883720930233,0.9761904761904762,43
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,bark,0.92,0.92,0.92,25
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,cone,0.0,0.0,0.0,1
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,flower,0.8461538461538461,0.8979591836734694,0.8712871287128713,49
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,fruit,0.7407407407407407,0.7407407407407407,0.7407407407407407,27
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,leaf,0.975609756097561,1.0,0.9876543209876543,40
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,needle,1.0,0.5,0.6666666666666666,2
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,twig,0.7083333333333334,0.7083333333333334,0.7083333333333334,24
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_tag,whole plant,1.0,0.9069767441860465,0.9512195121951219,43
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,bark,0.9130434782608695,0.6774193548387096,0.7777777777777778,31
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,cone,0.2857142857142857,1.0,0.4444444444444444,2
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,flower,0.6,0.8478260869565217,0.7027027027027027,46
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,fruit,0.5625,0.5,0.5294117647058824,36
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,leaf,0.7761194029850746,0.8125,0.7938931297709924,64
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,needle,0.0,0.0,0.0,3
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,twig,0.7916666666666666,0.5588235294117647,0.6551724137931034,34
+BioCLIP 2.5,bioclip,species_disjoint,organ_tag,whole plant,0.875,0.813953488372093,0.8433734939759037,43
+DINOv3,dinov3,species_disjoint,organ_tag,bark,0.9375,0.967741935483871,0.9523809523809523,31
+DINOv3,dinov3,species_disjoint,organ_tag,cone,1.0,1.0,1.0,2
+DINOv3,dinov3,species_disjoint,organ_tag,flower,0.7735849056603774,0.8913043478260869,0.8282828282828283,46
+DINOv3,dinov3,species_disjoint,organ_tag,fruit,0.8518518518518519,0.6388888888888888,0.7301587301587301,36
+DINOv3,dinov3,species_disjoint,organ_tag,leaf,0.8805970149253731,0.921875,0.9007633587786259,64
+DINOv3,dinov3,species_disjoint,organ_tag,needle,0.75,1.0,0.8571428571428571,3
+DINOv3,dinov3,species_disjoint,organ_tag,twig,0.9310344827586207,0.7941176470588235,0.8571428571428571,34
+DINOv3,dinov3,species_disjoint,organ_tag,whole plant,0.9111111111111111,0.9534883720930233,0.9318181818181818,43
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,bark,0.9642857142857143,0.8709677419354839,0.9152542372881356,31
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,cone,0.3333333333333333,1.0,0.5,2
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,flower,0.7333333333333333,0.717391304347826,0.7252747252747253,46
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,fruit,0.7727272727272727,0.4722222222222222,0.5862068965517241,36
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,leaf,0.8769230769230769,0.890625,0.8837209302325582,64
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,needle,0.5,1.0,0.6666666666666666,3
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,twig,0.8378378378378378,0.9117647058823529,0.8732394366197183,34
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_tag,whole plant,0.82,0.9534883720930233,0.8817204301075269,43
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,bark,0.9090909090909091,0.8,0.851063829787234,25
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,cone,0.0,0.0,0.0,1
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,fruit,0.7407407407407407,0.7407407407407407,0.7407407407407407,27
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,inflorescence,0.8269230769230769,0.8775510204081632,0.8514851485148515,49
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,leaf,0.8444444444444444,0.9047619047619048,0.8735632183908046,42
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,twig,0.68,0.7083333333333334,0.6938775510204082,24
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,whole tree,0.75,1.0,0.8571428571428571,3
+BioCLIP 2.5,bioclip,individual_disjoint,organ_category,whole tree (or vine),0.9117647058823529,0.775,0.8378378378378378,40
+DINOv3,dinov3,individual_disjoint,organ_category,bark,1.0,0.84,0.9130434782608695,25
+DINOv3,dinov3,individual_disjoint,organ_category,cone,0.0,0.0,0.0,1
+DINOv3,dinov3,individual_disjoint,organ_category,fruit,0.88,0.8148148148148148,0.8461538461538461,27
+DINOv3,dinov3,individual_disjoint,organ_category,inflorescence,0.8653846153846154,0.9183673469387755,0.8910891089108911,49
+DINOv3,dinov3,individual_disjoint,organ_category,leaf,0.9302325581395349,0.9523809523809523,0.9411764705882353,42
+DINOv3,dinov3,individual_disjoint,organ_category,twig,0.7083333333333334,0.7083333333333334,0.7083333333333334,24
+DINOv3,dinov3,individual_disjoint,organ_category,whole tree,0.75,1.0,0.8571428571428571,3
+DINOv3,dinov3,individual_disjoint,organ_category,whole tree (or vine),0.9487179487179487,0.925,0.9367088607594937,40
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,bark,0.88,0.88,0.88,25
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,cone,0.0,0.0,0.0,1
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,fruit,0.7692307692307693,0.7407407407407407,0.7547169811320755,27
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,inflorescence,0.84,0.8571428571428571,0.8484848484848485,49
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,leaf,0.9302325581395349,0.9523809523809523,0.9411764705882353,42
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,twig,0.6538461538461539,0.7083333333333334,0.68,24
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,whole tree,0.2857142857142857,0.6666666666666666,0.4,3
+EfficientNet-B0,efficientnet_b0,individual_disjoint,organ_category,whole tree (or vine),0.9655172413793104,0.7,0.8115942028985508,40
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,bark,0.9545454545454546,0.6774193548387096,0.7924528301886793,31
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,cone,0.5,1.0,0.6666666666666666,2
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,fruit,0.5531914893617021,0.7222222222222222,0.6265060240963856,36
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,inflorescence,0.6964285714285714,0.8478260869565217,0.7647058823529411,46
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,leaf,0.8064516129032258,0.746268656716418,0.7751937984496124,67
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,twig,0.7916666666666666,0.5588235294117647,0.6551724137931034,34
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,whole tree,0.5,1.0,0.6666666666666666,1
+BioCLIP 2.5,bioclip,species_disjoint,organ_category,whole tree (or vine),0.8095238095238095,0.8095238095238095,0.8095238095238095,42
+DINOv3,dinov3,species_disjoint,organ_category,bark,0.9666666666666667,0.9354838709677419,0.9508196721311475,31
+DINOv3,dinov3,species_disjoint,organ_category,cone,0.3333333333333333,1.0,0.5,2
+DINOv3,dinov3,species_disjoint,organ_category,fruit,0.8620689655172413,0.6944444444444444,0.7692307692307693,36
+DINOv3,dinov3,species_disjoint,organ_category,inflorescence,0.7884615384615384,0.8913043478260869,0.8367346938775511,46
+DINOv3,dinov3,species_disjoint,organ_category,leaf,0.921875,0.8805970149253731,0.9007633587786259,67
+DINOv3,dinov3,species_disjoint,organ_category,twig,0.90625,0.8529411764705882,0.8787878787878788,34
+DINOv3,dinov3,species_disjoint,organ_category,whole tree,1.0,1.0,1.0,1
+DINOv3,dinov3,species_disjoint,organ_category,whole tree (or vine),0.8888888888888888,0.9523809523809523,0.9195402298850575,42
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,bark,0.9655172413793104,0.9032258064516129,0.9333333333333333,31
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,cone,0.3333333333333333,1.0,0.5,2
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,fruit,0.7272727272727273,0.4444444444444444,0.5517241379310345,36
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,inflorescence,0.7608695652173914,0.7608695652173914,0.7608695652173914,46
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,leaf,0.8378378378378378,0.9253731343283582,0.8794326241134752,67
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,twig,0.8571428571428571,0.8823529411764706,0.8695652173913043,34
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,whole tree,0.0,0.0,0.0,1
+EfficientNet-B0,efficientnet_b0,species_disjoint,organ_category,whole tree (or vine),0.8297872340425532,0.9285714285714286,0.8764044943820225,42

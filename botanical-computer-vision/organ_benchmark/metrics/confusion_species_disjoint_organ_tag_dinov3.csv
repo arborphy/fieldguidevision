@@ -1,0 +1,65 @@
+model,protocol,task,true_label,predicted_label,count,row_fraction
+DINOv3,species_disjoint,organ_tag,bark,bark,30,0.967741935483871
+DINOv3,species_disjoint,organ_tag,bark,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,bark,flower,0,0.0
+DINOv3,species_disjoint,organ_tag,bark,fruit,0,0.0
+DINOv3,species_disjoint,organ_tag,bark,leaf,0,0.0
+DINOv3,species_disjoint,organ_tag,bark,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,bark,twig,1,0.03225806451612903
+DINOv3,species_disjoint,organ_tag,bark,whole plant,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,cone,2,1.0
+DINOv3,species_disjoint,organ_tag,cone,flower,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,fruit,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,leaf,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,twig,0,0.0
+DINOv3,species_disjoint,organ_tag,cone,whole plant,0,0.0
+DINOv3,species_disjoint,organ_tag,flower,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,flower,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,flower,flower,41,0.8913043478260869
+DINOv3,species_disjoint,organ_tag,flower,fruit,2,0.043478260869565216
+DINOv3,species_disjoint,organ_tag,flower,leaf,0,0.0
+DINOv3,species_disjoint,organ_tag,flower,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,flower,twig,1,0.021739130434782608
+DINOv3,species_disjoint,organ_tag,flower,whole plant,2,0.043478260869565216
+DINOv3,species_disjoint,organ_tag,fruit,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,fruit,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,fruit,flower,8,0.2222222222222222
+DINOv3,species_disjoint,organ_tag,fruit,fruit,23,0.6388888888888888
+DINOv3,species_disjoint,organ_tag,fruit,leaf,5,0.1388888888888889
+DINOv3,species_disjoint,organ_tag,fruit,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,fruit,twig,0,0.0
+DINOv3,species_disjoint,organ_tag,fruit,whole plant,0,0.0
+DINOv3,species_disjoint,organ_tag,leaf,bark,2,0.03125
+DINOv3,species_disjoint,organ_tag,leaf,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,leaf,flower,0,0.0
+DINOv3,species_disjoint,organ_tag,leaf,fruit,1,0.015625
+DINOv3,species_disjoint,organ_tag,leaf,leaf,59,0.921875
+DINOv3,species_disjoint,organ_tag,leaf,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,leaf,twig,0,0.0
+DINOv3,species_disjoint,organ_tag,leaf,whole plant,2,0.03125
+DINOv3,species_disjoint,organ_tag,needle,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,flower,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,fruit,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,leaf,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,needle,3,1.0
+DINOv3,species_disjoint,organ_tag,needle,twig,0,0.0
+DINOv3,species_disjoint,organ_tag,needle,whole plant,0,0.0
+DINOv3,species_disjoint,organ_tag,twig,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,twig,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,twig,flower,3,0.08823529411764706
+DINOv3,species_disjoint,organ_tag,twig,fruit,1,0.029411764705882353
+DINOv3,species_disjoint,organ_tag,twig,leaf,2,0.058823529411764705
+DINOv3,species_disjoint,organ_tag,twig,needle,1,0.029411764705882353
+DINOv3,species_disjoint,organ_tag,twig,twig,27,0.7941176470588235
+DINOv3,species_disjoint,organ_tag,twig,whole plant,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,bark,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,cone,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,flower,1,0.023255813953488372
+DINOv3,species_disjoint,organ_tag,whole plant,fruit,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,leaf,1,0.023255813953488372
+DINOv3,species_disjoint,organ_tag,whole plant,needle,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,twig,0,0.0
+DINOv3,species_disjoint,organ_tag,whole plant,whole plant,41,0.9534883720930233

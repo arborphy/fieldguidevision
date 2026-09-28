@@ -1,0 +1,4 @@
+model,model_key,queries,exclusions,organ_p_at_1,organ_p_at_5,organ_p_at_10
+BioCLIP 2.5,bioclip,1641,same individual_id and same species,0.5856185252894577,0.5333333333333333,0.4939061547836685
+DINOv3,dinov3,1641,same individual_id and same species,0.8427787934186471,0.8124314442413163,0.7963436928702011
+EfficientNet-B0,efficientnet_b0,1641,same individual_id and same species,0.7806215722120659,0.7716026812918951,0.7567336989640463

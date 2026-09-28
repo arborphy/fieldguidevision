@@ -1,0 +1,65 @@
+model,protocol,task,true_label,predicted_label,count,row_fraction
+EfficientNet-B0,individual_disjoint,organ_tag,bark,bark,23,0.92
+EfficientNet-B0,individual_disjoint,organ_tag,bark,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,bark,flower,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,bark,fruit,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,bark,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,bark,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,bark,twig,2,0.08
+EfficientNet-B0,individual_disjoint,organ_tag,bark,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,flower,1,1.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,fruit,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,twig,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,cone,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,flower,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,flower,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,flower,flower,44,0.8979591836734694
+EfficientNet-B0,individual_disjoint,organ_tag,flower,fruit,1,0.02040816326530612
+EfficientNet-B0,individual_disjoint,organ_tag,flower,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,flower,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,flower,twig,4,0.08163265306122448
+EfficientNet-B0,individual_disjoint,organ_tag,flower,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,cone,2,0.07407407407407407
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,flower,4,0.14814814814814814
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,fruit,20,0.7407407407407407
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,twig,1,0.037037037037037035
+EfficientNet-B0,individual_disjoint,organ_tag,fruit,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,flower,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,fruit,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,leaf,40,1.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,twig,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,leaf,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,flower,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,fruit,1,0.5
+EfficientNet-B0,individual_disjoint,organ_tag,needle,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,needle,1,0.5
+EfficientNet-B0,individual_disjoint,organ_tag,needle,twig,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,needle,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,twig,bark,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,twig,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,twig,flower,2,0.08333333333333333
+EfficientNet-B0,individual_disjoint,organ_tag,twig,fruit,5,0.20833333333333334
+EfficientNet-B0,individual_disjoint,organ_tag,twig,leaf,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,twig,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,twig,twig,17,0.7083333333333334
+EfficientNet-B0,individual_disjoint,organ_tag,twig,whole plant,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,bark,2,0.046511627906976744
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,cone,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,flower,1,0.023255813953488372
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,fruit,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,leaf,1,0.023255813953488372
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,needle,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,twig,0,0.0
+EfficientNet-B0,individual_disjoint,organ_tag,whole plant,whole plant,39,0.9069767441860465

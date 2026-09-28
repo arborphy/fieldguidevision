@@ -1,0 +1,29 @@
+[
+  {
+    "model": "BioCLIP 2.5",
+    "model_key": "bioclip",
+    "queries": 1641,
+    "exclusions": "same individual_id and same species",
+    "organ_p_at_1": 0.5856185252894577,
+    "organ_p_at_5": 0.5333333333333333,
+    "organ_p_at_10": 0.4939061547836685
+  },
+  {
+    "model": "DINOv3",
+    "model_key": "dinov3",
+    "queries": 1641,
+    "exclusions": "same individual_id and same species",
+    "organ_p_at_1": 0.8427787934186471,
+    "organ_p_at_5": 0.8124314442413163,
+    "organ_p_at_10": 0.7963436928702011
+  },
+  {
+    "model": "EfficientNet-B0",
+    "model_key": "efficientnet_b0",
+    "queries": 1641,
+    "exclusions": "same individual_id and same species",
+    "organ_p_at_1": 0.7806215722120659,
+    "organ_p_at_5": 0.7716026812918951,
+    "organ_p_at_10": 0.7567336989640463
+  }
+]

@@ -1,0 +1,61 @@
+model,protocol,task,C,macro_f1,top1_accuracy,validation_images,unsupported_validation_labels
+BioCLIP 2.5,individual_disjoint,organ_tag,0.01,0.3751749191887246,0.4838709677419355,248,stem
+BioCLIP 2.5,individual_disjoint,organ_tag,0.1,0.43698893822056417,0.5887096774193549,248,stem
+BioCLIP 2.5,individual_disjoint,organ_tag,1.0,0.5498669220031449,0.7217741935483871,248,stem
+BioCLIP 2.5,individual_disjoint,organ_tag,10.0,0.6031363481852439,0.7903225806451613,248,stem
+BioCLIP 2.5,individual_disjoint,organ_tag,100.0,0.6281916711144193,0.8064516129032258,248,stem
+DINOv3,individual_disjoint,organ_tag,0.01,0.6041712476109915,0.7701612903225806,248,stem
+DINOv3,individual_disjoint,organ_tag,0.1,0.6651831805364197,0.8306451612903226,248,stem
+DINOv3,individual_disjoint,organ_tag,1.0,0.7612899937841378,0.8790322580645161,248,stem
+DINOv3,individual_disjoint,organ_tag,10.0,0.7763112952964931,0.8870967741935484,248,stem
+DINOv3,individual_disjoint,organ_tag,100.0,0.7774185878600122,0.8870967741935484,248,stem
+EfficientNet-B0,individual_disjoint,organ_tag,0.01,0.4615157215241591,0.6653225806451613,248,stem
+EfficientNet-B0,individual_disjoint,organ_tag,0.1,0.542624481512312,0.7379032258064516,248,stem
+EfficientNet-B0,individual_disjoint,organ_tag,1.0,0.5771232948037072,0.7983870967741935,248,stem
+EfficientNet-B0,individual_disjoint,organ_tag,10.0,0.5844447949187245,0.8145161290322581,248,stem
+EfficientNet-B0,individual_disjoint,organ_tag,100.0,0.5822437061397543,0.8185483870967742,248,stem
+BioCLIP 2.5,species_disjoint,organ_tag,0.01,0.3293027998897984,0.4831932773109244,238,
+BioCLIP 2.5,species_disjoint,organ_tag,0.1,0.45506195151200163,0.5462184873949579,238,
+BioCLIP 2.5,species_disjoint,organ_tag,1.0,0.5256836353238669,0.6890756302521008,238,
+BioCLIP 2.5,species_disjoint,organ_tag,10.0,0.5143660334385235,0.7142857142857143,238,
+BioCLIP 2.5,species_disjoint,organ_tag,100.0,0.5007906394597733,0.6932773109243697,238,
+DINOv3,species_disjoint,organ_tag,0.01,0.6618815383248129,0.7983193277310925,238,
+DINOv3,species_disjoint,organ_tag,0.1,0.708723667036974,0.8403361344537815,238,
+DINOv3,species_disjoint,organ_tag,1.0,0.7562861331830961,0.8907563025210085,238,
+DINOv3,species_disjoint,organ_tag,10.0,0.7506375158588656,0.907563025210084,238,
+DINOv3,species_disjoint,organ_tag,100.0,0.6948743293266358,0.8949579831932774,238,
+EfficientNet-B0,species_disjoint,organ_tag,0.01,0.5775987042610433,0.7521008403361344,238,
+EfficientNet-B0,species_disjoint,organ_tag,0.1,0.6802545092110918,0.8151260504201681,238,
+EfficientNet-B0,species_disjoint,organ_tag,1.0,0.742976302906151,0.8403361344537815,238,
+EfficientNet-B0,species_disjoint,organ_tag,10.0,0.6268423936667636,0.8235294117647058,238,
+EfficientNet-B0,species_disjoint,organ_tag,100.0,0.5914580191011096,0.8151260504201681,238,
+BioCLIP 2.5,individual_disjoint,organ_category,0.01,0.3988932677708907,0.4534412955465587,247,stem; whole plant
+BioCLIP 2.5,individual_disjoint,organ_category,0.1,0.4913784456519442,0.5910931174089069,247,stem; whole plant
+BioCLIP 2.5,individual_disjoint,organ_category,1.0,0.6225996683217214,0.7165991902834008,247,stem; whole plant
+BioCLIP 2.5,individual_disjoint,organ_category,10.0,0.657593819141165,0.7894736842105263,247,stem; whole plant
+BioCLIP 2.5,individual_disjoint,organ_category,100.0,0.6805942666433349,0.7935222672064778,247,stem; whole plant
+DINOv3,individual_disjoint,organ_category,0.01,0.5864612475829452,0.7489878542510121,247,stem; whole plant
+DINOv3,individual_disjoint,organ_category,0.1,0.6589257277958632,0.8259109311740891,247,stem; whole plant
+DINOv3,individual_disjoint,organ_category,1.0,0.7105278587723625,0.8785425101214575,247,stem; whole plant
+DINOv3,individual_disjoint,organ_category,10.0,0.7126647136132537,0.8744939271255061,247,stem; whole plant
+DINOv3,individual_disjoint,organ_category,100.0,0.7255342998118242,0.8825910931174089,247,stem; whole plant
+EfficientNet-B0,individual_disjoint,organ_category,0.01,0.409553332801141,0.5870445344129555,247,stem; whole plant
+EfficientNet-B0,individual_disjoint,organ_category,0.1,0.5190667797196007,0.708502024291498,247,stem; whole plant
+EfficientNet-B0,individual_disjoint,organ_category,1.0,0.5462023402510677,0.7692307692307693,247,stem; whole plant
+EfficientNet-B0,individual_disjoint,organ_category,10.0,0.5269745029319137,0.7935222672064778,247,stem; whole plant
+EfficientNet-B0,individual_disjoint,organ_category,100.0,0.5343833236315436,0.8016194331983806,247,stem; whole plant
+BioCLIP 2.5,species_disjoint,organ_category,0.01,0.30702079064952886,0.42436974789915966,238,
+BioCLIP 2.5,species_disjoint,organ_category,0.1,0.5236359443577793,0.5336134453781513,238,
+BioCLIP 2.5,species_disjoint,organ_category,1.0,0.5293003342404694,0.6638655462184874,238,
+BioCLIP 2.5,species_disjoint,organ_category,10.0,0.5387385030502154,0.6932773109243697,238,
+BioCLIP 2.5,species_disjoint,organ_category,100.0,0.5023935187499037,0.6764705882352942,238,
+DINOv3,species_disjoint,organ_category,0.01,0.6258607042450037,0.7773109243697479,238,
+DINOv3,species_disjoint,organ_category,0.1,0.7359887247010716,0.8235294117647058,238,
+DINOv3,species_disjoint,organ_category,1.0,0.7669731942342348,0.865546218487395,238,
+DINOv3,species_disjoint,organ_category,10.0,0.7868847416721338,0.8823529411764706,238,
+DINOv3,species_disjoint,organ_category,100.0,0.7266271795277793,0.8739495798319328,238,
+EfficientNet-B0,species_disjoint,organ_category,0.01,0.43360206166530274,0.6680672268907563,238,
+EfficientNet-B0,species_disjoint,organ_category,0.1,0.554899727838522,0.7521008403361344,238,
+EfficientNet-B0,species_disjoint,organ_category,1.0,0.6635388104203764,0.7899159663865546,238,
+EfficientNet-B0,species_disjoint,organ_category,10.0,0.6678265132130086,0.8109243697478992,238,
+EfficientNet-B0,species_disjoint,organ_category,100.0,0.6744448437670577,0.8109243697478992,238,

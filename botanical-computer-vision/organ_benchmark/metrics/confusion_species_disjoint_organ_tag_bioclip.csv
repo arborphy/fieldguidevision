@@ -1,0 +1,65 @@
+model,protocol,task,true_label,predicted_label,count,row_fraction
+BioCLIP 2.5,species_disjoint,organ_tag,bark,bark,21,0.6774193548387096
+BioCLIP 2.5,species_disjoint,organ_tag,bark,cone,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,bark,flower,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,bark,fruit,7,0.22580645161290322
+BioCLIP 2.5,species_disjoint,organ_tag,bark,leaf,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,bark,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,bark,twig,1,0.03225806451612903
+BioCLIP 2.5,species_disjoint,organ_tag,bark,whole plant,2,0.06451612903225806
+BioCLIP 2.5,species_disjoint,organ_tag,cone,bark,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,cone,2,1.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,flower,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,fruit,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,leaf,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,twig,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,cone,whole plant,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,flower,bark,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,flower,cone,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,flower,flower,39,0.8666666666666667
+BioCLIP 2.5,species_disjoint,organ_tag,flower,fruit,2,0.044444444444444446
+BioCLIP 2.5,species_disjoint,organ_tag,flower,leaf,2,0.044444444444444446
+BioCLIP 2.5,species_disjoint,organ_tag,flower,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,flower,twig,1,0.022222222222222223
+BioCLIP 2.5,species_disjoint,organ_tag,flower,whole plant,1,0.022222222222222223
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,bark,1,0.027777777777777776
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,cone,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,flower,13,0.3611111111111111
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,fruit,18,0.5
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,leaf,2,0.05555555555555555
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,twig,2,0.05555555555555555
+BioCLIP 2.5,species_disjoint,organ_tag,fruit,whole plant,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,bark,1,0.015625
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,cone,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,flower,6,0.09375
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,fruit,2,0.03125
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,leaf,52,0.8125
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,twig,1,0.015625
+BioCLIP 2.5,species_disjoint,organ_tag,leaf,whole plant,2,0.03125
+BioCLIP 2.5,species_disjoint,organ_tag,needle,bark,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,cone,3,1.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,flower,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,fruit,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,leaf,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,twig,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,needle,whole plant,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,twig,bark,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,twig,cone,1,0.029411764705882353
+BioCLIP 2.5,species_disjoint,organ_tag,twig,flower,5,0.14705882352941177
+BioCLIP 2.5,species_disjoint,organ_tag,twig,fruit,3,0.08823529411764706
+BioCLIP 2.5,species_disjoint,organ_tag,twig,leaf,6,0.17647058823529413
+BioCLIP 2.5,species_disjoint,organ_tag,twig,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,twig,twig,19,0.5588235294117647
+BioCLIP 2.5,species_disjoint,organ_tag,twig,whole plant,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,bark,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,cone,1,0.023255813953488372
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,flower,2,0.046511627906976744
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,fruit,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,leaf,5,0.11627906976744186
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,needle,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,twig,0,0.0
+BioCLIP 2.5,species_disjoint,organ_tag,whole plant,whole plant,35,0.813953488372093

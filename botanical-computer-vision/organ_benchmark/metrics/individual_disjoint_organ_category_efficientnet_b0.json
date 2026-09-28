@@ -1,0 +1,81 @@
+{
+  "model": "EfficientNet-B0",
+  "model_key": "efficientnet_b0",
+  "protocol": "individual_disjoint",
+  "task": "organ_category",
+  "seed": 42,
+  "classifier": "LogisticRegression(class_weight='balanced', solver='lbfgs')",
+  "selected_C": 1.0,
+  "selection_metric": "validation macro F1",
+  "refit": "train + validation",
+  "train_images": 1181,
+  "validation_images": 249,
+  "test_images": 211,
+  "train_individuals": 339,
+  "test_individuals": 63,
+  "train_species": 63,
+  "test_species": 63,
+  "classes_fit": [
+    "bark",
+    "cone",
+    "fruit",
+    "inflorescence",
+    "leaf",
+    "seed",
+    "stem",
+    "twig",
+    "unspecified",
+    "whole plant",
+    "whole tree",
+    "whole tree (or vine)"
+  ],
+  "test_classes": [
+    "bark",
+    "cone",
+    "fruit",
+    "inflorescence",
+    "leaf",
+    "twig",
+    "whole tree",
+    "whole tree (or vine)"
+  ],
+  "unsupported_validation_labels_during_selection": [
+    "stem",
+    "whole plant"
+  ],
+  "unsupported_test_labels": [],
+  "top1_accuracy": 0.8104265402843602,
+  "top3_recall": 0.976303317535545,
+  "macro_f1": 0.6644965628879638,
+  "weighted_f1": 0.8221151466681116,
+  "individual_id_bootstrap_95_ci": {
+    "top1_accuracy": {
+      "point": 0.8104265402843602,
+      "lower_95": 0.7473974004834015,
+      "upper_95": 0.8680303232701042,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "top3_recall": {
+      "point": 0.976303317535545,
+      "lower_95": 0.9531216613247864,
+      "upper_95": 0.9950744953153675,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "macro_f1": {
+      "point": 0.6644965628879638,
+      "lower_95": 0.5928432356156256,
+      "upper_95": 0.7235682600846465,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    },
+    "weighted_f1": {
+      "point": 0.8221151466681116,
+      "lower_95": 0.7597618208392913,
+      "upper_95": 0.8780663418650575,
+      "bootstrap_unit": "individual_id",
+      "replicates": 2000
+    }
+  }
+}

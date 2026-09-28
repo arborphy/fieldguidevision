@@ -1,0 +1,4 @@
+model,source_model,rows,dimensions,normalized,min_l2_norm,max_l2_norm,source_path
+bioclip,hf-hub:imageomics/bioclip-2.5-vith14,1641,1024,True,0.9999998807907104,1.0000001192092896,outputs/bioclip25_strict_embeddings/embeddings.npz
+dinov3,facebook/dinov3-vitb16-pretrain-lvd1689m,1641,768,True,0.9999998807907104,1.0000001192092896,outputs/dinov3_strict_embeddings/embeddings.npz
+efficientnet_b0,torchvision/efficientnet_b0-imagenet1k-v1,1641,1280,True,0.9999998807907104,1.0000001192092896,outputs/efficientnet_b0_strict_embeddings/embeddings.npz

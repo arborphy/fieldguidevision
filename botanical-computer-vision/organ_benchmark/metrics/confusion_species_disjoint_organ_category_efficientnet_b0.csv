@@ -1,0 +1,65 @@
+model,protocol,task,true_label,predicted_label,count,row_fraction
+EfficientNet-B0,species_disjoint,organ_category,bark,bark,28,0.9032258064516129
+EfficientNet-B0,species_disjoint,organ_category,bark,cone,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,fruit,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,inflorescence,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,leaf,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,twig,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,bark,whole tree (or vine),3,0.0967741935483871
+EfficientNet-B0,species_disjoint,organ_category,cone,bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,cone,2,1.0
+EfficientNet-B0,species_disjoint,organ_category,cone,fruit,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,inflorescence,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,leaf,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,twig,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,cone,whole tree (or vine),0,0.0
+EfficientNet-B0,species_disjoint,organ_category,fruit,bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,fruit,cone,1,0.027777777777777776
+EfficientNet-B0,species_disjoint,organ_category,fruit,fruit,16,0.4444444444444444
+EfficientNet-B0,species_disjoint,organ_category,fruit,inflorescence,9,0.25
+EfficientNet-B0,species_disjoint,organ_category,fruit,leaf,6,0.16666666666666666
+EfficientNet-B0,species_disjoint,organ_category,fruit,twig,2,0.05555555555555555
+EfficientNet-B0,species_disjoint,organ_category,fruit,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,fruit,whole tree (or vine),2,0.05555555555555555
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,cone,1,0.021739130434782608
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,fruit,4,0.08695652173913043
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,inflorescence,35,0.7608695652173914
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,leaf,2,0.043478260869565216
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,twig,3,0.06521739130434782
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,inflorescence,whole tree (or vine),1,0.021739130434782608
+EfficientNet-B0,species_disjoint,organ_category,leaf,bark,1,0.014925373134328358
+EfficientNet-B0,species_disjoint,organ_category,leaf,cone,1,0.014925373134328358
+EfficientNet-B0,species_disjoint,organ_category,leaf,fruit,1,0.014925373134328358
+EfficientNet-B0,species_disjoint,organ_category,leaf,inflorescence,1,0.014925373134328358
+EfficientNet-B0,species_disjoint,organ_category,leaf,leaf,62,0.9253731343283582
+EfficientNet-B0,species_disjoint,organ_category,leaf,twig,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,leaf,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,leaf,whole tree (or vine),1,0.014925373134328358
+EfficientNet-B0,species_disjoint,organ_category,twig,bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,twig,cone,1,0.029411764705882353
+EfficientNet-B0,species_disjoint,organ_category,twig,fruit,1,0.029411764705882353
+EfficientNet-B0,species_disjoint,organ_category,twig,inflorescence,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,twig,leaf,2,0.058823529411764705
+EfficientNet-B0,species_disjoint,organ_category,twig,twig,30,0.8823529411764706
+EfficientNet-B0,species_disjoint,organ_category,twig,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,twig,whole tree (or vine),0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,cone,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,fruit,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,inflorescence,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,leaf,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,twig,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree,whole tree (or vine),1,1.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),bark,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),cone,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),fruit,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),inflorescence,1,0.023809523809523808
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),leaf,2,0.047619047619047616
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),twig,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),whole tree,0,0.0
+EfficientNet-B0,species_disjoint,organ_category,whole tree (or vine),whole tree (or vine),39,0.9285714285714286
