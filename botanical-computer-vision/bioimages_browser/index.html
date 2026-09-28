@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A modern, biologically organized browser for 1,899 BioImages photographs of 85 northeastern tree species.">
+  <title>BioImages Browser</title>
+  <link rel="preconnect" href="https://bioimages.vanderbilt.edu">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="data/site-data.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" data-route>
+      <span class="brand-mark" aria-hidden="true">BI</span>
+      <span><strong>BioImages</strong><small>Northeastern Trees · reorganized</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Primary">
+      <a href="?view=species" data-route>Species</a>
+      <a href="?view=organs" data-route>Organs &amp; views</a>
+      <a href="?view=individuals" data-route>Individuals</a>
+      <a href="?view=images" data-route>All images</a>
+      <a href="?view=models" data-route>Model evaluation</a>
+    </nav>
+  </header>
+  <main id="content" tabindex="-1"><p class="loading">Loading the image catalog…</p></main>
+  <footer>
+    <p>BioImages annotations are preserved as the canonical labels. Images remain hosted by BioImages; credits and licenses appear on every image detail page.</p>
+    <p><a href="https://bioimages.vanderbilt.edu/metadata.htm?//northeast-trees/list/northeast-trees#">Original BioImages collection</a> · <a href="data/image_manifest.csv">Download manifest CSV</a> · <a href="README.md">About this browser</a></p>
+  </footer>
+</body>
+</html>

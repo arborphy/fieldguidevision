@@ -1,0 +1,22 @@
+{
+  "valid": true,
+  "counts": {
+    "images": 1899,
+    "species": 85,
+    "individuals": 492,
+    "organ_categories": 12,
+    "view_types": 36,
+    "exact_primary_labels": 45,
+    "complete_primary_labels": 1899,
+    "prediction_images": 211,
+    "manual_review_images": 194
+  },
+  "unique_image_ids": 1899,
+  "source_corpus_sha256": "sha256:210655f43fec6b7411fa081b45bf7d7438eac87917156c9835fcb353f7c9a702",
+  "missing_primary_label_ids": [],
+  "review_reason_counts": {
+    "missing creator": 3,
+    "other organ group": 2,
+    "unspecified view": 191
+  }
+}
