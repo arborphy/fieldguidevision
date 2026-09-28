@@ -55,6 +55,8 @@ def main() -> None:
     app = (ROOT / "assets" / "app.js").read_text()
     for view in ("species", "organs", "individuals", "images", "image", "models"):
         assert f'view === "{view}"' in app
+    for source in data["model_evaluation"].get("confusions", {}).values():
+        assert (ROOT / source).is_file(), source
 
     validation = json.loads((ROOT / "data" / "validation.json").read_text())
     assert validation["valid"] is True

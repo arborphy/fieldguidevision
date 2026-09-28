@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import shutil
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -104,9 +105,9 @@ def read_model_evaluation() -> dict:
         "available": True,
         "summary": summary,
         "per_class": per_class,
-        "benchmark_url": "../organ_benchmark/index.html",
+        "benchmark_url": "https://arborphy.github.io/fieldguidevision/botanical-computer-vision/organ_benchmark/",
         "confusions": {
-            key: f"../organ_benchmark/figures/confusion_individual_disjoint_organ_tag_{key}.png"
+            key: f"assets/model-evaluation/confusion_individual_disjoint_organ_tag_{key}.png"
             for key in ("bioclip", "dinov3", "efficientnet_b0")
         },
     }
@@ -311,6 +312,13 @@ def build(corpus_path: Path) -> dict:
 
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "data").mkdir(exist_ok=True)
+    model_assets = OUT / "assets" / "model-evaluation"
+    model_assets.mkdir(parents=True, exist_ok=True)
+    for key in ("bioclip", "dinov3", "efficientnet_b0"):
+        name = f"confusion_individual_disjoint_organ_tag_{key}.png"
+        source = BENCHMARK / "figures" / name
+        if source.exists():
+            shutil.copy2(source, model_assets / name)
     (OUT / "data" / "site-data.js").write_text(
         "window.BIOIMAGES_DATA=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n"
     )
