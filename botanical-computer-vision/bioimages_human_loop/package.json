@@ -1,0 +1,8 @@
+{
+  "name": "bioimages-human-loop",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build_vercel.mjs",
+    "check": "node --check assets/app.js"
+  }
+}

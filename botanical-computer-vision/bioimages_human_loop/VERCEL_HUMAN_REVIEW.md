@@ -2,7 +2,7 @@
 
 ## Recommendation
 
-Deploy this site on **Vercel** and use **Supabase Postgres + Auth** for Human Review data.
+Deploy this site on **Vercel** and use the dedicated **BioImages Human Loop Supabase organization** for Postgres + Auth. It is deliberately separate from unrelated Supabase organizations and projects.
 
 - Vercel serves the gallery and review UI.
 - Supabase magic-link authentication gives each reviewer a stable identity without passwords.
@@ -109,17 +109,23 @@ Do not overwrite individual annotations with a single shared value. Keep every r
 
 This preserves inter-annotator agreement and lets the project distinguish genuine ambiguity from labeling mistakes.
 
-## Required setup
+## Implemented deployment files
+
+- `vercel.json`: builds the static site into `dist/`.
+- `scripts/build_vercel.mjs`: injects the public Supabase URL/key from Vercel environment variables without committing them to Git.
+- `data/runtime-config.js`: empty safe fallback used by GitHub Pages.
+- `supabase/migrations/001_human_review.sql`: schema, RLS policies, transactional submit function, audit events, and the 100-item seed batch.
+- `assets/app.js`: magic-link sign-in, per-reviewer synchronization, revision-safe saves, local preview fallback, and JSON/CSV export.
+
+## Required external setup
 
 The remaining external setup requires access to the project owner’s accounts:
 
-1. create/link a Vercel project for `bioimages_human_loop`;
-2. install the Supabase Marketplace integration;
-3. enable email magic-link authentication;
-4. apply the schema and RLS migration;
-5. set Vercel environment variables;
-6. deploy and test two independent reviewer accounts;
-7. import `analysis/human_review_set.json` as the first batch.
+1. create the database in the dedicated BioImages Human Loop Supabase organization;
+2. apply `supabase/migrations/001_human_review.sql`;
+3. configure the final Vercel URL as an allowed Auth redirect;
+4. set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `REVIEW_BATCH_ID` in Vercel;
+5. deploy and test two independent reviewer accounts.
 
 Official references:
 

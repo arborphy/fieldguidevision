@@ -17,6 +17,17 @@
   const groupsBySlug = new Map(data.organ_groups.map((group) => [group.slug, group]));
   const groupOrder = data.organ_groups.map((group) => group.slug);
   const nf = new Intl.NumberFormat("en-US");
+  const reviewRuntime = window.BIOIMAGES_RUNTIME || {};
+  const reviewBackendConfigured = Boolean(reviewRuntime.supabaseUrl && reviewRuntime.supabaseAnonKey && window.supabase?.createClient);
+  const reviewClient = reviewBackendConfigured
+    ? window.supabase.createClient(reviewRuntime.supabaseUrl, reviewRuntime.supabaseAnonKey, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    })
+    : null;
+  const reviewBatchId = reviewRuntime.reviewBatchId || "00000000-0000-4000-8000-000000000001";
+  let reviewSession = null;
+  let remoteHumanGold = null;
+  let reviewBackendState = reviewBackendConfigured ? "loading" : "local";
 
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
@@ -141,12 +152,96 @@
   };
 
   function loadHumanGold() {
+    if (reviewBackendConfigured) return remoteHumanGold || {};
     try { return JSON.parse(localStorage.getItem(HUMAN_STORAGE_KEY) || "{}"); }
     catch (_) { return {}; }
   }
 
-  function saveHumanGold(records) {
+  function saveLocalHumanGold(records) {
     localStorage.setItem(HUMAN_STORAGE_KEY, JSON.stringify(records));
+  }
+
+  async function loadRemoteHumanGold() {
+    if (!reviewClient || !reviewSession) { remoteHumanGold = {}; return; }
+    const { data: rows, error } = await reviewClient.from("annotations")
+      .select("image_id,visible_tags,primary_subject,ambiguous,other_tag,note,revision,submitted_at,updated_at")
+      .eq("batch_id", reviewBatchId);
+    if (error) throw error;
+    remoteHumanGold = Object.fromEntries((rows || []).map((row) => [row.image_id, {
+      tags: row.visible_tags,
+      primary: row.primary_subject || "",
+      ambiguous: row.ambiguous,
+      other_tag: row.other_tag || "",
+      note: row.note || "",
+      revision: row.revision,
+      labeled_at: row.updated_at || row.submitted_at,
+    }]));
+  }
+
+  async function saveHumanGoldEntry(imageId, record) {
+    if (!reviewBackendConfigured) {
+      const records = loadHumanGold(); records[imageId] = record; saveLocalHumanGold(records); return;
+    }
+    if (!reviewSession) throw new Error("Sign in before saving Human Gold.");
+    const { error } = await reviewClient.rpc("submit_annotation", {
+      p_batch_id: reviewBatchId,
+      p_image_id: imageId,
+      p_visible_tags: record.tags,
+      p_primary_subject: record.primary || null,
+      p_ambiguous: record.ambiguous,
+      p_other_tag: record.other_tag || null,
+      p_note: record.note || null,
+    });
+    if (error) throw error;
+    await loadRemoteHumanGold();
+  }
+
+  function reviewerStatusHtml() {
+    if (!reviewBackendConfigured) return `<div class="reviewer-status local"><strong>Local preview</strong><span>Answers stay in this browser until exported.</span></div>`;
+    if (reviewBackendState === "loading") return `<div class="reviewer-status"><strong>Connecting…</strong><span>Checking the shared Human Review database.</span></div>`;
+    if (reviewSession) return `<div class="reviewer-status synced"><div><strong>Shared review is active</strong><span>Signed in as ${escapeHtml(reviewSession.user.email || "reviewer")} · answers sync across devices.</span></div><button type="button" id="review-sign-out">Sign out</button></div>`;
+    return `<div class="review-auth"><div><strong>Sign in to the shared review</strong><span>We will email a password-free magic link. Model answers remain hidden until submission.</span></div><form id="review-login-form"><label>Email<input required type="email" name="email" autocomplete="email" placeholder="reviewer@example.org"></label><button type="submit">Email sign-in link</button></form><p id="review-login-status" role="status"></p></div>`;
+  }
+
+  function wireReviewerStatus() {
+    document.querySelector("#review-sign-out")?.addEventListener("click", async () => {
+      await reviewClient.auth.signOut();
+    });
+    document.querySelector("#review-login-form")?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = document.querySelector("#review-login-status");
+      const button = event.currentTarget.querySelector("button");
+      button.disabled = true; status.textContent = "Sending secure sign-in link…";
+      const email = new FormData(event.currentTarget).get("email").trim();
+      const redirect = new URL(location.href); redirect.search = "?view=review";
+      const { error } = await reviewClient.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect.toString() } });
+      status.textContent = error ? error.message : "Check your email for the sign-in link.";
+      button.disabled = false;
+    });
+  }
+
+  async function initializeReviewBackend() {
+    if (!reviewBackendConfigured) return;
+    try {
+      const { data, error } = await reviewClient.auth.getSession();
+      if (error) throw error;
+      reviewSession = data.session;
+      await loadRemoteHumanGold();
+      reviewBackendState = "ready";
+    } catch (error) {
+      reviewBackendState = "error";
+      console.error("Human Review backend initialization failed", error);
+    }
+    render();
+    reviewClient.auth.onAuthStateChange((_event, session) => {
+      reviewSession = session;
+      reviewBackendState = "loading";
+      setTimeout(async () => {
+        try { await loadRemoteHumanGold(); reviewBackendState = "ready"; }
+        catch (error) { reviewBackendState = "error"; console.error("Human Review synchronization failed", error); }
+        render();
+      }, 0);
+    });
   }
 
   function coarseTagsFromPrediction(image, modelKey) {
@@ -303,6 +398,11 @@
     if (!loop) return renderCatalogHome();
     const records = loadHumanGold();
     const completed = Object.values(records).filter((record) => record?.tags?.length).length;
+    const storageNote = reviewBackendConfigured
+      ? reviewSession
+        ? `<strong>Shared review active:</strong> ${escapeHtml(reviewSession.user.email || "reviewer")} · every submitted answer is stored in the protected database.`
+        : `<strong>Shared review ready:</strong> open Human Review and sign in by email before labeling.`
+      : `<strong>Current GitHub Pages preview:</strong> answers are private to this browser. The Vercel deployment uses authenticated reviewers and Supabase Postgres.`;
     const modeBlocks = loop.modes.map((mode, index) => `<article class="error-mode${index >= 8 ? " secondary-mode" : ""}">
       <div class="mode-heading"><div><p class="eyebrow">Error mode ${String(index + 1).padStart(2, "0")}</p><h3>${escapeHtml(mode.name)} — ${nf.format(mode.image_count)} images</h3><p>${escapeHtml(mode.description)}</p></div><span class="mode-count">${nf.format(mode.image_count)}</span></div>
       <dl class="mode-facts"><div><dt>Most affected</dt><dd>${modelCountLine(mode)}</dd></div><div><dt>Visual audit</dt><dd>${mode.vlm_reviewed ? `${mode.vlm_supported} / ${mode.vlm_reviewed} representatives supported` : "VLM audit pending"}</dd></div><div><dt>Likely cause</dt><dd>${escapeHtml(mode.vlm_common_cause || mode.cause)}</dd></div></dl>
@@ -311,7 +411,7 @@
     </article>`).join("");
     setPage(`<section class="hero human-loop-hero"><div class="wrap"><p class="eyebrow">Error discovery → targeted human verification</p><h1>See how the tagging systems repeatedly fail—before labeling by hand.</h1><p class="lede">Programmatic signals across all 1,899 images identify recurring confusions. Existing image-grounded Gemma tags corroborate high-signal examples, then a diverse 100-image blind review tests which modes are genuine errors and which are single-label ambiguity.</p><div class="stats"><div class="stat"><strong>${nf.format(loop.generated_from_images)}</strong><span>images analyzed</span></div><div class="stat"><strong>${loop.modes.length}</strong><span>recurring modes</span></div><div class="stat"><strong>${nf.format(loop.vlm_audited_images)}</strong><span>VLM-audited examples</span></div><div class="stat"><strong>${loop.human_set.length}</strong><span>targeted human images</span></div><div class="stat"><strong>${completed}</strong><span>Human Gold complete</span></div></div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Main error modes</p><h2>Repeated patterns found in the Full Gallery</h2><p>Counts are overlapping mode memberships, not mutually exclusive classes. Representative images favor species and individual diversity; visual corroboration reuses Gemma tags from the high-signal subset.</p></div></div><div class="mode-list">${modeBlocks}</div><button class="load-more" id="show-all-modes" type="button">Show all ${loop.modes.length} modes</button></div></section>
-    <section class="section" id="human-set"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Human Review Set</p><h2>100 targeted, blind multi-label decisions</h2><p>The set covers major modes, every major tag, easy agreements, strong disagreements, rare classes, and high-confidence errors while maximizing species and individual diversity.</p></div>${routeLink(completed ? "Continue review →" : "Start blind review →", { view: "review" }, "text-link")}</div><div class="review-summary"><strong>${completed} / 100 complete</strong><span>85 species · 100 individuals · selection reason saved for every image</span></div><div class="deployment-note"><strong>Current preview:</strong> answers are private to this browser. <strong>Shared production review:</strong> deploy on Vercel with authenticated reviewers and Supabase Postgres; see <a href="VERCEL_HUMAN_REVIEW.md">the implementation plan</a>.</div></div></section>
+    <section class="section" id="human-set"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Human Review Set</p><h2>100 targeted, blind multi-label decisions</h2><p>The set covers major modes, every major tag, easy agreements, strong disagreements, rare classes, and high-confidence errors while maximizing species and individual diversity.</p></div>${routeLink(completed ? "Continue review →" : "Start blind review →", { view: "review" }, "text-link")}</div><div class="review-summary"><strong>${completed} / 100 complete</strong><span>85 species · 100 individuals · selection reason saved for every image</span></div><div class="deployment-note">${storageNote} <a href="VERCEL_HUMAN_REVIEW.md">Deployment details</a>.</div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Which error modes are real?</p><h2>Human validation, updated locally</h2><p>Model error and annotation ambiguity are measured only after a blind answer is saved.</p></div></div><div id="human-evaluation">${renderHumanMetrics(records)}</div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Drill down</p><h2>Full Gallery remains available</h2><p>Inspect all good matches, BioImages mismatches, Gemma disagreements, and model disagreements with the original filters.</p></div>${routeLink("Open Full Gallery →", { view: "full-gallery" }, "text-link")}</div></div></section>`, "Error analysis");
     document.querySelector("#show-all-modes")?.addEventListener("click", (event) => {
@@ -346,16 +446,31 @@
     const index = Math.max(0, Math.min(loop.human_set.length - 1, requested - 1));
     const entry = loop.human_set[index]; const image = imagesById.get(entry.image_id); const records = loadHumanGold(); const saved = records[entry.image_id];
     const completed = Object.values(records).filter((record) => record?.tags?.length).length;
-    setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Image ${index + 1} of ${loop.human_set.length}</h1><p>${completed} complete · model and reference answers remain hidden until this image is submitted.</p></div><div class="review-actions"><button type="button" id="export-json">Export JSON</button><button type="button" id="export-csv">Export CSV</button></div></div><div class="review-progress"><i style="width:${completed}%"></i></div>
+    if (reviewBackendConfigured && (!reviewSession || reviewBackendState === "loading")) {
+      setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Shared 100-image review</h1><p>Sign in before labeling so every answer is saved to your reviewer record.</p></div></div>${reviewerStatusHtml()}<div class="pending-evaluation"><strong>Your labels remain private during blind review.</strong><p>BioImages, Gemma, DINOv3, BioCLIP, and EfficientNet answers appear only after you submit each image.</p></div></div>`, "Human review sign in");
+      wireReviewerStatus(); return;
+    }
+    setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Image ${index + 1} of ${loop.human_set.length}</h1><p>${completed} complete · model and reference answers remain hidden until this image is submitted.</p></div><div class="review-actions"><button type="button" id="export-json">Export JSON</button><button type="button" id="export-csv">Export CSV</button></div></div>${reviewerStatusHtml()}<div class="review-progress"><i style="width:${completed}%"></i></div>
       <div class="label-workspace"><div class="label-image"><img src="${escapeHtml(image.image_url)}" alt="Plant photograph for blind labeling"></div><form id="human-form" class="label-form"><fieldset><legend>Which tags are truly visible?</legend><p class="form-help">Select any number. Judge the pixels, not what you expect from the species.</p><div class="tag-checks">${loop.human_tags.map((tag) => `<label><input type="checkbox" name="tag" value="${escapeHtml(tag)}" ${saved?.tags?.includes(tag) ? "checked" : ""}><span>${escapeHtml(tag)}</span></label>`).join("")}</div></fieldset><label>Primary subject <span>(optional)</span><select name="primary"><option value="">Not specified</option>${loop.human_tags.map((tag) => `<option value="${escapeHtml(tag)}" ${saved?.primary === tag ? "selected" : ""}>${escapeHtml(tag)}</option>`).join("")}</select></label><label class="check-line"><input type="checkbox" name="ambiguous" ${saved?.ambiguous ? "checked" : ""}> Ambiguous / genuinely difficult</label><label>Other tag <span>(optional)</span><input name="other_tag" value="${escapeHtml(saved?.other_tag || "")}" placeholder="Visible structure not listed"></label><label>Short note <span>(optional)</span><textarea name="note" rows="3" placeholder="Why this is difficult or what is visible">${escapeHtml(saved?.note || "")}</textarea></label><p class="form-error" id="form-error" role="alert"></p><button class="submit-label" type="submit">${saved ? "Update answer and reveal" : "Submit answer and reveal"}</button><p class="selection-rationale"><strong>Why selected:</strong> ${escapeHtml(entry.selection_reason)}</p></form></div>
       <section class="answer-reveal ${saved ? "visible" : ""}" id="answer-reveal"><p class="eyebrow">Shown only after submission</p><h2>References and model answers</h2>${referenceReveal(image)}</section><div class="review-nav">${index ? routeLink("← Previous", { view: "review", n: index }, "text-link") : "<span></span>"}<span>${index + 1} / ${loop.human_set.length}</span>${index + 1 < loop.human_set.length ? routeLink("Next →", { view: "review", n: index + 2 }, "text-link") : routeLink("Return to results →", {}, "text-link")}</div></div>`, `Human review ${index + 1}`);
+    wireReviewerStatus();
     document.querySelector("#export-json").addEventListener("click", () => exportHumanGold("json"));
     document.querySelector("#export-csv").addEventListener("click", () => exportHumanGold("csv"));
-    document.querySelector("#human-form").addEventListener("submit", (event) => {
+    document.querySelector("#human-form").addEventListener("submit", async (event) => {
       event.preventDefault(); const form = new FormData(event.currentTarget); const tags = form.getAll("tag");
       if (!tags.length) { document.querySelector("#form-error").textContent = "Select at least one visible tag."; return; }
-      records[entry.image_id] = { tags, primary: form.get("primary"), ambiguous: form.get("ambiguous") === "on", other_tag: form.get("other_tag").trim(), note: form.get("note").trim(), labeled_at: new Date().toISOString() };
-      saveHumanGold(records); document.querySelector("#form-error").textContent = "Saved in this browser."; document.querySelector("#answer-reveal").classList.add("visible"); document.querySelector("#answer-reveal").scrollIntoView({ behavior: "smooth", block: "start" });
+      const button = event.currentTarget.querySelector("button[type=submit]");
+      const record = { tags, primary: form.get("primary"), ambiguous: form.get("ambiguous") === "on", other_tag: form.get("other_tag").trim(), note: form.get("note").trim(), labeled_at: new Date().toISOString() };
+      button.disabled = true; document.querySelector("#form-error").textContent = reviewBackendConfigured ? "Saving securely…" : "Saving…";
+      try {
+        await saveHumanGoldEntry(entry.image_id, record);
+        records[entry.image_id] = record;
+        document.querySelector("#form-error").textContent = reviewBackendConfigured ? "Saved to the shared Human Gold database." : "Saved in this browser.";
+        document.querySelector("#answer-reveal").classList.add("visible");
+        document.querySelector("#answer-reveal").scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        document.querySelector("#form-error").textContent = `Could not save: ${error.message}`;
+      } finally { button.disabled = false; }
     });
   }
 
@@ -690,4 +805,5 @@
   });
   window.addEventListener("popstate", render);
   render();
+  initializeReviewBackend();
 })();

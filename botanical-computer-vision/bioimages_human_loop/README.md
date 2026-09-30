@@ -29,7 +29,7 @@ Open `index.html`, choose **Human review**, and label one large image at a time.
 
 `leaf, twig, bark, flower, fruit, cone, seed, whole plant, other`
 
-Primary subject, ambiguity, another tag, and a short note are optional. After submission, every reference and model tag is revealed. Labels are kept in browser `localStorage` under `bioimages-human-gold-v2`; export JSON or CSV regularly.
+Primary subject, ambiguity, another tag, and a short note are optional. After submission, every reference and model tag is revealed. On GitHub Pages, labels remain a browser-local preview under `bioimages-human-gold-v2`. On the Vercel deployment, reviewers sign in with a magic link and every submission is written to their RLS-protected Supabase record with revision history.
 
 When labels exist, the home page automatically reports:
 
@@ -73,3 +73,5 @@ node --check botanical-computer-vision/bioimages_human_loop/assets/app.js
 Serve the directory with any static server or publish it directly under GitHub Pages. The stable `bioimages_browser/index.html` remains untouched.
 
 For a shared, persistent multi-reviewer deployment, see [`VERCEL_HUMAN_REVIEW.md`](VERCEL_HUMAN_REVIEW.md). The recommended production path is Vercel for hosting plus Supabase Postgres/Auth for reviewer identity, RLS-protected annotations, audit history, and consensus export.
+
+The deployment source includes `vercel.json`, a build-time runtime-config generator, and `supabase/migrations/001_human_review.sql`. The migration seeds the deterministic 100-image batch and exposes only a transactional `submit_annotation` function to authenticated reviewers.
