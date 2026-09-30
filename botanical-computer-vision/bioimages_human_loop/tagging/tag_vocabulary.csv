@@ -1,0 +1,41 @@
+tag,kind,description,bioimages_mapping_support,gemma_reference_support
+whole plant,structure,"Most or all of the tree, shrub, vine, or herb is visible.",360,377
+trunk,structure,A main woody trunk is visibly prominent.,165,450
+bark,structure,Bark texture or bark surface is visibly prominent.,197,318
+branch,structure,A woody branch larger than a twig is visibly prominent.,89,587
+stem,structure,A non-trunk stem is visibly prominent.,1,632
+twig,structure,A current or small woody twig is visibly prominent.,377,676
+bud,structure,One or more vegetative or reproductive buds are clearly visible.,81,327
+leaf,structure,One or more broad leaves or leaf blades are visible.,620,1146
+needle,structure,Needle-like or scale-like conifer leaves are visible.,38,67
+flower,structure,One or more flowers or visibly flower-like reproductive units are present.,313,316
+inflorescence,structure,"A flower cluster, catkin, or whole inflorescence is visible.",312,340
+fruit,structure,Fruit or a fruiting body is visible.,245,387
+cone,structure,A seed or pollen cone is visible.,38,19
+seed,structure,A seed is visibly isolated or is the main subject.,12,19
+view up trunk,view,The camera looks upward along the trunk into the crown.,59,248
+winter habit,view,A leaf-off whole plant or crown is shown in winter condition.,32,85
+large-tree bark,view,Bark is shown on a large mature trunk.,106,242
+medium-tree or large-branch bark,view,Bark is shown on a medium trunk or large branch.,47,38
+small-tree or branch bark,view,Bark is shown on a small trunk or branch.,42,22
+leaf upper surface,view,A whole leaf is presented mainly from its upper surface.,194,356
+leaf margin,view,The leaf edge or margin is the emphasized subject.,101,220
+leaf arrangement on twig,view,Leaves are shown in their visible arrangement along a twig.,137,419
+petiole arrangement,view,Petiole attachment or orientation on a twig is emphasized.,128,44
+needle attachment,view,Needle attachment to a twig or shoot is emphasized.,11,31
+winter twig,view,A leafless twig is shown in winter or dormant condition.,81,107
+leaf scar,view,A leaf scar is clearly shown in close-up.,26,36
+terminal bud,view,A terminal bud is clearly shown in close-up.,23,26
+immature fruit,view,Fruit is visibly immature or developing.,54,306
+fruit borne on plant,view,Fruit is shown attached in its natural position on the plant.,82,312
+fruit close-up,view,Fruit is the close-up subject without a more specific condition.,89,193
+opened or sectioned fruit,view,"Fruit is open, split, or sectioned so its interior is visible.",18,27
+flower close-up,view,A flower or reproductive unit is shown at close range.,114,225
+flower interior,view,The interior of a flower is the emphasized subject.,5,25
+frontal flower view,view,A flower is viewed front-on.,56,13
+lateral flower view,view,A flower is viewed from the side.,53,12
+male reproductive structure,view,"A visibly male flower, inflorescence, or pollen cone is shown.",59,12
+female reproductive structure,view,"A visibly female flower, inflorescence, or seed cone is shown.",60,3
+closed cone,view,A closed or immature seed cone is shown.,13,7
+open cone,view,A mature open seed cone is shown.,10,1
+receptive cone,view,A receptive female cone is shown.,8,0

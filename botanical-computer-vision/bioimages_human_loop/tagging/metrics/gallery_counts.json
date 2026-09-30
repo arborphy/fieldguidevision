@@ -1,0 +1,26 @@
+[
+  {
+    "model": "DINOv3",
+    "model_key": "dinov3",
+    "good_matches": 1333,
+    "bioimages_mismatches": 163,
+    "gemma_disagreements": 82,
+    "model_disagreements": 1427
+  },
+  {
+    "model": "BioCLIP 2.5",
+    "model_key": "bioclip",
+    "good_matches": 952,
+    "bioimages_mismatches": 336,
+    "gemma_disagreements": 312,
+    "model_disagreements": 1427
+  },
+  {
+    "model": "EfficientNet-B0",
+    "model_key": "efficientnet_b0",
+    "good_matches": 1156,
+    "bioimages_mismatches": 222,
+    "gemma_disagreements": 209,
+    "model_disagreements": 1427
+  }
+]

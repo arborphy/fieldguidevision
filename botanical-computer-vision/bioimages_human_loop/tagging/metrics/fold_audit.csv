@@ -1,0 +1,16 @@
+model_key,fold,train_images,test_images,train_individuals,test_individuals,individual_leakage
+dinov3,1,1553,346,394,98,False
+dinov3,2,1469,430,391,101,False
+dinov3,3,1487,412,395,97,False
+dinov3,4,1579,320,397,95,False
+dinov3,5,1508,391,391,101,False
+bioclip,1,1553,346,394,98,False
+bioclip,2,1469,430,391,101,False
+bioclip,3,1487,412,395,97,False
+bioclip,4,1579,320,397,95,False
+bioclip,5,1508,391,391,101,False
+efficientnet_b0,1,1553,346,394,98,False
+efficientnet_b0,2,1469,430,391,101,False
+efficientnet_b0,3,1487,412,395,97,False
+efficientnet_b0,4,1579,320,397,95,False
+efficientnet_b0,5,1508,391,391,101,False

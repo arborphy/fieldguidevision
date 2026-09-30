@@ -1,0 +1,57 @@
+Inspect only the visible content of this botanical photograph. Do not identify
+the species and do not use filenames or metadata. Return every clearly visible plant
+structure and meaningful photographic view/condition. Multiple structures may coexist;
+do not force a single label and do not invent hidden structures.
+
+Return JSON with exactly two arrays:
+1. "tags": 1 to 12 short, natural English visual tags of your own choosing.
+2. "normalized_tags": every applicable item from the controlled vocabulary below.
+There is no fixed number of normalized tags. Use exact vocabulary spelling and omit an
+item when it is not visibly supported. General structure tags and specific view tags may
+both be included.
+
+Controlled vocabulary:
+- whole plant: Most or all of the tree, shrub, vine, or herb is visible.
+- trunk: A main woody trunk is visibly prominent.
+- bark: Bark texture or bark surface is visibly prominent.
+- branch: A woody branch larger than a twig is visibly prominent.
+- stem: A non-trunk stem is visibly prominent.
+- twig: A current or small woody twig is visibly prominent.
+- bud: One or more vegetative or reproductive buds are clearly visible.
+- leaf: One or more broad leaves or leaf blades are visible.
+- needle: Needle-like or scale-like conifer leaves are visible.
+- flower: One or more flowers or visibly flower-like reproductive units are present.
+- inflorescence: A flower cluster, catkin, or whole inflorescence is visible.
+- fruit: Fruit or a fruiting body is visible.
+- cone: A seed or pollen cone is visible.
+- seed: A seed is visibly isolated or is the main subject.
+- view up trunk: The camera looks upward along the trunk into the crown.
+- winter habit: A leaf-off whole plant or crown is shown in winter condition.
+- large-tree bark: Bark is shown on a large mature trunk.
+- medium-tree or large-branch bark: Bark is shown on a medium trunk or large branch.
+- small-tree or branch bark: Bark is shown on a small trunk or branch.
+- leaf upper surface: A whole leaf is presented mainly from its upper surface.
+- leaf margin: The leaf edge or margin is the emphasized subject.
+- leaf arrangement on twig: Leaves are shown in their visible arrangement along a twig.
+- petiole arrangement: Petiole attachment or orientation on a twig is emphasized.
+- needle attachment: Needle attachment to a twig or shoot is emphasized.
+- winter twig: A leafless twig is shown in winter or dormant condition.
+- leaf scar: A leaf scar is clearly shown in close-up.
+- terminal bud: A terminal bud is clearly shown in close-up.
+- immature fruit: Fruit is visibly immature or developing.
+- fruit borne on plant: Fruit is shown attached in its natural position on the plant.
+- fruit close-up: Fruit is the close-up subject without a more specific condition.
+- opened or sectioned fruit: Fruit is open, split, or sectioned so its interior is visible.
+- flower close-up: A flower or reproductive unit is shown at close range.
+- flower interior: The interior of a flower is the emphasized subject.
+- frontal flower view: A flower is viewed front-on.
+- lateral flower view: A flower is viewed from the side.
+- male reproductive structure: A visibly male flower, inflorescence, or pollen cone is shown.
+- female reproductive structure: A visibly female flower, inflorescence, or seed cone is shown.
+- closed cone: A closed or immature seed cone is shown.
+- open cone: A mature open seed cone is shown.
+- receptive cone: A receptive female cone is shown.
+
+Return JSON only, for example:
+{"tags":["broad green leaves","woody twig","immature fruit"],
+ "normalized_tags":["leaf","twig","fruit","immature fruit"]}

@@ -1,0 +1,73 @@
+{
+  "models": [
+    {
+      "model": "DINOv3",
+      "model_key": "dinov3",
+      "images": 1899,
+      "bioimages_evaluable_images": 1897,
+      "bioimages_match_rate": 0.9140748550342647,
+      "top1_exact_match": 0.48655772272008435,
+      "gemma_micro_precision": 0.7739612188365651,
+      "gemma_micro_recall": 0.8055587590819975,
+      "gemma_micro_f1": 0.7894439421338156,
+      "gemma_mean_jaccard": 0.6867989994734071,
+      "mean_predicted_tags": 4.752501316482359
+    },
+    {
+      "model": "BioCLIP 2.5",
+      "model_key": "bioclip",
+      "images": 1899,
+      "bioimages_evaluable_images": 1897,
+      "bioimages_match_rate": 0.8228782287822878,
+      "top1_exact_match": 0.25566684238270954,
+      "gemma_micro_precision": 0.6746421938162351,
+      "gemma_micro_recall": 0.712143928035982,
+      "gemma_micro_f1": 0.6928859964093358,
+      "gemma_mean_jaccard": 0.5658350710900474,
+      "mean_predicted_tags": 4.819905213270142
+    },
+    {
+      "model": "EfficientNet-B0",
+      "model_key": "efficientnet_b0",
+      "images": 1899,
+      "bioimages_evaluable_images": 1897,
+      "bioimages_match_rate": 0.8829731154454402,
+      "top1_exact_match": 0.4290985767000527,
+      "gemma_micro_precision": 0.7257797861787721,
+      "gemma_micro_recall": 0.759427978318533,
+      "gemma_micro_f1": 0.7422227231740306,
+      "gemma_mean_jaccard": 0.6316072143233281,
+      "mean_predicted_tags": 4.777777777777778
+    }
+  ],
+  "images": 1899,
+  "vocabulary_size": 40,
+  "gemma_images": 1899,
+  "individual_leakage": false,
+  "gallery_counts": [
+    {
+      "model": "DINOv3",
+      "model_key": "dinov3",
+      "good_matches": 1333,
+      "bioimages_mismatches": 163,
+      "gemma_disagreements": 82,
+      "model_disagreements": 1427
+    },
+    {
+      "model": "BioCLIP 2.5",
+      "model_key": "bioclip",
+      "good_matches": 952,
+      "bioimages_mismatches": 336,
+      "gemma_disagreements": 312,
+      "model_disagreements": 1427
+    },
+    {
+      "model": "EfficientNet-B0",
+      "model_key": "efficientnet_b0",
+      "good_matches": 1156,
+      "bioimages_mismatches": 222,
+      "gemma_disagreements": 209,
+      "model_disagreements": 1427
+    }
+  ]
+}

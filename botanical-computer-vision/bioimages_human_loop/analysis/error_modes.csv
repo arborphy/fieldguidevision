@@ -1,0 +1,13 @@
+mode_id,name,image_count,dinov3,bioclip,efficientnet_b0,vlm_reviewed,vlm_supported,vlm_annotation_ambiguity
+high_confidence_extra_tag,High-confidence extra tags,757,471,235,463,85,0,72
+flower_fruit_bud_ambiguity,"Flower, fruit, and bud stages overlap",595,473,564,538,101,101,94
+strong_model_disagreement,Backbones make fundamentally different decisions,481,481,481,481,85,83,72
+leaf_view_confusion,Leaf view tags are over-interpreted,459,393,404,396,46,28,42
+secondary_woody_structure_missed,Secondary woody structures are missed,402,345,340,326,60,60,60
+fruit_state_view_confusion,Fruit state and view tags are unstable,345,300,307,316,66,65,59
+whole_plant_scale_split,"Whole-plant views split into trunk, branch, or leaf",277,132,240,141,31,23,30
+reproductive_structure_missed,Reproductive structures disappear in context,229,168,195,202,74,74,72
+bark_scale_confusion,Bark scale is confused,150,132,121,138,27,25,19
+bioimages_single_label_ambiguity,BioImages single-label conflicts may be false alarms,129,67,67,46,34,28,28
+leaf_dominates_reproductive,Leaf dominates flower or fruit,97,39,66,58,34,32,34
+cone_seed_under_detection,Cone and seed under-detection,62,42,49,59,32,19,27

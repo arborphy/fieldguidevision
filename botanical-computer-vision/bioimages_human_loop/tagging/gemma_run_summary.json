@@ -1,0 +1,17 @@
+{
+  "run_version": "bioimages-gemma-multilabel-v2",
+  "stage": "full",
+  "model": "google/gemma-3-27b-it",
+  "images": 1899,
+  "vocabulary_size": 40,
+  "mean_tags": 4.5660874144286465,
+  "cost_usd": 0.16793574599999997,
+  "latency_seconds_sum": 6604.530837246994,
+  "attempt_histogram": {
+    "1": 1884,
+    "2": 13,
+    "3": 2,
+    "4": 0
+  },
+  "status": "complete"
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "high_confidence_extra_tag",
+    "name": "High-confidence extra tags",
+    "description": "A model adds a tag above 0.85 confidence that Gemma does not include.",
+    "cause": "Some are genuine false positives; others expose incomplete model-generated or canonical annotations.",
+    "image_count": 757,
+    "model_counts": {
+      "DINOv3": 471,
+      "BioCLIP 2.5": 235,
+      "EfficientNet-B0": 463
+    },
+    "vlm_reviewed": 85,
+    "vlm_supported": 0,
+    "vlm_annotation_ambiguity": 72,
+    "vlm_common_cause": "",
+    "representative_image_ids": [
+      "baskauf/10565",
+      "baskauf/11744",
+      "baskauf/11125",
+      "baskauf/10794",
+      "baskauf/16509",
+      "thomas/0486-01-10",
+      "baskauf/15074",
+      "baskauf/39502",
+      "kirchoff/em2571",
+      "baskauf/15942",
+      "baskauf/30961",
+      "baskauf/12316"
+    ]
+  },
+  {
+    "id": "flower_fruit_bud_ambiguity",
+    "name": "Flower, fruit, and bud stages overlap",
+    "description": "Predictions cross between flower, inflorescence, bud, immature fruit, and fruit.",
+    "cause": "Closely related developmental stages share shape and color, and several may be visible together.",
+    "image_count": 595,
+    "model_counts": {
+      "DINOv3": 473,
+      "BioCLIP 2.5": 564,
+      "EfficientNet-B0": 538
+    },
+    "vlm_reviewed": 101,
+    "vlm_supported": 101,
+    "vlm_annotation_ambiguity": 94,
+    "vlm_common_cause": "Adjacent reproductive stages share visual form and can appear together.",
+    "representative_image_ids": [
+      "baskauf/11744",
+      "baskauf/15721",
+      "baskauf/70792",
+      "baskauf/10794",
+      "baskauf/31447",
+      "baskauf/34222",
+      "baskauf/50996",
+      "baskauf/24270",
+      "baskauf/39173",
+      "baskauf/38311",
+      "baskauf/10565",
+      "baskauf/11125"
+    ]
+  },
+  {
+    "id": "strong_model_disagreement",
+    "name": "Backbones make fundamentally different decisions",
+    "description": "The three model tag sets have low overlap or disagree on their top tag.",
+    "cause": "DINOv3, BioCLIP, and EfficientNet emphasize different morphology, semantic, and texture cues.",
+    "image_count": 481,
+    "model_counts": {
+      "DINOv3": 481,
+      "BioCLIP 2.5": 481,
+      "EfficientNet-B0": 481
+    },
+    "vlm_reviewed": 85,
+    "vlm_supported": 83,
+    "vlm_annotation_ambiguity": 72,
+    "vlm_common_cause": "The photograph contains competing texture, shape, and scene-scale cues.",
+    "representative_image_ids": [
+      "baskauf/54826",
+      "baskauf/15721",
+      "baskauf/10794",
+      "baskauf/70792",
+      "baskauf/39154",
+      "vanderbilt/mcgaw-p137-old-central-porch",
+      "baskauf/24254",
+      "baskauf/11753",
+      "baskauf/39173",
+      "baskauf/50996",
+      "baskauf/50503",
+      "baskauf/31447"
+    ]
+  },
+  {
+    "id": "leaf_view_confusion",
+    "name": "Leaf view tags are over-interpreted",
+    "description": "Upper surface, margin, arrangement, and petiole view tags are missed or added inconsistently.",
+    "cause": "The same photograph can legitimately show several leaf details, while BioImages names only one primary view.",
+    "image_count": 459,
+    "model_counts": {
+      "DINOv3": 393,
+      "BioCLIP 2.5": 404,
+      "EfficientNet-B0": 396
+    },
+    "vlm_reviewed": 46,
+    "vlm_supported": 28,
+    "vlm_annotation_ambiguity": 42,
+    "vlm_common_cause": "One leaf photograph can simultaneously show surface, margin, arrangement, and petiole details.",
+    "representative_image_ids": [
+      "baskauf/11744",
+      "baskauf/54826",
+      "ssmv/2-185-03",
+      "baskauf/11732",
+      "baskauf/55769",
+      "baskauf/19189",
+      "baskauf/51409",
+      "baskauf/13209",
+      "baskauf/10459",
+      "baskauf/43548",
+      "baskauf/32629",
+      "baskauf/29702"
+    ]
+  },
+  {
+    "id": "secondary_woody_structure_missed",
+    "name": "Secondary woody structures are missed",
+    "description": "Twig, branch, or stem is visible with the main subject but at least two models omit it.",
+    "cause": "Small woody structures occupy less area than the primary organ and are weakly represented by single-subject training labels.",
+    "image_count": 402,
+    "model_counts": {
+      "DINOv3": 345,
+      "BioCLIP 2.5": 340,
+      "EfficientNet-B0": 326
+    },
+    "vlm_reviewed": 60,
+    "vlm_supported": 60,
+    "vlm_annotation_ambiguity": 60,
+    "vlm_common_cause": "Small secondary twigs and stems are visually present but occupy less area than the primary organ.",
+    "representative_image_ids": [
+      "baskauf/38309",
+      "baskauf/54826",
+      "baskauf/70792",
+      "baskauf/39154",
+      "baskauf/11744",
+      "ssmv/2-185-03",
+      "baskauf/31996",
+      "baskauf/28649",
+      "baskauf/10791",
+      "baskauf/10380",
+      "thomas/0014-01-01",
+      "baskauf/19269"
+    ]
+  },
+  {
+    "id": "fruit_state_view_confusion",
+    "name": "Fruit state and view tags are unstable",
+    "description": "Models disagree about immature, attached, close-up, or opened fruit views.",
+    "cause": "Fine fruit states have limited support and can co-occur, making a single view label visually ambiguous.",
+    "image_count": 345,
+    "model_counts": {
+      "DINOv3": 300,
+      "BioCLIP 2.5": 307,
+      "EfficientNet-B0": 316
+    },
+    "vlm_reviewed": 66,
+    "vlm_supported": 65,
+    "vlm_annotation_ambiguity": 59,
+    "vlm_common_cause": "Fruit state and view tags co-occur and are difficult to separate from one still image.",
+    "representative_image_ids": [
+      "baskauf/38309",
+      "baskauf/15721",
+      "baskauf/70792",
+      "baskauf/24254",
+      "baskauf/50503",
+      "baskauf/10565",
+      "baskauf/50588",
+      "baskauf/10380",
+      "baskauf/13418",
+      "baskauf/12316",
+      "baskauf/25640",
+      "baskauf/11125"
+    ]
+  },
+  {
+    "id": "whole_plant_scale_split",
+    "name": "Whole-plant views split into trunk, branch, or leaf",
+    "description": "Models disagree on scene scale, especially between whole plant and its dominant local structure.",
+    "cause": "Global and local cues coexist; different backbones emphasize canopy texture, trunk geometry, or individual leaves.",
+    "image_count": 277,
+    "model_counts": {
+      "DINOv3": 132,
+      "BioCLIP 2.5": 240,
+      "EfficientNet-B0": 141
+    },
+    "vlm_reviewed": 31,
+    "vlm_supported": 23,
+    "vlm_annotation_ambiguity": 30,
+    "vlm_common_cause": "Global plant scale and local trunk, branch, and leaf cues coexist in the same frame.",
+    "representative_image_ids": [
+      "baskauf/11732",
+      "vanderbilt/mcgaw-p137-old-central-porch",
+      "baskauf/11054",
+      "baskauf/19269",
+      "thomas/0014-01-01",
+      "baskauf/28649",
+      "baskauf/10834",
+      "baskauf/43553",
+      "baskauf/13654",
+      "baskauf/35290",
+      "kirchoff/b5132",
+      "baskauf/54556"
+    ]
+  },
+  {
+    "id": "reproductive_structure_missed",
+    "name": "Reproductive structures disappear in context",
+    "description": "Flower, fruit, cone, seed, or inflorescence is present but at least two models miss it.",
+    "cause": "Small reproductive structures are visually dominated by leaves, twigs, or the wider plant view.",
+    "image_count": 229,
+    "model_counts": {
+      "DINOv3": 168,
+      "BioCLIP 2.5": 195,
+      "EfficientNet-B0": 202
+    },
+    "vlm_reviewed": 74,
+    "vlm_supported": 74,
+    "vlm_annotation_ambiguity": 72,
+    "vlm_common_cause": "Small reproductive structures are visually dominated by leaves, twigs, or wider context.",
+    "representative_image_ids": [
+      "baskauf/11744",
+      "baskauf/38309",
+      "baskauf/70792",
+      "baskauf/10794",
+      "baskauf/15721",
+      "baskauf/50503",
+      "baskauf/24270",
+      "baskauf/11125",
+      "baskauf/34222",
+      "kirchoff/em2061",
+      "baskauf/20950",
+      "baskauf/10554"
+    ]
+  },
+  {
+    "id": "bark_scale_confusion",
+    "name": "Bark scale is confused",
+    "description": "Large-trunk, medium-branch, and small-branch bark views are interchanged or missed.",
+    "cause": "Crop scale and lack of an absolute size reference make neighboring bark categories difficult to separate.",
+    "image_count": 150,
+    "model_counts": {
+      "DINOv3": 132,
+      "BioCLIP 2.5": 121,
+      "EfficientNet-B0": 138
+    },
+    "vlm_reviewed": 27,
+    "vlm_supported": 25,
+    "vlm_annotation_ambiguity": 19,
+    "vlm_common_cause": "Bark texture is visible without enough context to reliably infer trunk or branch scale.",
+    "representative_image_ids": [
+      "baskauf/39173",
+      "baskauf/39156",
+      "baskauf/15074",
+      "baskauf/30961",
+      "baskauf/16195",
+      "thomas/0486-01-09",
+      "baskauf/37293",
+      "baskauf/65653",
+      "baskauf/11213",
+      "baskauf/13885",
+      "thomas/0440-04-02",
+      "baskauf/51003"
+    ]
+  },
+  {
+    "id": "bioimages_single_label_ambiguity",
+    "name": "BioImages single-label conflicts may be false alarms",
+    "description": "Models agree well with Gemma but miss the one BioImages canonical tag.",
+    "cause": "The canonical label describes the intended subject, while other structures can dominate what is visibly present.",
+    "image_count": 129,
+    "model_counts": {
+      "DINOv3": 67,
+      "BioCLIP 2.5": 67,
+      "EfficientNet-B0": 46
+    },
+    "vlm_reviewed": 34,
+    "vlm_supported": 28,
+    "vlm_annotation_ambiguity": 28,
+    "vlm_common_cause": "The photograph visibly contains multiple structures although BioImages records one intended subject.",
+    "representative_image_ids": [
+      "baskauf/50996",
+      "baskauf/10892",
+      "baskauf/26495",
+      "baskauf/50467",
+      "baskauf/10897",
+      "baskauf/11125",
+      "baskauf/28649",
+      "baskauf/13654",
+      "baskauf/34222",
+      "baskauf/13537",
+      "baskauf/19689",
+      "baskauf/51172"
+    ]
+  },
+  {
+    "id": "leaf_dominates_reproductive",
+    "name": "Leaf dominates flower or fruit",
+    "description": "A reproductive structure is present, yet one or more models lead with leaf and omit reproductive tags.",
+    "cause": "Large high-contrast foliage overwhelms smaller flowers or fruits in the pooled image representation.",
+    "image_count": 97,
+    "model_counts": {
+      "DINOv3": 39,
+      "BioCLIP 2.5": 66,
+      "EfficientNet-B0": 58
+    },
+    "vlm_reviewed": 34,
+    "vlm_supported": 32,
+    "vlm_annotation_ambiguity": 34,
+    "vlm_common_cause": "Large leaf area pulls predictions away from smaller flowers, fruit, cones, or seeds.",
+    "representative_image_ids": [
+      "baskauf/15721",
+      "baskauf/11744",
+      "baskauf/24270",
+      "baskauf/11125",
+      "baskauf/70792",
+      "baskauf/10757",
+      "baskauf/79657",
+      "baskauf/12363",
+      "baskauf/55769",
+      "baskauf/51409",
+      "kirchoff/em2587",
+      "baskauf/13127"
+    ]
+  },
+  {
+    "id": "cone_seed_under_detection",
+    "name": "Cone and seed under-detection",
+    "description": "Cone or seed is supported by BioImages or Gemma but is absent from one or more model tag sets.",
+    "cause": "These are rare classes and often resemble fruit, flowers, buds, or background texture.",
+    "image_count": 62,
+    "model_counts": {
+      "DINOv3": 42,
+      "BioCLIP 2.5": 49,
+      "EfficientNet-B0": 59
+    },
+    "vlm_reviewed": 32,
+    "vlm_supported": 19,
+    "vlm_annotation_ambiguity": 27,
+    "vlm_common_cause": "Cone and seed morphology is rare and may resemble fruit, flowers, or woody texture.",
+    "representative_image_ids": [
+      "baskauf/38309",
+      "baskauf/50503",
+      "baskauf/11054",
+      "baskauf/20950",
+      "baskauf/39501",
+      "baskauf/50588",
+      "baskauf/16842",
+      "baskauf/24849",
+      "baskauf/55230",
+      "baskauf/13418",
+      "baskauf/30439",
+      "baskauf/20031"
+    ]
+  }
+]

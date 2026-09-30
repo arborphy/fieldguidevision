@@ -1,0 +1,206 @@
+{
+  "vocabulary": [
+    {
+      "tag": "whole plant",
+      "kind": "structure",
+      "description": "Most or all of the tree, shrub, vine, or herb is visible."
+    },
+    {
+      "tag": "trunk",
+      "kind": "structure",
+      "description": "A main woody trunk is visibly prominent."
+    },
+    {
+      "tag": "bark",
+      "kind": "structure",
+      "description": "Bark texture or bark surface is visibly prominent."
+    },
+    {
+      "tag": "branch",
+      "kind": "structure",
+      "description": "A woody branch larger than a twig is visibly prominent."
+    },
+    {
+      "tag": "stem",
+      "kind": "structure",
+      "description": "A non-trunk stem is visibly prominent."
+    },
+    {
+      "tag": "twig",
+      "kind": "structure",
+      "description": "A current or small woody twig is visibly prominent."
+    },
+    {
+      "tag": "bud",
+      "kind": "structure",
+      "description": "One or more vegetative or reproductive buds are clearly visible."
+    },
+    {
+      "tag": "leaf",
+      "kind": "structure",
+      "description": "One or more broad leaves or leaf blades are visible."
+    },
+    {
+      "tag": "needle",
+      "kind": "structure",
+      "description": "Needle-like or scale-like conifer leaves are visible."
+    },
+    {
+      "tag": "flower",
+      "kind": "structure",
+      "description": "One or more flowers or visibly flower-like reproductive units are present."
+    },
+    {
+      "tag": "inflorescence",
+      "kind": "structure",
+      "description": "A flower cluster, catkin, or whole inflorescence is visible."
+    },
+    {
+      "tag": "fruit",
+      "kind": "structure",
+      "description": "Fruit or a fruiting body is visible."
+    },
+    {
+      "tag": "cone",
+      "kind": "structure",
+      "description": "A seed or pollen cone is visible."
+    },
+    {
+      "tag": "seed",
+      "kind": "structure",
+      "description": "A seed is visibly isolated or is the main subject."
+    },
+    {
+      "tag": "view up trunk",
+      "kind": "view",
+      "description": "The camera looks upward along the trunk into the crown."
+    },
+    {
+      "tag": "winter habit",
+      "kind": "view",
+      "description": "A leaf-off whole plant or crown is shown in winter condition."
+    },
+    {
+      "tag": "large-tree bark",
+      "kind": "view",
+      "description": "Bark is shown on a large mature trunk."
+    },
+    {
+      "tag": "medium-tree or large-branch bark",
+      "kind": "view",
+      "description": "Bark is shown on a medium trunk or large branch."
+    },
+    {
+      "tag": "small-tree or branch bark",
+      "kind": "view",
+      "description": "Bark is shown on a small trunk or branch."
+    },
+    {
+      "tag": "leaf upper surface",
+      "kind": "view",
+      "description": "A whole leaf is presented mainly from its upper surface."
+    },
+    {
+      "tag": "leaf margin",
+      "kind": "view",
+      "description": "The leaf edge or margin is the emphasized subject."
+    },
+    {
+      "tag": "leaf arrangement on twig",
+      "kind": "view",
+      "description": "Leaves are shown in their visible arrangement along a twig."
+    },
+    {
+      "tag": "petiole arrangement",
+      "kind": "view",
+      "description": "Petiole attachment or orientation on a twig is emphasized."
+    },
+    {
+      "tag": "needle attachment",
+      "kind": "view",
+      "description": "Needle attachment to a twig or shoot is emphasized."
+    },
+    {
+      "tag": "winter twig",
+      "kind": "view",
+      "description": "A leafless twig is shown in winter or dormant condition."
+    },
+    {
+      "tag": "leaf scar",
+      "kind": "view",
+      "description": "A leaf scar is clearly shown in close-up."
+    },
+    {
+      "tag": "terminal bud",
+      "kind": "view",
+      "description": "A terminal bud is clearly shown in close-up."
+    },
+    {
+      "tag": "immature fruit",
+      "kind": "view",
+      "description": "Fruit is visibly immature or developing."
+    },
+    {
+      "tag": "fruit borne on plant",
+      "kind": "view",
+      "description": "Fruit is shown attached in its natural position on the plant."
+    },
+    {
+      "tag": "fruit close-up",
+      "kind": "view",
+      "description": "Fruit is the close-up subject without a more specific condition."
+    },
+    {
+      "tag": "opened or sectioned fruit",
+      "kind": "view",
+      "description": "Fruit is open, split, or sectioned so its interior is visible."
+    },
+    {
+      "tag": "flower close-up",
+      "kind": "view",
+      "description": "A flower or reproductive unit is shown at close range."
+    },
+    {
+      "tag": "flower interior",
+      "kind": "view",
+      "description": "The interior of a flower is the emphasized subject."
+    },
+    {
+      "tag": "frontal flower view",
+      "kind": "view",
+      "description": "A flower is viewed front-on."
+    },
+    {
+      "tag": "lateral flower view",
+      "kind": "view",
+      "description": "A flower is viewed from the side."
+    },
+    {
+      "tag": "male reproductive structure",
+      "kind": "view",
+      "description": "A visibly male flower, inflorescence, or pollen cone is shown."
+    },
+    {
+      "tag": "female reproductive structure",
+      "kind": "view",
+      "description": "A visibly female flower, inflorescence, or seed cone is shown."
+    },
+    {
+      "tag": "closed cone",
+      "kind": "view",
+      "description": "A closed or immature seed cone is shown."
+    },
+    {
+      "tag": "open cone",
+      "kind": "view",
+      "description": "A mature open seed cone is shown."
+    },
+    {
+      "tag": "receptive cone",
+      "kind": "view",
+      "description": "A receptive female cone is shown."
+    }
+  ],
+  "policy": "Visible structures may co-occur. Specific view tags supplement, never replace, structure tags.",
+  "mapping_caveat": "Mappings are for BioImages audit and vocabulary provenance; unlisted tags are not asserted absent and do not train the probes."
+}

@@ -1,0 +1,1900 @@
+image_id,species,mean_pairwise_jaccard,model_disagreement,dinov3_top1,bioclip_top1,efficientnet_b0_top1
+baskauf/00000,Acer rubrum,0.373,True,winter habit,whole plant,winter habit
+baskauf/00001,Acer rubrum,0.3333,True,inflorescence,inflorescence,inflorescence
+baskauf/10206,Cercis canadensis,0.454,True,fruit borne on plant,leaf,branch
+baskauf/10207,Cercis canadensis,0.5556,True,fruit borne on plant,leaf,branch
+baskauf/10213,Nyssa sylvatica,1.0,False,whole plant,whole plant,whole plant
+baskauf/10218,Nyssa sylvatica,0.6444,False,leaf,leaf,leaf
+baskauf/10220,Tilia americana,0.2778,True,fruit,branch,fruit
+baskauf/10221,Nyssa sylvatica,0.6111,False,leaf,leaf,leaf
+baskauf/10225,Pinus strobus,0.4405,True,needle,needle,branch
+baskauf/10332,Juniperus virginiana,0.1667,True,needle,twig,whole plant
+baskauf/10333,Juniperus virginiana,0.4349,True,winter habit,winter habit,winter habit
+baskauf/10336,Platanus occidentalis,0.6369,True,view up trunk,winter habit,winter habit
+baskauf/10338,Platanus occidentalis,0.5833,True,winter habit,whole plant,whole plant
+baskauf/10339,Cercis canadensis,0.3016,True,fruit borne on plant,branch,winter habit
+baskauf/10341,Ulmus americana,0.8889,True,branch,branch,view up trunk
+baskauf/10343,Ulmus americana,0.3571,True,winter habit,winter habit,winter habit
+baskauf/10344,Ulmus americana,0.5139,True,inflorescence,winter habit,winter habit
+baskauf/10374,Acer saccharum,0.7667,True,whole plant,view up trunk,branch
+baskauf/10376,Acer saccharum,0.627,True,bud,bud,inflorescence
+baskauf/10377,Cornus florida,0.5423,True,twig,flower close-up,twig
+baskauf/10380,Ulmus americana,0.4815,True,immature fruit,twig,twig
+baskauf/10386,Acer saccharum,0.7937,True,inflorescence,bud,twig
+baskauf/10392,Cercis canadensis,0.7778,True,twig,flower,inflorescence
+baskauf/10393,Cercis canadensis,0.5529,True,flower close-up,flower,flower close-up
+baskauf/10414,Rhus glabra,0.416,True,winter habit,fruit borne on plant,winter habit
+baskauf/10415,Rhus glabra,0.4472,True,fruit,inflorescence,fruit borne on plant
+baskauf/10419,Rhus copallinum,0.4286,True,fruit,stem,twig
+baskauf/10420,Rhus copallinum,0.4841,True,winter habit,twig,winter habit
+baskauf/10427,Nyssa sylvatica,0.7778,True,bud,bud,winter twig
+baskauf/10430,Fagus grandifolia,0.4944,True,twig,twig,twig
+baskauf/10431,Fagus grandifolia,0.6,False,winter twig,winter twig,winter twig
+baskauf/10432,Fagus grandifolia,0.6444,False,bark,bark,bark
+baskauf/10457,Fagus grandifolia,0.3026,True,inflorescence,twig,flower
+baskauf/10459,Fagus grandifolia,0.3611,True,twig,twig,branch
+baskauf/10460,Fagus grandifolia,0.2929,True,twig,twig,branch
+baskauf/10462,Platanus occidentalis,0.4286,True,bark,winter habit,large-tree bark
+baskauf/10463,Platanus occidentalis,0.2778,True,fruit,fruit borne on plant,fruit close-up
+baskauf/10464,Platanus occidentalis,0.5714,True,winter habit,winter habit,branch
+baskauf/10469,Cornus florida,0.6296,True,flower close-up,frontal flower view,flower close-up
+baskauf/10470,Cornus florida,0.5,True,twig,frontal flower view,flower close-up
+baskauf/10471,Cornus florida,0.8667,True,bark,medium-tree or large-branch bark,bark
+baskauf/10474,Fagus grandifolia,0.3778,True,twig,twig,twig
+baskauf/10485,Tsuga canadensis,0.416,True,cone,cone,inflorescence
+baskauf/10491,Cercis canadensis,0.8667,True,winter habit,winter habit,whole plant
+baskauf/10492,Acer rubrum,0.3944,True,twig,fruit borne on plant,twig
+baskauf/10493,Cercis canadensis,0.7333,True,whole plant,branch,whole plant
+baskauf/10494,Acer rubrum,0.8667,False,winter habit,winter habit,winter habit
+baskauf/10495,Acer rubrum,0.4508,True,twig,fruit borne on plant,bud
+baskauf/10496,Acer rubrum,0.7167,False,winter habit,winter habit,winter habit
+baskauf/10497,Cercis canadensis,0.8889,False,winter habit,winter habit,winter habit
+baskauf/10498,Quercus rubra,0.4667,True,branch,branch,winter habit
+baskauf/10499,Quercus rubra,0.7,True,bark,large-tree bark,bark
+baskauf/10502,Ginkgo biloba,0.4286,True,bud,branch,branch
+baskauf/10503,Fagus grandifolia,0.5231,False,inflorescence,inflorescence,inflorescence
+baskauf/10504,Fagus grandifolia,0.3333,True,inflorescence,immature fruit,flower
+baskauf/10506,Fagus grandifolia,0.6852,True,inflorescence,inflorescence,flower
+baskauf/10515,Tsuga canadensis,0.3833,True,needle,cone,twig
+baskauf/10516,Tsuga canadensis,0.2656,True,needle,needle,immature fruit
+baskauf/10534,Cornus florida,0.5481,True,flower close-up,frontal flower view,flower close-up
+baskauf/10535,Cornus florida,0.3417,True,flower close-up,frontal flower view,flower
+baskauf/10536,Tsuga canadensis,0.404,True,needle,cone,immature fruit
+baskauf/10537,Sassafras albidum,0.5926,False,flower,flower,flower
+baskauf/10539,Sassafras albidum,0.5231,True,flower,inflorescence,inflorescence
+baskauf/10550,Fagus grandifolia,0.8667,True,fruit,immature fruit,fruit
+baskauf/10554,Ginkgo biloba,0.1806,True,inflorescence,inflorescence,bark
+baskauf/10556,Ginkgo biloba,0.2222,True,stem,bud,fruit close-up
+baskauf/10557,Ginkgo biloba,0.3333,True,bud,immature fruit,branch
+baskauf/10564,Acer saccharum,0.487,True,inflorescence,bud,inflorescence
+baskauf/10565,Acer saccharum,0.6306,True,immature fruit,bud,immature fruit
+baskauf/10570,Acer saccharum,0.6296,True,bud,bud,twig
+baskauf/10574,Nyssa sylvatica,0.6991,True,bud,immature fruit,flower
+baskauf/10602,Fagus grandifolia,0.5417,True,leaf,immature fruit,leaf
+baskauf/10603,Cornus florida,0.75,False,flower close-up,flower close-up,flower close-up
+baskauf/10606,Acer saccharum,0.4815,True,immature fruit,bud,leaf
+baskauf/10643,Prunus serotina,0.8889,True,whole plant,branch,whole plant
+baskauf/10651,Prunus serotina,0.6528,False,inflorescence,inflorescence,inflorescence
+baskauf/10652,Prunus serotina,0.5571,True,flower,inflorescence,inflorescence
+baskauf/10670,Tilia americana,0.4583,True,immature fruit,immature fruit,inflorescence
+baskauf/10673,Juglans nigra,0.4757,True,inflorescence,inflorescence,branch
+baskauf/10674,Juglans nigra,0.5794,True,leaf,branch,leaf
+baskauf/10675,Aesculus hippocastanum,0.6032,False,inflorescence,inflorescence,inflorescence
+baskauf/10676,Aesculus hippocastanum,0.55,True,flower close-up,frontal flower view,flower close-up
+baskauf/10677,Aesculus hippocastanum,0.6389,True,flower,flower,flower close-up
+baskauf/10683,Juglans nigra,0.4545,True,stem,stem,immature fruit
+baskauf/10685,Juglans nigra,1.0,True,trunk,trunk,bark
+baskauf/10688,Juglans nigra,0.6157,False,leaf,leaf,leaf
+baskauf/10689,Aesculus glabra,0.5333,True,inflorescence,flower,leaf
+baskauf/10690,Aesculus glabra,0.619,True,inflorescence,flower,inflorescence
+baskauf/10692,Aesculus glabra,0.4762,True,flower close-up,flower,inflorescence
+baskauf/10693,Aesculus glabra,1.0,True,bark,large-tree bark,bark
+baskauf/10739,Cercis canadensis,0.3294,True,leaf,leaf,twig
+baskauf/10757,Fagus grandifolia,0.6333,False,leaf,leaf,leaf
+baskauf/10766,Cercis canadensis,0.4111,True,leaf,leaf,leaf
+baskauf/10791,Juniperus virginiana,0.4222,True,needle,needle,leaf
+baskauf/10793,Juniperus virginiana,0.2222,True,needle,needle,flower close-up
+baskauf/10794,Juniperus virginiana,0.2619,True,needle,needle,whole plant
+baskauf/10805,Tsuga canadensis,0.3393,True,needle,cone,twig
+baskauf/10832,Toxicodendron radicans,0.3095,True,inflorescence,stem,flower
+baskauf/10833,Toxicodendron radicans,0.6548,True,leaf,trunk,leaf
+baskauf/10834,Toxicodendron radicans,0.4286,True,leaf,trunk,trunk
+baskauf/10856,Cornus florida,1.0,True,bark,large-tree bark,bark
+baskauf/10858,Quercus palustris,0.8333,True,trunk,large-tree bark,bark
+baskauf/10861,Acer saccharum,0.7,False,bark,bark,bark
+baskauf/10890,Sassafras albidum,1.0,False,leaf,leaf,leaf
+baskauf/10892,Toxicodendron radicans,0.7,True,leaf,stem,leaf
+baskauf/10893,Toxicodendron radicans,0.5333,True,leaf,stem,leaf
+baskauf/10897,Acer negundo,0.7167,True,leaf,stem,leaf
+baskauf/10904,Ailanthus altissima,0.5926,True,leaf,fruit,leaf
+baskauf/10934,Rhus glabra,1.0,True,leaf arrangement on twig,leaf,leaf
+baskauf/10935,Rhus glabra,0.5762,True,leaf,stem,leaf arrangement on twig
+baskauf/10936,Rhus glabra,0.75,True,leaf,stem,leaf
+baskauf/10937,Rhus glabra,0.1667,True,leaf scar,leaf scar,opened or sectioned fruit
+baskauf/10938,Rhus copallinum,0.6417,False,leaf,leaf,leaf
+baskauf/10939,Rhus copallinum,0.8333,True,leaf,leaf,leaf arrangement on twig
+baskauf/10941,Rhus glabra,0.2778,True,medium-tree or large-branch bark,stem,leaf scar
+baskauf/10942,Rhus copallinum,0.4444,True,bud,small-tree or branch bark,small-tree or branch bark
+baskauf/10966,Magnolia acuminata,0.4074,True,leaf,leaf,leaf
+baskauf/10972,Magnolia acuminata,0.6131,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/10975,Magnolia acuminata,0.6111,False,leaf,leaf,leaf
+baskauf/10977,Magnolia acuminata,1.0,True,bark,trunk,bark
+baskauf/10978,Ailanthus altissima,0.8889,True,whole plant,leaf,whole plant
+baskauf/10980,Ailanthus altissima,0.5556,False,leaf,leaf,leaf
+baskauf/10981,Nyssa sylvatica,0.287,True,inflorescence,leaf,leaf
+baskauf/10987,Nyssa sylvatica,0.8333,False,bark,bark,bark
+baskauf/10988,Nyssa sylvatica,0.6528,True,flower close-up,flower close-up,inflorescence
+baskauf/10991,Ulmus rubra,0.8667,True,whole plant,view up trunk,whole plant
+baskauf/10992,Quercus alba,1.0,False,whole plant,whole plant,whole plant
+baskauf/10993,Quercus alba,0.6167,False,leaf,leaf,leaf
+baskauf/10997,Ailanthus altissima,0.4286,True,whole plant,leaf,whole plant
+baskauf/10998,Ailanthus altissima,0.7,True,leaf,leaf,whole plant
+baskauf/10999,Ailanthus altissima,0.3843,True,leaf,leaf,leaf
+baskauf/11019,Lindera benzoin,0.7167,False,leaf,leaf,leaf
+baskauf/11030,Carpinus caroliniana,0.6444,False,leaf,leaf,leaf
+baskauf/11037,Ulmus rubra,0.7667,False,leaf,leaf,leaf
+baskauf/11038,Ulmus rubra,0.4667,True,leaf,leaf,leaf
+baskauf/11053,Populus deltoides,0.5778,True,fruit,immature fruit,immature fruit
+baskauf/11054,Populus deltoides,0.3056,True,leaf,branch,branch
+baskauf/11064,Populus deltoides,0.3267,True,inflorescence,branch,leaf
+baskauf/11066,Populus deltoides,0.9048,True,bark,branch,trunk
+baskauf/11070,Populus deltoides,0.6,False,leaf,leaf,leaf
+baskauf/11078,Salix nigra,0.5424,True,stem,inflorescence,inflorescence
+baskauf/11086,Lindera benzoin,0.7778,False,leaf,leaf,leaf
+baskauf/11091,Pinus strobus,0.3889,True,inflorescence,cone,inflorescence
+baskauf/11093,Pinus strobus,0.7167,True,needle,needle,needle attachment
+baskauf/11094,Pinus strobus,0.8333,True,bark,trunk,bark
+baskauf/11100,Juniperus virginiana,0.8333,True,bark,trunk,bark
+baskauf/11102,Ailanthus altissima,0.5053,False,inflorescence,inflorescence,inflorescence
+baskauf/11105,Ailanthus altissima,0.7579,True,flower,inflorescence,inflorescence
+baskauf/11106,Ailanthus altissima,0.5377,False,leaf,leaf,leaf
+baskauf/11107,Ailanthus altissima,0.4259,True,leaf,leaf arrangement on twig,leaf
+baskauf/11109,Ailanthus altissima,0.4667,True,bark,fruit,bark
+baskauf/11111,Juglans nigra,1.0,False,whole plant,whole plant,whole plant
+baskauf/11124,Platanus occidentalis,0.6389,True,leaf,leaf upper surface,leaf
+baskauf/11125,Platanus occidentalis,0.1984,True,immature fruit,leaf upper surface,leaf
+baskauf/11127,Platanus occidentalis,0.5,True,fruit,fruit borne on plant,fruit close-up
+baskauf/11166,Juniperus virginiana,0.4563,True,needle,needle,twig
+baskauf/11174,Ginkgo biloba,0.5111,True,leaf arrangement on twig,branch,leaf
+baskauf/11176,Ginkgo biloba,0.3278,True,leaf arrangement on twig,fruit borne on plant,leaf
+baskauf/11181,Aesculus glabra,0.7778,False,leaf,leaf,leaf
+baskauf/11182,Aesculus glabra,0.7556,False,leaf,leaf,leaf
+baskauf/11187,Juglans nigra,0.5,False,leaf,leaf,leaf
+baskauf/11188,Juglans nigra,0.6333,False,leaf,leaf,leaf
+baskauf/11202,Juniperus virginiana,0.7778,True,needle,needle,needle attachment
+baskauf/11206,Cercis canadensis,0.6667,False,leaf,leaf,leaf
+baskauf/11208,Cercis canadensis,0.3,True,leaf,leaf,leaf
+baskauf/11211,Cercis canadensis,0.3,True,fruit,twig,twig
+baskauf/11213,Prunus serotina,0.0833,True,bark,stem,bark
+baskauf/11227,Cercis canadensis,1.0,True,bark,large-tree bark,bark
+baskauf/11243,Cornus florida,0.5111,False,leaf,leaf,leaf
+baskauf/11248,Cornus florida,0.4392,True,leaf,leaf,leaf
+baskauf/11251,Quercus alba,0.6556,True,bark,large-tree bark,bark
+baskauf/11288,Acer saccharum,0.6238,False,leaf,leaf,leaf
+baskauf/11294,Acer saccharum,0.4667,True,leaf,leaf,leaf
+baskauf/11301,Ginkgo biloba,0.8889,False,whole plant,whole plant,whole plant
+baskauf/11304,Ginkgo biloba,0.4111,True,leaf,leaf,leaf
+baskauf/11320,Ulmus rubra,0.8667,True,whole plant,leaf,whole plant
+baskauf/11322,Sassafras albidum,0.5278,True,whole plant,leaf,leaf
+baskauf/11327,Prunus serotina,0.8333,False,bark,bark,bark
+baskauf/11331,Prunus serotina,0.7333,False,bark,bark,bark
+baskauf/11335,Juglans nigra,1.0,False,whole plant,whole plant,whole plant
+baskauf/11336,Ulmus rubra,0.7321,True,bark,trunk,trunk
+baskauf/11341,Sassafras albidum,0.8333,True,bark,trunk,bark
+baskauf/11392,Tsuga canadensis,0.6032,True,branch,cone,whole plant
+baskauf/11394,Tsuga canadensis,0.5833,True,needle,cone,needle
+baskauf/11404,Tsuga canadensis,0.8333,True,bark,trunk,bark
+baskauf/11427,Picea rubens,0.6905,True,branch,needle,whole plant
+baskauf/11430,Picea rubens,0.8333,False,needle,needle,needle
+baskauf/11432,Picea rubens,0.6667,False,needle,needle,needle
+baskauf/11434,Picea rubens,0.5762,False,needle,needle,needle
+baskauf/11435,Picea rubens,1.0,False,bark,bark,bark
+baskauf/11449,Betula alleghaniensis,0.5571,False,bark,bark,bark
+baskauf/11454,Robinia pseudoacacia,0.6389,False,bark,bark,bark
+baskauf/11457,Robinia pseudoacacia,1.0,True,view up trunk,trunk,trunk
+baskauf/11458,Robinia pseudoacacia,0.8667,False,bark,bark,bark
+baskauf/11463,Tilia americana,0.5952,True,trunk,trunk,bark
+baskauf/11464,Tilia americana,0.6167,False,leaf,leaf,leaf
+baskauf/11469,Tilia americana,0.6792,True,trunk,branch,trunk
+baskauf/11471,Sambucus racemosa,0.4879,True,leaf,inflorescence,leaf
+baskauf/11477,Sambucus racemosa,0.6296,True,leaf,inflorescence,fruit
+baskauf/11479,Sambucus racemosa,0.7242,True,leaf,inflorescence,fruit borne on plant
+baskauf/11481,Sambucus racemosa,0.8333,False,leaf,leaf,leaf
+baskauf/11482,Sambucus racemosa,0.7333,False,leaf,leaf,leaf
+baskauf/11490,Tsuga canadensis,0.8095,True,whole plant,trunk,whole plant
+baskauf/11492,Tsuga canadensis,0.75,True,whole plant,trunk,trunk
+baskauf/11493,Tsuga canadensis,0.8667,False,bark,bark,bark
+baskauf/11495,Tsuga canadensis,0.8889,False,whole plant,whole plant,whole plant
+baskauf/11497,Tsuga canadensis,0.9048,True,whole plant,view up trunk,whole plant
+baskauf/11498,Robinia pseudoacacia,0.9048,True,whole plant,trunk,trunk
+baskauf/11499,Robinia pseudoacacia,0.9048,True,view up trunk,view up trunk,whole plant
+baskauf/11504,Robinia pseudoacacia,0.9048,True,view up trunk,view up trunk,trunk
+baskauf/11505,Robinia pseudoacacia,0.6389,False,bark,bark,bark
+baskauf/11506,Robinia pseudoacacia,0.6389,True,leaf,leaf arrangement on twig,leaf arrangement on twig
+baskauf/11508,Robinia pseudoacacia,0.8667,True,leaf,leaf arrangement on twig,twig
+baskauf/11509,Robinia pseudoacacia,0.7361,True,whole plant,branch,whole plant
+baskauf/11510,Betula alleghaniensis,0.7667,True,leaf,leaf,leaf upper surface
+baskauf/11511,Betula alleghaniensis,0.7778,True,leaf arrangement on twig,leaf,leaf arrangement on twig
+baskauf/11515,Betula alleghaniensis,0.8889,True,whole plant,trunk,whole plant
+baskauf/11516,Betula alleghaniensis,0.55,False,bark,bark,bark
+baskauf/11522,Juniperus virginiana,0.6111,True,whole plant,needle,whole plant
+baskauf/11524,Juniperus virginiana,0.7333,True,bark,trunk,bark
+baskauf/11534,Castanea dentata,0.7778,True,leaf,whole plant,bark
+baskauf/11535,Castanea dentata,1.0,False,whole plant,whole plant,whole plant
+baskauf/11612,Cornus florida,1.0,False,whole plant,whole plant,whole plant
+baskauf/11613,Cornus florida,0.7333,False,leaf,leaf,leaf
+baskauf/11614,Cornus florida,0.3393,True,leaf,leaf,leaf
+baskauf/11632,Robinia pseudoacacia,0.6667,True,leaf,leaf arrangement on twig,twig
+baskauf/11633,Robinia pseudoacacia,0.7556,True,leaf,leaf arrangement on twig,twig
+baskauf/11643,Tilia americana,0.6444,True,leaf,leaf upper surface,leaf
+baskauf/11644,Tilia americana,0.8889,True,leaf upper surface,leaf,leaf upper surface
+baskauf/11645,Tilia americana,0.4167,True,leaf,leaf,leaf
+baskauf/11646,Tilia americana,0.7333,True,twig,bud,bud
+baskauf/11653,Tilia americana,0.5873,False,bud,bud,bud
+baskauf/11656,Tilia americana,0.8333,True,stem,leaf,leaf
+baskauf/11657,Acer saccharum,1.0,True,view up trunk,view up trunk,branch
+baskauf/11666,Tilia americana,0.7063,True,trunk,whole plant,whole plant
+baskauf/11687,Ulmus americana,0.6794,False,leaf,leaf,leaf
+baskauf/11688,Ulmus americana,0.8667,True,leaf,leaf,leaf upper surface
+baskauf/11689,Ulmus americana,0.7167,True,leaf upper surface,leaf,leaf upper surface
+baskauf/11690,Ulmus americana,0.8333,False,bark,bark,bark
+baskauf/11691,Lindera benzoin,0.8095,False,leaf,leaf,leaf
+baskauf/11695,Lindera benzoin,0.7667,True,leaf,leaf upper surface,leaf upper surface
+baskauf/11696,Lindera benzoin,0.6984,True,bark,small-tree or branch bark,bud
+baskauf/11698,Betula lenta,0.6167,True,bark,trunk,bark
+baskauf/11699,Lindera benzoin,0.4667,True,leaf,stem,leaf
+baskauf/11719,Betula alleghaniensis,0.6167,False,bark,bark,bark
+baskauf/11722,Sassafras albidum,0.6,True,leaf,stem,leaf
+baskauf/11726,Yucca filamentosa,0.5444,True,whole plant,branch,branch
+baskauf/11727,Yucca filamentosa,0.3102,True,flower close-up,immature fruit,flower
+baskauf/11729,Yucca filamentosa,0.3397,True,flower close-up,flower close-up,flower close-up
+baskauf/11730,Yucca filamentosa,0.4074,True,flower,flower,inflorescence
+baskauf/11731,Yucca filamentosa,0.1111,True,twig,fruit,leaf
+baskauf/11732,Yucca filamentosa,0.0667,True,twig,fruit,needle attachment
+baskauf/11733,Tilia americana,0.3175,True,leaf,leaf,leaf
+baskauf/11744,Tilia americana,0.4286,True,leaf,leaf,leaf
+baskauf/11746,Tilia americana,0.4769,True,flower close-up,flower close-up,flower close-up
+baskauf/11751,Tilia americana,0.2889,True,leaf,leaf,leaf
+baskauf/11752,Tilia americana,0.8333,True,leaf,leaf upper surface,leaf upper surface
+baskauf/11753,Tilia americana,0.0,True,fruit,leaf margin,needle
+baskauf/11812,Juglans cinerea,0.6667,True,bark,trunk,bark
+baskauf/11813,Juglans cinerea,0.8095,True,bark,trunk,bark
+baskauf/11815,Juglans cinerea,0.6984,True,leaf,view up trunk,bark
+baskauf/11839,Juglans cinerea,0.5667,False,leaf,leaf,leaf
+baskauf/11840,Juglans cinerea,1.0,True,leaf,leaf arrangement on twig,leaf
+baskauf/11843,Juglans cinerea,0.6349,True,small-tree or branch bark,winter twig,small-tree or branch bark
+baskauf/11845,Castanea dentata,0.4667,True,leaf arrangement on twig,leaf,leaf
+baskauf/11848,Castanea dentata,0.3722,True,leaf,stem,leaf
+baskauf/11849,Castanea dentata,0.5714,True,leaf,leaf,bud
+baskauf/11854,Castanea dentata,0.8667,False,winter twig,winter twig,winter twig
+baskauf/11894,Gymnocladus dioicus,0.8667,False,leaf,leaf,leaf
+baskauf/11896,Gymnocladus dioicus,0.6333,False,leaf,leaf,leaf
+baskauf/11899,Gymnocladus dioicus,1.0,False,leaf,leaf,leaf
+baskauf/11902,Gymnocladus dioicus,0.8333,False,bark,bark,bark
+baskauf/11905,Gymnocladus dioicus,0.8889,True,leaf,leaf arrangement on twig,bud
+baskauf/11916,Acer rubrum,0.3833,True,leaf,leaf upper surface,leaf
+baskauf/11920,Acer rubrum,0.4444,True,leaf,leaf upper surface,leaf
+baskauf/11924,Acer rubrum,0.7,False,bark,bark,bark
+baskauf/11926,Acer rubrum,0.6794,True,leaf,stem,leaf
+baskauf/11927,Acer rubrum,0.6444,False,twig,twig,twig
+baskauf/11930,Acer rubrum,0.7556,False,whole plant,whole plant,whole plant
+baskauf/11945,Aesculus hippocastanum,0.8667,False,whole plant,whole plant,whole plant
+baskauf/11946,Aesculus hippocastanum,0.4392,True,leaf,leaf,immature fruit
+baskauf/11950,Aesculus hippocastanum,0.6444,True,fruit,fruit close-up,fruit
+baskauf/11952,Aesculus hippocastanum,1.0,True,bark,large-tree bark,bark
+baskauf/11958,Ginkgo biloba,1.0,True,bark,trunk,bark
+baskauf/11960,Ginkgo biloba,0.8095,True,bark,trunk,trunk
+baskauf/11961,Prunus serotina,0.5556,False,leaf,leaf,leaf
+baskauf/11962,Prunus serotina,0.5667,False,leaf,leaf,leaf
+baskauf/11964,Prunus serotina,0.3952,True,fruit,leaf,immature fruit
+baskauf/11966,Prunus serotina,0.4167,True,fruit,leaf,fruit
+baskauf/11973,Juglans nigra,0.8889,False,fruit,fruit,fruit
+baskauf/11993,Carya cordiformis,0.7778,False,leaf,leaf,leaf
+baskauf/11995,Carya cordiformis,0.7667,True,stem,bud,stem
+baskauf/11996,Carya cordiformis,0.8889,True,leaf,leaf arrangement on twig,leaf
+baskauf/11997,Carya cordiformis,0.5667,True,bud,stem,bud
+baskauf/11999,Staphylea trifolia,0.5333,False,leaf,leaf,leaf
+baskauf/12002,Staphylea trifolia,0.7333,False,leaf,leaf,leaf
+baskauf/12005,Staphylea trifolia,0.4206,True,fruit,leaf arrangement on twig,flower close-up
+baskauf/12008,Staphylea trifolia,0.5556,True,fruit,leaf arrangement on twig,immature fruit
+baskauf/12021,Ostrya virginiana,0.7778,True,bark,trunk,bark
+baskauf/12036,Carpinus caroliniana,0.6,False,bark,bark,bark
+baskauf/12037,Carpinus caroliniana,0.8667,False,leaf,leaf,leaf
+baskauf/12039,Carpinus caroliniana,0.7778,False,leaf,leaf,leaf
+baskauf/12041,Prunus serotina,0.6952,True,trunk,bark,trunk
+baskauf/12043,Prunus serotina,1.0,True,view up trunk,trunk,view up trunk
+baskauf/12045,Prunus serotina,0.7778,True,bark,bark,large-tree bark
+baskauf/12050,Quercus muehlenbergii,0.8333,True,bark,trunk,bark
+baskauf/12055,Quercus muehlenbergii,0.4762,True,leaf,leaf,branch
+baskauf/12060,Carya cordiformis,0.6667,True,leaf,leaf,leaf upper surface
+baskauf/12128,Ostrya virginiana,0.7667,True,leaf,leaf,leaf upper surface
+baskauf/12129,Ostrya virginiana,0.7667,True,leaf,leaf arrangement on twig,leaf
+baskauf/12131,Ostrya virginiana,0.7556,True,leaf,leaf,branch
+baskauf/12171,Sambucus nigra,0.5952,True,leaf,leaf,whole plant
+baskauf/12175,Sambucus nigra,0.45,True,flower,inflorescence,flower close-up
+baskauf/12178,Sambucus nigra,0.5345,True,leaf,leaf,leaf arrangement on twig
+baskauf/12190,Sambucus nigra,0.4242,True,inflorescence,inflorescence,inflorescence
+baskauf/12192,Sambucus nigra,0.7262,False,inflorescence,inflorescence,inflorescence
+baskauf/12242,Ulmus americana,1.0,True,whole plant,trunk,whole plant
+baskauf/12246,Ulmus americana,1.0,True,bark,trunk,bark
+baskauf/12247,Acer saccharinum,1.0,True,bark,large-tree bark,bark
+baskauf/12251,Acer saccharinum,0.7667,False,whole plant,whole plant,whole plant
+baskauf/12254,Acer saccharinum,0.4619,True,leaf,leaf,leaf
+baskauf/12255,Acer saccharinum,0.6167,True,leaf upper surface,leaf,leaf
+baskauf/12258,Magnolia acuminata,1.0,False,whole plant,whole plant,whole plant
+baskauf/12307,Ginkgo biloba,0.5,True,fruit,leaf,leaf
+baskauf/12309,Ginkgo biloba,0.5873,True,fruit,fruit borne on plant,fruit close-up
+baskauf/12316,Quercus velutina,0.1111,True,bud,twig,fruit close-up
+baskauf/12318,Quercus muehlenbergii,0.8889,False,whole plant,whole plant,whole plant
+baskauf/12319,Quercus muehlenbergii,1.0,True,bark,large-tree bark,bark
+baskauf/12321,Quercus muehlenbergii,0.9048,True,trunk,whole plant,trunk
+baskauf/12323,Quercus muehlenbergii,0.4667,True,leaf,leaf,leaf
+baskauf/12324,Quercus muehlenbergii,0.6667,False,leaf,leaf,leaf
+baskauf/12328,Quercus muehlenbergii,0.5417,True,leaf,leaf,leaf upper surface
+baskauf/12356,Quercus bicolor,0.8333,True,bark,large-tree bark,bark
+baskauf/12361,Quercus bicolor,1.0,False,trunk,trunk,trunk
+baskauf/12363,Quercus bicolor,0.7167,False,leaf,leaf,leaf
+baskauf/12366,Quercus bicolor,1.0,False,leaf,leaf,leaf
+baskauf/12368,Quercus bicolor,0.8333,True,leaf,leaf upper surface,leaf upper surface
+baskauf/12376,Quercus muehlenbergii,0.25,True,petiole arrangement,leaf upper surface,winter twig
+baskauf/12382,Quercus bicolor,1.0,False,leaf margin,leaf margin,leaf margin
+baskauf/12393,Quercus muehlenbergii,0.5333,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/12396,Quercus bicolor,0.7333,True,leaf upper surface,leaf,leaf margin
+baskauf/12403,Quercus alba,0.4944,True,leaf,leaf,leaf
+baskauf/12405,Quercus alba,0.6204,True,immature fruit,immature fruit,fruit
+baskauf/12407,Quercus alba,0.5833,False,leaf,leaf,leaf
+baskauf/12409,Quercus alba,0.6952,False,whole plant,whole plant,whole plant
+baskauf/12411,Quercus alba,0.8095,True,trunk,leaf,trunk
+baskauf/12413,Quercus macrocarpa,0.9048,True,whole plant,trunk,whole plant
+baskauf/12417,Quercus macrocarpa,1.0,True,trunk,trunk,bark
+baskauf/12420,Quercus macrocarpa,0.9048,False,trunk,trunk,trunk
+baskauf/12424,Quercus velutina,0.8889,False,whole plant,whole plant,whole plant
+baskauf/12429,Quercus velutina,1.0,True,trunk,trunk,bark
+baskauf/12433,Quercus velutina,1.0,False,trunk,trunk,trunk
+baskauf/12434,Quercus velutina,0.7,False,leaf,leaf,leaf
+baskauf/12435,Quercus palustris,1.0,True,whole plant,trunk,whole plant
+baskauf/12438,Quercus palustris,1.0,True,trunk,trunk,large-tree bark
+baskauf/12440,Quercus palustris,0.9048,False,trunk,trunk,trunk
+baskauf/12443,Quercus palustris,0.6556,False,leaf,leaf,leaf
+baskauf/12447,Quercus palustris,0.8667,False,leaf,leaf,leaf
+baskauf/12448,Quercus palustris,0.7778,True,leaf,leaf margin,leaf
+baskauf/12450,Quercus palustris,0.5429,False,leaf,leaf,leaf
+baskauf/12453,Fraxinus americana,0.8667,False,whole plant,whole plant,whole plant
+baskauf/12456,Fraxinus americana,0.8333,True,bark,trunk,bark
+baskauf/12457,Fraxinus americana,1.0,True,trunk,trunk,bark
+baskauf/12460,Fraxinus americana,0.8333,False,bark,bark,bark
+baskauf/12462,Fraxinus americana,0.5333,True,leaf,leaf,leaf arrangement on twig
+baskauf/12465,Fraxinus americana,0.6667,False,leaf,leaf,leaf
+baskauf/12467,Fraxinus americana,0.55,False,leaf,leaf,leaf
+baskauf/12469,Fraxinus americana,0.7556,False,bud,bud,bud
+baskauf/12493,Quercus macrocarpa,0.3056,True,leaf,leaf,leaf
+baskauf/12500,Quercus macrocarpa,0.8333,False,leaf,leaf,leaf
+baskauf/12501,Fraxinus americana,0.6389,False,leaf,leaf,leaf
+baskauf/12505,Fraxinus americana,0.4444,True,leaf upper surface,leaf,leaf upper surface
+baskauf/12507,Quercus palustris,0.7333,True,leaf upper surface,leaf upper surface,leaf
+baskauf/12509,Quercus macrocarpa,0.7556,True,leaf upper surface,leaf upper surface,petiole arrangement
+baskauf/12511,Quercus alba,0.8333,True,leaf,leaf upper surface,leaf upper surface
+baskauf/12516,Quercus alba,0.6667,False,leaf,leaf,leaf
+baskauf/12520,Quercus palustris,1.0,True,leaf margin,leaf margin,leaf upper surface
+baskauf/12522,Quercus macrocarpa,0.5667,True,petiole arrangement,leaf margin,leaf upper surface
+baskauf/12528,Quercus alba,0.6389,True,leaf margin,leaf margin,leaf upper surface
+baskauf/12538,Rhus glabra,0.6032,True,inflorescence,inflorescence,needle
+baskauf/12560,Rhus glabra,0.6792,False,inflorescence,inflorescence,inflorescence
+baskauf/12567,Rhus glabra,0.581,True,flower close-up,inflorescence,inflorescence
+baskauf/12572,Rhus glabra,0.5556,False,stem,stem,stem
+baskauf/12578,Rhus glabra,0.619,True,leaf,leaf arrangement on twig,leaf
+baskauf/12580,Rhus copallinum,1.0,True,leaf,leaf arrangement on twig,leaf
+baskauf/12583,Rhus copallinum,0.5,False,leaf,leaf,leaf
+baskauf/12585,Rhus copallinum,0.8667,True,leaf,leaf arrangement on twig,leaf
+baskauf/12625,Quercus palustris,0.9048,True,trunk,branch,branch
+baskauf/12698,Rhus aromatica,0.7037,True,fruit borne on plant,stem,fruit borne on plant
+baskauf/12700,Rhus aromatica,0.6417,True,leaf,stem,fruit
+baskauf/12703,Rhus aromatica,0.6222,True,leaf,stem,leaf
+baskauf/12755,Fraxinus quadrangulata,1.0,False,leaf,leaf,leaf
+baskauf/12757,Fraxinus quadrangulata,0.8667,False,leaf,leaf,leaf
+baskauf/12760,Fraxinus quadrangulata,0.5583,False,twig,twig,twig
+baskauf/12761,Fraxinus quadrangulata,0.8667,True,leaf,leaf arrangement on twig,twig
+baskauf/12763,Fraxinus quadrangulata,0.8667,True,stem,leaf arrangement on twig,stem
+baskauf/12764,Fraxinus quadrangulata,0.6389,True,leaf,leaf arrangement on twig,leaf
+baskauf/12768,Fraxinus quadrangulata,0.5833,True,leaf,leaf,leaf upper surface
+baskauf/12800,Fraxinus americana,0.5873,False,whole plant,whole plant,whole plant
+baskauf/12801,Fraxinus americana,0.8667,False,bark,bark,bark
+baskauf/12804,Rhus aromatica,0.5952,False,leaf,leaf,leaf
+baskauf/12928,Rhus aromatica,0.6111,True,leaf,stem,leaf
+baskauf/13000,Quercus velutina,0.5278,True,petiole arrangement,leaf margin,petiole arrangement
+baskauf/13075,Quercus velutina,0.8333,False,leaf,leaf,leaf
+baskauf/13089,Quercus velutina,0.7,False,leaf,leaf,leaf
+baskauf/13093,Quercus velutina,0.8333,True,leaf,leaf upper surface,leaf
+baskauf/13095,Quercus velutina,0.7333,True,leaf,leaf upper surface,leaf
+baskauf/13096,Quercus velutina,0.7143,False,bud,bud,bud
+baskauf/13104,Quercus velutina,0.3611,True,stem,leaf margin,leaf
+baskauf/13107,Quercus velutina,0.3929,True,bud,bud,immature fruit
+baskauf/13110,Quercus velutina,0.4815,True,bud,bud,bud
+baskauf/13113,Quercus rubra,0.5345,False,leaf,leaf,leaf
+baskauf/13118,Quercus rubra,1.0,True,trunk,large-tree bark,bark
+baskauf/13122,Quercus rubra,1.0,False,trunk,trunk,trunk
+baskauf/13127,Quercus rubra,0.7167,False,leaf,leaf,leaf
+baskauf/13132,Quercus rubra,0.4667,True,leaf,leaf,leaf
+baskauf/13135,Quercus rubra,0.6349,True,leaf,leaf,bud
+baskauf/13139,Quercus velutina,0.8667,False,leaf,leaf,leaf
+baskauf/13142,Quercus velutina,0.5833,False,leaf,leaf,leaf
+baskauf/13145,Quercus rubra,0.55,True,petiole arrangement,leaf upper surface,leaf upper surface
+baskauf/13151,Quercus rubra,0.7167,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/13155,Quercus rubra,0.6167,True,bud,bud,fruit close-up
+baskauf/13159,Acer negundo,0.5095,False,leaf,leaf,leaf
+baskauf/13160,Acer negundo,1.0,True,bark,trunk,bark
+baskauf/13161,Acer negundo,0.8095,False,bark,bark,bark
+baskauf/13165,Ailanthus altissima,0.4405,True,leaf,leaf,inflorescence
+baskauf/13169,Ailanthus altissima,0.3148,True,fruit,fruit,inflorescence
+baskauf/13172,Ailanthus altissima,0.7778,True,fruit,fruit,fruit close-up
+baskauf/13183,Quercus velutina,0.7167,False,leaf,leaf,leaf
+baskauf/13184,Quercus velutina,0.7778,False,leaf,leaf,leaf
+baskauf/13194,Quercus velutina,0.5333,True,bud,petiole arrangement,twig
+baskauf/13195,Quercus velutina,0.4577,True,bud,bud,twig
+baskauf/13201,Quercus velutina,0.8333,True,leaf,leaf,leaf upper surface
+baskauf/13202,Quercus velutina,0.4667,True,leaf upper surface,leaf,leaf upper surface
+baskauf/13209,Quercus velutina,0.0667,True,petiole arrangement,leaf margin,bark
+baskauf/13379,Fraxinus pennsylvanica,1.0,False,whole plant,whole plant,whole plant
+baskauf/13380,Fraxinus pennsylvanica,0.3016,True,leaf,leaf,leaf
+baskauf/13383,Fraxinus pennsylvanica,0.8333,False,leaf,leaf,leaf
+baskauf/13386,Fraxinus pennsylvanica,0.7,False,leaf,leaf,leaf
+baskauf/13392,Fraxinus pennsylvanica,0.6667,True,leaf,leaf,leaf upper surface
+baskauf/13393,Fraxinus pennsylvanica,0.5979,True,twig,leaf,twig
+baskauf/13397,Fraxinus pennsylvanica,0.5667,True,twig,bud,stem
+baskauf/13401,Fraxinus pennsylvanica,0.7333,True,leaf,leaf arrangement on twig,leaf
+baskauf/13403,Fraxinus pennsylvanica,0.6111,True,leaf,leaf arrangement on twig,leaf arrangement on twig
+baskauf/13406,Fraxinus pennsylvanica,1.0,True,bark,trunk,bark
+baskauf/13410,Fraxinus pennsylvanica,0.9048,False,trunk,trunk,trunk
+baskauf/13412,Fraxinus pennsylvanica,0.375,True,bark,small-tree or branch bark,bark
+baskauf/13417,Pinus strobus,0.3836,True,cone,cone,needle attachment
+baskauf/13418,Pinus strobus,0.2889,True,needle,cone,twig
+baskauf/13474,Sassafras albidum,0.5238,True,leaf,leaf,fruit
+baskauf/13515,Rhus glabra,0.5889,False,leaf,leaf,leaf
+baskauf/13516,Rhus glabra,0.6667,True,leaf,leaf,fruit borne on plant
+baskauf/13518,Rhus glabra,0.6157,True,inflorescence,inflorescence,fruit borne on plant
+baskauf/13534,Rhus copallinum,0.369,True,leaf,leaf,leaf
+baskauf/13535,Rhus copallinum,0.5608,True,inflorescence,inflorescence,leaf
+baskauf/13537,Rhus copallinum,0.7333,False,leaf,leaf,leaf
+baskauf/13540,Rhus copallinum,0.8333,False,bark,bark,bark
+baskauf/13574,Salix nigra,1.0,True,leaf,whole plant,whole plant
+baskauf/13576,Salix nigra,0.4167,True,leaf arrangement on twig,leaf,bud
+baskauf/13580,Salix nigra,1.0,True,leaf arrangement on twig,leaf,leaf
+baskauf/13583,Salix nigra,0.6444,True,leaf arrangement on twig,leaf,leaf
+baskauf/13585,Salix nigra,0.4944,True,bark,trunk,bark
+baskauf/13588,Salix nigra,0.6556,True,bark,bud,bark
+baskauf/13589,Salix nigra,0.8667,False,bark,bark,bark
+baskauf/13594,Salix nigra,0.9048,True,trunk,view up trunk,trunk
+baskauf/13650,Carya ovata,0.3333,True,bark,twig,bark
+baskauf/13654,Carya ovata,0.7778,True,bark,large-tree bark,bark
+baskauf/13707,Carya ovata,0.7167,False,leaf,leaf,leaf
+baskauf/13709,Carya ovata,0.7,False,leaf,leaf,leaf
+baskauf/13712,Carya ovata,0.7,True,bark,large-tree bark,bark
+baskauf/13828,Carya laciniosa,1.0,True,whole plant,view up trunk,whole plant
+baskauf/13833,Carya laciniosa,0.7333,False,leaf,leaf,leaf
+baskauf/13836,Carya laciniosa,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/13839,Carya laciniosa,0.8095,True,view up trunk,view up trunk,trunk
+baskauf/13843,Carya laciniosa,0.5333,False,bark,bark,bark
+baskauf/13862,Carya laciniosa,0.6,True,leaf,leaf upper surface,leaf
+baskauf/13866,Carya laciniosa,0.4167,True,bud,bud,bud
+baskauf/13870,Carya laciniosa,0.3214,True,bud,bud,twig
+baskauf/13878,Carya laciniosa,0.3333,True,leaf margin,bud,leaf margin
+baskauf/13880,Carya laciniosa,0.8333,True,leaf upper surface,leaf margin,leaf margin
+baskauf/13885,Carya laciniosa,0.4167,True,bud,winter twig,bark
+baskauf/13975,Populus tremuloides,0.6905,True,trunk,whole plant,trunk
+baskauf/13977,Populus tremuloides,0.6389,False,bark,bark,bark
+baskauf/13980,Populus tremuloides,0.7063,True,trunk,bark,bark
+baskauf/13981,Populus tremuloides,0.3444,True,leaf,leaf,leaf
+baskauf/14024,Populus tremuloides,0.5278,False,leaf,leaf,leaf
+baskauf/14027,Populus tremuloides,0.5833,True,leaf,leaf upper surface,leaf upper surface
+baskauf/14029,Populus tremuloides,0.4841,True,twig,leaf,twig
+baskauf/14031,Populus tremuloides,0.6905,True,twig,leaf upper surface,leaf
+baskauf/14034,Populus tremuloides,0.5873,True,stem,leaf upper surface,twig
+baskauf/15003,Sorbus americana,0.6488,True,fruit borne on plant,leaf,inflorescence
+baskauf/15006,Sorbus americana,0.4071,True,leaf,leaf,leaf
+baskauf/15007,Sorbus americana,0.6444,False,leaf,leaf,leaf
+baskauf/15008,Sorbus americana,0.7667,False,fruit borne on plant,fruit borne on plant,fruit borne on plant
+baskauf/15009,Sorbus americana,0.5833,True,leaf arrangement on twig,leaf,leaf
+baskauf/15010,Sorbus americana,0.8333,False,bark,bark,bark
+baskauf/15011,Sorbus americana,0.8889,True,twig,bud,twig
+baskauf/15013,Sorbus americana,0.5556,True,whole plant,stem,branch
+baskauf/15049,Sorbus americana,0.4917,True,whole plant,branch,whole plant
+baskauf/15050,Viburnum lantanoides,0.4576,True,leaf,stem,leaf
+baskauf/15051,Viburnum lantanoides,0.5333,False,stem,stem,stem
+baskauf/15074,Carpinus caroliniana,1.0,False,bark,bark,bark
+baskauf/15075,Carpinus caroliniana,0.6759,True,leaf,leaf,twig
+baskauf/15076,Carpinus caroliniana,0.7778,False,leaf,leaf,leaf
+baskauf/15078,Carpinus caroliniana,0.8889,True,leaf,leaf margin,leaf upper surface
+baskauf/15080,Carpinus caroliniana,0.4286,True,twig,twig,winter twig
+baskauf/15103,Cornus florida,0.6233,False,fruit borne on plant,fruit borne on plant,fruit borne on plant
+baskauf/15104,Cornus florida,0.8016,True,fruit,fruit borne on plant,fruit
+baskauf/15105,Cornus florida,0.7381,True,fruit,fruit borne on plant,fruit
+baskauf/15112,Sassafras albidum,0.6667,True,leaf,stem,fruit
+baskauf/15117,Lindera benzoin,0.5238,True,fruit borne on plant,stem,fruit borne on plant
+baskauf/15129,Platanus occidentalis,0.8889,True,twig,leaf,leaf
+baskauf/15141,Nyssa sylvatica,0.6488,False,leaf,leaf,leaf
+baskauf/15143,Nyssa sylvatica,0.3815,True,leaf,leaf,fruit
+baskauf/15144,Nyssa sylvatica,0.6111,True,leaf,leaf,leaf arrangement on twig
+baskauf/15172,Ulmus rubra,0.7143,True,leaf,petiole arrangement,leaf
+baskauf/15175,Ulmus rubra,1.0,True,leaf margin,leaf margin,leaf upper surface
+baskauf/15176,Ulmus rubra,0.5762,False,leaf,leaf,leaf
+baskauf/15180,Ulmus rubra,0.3524,True,leaf arrangement on twig,leaf,bud
+baskauf/15184,Ailanthus altissima,0.6952,True,fruit,leaf,leaf
+baskauf/15185,Ailanthus altissima,0.5185,False,fruit,fruit,fruit
+baskauf/15187,Ailanthus altissima,0.6,True,fruit,fruit close-up,seed
+baskauf/15190,Ailanthus altissima,0.4095,True,leaf,leaf,leaf upper surface
+baskauf/15192,Ailanthus altissima,0.5238,True,leaf,leaf,leaf upper surface
+baskauf/15196,Ailanthus altissima,0.5456,True,leaf,leaf arrangement on twig,leaf
+baskauf/15197,Juglans nigra,0.4889,True,leaf,leaf,leaf
+baskauf/15199,Juglans nigra,0.6,False,leaf,leaf,leaf
+baskauf/15200,Juglans nigra,0.581,False,bud,bud,bud
+baskauf/15203,Juglans nigra,0.4325,True,bud,leaf arrangement on twig,bud
+baskauf/15205,Juglans nigra,0.2333,True,bark,leaf scar,leaf scar
+baskauf/15207,Juglans nigra,0.1944,True,bark,winter twig,leaf scar
+baskauf/15211,Acer saccharum,0.7778,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/15212,Acer saccharum,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/15216,Acer saccharum,0.5,False,bud,bud,bud
+baskauf/15225,Pinus strobus,0.1905,True,cone,cone,fruit close-up
+baskauf/15227,Ulmus americana,0.4071,True,leaf,leaf,leaf
+baskauf/15230,Ulmus americana,0.8333,False,leaf margin,leaf margin,leaf margin
+baskauf/15235,Ulmus americana,0.5833,True,leaf,petiole arrangement,leaf
+baskauf/15238,Ulmus americana,0.6905,False,leaf,leaf,leaf
+baskauf/15241,Ulmus americana,0.5833,True,twig,petiole arrangement,bud
+baskauf/15272,Ostrya virginiana,0.6333,True,leaf margin,leaf margin,leaf
+baskauf/15276,Ostrya virginiana,0.5344,True,leaf,petiole arrangement,leaf
+baskauf/15280,Ostrya virginiana,0.619,True,twig,leaf,twig
+baskauf/15288,Ostrya virginiana,0.2778,True,bud,bud,stem
+baskauf/15307,Acer negundo,0.7778,True,leaf,leaf arrangement on twig,leaf
+baskauf/15308,Acer negundo,0.8889,True,stem,stem,bud
+baskauf/15313,Acer negundo,1.0,True,leaf,leaf arrangement on twig,leaf
+baskauf/15316,Acer negundo,0.8667,True,leaf,stem,leaf upper surface
+baskauf/15320,Acer negundo,0.3889,True,bark,stem,bark
+baskauf/15323,Acer saccharinum,0.3722,True,leaf,leaf,leaf
+baskauf/15326,Acer saccharinum,0.7333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/15332,Acer saccharinum,0.7143,False,bud,bud,bud
+baskauf/15335,Populus deltoides,1.0,True,whole plant,branch,whole plant
+baskauf/15339,Populus deltoides,0.7667,True,leaf,leaf,leaf upper surface
+baskauf/15343,Populus deltoides,0.6667,True,leaf margin,leaf,leaf upper surface
+baskauf/15346,Populus deltoides,0.6667,False,bud,bud,bud
+baskauf/15347,Populus deltoides,0.6,False,bud,bud,bud
+baskauf/15353,Robinia pseudoacacia,0.6794,True,fruit,fruit,twig
+baskauf/15356,Robinia pseudoacacia,0.0833,True,fruit,medium-tree or large-branch bark,twig
+baskauf/15358,Platanus occidentalis,0.5873,True,leaf,leaf upper surface,leaf
+baskauf/15360,Platanus occidentalis,0.4508,True,leaf,fruit borne on plant,leaf
+baskauf/15363,Platanus occidentalis,0.4405,True,bud,twig,bud
+baskauf/15364,Platanus occidentalis,0.7,True,leaf,leaf upper surface,leaf upper surface
+baskauf/15367,Platanus occidentalis,1.0,True,leaf,view up trunk,leaf
+baskauf/15370,Platanus occidentalis,0.6614,False,whole plant,whole plant,whole plant
+baskauf/15381,Prunus serotina,0.6389,True,leaf margin,leaf,leaf upper surface
+baskauf/15387,Quercus alba,0.8333,False,leaf,leaf,leaf
+baskauf/15388,Quercus alba,0.8333,True,leaf,leaf upper surface,leaf upper surface
+baskauf/15391,Cercis canadensis,0.3651,True,fruit,twig,twig
+baskauf/15395,Cercis canadensis,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/15412,Sassafras albidum,0.5111,True,leaf,leaf,leaf upper surface
+baskauf/15417,Sassafras albidum,0.8333,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/15424,Sassafras albidum,0.8667,True,leaf,leaf,twig
+baskauf/15444,Rhus copallinum,0.5595,True,whole plant,leaf,whole plant
+baskauf/15445,Rhus copallinum,0.7579,True,fruit,stem,inflorescence
+baskauf/15448,Rhus copallinum,0.7143,False,fruit,fruit,fruit
+baskauf/15477,Rhus glabra,0.4762,True,leaf,leaf,leaf
+baskauf/15503,Hamamelis virginiana,0.5639,True,immature fruit,stem,immature fruit
+baskauf/15504,Hamamelis virginiana,0.7333,False,leaf,leaf,leaf
+baskauf/15521,Gleditsia triacanthos,0.2905,True,branch,branch,bark
+baskauf/15531,Gleditsia triacanthos,0.7778,True,branch,trunk,view up trunk
+baskauf/15533,Gleditsia triacanthos,0.7167,False,bark,bark,bark
+baskauf/15537,Gleditsia triacanthos,0.4074,True,branch,twig,whole plant
+baskauf/15549,Sassafras albidum,0.7778,True,bark,trunk,bark
+baskauf/15573,Robinia pseudoacacia,0.8333,True,leaf,leaf upper surface,leaf
+baskauf/15576,Tilia americana,0.5651,True,leaf margin,leaf margin,leaf
+baskauf/15581,Tilia americana,0.6032,True,fruit,leaf,leaf
+baskauf/15592,Magnolia acuminata,0.7778,True,twig,leaf,twig
+baskauf/15597,Magnolia acuminata,0.6417,False,winter twig,winter twig,winter twig
+baskauf/15598,Ginkgo biloba,0.3611,True,fruit,branch,fruit
+baskauf/15604,Ginkgo biloba,0.5,True,fruit close-up,fruit close-up,fruit
+baskauf/15607,Ginkgo biloba,0.5095,True,twig,winter twig,twig
+baskauf/15615,Quercus macrocarpa,0.6667,True,immature fruit,leaf,fruit
+baskauf/15620,Quercus macrocarpa,0.8889,True,bud,petiole arrangement,bud
+baskauf/15624,Quercus macrocarpa,0.7333,True,leaf,leaf upper surface,leaf
+baskauf/15626,Tsuga canadensis,0.3667,True,needle,needle,twig
+baskauf/15637,Quercus alba,0.4603,True,fruit,immature fruit,fruit close-up
+baskauf/15641,Quercus alba,0.8667,True,bud,twig,bud
+baskauf/15643,Quercus rubra,0.7,True,leaf,leaf upper surface,leaf
+baskauf/15652,Ulmus americana,0.619,True,twig,leaf,leaf
+baskauf/15662,Pinus strobus,0.6222,True,needle,needle,whole plant
+baskauf/15663,Pinus strobus,0.8333,True,needle attachment,needle,needle attachment
+baskauf/15687,Sambucus nigra,0.6825,True,stem,leaf,fruit
+baskauf/15688,Sambucus nigra,0.5946,True,fruit,stem,fruit borne on plant
+baskauf/15691,Carpinus caroliniana,0.8889,True,leaf,leaf arrangement on twig,twig
+baskauf/15692,Carpinus caroliniana,0.8667,True,leaf margin,leaf margin,leaf upper surface
+baskauf/15696,Carpinus caroliniana,0.6444,True,leaf,leaf arrangement on twig,leaf upper surface
+baskauf/15719,Carpinus caroliniana,0.6333,True,twig,leaf arrangement on twig,leaf arrangement on twig
+baskauf/15721,Carpinus caroliniana,0.2889,True,leaf,leaf,leaf
+baskauf/15726,Carpinus caroliniana,0.4524,True,twig,leaf,leaf
+baskauf/15728,Carpinus caroliniana,0.4444,True,bark,branch,bark
+baskauf/15729,Lindera benzoin,0.7667,True,leaf,stem,leaf
+baskauf/15732,Quercus rubra,0.6667,True,bark,trunk,bark
+baskauf/15734,Cephalanthus occidentalis,0.7778,True,fruit,fruit,immature fruit
+baskauf/15737,Cephalanthus occidentalis,0.6333,True,bark,medium-tree or large-branch bark,bark
+baskauf/15742,Cephalanthus occidentalis,0.6667,True,stem,stem,bud
+baskauf/15745,Cephalanthus occidentalis,0.7667,False,leaf,leaf,leaf
+baskauf/15748,Cephalanthus occidentalis,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/15750,Cephalanthus occidentalis,1.0,False,stem,stem,stem
+baskauf/15756,Cephalanthus occidentalis,0.8426,True,fruit,fruit,inflorescence
+baskauf/15823,Quercus palustris,0.8095,True,view up trunk,bark,bark
+baskauf/15827,Quercus palustris,1.0,True,bark,trunk,view up trunk
+baskauf/15861,Carya ovata,0.8333,False,bark,bark,bark
+baskauf/15864,Carya ovata,1.0,True,bark,large-tree bark,bark
+baskauf/15867,Sassafras albidum,0.7167,False,leaf,leaf,leaf
+baskauf/15868,Sassafras albidum,0.7167,False,leaf,leaf,leaf
+baskauf/15894,Carya ovata,0.5444,True,seed,opened or sectioned fruit,fruit close-up
+baskauf/15898,Carya ovata,0.7167,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/15912,Ulmus rubra,0.7667,False,bud,bud,bud
+baskauf/15925,Aesculus glabra,0.5,True,bud,bud,twig
+baskauf/15935,Juglans nigra,0.5694,True,leaf,leaf,fruit close-up
+baskauf/15938,Juglans nigra,0.6,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/15942,Juglans nigra,1.0,True,opened or sectioned fruit,fruit close-up,fruit close-up
+baskauf/15946,Juglans nigra,0.8333,True,leaf margin,leaf margin,leaf upper surface
+baskauf/15948,Toxicodendron radicans,0.4352,True,fruit,inflorescence,inflorescence
+baskauf/15951,Toxicodendron radicans,0.8519,True,fruit,stem,leaf
+baskauf/15962,Aesculus hippocastanum,0.7667,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/15966,Aesculus hippocastanum,0.4444,True,bud,bud,bud
+baskauf/15969,Aesculus hippocastanum,0.7333,True,leaf margin,leaf margin,leaf upper surface
+baskauf/15984,Gymnocladus dioicus,0.9048,False,trunk,trunk,trunk
+baskauf/15988,Gymnocladus dioicus,0.7,False,bark,bark,bark
+baskauf/15991,Quercus palustris,1.0,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/15994,Quercus palustris,0.7778,True,bud,winter twig,bud
+baskauf/15999,Quercus rubra,0.6794,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/16016,Quercus velutina,0.6556,True,fruit close-up,immature fruit,fruit close-up
+baskauf/16021,Quercus velutina,0.8333,True,leaf,leaf,leaf upper surface
+baskauf/16026,Quercus bicolor,0.8333,False,bud,bud,bud
+baskauf/16046,Acer negundo,0.2762,True,winter habit,medium-tree or large-branch bark,bark
+baskauf/16050,Acer negundo,0.3365,True,bark,medium-tree or large-branch bark,bark
+baskauf/16083,Quercus muehlenbergii,0.8095,False,bud,bud,bud
+baskauf/16094,Quercus muehlenbergii,0.5694,True,fruit,twig,fruit
+baskauf/16192,Carya ovata,0.8333,True,leaf margin,leaf,leaf margin
+baskauf/16195,Ulmus americana,0.25,True,bark,bark,twig
+baskauf/16201,Ulmus rubra,0.6667,True,medium-tree or large-branch bark,medium-tree or large-branch bark,bark
+baskauf/16207,Ostrya virginiana,0.4722,True,bud,twig,immature fruit
+baskauf/16240,Tilia americana,0.4815,True,twig,bud,twig
+baskauf/16278,Ostrya virginiana,0.4167,True,fruit close-up,immature fruit,fruit close-up
+baskauf/16299,Quercus bicolor,0.6556,True,fruit,fruit borne on plant,fruit close-up
+baskauf/16321,Sassafras albidum,0.8333,False,bark,bark,bark
+baskauf/16324,Sassafras albidum,1.0,True,bark,large-tree bark,bark
+baskauf/16325,Sassafras albidum,0.9048,True,view up trunk,trunk,branch
+baskauf/16416,Cornus florida,0.7667,True,leaf,fruit borne on plant,leaf
+baskauf/16418,Toxicodendron radicans,0.3444,True,leaf,leaf,bark
+baskauf/16498,Juglans cinerea,1.0,True,whole plant,branch,whole plant
+baskauf/16500,Juglans cinerea,0.6376,True,whole plant,trunk,whole plant
+baskauf/16502,Juglans cinerea,0.7333,False,bark,bark,bark
+baskauf/16506,Juglans cinerea,0.8889,True,leaf,trunk,trunk
+baskauf/16509,Juglans cinerea,0.3333,True,opened or sectioned fruit,opened or sectioned fruit,bark
+baskauf/16683,Nyssa sylvatica,1.0,False,whole plant,whole plant,whole plant
+baskauf/16684,Rhus copallinum,0.7333,False,whole plant,whole plant,whole plant
+baskauf/16689,Tilia americana,0.5111,True,bud,winter twig,twig
+baskauf/16710,Nyssa sylvatica,0.3444,True,small-tree or branch bark,winter twig,bark
+baskauf/16712,Nyssa sylvatica,0.8016,True,whole plant,branch,whole plant
+baskauf/16715,Nyssa sylvatica,0.8333,False,bark,bark,bark
+baskauf/16720,Fagus grandifolia,0.8667,True,whole plant,whole plant,branch
+baskauf/16722,Sassafras albidum,0.4683,True,branch,whole plant,branch
+baskauf/16724,Rhus copallinum,0.6369,True,leaf,inflorescence,whole plant
+baskauf/16741,Acer saccharum,0.5377,True,whole plant,branch,branch
+baskauf/16760,Cornus florida,0.4921,True,leaf,fruit borne on plant,leaf
+baskauf/16835,Platanus occidentalis,0.5794,True,winter habit,whole plant,branch
+baskauf/16838,Quercus alba,0.4815,True,view up trunk,view up trunk,winter habit
+baskauf/16842,Quercus alba,0.8333,True,fruit close-up,fruit close-up,fruit
+baskauf/17265,Cercis canadensis,0.6296,True,twig,twig,winter twig
+baskauf/17295,Toxicodendron radicans,0.5833,False,bark,bark,bark
+baskauf/17306,Toxicodendron radicans,0.619,True,winter twig,leaf scar,winter twig
+baskauf/17313,Platanus occidentalis,0.3333,True,twig,winter twig,twig
+baskauf/17316,Platanus occidentalis,0.5529,True,twig,winter twig,winter twig
+baskauf/17339,Rhus glabra,0.8333,True,bark,bark,large-tree bark
+baskauf/17455,Fraxinus pennsylvanica,0.5833,False,winter twig,winter twig,winter twig
+baskauf/17457,Fraxinus pennsylvanica,0.8333,True,winter twig,leaf scar,winter twig
+baskauf/17511,Acer saccharinum,0.4821,True,bud,bud,twig
+baskauf/17523,Acer saccharinum,0.7242,False,bud,bud,bud
+baskauf/17526,Acer saccharinum,0.35,True,bud,bud,twig
+baskauf/17534,Ailanthus altissima,0.5873,True,winter twig,twig,winter habit
+baskauf/17536,Ailanthus altissima,0.5095,True,winter twig,winter twig,twig
+baskauf/17542,Pinus strobus,0.6167,True,needle,needle,needle attachment
+baskauf/17544,Pinus strobus,1.0,True,bark,trunk,bark
+baskauf/17546,Pinus strobus,0.7937,True,bark,trunk,bark
+baskauf/17548,Pinus strobus,0.7333,False,bark,bark,bark
+baskauf/17553,Cornus florida,0.2926,True,twig,inflorescence,twig
+baskauf/17559,Cornus florida,0.3194,True,bud,frontal flower view,twig
+baskauf/17569,Ulmus americana,0.6667,False,bud,bud,bud
+baskauf/17771,Lindera benzoin,0.8274,True,flower,stem,flower
+baskauf/17959,Ulmus rubra,0.4563,True,bud,leaf arrangement on twig,bud
+baskauf/18004,Ulmus americana,0.4905,True,immature fruit,twig,immature fruit
+baskauf/18009,Acer saccharinum,0.6481,True,bud,immature fruit,flower close-up
+baskauf/18076,Acer saccharum,0.5,False,view up trunk,view up trunk,view up trunk
+baskauf/18084,Quercus rubra,0.625,True,inflorescence,immature fruit,inflorescence
+baskauf/18093,Quercus rubra,0.7361,False,inflorescence,inflorescence,inflorescence
+baskauf/18096,Quercus rubra,0.5037,True,inflorescence,immature fruit,flower
+baskauf/18141,Fraxinus americana,0.4704,True,bud,bud,bud
+baskauf/18150,Fraxinus americana,0.4312,True,flower,bud,flower close-up
+baskauf/18219,Acer rubrum,0.4643,True,bud,bud,bud
+baskauf/18225,Acer rubrum,0.5417,True,twig,fruit borne on plant,stem
+baskauf/18234,Acer negundo,0.5767,True,bud,bud,stem
+baskauf/18483,Ulmus americana,0.5095,True,immature fruit,twig,bud
+baskauf/18746,Ostrya virginiana,0.3889,True,inflorescence,inflorescence,twig
+baskauf/18748,Ostrya virginiana,0.4667,True,twig,branch,branch
+baskauf/18836,Quercus bicolor,0.6085,True,inflorescence,immature fruit,inflorescence
+baskauf/18839,Quercus bicolor,0.6296,True,inflorescence,immature fruit,inflorescence
+baskauf/18850,Quercus macrocarpa,0.6296,True,inflorescence,immature fruit,inflorescence
+baskauf/18855,Quercus macrocarpa,0.3498,True,inflorescence,inflorescence,inflorescence
+baskauf/18859,Quercus macrocarpa,0.5455,True,bud,immature fruit,immature fruit
+baskauf/18969,Amelanchier arborea,0.416,True,flower,flower,flower close-up
+baskauf/18976,Amelanchier arborea,0.4683,True,flower close-up,flower,flower close-up
+baskauf/19080,Lindera benzoin,0.5833,True,bark,medium-tree or large-branch bark,bark
+baskauf/19171,Carpinus caroliniana,0.3889,True,twig,inflorescence,twig
+baskauf/19182,Carpinus caroliniana,0.8016,True,twig,inflorescence,inflorescence
+baskauf/19189,Carpinus caroliniana,0.5155,True,bud,twig,bud
+baskauf/19269,Acer rubrum,0.3889,True,branch,branch,branch
+baskauf/19291,Fraxinus pennsylvanica,0.5238,True,inflorescence,bud,inflorescence
+baskauf/19298,Fraxinus pennsylvanica,0.5222,True,inflorescence,bud,flower
+baskauf/19311,Quercus palustris,0.4598,True,inflorescence,immature fruit,inflorescence
+baskauf/19319,Quercus palustris,0.4815,True,inflorescence,immature fruit,inflorescence
+baskauf/19330,Acer saccharinum,0.5333,True,immature fruit,fruit borne on plant,fruit
+baskauf/19335,Acer saccharinum,0.3143,True,seed,immature fruit,stem
+baskauf/19346,Ginkgo biloba,0.6222,True,fruit close-up,fruit,fruit close-up
+baskauf/19354,Ginkgo biloba,0.4524,True,leaf,immature fruit,stem
+baskauf/19361,Ginkgo biloba,0.3111,True,stem,immature fruit,stem
+baskauf/19366,Quercus muehlenbergii,0.7371,False,inflorescence,inflorescence,inflorescence
+baskauf/19371,Quercus muehlenbergii,0.5595,False,inflorescence,inflorescence,inflorescence
+baskauf/19373,Quercus muehlenbergii,0.5397,False,bud,bud,bud
+baskauf/19392,Platanus occidentalis,0.218,True,bud,fruit borne on plant,immature fruit
+baskauf/19402,Platanus occidentalis,0.627,True,immature fruit,fruit borne on plant,fruit close-up
+baskauf/19579,Ulmus rubra,0.7667,True,branch,view up trunk,branch
+baskauf/19587,Sassafras albidum,0.6931,True,flower,inflorescence,flower close-up
+baskauf/19631,Ulmus americana,0.4921,True,fruit,twig,fruit close-up
+baskauf/19643,Quercus velutina,0.621,True,inflorescence,immature fruit,inflorescence
+baskauf/19669,Quercus velutina,0.6352,True,inflorescence,male reproductive structure,inflorescence
+baskauf/19689,Quercus velutina,0.7063,True,stem,twig,bud
+baskauf/19695,Quercus alba,0.3519,True,inflorescence,immature fruit,inflorescence
+baskauf/19705,Quercus alba,0.369,True,inflorescence,immature fruit,inflorescence
+baskauf/19712,Quercus alba,0.4778,True,twig,immature fruit,bud
+baskauf/19835,Ulmus rubra,0.2952,True,fruit,flower,flower close-up
+baskauf/19886,Ulmus rubra,0.3631,True,fruit,flower,inflorescence
+baskauf/20031,Acer rubrum,0.3119,True,fruit,stem,stem
+baskauf/2014-08-23-16-39-52,Fraxinus quadrangulata,0.6984,True,whole plant,leaf,branch
+baskauf/2014-08-23-16-40-08,Fraxinus quadrangulata,0.8667,True,leaf,leaf arrangement on twig,leaf
+baskauf/2014-08-23-16-40-31,Fraxinus quadrangulata,1.0,False,leaf,leaf,leaf
+baskauf/2014-08-23-16-40-51,Fraxinus quadrangulata,0.7333,True,leaf,leaf arrangement on twig,leaf
+baskauf/20452,Toxicodendron radicans,0.6667,True,leaf,stem,leaf
+baskauf/20454,Toxicodendron radicans,0.7333,True,leaf,stem,leaf
+baskauf/20545,Staphylea trifolia,0.5753,True,flower close-up,stem,flower close-up
+baskauf/20551,Staphylea trifolia,0.4762,True,whole plant,stem,whole plant
+baskauf/20553,Staphylea trifolia,0.3657,True,flower,stem,branch
+baskauf/20563,Staphylea trifolia,0.4444,True,bark,bud,bark
+baskauf/20565,Staphylea trifolia,0.3532,True,bark,stem,bark
+baskauf/20570,Staphylea trifolia,0.5321,False,stem,stem,stem
+baskauf/20572,Staphylea trifolia,0.8333,False,leaf,leaf,leaf
+baskauf/20777,Carya laciniosa,0.5048,True,inflorescence,inflorescence,immature fruit
+baskauf/20783,Carya laciniosa,0.625,True,inflorescence,inflorescence,fruit
+baskauf/20864,Carya laciniosa,0.6667,True,stem,bud,bud
+baskauf/20872,Carya laciniosa,0.4841,True,inflorescence,branch,inflorescence
+baskauf/20884,Carya laciniosa,0.6444,False,inflorescence,inflorescence,inflorescence
+baskauf/20950,Ulmus americana,0.0,True,fruit,trunk,bark
+baskauf/21454,Salix nigra,0.4114,True,inflorescence,inflorescence,inflorescence
+baskauf/21457,Salix nigra,0.5417,False,inflorescence,inflorescence,inflorescence
+baskauf/21465,Salix nigra,0.4769,True,inflorescence,inflorescence,inflorescence
+baskauf/21592,Gleditsia triacanthos,1.0,True,whole plant,whole plant,branch
+baskauf/21595,Gleditsia triacanthos,0.4643,True,twig,leaf arrangement on twig,twig
+baskauf/21602,Gleditsia triacanthos,0.6238,True,leaf arrangement on twig,leaf arrangement on twig,stem
+baskauf/21605,Robinia pseudoacacia,0.6528,True,whole plant,flower,whole plant
+baskauf/21608,Robinia pseudoacacia,0.3036,True,inflorescence,inflorescence,leaf
+baskauf/21611,Robinia pseudoacacia,0.4508,True,lateral flower view,inflorescence,flower close-up
+baskauf/21618,Robinia pseudoacacia,0.6667,True,whole plant,inflorescence,whole plant
+baskauf/21865,Fraxinus quadrangulata,1.0,True,bark,trunk,bark
+baskauf/21894,Rhus aromatica,0.65,True,stem,stem,immature fruit
+baskauf/21906,Rhus aromatica,0.4325,True,twig,twig,twig
+baskauf/21914,Rhus aromatica,0.3397,True,bark,medium-tree or large-branch bark,bark
+baskauf/21999,Robinia pseudoacacia,0.7333,True,flower,flower,leaf
+baskauf/22004,Robinia pseudoacacia,0.6825,True,flower close-up,flower,flower close-up
+baskauf/22014,Robinia pseudoacacia,0.5787,True,flower close-up,lateral flower view,flower close-up
+baskauf/22028,Magnolia acuminata,0.2095,True,flower close-up,fruit,fruit close-up
+baskauf/22032,Magnolia acuminata,0.4074,True,flower,fruit borne on plant,flower close-up
+baskauf/22184,Acer saccharum,0.5456,True,fruit,immature fruit,fruit close-up
+baskauf/22595,Amelanchier arborea,0.7667,False,bark,bark,bark
+baskauf/22601,Amelanchier arborea,0.581,True,winter twig,bud,twig
+baskauf/22607,Amelanchier arborea,0.5952,True,fruit,fruit,fruit close-up
+baskauf/22873,Carya ovata,0.7556,False,leaf,leaf,leaf
+baskauf/22882,Carya ovata,0.5762,False,bud,bud,bud
+baskauf/22885,Carya ovata,0.621,False,inflorescence,inflorescence,inflorescence
+baskauf/23002,Salix nigra,0.7333,False,whole plant,whole plant,whole plant
+baskauf/23004,Salix nigra,0.3968,True,leaf arrangement on twig,leaf,leaf
+baskauf/23007,Salix nigra,0.6667,False,leaf,leaf,leaf
+baskauf/23013,Salix nigra,0.2778,True,twig,leaf,twig
+baskauf/23020,Salix nigra,0.8333,False,bark,bark,bark
+baskauf/23022,Juglans nigra,0.7333,True,inflorescence,leaf,inflorescence
+baskauf/23025,Juglans nigra,0.3519,True,inflorescence,inflorescence,inflorescence
+baskauf/23997,Salix nigra,0.8889,True,inflorescence,stem,inflorescence
+baskauf/24001,Salix nigra,0.3545,True,stem,stem,inflorescence
+baskauf/24227,Gymnocladus dioicus,0.619,True,fruit,leaf arrangement on twig,leaf
+baskauf/24236,Gymnocladus dioicus,0.6952,True,twig,stem,bud
+baskauf/24245,Gymnocladus dioicus,0.8333,True,bark,trunk,bark
+baskauf/24248,Gymnocladus dioicus,0.7333,False,leaf,leaf,leaf
+baskauf/24251,Gymnocladus dioicus,0.8333,True,leaf,leaf,leaf upper surface
+baskauf/24254,Gymnocladus dioicus,0.0,True,fruit,branch,bark
+baskauf/24261,Gymnocladus dioicus,0.1333,True,opened or sectioned fruit,bud,fruit
+baskauf/24265,Gymnocladus dioicus,0.0833,True,opened or sectioned fruit,bud,fruit close-up
+baskauf/24270,Gymnocladus dioicus,0.7667,True,leaf,leaf,branch
+baskauf/24520,Carpinus caroliniana,1.0,True,whole plant,branch,whole plant
+baskauf/24849,Gymnocladus dioicus,0.254,True,fruit close-up,fruit,fruit close-up
+baskauf/25478,Carpinus caroliniana,0.5238,False,leaf,leaf,leaf
+baskauf/25625,Sambucus nigra,0.5139,True,bark,medium-tree or large-branch bark,bark
+baskauf/25638,Gymnocladus dioicus,1.0,False,whole plant,whole plant,whole plant
+baskauf/25640,Fraxinus americana,0.2698,True,inflorescence,leaf,leaf
+baskauf/25646,Fraxinus americana,0.131,True,fruit,flower,flower close-up
+baskauf/26114,Sambucus racemosa,0.546,False,inflorescence,inflorescence,inflorescence
+baskauf/26119,Sambucus racemosa,0.8095,False,inflorescence,inflorescence,inflorescence
+baskauf/26127,Sambucus racemosa,0.4012,True,flower close-up,inflorescence,inflorescence
+baskauf/26131,Picea rubens,0.6,False,needle attachment,needle attachment,needle attachment
+baskauf/26141,Sambucus racemosa,0.7361,False,inflorescence,inflorescence,inflorescence
+baskauf/26143,Sambucus racemosa,0.6667,True,leaf arrangement on twig,stem,leaf
+baskauf/26147,Sambucus racemosa,0.5429,False,bud,bud,bud
+baskauf/26149,Sambucus racemosa,0.5556,True,leaf upper surface,leaf,leaf upper surface
+baskauf/26153,Sambucus racemosa,0.6296,True,inflorescence,inflorescence,branch
+baskauf/26253,Castanea dentata,0.4583,True,bark,whole plant,bark
+baskauf/26308,Viburnum lantanoides,0.5762,True,bud,twig,bud
+baskauf/26311,Viburnum lantanoides,0.5833,True,leaf,stem,leaf
+baskauf/26321,Viburnum lantanoides,0.4325,True,stem,stem,immature fruit
+baskauf/26325,Viburnum lantanoides,0.4667,True,stem,flower close-up,fruit
+baskauf/26421,Betula alleghaniensis,0.3417,True,inflorescence,inflorescence,inflorescence
+baskauf/26426,Betula alleghaniensis,0.2976,True,inflorescence,inflorescence,inflorescence
+baskauf/26492,Viburnum lantanoides,0.5,False,flower close-up,flower close-up,flower close-up
+baskauf/26493,Viburnum lantanoides,0.4667,True,flower close-up,flower close-up,flower interior
+baskauf/26495,Viburnum lantanoides,0.6417,False,leaf,leaf,leaf
+baskauf/26496,Viburnum lantanoides,0.719,True,leaf,stem,stem
+baskauf/26502,Viburnum lantanoides,0.404,True,leaf,stem,leaf
+baskauf/26508,Viburnum lantanoides,0.6667,True,bud,bud,winter twig
+baskauf/26510,Viburnum lantanoides,0.4444,True,leaf margin,stem,leaf upper surface
+baskauf/26511,Viburnum lantanoides,1.0,False,bark,bark,bark
+baskauf/26515,Prunus pensylvanica,1.0,False,whole plant,whole plant,whole plant
+baskauf/26519,Prunus pensylvanica,0.8667,True,leaf arrangement on twig,leaf,leaf arrangement on twig
+baskauf/26526,Prunus pensylvanica,0.7167,False,leaf,leaf,leaf
+baskauf/26528,Prunus pensylvanica,0.6369,True,bud,small-tree or branch bark,leaf scar
+baskauf/26531,Prunus pensylvanica,0.7167,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/26532,Prunus pensylvanica,1.0,True,bark,bark,trunk
+baskauf/26540,Sambucus racemosa,0.5943,False,inflorescence,inflorescence,inflorescence
+baskauf/26705,Sambucus nigra,0.75,True,inflorescence,leaf,inflorescence
+baskauf/26707,Sambucus nigra,0.75,True,inflorescence,leaf,inflorescence
+baskauf/26710,Sambucus nigra,0.619,True,flower close-up,inflorescence,flower close-up
+baskauf/26714,Sambucus nigra,0.5,False,stem,stem,stem
+baskauf/27132,Yucca filamentosa,0.6667,True,stem,flower close-up,immature fruit
+baskauf/27137,Yucca filamentosa,0.5,False,immature fruit,immature fruit,immature fruit
+baskauf/27139,Yucca filamentosa,0.1667,True,bud,bark,bud
+baskauf/27143,Yucca filamentosa,0.3127,True,stem,stem,bud
+baskauf/27882,Carya cordiformis,0.5762,False,bud,bud,bud
+baskauf/27886,Carya cordiformis,0.45,True,twig,fruit close-up,stem
+baskauf/27889,Carya cordiformis,0.6222,True,leaf,leaf arrangement on twig,leaf
+baskauf/27896,Carya cordiformis,0.8333,True,bark,large-tree bark,bark
+baskauf/27897,Carya cordiformis,0.6667,True,bark,large-tree bark,trunk
+baskauf/27900,Carya cordiformis,0.8095,True,view up trunk,whole plant,trunk
+baskauf/27901,Carya cordiformis,0.8016,False,whole plant,whole plant,whole plant
+baskauf/27927,Nyssa sylvatica,0.7937,False,leaf,leaf,leaf
+baskauf/27929,Nyssa sylvatica,1.0,True,fruit,fruit borne on plant,fruit close-up
+baskauf/28499,Acer negundo,0.6607,True,fruit close-up,fruit borne on plant,leaf
+baskauf/28649,Cephalanthus occidentalis,0.3565,True,leaf,stem,leaf
+baskauf/28652,Cephalanthus occidentalis,0.4286,True,flower close-up,inflorescence,fruit close-up
+baskauf/28656,Cephalanthus occidentalis,0.4481,True,leaf,leaf,leaf
+baskauf/28666,Cephalanthus occidentalis,0.6296,True,flower close-up,inflorescence,flower close-up
+baskauf/28670,Cephalanthus occidentalis,0.7685,True,flower close-up,inflorescence,flower close-up
+baskauf/28672,Cephalanthus occidentalis,0.8333,False,bark,bark,bark
+baskauf/28751,Sambucus racemosa,0.7242,True,fruit borne on plant,inflorescence,fruit borne on plant
+baskauf/28754,Sambucus racemosa,0.6,True,fruit,inflorescence,fruit borne on plant
+baskauf/28756,Sambucus racemosa,0.6167,False,leaf,leaf,leaf
+baskauf/29397,Nyssa sylvatica,0.8889,True,fruit,fruit close-up,fruit borne on plant
+baskauf/29400,Nyssa sylvatica,0.7778,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/29613,Carya laciniosa,0.3278,True,fruit,opened or sectioned fruit,fruit close-up
+baskauf/29666,Platanus occidentalis,0.7167,False,leaf,leaf,leaf
+baskauf/29683,Fagus grandifolia,0.5333,True,leaf,leaf,leaf upper surface
+baskauf/29685,Fagus grandifolia,0.6905,True,leaf,leaf,bud
+baskauf/29689,Acer negundo,0.6905,False,leaf,leaf,leaf
+baskauf/29691,Acer negundo,0.7778,False,leaf,leaf,leaf
+baskauf/29699,Juglans nigra,0.2222,True,bark,bark,opened or sectioned fruit
+baskauf/29702,Aesculus hippocastanum,0.25,True,leaf arrangement on twig,branch,leaf
+baskauf/29705,Lindera benzoin,0.5444,True,leaf,leaf upper surface,leaf upper surface
+baskauf/29725,Robinia pseudoacacia,0.4683,True,stem,leaf arrangement on twig,bud
+baskauf/29730,Robinia pseudoacacia,0.7778,False,leaf,leaf,leaf
+baskauf/29761,Acer rubrum,0.8333,True,bark,large-tree bark,bark
+baskauf/29766,Rhus glabra,0.7333,False,leaf,leaf,leaf
+baskauf/29771,Rhus glabra,0.5444,True,leaf,leaf,leaf upper surface
+baskauf/29773,Fagus grandifolia,1.0,False,whole plant,whole plant,whole plant
+baskauf/29775,Cercis canadensis,0.6444,True,whole plant,branch,whole plant
+baskauf/29777,Cercis canadensis,0.4619,True,twig,twig,twig
+baskauf/29784,Ostrya virginiana,0.8333,True,leaf,leaf,leaf upper surface
+baskauf/29787,Prunus serotina,0.6667,True,leaf,leaf upper surface,leaf upper surface
+baskauf/29805,Nyssa sylvatica,0.7167,True,leaf,leaf upper surface,leaf
+baskauf/29811,Carpinus caroliniana,0.6444,True,leaf,leaf,leaf upper surface
+baskauf/29813,Carpinus caroliniana,0.7167,True,twig,twig,leaf arrangement on twig
+baskauf/29816,Lindera benzoin,0.8889,True,fruit borne on plant,fruit close-up,fruit close-up
+baskauf/30096,Rhus copallinum,0.7,True,leaf,stem,leaf
+baskauf/30099,Rhus copallinum,0.2,True,leaf,bud,leaf
+baskauf/30102,Carya laciniosa,0.7333,True,opened or sectioned fruit,seed,opened or sectioned fruit
+baskauf/30195,Carya ovata,0.619,False,opened or sectioned fruit,opened or sectioned fruit,opened or sectioned fruit
+baskauf/30235,Carya cordiformis,0.7556,False,bud,bud,bud
+baskauf/30240,Carya cordiformis,0.6,True,fruit close-up,fruit close-up,opened or sectioned fruit
+baskauf/30241,Carya cordiformis,0.7167,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/30246,Carya cordiformis,0.8667,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/30252,Carya cordiformis,0.4167,True,leaf,leaf,leaf
+baskauf/30271,Carya laciniosa,0.3479,True,fruit,seed,twig
+baskauf/30278,Carya laciniosa,0.5,True,fruit close-up,seed,fruit close-up
+baskauf/30320,Carya laciniosa,0.2167,True,seed,seed,fruit close-up
+baskauf/30327,Acer rubrum,0.8333,True,leaf margin,leaf upper surface,leaf
+baskauf/30435,Fraxinus quadrangulata,0.2333,True,fruit,bark,bark
+baskauf/30439,Fraxinus quadrangulata,0.1429,True,twig,bud,twig
+baskauf/30723,Castanea dentata,0.4444,True,fruit,fruit,fruit close-up
+baskauf/30724,Castanea dentata,0.4667,True,fruit,fruit close-up,fruit close-up
+baskauf/30752,Cornus amomum,0.7778,False,winter habit,winter habit,winter habit
+baskauf/30756,Cornus amomum,0.5794,False,winter twig,winter twig,winter twig
+baskauf/30758,Cornus amomum,0.7667,True,winter twig,twig,winter twig
+baskauf/30760,Cornus amomum,0.8333,False,bark,bark,bark
+baskauf/30763,Ilex verticillata,0.5048,True,winter habit,stem,winter habit
+baskauf/30769,Ilex verticillata,0.7778,True,fruit close-up,fruit borne on plant,fruit
+baskauf/30771,Ilex verticillata,0.744,True,fruit borne on plant,twig,fruit borne on plant
+baskauf/30773,Ilex verticillata,0.3532,True,bark,winter twig,bark
+baskauf/30778,Viburnum opulus,0.5762,False,winter habit,winter habit,winter habit
+baskauf/30779,Viburnum opulus,0.5344,True,fruit,fruit borne on plant,fruit borne on plant
+baskauf/30783,Viburnum opulus,0.6389,True,fruit,fruit,fruit borne on plant
+baskauf/30784,Viburnum opulus,0.3278,True,twig,twig,winter twig
+baskauf/30786,Viburnum opulus,0.8333,True,bark,medium-tree or large-branch bark,bark
+baskauf/30941,Cornus amomum,0.6444,True,winter twig,winter twig,leaf scar
+baskauf/30951,Cornus sericea,0.4286,True,leaf scar,leaf scar,bud
+baskauf/30958,Cornus sericea,0.8016,True,winter twig,leaf scar,leaf scar
+baskauf/30961,Cornus sericea,0.7333,True,winter twig,twig,winter twig
+baskauf/30975,Cornus sericea,0.5655,True,winter habit,stem,winter habit
+baskauf/30981,Cornus sericea,0.5,False,bark,bark,bark
+baskauf/30984,Celtis occidentalis,0.581,False,winter twig,winter twig,winter twig
+baskauf/30988,Celtis occidentalis,0.6667,True,bark,trunk,large-tree bark
+baskauf/30990,Celtis occidentalis,0.7333,True,bark,medium-tree or large-branch bark,bark
+baskauf/31257,Pyrus calleryana,0.4889,True,whole plant,winter habit,winter habit
+baskauf/31282,Pyrus calleryana,0.4242,True,flower close-up,flower,flower close-up
+baskauf/31283,Pyrus calleryana,0.5926,True,winter twig,winter twig,bud
+baskauf/31285,Pyrus calleryana,0.7667,True,twig,bud,bud
+baskauf/31288,Pyrus calleryana,0.8333,True,bark,large-tree bark,bark
+baskauf/31291,Pyrus calleryana,0.5456,False,twig,twig,twig
+baskauf/31312,Pyrus calleryana,0.3333,True,flower close-up,flower close-up,bud
+baskauf/31314,Pyrus calleryana,0.45,True,flower close-up,flower close-up,flower close-up
+baskauf/31400,Amelanchier arborea,0.5317,False,winter habit,winter habit,winter habit
+baskauf/31404,Amelanchier arborea,0.4722,True,winter habit,flower,winter habit
+baskauf/31411,Amelanchier arborea,1.0,True,bark,large-tree bark,bark
+baskauf/31412,Amelanchier arborea,0.5238,False,flower,flower,flower
+baskauf/31418,Amelanchier arborea,0.5741,False,flower close-up,flower close-up,flower close-up
+baskauf/31421,Amelanchier arborea,0.3651,True,flower,flower close-up,flower close-up
+baskauf/31425,Amelanchier arborea,0.6296,True,flower close-up,flower close-up,bud
+baskauf/31426,Amelanchier arborea,0.7167,True,bud,twig,winter twig
+baskauf/31433,Populus deltoides,0.5536,False,winter habit,winter habit,winter habit
+baskauf/31447,Populus deltoides,0.2963,True,inflorescence,fruit,fruit
+baskauf/31453,Populus deltoides,0.6349,False,inflorescence,inflorescence,inflorescence
+baskauf/31457,Populus deltoides,0.2889,True,twig,inflorescence,branch
+baskauf/31459,Populus deltoides,0.6167,True,flower,inflorescence,flower close-up
+baskauf/31462,Populus deltoides,0.6333,False,inflorescence,inflorescence,inflorescence
+baskauf/31464,Lindera benzoin,0.625,True,bud,winter habit,inflorescence
+baskauf/31468,Populus deltoides,0.0952,True,inflorescence,branch,flower
+baskauf/31637,Acer negundo,0.375,True,twig,winter habit,winter habit
+baskauf/31641,Acer negundo,0.7685,True,flower close-up,inflorescence,inflorescence
+baskauf/31644,Acer negundo,0.416,True,twig,bud,stem
+baskauf/31775,Pyrus calleryana,0.3037,True,leaf,twig,leaf upper surface
+baskauf/31778,Pyrus calleryana,0.5556,True,leaf margin,leaf margin,leaf
+baskauf/31780,Pyrus calleryana,0.7778,False,leaf margin,leaf margin,leaf margin
+baskauf/31911,Pyrus calleryana,0.4969,True,flower close-up,flower close-up,flower close-up
+baskauf/31913,Pyrus calleryana,0.619,False,flower close-up,flower close-up,flower close-up
+baskauf/31916,Pyrus calleryana,0.4286,True,bud,winter twig,twig
+baskauf/31917,Pyrus calleryana,0.3872,True,flower,flower,bud
+baskauf/31920,Pyrus calleryana,1.0,True,bark,large-tree bark,bark
+baskauf/31922,Pyrus calleryana,0.7167,False,bark,bark,bark
+baskauf/31926,Pyrus calleryana,0.4667,True,leaf,flower close-up,leaf
+baskauf/31980,Pyrus calleryana,0.5,True,leaf margin,leaf margin,leaf upper surface
+baskauf/31981,Pyrus calleryana,0.3833,True,flower close-up,flower close-up,flower close-up
+baskauf/31991,Pyrus calleryana,0.2988,True,flower close-up,stem,flower close-up
+baskauf/31996,Pyrus calleryana,0.1944,True,flower close-up,flower close-up,immature fruit
+baskauf/32045,Pyrus calleryana,0.3516,True,whole plant,flower,whole plant
+baskauf/32123,Amelanchier arborea,0.45,True,leaf,twig,leaf upper surface
+baskauf/32173,Rhus aromatica,0.4095,True,bud,bud,inflorescence
+baskauf/32255,Rhus aromatica,0.4202,True,winter habit,winter habit,twig
+baskauf/32257,Rhus aromatica,0.8889,True,flower,inflorescence,flower
+baskauf/32478,Amelanchier arborea,0.3333,True,stem,flower,fruit close-up
+baskauf/32481,Amelanchier arborea,0.3102,True,inflorescence,twig,stem
+baskauf/32482,Amelanchier arborea,0.4778,True,leaf,leaf upper surface,leaf upper surface
+baskauf/32629,Pyrus calleryana,0.4074,True,leaf,branch,leaf
+baskauf/32631,Pyrus calleryana,0.3204,True,leaf,flower close-up,leaf
+baskauf/32633,Pyrus calleryana,0.8519,True,fruit borne on plant,stem,fruit close-up
+baskauf/32634,Pyrus calleryana,0.4222,True,leaf,leaf,leaf upper surface
+baskauf/32748,Pyrus calleryana,0.8333,True,leaf margin,leaf margin,leaf upper surface
+baskauf/32752,Pyrus calleryana,0.3651,True,flower close-up,flower close-up,immature fruit
+baskauf/32764,Pyrus calleryana,1.0,True,leaf margin,leaf margin,leaf upper surface
+baskauf/32768,Pyrus calleryana,1.0,False,leaf margin,leaf margin,leaf margin
+baskauf/32770,Pyrus calleryana,0.6389,True,leaf margin,leaf margin,leaf upper surface
+baskauf/32863,Fraxinus quadrangulata,0.7167,True,leaf,leaf arrangement on twig,leaf
+baskauf/33644,Pyrus calleryana,0.4444,True,fruit borne on plant,leaf,fruit borne on plant
+baskauf/33646,Gymnocladus dioicus,0.5833,True,flower,stem,flower
+baskauf/33649,Gymnocladus dioicus,0.5,False,flower close-up,flower close-up,flower close-up
+baskauf/33651,Gymnocladus dioicus,0.3968,True,flower close-up,flower close-up,flower close-up
+baskauf/34159,Amelanchier arborea,0.5238,True,fruit borne on plant,leaf,fruit borne on plant
+baskauf/34165,Amelanchier arborea,0.4444,True,fruit borne on plant,fruit borne on plant,fruit close-up
+baskauf/34172,Toxicodendron radicans,0.6607,True,flower,stem,flower close-up
+baskauf/34216,Pinus strobus,0.3,True,needle,needle,branch
+baskauf/34219,Pinus strobus,0.3,True,needle,needle,fruit close-up
+baskauf/34222,Pinus strobus,0.3595,True,twig,immature fruit,inflorescence
+baskauf/35163,Yucca filamentosa,0.3631,True,flower,fruit,flower
+baskauf/35167,Yucca filamentosa,0.4762,True,flower,flower,flower
+baskauf/35177,Yucca filamentosa,0.3952,True,flower close-up,flower close-up,fruit
+baskauf/35180,Yucca filamentosa,0.281,True,flower close-up,fruit,flower close-up
+baskauf/35181,Yucca filamentosa,0.1726,True,stem,stem,stem
+baskauf/35184,Yucca filamentosa,0.3333,True,leaf,fruit,leaf
+baskauf/35191,Quercus alba,0.8667,False,whole plant,whole plant,whole plant
+baskauf/35214,Cornus amomum,0.4012,True,whole plant,stem,whole plant
+baskauf/35216,Cornus amomum,0.4259,True,inflorescence,flower close-up,flower close-up
+baskauf/35218,Cornus amomum,0.7037,True,flower close-up,stem,flower close-up
+baskauf/35219,Cornus amomum,0.2967,True,flower,leaf,leaf
+baskauf/35221,Cornus amomum,0.5417,True,flower,stem,leaf
+baskauf/35224,Cornus amomum,0.3873,True,flower close-up,flower close-up,flower close-up
+baskauf/35249,Castanea dentata,0.487,True,leaf,leaf,leaf
+baskauf/35251,Castanea dentata,0.5238,True,inflorescence,inflorescence,flower
+baskauf/35272,Viburnum opulus,0.7242,False,leaf,leaf,leaf
+baskauf/35278,Viburnum opulus,0.6417,True,leaf,stem,leaf
+baskauf/35282,Viburnum opulus,0.7242,False,leaf,leaf,leaf
+baskauf/35283,Viburnum opulus,0.6667,True,leaf upper surface,leaf,leaf upper surface
+baskauf/35284,Viburnum opulus,0.8333,False,stem,stem,stem
+baskauf/35290,Prunus virginiana,0.6389,False,leaf,leaf,leaf
+baskauf/35296,Prunus virginiana,0.5694,True,leaf,stem,leaf
+baskauf/35299,Prunus virginiana,0.6296,True,fruit,stem,fruit
+baskauf/35302,Prunus virginiana,0.8667,True,leaf,leaf,leaf upper surface
+baskauf/35303,Prunus virginiana,0.6238,True,leaf,stem,leaf
+baskauf/35305,Prunus virginiana,0.7667,True,twig,stem,twig
+baskauf/35306,Prunus virginiana,0.3905,True,bark,medium-tree or large-branch bark,bark
+baskauf/35318,Cornus sericea,0.6667,True,leaf,stem,leaf
+baskauf/35319,Cornus sericea,0.6667,True,leaf,stem,leaf
+baskauf/35324,Cornus sericea,0.581,True,leaf,leaf upper surface,leaf
+baskauf/35326,Cornus sericea,0.6952,True,stem,stem,bud
+baskauf/35364,Ilex verticillata,1.0,True,whole plant,leaf,whole plant
+baskauf/35368,Ilex verticillata,0.5833,True,leaf,stem,leaf
+baskauf/35369,Ilex verticillata,0.7143,True,leaf,stem,leaf
+baskauf/35372,Ilex verticillata,0.5185,True,bud,stem,stem
+baskauf/35376,Ilex verticillata,0.4524,True,stem,leaf,leaf
+baskauf/35419,Populus grandidentata,1.0,False,whole plant,whole plant,whole plant
+baskauf/35422,Populus grandidentata,0.6667,True,bark,trunk,bark
+baskauf/35425,Populus grandidentata,0.5833,False,leaf,leaf,leaf
+baskauf/35429,Populus grandidentata,0.619,False,leaf,leaf,leaf
+baskauf/35432,Populus grandidentata,0.8889,True,stem,bud,bud
+baskauf/35435,Populus grandidentata,0.5,False,leaf,leaf,leaf
+baskauf/35439,Celtis occidentalis,1.0,False,whole plant,whole plant,whole plant
+baskauf/35446,Celtis occidentalis,1.0,True,fruit,fruit,fruit borne on plant
+baskauf/35448,Celtis occidentalis,0.8667,False,leaf,leaf,leaf
+baskauf/35450,Celtis occidentalis,0.7167,True,leaf upper surface,leaf upper surface,leaf
+baskauf/35627,Ilex verticillata,0.4603,True,flower,stem,stem
+baskauf/35633,Ilex verticillata,0.5235,True,flower,stem,flower close-up
+baskauf/35635,Ilex verticillata,0.6852,True,flower,stem,flower close-up
+baskauf/35713,Zanthoxylum americanum,0.6667,False,leaf,leaf,leaf
+baskauf/35716,Zanthoxylum americanum,0.8667,True,leaf,leaf arrangement on twig,leaf arrangement on twig
+baskauf/35720,Zanthoxylum americanum,0.8333,False,leaf,leaf,leaf
+baskauf/35725,Zanthoxylum americanum,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/35726,Zanthoxylum americanum,0.4667,True,leaf,stem,leaf
+baskauf/35728,Zanthoxylum americanum,0.6444,False,leaf,leaf,leaf
+baskauf/35729,Zanthoxylum americanum,0.8889,False,stem,stem,stem
+baskauf/35731,Zanthoxylum americanum,0.3122,True,bark,stem,bark
+baskauf/35740,Prunus serotina,0.5159,True,fruit,leaf,fruit borne on plant
+baskauf/35743,Prunus serotina,0.5952,True,fruit,stem,fruit close-up
+baskauf/35968,Pyrus calleryana,0.6825,True,fruit,fruit close-up,fruit borne on plant
+baskauf/37287,Betula lenta,0.7,False,bark,bark,bark
+baskauf/37293,Betula lenta,0.8667,True,bark,winter twig,bud
+baskauf/37296,Betula lenta,0.6167,True,twig,winter twig,winter twig
+baskauf/37494,Cephalanthus occidentalis,0.7321,True,fruit,fruit,leaf
+baskauf/37883,Pyrus calleryana,0.65,True,fruit,leaf,fruit borne on plant
+baskauf/37886,Pyrus calleryana,0.9048,True,fruit close-up,fruit borne on plant,fruit close-up
+baskauf/38128,Picea rubens,0.3862,True,needle,needle,needle
+baskauf/38132,Picea rubens,0.5238,True,cone,cone,fruit close-up
+baskauf/38139,Betula lenta,0.619,True,leaf,leaf,bud
+baskauf/38140,Betula lenta,0.8095,True,leaf,leaf,leaf upper surface
+baskauf/38144,Betula lenta,0.7167,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/38145,Betula lenta,0.7778,False,leaf,leaf,leaf
+baskauf/38148,Betula lenta,0.8333,True,bark,large-tree bark,bark
+baskauf/38151,Betula lenta,1.0,False,whole plant,whole plant,whole plant
+baskauf/38154,Betula lenta,0.8016,False,trunk,trunk,trunk
+baskauf/38156,Betula lenta,1.0,True,view up trunk,whole plant,whole plant
+baskauf/38289,Pinus rigida,0.7778,True,view up trunk,whole plant,whole plant
+baskauf/38294,Pinus rigida,0.7143,False,whole plant,whole plant,whole plant
+baskauf/38297,Pinus rigida,0.5556,True,twig,leaf arrangement on twig,needle attachment
+baskauf/38299,Pinus rigida,0.2833,True,needle,fruit borne on plant,twig
+baskauf/38302,Pinus rigida,0.2976,True,twig,twig,stem
+baskauf/38303,Pinus rigida,0.6667,False,bark,bark,bark
+baskauf/38305,Pinus rigida,0.3556,True,bark,bark,bark
+baskauf/38309,Pinus rigida,0.6667,True,closed cone,twig,twig
+baskauf/38311,Pinus rigida,0.4444,True,closed cone,twig,twig
+baskauf/38433,Pyrus calleryana,0.8889,True,fruit close-up,fruit borne on plant,fruit close-up
+baskauf/38435,Gleditsia triacanthos,0.4392,True,twig,twig,twig
+baskauf/38436,Gleditsia triacanthos,0.3381,True,winter twig,twig,stem
+baskauf/38439,Gleditsia triacanthos,0.6376,False,twig,twig,twig
+baskauf/38441,Pyrus calleryana,0.7381,True,fruit,fruit borne on plant,fruit close-up
+baskauf/38461,Pyrus calleryana,0.5556,True,fruit,fruit close-up,fruit close-up
+baskauf/38620,Acer platanoides,1.0,True,whole plant,branch,whole plant
+baskauf/38627,Acer platanoides,0.6667,True,leaf,leaf upper surface,leaf
+baskauf/38628,Acer platanoides,0.6444,True,leaf,leaf upper surface,leaf
+baskauf/38630,Acer platanoides,0.6222,False,bud,bud,bud
+baskauf/38631,Acer platanoides,0.5787,True,bud,bud,twig
+baskauf/38634,Acer platanoides,1.0,True,bark,trunk,bark
+baskauf/38636,Acer platanoides,0.8333,True,leaf,leaf upper surface,leaf
+baskauf/38639,Acer platanoides,0.454,True,bud,bud,bud
+baskauf/38698,Pyrus calleryana,0.7778,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/38700,Pyrus calleryana,0.9048,True,fruit,fruit borne on plant,fruit close-up
+baskauf/38731,Pyrus calleryana,0.619,True,fruit,opened or sectioned fruit,fruit close-up
+baskauf/39025,Acer platanoides,0.6667,False,bud,bud,bud
+baskauf/39069,Acer rubrum,0.4074,True,flower close-up,bud,flower close-up
+baskauf/39125,Acer platanoides,0.6984,True,flower,inflorescence,bud
+baskauf/39128,Acer platanoides,0.7685,True,inflorescence,inflorescence,immature fruit
+baskauf/39134,Platanus occidentalis,0.3333,True,fruit close-up,winter twig,fruit close-up
+baskauf/39140,Acer saccharum,0.5111,False,bud,bud,bud
+baskauf/39142,Platanus occidentalis,0.7667,True,bud,winter twig,bud
+baskauf/39143,Fagus grandifolia,0.5833,True,winter twig,twig,winter twig
+baskauf/39144,Acer saccharum,0.7937,False,winter twig,winter twig,winter twig
+baskauf/39152,Platanus occidentalis,0.4012,True,fruit close-up,winter twig,fruit close-up
+baskauf/39154,Juglans nigra,0.1111,True,seed,winter twig,bark
+baskauf/39156,Carya ovata,0.4444,True,bark,bark,bark
+baskauf/39159,Ailanthus altissima,0.8667,True,leaf scar,leaf scar,bud
+baskauf/39161,Acer saccharum,0.619,False,winter twig,winter twig,winter twig
+baskauf/39162,Platanus occidentalis,0.8333,True,twig,winter twig,winter twig
+baskauf/39164,Juglans nigra,0.5714,True,winter twig,twig,leaf scar
+baskauf/39171,Ailanthus altissima,0.1143,True,twig,winter twig,fruit close-up
+baskauf/39173,Ailanthus altissima,0.2778,True,fruit,fruit close-up,fruit close-up
+baskauf/39176,Fagus grandifolia,0.7778,True,winter twig,bud,winter twig
+baskauf/39181,Acer saccharum,0.6,True,bud,bud,fruit close-up
+baskauf/39270,Fagus grandifolia,0.5556,True,leaf,immature fruit,leaf
+baskauf/39273,Fagus grandifolia,0.6,True,inflorescence,bud,flower
+baskauf/39282,Fagus grandifolia,0.6238,True,stem,bud,fruit close-up
+baskauf/39501,Acer platanoides,0.3254,True,fruit,leaf,leaf
+baskauf/39502,Acer platanoides,0.1786,True,immature fruit,inflorescence,leaf
+baskauf/39814,Viburnum opulus,0.5093,True,leaf,stem,flower close-up
+baskauf/39818,Viburnum opulus,0.7556,True,flower close-up,flower,flower close-up
+baskauf/39822,Viburnum opulus,0.5926,True,flower,frontal flower view,flower close-up
+baskauf/39880,Aesculus glabra,0.7167,True,immature fruit,inflorescence,inflorescence
+baskauf/43251,Juglans nigra,0.5556,False,leaf,leaf,leaf
+baskauf/43252,Juglans nigra,0.8333,True,leaf upper surface,leaf margin,leaf
+baskauf/43400,Acer nigrum,1.0,False,whole plant,whole plant,whole plant
+baskauf/43402,Acer nigrum,0.7063,True,bark,trunk,bark
+baskauf/43407,Acer nigrum,0.8333,True,bark,trunk,bark
+baskauf/43412,Acer nigrum,0.8667,True,bark,trunk,bark
+baskauf/43416,Acer nigrum,0.5,True,fruit borne on plant,leaf,leaf
+baskauf/43418,Acer nigrum,0.3889,True,leaf,leaf,leaf
+baskauf/43421,Acer nigrum,0.4821,True,fruit,immature fruit,leaf
+baskauf/43423,Acer nigrum,0.5476,True,fruit close-up,immature fruit,fruit close-up
+baskauf/43426,Acer nigrum,0.7,False,leaf,leaf,leaf
+baskauf/43429,Acer nigrum,0.4667,True,leaf,leaf,leaf
+baskauf/43430,Acer nigrum,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/43437,Acer nigrum,0.5333,False,bud,bud,bud
+baskauf/43439,Acer nigrum,0.5333,True,leaf,leaf upper surface,leaf
+baskauf/43539,Thuja occidentalis,0.6,True,needle,whole plant,whole plant
+baskauf/43541,Thuja occidentalis,0.6167,False,bark,bark,bark
+baskauf/43545,Thuja occidentalis,0.7778,False,needle,needle,needle
+baskauf/43546,Thuja occidentalis,0.2778,True,needle,twig,inflorescence
+baskauf/43548,Thuja occidentalis,0.2619,True,needle,twig,inflorescence
+baskauf/43550,Thuja occidentalis,0.2444,True,needle,twig,twig
+baskauf/43552,Thuja occidentalis,0.1958,True,needle,twig,twig
+baskauf/43553,Thuja occidentalis,0.275,True,needle,trunk,branch
+baskauf/43578,Pyrus calleryana,0.6167,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/43789,Carpinus caroliniana,0.3611,True,twig,twig,twig
+baskauf/43792,Carpinus caroliniana,0.5556,False,twig,twig,twig
+baskauf/49244,Betula alleghaniensis,0.7333,False,bark,bark,bark
+baskauf/49247,Betula alleghaniensis,1.0,True,leaf,leaf margin,leaf upper surface
+baskauf/49248,Betula alleghaniensis,1.0,True,leaf margin,leaf margin,leaf upper surface
+baskauf/49249,Betula alleghaniensis,1.0,False,leaf margin,leaf margin,leaf margin
+baskauf/49250,Betula alleghaniensis,0.4524,True,bud,bud,twig
+baskauf/49252,Betula alleghaniensis,0.3611,True,leaf,leaf margin,leaf
+baskauf/49290,Sambucus racemosa,0.8095,True,flower,stem,inflorescence
+baskauf/49293,Sambucus racemosa,0.7143,True,flower,inflorescence,flower close-up
+baskauf/49296,Sorbus americana,0.4508,True,branch,leaf,branch
+baskauf/49300,Sorbus americana,0.5417,True,inflorescence,stem,inflorescence
+baskauf/49326,Sorbus americana,0.6794,True,leaf,leaf,inflorescence
+baskauf/49330,Sorbus americana,0.7143,False,flower close-up,flower close-up,flower close-up
+baskauf/49332,Sorbus americana,0.5571,False,flower close-up,flower close-up,flower close-up
+baskauf/49334,Sorbus americana,0.7556,True,flower,flower,flower close-up
+baskauf/49335,Sorbus americana,0.6667,True,whole plant,branch,whole plant
+baskauf/49339,Sorbus americana,0.6,False,inflorescence,inflorescence,inflorescence
+baskauf/49341,Sorbus americana,0.6167,True,inflorescence,inflorescence,flower close-up
+baskauf/49344,Sorbus americana,0.7556,True,inflorescence,inflorescence,flower close-up
+baskauf/49612,Magnolia acuminata,0.7262,True,fruit close-up,immature fruit,fruit
+baskauf/50375,Picea glauca,0.621,True,whole plant,needle,whole plant
+baskauf/50377,Picea glauca,0.55,False,needle,needle,needle
+baskauf/50380,Picea glauca,0.5833,False,needle,needle,needle
+baskauf/50383,Picea glauca,0.2698,True,needle,fruit close-up,needle attachment
+baskauf/50384,Picea glauca,0.3016,True,needle attachment,needle,needle attachment
+baskauf/50385,Picea glauca,0.3952,True,needle,needle,needle attachment
+baskauf/50392,Picea glauca,0.7333,True,bark,needle,bark
+baskauf/50395,Picea glauca,0.5556,True,cone,cone,closed cone
+baskauf/50460,Lindera benzoin,0.8095,True,flower,bud,bud
+baskauf/50462,Lindera benzoin,1.0,True,flower,flower close-up,flower close-up
+baskauf/50467,Lindera benzoin,0.3679,True,twig,stem,twig
+baskauf/50473,Prunus serotina,0.6429,True,bud,winter twig,winter twig
+baskauf/50474,Prunus serotina,0.6667,True,winter twig,winter twig,twig
+baskauf/50496,Pinus resinosa,0.4206,True,needle,needle,branch
+baskauf/50500,Pinus resinosa,1.0,True,bark,large-tree bark,bark
+baskauf/50503,Pinus resinosa,0.0,True,closed cone,twig,fruit
+baskauf/50504,Pinus resinosa,0.5556,False,closed cone,closed cone,closed cone
+baskauf/50507,Pinus resinosa,0.5,True,needle,twig,needle attachment
+baskauf/50514,Pinus resinosa,0.4444,True,needle,twig,needle attachment
+baskauf/50515,Pinus resinosa,0.4167,True,twig,twig,twig
+baskauf/50517,Pinus resinosa,0.281,True,needle,twig,stem
+baskauf/50554,Juglans cinerea,0.6984,True,whole plant,winter habit,winter habit
+baskauf/50556,Juglans cinerea,0.7639,False,view up trunk,view up trunk,view up trunk
+baskauf/50586,Juniperus virginiana,0.5333,True,needle,needle,whole plant
+baskauf/50587,Juniperus virginiana,0.2824,True,needle,needle,inflorescence
+baskauf/50588,Juniperus virginiana,0.2889,True,needle,needle,inflorescence
+baskauf/50594,Acer nigrum,0.8333,True,inflorescence,bud,inflorescence
+baskauf/50595,Acer nigrum,0.6524,True,flower close-up,inflorescence,immature fruit
+baskauf/50597,Carpinus caroliniana,0.6204,True,bud,twig,bud
+baskauf/50598,Carpinus caroliniana,0.6389,False,inflorescence,inflorescence,inflorescence
+baskauf/50601,Carpinus caroliniana,0.4425,True,inflorescence,twig,twig
+baskauf/50606,Ulmus americana,0.5667,True,bud,twig,fruit
+baskauf/50629,Ostrya virginiana,0.6,True,bud,twig,bud
+baskauf/50630,Ostrya virginiana,0.4,True,inflorescence,twig,bud
+baskauf/50632,Ostrya virginiana,0.7381,True,bud,inflorescence,bud
+baskauf/50685,Acer platanoides,0.744,True,flower,inflorescence,inflorescence
+baskauf/50688,Acer platanoides,0.5139,True,flower close-up,inflorescence,flower close-up
+baskauf/50707,Juniperus virginiana,0.6296,True,needle,needle,fruit close-up
+baskauf/50709,Juniperus virginiana,0.7778,True,needle,needle,immature fruit
+baskauf/50711,Acer saccharum,0.4481,True,whole plant,inflorescence,whole plant
+baskauf/50713,Acer saccharum,0.6238,False,branch,branch,branch
+baskauf/50727,Acer saccharum,0.5333,True,immature fruit,bud,flower
+baskauf/50729,Acer saccharum,0.5972,False,immature fruit,immature fruit,immature fruit
+baskauf/50745,Ginkgo biloba,0.3667,True,bud,flower close-up,inflorescence
+baskauf/50749,Acer rubrum,0.7333,False,winter habit,winter habit,winter habit
+baskauf/50750,Acer rubrum,0.4452,True,whole plant,trunk,winter habit
+baskauf/50913,Gymnocladus dioicus,0.7778,True,bark,large-tree bark,bark
+baskauf/50973,Sassafras albidum,0.5899,False,flower close-up,flower close-up,flower close-up
+baskauf/50974,Sassafras albidum,0.7037,False,flower close-up,flower close-up,flower close-up
+baskauf/50977,Sassafras albidum,0.7063,False,flower close-up,flower close-up,flower close-up
+baskauf/50978,Sassafras albidum,0.5344,True,flower,flower close-up,inflorescence
+baskauf/50985,Quercus palustris,0.3576,True,bud,immature fruit,bud
+baskauf/50987,Quercus palustris,0.2778,True,inflorescence,inflorescence,inflorescence
+baskauf/50988,Quercus palustris,0.2421,True,inflorescence,leaf,inflorescence
+baskauf/50992,Celtis occidentalis,0.4537,True,stem,leaf,stem
+baskauf/50993,Celtis occidentalis,0.5833,True,flower close-up,leaf,flower
+baskauf/50996,Ginkgo biloba,0.2083,True,immature fruit,stem,stem
+baskauf/50998,Ginkgo biloba,0.2619,True,bud,stem,stem
+baskauf/51003,Cercis canadensis,0.3905,True,flower close-up,branch,inflorescence
+baskauf/51004,Cercis canadensis,0.5444,False,branch,branch,branch
+baskauf/51013,Sassafras albidum,0.4821,True,flower,flower close-up,flower close-up
+baskauf/51014,Sassafras albidum,0.5556,False,flower close-up,flower close-up,flower close-up
+baskauf/51027,Sassafras albidum,0.5661,True,branch,whole plant,whole plant
+baskauf/51161,Magnolia acuminata,0.5394,True,flower,immature fruit,flower close-up
+baskauf/51163,Magnolia acuminata,0.6898,True,flower,immature fruit,flower close-up
+baskauf/51164,Magnolia acuminata,0.6444,False,branch,branch,branch
+baskauf/51169,Fraxinus pennsylvanica,0.619,True,twig,bud,flower
+baskauf/51172,Fraxinus pennsylvanica,0.7556,True,bud,twig,stem
+baskauf/51174,Fraxinus pennsylvanica,0.5,True,inflorescence,bud,flower
+baskauf/51175,Fraxinus pennsylvanica,0.6667,True,flower,inflorescence,flower close-up
+baskauf/51183,Quercus bicolor,0.7361,True,inflorescence,twig,inflorescence
+baskauf/51186,Quercus bicolor,0.2917,True,inflorescence,twig,twig
+baskauf/51397,Nyssa sylvatica,0.6825,False,flower close-up,flower close-up,flower close-up
+baskauf/51398,Nyssa sylvatica,0.2175,True,flower close-up,bud,stem
+baskauf/51402,Nyssa sylvatica,0.4048,True,stem,leaf,stem
+baskauf/51406,Nyssa sylvatica,0.7242,False,leaf,leaf,leaf
+baskauf/51409,Nyssa sylvatica,0.3821,True,leaf,leaf,leaf
+baskauf/51411,Nyssa sylvatica,0.4769,True,leaf,leaf,leaf
+baskauf/51414,Nyssa sylvatica,0.8274,True,inflorescence,immature fruit,flower close-up
+baskauf/51416,Nyssa sylvatica,0.4881,True,inflorescence,immature fruit,flower close-up
+baskauf/51418,Nyssa sylvatica,0.3952,True,inflorescence,leaf,inflorescence
+baskauf/51420,Aesculus glabra,0.7381,False,flower close-up,flower close-up,flower close-up
+baskauf/51572,Carya cordiformis,0.563,True,inflorescence,inflorescence,immature fruit
+baskauf/51574,Carya cordiformis,0.7381,True,stem,immature fruit,flower
+baskauf/51575,Carya cordiformis,0.6931,True,stem,flower,flower close-up
+baskauf/51577,Carya cordiformis,0.5973,True,inflorescence,inflorescence,flower
+baskauf/51578,Carya cordiformis,0.6825,True,inflorescence,inflorescence,flower close-up
+baskauf/51686,Gymnocladus dioicus,0.3869,True,flower close-up,fruit close-up,flower close-up
+baskauf/51688,Gymnocladus dioicus,0.5037,False,flower close-up,flower close-up,flower close-up
+baskauf/51691,Gymnocladus dioicus,0.5556,False,flower close-up,flower close-up,flower close-up
+baskauf/51694,Gymnocladus dioicus,0.8274,True,flower close-up,fruit close-up,immature fruit
+baskauf/51695,Gymnocladus dioicus,0.5007,True,flower close-up,fruit close-up,bud
+baskauf/51704,Gymnocladus dioicus,0.4444,True,flower close-up,flower close-up,flower close-up
+baskauf/51706,Gymnocladus dioicus,0.4333,True,flower close-up,flower close-up,flower close-up
+baskauf/51730,Lonicera morrowii,0.4861,True,flower close-up,stem,flower close-up
+baskauf/51731,Lonicera morrowii,0.5896,True,flower close-up,leaf,stem
+baskauf/51734,Lonicera morrowii,0.4778,True,leaf,leaf,leaf
+baskauf/51736,Lonicera morrowii,0.6905,True,leaf arrangement on twig,bud,bud
+baskauf/51738,Lonicera morrowii,0.4206,True,bark,bark,bark
+baskauf/51741,Lonicera morrowii,0.5179,True,leaf,leaf,whole plant
+baskauf/51771,Gleditsia triacanthos,0.6667,True,inflorescence,twig,inflorescence
+baskauf/51793,Lonicera morrowii,0.5099,False,whole plant,whole plant,whole plant
+baskauf/51797,Lonicera morrowii,0.6984,True,whole plant,leaf,whole plant
+baskauf/51799,Lonicera morrowii,0.4538,True,flower,flower interior,leaf
+baskauf/51804,Lonicera morrowii,0.5013,True,flower interior,flower interior,flower close-up
+baskauf/51807,Lonicera morrowii,0.619,True,flower,flower interior,flower close-up
+baskauf/51808,Lonicera morrowii,0.472,True,flower,leaf,flower close-up
+baskauf/51813,Zanthoxylum americanum,0.7593,True,flower,flower close-up,bud
+baskauf/51814,Zanthoxylum americanum,0.6667,True,twig,stem,twig
+baskauf/51815,Zanthoxylum americanum,0.6481,True,bud,bud,twig
+baskauf/51816,Zanthoxylum americanum,0.3226,True,bud,stem,twig
+baskauf/52430,Carya cordiformis,0.8333,True,leaf margin,leaf margin,leaf upper surface
+baskauf/52470,Fagus grandifolia,0.6233,True,fruit,leaf,fruit
+baskauf/52471,Fagus grandifolia,0.5886,True,immature fruit,immature fruit,fruit
+baskauf/52472,Quercus palustris,1.0,True,leaf,leaf margin,leaf upper surface
+baskauf/52480,Quercus muehlenbergii,0.6167,True,leaf,leaf margin,leaf upper surface
+baskauf/52483,Quercus bicolor,0.7,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/52519,Ailanthus altissima,0.6,True,leaf,leaf margin,leaf upper surface
+baskauf/52523,Magnolia acuminata,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/52662,Rhus aromatica,0.6389,True,leaf,stem,leaf upper surface
+baskauf/52663,Rhus aromatica,0.6794,True,leaf,leaf,fruit borne on plant
+baskauf/52744,Lindera benzoin,0.8667,True,leaf,leaf upper surface,leaf upper surface
+baskauf/52747,Lindera benzoin,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/54517,Rhus copallinum,0.4815,True,inflorescence,leaf,inflorescence
+baskauf/54519,Rhus copallinum,0.4372,True,inflorescence,leaf,leaf
+baskauf/54525,Rhus copallinum,0.5873,True,inflorescence,leaf,leaf
+baskauf/54528,Rhus copallinum,0.4286,True,flower,inflorescence,inflorescence
+baskauf/54532,Rhus copallinum,0.5,True,inflorescence,leaf,inflorescence
+baskauf/54534,Zanthoxylum americanum,0.619,True,twig,stem,twig
+baskauf/54535,Zanthoxylum americanum,0.6111,True,fruit,stem,fruit borne on plant
+baskauf/54536,Zanthoxylum americanum,0.7143,True,fruit,stem,fruit close-up
+baskauf/54538,Zanthoxylum americanum,0.8333,True,fruit borne on plant,stem,fruit borne on plant
+baskauf/54555,Cornus amomum,0.7259,True,fruit,stem,fruit
+baskauf/54556,Zanthoxylum americanum,0.4815,True,branch,stem,branch
+baskauf/54564,Lonicera morrowii,0.7333,True,whole plant,leaf,whole plant
+baskauf/54565,Lonicera morrowii,0.6794,True,fruit borne on plant,stem,fruit borne on plant
+baskauf/54568,Lonicera morrowii,0.7143,True,fruit borne on plant,leaf,fruit
+baskauf/54572,Cornus sericea,0.375,True,stem,stem,leaf
+baskauf/54677,Cornus amomum,0.4241,True,stem,twig,bud
+baskauf/54680,Cornus amomum,0.4398,True,stem,stem,fruit
+baskauf/54682,Cornus amomum,0.6556,False,leaf,leaf,leaf
+baskauf/54683,Cornus amomum,0.6389,True,leaf upper surface,stem,leaf upper surface
+baskauf/54740,Cornus racemosa,0.4709,True,whole plant,stem,whole plant
+baskauf/54744,Cornus racemosa,0.8667,True,whole plant,leaf,whole plant
+baskauf/54747,Cornus racemosa,0.7037,True,fruit borne on plant,stem,fruit
+baskauf/54750,Cornus racemosa,0.4095,True,twig,twig,twig
+baskauf/54755,Cornus racemosa,0.8333,True,bark,medium-tree or large-branch bark,bark
+baskauf/54758,Cornus racemosa,0.4147,True,leaf,leaf,leaf upper surface
+baskauf/54760,Cornus racemosa,0.5833,True,leaf,leaf margin,leaf upper surface
+baskauf/54764,Cornus racemosa,0.6667,True,fruit borne on plant,leaf,leaf
+baskauf/54765,Cornus racemosa,0.8889,True,fruit,stem,fruit
+baskauf/54766,Cornus racemosa,0.9048,True,fruit borne on plant,fruit borne on plant,fruit
+baskauf/54767,Cornus racemosa,0.7143,False,fruit borne on plant,fruit borne on plant,fruit borne on plant
+baskauf/54817,Cornus racemosa,0.7143,True,fruit borne on plant,leaf,fruit
+baskauf/54819,Cornus racemosa,0.5028,True,leaf scar,leaf scar,twig
+baskauf/54826,Pinus strobus,0.0,True,twig,bark,stem
+baskauf/54828,Pinus strobus,0.3333,True,twig,twig,stem
+baskauf/54834,Pinus strobus,0.3611,True,twig,needle attachment,twig
+baskauf/54836,Pinus strobus,0.1667,True,twig,needle attachment,twig
+baskauf/54849,Acer negundo,0.7,True,whole plant,leaf,whole plant
+baskauf/54851,Acer negundo,0.7778,True,whole plant,leaf,whole plant
+baskauf/54856,Magnolia acuminata,0.8667,False,fruit close-up,fruit close-up,fruit close-up
+baskauf/54857,Magnolia acuminata,0.8889,True,fruit,fruit close-up,fruit close-up
+baskauf/54874,Acer negundo,0.6556,False,leaf,leaf,leaf
+baskauf/54876,Acer negundo,0.6389,True,leaf upper surface,leaf margin,leaf upper surface
+baskauf/54881,Acer negundo,1.0,True,whole plant,leaf,whole plant
+baskauf/54884,Acer negundo,1.0,False,whole plant,whole plant,whole plant
+baskauf/54962,Acer negundo,0.6333,True,leaf,stem,leaf
+baskauf/54969,Acer negundo,0.8667,False,leaf,leaf,leaf
+baskauf/54970,Acer negundo,0.8667,True,leaf,leaf arrangement on twig,leaf
+baskauf/54972,Acer negundo,0.7167,False,leaf,leaf,leaf
+baskauf/55139,Ulmus americana,0.8667,True,leaf,leaf,leaf arrangement on twig
+baskauf/55141,Ulmus americana,0.4762,True,leaf,leaf,stem
+baskauf/55228,Magnolia acuminata,0.4762,True,fruit,fruit close-up,bud
+baskauf/55230,Magnolia acuminata,0.4702,True,fruit,fruit close-up,fruit close-up
+baskauf/55474,Magnolia acuminata,1.0,True,bark,trunk,bark
+baskauf/55475,Magnolia acuminata,1.0,True,bark,trunk,bark
+baskauf/55479,Magnolia acuminata,0.6389,True,leaf,leaf upper surface,leaf
+baskauf/55485,Magnolia acuminata,1.0,False,whole plant,whole plant,whole plant
+baskauf/55492,Magnolia acuminata,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/55494,Magnolia acuminata,1.0,True,leaf upper surface,leaf upper surface,leaf
+baskauf/55500,Magnolia acuminata,0.7778,True,leaf,leaf upper surface,leaf
+baskauf/55738,Hamamelis virginiana,1.0,False,whole plant,whole plant,whole plant
+baskauf/55741,Hamamelis virginiana,0.7778,True,leaf,leaf upper surface,leaf upper surface
+baskauf/55745,Hamamelis virginiana,0.7167,False,leaf upper surface,leaf upper surface,leaf upper surface
+baskauf/55748,Hamamelis virginiana,0.4286,True,twig,bud,twig
+baskauf/55752,Hamamelis virginiana,0.7333,False,leaf,leaf,leaf
+baskauf/55755,Hamamelis virginiana,1.0,False,bark,bark,bark
+baskauf/55757,Hamamelis virginiana,0.4167,True,bark,medium-tree or large-branch bark,bark
+baskauf/55760,Hamamelis virginiana,0.3733,True,bud,flower close-up,fruit close-up
+baskauf/55763,Hamamelis virginiana,0.9167,True,flower close-up,flower close-up,bud
+baskauf/55764,Hamamelis virginiana,0.3545,True,bud,flower close-up,immature fruit
+baskauf/55769,Hamamelis virginiana,0.2063,True,leaf,stem,leaf
+baskauf/55770,Hamamelis virginiana,0.6759,True,flower,inflorescence,bud
+baskauf/55774,Hamamelis virginiana,0.4583,True,bud,flower close-up,bud
+baskauf/55799,Hamamelis virginiana,0.8667,True,leaf,leaf upper surface,leaf
+baskauf/55800,Hamamelis virginiana,0.6,True,leaf,leaf upper surface,leaf
+baskauf/55869,Juglans cinerea,0.5,True,winter twig,leaf scar,winter twig
+baskauf/55872,Juglans cinerea,0.5595,True,winter twig,leaf scar,winter twig
+baskauf/55876,Juglans cinerea,0.8095,True,leaf scar,leaf scar,winter twig
+baskauf/55877,Juglans cinerea,0.7143,True,winter twig,leaf scar,winter twig
+baskauf/58501,Ilex verticillata,0.5833,True,leaf,stem,leaf upper surface
+baskauf/58502,Ilex verticillata,0.5333,True,bud,stem,bud
+baskauf/58504,Ilex verticillata,0.6556,True,bud,stem,bud
+baskauf/58506,Ilex verticillata,0.4667,True,leaf upper surface,stem,leaf upper surface
+baskauf/63779,Gymnocladus dioicus,0.7321,False,winter twig,winter twig,winter twig
+baskauf/63781,Gymnocladus dioicus,0.8095,True,winter twig,winter twig,bark
+baskauf/63783,Gymnocladus dioicus,0.6806,False,winter twig,winter twig,winter twig
+baskauf/65631,Dirca palustris,0.8667,False,leaf,leaf,leaf
+baskauf/65633,Dirca palustris,0.4333,True,leaf,leaf,leaf
+baskauf/65634,Dirca palustris,0.7167,False,leaf,leaf,leaf
+baskauf/65637,Dirca palustris,0.7333,False,leaf,leaf,leaf
+baskauf/65641,Dirca palustris,0.4286,True,fruit borne on plant,bud,stem
+baskauf/65642,Dirca palustris,0.4444,True,leaf,leaf,leaf
+baskauf/65644,Dirca palustris,0.4444,True,leaf,leaf,leaf
+baskauf/65645,Dirca palustris,0.5556,True,leaf,leaf,leaf upper surface
+baskauf/65647,Dirca palustris,0.8889,True,stem,leaf,bud
+baskauf/65649,Dirca palustris,0.7667,True,stem,bud,twig
+baskauf/65650,Dirca palustris,0.8333,False,bark,bark,bark
+baskauf/65651,Dirca palustris,0.6333,False,bark,bark,bark
+baskauf/65652,Dirca palustris,0.6667,False,bark,bark,bark
+baskauf/65653,Dirca palustris,0.4667,True,bark,bark,bark
+baskauf/65654,Dirca palustris,0.3929,True,twig,stem,twig
+baskauf/65655,Dirca palustris,0.7778,True,leaf,whole plant,stem
+baskauf/65657,Dirca palustris,0.8889,False,leaf,leaf,leaf
+baskauf/65662,Dirca palustris,0.7333,False,leaf,leaf,leaf
+baskauf/66134,Gleditsia triacanthos,0.7579,True,flower,inflorescence,inflorescence
+baskauf/66135,Gleditsia triacanthos,0.4742,True,flower,flower,inflorescence
+baskauf/66137,Gleditsia triacanthos,0.6381,False,flower,flower,flower
+baskauf/66138,Gleditsia triacanthos,0.4815,True,leaf,branch,leaf
+baskauf/66140,Gleditsia triacanthos,0.3917,True,inflorescence,inflorescence,branch
+baskauf/66141,Gleditsia triacanthos,0.7333,False,leaf,leaf,leaf
+baskauf/66144,Gleditsia triacanthos,0.7167,False,leaf,leaf,leaf
+baskauf/66145,Gleditsia triacanthos,0.4167,True,leaf,leaf,leaf
+baskauf/66147,Gleditsia triacanthos,0.8667,False,whole plant,whole plant,whole plant
+baskauf/66149,Gleditsia triacanthos,0.2738,True,bark,branch,bark
+baskauf/66153,Gleditsia triacanthos,0.4944,True,leaf,leaf,leaf
+baskauf/66154,Gleditsia triacanthos,0.5238,True,stem,twig,stem
+baskauf/66155,Gleditsia triacanthos,0.8889,True,leaf arrangement on twig,twig,leaf
+baskauf/66156,Gleditsia triacanthos,0.6,True,twig,twig,bud
+baskauf/66157,Gleditsia triacanthos,0.7143,True,leaf arrangement on twig,branch,stem
+baskauf/66159,Gleditsia triacanthos,0.7167,False,leaf,leaf,leaf
+baskauf/66161,Gleditsia triacanthos,0.4444,True,leaf,inflorescence,leaf
+baskauf/66163,Gleditsia triacanthos,0.3591,True,stem,twig,bark
+baskauf/66164,Gleditsia triacanthos,0.5873,True,branch,branch,whole plant
+baskauf/66166,Gleditsia triacanthos,0.6758,False,inflorescence,inflorescence,inflorescence
+baskauf/66167,Gleditsia triacanthos,0.6707,True,inflorescence,inflorescence,twig
+baskauf/66168,Gleditsia triacanthos,0.725,False,inflorescence,inflorescence,inflorescence
+baskauf/66169,Gleditsia triacanthos,0.7259,False,flower,flower,flower
+baskauf/66170,Gleditsia triacanthos,0.7639,True,flower,flower,flower close-up
+baskauf/66172,Gleditsia triacanthos,0.6444,True,leaf,leaf arrangement on twig,leaf
+baskauf/66173,Gleditsia triacanthos,0.75,True,leaf,twig,leaf arrangement on twig
+baskauf/66174,Gleditsia triacanthos,0.6905,True,leaf arrangement on twig,bark,twig
+baskauf/66175,Gleditsia triacanthos,0.3556,True,leaf,leaf arrangement on twig,leaf upper surface
+baskauf/66176,Gleditsia triacanthos,0.4778,True,leaf,twig,leaf
+baskauf/66178,Gleditsia triacanthos,0.7333,True,leaf,twig,leaf
+baskauf/66180,Gleditsia triacanthos,1.0,True,whole plant,branch,whole plant
+baskauf/66181,Gleditsia triacanthos,0.2611,True,bark,branch,twig
+baskauf/66182,Gleditsia triacanthos,0.619,True,bark,branch,bark
+baskauf/66183,Gleditsia triacanthos,0.7222,False,inflorescence,inflorescence,inflorescence
+baskauf/66184,Gleditsia triacanthos,0.5667,False,inflorescence,inflorescence,inflorescence
+baskauf/66185,Gleditsia triacanthos,0.6825,False,inflorescence,inflorescence,inflorescence
+baskauf/66187,Gleditsia triacanthos,0.8333,True,inflorescence,inflorescence,flower close-up
+baskauf/66188,Gleditsia triacanthos,0.5973,True,inflorescence,flower,flower close-up
+baskauf/66190,Gleditsia triacanthos,0.2619,True,inflorescence,leaf,stem
+baskauf/66191,Gleditsia triacanthos,0.5185,True,leaf,leaf,inflorescence
+baskauf/66192,Gleditsia triacanthos,0.6548,True,inflorescence,flower,inflorescence
+baskauf/70791,Juglans cinerea,0.7937,True,whole plant,whole plant,bark
+baskauf/70792,Juglans cinerea,0.8333,True,trunk,whole plant,leaf
+baskauf/70795,Juglans cinerea,0.1667,True,fruit close-up,opened or sectioned fruit,fruit
+baskauf/70799,Juglans cinerea,0.1667,True,fruit close-up,trunk,fruit
+baskauf/70803,Juglans cinerea,0.2667,True,fruit,stem,fruit
+baskauf/70804,Juglans cinerea,0.0667,True,fruit,stem,fruit
+baskauf/70807,Juglans cinerea,0.7778,True,fruit close-up,fruit close-up,fruit
+baskauf/70808,Juglans cinerea,0.1944,True,fruit,fruit close-up,fruit
+baskauf/70867,Juglans cinerea,0.2222,True,fruit close-up,leaf upper surface,fruit close-up
+baskauf/70869,Juglans cinerea,0.4444,True,opened or sectioned fruit,opened or sectioned fruit,fruit close-up
+baskauf/70870,Juglans cinerea,0.4,True,fruit,opened or sectioned fruit,fruit close-up
+baskauf/70872,Juglans cinerea,0.3722,True,fruit close-up,opened or sectioned fruit,fruit
+baskauf/70873,Juglans cinerea,0.5222,True,fruit close-up,opened or sectioned fruit,fruit close-up
+baskauf/70874,Juglans cinerea,0.4667,True,fruit,opened or sectioned fruit,fruit close-up
+baskauf/70875,Juglans cinerea,0.2222,True,fruit close-up,stem,fruit close-up
+baskauf/70876,Juglans cinerea,0.0833,True,opened or sectioned fruit,stem,fruit
+baskauf/79649,Quercus macrocarpa,0.8889,False,whole plant,whole plant,whole plant
+baskauf/79651,Quercus macrocarpa,0.9048,False,trunk,trunk,trunk
+baskauf/79653,Quercus macrocarpa,0.8333,True,trunk,large-tree bark,bark
+baskauf/79657,Quercus macrocarpa,0.8333,False,leaf,leaf,leaf
+baskauf/89347,Fraxinus americana,0.8889,True,whole plant,branch,whole plant
+baskauf/89354,Cercis canadensis,0.8333,True,winter habit,winter habit,whole plant
+baskauf/89356,Juglans nigra,0.8667,True,whole plant,whole plant,winter habit
+baskauf/89363,Ulmus americana,0.8889,True,whole plant,view up trunk,whole plant
+baskauf/89367,Carya cordiformis,0.8889,True,view up trunk,branch,view up trunk
+baskauf/89368,Quercus muehlenbergii,0.8095,True,whole plant,view up trunk,winter habit
+baskauf/89370,Juglans nigra,0.5873,True,whole plant,branch,branch
+baskauf/89373,Ailanthus altissima,1.0,True,whole plant,winter habit,branch
+baskauf/89376,Quercus rubra,0.8095,True,whole plant,trunk,whole plant
+baskauf/89381,Acer rubrum,0.7143,True,view up trunk,trunk,whole plant
+baskauf/89382,Quercus velutina,0.8214,True,whole plant,trunk,branch
+baskauf/89384,Juniperus virginiana,1.0,True,whole plant,needle,whole plant
+baskauf/89388,Ulmus americana,0.8095,True,whole plant,branch,whole plant
+baskauf/89391,Ostrya virginiana,0.8095,False,whole plant,whole plant,whole plant
+baskauf/89394,Platanus occidentalis,0.8889,True,whole plant,whole plant,winter habit
+baskauf/89397,Pinus strobus,0.5926,True,view up trunk,needle,view up trunk
+baskauf/89403,Acer negundo,0.7143,True,whole plant,winter habit,winter habit
+baskauf/89954,Platanus occidentalis,0.7242,True,view up trunk,winter habit,winter habit
+baskauf/89955,Platanus occidentalis,0.581,True,trunk,trunk,large-tree bark
+baskauf/89960a,Platanus occidentalis,0.8095,True,whole plant,winter habit,winter habit
+baskauf/89963,Platanus occidentalis,0.6667,True,trunk,winter habit,whole plant
+baskauf/90661,Quercus macrocarpa,0.8889,True,whole plant,trunk,whole plant
+baskauf/90696,Quercus rubra,0.8889,True,whole plant,trunk,whole plant
+baskauf/90701,Quercus palustris,1.0,True,whole plant,trunk,whole plant
+baskauf/90712,Quercus alba,0.8889,True,whole plant,trunk,whole plant
+baskauf/90714,Quercus alba,0.8889,False,whole plant,whole plant,whole plant
+baskauf/90718,Quercus muehlenbergii,0.7667,True,whole plant,trunk,whole plant
+baskauf/90735,Quercus rubra,0.9048,True,whole plant,trunk,trunk
+baskauf/90737,Quercus rubra,1.0,True,view up trunk,view up trunk,whole plant
+baskauf/90750,Juglans nigra,1.0,True,whole plant,branch,whole plant
+baskauf/90752,Juglans nigra,1.0,False,whole plant,whole plant,whole plant
+baskauf/90762,Ulmus americana,1.0,False,whole plant,whole plant,whole plant
+baskauf/90785a,Fraxinus pennsylvanica,0.7937,True,whole plant,trunk,whole plant
+baskauf/90789,Fraxinus pennsylvanica,0.9048,False,view up trunk,view up trunk,view up trunk
+baskauf/90792,Fraxinus pennsylvanica,0.8095,True,whole plant,trunk,whole plant
+baskauf/90797a,Fraxinus pennsylvanica,0.8095,True,view up trunk,trunk,whole plant
+baskauf/90798,Fraxinus pennsylvanica,0.9048,True,whole plant,trunk,trunk
+baskauf/90799,Fraxinus pennsylvanica,1.0,True,whole plant,trunk,whole plant
+baskauf/90802,Populus deltoides,0.8889,False,whole plant,whole plant,whole plant
+baskauf/90804,Populus deltoides,0.8095,True,trunk,branch,trunk
+baskauf/90807,Ulmus americana,0.8889,True,whole plant,trunk,whole plant
+baskauf/90809,Ulmus americana,0.8889,True,whole plant,trunk,whole plant
+baskauf/90812,Ulmus americana,0.8095,True,view up trunk,trunk,whole plant
+baskauf/90814,Ulmus americana,0.9048,False,trunk,trunk,trunk
+baskauf/90815,Quercus rubra,0.8889,True,whole plant,trunk,whole plant
+baskauf/90817,Quercus rubra,0.8889,True,whole plant,trunk,whole plant
+baskauf/90820,Quercus rubra,1.0,True,trunk,view up trunk,trunk
+baskauf/90824a,Fraxinus americana,0.9048,True,trunk,trunk,whole plant
+baskauf/90825,Fraxinus americana,0.9048,True,trunk,trunk,whole plant
+baskauf/90826a,Fraxinus americana,0.8095,True,trunk,trunk,whole plant
+baskauf/90872,Platanus occidentalis,0.8667,True,whole plant,whole plant,branch
+baskauf/90874,Platanus occidentalis,0.8889,True,trunk,whole plant,branch
+baskauf/90876,Aesculus glabra,0.7143,True,whole plant,trunk,whole plant
+baskauf/90884,Quercus rubra,0.8889,True,whole plant,trunk,whole plant
+baskauf/90889,Quercus rubra,1.0,True,trunk,whole plant,whole plant
+baskauf/90899,Fraxinus americana,1.0,True,whole plant,trunk,whole plant
+baskauf/90902,Tilia americana,0.8667,True,whole plant,leaf,whole plant
+baskauf/90905,Fraxinus americana,0.7167,False,whole plant,whole plant,whole plant
+baskauf/90911,Platanus occidentalis,1.0,False,whole plant,whole plant,whole plant
+baskauf/90912,Quercus velutina,0.8095,True,whole plant,trunk,whole plant
+baskauf/90913,Quercus velutina,0.7937,True,whole plant,trunk,whole plant
+baskauf/90917,Quercus velutina,0.8016,True,whole plant,trunk,whole plant
+baskauf/90931,Cercis canadensis,0.7167,True,whole plant,branch,whole plant
+baskauf/90936,Juglans nigra,0.8667,True,whole plant,trunk,whole plant
+baskauf/90947,Carya cordiformis,0.8667,False,whole plant,whole plant,whole plant
+baskauf/90950,Quercus muehlenbergii,0.8016,True,trunk,trunk,whole plant
+baskauf/90955,Juglans nigra,0.8667,False,whole plant,whole plant,whole plant
+baskauf/90959,Ailanthus altissima,0.6952,False,whole plant,whole plant,whole plant
+baskauf/90969,Quercus rubra,0.8095,False,whole plant,whole plant,whole plant
+baskauf/90972,Quercus rubra,0.8889,False,whole plant,whole plant,whole plant
+baskauf/90975,Ulmus americana,0.8889,True,whole plant,trunk,whole plant
+baskauf/90988,Pinus strobus,0.6528,True,whole plant,whole plant,trunk
+baskauf/91000,Acer negundo,1.0,False,whole plant,whole plant,whole plant
+baskauf/91004,Quercus muehlenbergii,0.9048,True,trunk,trunk,whole plant
+baskauf/91006,Ostrya virginiana,1.0,False,whole plant,whole plant,whole plant
+baskauf/91011,Acer rubrum,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91016,Acer rubrum,0.7667,False,whole plant,whole plant,whole plant
+baskauf/91056,Sassafras albidum,0.8095,True,whole plant,trunk,trunk
+baskauf/91057,Fagus grandifolia,1.0,False,whole plant,whole plant,whole plant
+baskauf/91059,Carpinus caroliniana,0.7778,False,whole plant,whole plant,whole plant
+baskauf/91062,Tsuga canadensis,0.5556,True,needle,branch,whole plant
+baskauf/91064,Cornus florida,1.0,True,whole plant,leaf,whole plant
+baskauf/91065,Nyssa sylvatica,0.7778,True,whole plant,trunk,whole plant
+baskauf/91067,Nyssa sylvatica,1.0,False,whole plant,whole plant,whole plant
+baskauf/91076,Ginkgo biloba,1.0,False,whole plant,whole plant,whole plant
+baskauf/91081,Ulmus americana,0.8889,True,trunk,whole plant,whole plant
+baskauf/91083,Fraxinus americana,1.0,False,whole plant,whole plant,whole plant
+baskauf/91091,Fraxinus pennsylvanica,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91094,Acer saccharinum,0.8667,True,whole plant,branch,whole plant
+baskauf/91096,Acer saccharum,0.8667,True,whole plant,branch,whole plant
+baskauf/91098,Quercus macrocarpa,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91101,Juglans nigra,0.6952,True,whole plant,trunk,whole plant
+baskauf/91105,Quercus rubra,0.8889,True,whole plant,trunk,whole plant
+baskauf/91107,Ulmus americana,1.0,True,whole plant,trunk,whole plant
+baskauf/91110,Quercus bicolor,1.0,False,whole plant,whole plant,whole plant
+baskauf/91119,Quercus macrocarpa,0.8889,True,whole plant,trunk,whole plant
+baskauf/91122,Celtis occidentalis,1.0,False,whole plant,whole plant,whole plant
+baskauf/91123,Platanus occidentalis,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91126,Ginkgo biloba,0.8095,True,whole plant,trunk,whole plant
+baskauf/91127,Juglans nigra,0.8889,True,whole plant,view up trunk,branch
+baskauf/91133,Quercus palustris,0.8667,True,trunk,whole plant,whole plant
+baskauf/91134,Cercis canadensis,1.0,True,whole plant,branch,whole plant
+baskauf/91139,Quercus alba,0.8889,True,whole plant,whole plant,branch
+baskauf/91140,Quercus alba,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91143,Fagus grandifolia,1.0,False,whole plant,whole plant,whole plant
+baskauf/91144,Gymnocladus dioicus,0.7063,True,whole plant,trunk,whole plant
+baskauf/91146,Tilia americana,1.0,False,whole plant,whole plant,whole plant
+baskauf/91150,Fraxinus americana,0.8095,True,whole plant,trunk,whole plant
+baskauf/91152,Fraxinus pennsylvanica,0.8889,True,whole plant,trunk,whole plant
+baskauf/91154,Ulmus americana,0.9048,True,whole plant,trunk,whole plant
+baskauf/91159,Cornus florida,0.8889,False,whole plant,whole plant,whole plant
+baskauf/91164,Acer saccharum,0.8095,False,whole plant,whole plant,whole plant
+baskauf/91173,Fraxinus americana,0.1667,True,bark,trunk,leaf
+baskauf/91174,Magnolia acuminata,0.8667,False,whole plant,whole plant,whole plant
+baskauf/d0127,Fagus grandifolia,0.7321,True,whole plant,winter habit,trunk
+baskauf/d0420,Celtis occidentalis,0.8889,True,whole plant,branch,whole plant
+baskauf/d0425,Celtis occidentalis,0.8333,False,large-tree bark,large-tree bark,large-tree bark
+baskauf/d0426,Celtis occidentalis,0.6,False,branch,branch,branch
+baskauf/d0997,Nyssa sylvatica,0.3016,True,leaf,branch,fruit borne on plant
+baskauf/d0999,Acer saccharum,0.8667,True,whole plant,view up trunk,whole plant
+baskauf/d1104,Gleditsia triacanthos,0.2798,True,bark,branch,winter habit
+baskauf/d1110,Gleditsia triacanthos,0.4167,True,fruit,twig,fruit close-up
+baskauf/d1112,Gleditsia triacanthos,0.9048,True,trunk,bark,bark
+bassettst/sb560,Betula papyrifera,0.8889,True,whole plant,trunk,whole plant
+bassettst/sb561,Betula papyrifera,0.8889,False,whole plant,whole plant,whole plant
+bassettst/sb562,Betula papyrifera,0.8889,True,whole plant,trunk,whole plant
+bassettst/sb563,Betula papyrifera,0.7063,False,leaf,leaf,leaf
+bassettst/sb564,Betula papyrifera,0.7242,False,whole plant,whole plant,whole plant
+bassettst/sb569,Betula papyrifera,0.4881,True,bark,leaf,trunk
+eickmeierwg/we565,Dirca palustris,0.4345,True,twig,stem,twig
+hessd/e5353,Rhus aromatica,0.4333,True,leaf,stem,leaf
+hessd/e5381,Toxicodendron radicans,0.6548,True,inflorescence,stem,flower close-up
+kaufmannm/ke062,Populus tremuloides,0.4563,True,whole plant,whole plant,whole plant
+kaufmannm/ke063,Populus tremuloides,0.5556,False,whole plant,whole plant,whole plant
+kaufmannm/ke064,Populus tremuloides,0.3278,True,whole plant,whole plant,whole plant
+kaufmannm/ke128,Picea mariana,0.3278,True,whole plant,trunk,whole plant
+kaufmannm/ke142,Acer saccharum,0.5417,True,view up trunk,whole plant,whole plant
+kaufmannm/ke178,Juniperus communis,0.4841,True,needle,whole plant,whole plant
+kaufmannm/mk466,Ilex verticillata,0.6794,True,fruit borne on plant,stem,fruit
+kirchoff/ac1447,Quercus alba,0.8889,True,whole plant,trunk,whole plant
+kirchoff/ac1448,Quercus alba,0.8333,True,large-tree bark,large-tree bark,trunk
+kirchoff/ac1449,Quercus alba,1.0,True,large-tree bark,large-tree bark,trunk
+kirchoff/ac1468,Quercus bicolor,0.7556,True,whole plant,trunk,whole plant
+kirchoff/ac1469,Quercus bicolor,0.7333,True,bark,trunk,trunk
+kirchoff/ac1470,Quercus bicolor,0.8333,True,bark,trunk,bark
+kirchoff/ac1472,Quercus bicolor,0.6,False,leaf,leaf,leaf
+kirchoff/ac1473,Quercus bicolor,0.6667,False,leaf,leaf,leaf
+kirchoff/ac1477,Quercus bicolor,0.8333,True,leaf upper surface,leaf upper surface,leaf
+kirchoff/ac1478,Quercus bicolor,1.0,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/ac1479,Quercus bicolor,1.0,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/ac1515,Fagus grandifolia,0.8667,True,whole plant,trunk,whole plant
+kirchoff/ac1516,Fagus grandifolia,1.0,True,bark,large-tree bark,large-tree bark
+kirchoff/ac1517,Fagus grandifolia,1.0,True,bark,large-tree bark,large-tree bark
+kirchoff/ac1518,Fagus grandifolia,0.3704,True,fruit,leaf,fruit
+kirchoff/ac1519,Fagus grandifolia,0.4577,True,fruit,leaf,stem
+kirchoff/b5060,Carpinus caroliniana,0.5952,True,bark,branch,bark
+kirchoff/b5061,Carpinus caroliniana,0.7667,False,bark,bark,bark
+kirchoff/b5062,Carpinus caroliniana,0.744,True,trunk,winter habit,trunk
+kirchoff/b5063,Carpinus caroliniana,0.6556,True,branch,branch,whole plant
+kirchoff/b5064,Carpinus caroliniana,0.5111,True,leaf,twig,leaf
+kirchoff/b5065,Carpinus caroliniana,0.3889,True,leaf,twig,leaf
+kirchoff/b5066,Carpinus caroliniana,1.0,False,bark,bark,bark
+kirchoff/b5067,Carpinus caroliniana,0.7333,False,leaf,leaf,leaf
+kirchoff/b5068,Carpinus caroliniana,0.3,True,leaf,leaf,leaf
+kirchoff/b5069,Carpinus caroliniana,0.2452,True,leaf,leaf,leaf
+kirchoff/b5070,Carpinus caroliniana,0.8333,True,bark,trunk,bark
+kirchoff/b5071,Carpinus caroliniana,0.4921,True,branch,branch,branch
+kirchoff/b5085,Cornus florida,0.3333,True,flower close-up,fruit borne on plant,flower close-up
+kirchoff/b5086,Cornus florida,0.5238,True,flower close-up,fruit borne on plant,flower close-up
+kirchoff/b5087,Cornus florida,0.7037,True,fruit borne on plant,inflorescence,fruit borne on plant
+kirchoff/b5088,Cornus florida,0.7037,True,fruit,fruit borne on plant,fruit
+kirchoff/b5089,Cornus florida,0.5608,True,fruit borne on plant,leaf,leaf
+kirchoff/b5090,Cornus florida,0.3694,True,leaf,leaf,leaf
+kirchoff/b5091,Cornus florida,0.5377,True,branch,fruit borne on plant,leaf
+kirchoff/b5092,Cornus florida,0.5155,True,fruit,fruit borne on plant,fruit
+kirchoff/b5093,Cornus florida,0.5815,True,fruit,fruit borne on plant,fruit borne on plant
+kirchoff/b5094,Cornus florida,0.6111,True,fruit borne on plant,inflorescence,fruit
+kirchoff/b5095,Cornus florida,0.5741,True,fruit,fruit borne on plant,fruit
+kirchoff/b5132,Fagus grandifolia,0.3929,True,branch,twig,winter habit
+kirchoff/b5147,Sassafras albidum,0.7167,False,leaf,leaf,leaf
+kirchoff/b5148,Sassafras albidum,0.5571,True,leaf,stem,leaf
+kirchoff/b5149,Sassafras albidum,0.8333,True,leaf,stem,leaf
+kirchoff/bkk2902,Quercus palustris,0.7937,True,fruit close-up,fruit close-up,fruit
+kirchoff/bkk2903,Quercus palustris,0.6905,True,fruit close-up,fruit close-up,fruit
+kirchoff/bkk2904,Quercus palustris,0.6905,True,fruit close-up,twig,fruit
+kirchoff/bkk2905,Quercus palustris,0.7,True,fruit close-up,fruit close-up,fruit
+kirchoff/em1968,Quercus palustris,0.7778,True,whole plant,trunk,whole plant
+kirchoff/em1969,Quercus palustris,1.0,True,trunk,large-tree bark,bark
+kirchoff/em1971,Quercus palustris,0.5476,False,leaf,leaf,leaf
+kirchoff/em1975,Quercus palustris,0.619,False,leaf,leaf,leaf
+kirchoff/em1993,Fagus grandifolia,0.3444,True,leaf,leaf,leaf
+kirchoff/em1998,Fagus grandifolia,0.7333,False,leaf,leaf,leaf
+kirchoff/em2001,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2002,Fagus grandifolia,0.6667,True,leaf upper surface,leaf,leaf
+kirchoff/em2003,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2009,Quercus palustris,0.4881,True,twig,leaf scar,twig
+kirchoff/em2010,Quercus palustris,1.0,True,leaf upper surface,leaf,leaf upper surface
+kirchoff/em2014,Quercus palustris,0.7,True,leaf,leaf margin,leaf
+kirchoff/em2017,Quercus palustris,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2018,Quercus palustris,0.8333,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2020,Quercus palustris,1.0,True,leaf upper surface,leaf margin,leaf upper surface
+kirchoff/em2021,Quercus palustris,0.7167,True,leaf upper surface,leaf margin,leaf upper surface
+kirchoff/em2061,Fagus grandifolia,0.4253,True,fruit close-up,immature fruit,fruit
+kirchoff/em2062,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2063,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2067,Quercus palustris,0.7667,True,fruit close-up,fruit close-up,fruit
+kirchoff/em2069,Quercus palustris,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2070,Quercus palustris,0.7,True,leaf,leaf margin,leaf
+kirchoff/em2071,Quercus palustris,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2072,Quercus palustris,0.8333,True,leaf,leaf margin,leaf
+kirchoff/em2073,Quercus palustris,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2076,Quercus palustris,0.8333,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2092,Quercus alba,1.0,True,large-tree bark,large-tree bark,bark
+kirchoff/em2093,Quercus alba,1.0,True,large-tree bark,large-tree bark,bark
+kirchoff/em2094,Quercus alba,0.8333,False,leaf,leaf,leaf
+kirchoff/em2095,Quercus alba,0.627,True,bud,leaf,bud
+kirchoff/em2096,Quercus alba,0.627,False,bud,bud,bud
+kirchoff/em2097,Quercus alba,0.7,True,winter twig,winter twig,terminal bud
+kirchoff/em2099,Quercus alba,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2100,Quercus alba,0.8333,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2101,Quercus alba,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2102,Quercus alba,0.8333,True,leaf,leaf upper surface,leaf
+kirchoff/em2105,Quercus alba,0.8016,True,leaf,fruit,fruit
+kirchoff/em2106,Quercus alba,0.7333,True,large-tree bark,large-tree bark,bark
+kirchoff/em2107,Quercus alba,1.0,True,bark,large-tree bark,bark
+kirchoff/em2108,Quercus alba,0.5179,True,winter twig,bud,winter twig
+kirchoff/em2110,Quercus alba,0.2444,True,leaf,leaf,inflorescence
+kirchoff/em2112,Quercus alba,0.6667,True,bud,leaf,bud
+kirchoff/em2114,Quercus alba,0.7778,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2115,Quercus alba,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2116,Quercus alba,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2119,Quercus alba,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2143,Quercus bicolor,0.8333,True,bark,large-tree bark,bark
+kirchoff/em2144,Quercus bicolor,0.8333,True,bark,large-tree bark,bark
+kirchoff/em2146,Quercus bicolor,0.6,True,leaf,leaf upper surface,leaf
+kirchoff/em2147,Quercus bicolor,0.8333,False,leaf,leaf,leaf
+kirchoff/em2150,Quercus bicolor,0.494,True,leaf,leaf upper surface,petiole arrangement
+kirchoff/em2152,Quercus bicolor,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2153,Quercus bicolor,0.7333,True,leaf upper surface,leaf upper surface,leaf
+kirchoff/em2154,Quercus bicolor,0.7333,True,leaf upper surface,leaf upper surface,leaf
+kirchoff/em2192,Fagus grandifolia,0.8333,True,bark,large-tree bark,large-tree bark
+kirchoff/em2194,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2195,Fagus grandifolia,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2196,Fagus grandifolia,1.0,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2198,Fagus grandifolia,1.0,True,leaf upper surface,leaf,leaf upper surface
+kirchoff/em2200,Quercus palustris,0.8333,True,trunk,large-tree bark,bark
+kirchoff/em2201,Quercus palustris,0.7333,True,bud,bud,winter twig
+kirchoff/em2312,Quercus palustris,0.7778,True,whole plant,trunk,whole plant
+kirchoff/em2315,Quercus palustris,0.8333,True,trunk,large-tree bark,bark
+kirchoff/em2316,Quercus palustris,0.7333,False,leaf,leaf,leaf
+kirchoff/em2319,Quercus palustris,0.6905,True,twig,leaf,leaf
+kirchoff/em2321,Quercus palustris,0.6905,True,leaf,leaf,bud
+kirchoff/em2323,Quercus palustris,0.6905,True,immature fruit,fruit borne on plant,fruit close-up
+kirchoff/em2324,Quercus palustris,0.7778,True,fruit,fruit borne on plant,fruit close-up
+kirchoff/em2325,Quercus palustris,0.7333,True,fruit close-up,twig,fruit close-up
+kirchoff/em2328,Quercus palustris,0.8333,True,leaf,leaf,leaf upper surface
+kirchoff/em2329,Quercus palustris,0.8333,True,leaf,leaf,leaf upper surface
+kirchoff/em2330,Quercus palustris,1.0,False,leaf,leaf,leaf
+kirchoff/em2334,Quercus palustris,0.7333,False,leaf,leaf,leaf
+kirchoff/em2335,Quercus palustris,0.8333,False,leaf,leaf,leaf
+kirchoff/em2338,Quercus palustris,0.8667,False,whole plant,whole plant,whole plant
+kirchoff/em2339,Quercus palustris,1.0,True,trunk,large-tree bark,large-tree bark
+kirchoff/em2341,Quercus palustris,0.7,False,leaf,leaf,leaf
+kirchoff/em2342,Quercus palustris,0.4444,True,leaf,twig,leaf
+kirchoff/em2343,Quercus palustris,0.4778,True,leaf,leaf margin,leaf
+kirchoff/em2344,Quercus palustris,0.7778,True,bud,leaf,bud
+kirchoff/em2347,Quercus palustris,0.8016,False,twig,twig,twig
+kirchoff/em2348,Quercus palustris,0.8889,False,fruit close-up,fruit close-up,fruit close-up
+kirchoff/em2349,Quercus palustris,0.6984,False,twig,twig,twig
+kirchoff/em2350,Quercus palustris,0.8667,True,fruit,fruit close-up,fruit close-up
+kirchoff/em2352,Quercus palustris,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2353,Quercus palustris,0.8333,True,leaf,leaf margin,leaf
+kirchoff/em2354,Quercus palustris,0.7,False,leaf,leaf,leaf
+kirchoff/em2355,Quercus palustris,0.8333,True,leaf,leaf margin,leaf
+kirchoff/em2356,Quercus palustris,0.7333,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2358,Quercus palustris,0.7556,True,leaf,leaf margin,leaf
+kirchoff/em2392,Quercus rubra,1.0,True,whole plant,trunk,whole plant
+kirchoff/em2393,Quercus rubra,1.0,True,trunk,large-tree bark,bark
+kirchoff/em2394,Quercus rubra,1.0,True,bark,large-tree bark,bark
+kirchoff/em2396,Quercus rubra,0.55,False,leaf,leaf,leaf
+kirchoff/em2397,Quercus rubra,0.6905,True,bud,leaf,bud
+kirchoff/em2399,Quercus rubra,0.5111,True,twig,leaf,twig
+kirchoff/em2401,Quercus rubra,0.4266,True,bud,leaf,bud
+kirchoff/em2402,Quercus rubra,0.4614,True,leaf,leaf,leaf
+kirchoff/em2403,Quercus rubra,1.0,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2404,Quercus rubra,1.0,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2405,Quercus rubra,0.8333,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2406,Quercus rubra,0.7167,False,leaf upper surface,leaf upper surface,leaf upper surface
+kirchoff/em2407,Quercus rubra,0.7167,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2408,Quercus rubra,1.0,True,leaf,leaf upper surface,leaf upper surface
+kirchoff/em2409,Quercus rubra,0.7333,True,leaf,leaf upper surface,leaf
+kirchoff/em2412,Quercus rubra,0.8095,False,whole plant,whole plant,whole plant
+kirchoff/em2413,Quercus rubra,0.5417,False,bark,bark,bark
+kirchoff/em2414,Quercus rubra,0.7167,False,leaf,leaf,leaf
+kirchoff/em2415,Quercus rubra,0.7,False,leaf,leaf,leaf
+kirchoff/em2418,Quercus rubra,0.3228,True,leaf,leaf,leaf
+kirchoff/em2420,Quercus rubra,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2421,Quercus rubra,1.0,True,leaf,leaf margin,leaf upper surface
+kirchoff/em2422,Quercus rubra,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2424,Quercus rubra,0.8333,False,leaf,leaf,leaf
+kirchoff/em2559,Quercus palustris,0.8889,True,whole plant,branch,whole plant
+kirchoff/em2561,Quercus palustris,0.8889,False,whole plant,whole plant,whole plant
+kirchoff/em2562,Quercus palustris,0.8095,True,view up trunk,leaf,whole plant
+kirchoff/em2563,Quercus palustris,1.0,True,trunk,large-tree bark,bark
+kirchoff/em2564,Quercus palustris,1.0,True,trunk,large-tree bark,bark
+kirchoff/em2566,Quercus palustris,0.4583,True,leaf,leaf,leaf
+kirchoff/em2570,Quercus palustris,0.4683,True,twig,twig,twig
+kirchoff/em2571,Quercus palustris,0.8333,True,leaf,leaf upper surface,leaf
+kirchoff/em2572,Quercus palustris,0.8333,True,leaf,leaf margin,leaf
+kirchoff/em2573,Quercus palustris,1.0,True,leaf,leaf margin,leaf
+kirchoff/em2574,Quercus palustris,0.8333,True,leaf upper surface,leaf upper surface,leaf
+kirchoff/em2576,Quercus palustris,0.8667,True,leaf,leaf upper surface,leaf
+kirchoff/em2577,Quercus palustris,0.7778,False,fruit close-up,fruit close-up,fruit close-up
+kirchoff/em2579,Quercus palustris,0.8095,False,fruit close-up,fruit close-up,fruit close-up
+kirchoff/em2581,Quercus palustris,0.8889,False,whole plant,whole plant,whole plant
+kirchoff/em2583,Quercus palustris,0.8889,True,whole plant,trunk,whole plant
+kirchoff/em2584,Quercus palustris,1.0,True,trunk,large-tree bark,bark
+kirchoff/em2585,Quercus palustris,1.0,True,large-tree bark,bark,bark
+kirchoff/em2587,Quercus palustris,0.5179,True,leaf,petiole arrangement,leaf
+kirchoff/em2590,Quercus palustris,0.4286,True,leaf,leaf,twig
+kirchoff/em2593,Quercus palustris,0.8667,False,fruit close-up,fruit close-up,fruit close-up
+kirchoff/em2596,Quercus palustris,1.0,True,fruit,fruit close-up,fruit close-up
+kirchoff/em2597,Quercus palustris,0.8667,True,leaf,leaf,leaf upper surface
+kirchoff/em2598,Quercus palustris,1.0,False,leaf,leaf,leaf
+kirchoff/em2599,Quercus palustris,1.0,False,leaf,leaf,leaf
+kirchoff/em2600,Quercus palustris,1.0,True,leaf,petiole arrangement,leaf
+kirchoff/em2603,Quercus palustris,0.7,True,leaf,leaf upper surface,leaf
+kirchoff/em2604,Quercus palustris,0.7778,True,whole plant,branch,whole plant
+kirchoff/em2605,Quercus palustris,0.8667,True,whole plant,trunk,whole plant
+kirchoff/em2607,Quercus palustris,1.0,True,trunk,large-tree bark,bark
+kirchoff/em2610,Quercus palustris,0.3389,True,leaf,leaf,leaf
+kirchoff/em2613,Quercus palustris,0.5429,True,bud,twig,winter twig
+kirchoff/em2616,Quercus palustris,1.0,False,fruit close-up,fruit close-up,fruit close-up
+kirchoff/em2618,Quercus palustris,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2619,Quercus palustris,0.6667,True,leaf,leaf upper surface,leaf
+kirchoff/em2620,Quercus palustris,0.8333,False,leaf,leaf,leaf
+kirchoff/em2621,Quercus palustris,1.0,True,leaf,leaf upper surface,leaf
+kirchoff/em2623,Quercus palustris,0.7333,True,leaf,leaf upper surface,leaf
+kirchoff/em2703,Quercus alba,0.8889,True,whole plant,trunk,whole plant
+ssmv/2-1006-01,Fraxinus americana,0.7937,True,whole plant,trunk,whole plant
+ssmv/2-1006-02,Fraxinus americana,0.8889,True,whole plant,trunk,whole plant
+ssmv/2-1006-03,Fraxinus americana,0.8016,True,whole plant,trunk,whole plant
+ssmv/2-161-01,Quercus alba,1.0,True,bark,large-tree bark,bark
+ssmv/2-161-02,Quercus alba,1.0,False,trunk,trunk,trunk
+ssmv/2-161-03,Quercus alba,0.2861,True,leaf,leaf,bark
+ssmv/2-161-04,Quercus alba,0.9048,True,whole plant,trunk,whole plant
+ssmv/2-185-01,Ginkgo biloba,0.8889,True,whole plant,trunk,whole plant
+ssmv/2-185-02,Ginkgo biloba,0.8333,False,bark,bark,bark
+ssmv/2-185-03,Ginkgo biloba,0.4167,True,leaf,leaf,leaf
+ssmv/2-185-04,Ginkgo biloba,0.4,True,leaf,leaf,leaf
+ssmv/2-253-01,Celtis occidentalis,0.9048,True,trunk,trunk,whole plant
+ssmv/2-253-02,Celtis occidentalis,0.9048,False,trunk,trunk,trunk
+ssmv/2-253-03,Celtis occidentalis,0.7167,True,branch,leaf,branch
+ssmv/2-253-04,Celtis occidentalis,1.0,False,whole plant,whole plant,whole plant
+ssmv/2-638-01,Fraxinus americana,0.8333,True,bark,large-tree bark,bark
+ssmv/2-638-02,Fraxinus americana,0.8889,True,whole plant,trunk,whole plant
+ssmv/2-638-03,Fraxinus americana,0.6667,True,leaf,leaf arrangement on twig,leaf
+ssmv/2-638-04,Fraxinus americana,0.7778,True,whole plant,trunk,whole plant
+ssmv/2-759-01,Quercus alba,0.8889,True,whole plant,trunk,whole plant
+ssmv/2-886-01,Acer saccharum,0.7667,False,whole plant,whole plant,whole plant
+ssmv/2-886-02,Acer saccharum,1.0,True,bark,large-tree bark,large-tree bark
+ssmv/2-886-03,Acer saccharum,0.9048,False,view up trunk,view up trunk,view up trunk
+thomas/0014-01-01,Aesculus glabra,0.35,True,inflorescence,twig,stem
+thomas/0014-01-02,Aesculus glabra,0.3737,True,flower close-up,flower close-up,flower close-up
+thomas/0014-01-03,Aesculus glabra,0.7333,True,leaf,leaf upper surface,leaf
+thomas/0014-01-04,Aesculus glabra,0.6528,True,flower,flower,inflorescence
+thomas/0014-01-05,Aesculus glabra,0.4815,True,flower,flower,flower
+thomas/0014-01-06,Aesculus glabra,0.4667,True,inflorescence,twig,leaf
+thomas/0014-01-07,Aesculus glabra,0.35,True,flower close-up,flower close-up,immature fruit
+thomas/0014-01-08,Aesculus glabra,0.6556,True,leaf,leaf upper surface,leaf
+thomas/0014-01-09,Aesculus glabra,0.627,True,flower,flower,flower close-up
+thomas/0049-08-01,Cercis canadensis,0.3869,True,whole plant,branch,whole plant
+thomas/0049-08-02,Cercis canadensis,0.6952,True,flower,inflorescence,inflorescence
+thomas/0049-08-03,Cercis canadensis,0.4969,True,flower,inflorescence,inflorescence
+thomas/0049-08-04,Cercis canadensis,0.4008,True,flower close-up,inflorescence,flower close-up
+thomas/0049-08-05,Cercis canadensis,0.1217,True,twig,inflorescence,flower close-up
+thomas/0104-01-01,Cephalanthus occidentalis,0.8274,True,leaf,fruit,immature fruit
+thomas/0104-01-02,Cephalanthus occidentalis,0.5833,False,flower close-up,flower close-up,flower close-up
+thomas/0104-01-03,Cephalanthus occidentalis,0.619,False,flower close-up,flower close-up,flower close-up
+thomas/0104-01-04,Cephalanthus occidentalis,0.2,True,leaf,leaf,leaf
+thomas/0265-01-01,Aesculus glabra,0.7556,True,leaf,leaf arrangement on twig,leaf
+thomas/0265-01-02,Aesculus glabra,0.5571,True,stem,bud,stem
+thomas/0265-01-03,Aesculus glabra,0.4667,True,stem,leaf scar,stem
+thomas/0265-01-04,Aesculus glabra,0.8667,False,leaf arrangement on twig,leaf arrangement on twig,leaf arrangement on twig
+thomas/0265-01-05,Aesculus glabra,0.6222,True,leaf,leaf upper surface,leaf
+thomas/0265-01-06,Aesculus glabra,0.5886,True,flower,flower interior,flower close-up
+thomas/0301-02-01,Toxicodendron radicans,0.5344,True,flower,inflorescence,flower close-up
+thomas/0301-02-02,Toxicodendron radicans,0.7,True,leaf,stem,leaf
+thomas/0301-02-03,Toxicodendron radicans,0.625,True,flower,inflorescence,flower
+thomas/0440-04-01,Cephalanthus occidentalis,0.6444,True,stem,leaf,bud
+thomas/0440-04-02,Cephalanthus occidentalis,0.5694,True,stem,twig,twig
+thomas/0440-04-03,Cephalanthus occidentalis,0.6111,True,leaf upper surface,leaf upper surface,leaf
+thomas/0440-04-04,Cephalanthus occidentalis,0.4687,True,leaf,leaf,twig
+thomas/0440-04-05,Cephalanthus occidentalis,0.5222,True,leaf,leaf,leaf arrangement on twig
+thomas/0440-04-06,Cephalanthus occidentalis,0.8667,True,fruit,flower close-up,inflorescence
+thomas/0440-04-07,Cephalanthus occidentalis,0.363,True,inflorescence,inflorescence,fruit close-up
+thomas/0486-01-01,Robinia pseudoacacia,0.4352,True,leaf,lateral flower view,flower close-up
+thomas/0486-01-02,Robinia pseudoacacia,0.3038,True,inflorescence,lateral flower view,whole plant
+thomas/0486-01-03,Robinia pseudoacacia,0.4815,True,inflorescence,lateral flower view,flower close-up
+thomas/0486-01-04,Robinia pseudoacacia,0.6667,False,leaf,leaf,leaf
+thomas/0486-01-05,Robinia pseudoacacia,0.4632,True,inflorescence,lateral flower view,twig
+thomas/0486-01-06,Robinia pseudoacacia,0.6444,True,bark,medium-tree or large-branch bark,bark
+thomas/0486-01-07,Robinia pseudoacacia,0.3611,True,bark,medium-tree or large-branch bark,bark
+thomas/0486-01-08,Robinia pseudoacacia,0.6898,True,inflorescence,inflorescence,immature fruit
+thomas/0486-01-09,Robinia pseudoacacia,0.3179,True,bark,medium-tree or large-branch bark,bark
+thomas/0486-01-10,Robinia pseudoacacia,0.4425,True,flower close-up,flower close-up,flower interior
+thomas/0486-01-11,Robinia pseudoacacia,0.1944,True,flower close-up,flower close-up,bud
+thomas/0506-01-01,Toxicodendron radicans,0.6952,True,flower close-up,stem,flower close-up
+thomas/0506-01-02,Toxicodendron radicans,0.5529,False,flower close-up,flower close-up,flower close-up
+thomas/0506-01-03,Toxicodendron radicans,0.3714,True,flower close-up,flower close-up,flower close-up
+thomas/0506-01-04,Toxicodendron radicans,0.8333,False,leaf,leaf,leaf
+thomas/0506-01-05,Toxicodendron radicans,0.4444,True,petiole arrangement,leaf,leaf
+thomas/0506-01-06,Toxicodendron radicans,0.4333,True,leaf,stem,leaf
+thomas/0506-01-07,Toxicodendron radicans,0.6296,True,stem,flower,stem
+thomas/0506-01-08,Toxicodendron radicans,0.7333,True,leaf,stem,leaf
+thomas/0506-01-09,Toxicodendron radicans,0.5833,True,leaf,leaf,leaf upper surface
+thomas/0506-01-10,Toxicodendron radicans,1.0,True,leaf upper surface,leaf upper surface,leaf margin
+vanderbilt/conkin-p-69-campus-from-kirkland-tower,Quercus macrocarpa,0.3667,True,leaf,trunk,trunk
+vanderbilt/mcgaw-p137-old-central-porch,Quercus macrocarpa,0.2889,True,leaf,trunk,fruit
