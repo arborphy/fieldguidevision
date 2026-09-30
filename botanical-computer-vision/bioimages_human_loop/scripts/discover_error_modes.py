@@ -408,6 +408,8 @@ def main() -> None:
             "vlm_annotation_ambiguity": sum(item["audit"].get("annotation_ambiguity", False) for item in reviewed),
             "vlm_common_cause": causes.most_common(1)[0][0] if causes else "",
             "representative_image_ids": [item["image"]["id"] for item in representatives],
+            "member_image_ids": [item["image"]["id"] for item in members],
+            "member_models": {item["image"]["id"]: item["models"] for item in members},
         })
 
     mode_outputs.sort(key=lambda row: (-row["image_count"], row["name"]))

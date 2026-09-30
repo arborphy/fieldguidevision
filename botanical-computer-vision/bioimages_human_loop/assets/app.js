@@ -79,7 +79,7 @@
     const view = new URLSearchParams(location.search).get("view") || "home";
     document.querySelectorAll("nav a").forEach((anchor) => {
       const anchorView = new URL(anchor.href, location.href).searchParams.get("view") || "home";
-      anchor.classList.toggle("active", anchorView === view || (view === "image" && anchorView === "full-gallery"));
+      anchor.classList.toggle("active", anchorView === view || (view === "mode" && anchorView === "home") || (view === "image" && anchorView === "full-gallery"));
     });
   }
 
@@ -191,13 +191,98 @@
     return { labeled, byModel, modes };
   }
 
-  function modeImageCard(imageId) {
+  const reproductiveTags = new Set(["flower", "inflorescence", "fruit", "cone", "seed", "bud", "immature fruit"]);
+  const woodyTags = new Set(["twig", "branch", "stem"]);
+
+  function relevantModelTags(image, modelKey, accepted = null, limit = 3) {
+    const tags = image.tagging?.models?.[modelKey]?.tags || [];
+    const filtered = accepted ? tags.filter((item) => accepted(item.tag)) : tags;
+    return filtered.slice(0, limit).map((item) => `${item.tag} ${(item.confidence * 100).toFixed(0)}%`);
+  }
+
+  function modeConflict(image, modeId) {
+    const gemma = new Set(image.tagging?.gemma_normalized_tags || []);
+    const modelEntries = Object.entries(loop.models);
+    const missingModels = (wanted) => modelEntries.filter(([key]) => !coarseTagsFromPrediction(image, key).some((tag) => wanted.has(tag))).map(([, label]) => label);
+    const modelTop = modelEntries.map(([key, label]) => `${label}: ${relevantModelTags(image, key, null, 1)[0] || "none"}`).join(" · ");
+    if (modeId === "high_confidence_extra_tag") {
+      const extras = modelEntries.flatMap(([key, label]) => (image.tagging.models[key].tags || []).filter((item) => item.confidence >= 0.85 && !gemma.has(item.tag)).slice(0, 2).map((item) => `${label} adds ${item.tag} ${(item.confidence * 100).toFixed(0)}%`));
+      return extras.length ? `${extras.join("; ")} · absent from Gemma tags` : "High-confidence model tag is not present in Gemma’s visual tag set.";
+    }
+    if (modeId === "strong_model_disagreement") return `Top predictions diverge — ${modelTop}`;
+    if (modeId === "secondary_woody_structure_missed") {
+      const missing = missingModels(new Set(["twig"]));
+      return `Gemma sees ${[...gemma].filter((tag) => woodyTags.has(tag)).join(" + ") || "a woody support"}; omitted by ${missing.join(", ") || "one or more models"}.`;
+    }
+    if (modeId === "reproductive_structure_missed" || modeId === "leaf_dominates_reproductive") {
+      const visible = [...gemma].filter((tag) => reproductiveTags.has(tag));
+      const missing = missingModels(new Set(["flower", "fruit", "cone", "seed"]));
+      return `${visible.length ? `Gemma sees ${visible.join(" + ")}` : `BioImages marks ${image.organ_tag}`}; ${missing.join(", ") || "a model"} omits the reproductive structure${modeId === "leaf_dominates_reproductive" ? " while retaining leaf" : ""}.`;
+    }
+    if (modeId === "cone_seed_under_detection") {
+      const target = image.organ_tag === "cone" || image.organ_tag === "seed" ? image.organ_tag : [...gemma].find((tag) => tag === "cone" || tag === "seed") || "cone/seed";
+      return `${target} is the visual target; omitted by ${missingModels(new Set([target])).join(", ") || "one or more models"}.`;
+    }
+    if (modeId === "whole_plant_scale_split") return `BioImages: ${image.organ_tag} · models split scene scale — ${modelTop}`;
+    if (modeId === "fruit_state_view_confusion") {
+      const detail = modelEntries.map(([key, label]) => `${label}: ${relevantModelTags(image, key, (tag) => tag.includes("fruit") || tag === "seed", 2).join(" + ") || "no fruit view"}`).join(" · ");
+      return `BioImages view: ${image.subview} · ${detail}`;
+    }
+    if (modeId === "leaf_view_confusion") {
+      const detail = modelEntries.map(([key, label]) => `${label}: ${relevantModelTags(image, key, (tag) => tag.startsWith("leaf") || tag.includes("petiole") || tag === "needle", 2).join(" + ") || "no leaf view"}`).join(" · ");
+      return `BioImages view: ${image.subview} · ${detail}`;
+    }
+    if (modeId === "bark_scale_confusion") {
+      const detail = modelEntries.map(([key, label]) => `${label}: ${relevantModelTags(image, key, (tag) => tag.includes("bark") || tag === "trunk", 2).join(" + ") || "no bark scale"}`).join(" · ");
+      return `BioImages view: ${image.subview} · ${detail}`;
+    }
+    if (modeId === "flower_fruit_bud_ambiguity") {
+      const seen = [...new Set(modelEntries.flatMap(([key]) => relevantModelTags(image, key, (tag) => reproductiveTags.has(tag), 2).map((tag) => tag.replace(/ \d+%$/, ""))))];
+      return `BioImages: ${image.organ_tag} · developmental predictions span ${seen.slice(0, 5).join(" ↔ ") || "flower / fruit / bud"}.`;
+    }
+    if (modeId === "bioimages_single_label_ambiguity") return `BioImages names ${image.organ_tag}; Gemma visibly tags ${(image.tagging.gemma_normalized_tags || []).slice(0, 6).join(" + ")}.`;
+    return `BioImages: ${image.tagging.bioimages_label} · ${modelTop}`;
+  }
+
+  function evidenceLine(label, content) {
+    return `<p><strong>${escapeHtml(label)}</strong><span>${escapeHtml(content || "None")}</span></p>`;
+  }
+
+  function modeImageCard(imageId, modeId, compact = false) {
     const image = imagesById.get(imageId);
     if (!image) return "";
-    return `<a class="mode-image" href="${url({ view: "image", id: image.id })}" data-route>
-      <img src="${escapeHtml(image.thumbnail_url)}" alt="${escapeHtml(image.primary_label)}" loading="lazy">
-      <span><i>${escapeHtml(image.species)}</i><small>${escapeHtml(image.organ_category)} · ${escapeHtml(image.subview)}</small></span>
-    </a>`;
+    const modelSummary = Object.entries(loop.models).map(([key, label]) => `${label}: ${relevantModelTags(image, key, null, compact ? 1 : 2).join(", ") || "none"}`).join(" · ");
+    return `<article class="mode-image-card">
+      <a class="mode-photo" href="${url({ view: "image", id: image.id })}" data-route><img src="${escapeHtml(image.image_url)}" alt="${escapeHtml(image.primary_label)}" loading="lazy" decoding="async"></a>
+      <div class="mode-image-copy"><p class="mode-species"><i>${escapeHtml(image.species)}</i><span>${escapeHtml(image.id)}</span></p><h4>${escapeHtml(image.organ_category)} · ${escapeHtml(image.subview)}</h4>
+        <p class="conflict-line"><strong>Conflict</strong>${escapeHtml(modeConflict(image, modeId))}</p>
+        ${evidenceLine("BioImages", image.tagging.bioimages_label)}
+        ${evidenceLine("Gemma", (image.tagging.gemma_normalized_tags || []).slice(0, compact ? 5 : 9).join(", "))}
+        ${evidenceLine("Models", modelSummary)}
+      </div>
+    </article>`;
+  }
+
+  function renderErrorMode(params) {
+    const mode = loop?.modes?.find((item) => item.id === params.get("id"));
+    if (!mode) return renderNotFound();
+    const allImages = mode.member_image_ids.map((id) => imagesById.get(id)).filter(Boolean);
+    const modelOptions = Object.entries(loop.models).map(([key, label]) => `<option value="${key}">${escapeHtml(label)}</option>`).join("");
+    const tags = [...new Set(allImages.flatMap((image) => Object.values(image.tagging.models).flatMap((prediction) => prediction.tags.map((item) => item.tag))))].sort();
+    setPage(`<div class="wrap mode-page"><p class="crumbs">${routeLink("Error analysis", {})} / ${escapeHtml(mode.name)}</p><div class="page-head"><div><p class="eyebrow">Complete error-mode drill-down</p><h1>${escapeHtml(mode.name)}</h1><p>${escapeHtml(mode.description)}</p></div><strong class="large-count">${nf.format(mode.image_count)} images</strong></div>
+      <div class="notice"><strong>What the contradiction means:</strong> ${escapeHtml(mode.cause)} Counts overlap other modes; these are candidates for Human Gold verification, not confirmed errors.</div>
+      <dl class="mode-facts mode-page-facts"><div><dt>Most affected</dt><dd>${modelCountLine(mode)}</dd></div><div><dt>Visual corroboration</dt><dd>${mode.vlm_supported} / ${mode.vlm_reviewed} audited examples</dd></div><div><dt>Likely cause</dt><dd>${escapeHtml(mode.vlm_common_cause || mode.cause)}</dd></div></dl>
+      <div class="toolbar mode-toolbar"><label>Search<input id="mode-search" type="search" placeholder="Species, image ID, label"></label><label>Affected model<select id="mode-model"><option value="">All models</option>${modelOptions}</select></label><label>Any predicted tag<select id="mode-tag"><option value="">All tags</option>${tags.map((tag) => `<option value="${escapeHtml(tag)}">${escapeHtml(tag)}</option>`).join("")}</select></label></div><p class="results-line" id="mode-count"></p><div id="mode-gallery-all"></div></div>`, mode.name);
+    const search = document.querySelector("#mode-search"); const model = document.querySelector("#mode-model"); const tag = document.querySelector("#mode-tag");
+    const draw = () => {
+      const term = search.value.trim().toLowerCase();
+      const filtered = allImages.filter((image) => (!term || `${image.species} ${image.id} ${image.primary_label}`.toLowerCase().includes(term)) && (!model.value || mode.member_models[image.id]?.includes(model.value)) && (!tag.value || Object.values(image.tagging.models).some((prediction) => prediction.tags.some((item) => item.tag === tag.value))));
+      document.querySelector("#mode-count").textContent = `${nf.format(filtered.length)} of ${nf.format(allImages.length)} images`;
+      const mount = document.querySelector("#mode-gallery-all"); let shown = Math.min(30, filtered.length);
+      const paint = () => { mount.innerHTML = `<div class="mode-gallery all-mode-gallery">${filtered.slice(0, shown).map((image) => modeImageCard(image.id, mode.id)).join("")}</div>${shown < filtered.length ? `<button class="load-more" type="button">Show ${Math.min(30, filtered.length - shown)} more</button>` : ""}`; mount.querySelector(".load-more")?.addEventListener("click", () => { shown = Math.min(shown + 30, filtered.length); paint(); }); };
+      paint();
+    };
+    [search, model, tag].forEach((control) => control.addEventListener(control.tagName === "INPUT" ? "input" : "change", draw)); draw();
   }
 
   function modelCountLine(mode) {
@@ -221,13 +306,14 @@
     const modeBlocks = loop.modes.map((mode, index) => `<article class="error-mode${index >= 8 ? " secondary-mode" : ""}">
       <div class="mode-heading"><div><p class="eyebrow">Error mode ${String(index + 1).padStart(2, "0")}</p><h3>${escapeHtml(mode.name)} — ${nf.format(mode.image_count)} images</h3><p>${escapeHtml(mode.description)}</p></div><span class="mode-count">${nf.format(mode.image_count)}</span></div>
       <dl class="mode-facts"><div><dt>Most affected</dt><dd>${modelCountLine(mode)}</dd></div><div><dt>Visual audit</dt><dd>${mode.vlm_reviewed ? `${mode.vlm_supported} / ${mode.vlm_reviewed} representatives supported` : "VLM audit pending"}</dd></div><div><dt>Likely cause</dt><dd>${escapeHtml(mode.vlm_common_cause || mode.cause)}</dd></div></dl>
-      <div class="mode-gallery">${mode.representative_image_ids.slice(0, 12).map(modeImageCard).join("")}</div>
+      <div class="mode-gallery">${mode.representative_image_ids.slice(0, 9).map((id) => modeImageCard(id, mode.id, true)).join("")}</div>
+      <div class="mode-read-all">${routeLink(`View all ${nf.format(mode.image_count)} examples →`, { view: "mode", id: mode.id }, "text-link")}</div>
     </article>`).join("");
     setPage(`<section class="hero human-loop-hero"><div class="wrap"><p class="eyebrow">Error discovery → targeted human verification</p><h1>See how the tagging systems repeatedly fail—before labeling by hand.</h1><p class="lede">Programmatic signals across all 1,899 images identify recurring confusions. Existing image-grounded Gemma tags corroborate high-signal examples, then a diverse 100-image blind review tests which modes are genuine errors and which are single-label ambiguity.</p><div class="stats"><div class="stat"><strong>${nf.format(loop.generated_from_images)}</strong><span>images analyzed</span></div><div class="stat"><strong>${loop.modes.length}</strong><span>recurring modes</span></div><div class="stat"><strong>${nf.format(loop.vlm_audited_images)}</strong><span>VLM-audited examples</span></div><div class="stat"><strong>${loop.human_set.length}</strong><span>targeted human images</span></div><div class="stat"><strong>${completed}</strong><span>Human Gold complete</span></div></div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Main error modes</p><h2>Repeated patterns found in the Full Gallery</h2><p>Counts are overlapping mode memberships, not mutually exclusive classes. Representative images favor species and individual diversity; visual corroboration reuses Gemma tags from the high-signal subset.</p></div></div><div class="mode-list">${modeBlocks}</div><button class="load-more" id="show-all-modes" type="button">Show all ${loop.modes.length} modes</button></div></section>
-    <section class="section" id="human-set"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Human Review Set</p><h2>100 targeted, blind multi-label decisions</h2><p>The set covers major modes, every major tag, easy agreements, strong disagreements, rare classes, and high-confidence errors while maximizing species and individual diversity.</p></div>${routeLink(completed ? "Continue review →" : "Start blind review →", { view: "review" }, "text-link")}</div><div class="review-summary"><strong>${completed} / 100 complete</strong><span>85 species · 100 individuals · selection reason saved for every image</span></div></div></section>
+    <section class="section" id="human-set"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Human Review Set</p><h2>100 targeted, blind multi-label decisions</h2><p>The set covers major modes, every major tag, easy agreements, strong disagreements, rare classes, and high-confidence errors while maximizing species and individual diversity.</p></div>${routeLink(completed ? "Continue review →" : "Start blind review →", { view: "review" }, "text-link")}</div><div class="review-summary"><strong>${completed} / 100 complete</strong><span>85 species · 100 individuals · selection reason saved for every image</span></div><div class="deployment-note"><strong>Current preview:</strong> answers are private to this browser. <strong>Shared production review:</strong> deploy on Vercel with authenticated reviewers and Supabase Postgres; see <a href="VERCEL_HUMAN_REVIEW.md">the implementation plan</a>.</div></div></section>
     <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Which error modes are real?</p><h2>Human validation, updated locally</h2><p>Model error and annotation ambiguity are measured only after a blind answer is saved.</p></div></div><div id="human-evaluation">${renderHumanMetrics(records)}</div></div></section>
-    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Drill down</p><h2>Full Gallery remains available</h2><p>Inspect all good matches, BioImages mismatches, Gemma disagreements, and model disagreements with the original filters.</p></div>${routeLink("Open Full Gallery →", { view: "full-gallery" }, "text-link")}</div></div></section>`, "Error modes");
+    <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Drill down</p><h2>Full Gallery remains available</h2><p>Inspect all good matches, BioImages mismatches, Gemma disagreements, and model disagreements with the original filters.</p></div>${routeLink("Open Full Gallery →", { view: "full-gallery" }, "text-link")}</div></div></section>`, "Error analysis");
     document.querySelector("#show-all-modes")?.addEventListener("click", (event) => {
       document.querySelectorAll(".secondary-mode").forEach((el) => el.classList.remove("secondary-mode"));
       event.currentTarget.remove();
@@ -577,6 +663,7 @@
     const params = new URLSearchParams(location.search);
     const view = params.get("view") || "home";
     if (view === "home") renderHome();
+    else if (view === "mode") renderErrorMode(params);
     else if (view === "review") renderHumanReview(params);
     else if (view === "full-gallery") renderTaggingHome();
     else if (view === "species") params.get("species") ? renderSpeciesDetail(params.get("species")) : renderSpeciesList();

@@ -71,3 +71,5 @@ node --check botanical-computer-vision/bioimages_human_loop/assets/app.js
 ```
 
 Serve the directory with any static server or publish it directly under GitHub Pages. The stable `bioimages_browser/index.html` remains untouched.
+
+For a shared, persistent multi-reviewer deployment, see [`VERCEL_HUMAN_REVIEW.md`](VERCEL_HUMAN_REVIEW.md). The recommended production path is Vercel for hosting plus Supabase Postgres/Auth for reviewer identity, RLS-protected annotations, audit history, and consensus export.

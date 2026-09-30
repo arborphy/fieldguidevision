@@ -34,6 +34,9 @@ def main() -> None:
         assert mode["image_count"] > 0
         assert 8 <= len(mode["representative_image_ids"]) <= 12
         assert set(mode["representative_image_ids"]) <= image_ids
+        assert len(mode["member_image_ids"]) == mode["image_count"]
+        assert set(mode["member_image_ids"]) <= image_ids
+        assert set(mode["member_models"]) == set(mode["member_image_ids"])
         assert set(mode["model_counts"]) == {"DINOv3", "BioCLIP 2.5", "EfficientNet-B0"}
         assert mode["vlm_reviewed"] > 0
     audit = [json.loads(line) for line in (ROOT / "analysis" / "vlm_error_audit.jsonl").read_text().splitlines() if line]
