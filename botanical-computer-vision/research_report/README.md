@@ -7,6 +7,7 @@ Generated 2026-09-23 from existing project artifacts only. No model inference, e
 1. `index.html` — compact meeting summary, headline results, hierarchy, and confusion pairs.
 2. `error_gallery.html` — complete six-bucket visual review page.
 3. `representation_analysis.html` — PCA/UMAP first, followed by frozen probes, clustering, distances, and contact sheets.
+4. `../scale_conditioned_analysis/index.html` — visual-condition labels, scale-conditioned structure, accuracy slices, and mixed-cluster review queue.
 
 Secondary traceability pages:
 

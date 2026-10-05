@@ -1,0 +1,14 @@
+axis,value,all_images,analysis_images
+shot_scale,close-up,1297,1105
+shot_scale,distant,393,350
+shot_scale,mid-range,177,158
+shot_scale,uncertain,32,28
+leaf_state,leaf-off,159,140
+leaf_state,leaf-on,1184,1033
+leaf_state,mixed,23,17
+leaf_state,not-visible,533,451
+reproductive_visibility,not-visible,1205,1036
+reproductive_visibility,visible,694,605
+background_context,environmental,246,223
+background_context,isolated,30,30
+background_context,unspecified,1623,1388

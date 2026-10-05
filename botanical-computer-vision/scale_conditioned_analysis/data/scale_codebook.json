@@ -1,0 +1,208 @@
+{
+  "distant": [
+    {
+      "image_id": "baskauf/91011",
+      "species": "Acer rubrum",
+      "organ_category": "whole tree (or vine)",
+      "subview": "general",
+      "image_url": "../research_report/gallery_images/baskauf__91011.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/91011",
+      "reason": "Whole organism or crown is visible with scene context."
+    },
+    {
+      "image_id": "baskauf/89960a",
+      "species": "Platanus occidentalis",
+      "organ_category": "whole tree (or vine)",
+      "subview": "winter",
+      "image_url": "../research_report/gallery_images/baskauf__89960a.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/89960a",
+      "reason": "Whole organism or crown is visible with scene context."
+    },
+    {
+      "image_id": "baskauf/13654",
+      "species": "Carya ovata",
+      "organ_category": "whole tree (or vine)",
+      "subview": "view up trunk",
+      "image_url": "../research_report/gallery_images/baskauf__13654.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/13654",
+      "reason": "Whole organism or crown is visible with scene context."
+    },
+    {
+      "image_id": "baskauf/91126",
+      "species": "Ginkgo biloba",
+      "organ_category": "whole tree",
+      "subview": "general",
+      "image_url": "../research_report/gallery_images/baskauf__91126.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/91126",
+      "reason": "Whole organism or crown is visible with scene context."
+    },
+    {
+      "image_id": "baskauf/11522",
+      "species": "Juniperus virginiana",
+      "organ_category": "whole tree",
+      "subview": "general",
+      "image_url": "../research_report/gallery_images/baskauf__11522.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11522",
+      "reason": "Whole organism or crown is visible with scene context."
+    },
+    {
+      "image_id": "baskauf/11492",
+      "species": "Tsuga canadensis",
+      "organ_category": "whole tree",
+      "subview": "general",
+      "image_url": "../research_report/gallery_images/baskauf__11492.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11492",
+      "reason": "Whole organism or crown is visible with scene context."
+    }
+  ],
+  "mid-range": [
+    {
+      "image_id": "baskauf/11961",
+      "species": "Prunus serotina",
+      "organ_category": "leaf",
+      "subview": "showing orientation on twig",
+      "image_url": "../research_report/gallery_images/baskauf__11961.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11961",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    },
+    {
+      "image_id": "baskauf/29813",
+      "species": "Carpinus caroliniana",
+      "organ_category": "twig",
+      "subview": "orientation of petioles",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gcaca18tw29813.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/29813",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    },
+    {
+      "image_id": "baskauf/15687",
+      "species": "Sambucus nigra",
+      "organ_category": "fruit",
+      "subview": "as borne on the plant",
+      "image_url": "../research_report/gallery_images/baskauf__15687.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/15687",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    },
+    {
+      "image_id": "baskauf/66182",
+      "species": "Gleditsia triacanthos",
+      "organ_category": "bark",
+      "subview": "of a medium tree or large branch",
+      "image_url": "../research_report/gallery_images/baskauf__66182.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/66182",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    },
+    {
+      "image_id": "baskauf/17546",
+      "species": "Pinus strobus",
+      "organ_category": "bark",
+      "subview": "of a small tree or small branch",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gpist--brsmall17546.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/17546",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    },
+    {
+      "image_id": "baskauf/35184",
+      "species": "Yucca filamentosa",
+      "organ_category": "leaf",
+      "subview": "basal or on lower stem",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gyufl2-lf35184.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/35184",
+      "reason": "A branch system or contextual plant part is visible, without the whole organism."
+    }
+  ],
+  "close-up": [
+    {
+      "image_id": "baskauf/11070",
+      "species": "Populus deltoides",
+      "organ_category": "leaf",
+      "subview": "whole upper surface",
+      "image_url": "../research_report/gallery_images/baskauf__11070.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11070",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    },
+    {
+      "image_id": "baskauf/32768",
+      "species": "Pyrus calleryana",
+      "organ_category": "leaf",
+      "subview": "margin of upper + lower surface",
+      "image_url": "../research_report/gallery_images/baskauf__32768.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/32768",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    },
+    {
+      "image_id": "baskauf/54568",
+      "species": "Lonicera morrowii",
+      "organ_category": "fruit",
+      "subview": "lateral or general close-up",
+      "image_url": "../research_report/gallery_images/baskauf__54568.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/54568",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    },
+    {
+      "image_id": "baskauf/39161",
+      "species": "Acer saccharum",
+      "organ_category": "twig",
+      "subview": "close-up winter leaf scar/bud",
+      "image_url": "../research_report/gallery_images/baskauf__39161.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/39161",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    },
+    {
+      "image_id": "baskauf/11997",
+      "species": "Carya cordiformis",
+      "organ_category": "twig",
+      "subview": "close-up winter terminal bud",
+      "image_url": "../research_report/gallery_images/baskauf__11997.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11997",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    },
+    {
+      "image_id": "thomas/0104-01-02",
+      "species": "Cephalanthus occidentalis",
+      "organ_category": "inflorescence",
+      "subview": "close-up of flower interior",
+      "image_url": "../research_report/gallery_images/thomas__0104-01-02.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/thomas/0104-01-02",
+      "reason": "A diagnostic organ, surface, or fine detail is the main subject."
+    }
+  ],
+  "uncertain": [
+    {
+      "image_id": "baskauf/11464",
+      "species": "Tilia americana",
+      "organ_category": "leaf",
+      "subview": "showing orientation on twig",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gtiamh-tw11464.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11464",
+      "reason": "Distant and close-up evidence both present; manual review required."
+    },
+    {
+      "image_id": "baskauf/11899",
+      "species": "Gymnocladus dioicus",
+      "organ_category": "leaf",
+      "subview": "unspecified",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/ggydi--lffrom-below11899.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11899",
+      "reason": "Distant and close-up evidence both present; manual review required."
+    },
+    {
+      "image_id": "baskauf/11945",
+      "species": "Aesculus hippocastanum",
+      "organ_category": "whole tree (or vine)",
+      "subview": "general",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gaehi--wplarge11945.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/11945",
+      "reason": "Distant and close-up evidence both present; manual review required."
+    },
+    {
+      "image_id": "baskauf/16712",
+      "species": "Nyssa sylvatica",
+      "organ_category": "whole tree (or vine)",
+      "subview": "view up trunk",
+      "image_url": "https://bioimages.vanderbilt.edu/gq/baskauf/gnysy--wplookup16712.jpg",
+      "source_url": "https://bioimages.vanderbilt.edu/baskauf/16712",
+      "reason": "Distant and close-up evidence both present; manual review required."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "images": 1899,
+  "embedding_images": 1641,
+  "strict_test_images": 211,
+  "shot_scale_counts": {
+    "close-up": 1297,
+    "distant": 393,
+    "mid-range": 177,
+    "uncertain": 32
+  },
+  "representations": [
+    "bioclip",
+    "dinov3",
+    "efficientnet_b0"
+  ],
+  "k": 20
+}
