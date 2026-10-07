@@ -5,7 +5,7 @@
 Deploy this site on **Vercel** and use the dedicated **BioImages Human Loop Supabase organization** for Postgres + Auth. It is deliberately separate from unrelated Supabase organizations and projects.
 
 - Vercel serves the gallery and review UI.
-- Supabase magic-link authentication gives each reviewer a stable identity without passwords.
+- Supabase anonymous authentication gives each browser a private reviewer identity without email or passwords.
 - Supabase Postgres stores one annotation per reviewer and image.
 - Row Level Security (RLS) lets reviewers read and update only their own answers.
 - A server-only admin export can read every annotation and create consensus Human Gold.
@@ -18,14 +18,14 @@ Current Vercel documentation routes new relational databases through Marketplace
 ## Reviewer experience
 
 1. Reviewer opens the Vercel URL.
-2. They enter an email and receive a magic link.
+2. The app automatically creates or resumes an anonymous reviewer identity in that browser.
 3. The app assigns the same deterministic 100-image batch, optionally in a reviewer-specific order.
 4. Existing model/reference answers stay hidden until that reviewer submits the image.
 5. The answer is saved immediately to Postgres.
 6. The reviewer can resume from another device.
 7. Admin views show completion and agreement; ordinary reviewers never see another person’s unfinished answers.
 
-For a temporary public pilot, Supabase anonymous sign-in can replace magic links. It creates a real authenticated user ID without collecting PII, but the identity is lost if browser data is cleared. For research-quality Human Gold, magic links are more reliable.
+Anonymous sign-in creates a real authenticated user ID without collecting PII. The identity is lost if browser data is cleared or the reviewer changes devices, so every review page also offers CSV and JSON export. If cross-device identity later becomes necessary, email or OAuth can be linked as a separate enhancement without blocking the public pilot.
 
 ## Database schema
 
@@ -115,7 +115,9 @@ This preserves inter-annotator agreement and lets the project distinguish genuin
 - `scripts/build_vercel.mjs`: injects the public Supabase URL/key from Vercel environment variables without committing them to Git.
 - `data/runtime-config.js`: empty safe fallback used by GitHub Pages.
 - `supabase/migrations/001_human_review.sql`: schema, RLS policies, transactional submit function, audit events, and the 100-item seed batch.
-- `assets/app.js`: magic-link sign-in, per-reviewer synchronization, revision-safe saves, local preview fallback, and JSON/CSV export.
+- `assets/app.js`: automatic anonymous sign-in, per-reviewer synchronization, revision-safe saves, local fallback, and JSON/CSV export.
+- `supabase/migrations/002_scale_review.sql`: RLS-protected 92-image photographic-scale batch and audit history.
+- `../scale_conditioned_analysis/review/`: public, keyboard-friendly scale-review interface copied to `/scale-review/` during the Vercel build.
 
 ## Required external setup
 
@@ -123,9 +125,9 @@ The remaining external setup requires access to the project owner’s accounts:
 
 1. create the database in the dedicated BioImages Human Loop Supabase organization;
 2. apply `supabase/migrations/001_human_review.sql`;
-3. configure the final Vercel URL as an allowed Auth redirect;
-4. set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `REVIEW_BATCH_ID` in Vercel;
-5. deploy and test two independent reviewer accounts.
+3. enable **Allow anonymous sign-ins** in Supabase Authentication settings;
+4. set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `REVIEW_BATCH_ID`, and `SCALE_REVIEW_BATCH_ID` in Vercel;
+5. deploy and test two independent browsers.
 
 Official references:
 

@@ -152,7 +152,7 @@
   };
 
   function loadHumanGold() {
-    if (reviewBackendConfigured) return remoteHumanGold || {};
+    if (reviewBackendConfigured && reviewSession) return remoteHumanGold || {};
     try { return JSON.parse(localStorage.getItem(HUMAN_STORAGE_KEY) || "{}"); }
     catch (_) { return {}; }
   }
@@ -179,10 +179,9 @@
   }
 
   async function saveHumanGoldEntry(imageId, record) {
-    if (!reviewBackendConfigured) {
+    if (!reviewBackendConfigured || !reviewSession) {
       const records = loadHumanGold(); records[imageId] = record; saveLocalHumanGold(records); return;
     }
-    if (!reviewSession) throw new Error("Sign in before saving Human Gold.");
     const { error } = await reviewClient.rpc("submit_annotation", {
       p_batch_id: reviewBatchId,
       p_image_id: imageId,
@@ -199,26 +198,11 @@
   function reviewerStatusHtml() {
     if (!reviewBackendConfigured) return `<div class="reviewer-status local"><strong>Local preview</strong><span>Answers stay in this browser until exported.</span></div>`;
     if (reviewBackendState === "loading") return `<div class="reviewer-status"><strong>Connecting…</strong><span>Checking the shared Human Review database.</span></div>`;
-    if (reviewSession) return `<div class="reviewer-status synced"><div><strong>Shared review is active</strong><span>Signed in as ${escapeHtml(reviewSession.user.email || "reviewer")} · answers sync across devices.</span></div><button type="button" id="review-sign-out">Sign out</button></div>`;
-    return `<div class="review-auth"><div><strong>Sign in to the shared review</strong><span>We will email a password-free magic link. Model answers remain hidden until submission.</span></div><form id="review-login-form"><label>Email<input required type="email" name="email" autocomplete="email" placeholder="reviewer@example.org"></label><button type="submit">Email sign-in link</button></form><p id="review-login-status" role="status"></p></div>`;
+    if (reviewSession) return `<div class="reviewer-status synced"><div><strong>Shared anonymous review is active</strong><span>No email is required. This browser has a private reviewer ID and every answer is stored separately.</span></div></div>`;
+    return `<div class="reviewer-status local"><strong>Shared saving is unavailable</strong><span>The complete review still works locally. Export JSON or CSV before changing browsers.</span></div>`;
   }
 
-  function wireReviewerStatus() {
-    document.querySelector("#review-sign-out")?.addEventListener("click", async () => {
-      await reviewClient.auth.signOut();
-    });
-    document.querySelector("#review-login-form")?.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const status = document.querySelector("#review-login-status");
-      const button = event.currentTarget.querySelector("button");
-      button.disabled = true; status.textContent = "Sending secure sign-in link…";
-      const email = new FormData(event.currentTarget).get("email").trim();
-      const redirect = new URL(location.href); redirect.search = "?view=review";
-      const { error } = await reviewClient.auth.signInWithOtp({ email, options: { emailRedirectTo: redirect.toString() } });
-      status.textContent = error ? error.message : "Check your email for the sign-in link.";
-      button.disabled = false;
-    });
-  }
+  function wireReviewerStatus() {}
 
   async function initializeReviewBackend() {
     if (!reviewBackendConfigured) return;
@@ -226,6 +210,11 @@
       const { data, error } = await reviewClient.auth.getSession();
       if (error) throw error;
       reviewSession = data.session;
+      if (!reviewSession) {
+        const anonymous = await reviewClient.auth.signInAnonymously();
+        if (anonymous.error) throw anonymous.error;
+        reviewSession = anonymous.data.session;
+      }
       await loadRemoteHumanGold();
       reviewBackendState = "ready";
     } catch (error) {
@@ -400,9 +389,9 @@
     const completed = Object.values(records).filter((record) => record?.tags?.length).length;
     const storageNote = reviewBackendConfigured
       ? reviewSession
-        ? `<strong>Shared review active:</strong> ${escapeHtml(reviewSession.user.email || "reviewer")} · every submitted answer is stored in the protected database.`
-        : `<strong>Shared review ready:</strong> open Human Review and sign in by email before labeling.`
-      : `<strong>Current GitHub Pages preview:</strong> answers are private to this browser. The Vercel deployment uses authenticated reviewers and Supabase Postgres.`;
+        ? `<strong>Shared anonymous review active:</strong> this browser has a private reviewer ID and every submitted answer is stored separately.`
+        : `<strong>Local fallback active:</strong> review immediately and export JSON or CSV before changing browsers.`
+      : `<strong>Current GitHub Pages preview:</strong> answers are private to this browser. The Vercel deployment creates an anonymous Supabase reviewer automatically.`;
     const modeBlocks = loop.modes.map((mode, index) => `<article class="error-mode${index >= 8 ? " secondary-mode" : ""}">
       <div class="mode-heading"><div><p class="eyebrow">Error mode ${String(index + 1).padStart(2, "0")}</p><h3>${escapeHtml(mode.name)} — ${nf.format(mode.image_count)} images</h3><p>${escapeHtml(mode.description)}</p></div><span class="mode-count">${nf.format(mode.image_count)}</span></div>
       <dl class="mode-facts"><div><dt>Most affected</dt><dd>${modelCountLine(mode)}</dd></div><div><dt>Visual audit</dt><dd>${mode.vlm_reviewed ? `${mode.vlm_supported} / ${mode.vlm_reviewed} representatives supported` : "VLM audit pending"}</dd></div><div><dt>Likely cause</dt><dd>${escapeHtml(mode.vlm_common_cause || mode.cause)}</dd></div></dl>
@@ -446,8 +435,8 @@
     const index = Math.max(0, Math.min(loop.human_set.length - 1, requested - 1));
     const entry = loop.human_set[index]; const image = imagesById.get(entry.image_id); const records = loadHumanGold(); const saved = records[entry.image_id];
     const completed = Object.values(records).filter((record) => record?.tags?.length).length;
-    if (reviewBackendConfigured && (!reviewSession || reviewBackendState === "loading")) {
-      setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Shared 100-image review</h1><p>Sign in before labeling so every answer is saved to your reviewer record.</p></div></div>${reviewerStatusHtml()}<div class="pending-evaluation"><strong>Your labels remain private during blind review.</strong><p>BioImages, Gemma, DINOv3, BioCLIP, and EfficientNet answers appear only after you submit each image.</p></div></div>`, "Human review sign in");
+    if (reviewBackendConfigured && reviewBackendState === "loading") {
+      setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Preparing the shared 100-image review</h1><p>No email is required. A private anonymous reviewer identity is created in this browser.</p></div></div>${reviewerStatusHtml()}<div class="pending-evaluation"><strong>Your labels remain private during blind review.</strong><p>BioImages, Gemma, DINOv3, BioCLIP, and EfficientNet answers appear only after you submit each image.</p></div></div>`, "Preparing Human review");
       wireReviewerStatus(); return;
     }
     setPage(`<div class="wrap review-page"><div class="review-top"><div><p class="eyebrow">Blind Human Review</p><h1>Image ${index + 1} of ${loop.human_set.length}</h1><p>${completed} complete · model and reference answers remain hidden until this image is submitted.</p></div><div class="review-actions"><button type="button" id="export-json">Export JSON</button><button type="button" id="export-csv">Export CSV</button></div></div>${reviewerStatusHtml()}<div class="review-progress"><i style="width:${completed}%"></i></div>

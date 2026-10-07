@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Human review of distant, mid-range, close-up, and uncertain BioImages photographs.">
+  <title>Photographic-scale review · BioImages</title>
+  <link rel="preconnect" href="https://bioimages.vanderbilt.edu">
+  <link rel="stylesheet" href="assets/review.css?v=1">
+  <script defer src="data/runtime-config.js?v=1"></script>
+  <script defer src="data/scale-review-data.js?v=1"></script>
+  <script defer src="assets/review.js?v=1"></script>
+</head>
+<body>
+  <a class="skip-link" href="#review-workspace">Skip to the current image</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">BioImages <span>photographic-scale audit</span></a>
+      <nav aria-label="Review navigation">
+        <a href="#codebook">Definitions</a>
+        <a href="#review-workspace">Review</a>
+        <button id="export-csv" type="button">Export CSV</button>
+        <button id="export-json" type="button">Export JSON</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro wrap">
+      <div>
+        <p class="eyebrow">Human audit · 92 photographs</p>
+        <h1>Classify what the camera shows—not what the organ is.</h1>
+        <p class="lede">Use the same four visible rules for every image. The provisional machine label stays hidden until you submit, so the audit remains independent.</p>
+      </div>
+      <div class="progress-card" aria-live="polite">
+        <strong id="progress-count">0 / 92</strong>
+        <span>reviewed</span>
+        <div class="progress-track"><i id="progress-bar"></i></div>
+      </div>
+    </section>
+
+    <section class="status-wrap wrap" id="review-status" aria-live="polite"></section>
+
+    <section class="codebook wrap" id="codebook" aria-labelledby="codebook-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Operational codebook</p>
+          <h2 id="codebook-title">Use this decision order</h2>
+        </div>
+        <ol class="decision-order">
+          <li><b>Whole organism or crown visible?</b> Distant.</li>
+          <li><b>One organ or fine detail dominates?</b> Close-up.</li>
+          <li><b>Connected plant part, but not the whole organism?</b> Mid-range.</li>
+          <li><b>Rules conflict or evidence is insufficient?</b> Uncertain.</li>
+        </ol>
+      </div>
+      <div class="codebook-grid" id="codebook-grid"></div>
+      <p class="codebook-note">Scale and organ are separate. A leaf can be close-up, part of a mid-range branch view, or a small element in a distant crown.</p>
+    </section>
+
+    <section class="review-shell" id="review-workspace" tabindex="-1">
+      <div class="wrap review-topline">
+        <div>
+          <p class="eyebrow" id="review-position">Image 1 of 92</p>
+          <h2 id="review-title">Loading review image…</h2>
+          <p id="review-meta"></p>
+        </div>
+        <div class="review-nav-actions">
+          <button id="previous-item" type="button">← Previous</button>
+          <button id="next-item" type="button">Next →</button>
+          <button id="next-unreviewed" type="button">Next unreviewed</button>
+        </div>
+      </div>
+
+      <div class="wrap workspace">
+        <figure class="image-stage">
+          <a id="image-link" href="#" target="_blank" rel="noreferrer">
+            <img id="review-image" alt="Plant photograph for photographic-scale review">
+          </a>
+          <figcaption>Click the photograph to open the original BioImages record.</figcaption>
+        </figure>
+
+        <form class="review-form" id="review-form">
+          <fieldset>
+            <legend>What scale is visibly dominant?</legend>
+            <p class="form-help">Choose one. Keyboard: <kbd>1</kbd> distant, <kbd>2</kbd> mid-range, <kbd>3</kbd> close-up, <kbd>4</kbd> uncertain.</p>
+            <div class="scale-choices" id="scale-choices"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>How certain are you?</legend>
+            <div class="confidence-choices">
+              <label><input type="radio" name="confidence" value="high"><span>High<small>Rule fits clearly</small></span></label>
+              <label><input type="radio" name="confidence" value="medium" checked><span>Medium<small>Best fit, minor doubt</small></span></label>
+              <label><input type="radio" name="confidence" value="low"><span>Low<small>Boundary judgment</small></span></label>
+            </div>
+          </fieldset>
+
+          <label class="note-field">Optional note
+            <textarea name="note" rows="3" placeholder="What made the boundary clear or difficult?"></textarea>
+          </label>
+          <p class="form-message" id="form-message" role="status"></p>
+          <button class="submit-review" type="submit">Save and show provisional evidence</button>
+          <p class="shortcut-note"><kbd>Enter</kbd> save · <kbd>←</kbd>/<kbd>→</kbd> move · <kbd>S</kbd> next unreviewed</p>
+        </form>
+      </div>
+
+      <div class="wrap reveal" id="machine-reveal" hidden></div>
+    </section>
+
+    <section class="queue wrap" aria-labelledby="queue-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">Review queue</p><h2 id="queue-title">Jump to any sample</h2></div>
+        <div class="queue-legend"><span class="done-dot"></span> reviewed <span class="current-dot"></span> current</div>
+      </div>
+      <div class="queue-grid" id="queue-grid"></div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">The 92-image audit includes balanced high- and medium-confidence samples plus every provisional boundary case. Human answers never overwrite BioImages metadata.</div></footer>
+</body>
+</html>
