@@ -107,7 +107,7 @@ def main() -> None:
             ) + ")"
         )
 
-    migration = f"""-- Shared anonymous review for the 92-image photographic-scale audit.
+    migration = f"""-- Shared anonymous review for the {len(items)}-image photographic-scale audit.
 -- Anonymous Supabase users still receive auth.uid() and the authenticated role.
 
 create table if not exists public.scale_review_batches (
@@ -237,6 +237,11 @@ grant execute on function public.submit_scale_annotation(uuid, text, text, text,
 insert into public.scale_review_batches (id, slug, title)
 values ('{BATCH_ID}', 'scale-audit-v1', 'BioImages photographic-scale audit')
 on conflict (id) do update set title = excluded.title;
+
+-- Preserve annotations while freeing the unique display-order range for an expanded batch.
+update public.scale_review_items
+set display_order = display_order + 10000
+where batch_id = '{BATCH_ID}';
 
 insert into public.scale_review_items (
   batch_id, image_id, display_order, species, organ_category, subview,

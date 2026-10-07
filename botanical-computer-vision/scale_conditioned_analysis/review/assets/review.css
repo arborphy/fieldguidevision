@@ -100,12 +100,16 @@ kbd { min-width: 20px; display: inline-block; padding: 1px 5px; border: 1px soli
 .form-message.error { color: #9b352a; }
 .submit-review { width: 100%; min-height: 48px; border: 1px solid var(--green); color: #fff; background: var(--green); font-weight: 800; }
 .shortcut-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; text-align: center; }
-.reveal { margin-top: 18px; padding: 18px; border: 1px solid #e2cf9c; background: var(--warning); }
+.reveal { margin-top: 18px; padding: 18px; border: 1px solid #e2cf9c; border-left-width: 6px; background: var(--warning); }
+.reveal.agreement { border-color: #78a58a; background: #eaf5ed; }
+.reveal.disagreement { border-color: #d3a94f; background: var(--warning); }
 .reveal h3 { margin-bottom: 9px; }
 .reveal-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .reveal-pill { padding: 5px 8px; border: 1px solid #d9c182; background: #fff; font-size: 11px; }
+.reveal.agreement .reveal-pill { border-color: #a9c9b4; }
 .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
 .evidence-grid div { padding: 10px; border: 1px solid #ead8ac; background: #fff; }
+.reveal.agreement .evidence-grid div { border-color: #bfd7c7; }
 .evidence-grid strong { display: block; margin-bottom: 4px; text-transform: capitalize; }
 .evidence-grid p { margin: 3px 0; color: var(--muted); font-size: 11px; }
 

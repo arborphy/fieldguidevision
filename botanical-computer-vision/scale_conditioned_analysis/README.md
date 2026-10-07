@@ -6,7 +6,7 @@ This directory continues the BioImages representation analysis with one focused 
 
 Open `index.html` for the visual explanation.
 
-Open [`review/index.html`](review/index.html) for the 92-image human audit. It shows one large photograph at a time, keeps the four operational definitions visible, supports 1–4 keyboard shortcuts, resumes progress, hides provisional evidence until submission, and exports CSV or JSON. On Vercel it uses an anonymous Supabase reviewer identity, so no email verification is required.
+Open [`review/index.html`](review/index.html) for the 182-image human audit. It shows one large photograph at a time, keeps the four operational definitions visible, supports 1–4 keyboard shortcuts, resumes progress, hides provisional evidence until submission, and exports CSV or JSON. On Vercel it uses an anonymous Supabase reviewer identity, so no email verification is required.
 
 ## Phase 1 scope
 
@@ -15,7 +15,7 @@ The current page deliberately completes the visual foundation before adding more
 1. Defines distant, mid-range, close-up, and uncertain with positive visual criteria.
 2. Shows six real high-confidence examples for each main class and four boundary cases.
 3. Records separate BioImages and Gemma evidence for every provisional image label.
-4. Creates a 92-image manual review file: 10 high-confidence and 10 medium-confidence examples per main class, plus every uncertain image.
+4. Creates a 182-image manual review file: 25 high-confidence and 25 medium-confidence examples per main class, plus every uncertain image.
 5. Redraws the saved PCA coordinates for BioCLIP 2.5, DINOv3, and EfficientNet-B0 using photographic scale.
 6. Shows each scale in the same global PCA space while retaining the existing k=20 cluster colors.
 7. Uses BioCLIP cluster 04 as a concrete case study and reorganizes its image gallery by scale.
@@ -46,7 +46,7 @@ Gemma is used as an image-grounded suggestion, not ground truth. All labels rema
 
 - `data/image_visual_groups.csv`: one row per image with scale, confidence, rationale, and separate source evidence.
 - `data/scale_codebook.json`: the examples rendered in the visual codebook.
-- `data/scale_review_sample.csv`: the 92-image human audit sheet.
+- `data/scale_review_sample.csv`: the 182-image human audit sheet.
 - `review/`: the public, human-friendly review application and generated browser payload.
 - `data/visual_group_counts.csv`: full-corpus and embedding-subset coverage.
 - `assets/representation_by_scale.png`: three frozen representations colored only by scale.

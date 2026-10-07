@@ -31,7 +31,7 @@ Open `index.html`, choose **Human review**, and label one large image at a time.
 
 Primary subject, ambiguity, another tag, and a short note are optional. After submission, every reference and model tag is revealed. On GitHub Pages, labels remain a browser-local preview under `bioimages-human-gold-v2`. On the Vercel deployment, an anonymous Supabase reviewer is created automatically—no email verification—and every submission is written to that reviewer's RLS-protected record with revision history.
 
-The separate [photographic-scale review](../scale_conditioned_analysis/review/) presents the 92-image distant / mid-range / close-up / uncertain audit as a large-image, one-decision-at-a-time workflow. It keeps the operational codebook visible, supports keyboard shortcuts and resume, hides provisional evidence until submission, and exports CSV or JSON.
+The separate [photographic-scale review](../scale_conditioned_analysis/review/) presents the 182-image distant / mid-range / close-up / uncertain audit as a large-image, one-decision-at-a-time workflow. It keeps the operational codebook visible, supports keyboard shortcuts and resume, hides provisional evidence until submission, and exports CSV or JSON.
 
 When labels exist, the home page automatically reports:
 

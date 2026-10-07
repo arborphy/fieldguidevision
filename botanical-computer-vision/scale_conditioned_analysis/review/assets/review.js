@@ -123,6 +123,17 @@
     return `<p class="eyebrow">Revealed after your answer</p><h3>Provisional label and evidence</h3><div class="reveal-summary"><span class="reveal-pill">Your answer: <b>${escapeHtml(saved.human_scale)}</b></span><span class="reveal-pill">Provisional: <b>${escapeHtml(item.provisional_scale)}</b> · ${escapeHtml(item.provisional_confidence)}</span><span class="reveal-pill">${agrees ? "Agreement" : "Disagreement—keep for adjudication"}</span></div><p>${escapeHtml(item.rationale)}</p><div class="evidence-grid">${evidence}</div>`;
   }
 
+  function renderReveal(item, saved) {
+    const reveal = $("#machine-reveal");
+    const hasAnswer = Boolean(saved?.human_scale);
+    const agrees = hasAnswer && saved.human_scale === item.provisional_scale;
+    reveal.hidden = !hasAnswer;
+    reveal.classList.toggle("agreement", agrees);
+    reveal.classList.toggle("disagreement", hasAnswer && !agrees);
+    reveal.innerHTML = evidenceReveal(item, saved);
+    return reveal;
+  }
+
   function renderQueue() {
     $("#queue-grid").innerHTML = data.items.map((item, index) => {
       const done = Boolean(records[item.image_id]?.human_scale);
@@ -148,9 +159,7 @@
     form.elements.note.value = saved?.note || "";
     $("#form-message").textContent = saved ? "Saved. You may revise this answer." : "";
     $("#form-message").className = "form-message";
-    const reveal = $("#machine-reveal");
-    reveal.hidden = !saved?.human_scale;
-    reveal.innerHTML = evidenceReveal(item, saved);
+    renderReveal(item, saved);
     $("#previous-item").disabled = currentIndex === 0;
     $("#next-item").disabled = currentIndex === data.items.length - 1;
     renderProgress();
@@ -169,7 +178,7 @@
       const index = (currentIndex + offset) % total;
       if (!records[data.items[index].image_id]?.human_scale) return navigateTo(index);
     }
-    $("#form-message").textContent = "All 92 samples are reviewed. Export the results or revise any answer.";
+    $("#form-message").textContent = `All ${data.items.length} samples are reviewed. Export the results or revise any answer.`;
   }
 
   async function saveRemote(item, record) {
@@ -220,9 +229,7 @@
       button.disabled = false;
       renderProgress();
       renderQueue();
-      const reveal = $("#machine-reveal");
-      reveal.innerHTML = evidenceReveal(item, record);
-      reveal.hidden = false;
+      const reveal = renderReveal(item, record);
       reveal.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }

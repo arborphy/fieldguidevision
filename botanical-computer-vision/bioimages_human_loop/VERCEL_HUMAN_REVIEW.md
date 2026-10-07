@@ -116,7 +116,7 @@ This preserves inter-annotator agreement and lets the project distinguish genuin
 - `data/runtime-config.js`: empty safe fallback used by GitHub Pages.
 - `supabase/migrations/001_human_review.sql`: schema, RLS policies, transactional submit function, audit events, and the 100-item seed batch.
 - `assets/app.js`: automatic anonymous sign-in, per-reviewer synchronization, revision-safe saves, local fallback, and JSON/CSV export.
-- `supabase/migrations/002_scale_review.sql`: RLS-protected 92-image photographic-scale batch and audit history.
+- `supabase/migrations/002_scale_review.sql`: RLS-protected 182-image photographic-scale batch and audit history.
 - `../scale_conditioned_analysis/review/`: public, keyboard-friendly scale-review interface copied to `/scale-review/` during the Vercel build.
 
 ## Required external setup
