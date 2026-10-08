@@ -4,21 +4,22 @@ This directory continues the BioImages representation analysis with one focused 
 
 > Are different species mixed because they look morphologically similar, or because they were photographed at the same scale and composition?
 
-Open `index.html` for the visual explanation.
+Open `index.html` for the complete visual analysis.
 
 Open [`review/index.html`](review/index.html) for the 182-image human audit. It shows one large photograph at a time, keeps the four operational definitions visible, supports 1–4 keyboard shortcuts, resumes progress, hides provisional evidence until submission, and exports CSV or JSON. On Vercel it uses an anonymous Supabase reviewer identity, so no email verification is required.
 
-## Phase 1 scope
+## Implemented analysis sequence
 
-The current page deliberately completes the visual foundation before adding more metrics or algorithms:
+The page follows the agreed conditional sequence instead of mixing every factor at once:
 
 1. Defines distant, mid-range, close-up, and uncertain with positive visual criteria.
-2. Shows six real high-confidence examples for each main class and four boundary cases.
-3. Records separate BioImages and Gemma evidence for every provisional image label.
-4. Creates a 182-image manual review file: 25 high-confidence and 25 medium-confidence examples per main class, plus every uncertain image.
-5. Redraws the saved PCA coordinates for BioCLIP 2.5, DINOv3, and EfficientNet-B0 using photographic scale.
-6. Shows each scale in the same global PCA space while retaining the existing k=20 cluster colors.
-7. Uses BioCLIP cluster 04 as a concrete case study and reorganizes its image gallery by scale.
+2. Redraws the three global representations by scale and provides an interactive scale-only cluster explorer with species highlighting and image inspection.
+3. Compares species purity and NMI before conditioning and within each scale.
+4. Draws Top-1 accuracy by scale with `correct / total` labels and real correct/error examples.
+5. Calculates and plots species, organ, and scale composition for all 60 model-cluster combinations.
+6. Reorganizes high-priority mixed-cluster galleries into distant, mid-range, and close-up rows.
+7. Only after scale is separated, compares leaf-on/off, reproductive-visible/not-visible, and environmental/isolated groups.
+8. When the ignored original vectors are restored, recomputes local PCA, rotating projections, pairwise cosine comparisons, and Top-100 seed neighborhoods.
 
 No model is retrained and no new embedding is inferred.
 
@@ -51,21 +52,30 @@ Gemma is used as an image-grounded suggestion, not ground truth. All labels rema
 - `data/visual_group_counts.csv`: full-corpus and embedding-subset coverage.
 - `assets/representation_by_scale.png`: three frozen representations colored only by scale.
 - `assets/*_scale_conditioned_clusters.png`: one scale at a time in the same global PCA space.
-- `assets/bioclip_cluster_04_case.png`: one mixed cluster colored by scale and species.
+- `assets/species_separation_by_scale.png`: species purity and NMI before/after scale conditioning.
+- `assets/accuracy_by_scale.png`: strict-test Top-1 accuracy with `correct / total` labels.
+- `assets/secondary_explanatory_variables.png`: residual comparisons for the second-layer visual variables.
+- `assets/*_cluster_composition.png`: scale, organ, and ranked species composition for every k=20 cluster.
+- `data/separation_metrics.csv`, `data/accuracy_by_visual_group.csv`, and `data/cluster_visual_composition.csv`: exact values behind the figures.
+- `data/analysis-payload.js`: interactive points, galleries, examples, and—when available—deep-exploration data.
 
 ## Rebuild
 
 From `botanical-computer-vision/`:
 
 ```bash
-python scale_conditioned_analysis/build_scale_conditioned_analysis.py
+python scale_conditioned_analysis/build_complete_analysis.py
+python scale_conditioned_analysis/verify_complete_analysis.py
 ```
 
 Required Python packages: pandas, NumPy, scikit-learn, and Matplotlib.
 
-## Next phase after label review
+## Original-vector requirement
 
-1. Compare same-species/same-scale, same-species/different-scale, and different-species/same-scale cosine similarities.
-2. Add accuracy bars by scale with real correct and incorrect images.
-3. Select 3–5 validated mixed clusters for local PCA across PC1–PC2, PC1–PC3, and PC2–PC3.
-4. Add rotation/projection and seed-guided nearest-neighbor views using the original frozen vectors.
+The repository intentionally ignores `outputs/`. The following files must be restored or regenerated for the deep-exploration sections:
+
+- `outputs/bioclip25_strict_embeddings/embeddings.npz`
+- `outputs/dinov3_strict_embeddings/embeddings.npz`
+- `outputs/efficientnet_b0_strict_embeddings/embeddings.npz`
+
+Without them, the builder leaves pairwise cosine, local PCA/rotation, and Top-100 neighbors explicitly pending. It does not use saved two-dimensional coordinates as a misleading substitute.
