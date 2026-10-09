@@ -16,6 +16,7 @@ original high-dimensional cosine distance.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 from collections import Counter
@@ -874,7 +875,13 @@ def build_accuracy_examples(examples: dict) -> str:
     return "".join(sections)
 
 
-def build_html(payload: dict, metrics: pd.DataFrame, accuracy: pd.DataFrame, embeddings_ready: bool) -> str:
+def build_html(
+    payload: dict,
+    metrics: pd.DataFrame,
+    accuracy: pd.DataFrame,
+    embeddings_ready: bool,
+    asset_version: str,
+) -> str:
     counts = payload["counts"]
     metrics_table = []
     for rep in REPRESENTATIONS:
@@ -950,7 +957,7 @@ def build_html(payload: dict, metrics: pd.DataFrame, accuracy: pd.DataFrame, emb
 <section class="section" id="projection"><h2>Local projection and rotation</h2><p class="section-note">For the highest-priority mixed clusters, local PCA is recomputed from the original frozen vectors. Switch PC pairs or rotate across the first four principal directions; recolor by species, scale, organ, correctness or background, then click a point to open its image.</p><div class="method-note" data-deep-state="{deep_state}">{escape(embedding_note)}</div><div id="local-controls" class="controls"></div><div id="local-explorer" class="deep-explorer"></div></section>
 <section class="section" id="seed"><h2>Seed-guided neighborhood explorer</h2><p class="section-note">Start from a representative image and reveal more neighbours until the visual semantics change. Original-space cosine neighbours exclude the seed's own observation. The slider expands to 100 when source vectors are available.</p><div id="seed-controls" class="controls"></div><div id="seed-explorer"></div></section>
 </main><footer><div class="wrap">Generated from BioImages metadata, Gemma visual tags, the frozen k=20 assignments, strict test predictions and—when present—the original normalized frozen vectors. Provisional visual-group labels do not replace BioImages records.</div></footer>
-<script src="data/analysis-payload.js"></script><script src="assets/complete-analysis.js"></script></body></html>'''
+<script src="data/analysis-payload.js?v={asset_version}"></script><script src="assets/complete-analysis.js?v={asset_version}"></script></body></html>'''
 
 
 def main() -> None:
@@ -1007,14 +1014,23 @@ def main() -> None:
         "seeds": seeds,
         "embeddings_ready": sorted(embeddings),
     }
-    (DATA / "analysis-payload.js").write_text(
+    payload_js = (
         "window.SCALE_ANALYSIS = "
         + json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-        + ";\n",
-        encoding="utf-8",
+        + ";\n"
     )
+    (DATA / "analysis-payload.js").write_text(payload_js, encoding="utf-8")
+    asset_version = hashlib.sha256(
+        payload_js.encode("utf-8") + (ASSETS / "complete-analysis.js").read_bytes()
+    ).hexdigest()[:12]
     (HERE / "index.html").write_text(
-        build_html(payload, separation, accuracy, len(embeddings) == len(REPRESENTATIONS)),
+        build_html(
+            payload,
+            separation,
+            accuracy,
+            len(embeddings) == len(REPRESENTATIONS),
+            asset_version,
+        ),
         encoding="utf-8",
     )
     summary = {
