@@ -523,6 +523,7 @@ def build_deep_payload(
     assignments: pd.DataFrame,
     cluster_payload: dict,
     embeddings: dict[str, tuple[np.ndarray, np.ndarray]],
+    predictions: pd.DataFrame,
 ) -> tuple[dict, dict]:
     metadata = images.set_index("image_id")
     assignment_lookup = {
@@ -533,6 +534,7 @@ def build_deep_payload(
     seed_payload: dict[str, list[dict]] = {rep: [] for rep in REPRESENTATIONS}
     for rep, (ids, matrix) in embeddings.items():
         index = {image_id: i for i, image_id in enumerate(ids)}
+        rep_predictions = predictions[predictions.representation == rep].set_index("image_id")
         selected_clusters = [item["cluster"] for item in cluster_payload[rep][:5]]
         for cluster_id in selected_clusters:
             cluster_ids = [
@@ -550,6 +552,13 @@ def build_deep_payload(
             points = []
             for image_id, values in zip(cluster_ids, coords):
                 row = metadata.loc[image_id]
+                if image_id in rep_predictions.index:
+                    prediction = rep_predictions.loc[image_id]
+                    predicted_species = prediction.prediction
+                    correctness = "correct" if bool(prediction.correct) else "incorrect"
+                else:
+                    predicted_species = None
+                    correctness = "not evaluated"
                 points.append(
                     {
                         "id": image_id,
@@ -560,6 +569,8 @@ def build_deep_payload(
                         "leaf": row.leaf_state,
                         "reproductive": row.reproductive_visibility,
                         "background": row.background_context,
+                        "prediction": predicted_species,
+                        "correctness": correctness,
                         "image": display_image_url(image_id, row.thumbnail_url),
                         "source": row.source_url,
                     }
@@ -990,7 +1001,9 @@ def main() -> None:
     cluster_summary, clusters = build_cluster_summaries(images, assignments)
     embeddings = load_embeddings()
     pairwise = build_distance_metrics(images, embeddings)
-    local, seeds = build_deep_payload(images, assignments, clusters, embeddings)
+    local, seeds = build_deep_payload(
+        images, assignments, clusters, embeddings, predictions
+    )
 
     chart_separation(separation)
     chart_accuracy(accuracy)

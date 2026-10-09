@@ -63,6 +63,8 @@ def main() -> None:
         assert marker in html
     assert "window.SCALE_ANALYSIS" in payload
     assert len(payload) > 1_000_000
+    assert "analysis-payload.js?v=" in html
+    assert "complete-analysis.js?v=" in html
 
     if set(summary["original_embeddings_available"]) == REPRESENTATIONS:
         pairwise = pd.read_csv(DATA / "scale_pairwise_similarity.csv")
@@ -75,6 +77,10 @@ def main() -> None:
             seeds = payload_json["seeds"][representation]
             assert len(local) == 5
             assert all(len(point["pc"]) >= 4 for cluster in local for point in cluster["points"])
+            correctness = {
+                point["correctness"] for cluster in local for point in cluster["points"]
+            }
+            assert {"correct", "incorrect", "not evaluated"}.issubset(correctness)
             assert len(seeds) == 10
             assert all(len(seed["neighbors"]) == 100 for seed in seeds)
             assert all(

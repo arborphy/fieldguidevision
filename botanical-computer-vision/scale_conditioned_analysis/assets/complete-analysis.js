@@ -187,7 +187,7 @@
       explorer.innerHTML = '<div class="method-note"><strong>Waiting for regenerated frozen vectors.</strong> Local PCA is intentionally not approximated from the saved two-dimensional plot.</div>';
       return;
     }
-    controls.innerHTML = `<label>Representation<select id="local-model">${readyModels.map((rep) => `<option value="${rep}">${esc(modelNames[rep])}</option>`).join("")}</select></label><label>Mixed cluster<select id="local-cluster"></select></label><label>Projection<select id="local-pair"><option value="0,1">PC1–PC2</option><option value="0,2">PC1–PC3</option><option value="1,2">PC2–PC3</option><option value="rotate">Rotating PC1–PC4</option></select></label><label>Color by<select id="local-color"><option value="species">species</option><option value="scale">shot scale</option><option value="organ">organ</option><option value="background">background</option><option value="leaf">leaf state</option><option value="reproductive">reproductive</option></select></label><button id="rotate-step">Rotate +10°</button>`;
+    controls.innerHTML = `<label>Representation<select id="local-model">${readyModels.map((rep) => `<option value="${rep}">${esc(modelNames[rep])}</option>`).join("")}</select></label><label>Mixed cluster<select id="local-cluster"></select></label><label>Projection<select id="local-pair"><option value="0,1">PC1–PC2</option><option value="0,2">PC1–PC3</option><option value="1,2">PC2–PC3</option><option value="rotate">Rotating PC1–PC4</option></select></label><label>Color by<select id="local-color"><option value="species">species</option><option value="scale">shot scale</option><option value="organ">organ</option><option value="correctness">correct / incorrect</option><option value="background">background</option><option value="leaf">leaf state</option><option value="reproductive">reproductive</option></select></label><button id="rotate-step">Rotate +10°</button>`;
     explorer.innerHTML = '<canvas id="local-canvas" class="deep-canvas" width="820" height="560" aria-label="Local principal-component projection"></canvas><aside id="local-detail" class="deep-detail"><p>Click a point to inspect the image.</p></aside>';
     const model = document.getElementById("local-model");
     const cluster = document.getElementById("local-cluster");
@@ -245,7 +245,8 @@
       const nearest = localRendered.map((item) => ({ item, distance: Math.hypot(item.x - x, item.y - y) })).sort((a, b) => a.distance - b.distance)[0];
       if (!nearest || nearest.distance > 20) return;
       const point = nearest.item.point;
-      detail.innerHTML = `<a href="${esc(point.source)}" target="_blank" rel="noreferrer"><img src="${esc(point.image)}" alt="${esc(point.species)}"></a><p><b><i>${esc(point.species)}</i></b><br>${esc(point.organ)} · ${esc(point.scale)}<br>${esc(point.background)} · ${esc(point.leaf)} · reproductive ${esc(point.reproductive)}</p>`;
+      const prediction = point.prediction ? `${esc(point.prediction)} · ${esc(point.correctness)}` : "not a strict-test image";
+      detail.innerHTML = `<a href="${esc(point.source)}" target="_blank" rel="noreferrer"><img src="${esc(point.image)}" alt="${esc(point.species)}"></a><p><b><i>${esc(point.species)}</i></b><br>${esc(point.organ)} · ${esc(point.scale)}<br>${esc(point.background)} · ${esc(point.leaf)} · reproductive ${esc(point.reproductive)}<br>Prediction: ${prediction}</p>`;
     });
     model.addEventListener("change", loadLocalClusters);
     [cluster, pair, color].forEach((element) => element.addEventListener("change", drawLocal));
