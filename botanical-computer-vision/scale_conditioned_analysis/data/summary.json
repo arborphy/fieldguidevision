@@ -14,15 +14,19 @@
     "efficientnet_b0"
   ],
   "k": 20,
-  "original_embeddings_available": [],
+  "original_embeddings_available": [
+    "bioclip",
+    "dinov3",
+    "efficientnet_b0"
+  ],
   "local_projection_clusters": {
-    "bioclip": 0,
-    "dinov3": 0,
-    "efficientnet_b0": 0
+    "bioclip": 5,
+    "dinov3": 5,
+    "efficientnet_b0": 5
   },
   "seed_queries": {
-    "bioclip": 0,
-    "dinov3": 0,
-    "efficientnet_b0": 0
+    "bioclip": 10,
+    "dinov3": 10,
+    "efficientnet_b0": 10
   }
 }

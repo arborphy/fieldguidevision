@@ -24,6 +24,7 @@ def main() -> None:
     summary = json.loads((DATA / "summary.json").read_text(encoding="utf-8"))
     html = (HERE / "index.html").read_text(encoding="utf-8")
     payload = (DATA / "analysis-payload.js").read_text(encoding="utf-8")
+    payload_json = json.loads(payload.split("=", 1)[1].strip().rstrip(";"))
 
     assert len(groups) == 1899
     assert groups.image_id.nunique() == 1899
@@ -63,6 +64,24 @@ def main() -> None:
     assert "window.SCALE_ANALYSIS" in payload
     assert len(payload) > 1_000_000
 
+    if set(summary["original_embeddings_available"]) == REPRESENTATIONS:
+        pairwise = pd.read_csv(DATA / "scale_pairwise_similarity.csv")
+        assert len(pairwise) == len(REPRESENTATIONS) * 4
+        assert set(pairwise.representation) == REPRESENTATIONS
+        assert (pairwise.pairs > 0).all()
+        assert set(payload_json["embeddings_ready"]) == REPRESENTATIONS
+        for representation in REPRESENTATIONS:
+            local = payload_json["local"][representation]
+            seeds = payload_json["seeds"][representation]
+            assert len(local) == 5
+            assert all(len(point["pc"]) >= 4 for cluster in local for point in cluster["points"])
+            assert len(seeds) == 10
+            assert all(len(seed["neighbors"]) == 100 for seed in seeds)
+            assert all(
+                seed["id"] not in {neighbor["id"] for neighbor in seed["neighbors"]}
+                for seed in seeds
+            )
+
     for name in [
         "representation_by_scale.png",
         "species_separation_by_scale.png",
@@ -71,6 +90,7 @@ def main() -> None:
         "bioclip_cluster_composition.png",
         "dinov3_cluster_composition.png",
         "efficientnet_b0_cluster_composition.png",
+        "pairwise_similarity_by_species_and_scale.png",
     ]:
         path = ASSETS / name
         assert path.exists() and path.stat().st_size > 10_000, name

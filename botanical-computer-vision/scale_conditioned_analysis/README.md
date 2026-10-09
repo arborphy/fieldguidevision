@@ -19,7 +19,7 @@ The page follows the agreed conditional sequence instead of mixing every factor 
 5. Calculates and plots species, organ, and scale composition for all 60 model-cluster combinations.
 6. Reorganizes high-priority mixed-cluster galleries into distant, mid-range, and close-up rows.
 7. Only after scale is separated, compares leaf-on/off, reproductive-visible/not-visible, and environmental/isolated groups.
-8. When the ignored original vectors are restored, recomputes local PCA, rotating projections, pairwise cosine comparisons, and Top-100 seed neighborhoods.
+8. Uses the restored original vectors to recompute local PCA, rotating projections, pairwise cosine comparisons, and Top-100 seed neighborhoods.
 
 No model is retrained and no new embedding is inferred.
 
@@ -57,7 +57,9 @@ Gemma is used as an image-grounded suggestion, not ground truth. All labels rema
 - `assets/secondary_explanatory_variables.png`: residual comparisons for the second-layer visual variables.
 - `assets/*_cluster_composition.png`: scale, organ, and ranked species composition for every k=20 cluster.
 - `data/separation_metrics.csv`, `data/accuracy_by_visual_group.csv`, and `data/cluster_visual_composition.csv`: exact values behind the figures.
-- `data/analysis-payload.js`: interactive points, galleries, examples, and—when available—deep-exploration data.
+- `assets/pairwise_similarity_by_species_and_scale.png`: the four species/scale pair types with bootstrap confidence intervals.
+- `data/scale_pairwise_similarity.csv`: exact cosine-similarity values and pair counts behind that figure.
+- `data/analysis-payload.js`: interactive points, galleries, examples, five local PCA clusters and ten Top-100 seed queries per representation.
 
 ## Rebuild
 
@@ -70,12 +72,12 @@ python scale_conditioned_analysis/verify_complete_analysis.py
 
 Required Python packages: pandas, NumPy, scikit-learn, and Matplotlib.
 
-## Original-vector requirement
+## Original-vector source
 
-The repository intentionally ignores `outputs/`. The following files must be restored or regenerated for the deep-exploration sections:
+The repository intentionally ignores `outputs/`, so the original vectors are not published with the site. To reproduce the committed deep-exploration outputs, restore these files before running the builder:
 
 - `outputs/bioclip25_strict_embeddings/embeddings.npz`
 - `outputs/dinov3_strict_embeddings/embeddings.npz`
 - `outputs/efficientnet_b0_strict_embeddings/embeddings.npz`
 
-Without them, the builder leaves pairwise cosine, local PCA/rotation, and Top-100 neighbors explicitly pending. It does not use saved two-dimensional coordinates as a misleading substitute.
+The current committed page was built with all three files present. If they are absent on a future rebuild, the builder leaves pairwise cosine, local PCA/rotation, and Top-100 neighbors explicitly pending. It never uses saved two-dimensional coordinates as a misleading substitute.
