@@ -8,6 +8,8 @@ on:
     branches: [lindsey-branch]
     paths:
       - '.github/workflows/run-dual-encoder-gpu.yml'
+      - 'botanical-computer-vision/dual_encoder_fusion/**'
+      - 'botanical-computer-vision/organ_benchmark/split_manifests/individual_disjoint.csv'
   workflow_dispatch:
     inputs:
       smoke:
