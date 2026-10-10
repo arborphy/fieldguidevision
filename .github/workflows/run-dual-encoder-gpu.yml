@@ -1,6 +1,13 @@
 name: Run dual-encoder GPU experiment
 
 on:
+  # GitHub only exposes workflow_dispatch for workflow files that already
+  # exist on the default branch.  This branch-scoped push trigger lets the
+  # first smoke run bootstrap without touching main.
+  push:
+    branches: [lindsey-branch]
+    paths:
+      - '.github/workflows/run-dual-encoder-gpu.yml'
   workflow_dispatch:
     inputs:
       smoke:
@@ -96,7 +103,7 @@ jobs:
             -X POST \
             -H "Authorization: Bearer $ID_TOKEN" \
             -H "X-Experiment-Token: $EXPERIMENT_TOKEN" \
-            "$SERVICE_URL/run?smoke=${{ inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache }}" \
+            "$SERVICE_URL/run?smoke=${{ github.event_name == 'push' && 'true' || inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache || 'false' }}" \
             --output dual-encoder-results/results.tar.gz
           tar -xzf dual-encoder-results/results.tar.gz -C dual-encoder-results
           cat dual-encoder-results/REPORT.md
@@ -104,7 +111,7 @@ jobs:
       - name: Upload reproducible results
         uses: actions/upload-artifact@v4
         with:
-          name: dual-encoder-${{ inputs.smoke && 'smoke' || 'full' }}-${{ github.run_id }}
+          name: dual-encoder-${{ (github.event_name == 'push' || inputs.smoke) && 'smoke' || 'full' }}-${{ github.run_id }}
           path: dual-encoder-results/
           if-no-files-found: error
           retention-days: 30
