@@ -100,6 +100,7 @@ def run_experiment(
         raise RuntimeError("CUDA is unavailable in the requested Modal L4 container")
 
     def load_or_create_cache() -> dict[str, object]:
+        Path(CACHE_PATH).parent.mkdir(parents=True, exist_ok=True)
         if os.path.exists(CACHE_PATH) and not rebuild_cache:
             value = torch.load(CACHE_PATH, map_location="cpu", weights_only=False)
             if value.get("cache_version") == 1:
