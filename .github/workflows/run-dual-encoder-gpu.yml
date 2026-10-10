@@ -129,15 +129,29 @@ jobs:
       - name: Run experiment and download archive
         run: |
           mkdir -p dual-encoder-results
-          curl --fail-with-body --show-error --location \
+          set +e
+          HTTP_STATUS=$(curl --show-error --location \
             --max-time 3600 \
-            --retry 2 \
-            --retry-all-errors \
             -X POST \
             -H "Authorization: Bearer ${{ steps.invoke-auth.outputs.id_token }}" \
             -H "X-Experiment-Token: $EXPERIMENT_TOKEN" \
             "$SERVICE_URL/run?smoke=${{ github.event_name == 'push' && 'true' || inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache || 'false' }}" \
-            --output dual-encoder-results/results.tar.gz
+            --output dual-encoder-results/results.tar.gz \
+            --write-out '%{http_code}')
+          CURL_STATUS=$?
+          set -e
+          if [[ "$CURL_STATUS" -ne 0 || "$HTTP_STATUS" != "200" ]]; then
+            echo "Experiment request failed: curl=$CURL_STATUS http=$HTTP_STATUS"
+            cat dual-encoder-results/results.tar.gz || true
+            echo "Recent Cloud Run logs:"
+            gcloud logging read \
+              'resource.type="cloud_run_revision" AND resource.labels.service_name="${{ env.SERVICE }}"' \
+              --project "${{ env.PROJECT_ID }}" \
+              --limit 100 \
+              --order desc \
+              --format='value(timestamp,severity,textPayload,jsonPayload.message)' || true
+            exit 1
+          fi
           tar -xzf dual-encoder-results/results.tar.gz -C dual-encoder-results
           cat dual-encoder-results/REPORT.md
 
