@@ -107,7 +107,7 @@ jobs:
             --concurrency 1 \
             --max-instances 1 \
             --timeout 3600 \
-            --allow-unauthenticated \
+            --no-allow-unauthenticated \
             --service-account "$RUNTIME_SERVICE_ACCOUNT" \
             --set-env-vars "EXPERIMENT_TOKEN=$EXPERIMENT_TOKEN" \
             --quiet
@@ -117,6 +117,15 @@ jobs:
             --format='value(status.url)')
           echo "SERVICE_URL=$SERVICE_URL" >> "$GITHUB_ENV"
 
+      - id: invoke-auth
+        name: Mint service-specific ID token
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOYER_SA }}
+          token_format: id_token
+          id_token_audience: ${{ env.SERVICE_URL }}
+
       - name: Run experiment and download archive
         run: |
           mkdir -p dual-encoder-results
@@ -125,6 +134,7 @@ jobs:
             --retry 2 \
             --retry-all-errors \
             -X POST \
+            -H "Authorization: Bearer ${{ steps.invoke-auth.outputs.id_token }}" \
             -H "X-Experiment-Token: $EXPERIMENT_TOKEN" \
             "$SERVICE_URL/run?smoke=${{ github.event_name == 'push' && 'true' || inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache || 'false' }}" \
             --output dual-encoder-results/results.tar.gz
