@@ -98,3 +98,17 @@ species macro-F1 was `0.8082 ± 0.0272`, compared with `0.8192 ± 0.0079` for
 BioCLIP→EfficientNet and `0.8044 ± 0.0245` for EfficientNet→BioCLIP. BioCLIP
 alone was strongest at `0.8439 ± 0.0092`. See the archived `ANALYSIS.md` for the
 objective interpretation and the negative-transfer evidence motivating V2.
+
+## Completed V2 result
+
+The BioCLIP-anchored gated-residual follow-up is archived in
+`results/v2_gated_residual`. It stabilized the full bidirectional model and
+raised its species macro-F1 to `0.8321 ± 0.0062`, but the primary superiority
+claim remained **not demonstrated**: the two one-way variants scored `0.8383 ±
+0.0045` and `0.8371 ± 0.0076`, and BioCLIP alone remained strongest at `0.8466
+± 0.0070`.
+
+The final-map-only bidirectional ablation is the useful secondary result. It
+scored `0.8460 ± 0.0060` and beat both one-way variants at every matched seed,
+but did not beat BioCLIP alone. See its archived `ANALYSIS.md` for the paired
+deltas, fusion-versus-anchor comparison, and interpretation limits.
