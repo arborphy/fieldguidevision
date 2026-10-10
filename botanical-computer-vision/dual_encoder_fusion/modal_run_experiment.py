@@ -61,7 +61,11 @@ def _archive(files: dict[str, bytes]) -> bytes:
     timeout=6 * 60 * 60,
     volumes={"/cache": cache_volume},
 )
-def run_experiment(smoke: bool = False, rebuild_cache: bool = False) -> bytes:
+def run_experiment(
+    smoke: bool = False,
+    rebuild_cache: bool = False,
+    commit_modal_cache: bool = True,
+) -> bytes:
     import csv
     import gc
     import hashlib
@@ -229,7 +233,10 @@ def run_experiment(smoke: bool = False, rebuild_cache: bool = False) -> bytes:
         temporary = CACHE_PATH + ".tmp"
         torch.save(cache, temporary)
         os.replace(temporary, CACHE_PATH)
-        cache_volume.commit()
+        # The raw function is also reused by the temporary Cloud Run GPU
+        # service.  Only a real Modal invocation can commit this volume.
+        if commit_modal_cache:
+            cache_volume.commit()
         shutil.rmtree(data_root, ignore_errors=True)
         zip_path.unlink(missing_ok=True)
         return cache

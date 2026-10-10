@@ -60,6 +60,12 @@ uv run modal run dual_encoder_fusion/modal_run_experiment.py --smoke
 uv run modal run dual_encoder_fusion/modal_run_experiment.py
 ```
 
+If the Modal API is unavailable, the repository also contains a manually
+dispatched `Run dual-encoder GPU experiment` GitHub Actions workflow. It builds
+the same experiment into a temporary private Cloud Run L4 service, downloads
+the result bundle as a workflow artifact, and deletes the service in the final
+step so that the GPU does not remain allocated.
+
 Local shape/gradient tests:
 
 ```bash

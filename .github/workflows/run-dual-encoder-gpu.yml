@@ -1,0 +1,118 @@
+name: Run dual-encoder GPU experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      smoke:
+        description: Run the three-mode, one-seed smoke protocol
+        required: true
+        type: boolean
+        default: true
+      rebuild_cache:
+        description: Re-extract frozen features even if this instance has a cache
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT_ID: arborphy-dev-2d36f4
+  REGION: us-east4
+  SERVICE: fgv-dual-encoder-experiment
+  AR_REPO: fieldguidevision-gate
+  WIF_PROVIDER: projects/555727880932/locations/global/workloadIdentityPools/github-actions-dev/providers/github
+  DEPLOYER_SA: fgv-gate-deployer-dev@arborphy-dev-2d36f4.iam.gserviceaccount.com
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.DEPLOYER_SA }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push experiment image
+        run: |
+          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/dual-encoder:${{ github.sha }}"
+          mkdir docker-context
+          cp -R botanical-computer-vision/dual_encoder_fusion docker-context/dual_encoder_fusion
+          cp botanical-computer-vision/organ_benchmark/split_manifests/individual_disjoint.csv \
+            docker-context/individual_disjoint.csv
+          cp botanical-computer-vision/dual_encoder_fusion/Dockerfile.cloud-run \
+            docker-context/Dockerfile
+          docker build \
+            -t "$IMAGE" docker-context
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy temporary private L4 service
+        run: |
+          EXPERIMENT_TOKEN=$(openssl rand -hex 32)
+          echo "::add-mask::$EXPERIMENT_TOKEN"
+          echo "EXPERIMENT_TOKEN=$EXPERIMENT_TOKEN" >> "$GITHUB_ENV"
+          gcloud run deploy "${{ env.SERVICE }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --image "$IMAGE" \
+            --cpu 8 \
+            --memory 32Gi \
+            --gpu 1 \
+            --gpu-type nvidia-l4 \
+            --no-gpu-zonal-redundancy \
+            --no-cpu-throttling \
+            --concurrency 1 \
+            --max-instances 1 \
+            --timeout 3600 \
+            --no-allow-unauthenticated \
+            --set-env-vars "EXPERIMENT_TOKEN=$EXPERIMENT_TOKEN" \
+            --quiet
+          SERVICE_URL=$(gcloud run services describe "${{ env.SERVICE }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --format='value(status.url)')
+          echo "SERVICE_URL=$SERVICE_URL" >> "$GITHUB_ENV"
+
+      - name: Run experiment and download archive
+        run: |
+          mkdir -p dual-encoder-results
+          ID_TOKEN=$(gcloud auth print-identity-token --audiences="$SERVICE_URL")
+          curl --fail-with-body --show-error --location \
+            --max-time 3600 \
+            --retry 2 \
+            --retry-all-errors \
+            -X POST \
+            -H "Authorization: Bearer $ID_TOKEN" \
+            -H "X-Experiment-Token: $EXPERIMENT_TOKEN" \
+            "$SERVICE_URL/run?smoke=${{ inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache }}" \
+            --output dual-encoder-results/results.tar.gz
+          tar -xzf dual-encoder-results/results.tar.gz -C dual-encoder-results
+          cat dual-encoder-results/REPORT.md
+
+      - name: Upload reproducible results
+        uses: actions/upload-artifact@v4
+        with:
+          name: dual-encoder-${{ inputs.smoke && 'smoke' || 'full' }}-${{ github.run_id }}
+          path: dual-encoder-results/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove temporary GPU service
+        if: always()
+        run: |
+          gcloud run services delete "${{ env.SERVICE }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --quiet || true
