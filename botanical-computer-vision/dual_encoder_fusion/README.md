@@ -82,3 +82,12 @@ uv run --with-requirements dual_encoder_fusion/requirements-dev.txt \
 - `species_macro_f1.png`: visual comparison with seed variability
 - `verdict.json`: an explicit pass/not-demonstrated decision
 - `REPORT.md`: short protocol and outcome summary
+
+## Completed V1 result
+
+The first full controlled run is archived in `results/v1_controlled`. Its
+pre-specified bidirectional claim was **not demonstrated**: bidirectional
+species macro-F1 was `0.8082 ± 0.0272`, compared with `0.8192 ± 0.0079` for
+BioCLIP→EfficientNet and `0.8044 ± 0.0245` for EfficientNet→BioCLIP. BioCLIP
+alone was strongest at `0.8439 ± 0.0092`. See the archived `ANALYSIS.md` for the
+objective interpretation and the negative-transfer evidence motivating V2.

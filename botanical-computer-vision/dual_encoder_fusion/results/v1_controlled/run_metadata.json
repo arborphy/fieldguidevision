@@ -1,0 +1,38 @@
+{
+  "smoke": false,
+  "elapsed_seconds": 622.875104065,
+  "gpu": "NVIDIA L4",
+  "torch": "2.7.1+cu126",
+  "python": "3.11.17",
+  "images": 1641,
+  "species_classes": 63,
+  "organ_classes": 9,
+  "organ_names": [
+    "bark",
+    "cone",
+    "flower",
+    "fruit",
+    "leaf",
+    "needle",
+    "seed",
+    "twig",
+    "whole plant"
+  ],
+  "species_is_primary": true,
+  "selection_metric": "validation species macro F1",
+  "test_used_for_selection": false,
+  "modes": [
+    "efficientnet_only",
+    "bioclip_only",
+    "concat",
+    "bio_queries_eff",
+    "eff_queries_bio",
+    "bidirectional",
+    "bidirectional_final_only"
+  ],
+  "seeds": [
+    17,
+    42,
+    73
+  ]
+}

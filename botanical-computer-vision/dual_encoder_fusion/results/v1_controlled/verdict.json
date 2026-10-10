@@ -1,0 +1,8 @@
+{
+  "status": "not_demonstrated",
+  "criterion": "mean bidirectional species macro F1 exceeds each one-way direction over matched seeds",
+  "mean_paired_deltas": {
+    "bio_queries_eff": -0.01100196445667967,
+    "eff_queries_bio": 0.003866336658120121
+  }
+}
