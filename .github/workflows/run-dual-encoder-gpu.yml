@@ -29,6 +29,7 @@ env:
   PROJECT_ID: arborphy-dev-2d36f4
   REGION: us-east4
   SERVICE: fgv-dual-encoder-experiment
+  RUNTIME_IDENTITY_SOURCE_SERVICE: fieldguidevision-gate-dev
   AR_REPO: fieldguidevision-gate
   WIF_PROVIDER: projects/555727880932/locations/global/workloadIdentityPools/github-actions-dev/providers/github
   DEPLOYER_SA: fgv-gate-deployer-dev@arborphy-dev-2d36f4.iam.gserviceaccount.com
@@ -70,6 +71,15 @@ jobs:
           EXPERIMENT_TOKEN=$(openssl rand -hex 32)
           echo "::add-mask::$EXPERIMENT_TOKEN"
           echo "EXPERIMENT_TOKEN=$EXPERIMENT_TOKEN" >> "$GITHUB_ENV"
+          RUNTIME_SERVICE_ACCOUNT=$(gcloud run services describe \
+            "${{ env.RUNTIME_IDENTITY_SOURCE_SERVICE }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --format='value(spec.template.spec.serviceAccountName)')
+          if [[ -z "$RUNTIME_SERVICE_ACCOUNT" ]]; then
+            echo "The existing gate service has no reusable runtime identity."
+            exit 1
+          fi
           gcloud run deploy "${{ env.SERVICE }}" \
             --project "${{ env.PROJECT_ID }}" \
             --region "${{ env.REGION }}" \
@@ -84,6 +94,7 @@ jobs:
             --max-instances 1 \
             --timeout 3600 \
             --no-allow-unauthenticated \
+            --service-account "$RUNTIME_SERVICE_ACCOUNT" \
             --set-env-vars "EXPERIMENT_TOKEN=$EXPERIMENT_TOKEN" \
             --quiet
           SERVICE_URL=$(gcloud run services describe "${{ env.SERVICE }}" \
