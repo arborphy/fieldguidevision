@@ -9,6 +9,7 @@ service again, so no GPU is left allocated after an experiment.
 from __future__ import annotations
 
 import os
+import traceback
 
 from flask import Flask, Response, jsonify, request
 
@@ -16,6 +17,17 @@ from dual_encoder_fusion.modal_run_experiment import run_experiment
 
 
 app = Flask(__name__)
+
+
+@app.errorhandler(Exception)
+def unhandled_exception(error: Exception):
+    """Return diagnostics to the already authenticated one-shot caller."""
+    app.logger.exception("Dual-encoder experiment failed")
+    return jsonify(
+        error=type(error).__name__,
+        message=str(error),
+        traceback=traceback.format_exc(),
+    ), 500
 
 
 @app.get("/health")

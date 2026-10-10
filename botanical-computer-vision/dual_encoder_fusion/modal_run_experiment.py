@@ -166,7 +166,10 @@ def run_experiment(
         for parameter in bio_model.parameters():
             parameter.requires_grad_(False)
         bio_loader = DataLoader(
-            ImageDataset(bio_preprocess), batch_size=20, shuffle=False,
+            # BioCLIP 2.5 ViT-H uses substantially more activation memory than
+            # EfficientNet. Four images leaves headroom on a 24 GiB L4 while
+            # keeping extraction deterministic and fully batched.
+            ImageDataset(bio_preprocess), batch_size=4, shuffle=False,
             num_workers=8, pin_memory=True, persistent_workers=True,
         )
         bio_spatial = None
