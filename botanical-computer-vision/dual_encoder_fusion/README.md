@@ -15,15 +15,22 @@ operation attention.
   calculate both updates from the same pre-block state. LayerScale starts at
   `1e-3`, so fusion begins near the two frozen representations instead of
   immediately overwriting them.
-- **Heads:** species and organ have separate fused heads. Each original branch
-  also has auxiliary species and organ heads.
+- **Heads:** species and organ remain separate. V2 anchors species logits to
+  the pre-fusion BioCLIP representation and adds a small gated residual from
+  the cross-attended representation. The residual head starts near zero and
+  the gate starts at 0.076 with a `0.01 × mean(gate)` penalty, so harmful
+  EfficientNet information can be rejected. Organ retains a direct fused head.
+  Each original branch also has auxiliary species and organ heads.
 
-The objective is
+The V2 species logits and objective are
 
 ```text
-species_fused
-+ 0.20 × mean(species_EfficientNet, species_BioCLIP)
-+ 0.25 × [organ_fused + 0.20 × mean(organ_EfficientNet, organ_BioCLIP)]
+species_logits = BioCLIP_anchor_logits + gate × fused_residual_logits
+
+CE(species_logits)
++ 0.20 × mean(CE(species_EfficientNet), CE(species_BioCLIP))
++ 0.25 × [CE(organ_fused) + 0.20 × mean(CE(organ_EfficientNet), CE(organ_BioCLIP))]
++ 0.01 × mean(gate)
 ```
 
 Species macro F1 is the only early-stopping and model-selection metric. Organ is

@@ -25,6 +25,7 @@ class TrainConfig:
     organ_loss_weight: float = 0.25
     branch_species_weight: float = 0.20
     branch_organ_weight: float = 0.20
+    fusion_gate_weight: float = 0.01
     label_smoothing: float = 0.05
     batch_size: int = 32
     epochs: int = 80
@@ -106,25 +107,36 @@ def evaluate(
     species_classes: int,
 ) -> tuple[dict[str, float], list[dict[str, object]]]:
     model.eval()
-    species_truth, species_probabilities, organ_truth, organ_predictions, indices = [], [], [], [], []
+    species_truth, species_probabilities, anchor_probabilities = [], [], []
+    species_gates, organ_truth, organ_predictions, indices = [], [], [], []
     with torch.inference_mode():
         for batch in loader:
             outputs = _forward(model, batch, device)
             species_truth.extend(batch["species"].numpy().tolist())
             species_probabilities.append(outputs["species"].softmax(-1).cpu().numpy())
+            anchor_probabilities.append(outputs["species_anchor"].softmax(-1).cpu().numpy())
+            species_gates.extend(outputs["species_gate"].squeeze(-1).cpu().numpy().tolist())
             valid = batch["organ"] >= 0
             organ_truth.extend(batch["organ"][valid].numpy().tolist())
             organ_predictions.extend(outputs["organ"][valid].argmax(-1).cpu().numpy().tolist())
             indices.extend(batch["index"].numpy().tolist())
     y_species = np.asarray(species_truth)
     p_species = np.concatenate(species_probabilities)
+    p_anchor = np.concatenate(anchor_probabilities)
     predicted_species = p_species.argmax(axis=1)
+    predicted_anchor = p_anchor.argmax(axis=1)
     metrics = {
         "species_accuracy": float(accuracy_score(y_species, predicted_species)),
         "species_macro_f1": float(f1_score(y_species, predicted_species, average="macro", zero_division=0)),
         "species_top5": float(top_k_accuracy_score(
             y_species, p_species, k=min(5, species_classes), labels=np.arange(species_classes)
         )),
+        "species_anchor_accuracy": float(accuracy_score(y_species, predicted_anchor)),
+        "species_anchor_macro_f1": float(f1_score(
+            y_species, predicted_anchor, average="macro", zero_division=0
+        )),
+        "species_changed_from_anchor": float(np.mean(predicted_species != predicted_anchor)),
+        "species_fusion_gate_mean": float(np.mean(species_gates)),
         "organ_accuracy": float(accuracy_score(organ_truth, organ_predictions)) if organ_truth else float("nan"),
         "organ_macro_f1": float(f1_score(
             organ_truth, organ_predictions, average="macro", zero_division=0
@@ -136,10 +148,14 @@ def evaluate(
             "species_target": int(target),
             "species_prediction": int(prediction),
             "species_confidence": float(probability[prediction]),
+            "species_anchor_prediction": int(anchor_prediction),
+            "species_anchor_confidence": float(anchor_probability[anchor_prediction]),
+            "species_fusion_gate": float(gate),
             "species_top5": np.argsort(-probability)[:5].astype(int).tolist(),
         }
-        for index, target, prediction, probability in zip(
-            indices, y_species, predicted_species, p_species
+        for index, target, prediction, probability, anchor_prediction, anchor_probability, gate in zip(
+            indices, y_species, predicted_species, p_species,
+            predicted_anchor, p_anchor, species_gates
         )
     ]
     return metrics, rows
@@ -179,6 +195,7 @@ def run_training(
             organ=config.organ_loss_weight,
             branch_species=config.branch_species_weight,
             branch_organ=config.branch_organ_weight,
+            fusion_gate=config.fusion_gate_weight,
         ),
         label_smoothing=config.label_smoothing,
     )

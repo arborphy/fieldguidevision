@@ -31,6 +31,22 @@ def test_all_modes_have_expected_outputs():
         assert outputs["species"].shape == (3, 7)
         assert outputs["organ"].shape == (3, 4)
         assert outputs["embedding"].shape == (3, 64)
+        assert outputs["species_anchor"].shape == (3, 7)
+        assert outputs["species_gate"].shape == (3, 1)
+
+
+def test_fusion_starts_close_to_bioclip_anchor():
+    model = make_model("bidirectional")
+    outputs = model(*make_batch())
+    assert torch.all(outputs["species_gate"] < 0.08)
+    assert torch.max(torch.abs(outputs["species"] - outputs["species_anchor"])) < 0.01
+
+
+def test_single_encoder_modes_do_not_use_residual_gate():
+    for mode in ("efficientnet_only", "bioclip_only"):
+        outputs = make_model(mode)(*make_batch())
+        assert torch.equal(outputs["species_gate"], torch.zeros_like(outputs["species_gate"]))
+        assert torch.equal(outputs["species"], outputs["species_anchor"])
 
 
 def test_bidirectional_updates_both_attention_directions():

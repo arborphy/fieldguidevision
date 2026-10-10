@@ -286,6 +286,8 @@ def run_experiment(
     results_frame = pd.DataFrame(flat_results)
     metric_columns = [
         "species_accuracy", "species_macro_f1", "species_top5",
+        "species_anchor_accuracy", "species_anchor_macro_f1",
+        "species_changed_from_anchor", "species_fusion_gate_mean",
         "organ_accuracy", "organ_macro_f1",
     ]
     summary = results_frame.groupby("mode")[metric_columns + ["trainable_parameters"]].agg(
@@ -340,6 +342,7 @@ def run_experiment(
         "organ_classes": len(cache["organ_names"]),
         "organ_names": cache["organ_names"],
         "species_is_primary": True,
+        "architecture_version": "v2_bioclip_anchored_gated_residual",
         "selection_metric": "validation species macro F1",
         "test_used_for_selection": False,
         "modes": modes,
@@ -360,6 +363,7 @@ def run_experiment(
         f"- Images: {metadata['images']} (individual-disjoint train/validation/test)",
         f"- Primary selection metric: {metadata['selection_metric']}",
         "- Organ supervision: separate auxiliary head; weight 0.25 relative to species",
+        "- Species fusion: BioCLIP-anchored gated residual after real cross-attention",
         "- Encoders: frozen for this controlled phase; projections, attention blocks, and heads are trained",
         "",
         "## Interpretation rule",

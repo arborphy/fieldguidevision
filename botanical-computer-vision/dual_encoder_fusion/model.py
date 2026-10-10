@@ -136,6 +136,16 @@ class DualEncoderFusion(nn.Module):
         )
         self.fused_species_head = ClassificationHead(2 * width, species_classes, dropout)
         self.fused_organ_head = ClassificationHead(2 * width, organ_classes, dropout)
+        self.eff_anchor_species_head = ClassificationHead(width, species_classes, dropout)
+        self.bio_anchor_species_head = ClassificationHead(width, species_classes, dropout)
+        self.species_residual_gate = nn.Sequential(
+            nn.LayerNorm(2 * width),
+            nn.Linear(2 * width, 1),
+        )
+        nn.init.normal_(self.fused_species_head.net[-1].weight, std=1e-3)
+        nn.init.zeros_(self.fused_species_head.net[-1].bias)
+        nn.init.zeros_(self.species_residual_gate[-1].weight)
+        nn.init.constant_(self.species_residual_gate[-1].bias, -2.5)
         self.eff_species_head = ClassificationHead(width, species_classes, dropout)
         self.bio_species_head = ClassificationHead(width, species_classes, dropout)
         self.eff_organ_head = ClassificationHead(width, organ_classes, dropout)
@@ -162,12 +172,20 @@ class DualEncoderFusion(nn.Module):
             self.bio_position.requires_grad_(False)
             self._freeze(self.bio_species_head)
             self._freeze(self.bio_organ_head)
+            self._freeze(self.bio_anchor_species_head)
+            self._freeze(self.fused_species_head)
+            self._freeze(self.species_residual_gate)
         elif self.mode == "bioclip_only":
             self._freeze(self.eff_mid_projection)
             self._freeze(self.eff_final_projection)
             self.eff_position.requires_grad_(False)
             self._freeze(self.eff_species_head)
             self._freeze(self.eff_organ_head)
+            self._freeze(self.eff_anchor_species_head)
+            self._freeze(self.fused_species_head)
+            self._freeze(self.species_residual_gate)
+        else:
+            self._freeze(self.eff_anchor_species_head)
         if self.mode == "bidirectional_final_only":
             self._freeze(self.eff_mid_projection)
 
@@ -202,8 +220,27 @@ class DualEncoderFusion(nn.Module):
         else:
             fused = torch.cat([post_eff, post_bio], dim=-1)
 
+        eff_anchor = self.eff_anchor_species_head(pre_eff)
+        bio_anchor = self.bio_anchor_species_head(pre_bio)
+        species_delta = self.fused_species_head(fused)
+        if self.mode == "efficientnet_only":
+            species_anchor = eff_anchor
+            species_gate = fused.new_zeros((fused.shape[0], 1))
+            species = species_anchor
+        elif self.mode == "bioclip_only":
+            species_anchor = bio_anchor
+            species_gate = fused.new_zeros((fused.shape[0], 1))
+            species = species_anchor
+        else:
+            species_anchor = bio_anchor
+            species_gate = torch.sigmoid(self.species_residual_gate(fused))
+            species = species_anchor + species_gate * species_delta
+
         return {
-            "species": self.fused_species_head(fused),
+            "species": species,
+            "species_anchor": species_anchor,
+            "species_delta": species_delta,
+            "species_gate": species_gate,
             "organ": self.fused_organ_head(fused),
             "eff_species": self.eff_species_head(pre_eff),
             "bio_species": self.bio_species_head(pre_bio),
@@ -220,6 +257,7 @@ class LossWeights:
     organ: float = 0.25
     branch_species: float = 0.20
     branch_organ: float = 0.20
+    fusion_gate: float = 0.01
 
 
 class MultiTaskLoss(nn.Module):
@@ -276,7 +314,12 @@ class MultiTaskLoss(nn.Module):
 
         species_total = species_main + self.weights.branch_species * species_branch
         organ_total = organ_main + self.weights.branch_organ * organ_branch
-        total = species_total + self.weights.organ * organ_total
+        fusion_gate = outputs["species_gate"].mean()
+        total = (
+            species_total
+            + self.weights.organ * organ_total
+            + self.weights.fusion_gate * fusion_gate
+        )
         return {
             "total": total,
             "species_main": species_main,
@@ -285,6 +328,7 @@ class MultiTaskLoss(nn.Module):
             "organ_branch": organ_branch,
             "species_total": species_total,
             "organ_total": organ_total,
+            "fusion_gate": fusion_gate,
         }
 
 
