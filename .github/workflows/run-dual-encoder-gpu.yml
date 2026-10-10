@@ -56,29 +56,23 @@ jobs:
 
       - name: Build and push experiment image
         run: |
-          CONTENT_TAG=$(git ls-tree -r HEAD \
+          CONTENT_HASH=$(git ls-tree -r HEAD \
             botanical-computer-vision/dual_encoder_fusion \
             botanical-computer-vision/organ_benchmark/split_manifests/individual_disjoint.csv \
             | sha256sum | cut -c1-16)
+          CONTENT_TAG="v2-$CONTENT_HASH"
           IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/dual-encoder:$CONTENT_TAG"
           if gcloud artifacts docker images describe "$IMAGE" >/dev/null 2>&1; then
             echo "Reusing content-addressed image $IMAGE"
           else
-            # The first content-addressed tag reuses the image built by the
-            # preceding bootstrap run. Future code changes take the build path.
-            BOOTSTRAP_IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPO }}/dual-encoder:6e384c4a9e59e0083429444a3793190b597b8892"
-            if gcloud artifacts docker images describe "$BOOTSTRAP_IMAGE" >/dev/null 2>&1; then
-              gcloud artifacts docker tags add "$BOOTSTRAP_IMAGE" "$IMAGE" --quiet
-            else
-              mkdir docker-context
-              cp -R botanical-computer-vision/dual_encoder_fusion docker-context/dual_encoder_fusion
-              cp botanical-computer-vision/organ_benchmark/split_manifests/individual_disjoint.csv \
-                docker-context/individual_disjoint.csv
-              cp botanical-computer-vision/dual_encoder_fusion/Dockerfile.cloud-run \
-                docker-context/Dockerfile
-              docker build -t "$IMAGE" docker-context
-              docker push "$IMAGE"
-            fi
+            mkdir docker-context
+            cp -R botanical-computer-vision/dual_encoder_fusion docker-context/dual_encoder_fusion
+            cp botanical-computer-vision/organ_benchmark/split_manifests/individual_disjoint.csv \
+              docker-context/individual_disjoint.csv
+            cp botanical-computer-vision/dual_encoder_fusion/Dockerfile.cloud-run \
+              docker-context/Dockerfile
+            docker build -t "$IMAGE" docker-context
+            docker push "$IMAGE"
           fi
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 
