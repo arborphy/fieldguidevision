@@ -17,6 +17,11 @@ on:
         required: true
         type: boolean
         default: true
+      confirmation:
+        description: Run the locked three-fold final-map confirmation protocol
+        required: true
+        type: boolean
+        default: false
       rebuild_cache:
         description: Re-extract frozen features even if this instance has a cache
         required: true
@@ -131,7 +136,7 @@ jobs:
             -X POST \
             -H "Authorization: Bearer ${{ steps.invoke-auth.outputs.id_token }}" \
             -H "X-Experiment-Token: $EXPERIMENT_TOKEN" \
-            "$SERVICE_URL/run?smoke=${{ github.event_name == 'push' && 'true' || inputs.smoke }}&rebuild_cache=${{ inputs.rebuild_cache || 'false' }}" \
+            "$SERVICE_URL/run?smoke=${{ github.event_name == 'push' && 'false' || inputs.smoke }}&confirmation=${{ github.event_name == 'push' && 'true' || inputs.confirmation }}&rebuild_cache=${{ inputs.rebuild_cache || 'false' }}" \
             --output dual-encoder-results/results.tar.gz \
             --write-out '%{http_code}')
           CURL_STATUS=$?
@@ -154,7 +159,7 @@ jobs:
       - name: Upload reproducible results
         uses: actions/upload-artifact@v4
         with:
-          name: dual-encoder-${{ (github.event_name == 'push' || inputs.smoke) && 'smoke' || 'full' }}-${{ github.run_id }}
+          name: dual-encoder-${{ (github.event_name == 'push' || inputs.confirmation) && 'confirmation' || (inputs.smoke && 'smoke' || 'full') }}-${{ github.run_id }}
           path: dual-encoder-results/
           if-no-files-found: error
           retention-days: 30

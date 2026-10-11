@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import numpy as np
 import torch
 
+from dual_encoder_fusion.experiment import make_nested_group_splits
 from dual_encoder_fusion.model import DualEncoderFusion, MultiTaskLoss
 
 
@@ -77,3 +79,31 @@ def test_unknown_organ_is_masked_but_species_still_trains():
     assert losses["organ_main"].item() == 0.0
     assert losses["species_main"].item() > 0.0
     losses["total"].backward()
+
+
+def test_nested_group_splits_are_complete_disjoint_and_deterministic():
+    species = []
+    individuals = []
+    for species_name, group_count in (("A", 3), ("B", 4), ("C", 5)):
+        for group_index in range(group_count):
+            # Unequal image counts exercise the fold-balancing path.
+            for _ in range(group_index + 1):
+                species.append(species_name)
+                individuals.append(f"{species_name}-{group_index}")
+
+    first = make_nested_group_splits(species, individuals, folds=3, seed=91)
+    second = make_nested_group_splits(species, individuals, folds=3, seed=91)
+    assert all(np.array_equal(left, right) for left, right in zip(first, second))
+
+    tested_groups = []
+    species_array = np.asarray(species)
+    individual_array = np.asarray(individuals)
+    for labels in first:
+        assert set(labels) == {"train", "validation", "test"}
+        for split_name in ("train", "validation", "test"):
+            assert set(species_array[labels == split_name]) == {"A", "B", "C"}
+        for group in np.unique(individual_array):
+            assert len(set(labels[individual_array == group])) == 1
+        tested_groups.extend(np.unique(individual_array[labels == "test"]).tolist())
+
+    assert sorted(tested_groups) == sorted(np.unique(individual_array).tolist())

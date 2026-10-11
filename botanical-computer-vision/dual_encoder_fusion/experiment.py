@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import random
 from dataclasses import asdict, dataclass
 
@@ -33,6 +34,85 @@ class TrainConfig:
     learning_rate: float = 3e-4
     weight_decay: float = 1e-3
     gradient_clip: float = 1.0
+
+
+def make_nested_group_splits(
+    species: list[str] | np.ndarray,
+    individuals: list[str] | np.ndarray,
+    folds: int = 3,
+    seed: int = 20261012,
+) -> list[np.ndarray]:
+    """Create deterministic outer test folds with nested validation groups.
+
+    Every individual is assigned to exactly one outer test fold. Assignment is
+    performed separately within each species and greedily balances image counts.
+    One non-test individual per species is then selected for validation, leaving
+    every split species-complete without allowing an individual to cross splits.
+    """
+
+    species_array = np.asarray(species, dtype=str)
+    individual_array = np.asarray(individuals, dtype=str)
+    if len(species_array) != len(individual_array) or len(species_array) == 0:
+        raise ValueError("species and individuals must be non-empty and equally sized")
+    if folds < 2:
+        raise ValueError("folds must be at least 2")
+
+    def stable_key(*parts: object) -> str:
+        value = "|".join(str(part) for part in (seed, *parts))
+        return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+    group_species: dict[str, str] = {}
+    outer_assignment: dict[str, int] = {}
+    validation_groups: list[set[str]] = [set() for _ in range(folds)]
+    for species_name in sorted(np.unique(species_array)):
+        mask = species_array == species_name
+        groups, counts = np.unique(individual_array[mask], return_counts=True)
+        if len(groups) < folds:
+            raise ValueError(
+                f"{species_name!r} has {len(groups)} individuals; "
+                f"{folds} folds require at least {folds}"
+            )
+        for group in groups:
+            previous = group_species.setdefault(group, species_name)
+            if previous != species_name:
+                raise ValueError(f"individual {group!r} spans multiple species")
+
+        ordered_groups = sorted(
+            zip(groups.tolist(), counts.tolist()),
+            key=lambda item: (-item[1], stable_key("outer-order", species_name, item[0])),
+        )
+        fold_order = sorted(
+            range(folds), key=lambda fold: stable_key("fold-order", species_name, fold)
+        )
+        fold_rank = {fold: rank for rank, fold in enumerate(fold_order)}
+        loads = [0] * folds
+        for group, count in ordered_groups:
+            target_fold = min(
+                fold_order, key=lambda fold: (loads[fold], fold_rank[fold])
+            )
+            outer_assignment[group] = target_fold
+            loads[target_fold] += count
+
+        for outer_fold in range(folds):
+            candidates = [group for group in groups if outer_assignment[group] != outer_fold]
+            validation_group = min(
+                candidates,
+                key=lambda group: stable_key(
+                    "validation", species_name, outer_fold, group
+                ),
+            )
+            validation_groups[outer_fold].add(validation_group)
+
+    splits: list[np.ndarray] = []
+    for outer_fold in range(folds):
+        labels = np.full(len(species_array), "train", dtype="<U10")
+        for index, group in enumerate(individual_array):
+            if outer_assignment[group] == outer_fold:
+                labels[index] = "test"
+            elif group in validation_groups[outer_fold]:
+                labels[index] = "validation"
+        splits.append(labels)
+    return splits
 
 
 class TokenDataset(Dataset):

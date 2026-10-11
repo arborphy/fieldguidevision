@@ -63,6 +63,7 @@ def _archive(files: dict[str, bytes]) -> bytes:
 )
 def run_experiment(
     smoke: bool = False,
+    confirmation: bool = False,
     rebuild_cache: bool = False,
     commit_modal_cache: bool = True,
 ) -> bytes:
@@ -92,7 +93,11 @@ def run_experiment(
     from torchvision.models import EfficientNet_B0_Weights, efficientnet_b0
 
     sys.path.insert(0, "/root")
-    from dual_encoder_fusion.experiment import TrainConfig, run_training
+    from dual_encoder_fusion.experiment import (
+        TrainConfig,
+        make_nested_group_splits,
+        run_training,
+    )
 
     started = time.perf_counter()
     ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -246,10 +251,32 @@ def run_experiment(
         return cache
 
     cache = load_or_create_cache()
-    if smoke:
+    if smoke and confirmation:
+        raise ValueError("smoke and confirmation protocols are mutually exclusive")
+
+    manifest = pd.read_csv("/root/individual_disjoint.csv")
+    manifest = manifest.set_index("image_id").loc[cache["image_ids"]].reset_index()
+    if confirmation:
+        modes = [
+            "bioclip_only",
+            "bio_queries_eff",
+            "eff_queries_bio",
+            "bidirectional_final_only",
+        ]
+        seeds = [17, 42]
+        config = TrainConfig()
+        generated_splits = make_nested_group_splits(
+            manifest.species.tolist(),
+            manifest.individual_id.tolist(),
+            folds=3,
+            seed=20261012,
+        )
+        split_definitions = list(enumerate(generated_splits))
+    elif smoke:
         modes = ["bio_queries_eff", "eff_queries_bio", "bidirectional"]
         seeds = [42]
         config = TrainConfig(width=64, heads=4, blocks=1, epochs=3, patience=3, batch_size=32)
+        split_definitions = [(-1, np.asarray(cache["splits"]))]
     else:
         modes = [
             "efficientnet_only", "bioclip_only", "concat",
@@ -258,29 +285,52 @@ def run_experiment(
         ]
         seeds = [17, 42, 73]
         config = TrainConfig()
+        split_definitions = [(-1, np.asarray(cache["splits"]))]
 
     results = []
     prediction_rows = []
     device = torch.device("cuda")
-    for mode in modes:
-        for seed in seeds:
-            print(f"Training {mode}, seed={seed}", flush=True)
-            result, predictions, _ = run_training(cache, mode, seed, config, device)
-            history = result.pop("history")
-            result["history"] = history
-            results.append(result)
-            for row in predictions:
-                index = row.pop("index")
-                row.update({
-                    "mode": mode,
-                    "seed": seed,
-                    "image_id": cache["image_ids"][index],
-                    "species_truth": cache["species_names"][row["species_target"]],
-                    "species_predicted": cache["species_names"][row["species_prediction"]],
-                    "species_top5_names": [cache["species_names"][value] for value in row["species_top5"]],
-                })
-                prediction_rows.append(row)
-            torch.cuda.empty_cache()
+    split_audit = []
+    for outer_fold, split_labels in split_definitions:
+        fold_cache = dict(cache)
+        fold_cache["splits"] = split_labels.tolist()
+        split_audit.append({
+            "outer_fold": outer_fold,
+            **{
+                f"{split_name}_images": int(np.sum(split_labels == split_name))
+                for split_name in ("train", "validation", "test")
+            },
+            **{
+                f"{split_name}_individuals": int(
+                    manifest.loc[split_labels == split_name, "individual_id"].nunique()
+                )
+                for split_name in ("train", "validation", "test")
+            },
+        })
+        for mode in modes:
+            for seed in seeds:
+                print(
+                    f"Training {mode}, fold={outer_fold}, seed={seed}", flush=True
+                )
+                result, predictions, _ = run_training(
+                    fold_cache, mode, seed, config, device
+                )
+                result["outer_fold"] = outer_fold
+                results.append(result)
+                for row in predictions:
+                    index = row.pop("index")
+                    row.update({
+                        "mode": mode,
+                        "seed": seed,
+                        "outer_fold": outer_fold,
+                        "image_id": cache["image_ids"][index],
+                        "individual_id": manifest.iloc[index].individual_id,
+                        "species_truth": cache["species_names"][row["species_target"]],
+                        "species_predicted": cache["species_names"][row["species_prediction"]],
+                        "species_top5_names": [cache["species_names"][value] for value in row["species_top5"]],
+                    })
+                    prediction_rows.append(row)
+                torch.cuda.empty_cache()
 
     flat_results = [{key: value for key, value in row.items() if key not in {"config", "history"}} for row in results]
     results_frame = pd.DataFrame(flat_results)
@@ -295,34 +345,178 @@ def run_experiment(
     ).reset_index()
     summary.columns = ["_".join(part for part in column if part) if isinstance(column, tuple) else column for column in summary.columns]
 
+    predictions_frame = pd.DataFrame(prediction_rows)
     paired_rows = []
-    if "bidirectional" in set(results_frame["mode"]):
-        for competitor in ("bio_queries_eff", "eff_queries_bio"):
-            paired = results_frame[results_frame["mode"].isin(["bidirectional", competitor])].pivot(
-                index="seed", columns="mode", values="species_macro_f1"
-            ).dropna()
-            for seed, row in paired.iterrows():
+    candidate = "bidirectional_final_only" if confirmation else "bidirectional"
+    competitors = (
+        ("bio_queries_eff", "eff_queries_bio", "bioclip_only")
+        if confirmation else ("bio_queries_eff", "eff_queries_bio")
+    )
+    if candidate in set(results_frame["mode"]):
+        pair_index = ["outer_fold", "seed"] if confirmation else ["seed"]
+        for competitor in competitors:
+            paired = results_frame[
+                results_frame["mode"].isin([candidate, competitor])
+            ].pivot(index=pair_index, columns="mode", values="species_macro_f1").dropna()
+            for pair_key, row in paired.iterrows():
+                outer_fold, seed = (
+                    pair_key if confirmation else (-1, pair_key)
+                )
                 paired_rows.append({
                     "competitor": competitor,
+                    "outer_fold": int(outer_fold),
                     "seed": int(seed),
-                    "bidirectional_species_macro_f1": float(row["bidirectional"]),
+                    "candidate_species_macro_f1": float(row[candidate]),
                     "competitor_species_macro_f1": float(row[competitor]),
-                    "paired_delta": float(row["bidirectional"] - row[competitor]),
+                    "paired_delta": float(row[candidate] - row[competitor]),
                 })
     paired_frame = pd.DataFrame(paired_rows)
 
+    oof_per_seed = pd.DataFrame()
+    oof_summary = pd.DataFrame()
+    bootstrap_frame = pd.DataFrame()
+    delta_figure_sink = None
+    if confirmation:
+        from sklearn.metrics import accuracy_score, f1_score
+
+        oof_rows = []
+        for (mode, seed), frame in predictions_frame.groupby(["mode", "seed"]):
+            if len(frame) != len(cache["image_ids"]) or frame.image_id.nunique() != len(frame):
+                raise RuntimeError(
+                    f"Incomplete out-of-fold predictions for {mode}, seed={seed}"
+                )
+            truth = frame.species_target.to_numpy()
+            predicted = frame.species_prediction.to_numpy()
+            oof_rows.append({
+                "mode": mode,
+                "seed": int(seed),
+                "species_accuracy": float(accuracy_score(truth, predicted)),
+                "species_macro_f1": float(f1_score(
+                    truth,
+                    predicted,
+                    labels=np.arange(len(cache["species_names"])),
+                    average="macro",
+                    zero_division=0,
+                )),
+            })
+        oof_per_seed = pd.DataFrame(oof_rows)
+        oof_summary = oof_per_seed.groupby("mode")[[
+            "species_accuracy", "species_macro_f1"
+        ]].agg(["mean", "std"]).reset_index()
+        oof_summary.columns = [
+            "_".join(part for part in column if part)
+            if isinstance(column, tuple) else column
+            for column in oof_summary.columns
+        ]
+
+        wide = predictions_frame.pivot(
+            index=["image_id", "individual_id", "species_target"],
+            columns=["mode", "seed"],
+            values="species_prediction",
+        ).sort_index()
+        if wide.isna().any().any() or len(wide) != len(cache["image_ids"]):
+            raise RuntimeError("Confirmation prediction matrix is incomplete")
+        truth = wide.index.get_level_values("species_target").to_numpy(dtype=int)
+        individual_ids = wide.index.get_level_values("individual_id").to_numpy(dtype=str)
+        labels = np.arange(len(cache["species_names"]))
+
+        positions_by_species_group = []
+        for species_target in labels:
+            species_positions = np.flatnonzero(truth == species_target)
+            species_groups = np.unique(individual_ids[species_positions])
+            positions_by_species_group.append([
+                species_positions[individual_ids[species_positions] == group]
+                for group in species_groups
+            ])
+        bootstrap_rng = np.random.default_rng(20261012)
+        bootstrap_indices = []
+        for _ in range(2000):
+            sampled_positions = []
+            for group_positions in positions_by_species_group:
+                choices = bootstrap_rng.integers(0, len(group_positions), len(group_positions))
+                sampled_positions.extend(group_positions[index] for index in choices)
+            bootstrap_indices.append(np.concatenate(sampled_positions))
+
+        def macro_f1(target: np.ndarray, predicted: np.ndarray) -> float:
+            return float(f1_score(
+                target,
+                predicted,
+                labels=labels,
+                average="macro",
+                zero_division=0,
+            ))
+
+        bootstrap_rows = []
+        for competitor in competitors:
+            candidate_predictions = {
+                seed: wide[(candidate, seed)].to_numpy(dtype=int) for seed in seeds
+            }
+            competitor_predictions = {
+                seed: wide[(competitor, seed)].to_numpy(dtype=int) for seed in seeds
+            }
+            observed = float(np.mean([
+                macro_f1(truth, candidate_predictions[seed])
+                - macro_f1(truth, competitor_predictions[seed])
+                for seed in seeds
+            ]))
+            samples = np.asarray([
+                np.mean([
+                    macro_f1(truth[indices], candidate_predictions[seed][indices])
+                    - macro_f1(truth[indices], competitor_predictions[seed][indices])
+                    for seed in seeds
+                ])
+                for indices in bootstrap_indices
+            ])
+            bootstrap_rows.append({
+                "competitor": competitor,
+                "observed_oof_macro_f1_delta": observed,
+                "ci_95_lower": float(np.quantile(samples, 0.025)),
+                "ci_95_upper": float(np.quantile(samples, 0.975)),
+                "bootstrap_probability_positive": float(np.mean(samples > 0)),
+                "bootstrap_iterations": len(samples),
+            })
+        bootstrap_frame = pd.DataFrame(bootstrap_rows)
+
+        delta_fig, delta_axis = plt.subplots(figsize=(8.5, 4.6))
+        delta_positions = np.arange(len(bootstrap_frame))
+        observed = bootstrap_frame.observed_oof_macro_f1_delta.to_numpy()
+        lower = bootstrap_frame.ci_95_lower.to_numpy()
+        upper = bootstrap_frame.ci_95_upper.to_numpy()
+        delta_axis.errorbar(
+            observed,
+            delta_positions,
+            xerr=np.vstack([observed - lower, upper - observed]),
+            fmt="o",
+            color="#246b45",
+            ecolor="#466a55",
+            capsize=5,
+        )
+        delta_axis.axvline(0, color="#9b3d3d", linestyle="--", linewidth=1.5)
+        delta_axis.set_yticks(delta_positions, bootstrap_frame.competitor)
+        delta_axis.set_xlabel("Final-only bidirectional minus comparator macro F1")
+        delta_axis.set_title("Individual-bootstrap 95% intervals on out-of-fold predictions")
+        delta_axis.grid(axis="x", alpha=0.25)
+        delta_fig.tight_layout()
+        delta_figure_sink = io.BytesIO()
+        delta_fig.savefig(delta_figure_sink, format="png", dpi=180)
+        plt.close(delta_fig)
+
     fig, axis = plt.subplots(figsize=(10, 5.5))
-    ordering = summary.sort_values("species_macro_f1_mean", ascending=False)
+    plot_summary = oof_summary if confirmation else summary
+    ordering = plot_summary.sort_values("species_macro_f1_mean", ascending=False)
     positions = np.arange(len(ordering))
     axis.bar(
         positions, ordering.species_macro_f1_mean,
         yerr=ordering.species_macro_f1_std.fillna(0),
-        color=["#246b45" if value == "bidirectional" else "#9bb89f" for value in ordering["mode"]],
+        color=["#246b45" if value == candidate else "#9bb89f" for value in ordering["mode"]],
         capsize=4,
     )
     axis.set_xticks(positions, ordering["mode"], rotation=25, ha="right")
     axis.set_ylabel("Test species macro F1")
-    axis.set_title("Controlled EfficientNet + BioCLIP fusion ablation")
+    axis.set_title(
+        "Nested group confirmation: out-of-fold performance"
+        if confirmation else "Controlled EfficientNet + BioCLIP fusion ablation"
+    )
     axis.grid(axis="y", alpha=0.25)
     fig.tight_layout()
     figure_sink = io.BytesIO(); fig.savefig(figure_sink, format="png", dpi=180); plt.close(fig)
@@ -333,6 +527,11 @@ def run_experiment(
     results_json = json.dumps(results, indent=2, ensure_ascii=False).encode("utf-8")
     metadata = {
         "smoke": smoke,
+        "confirmation": confirmation,
+        "protocol": (
+            "three_fold_nested_individual_confirmation"
+            if confirmation else ("smoke" if smoke else "fixed_split_ablation")
+        ),
         "elapsed_seconds": time.perf_counter() - started,
         "gpu": torch.cuda.get_device_name(0),
         "torch": torch.__version__,
@@ -347,9 +546,33 @@ def run_experiment(
         "test_used_for_selection": False,
         "modes": modes,
         "seeds": seeds,
+        "outer_split_seed": 20261012 if confirmation else None,
+        "split_audit": split_audit,
     }
     verdict = {"status": "smoke_only"}
-    if not smoke:
+    if confirmation:
+        interval_lookup = bootstrap_frame.set_index("competitor").to_dict("index")
+        one_way_competitors = ("bio_queries_eff", "eff_queries_bio")
+        bidirectionality_supported = all(
+            interval_lookup[name]["ci_95_lower"] > 0
+            for name in one_way_competitors
+        )
+        fusion_beats_bioclip = interval_lookup["bioclip_only"]["ci_95_lower"] > 0
+        verdict = {
+            "status": (
+                "bidirectionality_supported"
+                if bidirectionality_supported else "not_demonstrated"
+            ),
+            "criterion": (
+                "final-map-only bidirectional fusion must have a positive lower "
+                "bound of the 95% species-stratified individual bootstrap interval "
+                "against both one-way directions"
+            ),
+            "bidirectionality_supported": bidirectionality_supported,
+            "fusion_beats_bioclip": fusion_beats_bioclip,
+            "comparisons": interval_lookup,
+        }
+    elif not smoke:
         deltas = paired_frame.groupby("competitor").paired_delta.mean().to_dict()
         verdict = {
             "status": "pass" if deltas and all(value > 0 for value in deltas.values()) else "not_demonstrated",
@@ -357,10 +580,13 @@ def run_experiment(
             "mean_paired_deltas": deltas,
         }
     report_lines = [
-        "# Dual-encoder cross-attention experiment",
+        (
+            "# Final-map bidirectional confirmation"
+            if confirmation else "# Dual-encoder cross-attention experiment"
+        ),
         "",
         f"- Status: **{verdict['status']}**",
-        f"- Images: {metadata['images']} (individual-disjoint train/validation/test)",
+        f"- Images: {metadata['images']} (strictly individual-disjoint within every fold)",
         f"- Primary selection metric: {metadata['selection_metric']}",
         "- Organ supervision: separate auxiliary head; weight 0.25 relative to species",
         "- Species fusion: BioCLIP-anchored gated residual after real cross-attention",
@@ -368,9 +594,24 @@ def run_experiment(
         "",
         "## Interpretation rule",
         "",
-        "Bidirectional fusion is considered supported only if its mean test species macro F1 is higher than both one-way variants under the same seeds and training budget. This run does not claim support when that criterion fails.",
+        (
+            "The locked final-map-only bidirectional model is supported over one-way "
+            "fusion only when the lower bound of its 95% species-stratified, "
+            "individual-level bootstrap interval is above zero against both one-way "
+            "directions. Beating BioCLIP alone is reported as a separate claim."
+            if confirmation else
+            "Bidirectional fusion is considered supported only if its mean test species "
+            "macro F1 is higher than both one-way variants under the same seeds and "
+            "training budget. This run does not claim support when that criterion fails."
+        ),
         "",
-        "See `summary.csv`, `paired_deltas.csv`, and `species_macro_f1.png` for the numerical and visual comparison.",
+        (
+            "See `oof_summary.csv`, `bootstrap_intervals.csv`, "
+            "`species_macro_f1.png`, and `paired_oof_deltas.png`."
+            if confirmation else
+            "See `summary.csv`, `paired_deltas.csv`, and `species_macro_f1.png` for "
+            "the numerical and visual comparison."
+        ),
     ]
     files = {
         "run_metadata.json": json.dumps(metadata, indent=2).encode(),
@@ -379,20 +620,33 @@ def run_experiment(
         "results.json": results_json,
         "summary.csv": dataframe_bytes(summary),
         "paired_deltas.csv": dataframe_bytes(paired_frame),
-        "predictions.csv": dataframe_bytes(pd.DataFrame(prediction_rows)),
+        "predictions.csv": dataframe_bytes(predictions_frame),
         "species_macro_f1.png": figure_sink.getvalue(),
         "REPORT.md": "\n".join(report_lines).encode("utf-8"),
     }
+    if confirmation:
+        files.update({
+            "split_audit.csv": dataframe_bytes(pd.DataFrame(split_audit)),
+            "oof_per_seed.csv": dataframe_bytes(oof_per_seed),
+            "oof_summary.csv": dataframe_bytes(oof_summary),
+            "bootstrap_intervals.csv": dataframe_bytes(bootstrap_frame),
+            "paired_oof_deltas.png": delta_figure_sink.getvalue(),
+        })
     return _archive(files)
 
 
 @app.local_entrypoint()
 def main(
     smoke: bool = False,
+    confirmation: bool = False,
     rebuild_cache: bool = False,
     output: str = "botanical-computer-vision/dual_encoder_fusion/results",
 ) -> None:
-    payload = run_experiment.remote(smoke=smoke, rebuild_cache=rebuild_cache)
+    payload = run_experiment.remote(
+        smoke=smoke,
+        confirmation=confirmation,
+        rebuild_cache=rebuild_cache,
+    )
     destination = Path(output)
     destination.mkdir(parents=True, exist_ok=True)
     with tarfile.open(fileobj=io.BytesIO(payload), mode="r:gz") as archive:

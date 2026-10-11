@@ -43,11 +43,15 @@ def run():
         return jsonify(error="unauthorized"), 401
 
     smoke = request.args.get("smoke", "true").lower() in {"1", "true", "yes"}
+    confirmation = request.args.get("confirmation", "false").lower() in {
+        "1", "true", "yes"
+    }
     rebuild_cache = request.args.get("rebuild_cache", "false").lower() in {
         "1", "true", "yes"
     }
     payload = run_experiment.get_raw_f()(
         smoke=smoke,
+        confirmation=confirmation,
         rebuild_cache=rebuild_cache,
         commit_modal_cache=False,
     )

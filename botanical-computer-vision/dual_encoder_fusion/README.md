@@ -112,3 +112,24 @@ The final-map-only bidirectional ablation is the useful secondary result. It
 scored `0.8460 ± 0.0060` and beat both one-way variants at every matched seed,
 but did not beat BioCLIP alone. See its archived `ANALYSIS.md` for the paired
 deltas, fusion-versus-anchor comparison, and interpretation limits.
+
+## Locked confirmation protocol
+
+The follow-up confirmation freezes the final-map-only architecture before
+evaluation and replaces the previously inspected split with three nested,
+species-complete outer folds. Individuals never cross train, validation, and
+test within a fold; every one of the 465 individuals appears in an outer test
+fold exactly once. Two fixed optimization seeds are run for BioCLIP-only, both
+one-way directions, and final-map-only bidirectional fusion (24 fits total).
+
+The primary decision uses pooled out-of-fold species macro-F1. Uncertainty is
+estimated with 2,000 species-stratified bootstrap replicates that resample
+whole individuals rather than treating correlated images as independent.
+Bidirectionality is supported only if the 95% interval for the paired
+bidirectional-minus-one-way difference is above zero for both directions.
+Whether fusion beats BioCLIP alone is evaluated and reported separately.
+
+```bash
+cd botanical-computer-vision
+uv run modal run dual_encoder_fusion/modal_run_experiment.py --confirmation
+```
