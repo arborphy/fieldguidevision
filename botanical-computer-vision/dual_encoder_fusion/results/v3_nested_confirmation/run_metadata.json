@@ -1,0 +1,67 @@
+{
+  "smoke": false,
+  "confirmation": true,
+  "protocol": "three_fold_nested_individual_confirmation",
+  "elapsed_seconds": 581.5472419969997,
+  "gpu": "NVIDIA L4",
+  "torch": "2.7.1+cu126",
+  "python": "3.11.17",
+  "images": 1641,
+  "species_classes": 63,
+  "organ_classes": 9,
+  "organ_names": [
+    "bark",
+    "cone",
+    "flower",
+    "fruit",
+    "leaf",
+    "needle",
+    "seed",
+    "twig",
+    "whole plant"
+  ],
+  "species_is_primary": true,
+  "architecture_version": "v2_bioclip_anchored_gated_residual",
+  "selection_metric": "validation species macro F1",
+  "test_used_for_selection": false,
+  "modes": [
+    "bioclip_only",
+    "bio_queries_eff",
+    "eff_queries_bio",
+    "bidirectional_final_only"
+  ],
+  "seeds": [
+    17,
+    42
+  ],
+  "outer_split_seed": 20261012,
+  "split_audit": [
+    {
+      "outer_fold": 0,
+      "train_images": 812,
+      "validation_images": 274,
+      "test_images": 555,
+      "train_individuals": 250,
+      "validation_individuals": 63,
+      "test_individuals": 152
+    },
+    {
+      "outer_fold": 1,
+      "train_images": 849,
+      "validation_images": 246,
+      "test_images": 546,
+      "train_individuals": 240,
+      "validation_individuals": 63,
+      "test_individuals": 162
+    },
+    {
+      "outer_fold": 2,
+      "train_images": 839,
+      "validation_images": 262,
+      "test_images": 540,
+      "train_individuals": 251,
+      "validation_individuals": 63,
+      "test_individuals": 151
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+outer_fold,train_images,validation_images,test_images,train_individuals,validation_individuals,test_individuals
+0,812,274,555,250,63,152
+1,849,246,546,240,63,162
+2,839,262,540,251,63,151

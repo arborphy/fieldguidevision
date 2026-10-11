@@ -1,0 +1,29 @@
+{
+  "status": "not_demonstrated",
+  "criterion": "final-map-only bidirectional fusion must have a positive lower bound of the 95% species-stratified individual bootstrap interval against both one-way directions",
+  "bidirectionality_supported": false,
+  "fusion_beats_bioclip": false,
+  "comparisons": {
+    "bio_queries_eff": {
+      "observed_oof_macro_f1_delta": 0.005768617925583808,
+      "ci_95_lower": -0.0019051467317122413,
+      "ci_95_upper": 0.01257593231958948,
+      "bootstrap_probability_positive": 0.926,
+      "bootstrap_iterations": 2000
+    },
+    "eff_queries_bio": {
+      "observed_oof_macro_f1_delta": 0.0017549471852595366,
+      "ci_95_lower": -0.006777548432294644,
+      "ci_95_upper": 0.009841158937072481,
+      "bootstrap_probability_positive": 0.6545,
+      "bootstrap_iterations": 2000
+    },
+    "bioclip_only": {
+      "observed_oof_macro_f1_delta": -0.0002526719452190518,
+      "ci_95_lower": -0.008896835470614487,
+      "ci_95_upper": 0.007893835330563767,
+      "bootstrap_probability_positive": 0.4915,
+      "bootstrap_iterations": 2000
+    }
+  }
+}

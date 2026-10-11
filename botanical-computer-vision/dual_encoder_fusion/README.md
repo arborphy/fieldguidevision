@@ -133,3 +133,13 @@ Whether fusion beats BioCLIP alone is evaluated and reported separately.
 cd botanical-computer-vision
 uv run modal run dual_encoder_fusion/modal_run_experiment.py --confirmation
 ```
+
+### Confirmation outcome
+
+The completed run is archived in `results/v3_nested_confirmation`. The locked
+claim was **not demonstrated**. Final-map bidirectional fusion scored `0.76009
+± 0.00467` out-of-fold macro-F1, versus `0.75432 ± 0.00581` and `0.75833 ±
+0.00839` for the one-way models. However, the paired individual-bootstrap 95%
+intervals were `[-0.00191, +0.01258]` and `[-0.00678, +0.00984]`, so both
+included zero. BioCLIP-only scored `0.76034 ± 0.00544`; fusion did not improve
+on it. See the archived `ANALYSIS.md` and `paired_oof_deltas.png`.
