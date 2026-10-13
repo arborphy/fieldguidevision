@@ -135,3 +135,14 @@ Official references:
 - <https://vercel.com/marketplace/supabase/supabase>
 - <https://supabase.com/docs/guides/auth>
 - <https://supabase.com/docs/guides/database/postgres/row-level-security>
+
+
+## Shared photographic-scale progress
+
+The `/scale-review/` workflow is collaborative: everyone sees the same batch progress and the latest saved answer for each image. Anonymous identities still attribute writes; per-reviewer records and event history are preserved. The tag-based Human Gold workflow remains an independent blind review per reviewer.
+
+For an existing database, apply `supabase/migrations/003_shared_scale_progress.sql` after `002_scale_review.sql`. Updating GitHub or deploying Vercel does not run this SQL automatically. The migration changes SELECT access on `scale_annotations` to allow authenticated reviewers, including anonymous sign-ins, to read the shared answers and notes. INSERT and UPDATE remain restricted to each reviewer’s own records; events remain private. No existing answers are deleted or rewritten.
+
+Deploy the updated scale-review JavaScript from `lindsey-branch`. The UI loads all annotation pages in chronological order, displays the latest revision per image, and opens the first unreviewed image unless the original URL explicitly specifies `?n=`. Shared progress updates when the page is opened or reloaded.
+
+Validation: run `node --test botanical-computer-vision/scale_conditioned_analysis/review/tests/shared-scale-review.test.mjs`. After applying the migration and deployment, save a real answer in browser A, open `/scale-review/` without `?n=` in a fresh browser B, and confirm the same completion count and saved answer. Correcting that image in B must become visible after A reloads, while both reviewer records and audit events remain intact.
