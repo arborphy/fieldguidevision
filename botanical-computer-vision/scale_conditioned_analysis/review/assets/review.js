@@ -28,6 +28,8 @@
   let backendState = configured ? "connecting" : "local";
   let backendMessage = configured ? "Creating a private anonymous reviewer identity…" : "Answers are stored in this browser and can be exported.";
   let records = loadLocalRecords();
+  const requestedIndex = Number(new URLSearchParams(location.search).get("n"));
+  const hasRequestedIndex = Number.isInteger(requestedIndex) && requestedIndex >= 1 && requestedIndex <= data.items.length;
   let currentIndex = initialIndex();
 
   function loadSupabaseSdk() {
@@ -65,8 +67,7 @@
   }
 
   function initialIndex() {
-    const requested = Number(new URLSearchParams(location.search).get("n"));
-    if (Number.isFinite(requested) && requested >= 1 && requested <= data.items.length) return requested - 1;
+    if (hasRequestedIndex) return requestedIndex - 1;
     const firstOpen = data.items.findIndex((item) => !records[item.image_id]?.human_scale);
     return firstOpen >= 0 ? firstOpen : 0;
   }
@@ -120,7 +121,7 @@
       const lines = values.filter(Boolean);
       return `<div><strong>${escapeHtml(label)}</strong>${lines.length ? lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("") : '<p>No positive evidence recorded.</p>'}</div>`;
     }).join("");
-    return `<p class="eyebrow">Revealed after your answer</p><h3>Provisional label and evidence</h3><div class="reveal-summary"><span class="reveal-pill">Your answer: <b>${escapeHtml(saved.human_scale)}</b></span><span class="reveal-pill">Provisional: <b>${escapeHtml(item.provisional_scale)}</b> · ${escapeHtml(item.provisional_confidence)}</span><span class="reveal-pill">${agrees ? "Agreement" : "Disagreement—keep for adjudication"}</span></div><p>${escapeHtml(item.rationale)}</p><div class="evidence-grid">${evidence}</div>`;
+    return `<p class="eyebrow">Revealed after an answer is saved</p><h3>Provisional label and evidence</h3><div class="reveal-summary"><span class="reveal-pill">Saved answer: <b>${escapeHtml(saved.human_scale)}</b></span><span class="reveal-pill">Provisional: <b>${escapeHtml(item.provisional_scale)}</b> · ${escapeHtml(item.provisional_confidence)}</span><span class="reveal-pill">${agrees ? "Agreement" : "Disagreement—keep for adjudication"}</span></div><p>${escapeHtml(item.rationale)}</p><div class="evidence-grid">${evidence}</div>`;
   }
 
   function renderReveal(item, saved) {
@@ -195,6 +196,10 @@
 
   async function submitCurrent(event) {
     event.preventDefault();
+    if (backendState === "connecting") {
+      $("#form-message").textContent = "Wait for shared progress to load before saving.";
+      return;
+    }
     const item = data.items[currentIndex];
     const formData = new FormData(event.currentTarget);
     const humanScale = formData.get("human_scale");
@@ -290,11 +295,20 @@
         if (error) throw error;
         session = authData.session;
       }
-      const response = await client.from("scale_annotations")
-        .select("image_id,human_scale,confidence,note,updated_at,submitted_at")
-        .eq("batch_id", batchId);
-      if (response.error) throw response.error;
-      for (const row of response.data || []) {
+      const sharedRows = [];
+      for (let offset = 0; ; offset += 1000) {
+        const response = await client.from("scale_annotations")
+        .select("image_id,human_scale,confidence,note,updated_at,submitted_at,reviewer_id")
+        .eq("batch_id", batchId)
+        .order("updated_at", { ascending: true })
+        .order("submitted_at", { ascending: true })
+        .order("reviewer_id", { ascending: true })
+        .range(offset, offset + 999);
+        if (response.error) throw response.error;
+        sharedRows.push(...(response.data || []));
+        if ((response.data || []).length < 1000) break;
+      }
+      for (const row of sharedRows) {
         records[row.image_id] = {
           human_scale: row.human_scale,
           confidence: row.confidence,
@@ -304,8 +318,9 @@
         };
       }
       persistLocalRecords();
+      if (!hasRequestedIndex) currentIndex = initialIndex();
       backendState = "synced";
-      backendMessage = "No email is required. This browser has a private reviewer ID, and answers resume here automatically.";
+      backendMessage = "Everyone shares this batch’s progress. The most recently saved answer is displayed; individual annotations and revision history are preserved.";
     } catch (error) {
       backendState = "error";
       backendMessage = `Anonymous shared access is not enabled yet (${error.message}). The complete interface remains usable with local save and export.`;
