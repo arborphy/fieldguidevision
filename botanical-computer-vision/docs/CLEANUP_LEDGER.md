@@ -25,7 +25,7 @@ needs a rewrite of a shared branch — only if the team agrees.
 | `error_analysis/samples/images` vs `gallery_images` | ~35 MB identical | `build_error_analysis.py` and `annotation/human_error_annotation.csv` reference `samples/images` paths | Point the gallery at `samples/images`, rebuild, delete `gallery_images`. |
 | `bioimages_human_loop/` vs `bioimages_browser/` | ~17 MB identical | Human loop is a separate Vercel deployment whose `build_vercel.mjs` copies its own `tagging/`, `data/` | Have `build_vercel.mjs` copy from `../bioimages_browser/` at build time. Test the Vercel build first. |
 | `app/`, `worker/`, `db/`, `drizzle/`, `build/`, `public/`, `.openai/`, `package*.json`, configs | — | They are the hosted site (ChatGPT Sites / vinext) | Keep. |
-| `segmentation/`, `notebooks/`, `images/`, `tests/test_planar_filter_feasibility.py`, `scripts/live_webcam_filter_demo.py` | — | Early Grounding-DINO / SAM2 exploration; `segmentation/` also exists on `main` and its masks are needed for MEETING_EXPERIMENTS §3 | Keep; document in README as "early exploration". |
+| Repo root: `segmentation/`, `notebooks/`, `images/`, `tests/test_planar_filter_feasibility.py`, `scripts/live_webcam_filter_demo.py` | — | Early Grounding-DINO / SAM2 exploration; `segmentation/` also exists on `main` and its masks are needed for MEETING_EXPERIMENTS §3 | Keep; document in README as "early exploration". |
 | Root `manual_of_woody_plants/`, `newcomb_wildflower_guide/`, `gobotany/`, `observations_pound_ridge/`, `trials/`, `canonical_adapter/`, `main.py`, `hierarchical_pipeline.py` | — | Come from `main` / other team members | Not this branch's to delete. |
 
 ## Missing — must be recovered (P0)
