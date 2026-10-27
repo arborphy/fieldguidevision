@@ -1,0 +1,52 @@
+{
+  "inat_records": 11645,
+  "gbif_records": 4225,
+  "gbif_ids_also_in_inat": 4038,
+  "gbif_only_records": 187,
+  "union_unique_observations": 11832,
+  "inat_records_in_strict63": 1004,
+  "research_wild_in_strict63": 675,
+  "excluded_no_licence": 102,
+  "eligible_observations": 573,
+  "strict_species": 63,
+  "species_with_any_eligible": 44,
+  "species_with_10plus": 18,
+  "species_with_20plus": 12,
+  "species_missing": [
+    "Aesculus glabra",
+    "Celtis occidentalis",
+    "Cercis canadensis",
+    "Dirca palustris",
+    "Fraxinus quadrangulata",
+    "Ginkgo biloba",
+    "Gleditsia triacanthos",
+    "Gymnocladus dioicus",
+    "Juglans cinerea",
+    "Picea rubens",
+    "Quercus macrocarpa",
+    "Quercus muehlenbergii",
+    "Quercus palustris",
+    "Rhus aromatica",
+    "Sambucus nigra",
+    "Sorbus americana",
+    "Ulmus rubra",
+    "Viburnum lantanoides",
+    "Zanthoxylum americanum"
+  ],
+  "pilot_observations": 383,
+  "pilot_species": 44,
+  "pilot_sealed_test": 200,
+  "licence_mix_eligible": {
+    "CC-BY-NC": 395,
+    "CC0": 163,
+    "CC-BY": 11,
+    "CC-BY-SA": 4
+  },
+  "season_mix_eligible": {
+    "autumn": 286,
+    "summer": 126,
+    "spring": 94,
+    "winter": 67
+  },
+  "note": "One photo URL per observation (the export's first photo). Images are not downloaded or committed."
+}
