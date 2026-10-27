@@ -7,12 +7,28 @@ first round are quoted from the handoff note, not recomputed.
 
 ## One question that ties them together
 
-The seven items were raised as separate method names. Read together they describe a single
-pipeline for one question:
+The seven items were raised as separate method names. They are tools for the question the
+scale-conditioned analysis already opened:
 
-> **Inside a frozen image embedding (BioCLIP / DINOv3 / EfficientNet), what structure
-> corresponds to species, to organ / view, to photographic scale, and to background — and
-> does that structure explain where species identification fails?**
+> **Species mix in embedding space. How much of that is shot scale, how much is organ,
+> how much is real morphological similarity — and which of it explains errors?**
+
+What is already established (README §2–3): BioCLIP is species-first; DINOv3 and
+EfficientNet are organ-first; scale moves EfficientNet images more than species does.
+What is not yet established: whether that survives species/individual confounding and
+human-checked labels, and what the residual mixing is. Each method below is judged by
+whether it moves that question forward.
+
+| Method | Its job in this question |
+|---|---|
+| 2a PCA d* | a faithful low-dim space in which the scale/organ/species axes can be measured |
+| 4 soft clustering, K by numbers | clusters that are not an artefact of K=20; images "between" clusters (e.g. a leaf on a distant crown) |
+| 2b enrichment | which clusters are scale / organ clusters **after controlling species** |
+| 1 NSC | which few components still separate species *within* a scale |
+| 5 axis reading | is PC1 "distance of the camera"? which PCs are organ? |
+| 3 activation mapping | does a "distant" cluster look at the crown or at the sky? |
+| 7 inversion | show what a cluster / axis point looks like (nearest real images) |
+| 6 fidelity rule | none of this read off 2-D pictures |
 
 ```
 frozen embeddings (1,641 strict images; later + Pound Ridge external photos)
@@ -71,7 +87,9 @@ expected outcome and says nothing.
 
 1. Work in the PCA basis from experiment 2a (fit on train), d* components, whitened.
    Components are ordered and comparable, so "component 7 survives" means something.
-2. Two label sets: (a) species (63), (b) K-means cluster IDs from experiment 4.
+2. Three label sets: (a) species (63), (b) K-means cluster IDs from experiment 4,
+   (c) species **within each shot scale** — do different components separate species at
+   distance than at close-up?
 3. Sweep Δ on a grid; at each Δ record CV accuracy / macro-F1 **and** the number of
    surviving components per class. Deliverable is the **accuracy–sparsity curve**, plus
    the smallest Δ within 1 SE of the best score (one-standard-error rule), not the argmax.

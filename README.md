@@ -1,94 +1,36 @@
-# Descriptive Vocabulary Assets
+# FieldGuideVision
 
-> **Research on `lindsey-branch`:** the vision research (species / organ / representation analysis) lives in [`botanical-computer-vision/`](botanical-computer-vision/README.md).
+Identifying plants from field photographs, and understanding **what a vision model is
+actually looking at** when it does — the species, the organ in frame, or simply how far
+away the camera was.
 
-This folder hands the interns the **arq-refdata equivalents of John Matter's
-Spring-2026 input files** — nothing more, nothing less. Each remaining file
-here corresponds directly to something John used in his thesis experiment.
+This is the research branch (`lindsey-branch`). The work lives in
+[`botanical-computer-vision/`](botanical-computer-vision/README.md); start there.
 
-If you have read John's thesis and worked with `../JM_Assets/`, this folder is
-the same five conceptual inputs, but extracted with Margaret's broader pipeline
-and across three reference sources instead of one.
+## The research line in one page
 
-## What John used vs. what is here
+| Stage | Question | Answer so far | Where |
+|---|---|---|---|
+| **0 · Prototype** (Aug) | Can region evidence (Gemma → GroundingDINO → SAM polygons) + Gemini name the species? | Runs end to end: 58/85 blind pilot. But no controls, so we cannot tell what drove it. → build proper baselines. | `notebooks/`, `segmentation/` |
+| **1 · Baselines** (Sep) | Which frozen model identifies species on BioImages? | **BioCLIP 2.5 clearly**: 85.8 % zero-shot, 87.2 % probe on 211 strict test images. DINOv3 56.4 %, EfficientNet 21.8 %, GPT-5.4 / Gemini ≈ 40 %. | `botanical-computer-vision/research_report/`, `error_analysis/` |
+| **2 · Errors** | Where do they fail together? | Oaks and other within-genus pairs; 17 images all four models miss. | `error_analysis/` |
+| **3 · Representation** | How are embedding spaces organised? | **They organise by different things.** BioCLIP clusters follow species (species NMI 0.62, organ 0.16). DINOv3 and EfficientNet clusters follow **organ** (organ NMI ≈ 0.5, species ≤ 0.32). | `representation_analysis/`, `organ_benchmark/` |
+| **4 · Shot scale** (Oct) | Are species mixed because they look alike, or because they were shot at the same distance? | **Scale is a major axis.** In EfficientNet, two different species at the same scale are *more* similar than one species at different scales; in DINOv3 about equal; BioCLIP stays species-first. Conditioning on scale helps mid-range, not distant. | `scale_conditioned_analysis/` |
+| **5 · Fusion** | Does BioCLIP (species) + DINOv3 (organ) help? | No species gain (macro-F1 0.760 vs 0.760); organ hint only. Closed. | `dual_encoder_fusion/` |
+| **6 · Labels** | Can we trust organ / scale labels? | Model labels (Gemma) are references; Human Gold review apps are live, completion to be exported. | `bioimages_browser/`, `bioimages_human_loop/`, `scale_conditioned_analysis/review/` |
+| **7 · Meeting methods** (Oct) | NSC, enrichment, soft clustering, activation maps, AE, inversion | First runs exist on the hosted site only; they need recovering and a redesign around stage 4's question. | [`MEETING_EXPERIMENTS.md`](botanical-computer-vision/docs/MEETING_EXPERIMENTS.md) |
 
-John's Spring experiment ran against Newcomb only, with five hand-curated CSVs
-and a folder of 11 illustration PNGs (`../JM_Assets/data/`). The arq-refdata
-pipeline produces the same conceptual pieces — vocabulary, references with
-illustrations, species × feature assignments, and (separately) field
-observations — but as Parquet tables, across three sources.
+**Next:** test whether these findings hold on independent field photos (Pound Ridge /
+iNaturalist), and use the meeting methods to explain the species-vs-organ-vs-scale
+structure. See [`PROJECT_STATUS.md`](botanical-computer-vision/docs/PROJECT_STATUS.md).
 
-| John's Spring asset (`../JM_Assets/data/`)        | Equivalent here                                                              |
-| ------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `feature_value_pairs.csv` — every (feature, value) Newcomb defines | `<source>/extracted_vocabulary/parquet/*_vocabulary.parquet` (Dirr); `<source>/extracted_vocabulary/parquet/*_feature*.parquet` + `*_character*.parquet` (Newcomb, GoBotany) |
-| `references.csv` — definition + path to illustration for each value | `<source>/extracted_vocabulary/parquet/` + `<source>/illustrations/label_map.csv` |
-| `newcomb_preprocessed.csv` — species × key-path assignments | `<source>/extracted_vocabulary/parquet/*_species_tags.parquet` (Dirr); `*_taxon*.parquet` (Newcomb, GoBotany) |
-| `sample.csv` — species paired with iNat photo observations | `observations_pound_ridge/` (site-scoped, current; replaces the Spring slice John used) |
-| `illustrations/*.png` — labeled diagram crops | `<source>/illustrations/*.png` + `label_map.csv` |
+## Repository map
 
-What's intentionally **not** here: raw OCR pages, source-traceable JSON, scan
-intermediates, glossary dumps, editorial provenance docs, work-plans. Those
-live in `arq-refdata` and are the build inputs Margaret used to *produce* the
-files you see in this folder — they are not what John worked with, and they
-are not what the summer's experiments need.
-
-## Sources
-
-| Folder                       | Source                                                | Status                                                     |
-| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
-| `manual_of_woody_plants/`    | Dirr's *Manual of Woody Landscape Plants*, 6th ed.    | Parquets + 104 labeled illustration crops                  |
-| `newcomb_wildflower_guide/`  | Newcomb's *Wildflower Guide* (Lawrence Newcomb, 1977) | Parquets + key/locator CSVs; illustrations not yet extracted |
-| `gobotany/`                  | GoBotany (New England Wild Flower Society, live API)  | Parquets + character CSVs; illustrations not mirrored      |
-
-## Observations (the other half of the picture)
-
-Vocabulary tells you *what features exist and which species have them*.
-Observations tell you *where and when each species was actually seen*. John's
-Spring experiment used a small per-species iNat photo sample (`sample.csv`);
-the summer experiments use the latest site-scoped pull from Ward Pound Ridge.
-
-| Folder                       | Source                                                | Status                                                     |
-| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
-| `observations_pound_ridge/`  | iNaturalist field observations at Ward Pound Ridge Reservation, NY (direct iNat export + GBIF mirror) | 11,881 iNat records + 4,225 GBIF records |
-
-See that folder's README for the join pattern between observations and any
-source's species-tag parquet.
-
-## Folder layout per source
-
-Every source folder has the same two compartments. They correspond directly to
-the two kinds of JM input (the structured CSVs, and the illustration PNGs +
-label map).
-
-```
-<source>/
-├── extracted_vocabulary/
-│   ├── parquet/         ← downstream contract: the (feature, value, definition)
-│   │                      tables and the species × feature-value assignment matrix
-│   └── *.csv            ← (Newcomb, GoBotany) lightweight CSV peeks at the same data
-│
-└── illustrations/
-    ├── *.png            ← labeled diagram crops
-    └── label_map.csv    ← filename → (feature, value) mapping
-                          (placeholder README where extraction is not yet done)
-```
-
-## Where to start
-
-1. Browse **`manual_of_woody_plants/`** — most complete. The Dirr parquets and
-   illustration set are the model. Open
-   `extracted_vocabulary/parquet/dirr_vocabulary.parquet` and
-   `dirr_species_tags.parquet` side by side; this is the
-   `feature_value_pairs.csv` + `newcomb_preprocessed.csv` analogue, scaled up.
-
-2. Compare to **`newcomb_wildflower_guide/`** — same source John used. The
-   parquets cover Newcomb's branching key and species-route assignments; the
-   illustration extraction is the natural first summer task.
-
-3. Compare to **`gobotany/`** — same conceptual shape, different source
-   structure (live API, 5-layer model). Useful for thinking about how the
-   pattern generalises beyond a single book.
-
-4. Look at **`observations_pound_ridge/`** — pair with any source's
-   `*_species_tags` parquet to land at the John's-`sample.csv` analogue at
-   site scale.
+| Path | What | Owner |
+|---|---|---|
+| `botanical-computer-vision/` | All vision research, published reports, review apps, hosted site | Lindsey |
+| `notebooks/`, `images/` | Aug prototype notebooks (Grounding DINO, agentic labeling, general-purpose vision report) | Lindsey |
+| `segmentation/`, `canonical_adapter/`, `hierarchical_pipeline.py`, `scripts/`, `tests/`, `Dockerfile`, [`docs/notice_tagging.md`](docs/notice_tagging.md) | Notice-first organ tagging (Grounding DINO + SAM 2.1), DeVo gates, photo-batch tooling | V W, avwilks |
+| `observations_pound_ridge/` | Ward Pound Ridge iNaturalist / GBIF observations — source for the next photo set | shared |
+| `manual_of_woody_plants/`, `newcomb_wildflower_guide/`, `gobotany/` | Field-guide knowledge: species × trait vocabularies, definitions, illustrations | shared |
+| `archive/2026-06_jm_reproduction/` | June reproduction of the earlier Newcomb stepwise experiment; superseded, kept for record | Lindsey |

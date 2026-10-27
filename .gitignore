@@ -2,6 +2,6 @@
 .venv/
 __pycache__/
 *.py[cod]
-newcomb_wildflower_guide/experiment_repro/output/
+archive/2026-06_jm_reproduction/newcomb_wildflower_guide/experiment_repro/output/
 .env
 trials/local_batches/

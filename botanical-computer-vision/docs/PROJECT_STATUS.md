@@ -4,28 +4,33 @@ Updated 2026-10-27 · branch `lindsey-cleanup` (from `lindsey-branch` @ `0aef4c4
 
 ## The research question
 
-Frozen image models (BioCLIP 2.5, DINOv3, EfficientNet-B0) identify plants from photos.
-**What do their embeddings actually encode — species, organ/view, photographic scale or
-background — and does that explain when identification fails, especially on photos from
-a different source?**
+When frozen models embed plant photos, is the space organised by **species**, by the
+**organ** in frame, or by **shot scale** — and does that explain identification errors,
+on BioImages and on independent field photos?
+
+This grew out of the August evidence-bag prototype (Gemma → GroundingDINO → SAM → Gemini,
+58/85 blind pilot), which worked but could not say *why*. The baselines and
+representation analyses since then are the controlled version of that question.
 
 ## What we know (settled; do not re-run)
 
 | Finding | Evidence |
 |---|---|
-| BioCLIP is the strongest species model: strict 63-species test 181/211 zero-shot (85.8 %), 87.2 % linear probe | `research_report/data/experiment_registry.csv` |
-| DINOv3 probe is weaker on species (56.4 %) but **better on organ** (organ_tag 0.896 vs BioCLIP 0.810) | `organ_benchmark/metrics/benchmark_summary.csv` |
-| BioCLIP + DINOv3 attention fusion gives **no species gain** (macro-F1 0.760 vs 0.760, CIs span 0); organ hint only | `dual_encoder_fusion/results/v3_nested_confirmation/ANALYSIS.md` |
-| 2-D projections keep ~10 % of neighbourhoods; pictures are not evidence | meeting run (site), see registry `mtg6_pca_fidelity` |
-| AE adds nothing over PCA at this sample size | registry `mtg5_autoencoder` |
-| Clusters exist but are not organ or species truth; overlap from NEO-K-means is parameter-driven | registry `mtg4_neo_kmeans` |
+| BioCLIP is the species model: 85.8 % zero-shot, 87.2 % probe on 211 strict test images; DINOv3 56.4 %, EfficientNet 21.8 %, VLMs ≈ 40 % | `research_report/`, `representation_analysis/data/frozen_probe_comparison.csv` |
+| **Spaces organise by different things.** BioCLIP k=20 clusters follow species (NMI 0.615 vs organ 0.163); DINOv3 / EfficientNet follow organ (organ NMI 0.52 / 0.50, species 0.32 / 0.20) | `scale_conditioned_analysis/` separation table; `organ_benchmark/` |
+| **Shot scale is a major axis.** Different species at the same scale vs same species at different scales: EfficientNet 0.232 > 0.176, DINOv3 0.153 ≈ 0.170, BioCLIP 0.338 ≪ 0.558 | `scale_conditioned_analysis/data/scale_pairwise_similarity.csv` |
+| Conditioning on scale helps species separation at mid-range (BioCLIP purity 33 → 50 %), not at distance; BioCLIP accuracy distant 71 % vs close-up 89 % | `scale_conditioned_analysis/data/` |
+| BioCLIP + DINOv3 fusion gives no species gain (0.760 vs 0.760, CIs span 0) | `dual_encoder_fusion/results/v3_nested_confirmation/ANALYSIS.md` |
+| 2-D projections keep ~10 % of neighbourhoods; AE adds nothing over PCA; NEO-K-means overlap is parameter-driven | meeting runs (site only), registry `mtg*` |
 
 ## What is open
 
-1. Whether any embedding structure is about **organ/scale rather than species/individual**
-   (needs species-stratified enrichment).
-2. Whether results hold on **independent field photos** (needs Pound Ridge / iNat data).
-3. How much Human Gold labelling actually exists (Supabase export).
+1. Is the scale effect real or an artefact of provisional labels and of species/individual
+   confounding? (Human scale audit + species-stratified enrichment.)
+2. After scale is controlled, what explains the remaining mixing — organ, leaf state,
+   background? (Meeting methods, MEETING_EXPERIMENTS.md.)
+3. Does any of it hold on **independent field photos**? (Pound Ridge / iNat.)
+4. How much Human Gold labelling exists? (Supabase export.)
 
 ## Priorities
 

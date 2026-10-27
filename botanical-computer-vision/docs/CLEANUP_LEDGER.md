@@ -12,6 +12,7 @@ deleted; nothing a live page depends on is moved without changing its build.
 | Added `data/embeddings/efficientnet_b0_strict/` | 6 MB | The only versioned copy of the EfficientNet-B0 strict embeddings + predictions lived inside a ZIP. |
 | Moved `01_general_purpose_vision_report_en.ipynb` → `notebooks/` | — | Root-level clutter; outputs are embedded, image paths are repo-root relative and unchanged. |
 | Renamed `botanical-computer-vision/README.md` → `WEBAPP.md` | — | It was the vinext starter template. The new README is the research entry point. |
+| Archived the June JM-reproduction files (old root README, `arch.md`, `main.py`, `trials/`, `docs/data_inventory.md`, `docs/repro_notes.md`, `scripts/run_stepwise_trial.py`, `newcomb_wildflower_guide/experiment_repro/` + JM comparison files) → `archive/2026-06_jm_reproduction/` | — | Superseded; nothing else imports them. `git mv`, history intact. New root README describes the current research. |
 | Added `docs/` (status, data catalog, registry, experiment designs, expansion plan) and the Pound Ridge manifest | <0.5 MB | Documentation only. |
 
 Git history still contains the ZIPs (the `.git` folder stays ~245 MB). Shrinking history
@@ -26,7 +27,8 @@ needs a rewrite of a shared branch — only if the team agrees.
 | `bioimages_human_loop/` vs `bioimages_browser/` | ~17 MB identical | Human loop is a separate Vercel deployment whose `build_vercel.mjs` copies its own `tagging/`, `data/` | Have `build_vercel.mjs` copy from `../bioimages_browser/` at build time. Test the Vercel build first. |
 | `app/`, `worker/`, `db/`, `drizzle/`, `build/`, `public/`, `.openai/`, `package*.json`, configs | — | They are the hosted site (ChatGPT Sites / vinext) | Keep. |
 | Repo root: `segmentation/`, `notebooks/`, `images/`, `tests/test_planar_filter_feasibility.py`, `scripts/live_webcam_filter_demo.py` | — | Early Grounding-DINO / SAM2 exploration; `segmentation/` also exists on `main` and its masks are needed for MEETING_EXPERIMENTS §3 | Keep; document in README as "early exploration". |
-| Root `manual_of_woody_plants/`, `newcomb_wildflower_guide/`, `gobotany/`, `observations_pound_ridge/`, `trials/`, `canonical_adapter/`, `main.py`, `hierarchical_pipeline.py` | — | Come from `main` / other team members | Not this branch's to delete. |
+| Root `manual_of_woody_plants/`, `newcomb_wildflower_guide/`, `gobotany/`, `observations_pound_ridge/` | — | Shared field-guide knowledge and the observation source for the next photo set; `segmentation/gobotany_devo_adapter.py` reads `gobotany/` | Keep in place. |
+| `canonical_adapter/`, `hierarchical_pipeline.py`, `Dockerfile`, root `scripts/` (except the archived runner), `docs/notice_tagging.md` | — | V W / avwilks notice-first tagging and DeVo gates | Not mine to move. |
 
 ## Missing — must be recovered (P0)
 
