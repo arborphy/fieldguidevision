@@ -1,5 +1,7 @@
 # Descriptive Vocabulary Assets
 
+> **Research on `lindsey-branch`:** the vision research (species / organ / representation analysis) lives in [`botanical-computer-vision/`](botanical-computer-vision/README.md).
+
 This folder hands the interns the **arq-refdata equivalents of John Matter's
 Spring-2026 input files** — nothing more, nothing less. Each remaining file
 here corresponds directly to something John used in his thesis experiment.
