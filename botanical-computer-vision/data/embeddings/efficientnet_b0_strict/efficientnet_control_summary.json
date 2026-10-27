@@ -1,0 +1,20 @@
+{
+  "validated_identical_to_dinov3_manifest": true,
+  "images": 1641,
+  "embedding_shape": [
+    1641,
+    1280
+  ],
+  "all_image_predictions": 1641,
+  "test_images": 211,
+  "species_top1_accuracy": 0.21800947867298578,
+  "species_top5_accuracy": 0.4786729857819905,
+  "genus_top1_accuracy": 0.2938388625592417,
+  "family_top1_accuracy": 0.33649289099526064,
+  "selected_C": 100.0,
+  "clusters": 20,
+  "contact_sheets": 20,
+  "contact_sheet_images": {
+    "cached": 400
+  }
+}

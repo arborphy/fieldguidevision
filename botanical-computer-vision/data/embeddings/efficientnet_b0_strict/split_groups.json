@@ -1,0 +1,971 @@
+{
+  "Acer negundo": {
+    "validation": [
+      "ind-baskauf/13159"
+    ],
+    "test": [
+      "ind-baskauf/15307"
+    ],
+    "train": [
+      "ind-baskauf/10897",
+      "ind-baskauf/16046",
+      "ind-baskauf/18230",
+      "ind-baskauf/28499",
+      "ind-baskauf/29686",
+      "ind-baskauf/31636",
+      "ind-baskauf/54847",
+      "vanderbilt/12-43",
+      "vanderbilt/9-16"
+    ]
+  },
+  "Acer rubrum": {
+    "validation": [
+      "ind-baskauf/10494"
+    ],
+    "test": [
+      "vanderbilt/7-298"
+    ],
+    "train": [
+      "ind-baskauf/00000",
+      "ind-baskauf/10492",
+      "ind-baskauf/11916",
+      "ind-baskauf/18216",
+      "ind-baskauf/19266",
+      "ind-baskauf/20028",
+      "ind-baskauf/29761",
+      "ind-baskauf/30326",
+      "ind-baskauf/39067",
+      "ind-baskauf/50747"
+    ]
+  },
+  "Acer saccharum": {
+    "validation": [
+      "vanderbilt/6-133"
+    ],
+    "test": [
+      "ind-baskauf/39138"
+    ],
+    "train": [
+      "ind-baskauf/10374",
+      "ind-baskauf/10376",
+      "ind-baskauf/10386",
+      "ind-baskauf/10861",
+      "ind-baskauf/11288",
+      "ind-baskauf/11657",
+      "ind-baskauf/15211",
+      "ind-baskauf/16741",
+      "ind-baskauf/18076",
+      "ind-baskauf/22179",
+      "ind-baskauf/50721",
+      "ind-baskauf/d0999",
+      "ind-kaufmannm/ke142",
+      "vanderbilt/12-196",
+      "vanderbilt/13-38",
+      "vanderbilt/3-31",
+      "vanderbilt/8-70"
+    ]
+  },
+  "Yucca filamentosa": {
+    "validation": [
+      "ind-baskauf/35163"
+    ],
+    "test": [
+      "ind-baskauf/27131"
+    ],
+    "train": [
+      "ind-baskauf/11726"
+    ]
+  },
+  "Rhus aromatica": {
+    "validation": [
+      "ind-baskauf/52661"
+    ],
+    "test": [
+      "ind-baskauf/32253"
+    ],
+    "train": [
+      "ind-baskauf/12698",
+      "ind-baskauf/12804",
+      "ind-baskauf/12928",
+      "ind-baskauf/21893",
+      "ind-baskauf/32172",
+      "ind-hessd/e5353"
+    ]
+  },
+  "Rhus copallinum": {
+    "validation": [
+      "ind-baskauf/15444"
+    ],
+    "test": [
+      "ind-baskauf/10938"
+    ],
+    "train": [
+      "ind-baskauf/10419",
+      "ind-baskauf/10420",
+      "ind-baskauf/12580",
+      "ind-baskauf/13534",
+      "ind-baskauf/30092"
+    ]
+  },
+  "Rhus glabra": {
+    "validation": [
+      "ind-baskauf/13515"
+    ],
+    "test": [
+      "ind-baskauf/15477"
+    ],
+    "train": [
+      "ind-baskauf/10414"
+    ]
+  },
+  "Toxicodendron radicans": {
+    "validation": [
+      "ind-baskauf/10832"
+    ],
+    "test": [
+      "thomas/0301-02"
+    ],
+    "train": [
+      "ind-baskauf/10892",
+      "ind-baskauf/10893",
+      "ind-baskauf/15948",
+      "ind-baskauf/16418",
+      "ind-baskauf/17295",
+      "ind-baskauf/20451",
+      "ind-baskauf/34170",
+      "ind-hessd/e5381",
+      "thomas/0506-01"
+    ]
+  },
+  "Ilex verticillata": {
+    "validation": [
+      "ind-kaufmannm/mk466"
+    ],
+    "test": [
+      "ind-baskauf/35627"
+    ],
+    "train": [
+      "ind-baskauf/30762",
+      "ind-baskauf/35363",
+      "ind-baskauf/35374",
+      "ind-baskauf/35634",
+      "ind-baskauf/58500"
+    ]
+  },
+  "Betula alleghaniensis": {
+    "validation": [
+      "ind-baskauf/26417"
+    ],
+    "test": [
+      "ind-baskauf/11449"
+    ],
+    "train": [
+      "ind-baskauf/11510",
+      "ind-baskauf/11719",
+      "ind-baskauf/49238"
+    ]
+  },
+  "Betula lenta": {
+    "validation": [
+      "ind-baskauf/11698"
+    ],
+    "test": [
+      "ind-baskauf/37284"
+    ],
+    "train": [
+      "ind-baskauf/38137"
+    ]
+  },
+  "Carpinus caroliniana": {
+    "validation": [
+      "ind-baskauf/15074"
+    ],
+    "test": [
+      "vanderbilt/6-189"
+    ],
+    "train": [
+      "ind-baskauf/11030",
+      "ind-baskauf/12036",
+      "ind-baskauf/15691",
+      "ind-baskauf/15719",
+      "ind-baskauf/19166",
+      "ind-baskauf/24519",
+      "ind-baskauf/25478",
+      "ind-baskauf/29806",
+      "ind-kirchoff/b5060",
+      "ind-kirchoff/b5061",
+      "ind-kirchoff/b5062",
+      "ind-kirchoff/b5063"
+    ]
+  },
+  "Ostrya virginiana": {
+    "validation": [
+      "ind-baskauf/12128"
+    ],
+    "test": [
+      "ind-baskauf/12021"
+    ],
+    "train": [
+      "ind-baskauf/15272",
+      "vanderbilt/7-201"
+    ]
+  },
+  "Lonicera morrowii": {
+    "validation": [
+      "ind-baskauf/51729"
+    ],
+    "test": [
+      "ind-baskauf/54562"
+    ],
+    "train": [
+      "ind-baskauf/51793"
+    ]
+  },
+  "Sambucus nigra": {
+    "validation": [
+      "ind-baskauf/12190"
+    ],
+    "test": [
+      "ind-baskauf/15687"
+    ],
+    "train": [
+      "ind-baskauf/12171",
+      "ind-baskauf/25620",
+      "ind-baskauf/26705"
+    ]
+  },
+  "Sambucus racemosa": {
+    "validation": [
+      "ind-baskauf/26113"
+    ],
+    "test": [
+      "ind-baskauf/28751"
+    ],
+    "train": [
+      "ind-baskauf/11471",
+      "ind-baskauf/26137",
+      "ind-baskauf/26538",
+      "ind-baskauf/49288"
+    ]
+  },
+  "Viburnum lantanoides": {
+    "validation": [
+      "ind-baskauf/15050"
+    ],
+    "test": [
+      "ind-baskauf/26298"
+    ],
+    "train": [
+      "ind-baskauf/26489"
+    ]
+  },
+  "Cornus amomum": {
+    "validation": [
+      "ind-baskauf/30752"
+    ],
+    "test": [
+      "ind-baskauf/30937"
+    ],
+    "train": [
+      "ind-baskauf/35213",
+      "ind-baskauf/54554"
+    ]
+  },
+  "Cornus florida": {
+    "validation": [
+      "ind-baskauf/11612"
+    ],
+    "test": [
+      "ind-baskauf/15103"
+    ],
+    "train": [
+      "ind-baskauf/10377",
+      "ind-baskauf/10534",
+      "ind-baskauf/10856",
+      "ind-baskauf/16416",
+      "ind-baskauf/16760",
+      "ind-kirchoff/b5085",
+      "ind-kirchoff/b5087",
+      "vanderbilt/12-227",
+      "vanderbilt/6-167"
+    ]
+  },
+  "Nyssa sylvatica": {
+    "validation": [
+      "vanderbilt/6-238"
+    ],
+    "test": [
+      "vanderbilt/6-239"
+    ],
+    "train": [
+      "ind-baskauf/10427",
+      "ind-baskauf/15141",
+      "ind-baskauf/16683",
+      "ind-baskauf/16712",
+      "ind-baskauf/27926",
+      "ind-baskauf/29396",
+      "ind-baskauf/d0997",
+      "vanderbilt/12-188",
+      "vanderbilt/6-236"
+    ]
+  },
+  "Juniperus virginiana": {
+    "validation": [
+      "ind-baskauf/50704"
+    ],
+    "test": [
+      "ind-baskauf/11522"
+    ],
+    "train": [
+      "ind-baskauf/10332",
+      "ind-baskauf/10333",
+      "ind-baskauf/10791",
+      "ind-baskauf/11100",
+      "ind-baskauf/11166",
+      "ind-baskauf/11202",
+      "ind-baskauf/50583",
+      "vanderbilt/7-307"
+    ]
+  },
+  "Cercis canadensis": {
+    "validation": [
+      "ind-baskauf/10207"
+    ],
+    "test": [
+      "thomas/0049-08"
+    ],
+    "train": [
+      "ind-baskauf/10491",
+      "ind-baskauf/10493",
+      "ind-baskauf/10497",
+      "ind-baskauf/10739",
+      "ind-baskauf/10766",
+      "ind-baskauf/11227",
+      "ind-baskauf/29774",
+      "ind-baskauf/51001",
+      "vanderbilt/12-82",
+      "vanderbilt/6-186",
+      "vanderbilt/6-29"
+    ]
+  },
+  "Gleditsia triacanthos": {
+    "validation": [
+      "ind-baskauf/66164"
+    ],
+    "test": [
+      "ind-baskauf/66180"
+    ],
+    "train": [
+      "ind-baskauf/15521",
+      "ind-baskauf/21594",
+      "ind-baskauf/38435",
+      "ind-baskauf/51771",
+      "ind-baskauf/66133",
+      "ind-baskauf/d1104"
+    ]
+  },
+  "Gymnocladus dioicus": {
+    "validation": [
+      "ind-baskauf/11894"
+    ],
+    "test": [
+      "vanderbilt/12-177"
+    ],
+    "train": [
+      "ind-baskauf/24227",
+      "ind-baskauf/50912"
+    ]
+  },
+  "Robinia pseudoacacia": {
+    "validation": [
+      "ind-baskauf/21607"
+    ],
+    "test": [
+      "ind-baskauf/21999"
+    ],
+    "train": [
+      "ind-baskauf/11454",
+      "ind-baskauf/11498",
+      "ind-baskauf/11504",
+      "ind-baskauf/11506",
+      "ind-baskauf/11632",
+      "ind-baskauf/15353",
+      "ind-baskauf/15573",
+      "ind-baskauf/29725",
+      "thomas/0486-01"
+    ]
+  },
+  "Castanea dentata": {
+    "validation": [
+      "ind-baskauf/26248"
+    ],
+    "test": [
+      "ind-baskauf/11534"
+    ],
+    "train": [
+      "ind-baskauf/11535",
+      "ind-baskauf/11845",
+      "ind-baskauf/30720"
+    ]
+  },
+  "Fagus grandifolia": {
+    "validation": [
+      "ind-baskauf/39269"
+    ],
+    "test": [
+      "ind-baskauf/10432"
+    ],
+    "train": [
+      "ind-baskauf/10430",
+      "ind-baskauf/16720",
+      "ind-baskauf/39143",
+      "ind-baskauf/d0127",
+      "ind-kirchoff/b5132",
+      "ind-kirchoff/mason09",
+      "vanderbilt/12-187",
+      "vanderbilt/6-208"
+    ]
+  },
+  "Quercus alba": {
+    "validation": [
+      "ind-kirchoff/mason02"
+    ],
+    "test": [
+      "vanderbilt/7-324"
+    ],
+    "train": [
+      "ind-baskauf/10992",
+      "ind-baskauf/10993",
+      "ind-baskauf/15387",
+      "ind-baskauf/16838",
+      "ind-baskauf/19695",
+      "ind-baskauf/35191",
+      "ind-kirchoff/mason03",
+      "vanderbilt/1-178",
+      "vanderbilt/15-134",
+      "vanderbilt/15-139",
+      "vanderbilt/2-76",
+      "vanderbilt/6-152"
+    ]
+  },
+  "Quercus bicolor": {
+    "validation": [
+      "vanderbilt/6-173"
+    ],
+    "test": [
+      "vanderbilt/12-11"
+    ],
+    "train": [
+      "ind-baskauf/16299",
+      "ind-baskauf/18833",
+      "uncg/5",
+      "vanderbilt/6-243"
+    ]
+  },
+  "Quercus macrocarpa": {
+    "validation": [
+      "ind-baskauf/18850"
+    ],
+    "test": [
+      "vanderbilt/6-135"
+    ],
+    "train": [
+      "vanderbilt/12-29",
+      "vanderbilt/6-153",
+      "vanderbilt/7-314",
+      "vanderbilt/h001"
+    ]
+  },
+  "Quercus muehlenbergii": {
+    "validation": [
+      "vanderbilt/7-282"
+    ],
+    "test": [
+      "ind-baskauf/12050"
+    ],
+    "train": [
+      "vanderbilt/15-154"
+    ]
+  },
+  "Quercus palustris": {
+    "validation": [
+      "ind-kirchoff/mason24"
+    ],
+    "test": [
+      "ind-kirchoff/mason19"
+    ],
+    "train": [
+      "ind-baskauf/15823",
+      "ind-baskauf/15827",
+      "ind-baskauf/19299",
+      "ind-kirchoff/mason18",
+      "ind-kirchoff/mason25",
+      "ind-kirchoff/mason26",
+      "uncg/84",
+      "vanderbilt/12-215",
+      "vanderbilt/12-76",
+      "vanderbilt/3-62",
+      "vanderbilt/7-163"
+    ]
+  },
+  "Quercus rubra": {
+    "validation": [
+      "ind-kirchoff/mason21"
+    ],
+    "test": [
+      "vanderbilt/7-306"
+    ],
+    "train": [
+      "ind-baskauf/15732",
+      "ind-baskauf/90696",
+      "ind-kirchoff/mason17",
+      "vanderbilt/12-112",
+      "vanderbilt/12-6",
+      "vanderbilt/15-227",
+      "vanderbilt/5-76"
+    ]
+  },
+  "Ginkgo biloba": {
+    "validation": [
+      "vanderbilt/4-214"
+    ],
+    "test": [
+      "vanderbilt/12-126"
+    ],
+    "train": [
+      "ind-baskauf/11174",
+      "ind-baskauf/11958",
+      "vanderbilt/12-63",
+      "vanderbilt/2-101"
+    ]
+  },
+  "Aesculus glabra": {
+    "validation": [
+      "thomas/0265-01"
+    ],
+    "test": [
+      "ind-baskauf/39879"
+    ],
+    "train": [
+      "thomas/0014-01",
+      "vanderbilt/11-210"
+    ]
+  },
+  "Carya cordiformis": {
+    "validation": [
+      "ind-baskauf/30230"
+    ],
+    "test": [
+      "ind-baskauf/11993"
+    ],
+    "train": [
+      "ind-baskauf/12060",
+      "ind-baskauf/27882",
+      "vanderbilt/7-289"
+    ]
+  },
+  "Carya ovata": {
+    "validation": [
+      "ind-baskauf/13707"
+    ],
+    "test": [
+      "ind-baskauf/13650"
+    ],
+    "train": [
+      "ind-baskauf/15861",
+      "ind-baskauf/15864",
+      "ind-baskauf/15894",
+      "ind-baskauf/15898",
+      "ind-baskauf/16192",
+      "ind-baskauf/22872",
+      "ind-baskauf/30194",
+      "ind-baskauf/39155"
+    ]
+  },
+  "Juglans cinerea": {
+    "validation": [
+      "ind-baskauf/16502"
+    ],
+    "test": [
+      "ind-baskauf/11812"
+    ],
+    "train": [
+      "ind-baskauf/11839",
+      "ind-baskauf/70791"
+    ]
+  },
+  "Juglans nigra": {
+    "validation": [
+      "vanderbilt/6-85"
+    ],
+    "test": [
+      "ind-baskauf/23021"
+    ],
+    "train": [
+      "ind-baskauf/11111",
+      "ind-baskauf/11335",
+      "ind-baskauf/11973",
+      "vanderbilt/11-221",
+      "vanderbilt/11-402",
+      "vanderbilt/12-123",
+      "vanderbilt/15-120",
+      "vanderbilt/7-88"
+    ]
+  },
+  "Lindera benzoin": {
+    "validation": [
+      "ind-baskauf/52741"
+    ],
+    "test": [
+      "ind-baskauf/50458"
+    ],
+    "train": [
+      "ind-baskauf/11019",
+      "ind-baskauf/11086",
+      "ind-baskauf/11691",
+      "ind-baskauf/15117",
+      "ind-baskauf/15729",
+      "ind-baskauf/17766",
+      "ind-baskauf/19080",
+      "ind-baskauf/29705",
+      "ind-baskauf/29815",
+      "ind-baskauf/31464"
+    ]
+  },
+  "Sassafras albidum": {
+    "validation": [
+      "ind-baskauf/15412"
+    ],
+    "test": [
+      "vanderbilt/6-215"
+    ],
+    "train": [
+      "ind-baskauf/10537",
+      "ind-baskauf/10890",
+      "ind-baskauf/11322",
+      "ind-baskauf/11341",
+      "ind-baskauf/11722",
+      "ind-baskauf/13474",
+      "ind-baskauf/15112",
+      "ind-baskauf/15549",
+      "ind-baskauf/15867",
+      "ind-baskauf/16321",
+      "ind-baskauf/16722",
+      "ind-baskauf/51010",
+      "ind-kirchoff/b5147",
+      "ind-kirchoff/b5149"
+    ]
+  },
+  "Fraxinus americana": {
+    "validation": [
+      "vanderbilt/1-183"
+    ],
+    "test": [
+      "vanderbilt/3-108"
+    ],
+    "train": [
+      "ind-baskauf/12800",
+      "ind-baskauf/25640",
+      "vanderbilt/12-167",
+      "vanderbilt/2-146",
+      "vanderbilt/2-83",
+      "vanderbilt/2-95",
+      "vanderbilt/6-71"
+    ]
+  },
+  "Fraxinus pennsylvanica": {
+    "validation": [
+      "vanderbilt/9-88"
+    ],
+    "test": [
+      "vanderbilt/9-89"
+    ],
+    "train": [
+      "ind-baskauf/17451",
+      "vanderbilt/12-209",
+      "vanderbilt/5-64"
+    ]
+  },
+  "Fraxinus quadrangulata": {
+    "validation": [
+      "ind-baskauf/30435"
+    ],
+    "test": [
+      "ind-baskauf/21860"
+    ],
+    "train": [
+      "ind-baskauf/12755",
+      "ind-baskauf/2014-08-23",
+      "ind-baskauf/32863"
+    ]
+  },
+  "Picea rubens": {
+    "validation": [
+      "ind-baskauf/38128"
+    ],
+    "test": [
+      "ind-baskauf/26128"
+    ],
+    "train": [
+      "ind-baskauf/11427"
+    ]
+  },
+  "Pinus strobus": {
+    "validation": [
+      "ind-baskauf/34215"
+    ],
+    "test": [
+      "vanderbilt/6-15"
+    ],
+    "train": [
+      "ind-baskauf/10225",
+      "ind-baskauf/15225",
+      "ind-baskauf/17548",
+      "ind-baskauf/54837",
+      "vanderbilt/1-125",
+      "vanderbilt/10-83"
+    ]
+  },
+  "Tsuga canadensis": {
+    "validation": [
+      "ind-baskauf/11392"
+    ],
+    "test": [
+      "ind-baskauf/11492"
+    ],
+    "train": [
+      "ind-baskauf/11404",
+      "ind-baskauf/11490",
+      "ind-baskauf/11495",
+      "ind-baskauf/11497",
+      "vanderbilt/6-117",
+      "vanderbilt/6-139",
+      "vanderbilt/6-144"
+    ]
+  },
+  "Platanus occidentalis": {
+    "validation": [
+      "vanderbilt/12-90"
+    ],
+    "test": [
+      "vanderbilt/11-283"
+    ],
+    "train": [
+      "ind-baskauf/10336",
+      "ind-baskauf/10338",
+      "ind-baskauf/10462",
+      "ind-baskauf/15129",
+      "ind-baskauf/15358",
+      "ind-baskauf/16835",
+      "ind-baskauf/39130",
+      "vanderbilt/7-205"
+    ]
+  },
+  "Amelanchier arborea": {
+    "validation": [
+      "ind-baskauf/34156"
+    ],
+    "test": [
+      "ind-baskauf/32477"
+    ],
+    "train": [
+      "ind-baskauf/18967",
+      "ind-baskauf/31399",
+      "ind-baskauf/32120"
+    ]
+  },
+  "Prunus serotina": {
+    "validation": [
+      "ind-baskauf/12041"
+    ],
+    "test": [
+      "ind-baskauf/11961"
+    ],
+    "train": [
+      "ind-baskauf/10643",
+      "ind-baskauf/11327",
+      "ind-baskauf/11331"
+    ]
+  },
+  "Pyrus calleryana": {
+    "validation": [
+      "ind-baskauf/31257"
+    ],
+    "test": [
+      "ind-baskauf/32766"
+    ],
+    "train": [
+      "ind-baskauf/31910"
+    ]
+  },
+  "Sorbus americana": {
+    "validation": [
+      "ind-baskauf/49326"
+    ],
+    "test": [
+      "ind-baskauf/49335"
+    ],
+    "train": [
+      "ind-baskauf/15003",
+      "ind-baskauf/15049",
+      "ind-baskauf/49296"
+    ]
+  },
+  "Cephalanthus occidentalis": {
+    "validation": [
+      "ind-baskauf/37493"
+    ],
+    "test": [
+      "thomas/0104-01"
+    ],
+    "train": [
+      "ind-baskauf/15734",
+      "thomas/0440-04"
+    ]
+  },
+  "Zanthoxylum americanum": {
+    "validation": [
+      "ind-baskauf/54533"
+    ],
+    "test": [
+      "ind-baskauf/51813"
+    ],
+    "train": [
+      "ind-baskauf/35706"
+    ]
+  },
+  "Populus deltoides": {
+    "validation": [
+      "ind-baskauf/31457"
+    ],
+    "test": [
+      "ind-baskauf/11064"
+    ],
+    "train": [
+      "ind-baskauf/11053",
+      "ind-baskauf/15335",
+      "ind-baskauf/31433",
+      "vanderbilt/8-103"
+    ]
+  },
+  "Populus tremuloides": {
+    "validation": [
+      "ind-baskauf/13975"
+    ],
+    "test": [
+      "ind-kaufmannm/ke064"
+    ],
+    "train": [
+      "ind-baskauf/13977",
+      "ind-baskauf/14024",
+      "ind-kaufmannm/ke062",
+      "ind-kaufmannm/ke063"
+    ]
+  },
+  "Salix nigra": {
+    "validation": [
+      "ind-baskauf/23990"
+    ],
+    "test": [
+      "ind-baskauf/21454"
+    ],
+    "train": [
+      "ind-baskauf/11078",
+      "ind-baskauf/13574",
+      "ind-baskauf/22997"
+    ]
+  },
+  "Ailanthus altissima": {
+    "validation": [
+      "vanderbilt/12-230"
+    ],
+    "test": [
+      "ind-baskauf/10904"
+    ],
+    "train": [
+      "ind-baskauf/10997",
+      "vanderbilt/7-87"
+    ]
+  },
+  "Dirca palustris": {
+    "validation": [
+      "ind-eickmeierwg/we565"
+    ],
+    "test": [
+      "ind-baskauf/65657"
+    ],
+    "train": [
+      "ind-baskauf/65629",
+      "ind-baskauf/65662"
+    ]
+  },
+  "Tilia americana": {
+    "validation": [
+      "ind-baskauf/11643"
+    ],
+    "test": [
+      "ind-baskauf/11653"
+    ],
+    "train": [
+      "ind-baskauf/11463",
+      "ind-baskauf/11464",
+      "ind-baskauf/11469",
+      "ind-baskauf/11666",
+      "ind-baskauf/16689",
+      "vanderbilt/12-173",
+      "vanderbilt/6-89"
+    ]
+  },
+  "Celtis occidentalis": {
+    "validation": [
+      "vanderbilt/12-32"
+    ],
+    "test": [
+      "vanderbilt/12-33"
+    ],
+    "train": [
+      "ind-baskauf/30984",
+      "vanderbilt/4-216"
+    ]
+  },
+  "Ulmus americana": {
+    "validation": [
+      "vanderbilt/8-77"
+    ],
+    "test": [
+      "ind-baskauf/11687"
+    ],
+    "train": [
+      "ind-baskauf/10341",
+      "ind-baskauf/10380",
+      "ind-baskauf/16195",
+      "ind-baskauf/17569",
+      "ind-baskauf/18004",
+      "ind-baskauf/18483",
+      "ind-baskauf/20950",
+      "ind-baskauf/50603",
+      "vanderbilt/10-158",
+      "vanderbilt/12-222",
+      "vanderbilt/12-8",
+      "vanderbilt/13-27",
+      "vanderbilt/2-30",
+      "vanderbilt/3-63",
+      "vanderbilt/6-126",
+      "vanderbilt/7-175"
+    ]
+  },
+  "Ulmus rubra": {
+    "validation": [
+      "ind-baskauf/17959"
+    ],
+    "test": [
+      "ind-baskauf/11037"
+    ],
+    "train": [
+      "ind-baskauf/10991",
+      "ind-baskauf/11320",
+      "ind-baskauf/15172",
+      "ind-baskauf/15912"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+taxonomy_level,correct,total,accuracy
+species,46,211,0.21800947867298578
+genus,62,211,0.2938388625592417
+family,71,211,0.33649289099526064
