@@ -1,0 +1,30 @@
+{
+  "inputs": {
+    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "space": "PCA-32 (all 1,641, descriptive)",
+  "model": "GaussianMixture diag K=20",
+  "bic": {
+    "5": -99357.96877625,
+    "10": -102657.1507023464,
+    "20": -105955.79898599672,
+    "30": -106381.92103978865,
+    "50": -103057.56023556832
+  },
+  "seed_label_ari_mean": 0.6569262921383456,
+  "seed_label_ari_min": 0.5911141986312328,
+  "seed_entropy_spearman_mean": 0.7647774758945889,
+  "ari_gmm_vs_existing_kmeans20": 0.535270668758456,
+  "frac_images_max_membership_lt_0_6": 0.01340645947592931,
+  "auroc_entropy_vs_probe_error_test211": 0.5098814229249011,
+  "n_test_wrong": 165,
+  "auroc_entropy_vs_midrange_scale": 0.6391448083866197,
+  "multi_organ_auroc": "NOT COMPUTED - no multi-organ labels in Git (Gemma multi-label / Human Gold not exported)"
+}

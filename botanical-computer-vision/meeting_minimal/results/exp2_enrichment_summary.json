@@ -1,0 +1,65 @@
+{
+  "inputs": {
+    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "bootstrap": 500,
+  "unit": "individual plant",
+  "no_p_values_reason": "images nested in individuals/species; independence assumption fails",
+  "summary": {
+    "bioclip/organ": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 2,
+      "clusters_fe_ci_lo_gt_1_5": 4,
+      "clusters_species_adjusted_fe_gt_1_5": 5,
+      "median_top_species_share": 0.3266798418972332,
+      "clusters_lt5_individuals": 0
+    },
+    "bioclip/shot_scale": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 8,
+      "clusters_fe_ci_lo_gt_1_5": 2,
+      "clusters_species_adjusted_fe_gt_1_5": 2,
+      "median_top_species_share": 0.3266798418972332,
+      "clusters_lt5_individuals": 0
+    },
+    "dinov3/organ": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 17,
+      "clusters_fe_ci_lo_gt_1_5": 19,
+      "clusters_species_adjusted_fe_gt_1_5": 19,
+      "median_top_species_share": 0.1153480636730815,
+      "clusters_lt5_individuals": 0
+    },
+    "dinov3/shot_scale": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 13,
+      "clusters_fe_ci_lo_gt_1_5": 6,
+      "clusters_species_adjusted_fe_gt_1_5": 9,
+      "median_top_species_share": 0.1153480636730815,
+      "clusters_lt5_individuals": 0
+    },
+    "eff/organ": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 17,
+      "clusters_fe_ci_lo_gt_1_5": 19,
+      "clusters_species_adjusted_fe_gt_1_5": 20,
+      "median_top_species_share": 0.08765027322404371,
+      "clusters_lt5_individuals": 0
+    },
+    "eff/shot_scale": {
+      "clusters": 20,
+      "clusters_dominant_share_ge_0_6": 14,
+      "clusters_fe_ci_lo_gt_1_5": 8,
+      "clusters_species_adjusted_fe_gt_1_5": 8,
+      "median_top_species_share": 0.08765027322404371,
+      "clusters_lt5_individuals": 0
+    }
+  }
+}

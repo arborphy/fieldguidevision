@@ -1,0 +1,27 @@
+{
+  "inputs": {
+    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "model": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+  "n_cases": 80,
+  "reembed_cosine_median": 0.9994300007820129,
+  "reembed_cosine_min": 0.9976018071174622,
+  "frac_top_cam_beats_random": 0.875,
+  "frac_by_kind": {
+    "boundary": 0.9,
+    "core": 0.85
+  },
+  "median_drop_top": 0.06526584923267365,
+  "median_drop_random": 0.00917423963546753,
+  "sanity_spearman_vs_randomised_last_block_median": 0.14924882529705613,
+  "mean_cam_center_mass_3x3": 0.20115577814285643,
+  "center_mass_uniform_expectation": 0.1836734693877551,
+  "note": "Sampled 2 core + 2 boundary per cluster, seed 42, not hand-picked. No organ masks: says whether the map is faithful to the score, not whether it is on the organ."
+}

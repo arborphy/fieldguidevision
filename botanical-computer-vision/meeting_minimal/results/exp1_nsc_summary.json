@@ -1,0 +1,417 @@
+{
+  "inputs": {
+    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "basis": "PCA-64 whitened, fit on train",
+  "warning": "Coordinates are PCA components, not biological features.",
+  "results": {
+    "organ (external label)": {
+      "n_train": 1169,
+      "n_test": 211,
+      "n_classes": 7,
+      "best_cv_delta": 0.25,
+      "one_se_delta": 1.5,
+      "test": {
+        "delta0": {
+          "delta": 0.0,
+          "test_macroF1": 0.6921480262605085,
+          "test_acc": 0.8199052132701422,
+          "coords_any_class": 64,
+          "coords_mean_per_class": 64.0
+        },
+        "delta_1se": {
+          "delta": 1.5,
+          "test_macroF1": 0.6720813204508856,
+          "test_acc": 0.7867298578199052,
+          "coords_any_class": 22,
+          "coords_mean_per_class": 7.857142857142857
+        }
+      },
+      "surviving_PCs_at_1se_first12": {
+        "bark": [
+          1,
+          2,
+          3,
+          5,
+          10,
+          12,
+          16
+        ],
+        "cone": [
+          3,
+          14,
+          16,
+          26,
+          37
+        ],
+        "fruit": [
+          1,
+          3,
+          8,
+          9,
+          10,
+          14,
+          15,
+          18,
+          19,
+          28,
+          32,
+          35
+        ],
+        "inflorescence": [
+          1,
+          3,
+          5,
+          6,
+          8,
+          15,
+          29
+        ],
+        "leaf": [
+          1,
+          2,
+          3,
+          8,
+          9,
+          19
+        ],
+        "twig": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          18,
+          31
+        ],
+        "whole tree": [
+          1,
+          2,
+          5,
+          6,
+          7,
+          8,
+          19
+        ]
+      },
+      "ratio_F1_1se_over_delta0": 0.9710080719032922
+    },
+    "grouping approximation: EfficientNet K=20 cluster ID": {
+      "n_train": 1181,
+      "n_test": 211,
+      "n_classes": 20,
+      "best_cv_delta": 0.5,
+      "one_se_delta": 1.25,
+      "test": {
+        "delta0": {
+          "delta": 0.0,
+          "test_macroF1": 0.8648531192801272,
+          "test_acc": 0.8720379146919431,
+          "coords_any_class": 64,
+          "coords_mean_per_class": 64.0
+        },
+        "delta_1se": {
+          "delta": 1.25,
+          "test_macroF1": 0.8529217708648199,
+          "test_acc": 0.8625592417061612,
+          "coords_any_class": 61,
+          "coords_mean_per_class": 21.85
+        }
+      },
+      "surviving_PCs_at_1se_first12": {
+        "0": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          11,
+          12,
+          14,
+          15
+        ],
+        "1": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          8,
+          10,
+          11,
+          12,
+          14,
+          16,
+          17
+        ],
+        "10": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          11,
+          12,
+          14,
+          17
+        ],
+        "11": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          11,
+          17,
+          18,
+          26,
+          28
+        ],
+        "12": [
+          1,
+          3,
+          7,
+          8,
+          9,
+          10,
+          12,
+          14,
+          15,
+          17,
+          18,
+          22
+        ],
+        "13": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          14,
+          16
+        ],
+        "14": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          11,
+          14,
+          18,
+          20
+        ],
+        "15": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          11,
+          12,
+          14,
+          19
+        ],
+        "16": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          12,
+          13,
+          14,
+          15
+        ],
+        "17": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10,
+          11,
+          12,
+          14,
+          17
+        ],
+        "18": [
+          1,
+          2,
+          3,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          17,
+          18,
+          20
+        ],
+        "19": [
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          14,
+          17,
+          18,
+          19,
+          20,
+          24
+        ],
+        "2": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "3": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          10,
+          12,
+          14,
+          15
+        ],
+        "4": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          12,
+          13,
+          14,
+          15
+        ],
+        "5": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          14,
+          16,
+          17,
+          22,
+          25
+        ],
+        "6": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          12,
+          14,
+          16,
+          17
+        ],
+        "7": [
+          1,
+          2,
+          3,
+          4,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14,
+          17,
+          18
+        ],
+        "8": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          10,
+          13,
+          14,
+          15,
+          18,
+          23,
+          26
+        ],
+        "9": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14
+        ]
+      },
+      "ratio_F1_1se_over_delta0": 0.9862041910362322
+    }
+  }
+}
