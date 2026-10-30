@@ -1,5 +1,5 @@
 """Exp 7: retrieval inversion (no generative model). For latent points we return the nearest REAL images
-(cosine, full 1,280-d EfficientNet space, all 1,641 images):
+(cosine, full embedding space of FGV_MODEL, all 1,641 images):
   - each K=20 cluster centroid (existing EfficientNet K-means): top-6 images; record cosine and whether
     the retrieved images belong to that cluster / share its dominant organ;
   - PC1 and PC2 direction points: mean +/- 2 SD along the PC (fit on train), re-normalised.
@@ -12,7 +12,7 @@ from common import OUT, SEED, load, save_json, input_record
 
 meta, X = load()
 tr = (meta.split == "train").values
-cent = np.stack([X[meta.eff_k20 == c].mean(0) for c in range(20)])
+cent = np.stack([X[meta.own_k20 == c].mean(0) for c in range(20)])
 points = {f"centroid c{c}": cent[c] for c in range(20)}
 pca = PCA(5, random_state=SEED).fit(X[tr])
 for k in range(2):
@@ -29,9 +29,9 @@ for name, v in points.items():
              top6_organs=", ".join(sub.organ), top6_scales=", ".join(sub.shot_scale), top6_n_species=sub.species.nunique())
     if name.startswith("centroid"):
         c = int(name.split("c")[-1])
-        dom = meta[meta.eff_k20 == c].organ.value_counts()
+        dom = meta[meta.own_k20 == c].organ.value_counts()
         r.update(cluster_size=int(dom.sum()), cluster_dominant_organ=dom.index[0], cluster_dominant_share=float(dom.iloc[0] / dom.sum()),
-                 top6_in_cluster=int((sub.eff_k20 == c).sum()), top6_share_dominant_organ=float((sub.organ == dom.index[0]).mean()))
+                 top6_in_cluster=int((sub.own_k20 == c).sum()), top6_share_dominant_organ=float((sub.organ == dom.index[0]).mean()))
     rows.append(r)
     cases[name] = sub[["image_id", "thumb", "species", "organ", "shot_scale"]].assign(cos=sim[top]).to_dict("records")
 df = pd.DataFrame(rows)

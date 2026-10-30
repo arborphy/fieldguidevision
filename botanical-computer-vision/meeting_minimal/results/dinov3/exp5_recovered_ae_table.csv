@@ -1,0 +1,7 @@
+model,method,test_mse,knn15_retention
+bioclip25,PCA,0.000284,0.667299
+bioclip25,Autoencoder,0.00028,0.616746
+dinov3,PCA,0.000498,0.766509
+dinov3,Autoencoder,0.000491,0.745656
+efficientnet_b0,PCA,0.000296,0.729542
+efficientnet_b0,Autoencoder,0.000301,0.721327

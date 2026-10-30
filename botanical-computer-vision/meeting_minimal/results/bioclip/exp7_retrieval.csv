@@ -1,0 +1,25 @@
+point,top1_cos,top6_mean_cos,top6_organs,top6_scales,top6_n_species,cluster_size,cluster_dominant_organ,cluster_dominant_share,top6_in_cluster,top6_share_dominant_organ
+centroid c0,0.775356650352478,0.7586121559143066,"leaf, leaf, leaf, leaf, leaf, inflorescence","close-up, close-up, close-up, uncertain, close-up, distant",3,111.0,leaf,0.3153153153153153,6.0,0.8333333333333334
+centroid c1,0.9177026748657227,0.9063469767570496,"leaf, leaf, leaf, leaf, leaf, leaf","close-up, close-up, close-up, mid-range, mid-range, close-up",1,129.0,leaf,0.5348837209302325,6.0,1.0
+centroid c2,0.8845131397247314,0.8727591037750244,"inflorescence, fruit, inflorescence, leaf, inflorescence, leaf","close-up, mid-range, mid-range, close-up, close-up, mid-range",1,55.0,inflorescence,0.36363636363636365,6.0,0.5
+centroid c3,0.719556450843811,0.7091953754425049,"bark, bark, bark, twig, twig, fruit","close-up, close-up, close-up, mid-range, close-up, close-up",6,200.0,twig,0.225,6.0,0.3333333333333333
+centroid c4,0.8173260688781738,0.8119723200798035,"twig, bark, whole tree, inflorescence, whole tree, whole tree","mid-range, uncertain, distant, close-up, distant, distant",2,92.0,leaf,0.2717391304347826,6.0,0.0
+centroid c5,0.9003952741622925,0.8887078762054443,"leaf, leaf, leaf, twig, leaf, leaf","close-up, close-up, close-up, close-up, close-up, close-up",1,77.0,leaf,0.38961038961038963,6.0,0.8333333333333334
+centroid c6,0.8628761172294617,0.8499536514282227,"inflorescence, fruit, fruit, fruit, inflorescence, inflorescence","close-up, close-up, mid-range, close-up, close-up, close-up",1,65.0,inflorescence,0.36923076923076925,6.0,0.5
+centroid c7,0.860551118850708,0.8511631488800049,"leaf, twig, leaf, leaf, inflorescence, leaf","close-up, close-up, close-up, close-up, mid-range, close-up",3,91.0,leaf,0.5054945054945055,6.0,0.6666666666666666
+centroid c8,0.8319224715232849,0.8241118788719177,"leaf, leaf, leaf, leaf, leaf, leaf","close-up, close-up, distant, mid-range, close-up, mid-range",3,51.0,leaf,0.47058823529411764,6.0,1.0
+centroid c9,0.8552708029747009,0.847640335559845,"whole tree, inflorescence, whole tree, fruit, inflorescence, fruit","distant, mid-range, distant, close-up, close-up, distant",2,90.0,leaf,0.25555555555555554,6.0,0.0
+centroid c10,0.8321441411972046,0.819058358669281,"whole tree, leaf, inflorescence, inflorescence, leaf, fruit","distant, close-up, distant, close-up, close-up, close-up",3,81.0,inflorescence,0.3333333333333333,6.0,0.3333333333333333
+centroid c11,0.8428153395652771,0.8349518775939941,"whole tree, whole tree, whole tree, whole tree, whole tree, whole tree","distant, distant, distant, distant, distant, distant",4,121.0,whole tree,0.8677685950413223,6.0,1.0
+centroid c12,0.8153499364852905,0.7871537804603577,"inflorescence, leaf, fruit, fruit, leaf, inflorescence","close-up, close-up, close-up, close-up, close-up, close-up",1,48.0,inflorescence,0.375,6.0,0.3333333333333333
+centroid c13,0.9533295035362244,0.94757479429245,"inflorescence, leaf, inflorescence, leaf, leaf, twig","mid-range, close-up, close-up, close-up, close-up, close-up",1,64.0,twig,0.265625,6.0,0.16666666666666666
+centroid c14,0.8335926532745361,0.8130938410758972,"inflorescence, inflorescence, inflorescence, inflorescence, fruit, fruit","mid-range, mid-range, close-up, close-up, close-up, mid-range",1,72.0,leaf,0.2361111111111111,6.0,0.0
+centroid c15,0.8622452020645142,0.8496868014335632,"whole tree, twig, twig, leaf, leaf, fruit","distant, close-up, close-up, close-up, close-up, mid-range",2,29.0,whole tree,0.3448275862068966,6.0,0.16666666666666666
+centroid c16,0.9254248142242432,0.9195391535758972,"inflorescence, leaf, twig, fruit, twig, twig","mid-range, close-up, close-up, close-up, mid-range, close-up",1,44.0,leaf,0.29545454545454547,6.0,0.16666666666666666
+centroid c17,0.7714858055114746,0.739844799041748,"whole tree, whole tree, whole tree, whole tree, whole tree, whole tree","distant, distant, distant, distant, distant, distant",6,122.0,whole tree,0.6311475409836066,5.0,1.0
+centroid c18,0.8039844036102295,0.792391836643219,"cone, cone, cone, bark, bark, cone","close-up, close-up, close-up, close-up, mid-range, close-up",2,54.0,cone,0.3888888888888889,6.0,0.6666666666666666
+centroid c19,0.8450015187263489,0.8288660049438477,"fruit, fruit, leaf, leaf, fruit, leaf","mid-range, close-up, mid-range, close-up, close-up, close-up",2,45.0,leaf,0.28888888888888886,6.0,0.5
+PC1 -2SD,0.7286703586578369,0.7105414867401123,"whole tree, bark, whole tree, whole tree, whole tree, whole tree","distant, close-up, distant, distant, distant, distant",4,,,,,
+PC1 +2SD,0.7790002822875977,0.7765308022499084,"leaf, inflorescence, whole tree, fruit, whole tree, leaf","close-up, distant, distant, mid-range, distant, close-up",5,,,,,
+PC2 -2SD,0.8419209718704224,0.8343588709831238,"twig, leaf, leaf, leaf, leaf, twig","mid-range, close-up, close-up, close-up, mid-range, close-up",2,,,,,
+PC2 +2SD,0.6494985222816467,0.645443856716156,"inflorescence, leaf, leaf, twig, twig, leaf","close-up, close-up, uncertain, close-up, close-up, uncertain",2,,,,,

@@ -17,12 +17,20 @@ import numpy as np
 import pandas as pd
 
 BCV = Path(__file__).resolve().parents[1]
-OUT = Path(__file__).resolve().parent / "results"
-OUT.mkdir(exist_ok=True)
+import os
+MODEL = os.environ.get("FGV_MODEL", "efficientnet")  # efficientnet | bioclip | dinov3
+OUT = Path(__file__).resolve().parent / ("results" if MODEL == "efficientnet" else f"results/{MODEL}")
+OUT.mkdir(parents=True, exist_ok=True)
 IMG_DIR = Path("/home/user/imgcache")  # local cache, rebuilt by fetch_images.sh; images are never committed
 
-EFF_NPZ = BCV / "data/embeddings/efficientnet_b0_strict/embeddings.npz"
-EFF_SHA = "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b"
+# raw vectors per model; BioCLIP/DINOv3 recovered from Drive 2026-10-30 (image_ids/splits verified vs manifest)
+EMB = {"efficientnet": ("data/embeddings/efficientnet_b0_strict/embeddings.npz",
+                        "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b"),
+       "bioclip": ("data/embeddings/bioclip25_strict/embeddings.npz",
+                   "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee"),
+       "dinov3": ("data/embeddings/dinov3_strict/embeddings.npz",
+                  "63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6")}
+EFF_NPZ, EFF_SHA = BCV / EMB[MODEL][0], EMB[MODEL][1]
 MANIFEST = BCV / "organ_benchmark/split_manifests/individual_disjoint.csv"
 SCALE = BCV / "scale_conditioned_analysis/data/image_visual_groups.csv"
 CLUSTERS_BD = BCV / "representation_analysis/data/cluster_assignments.csv"
@@ -38,9 +46,9 @@ def sha256(path: Path) -> str:
 
 
 def load():
-    """Return (meta DataFrame aligned to rows of X, X float32 L2-normalised EfficientNet vectors)."""
-    assert sha256(EFF_NPZ) == EFF_SHA, "EfficientNet npz SHA-256 mismatch"
-    d = np.load(EFF_NPZ, allow_pickle=True)
+    """Return (meta DataFrame aligned to rows of X, X float32 L2-normalised vectors of FGV_MODEL)."""
+    assert sha256(EFF_NPZ) == EFF_SHA, f"{MODEL} npz SHA-256 mismatch"
+    d = np.load(EFF_NPZ, allow_pickle=False)
     ids = d["image_ids"].astype(str)
     X = d["embeddings"].astype(np.float32)
     man = pd.read_csv(MANIFEST).set_index("image_id")
@@ -55,12 +63,13 @@ def load():
     bd = pd.read_csv(CLUSTERS_BD)
     for (rep, k), g in bd.groupby(["representation", "k"]):
         meta[f"{rep}_k{k}"] = g.set_index("image_id").loc[meta["image_id"], "cluster_id"].values
+    meta["own_k20"] = meta[{"efficientnet": "eff_k20", "bioclip": "bioclip_k20", "dinov3": "dinov3_k20"}[MODEL]]
     meta["thumb"] = meta["image_id"].str.replace("/", "_") + ".jpg"
     return meta, X
 
 
 def input_record():
-    return {"efficientnet_npz": str(EFF_NPZ.relative_to(BCV)), "sha256": EFF_SHA,
+    return {"model": MODEL, "embeddings_npz": str(EFF_NPZ.relative_to(BCV)), "sha256": EFF_SHA,
             "manifest": str(MANIFEST.relative_to(BCV)), "scale_labels": str(SCALE.relative_to(BCV)),
             "clusters": [str(CLUSTERS_BD.relative_to(BCV)), str(CLUSTERS_EFF.relative_to(BCV))]}
 

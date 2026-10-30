@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "model": "dinov3",
+    "embeddings_npz": "data/embeddings/dinov3_strict/embeddings.npz",
+    "sha256": "63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "space": "PCA-32 (all 1,641, descriptive)",
+  "model": "GaussianMixture diag K=20",
+  "bic": {
+    "5": -91252.66423370849,
+    "10": -95857.93427549703,
+    "20": -100891.3749137311,
+    "30": -101940.4840280699,
+    "50": -100567.01421506051
+  },
+  "seed_label_ari_mean": 0.5659462745053838,
+  "seed_label_ari_min": 0.5319223571652903,
+  "seed_entropy_spearman_mean": 0.6904349605353779,
+  "ari_gmm_vs_existing_kmeans20": 0.42975229920044594,
+  "frac_images_max_membership_lt_0_6": 0.007921998781230956,
+  "auroc_entropy_vs_probe_error_test211": null,
+  "n_test_wrong": null,
+  "auroc_entropy_vs_midrange_scale": 0.6188611944843185,
+  "multi_organ_auroc": "NOT COMPUTED - no multi-organ labels in Git (Gemma multi-label / Human Gold not exported)"
+}

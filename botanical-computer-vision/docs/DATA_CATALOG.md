@@ -22,8 +22,8 @@ AE trained on 1,181). Always write the denominator next to a metric.
 
 | Model | Dim | Authoritative copy | SHA-256 |
 |---|---|---|---|
-| BioCLIP 2.5 | — | Drive: `outputs/bioclip25_strict_embeddings/embeddings.npz` (4,255,575 B) | record on recovery |
-| DINOv3 ViT-B/16 | — | Drive: `outputs/dinov3_strict_embeddings/` | record on recovery |
+| BioCLIP 2.5 (`hf-hub:imageomics/bioclip-2.5-vith14`) | 1024 | **Git** (recovered from Drive 2026-10-30): `data/embeddings/bioclip25_strict/embeddings.npz` (4,255,575 B) | `c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee` |
+| DINOv3 ViT-B/16 (`facebook/dinov3-vitb16-pretrain-lvd1689m`) | 768 | **Git** (recovered from Drive 2026-10-30): `data/embeddings/dinov3_strict/embeddings.npz` (4,696,967 B) | `63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6` |
 | EfficientNet-B0 | 1280 | **Git**: `data/embeddings/efficientnet_b0_strict/embeddings.npz` (rescued from a share ZIP) | `b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b` |
 
 Each `.npz` holds `image_ids`, `embeddings` (L2-normalised), `splits`, `model`,

@@ -1,0 +1,13 @@
+image_id,thumb,species,organ,shot_scale,gmm_top1,gmm_max,gmm_top2,gmm_p2,gmm_entropy,top1_component_main_organ,top2_component_main_organ
+baskauf/16722,baskauf_16722.jpg,Sassafras albidum,leaf,distant,12,0.63310623,15,0.18508269,0.9549374,bark 30%,inflorescence 34%
+baskauf/10499,baskauf_10499.jpg,Quercus rubra,bark,uncertain,9,0.56715673,12,0.3020771,0.94977856,whole tree 93%,bark 30%
+baskauf/35376,baskauf_35376.jpg,Ilex verticillata,twig,close-up,12,0.5379112,13,0.3963767,0.8974971,bark 30%,leaf 33%
+baskauf/27897,baskauf_27897.jpg,Carya cordiformis,bark,uncertain,12,0.685446,8,0.16648112,0.8405017,bark 30%,leaf 33%
+baskauf/11336,baskauf_11336.jpg,Ulmus rubra,bark,mid-range,9,0.56978935,12,0.3997721,0.7979231,whole tree 93%,bark 30%
+baskauf/91127,baskauf_91127.jpg,Juglans nigra,whole tree,distant,11,0.51026803,12,0.4675691,0.7851168,whole tree 24%,bark 30%
+thomas/0440-04-03,thomas_0440-04-03.jpg,Cephalanthus occidentalis,leaf,close-up,12,0.7211692,15,0.19272922,0.76422006,bark 30%,inflorescence 34%
+baskauf/11613,baskauf_11613.jpg,Cornus florida,leaf,mid-range,12,0.68262786,15,0.2711652,0.75672024,bark 30%,inflorescence 34%
+baskauf/31780,baskauf_31780.jpg,Pyrus calleryana,leaf,close-up,12,0.72109354,17,0.21767467,0.73871493,bark 30%,leaf 25%
+baskauf/32255,baskauf_32255.jpg,Rhus aromatica,whole tree,distant,12,0.59704983,15,0.39288196,0.7297641,bark 30%,inflorescence 34%
+baskauf/d0997,baskauf_d0997.jpg,Nyssa sylvatica,leaf,close-up,17,0.7216026,12,0.23677628,0.7164402,leaf 25%,bark 30%
+baskauf/70792,baskauf_70792.jpg,Juglans cinerea,fruit,mid-range,9,0.5039242,12,0.4934465,0.70972043,whole tree 93%,bark 30%

@@ -1,0 +1,13 @@
+image_id,thumb,species,organ,shot_scale,gmm_top1,gmm_max,gmm_top2,gmm_p2,gmm_entropy,top1_component_main_organ,top2_component_main_organ
+baskauf/12501,baskauf_12501.jpg,Fraxinus americana,leaf,close-up,4,0.48620513,1,0.25999135,1.048865,leaf 49%,leaf 36%
+baskauf/11078,baskauf_11078.jpg,Salix nigra,inflorescence,close-up,1,0.6407365,4,0.21826546,0.9708537,leaf 36%,leaf 49%
+baskauf/35251,baskauf_35251.jpg,Castanea dentata,inflorescence,close-up,12,0.565339,15,0.27784148,0.96879506,inflorescence 79%,inflorescence 80%
+baskauf/34172,baskauf_34172.jpg,Toxicodendron radicans,inflorescence,close-up,15,0.55825305,12,0.29962686,0.96390533,inflorescence 80%,inflorescence 79%
+baskauf/27137,baskauf_27137.jpg,Yucca filamentosa,fruit,close-up,16,0.6136159,1,0.2683221,0.9179498,inflorescence 90%,leaf 36%
+baskauf/32481,baskauf_32481.jpg,Amelanchier arborea,fruit,close-up,1,0.63203967,15,0.27547064,0.86735713,leaf 36%,inflorescence 80%
+baskauf/26493,baskauf_26493.jpg,Viburnum lantanoides,inflorescence,close-up,15,0.6645738,16,0.25360078,0.8268622,inflorescence 80%,inflorescence 90%
+baskauf/24001,baskauf_24001.jpg,Salix nigra,fruit,close-up,12,0.6160034,1,0.33791885,0.8070504,inflorescence 79%,leaf 36%
+baskauf/31285,baskauf_31285.jpg,Pyrus calleryana,twig,close-up,16,0.7051974,1,0.23554885,0.79474324,inflorescence 90%,leaf 36%
+baskauf/23022,baskauf_23022.jpg,Juglans nigra,inflorescence,mid-range,4,0.7662456,1,0.112509765,0.7859328,leaf 49%,leaf 36%
+baskauf/26147,baskauf_26147.jpg,Sambucus racemosa,twig,close-up,6,0.515839,17,0.47431213,0.7408418,twig 53%,twig 70%
+baskauf/51731,baskauf_51731.jpg,Lonicera morrowii,inflorescence,close-up,1,0.5519029,14,0.43708932,0.74013907,leaf 36%,inflorescence 85%

@@ -1,0 +1,101 @@
+{
+  "inputs": {
+    "model": "dinov3",
+    "embeddings_npz": "data/embeddings/dinov3_strict/embeddings.npz",
+    "sha256": "63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "d_star_rule": "smallest d with val 15-NN>=0.85 and species probe within 1pp of full",
+  "d_star": null,
+  "two_d_all_images": {
+    "knn15_overlap_all1641": 0.14283973187081048,
+    "trustworthiness_all1641": 0.8199276773310213
+  },
+  "table": [
+    {
+      "d": 2,
+      "train_explained_var": 0.1465315967798233,
+      "val_recon_r2": 0.11797606945037842,
+      "val_knn15_overlap": 0.3311914323962517,
+      "val_trustworthiness": 0.8002724763360225,
+      "probe_species_macroF1": 0.002374283046551954,
+      "probe_organ_macroF1": 0.42863605188894083,
+      "kmeans20_ARI_vs_full": 0.2157182072165595
+    },
+    {
+      "d": 8,
+      "train_explained_var": 0.3466913104057312,
+      "val_recon_r2": 0.3167122006416321,
+      "val_knn15_overlap": 0.5552878179384203,
+      "val_trustworthiness": 0.9095828742699411,
+      "probe_species_macroF1": 0.11098974583494706,
+      "probe_organ_macroF1": 0.5915110693058673,
+      "kmeans20_ARI_vs_full": 0.5167442897797391
+    },
+    {
+      "d": 16,
+      "train_explained_var": 0.47027072310447693,
+      "val_recon_r2": 0.4316244125366211,
+      "val_knn15_overlap": 0.6688085676037483,
+      "val_trustworthiness": 0.9468884387105946,
+      "probe_species_macroF1": 0.24562344429889754,
+      "probe_organ_macroF1": 0.7978350369465352,
+      "kmeans20_ARI_vs_full": 0.6575478308388233
+    },
+    {
+      "d": 32,
+      "train_explained_var": 0.6055414080619812,
+      "val_recon_r2": 0.5600870847702026,
+      "val_knn15_overlap": 0.7427041499330657,
+      "val_trustworthiness": 0.959263603084906,
+      "probe_species_macroF1": 0.3306041019608186,
+      "probe_organ_macroF1": 0.8048850814460738,
+      "kmeans20_ARI_vs_full": 0.650711521176789
+    },
+    {
+      "d": 64,
+      "train_explained_var": 0.7424948215484619,
+      "val_recon_r2": 0.6834853291511536,
+      "val_knn15_overlap": 0.8056224899598393,
+      "val_trustworthiness": 0.9721244861451707,
+      "probe_species_macroF1": 0.4134257706503539,
+      "probe_organ_macroF1": 0.8095131238178155,
+      "kmeans20_ARI_vs_full": 0.6779575728829315
+    },
+    {
+      "d": 128,
+      "train_explained_var": 0.8617907166481018,
+      "val_recon_r2": 0.7960737943649292,
+      "val_knn15_overlap": 0.8669344042838019,
+      "val_trustworthiness": 0.9847152622288564,
+      "probe_species_macroF1": 0.4057005511347249,
+      "probe_organ_macroF1": 0.7794366931200492,
+      "kmeans20_ARI_vs_full": 0.6970940475191899
+    },
+    {
+      "d": 256,
+      "train_explained_var": 0.9488707780838013,
+      "val_recon_r2": 0.8882734775543213,
+      "val_knn15_overlap": 0.9266398929049532,
+      "val_trustworthiness": 0.9955515276445013,
+      "probe_species_macroF1": 0.42002829621877236,
+      "probe_organ_macroF1": 0.8148561372176879,
+      "kmeans20_ARI_vs_full": 0.6567504360918868
+    },
+    {
+      "d": "full",
+      "train_explained_var": 1.0,
+      "val_recon_r2": 1.0,
+      "val_knn15_overlap": 1.0,
+      "val_trustworthiness": 1.0,
+      "probe_species_macroF1": 0.4311099158511808,
+      "probe_organ_macroF1": 0.8276005912331605,
+      "kmeans20_ARI_vs_full": 1.0
+    }
+  ]
+}

@@ -16,7 +16,7 @@ from sklearn.decomposition import PCA
 from sklearn.metrics import adjusted_rand_score, roc_auc_score
 from sklearn.mixture import GaussianMixture
 
-from common import BCV, OUT, SEED, load, save_json, input_record
+from common import BCV, MODEL, OUT, SEED, load, save_json, input_record
 
 meta, X = load()
 Z = PCA(32, random_state=SEED).fit_transform(X)
@@ -38,12 +38,15 @@ p, h = P[0], H[0]
 meta["gmm_max"] = p.max(1); meta["gmm_entropy"] = h
 meta["gmm_top1"] = p.argsort(1)[:, -1]; meta["gmm_top2"] = p.argsort(1)[:, -2]
 meta["gmm_p2"] = np.sort(p, 1)[:, -2]
-meta["ari_gmm_vs_kmeans20"] = adjusted_rand_score(labels[0], meta.eff_k20)
+meta["ari_gmm_vs_kmeans20"] = adjusted_rand_score(labels[0], meta.own_k20)
 
-pred = pd.read_csv(BCV / "data/embeddings/efficientnet_b0_strict/all_predictions.csv").set_index("image_id")
-tm = meta[meta.split == "test"].copy()
-tm["wrong"] = ~pred.loc[tm.image_id, "correct"].astype(bool).values
-auc_err = roc_auc_score(tm.wrong, tm.gmm_entropy)
+if MODEL == "efficientnet":  # per-image probe predictions are in Git only for EfficientNet
+    pred = pd.read_csv(BCV / "data/embeddings/efficientnet_b0_strict/all_predictions.csv").set_index("image_id")
+    tm = meta[meta.split == "test"].copy()
+    tm["wrong"] = ~pred.loc[tm.image_id, "correct"].astype(bool).values
+    auc_err, n_wrong = roc_auc_score(tm.wrong, tm.gmm_entropy), int(tm.wrong.sum())
+else:
+    auc_err, n_wrong = None, None
 sm = meta[meta.shot_scale != "uncertain"]
 auc_mid = roc_auc_score(sm.shot_scale == "mid-range", sm.gmm_entropy)
 frac_ambig = float((meta.gmm_max < 0.6).mean())
@@ -61,7 +64,7 @@ summ = dict(inputs=input_record(), space="PCA-32 (all 1,641, descriptive)", mode
             bic=bic, seed_label_ari_mean=float(np.mean(ari)), seed_label_ari_min=float(np.min(ari)),
             seed_entropy_spearman_mean=float(np.mean(hrho)), ari_gmm_vs_existing_kmeans20=float(meta.ari_gmm_vs_kmeans20[0]),
             frac_images_max_membership_lt_0_6=frac_ambig, auroc_entropy_vs_probe_error_test211=auc_err,
-            n_test_wrong=int(tm.wrong.sum()), auroc_entropy_vs_midrange_scale=auc_mid,
+            n_test_wrong=n_wrong, auroc_entropy_vs_midrange_scale=auc_mid,
             multi_organ_auroc="NOT COMPUTED - no multi-organ labels in Git (Gemma multi-label / Human Gold not exported)")
 save_json("exp4_soft_summary.json", summ)
 print(summ)

@@ -28,7 +28,7 @@ pca = PCA(32, random_state=SEED).fit(X[tr])
 pca_mse = float(((X[te] - pca.inverse_transform(pca.transform(X[te]))) ** 2).mean())
 torch.manual_seed(SEED)
 A = torch.tensor(X[tr] - mu); T = torch.tensor(X[te] - mu)
-enc = torch.nn.Linear(1280, 32, bias=False); dec = torch.nn.Linear(32, 1280, bias=False)
+enc = torch.nn.Linear(X.shape[1], 32, bias=False); dec = torch.nn.Linear(32, X.shape[1], bias=False)
 opt = torch.optim.Adam(list(enc.parameters()) + list(dec.parameters()), lr=1e-3)
 for ep in range(3000):
     opt.zero_grad(); loss = ((dec(enc(A)) - A) ** 2).mean(); loss.backward(); opt.step()
@@ -49,7 +49,8 @@ for k in range(5):
         r[f"rho_{o}"] = spearmanr(S[:, k], meta.organ == o)[0]
     o_r = {o: r[f"rho_{o}"] for o in ["leaf", "whole tree", "inflorescence", "fruit", "twig", "bark"]}
     lo, hi = min(o_r, key=o_r.get), max(o_r, key=o_r.get)
-    r["reading"] = f"low end ~ {lo}, high end ~ {hi}"
+    r["reading"] = (f"low end ~ {lo}, high end ~ {hi}" if max(abs(o_r[lo]), abs(o_r[hi])) >= 0.2
+                    else "no clear organ correlate (all |rho|<0.2)")
     rows.append(r)
     order = np.argsort(S[:, k])
     ends[k + 1] = dict(low=meta.iloc[order[:6]][["image_id", "thumb", "species", "organ", "shot_scale"]].to_dict("records"),

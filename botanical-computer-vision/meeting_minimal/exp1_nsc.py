@@ -53,7 +53,7 @@ Z = pca.transform(X)
 grid = np.round(np.concatenate([[0], np.linspace(0.25, 8, 32)]), 3)
 gkf = GroupKFold(5)
 results, curves = {}, []
-for task, ycol in [("organ (external label)", "organ"), ("grouping approximation: EfficientNet K=20 cluster ID", "eff_k20")]:
+for task, ycol in [("organ (external label)", "organ"), ("grouping approximation: own K=20 cluster ID", "own_k20")]:
     y = meta[ycol].astype(str).values
     keep = y != "other"
     trk, tek = tr & keep, te & keep

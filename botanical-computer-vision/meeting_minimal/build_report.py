@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
+import crossmodel
+
 from common import OUT, load
 
 H = Path(__file__).resolve().parent
@@ -45,7 +47,7 @@ def section(n, title, ask, did, result, means, badges):
 
 secs = []
 # 1 NSC
-o = s1["results"]["organ (external label)"]; g = s1["results"]["grouping approximation: EfficientNet K=20 cluster ID"]
+o = s1["results"]["organ (external label)"]; g = [v for k, v in s1["results"].items() if k.startswith("grouping")][0]
 nsc_tab = pd.DataFrame([dict(task=t, n_train=r["n_train"], n_test=r["n_test"], classes=r["n_classes"],
                              delta_1se=r["one_se_delta"], coords_1se=r["test"]["delta_1se"]["coords_any_class"],
                              coords_per_class_1se=r["test"]["delta_1se"]["coords_mean_per_class"],
@@ -83,7 +85,7 @@ secs.append(section(3, "Activation mapping（Grad-CAM ＋ 遮挡对照）", "Eff
     f"EfficientNet-B0 权重 + 1,641 张原图均可得，因此做了真实计算（CPU fp32）。先复核：重新嵌入 40 张图与库存向量余弦中位数 {s3['reembed_cosine_median']:.4f}（最低 {s3['reembed_cosine_min']:.4f}）。"
     "目标分数 = 图像嵌入与 K=20 簇中心的余弦。每簇按到中心距离抽 2 个核心 + 2 个边界（seed 42，非手选，共 80 张）。"
     "遮挡对照：把 Grad-CAM 最高的 12/49 格换成均值灰，对比 10 次随机 12 格。合理性检查：重置最后一个特征块后热图应改变。"
-    "<b>BioCLIP / DINOv3 未做</b>：Git 中没有其原始向量，本轮也未在 CPU 上加载它们的权重。",
+    "<b>BioCLIP / DINOv3 未做</b>：需要加载它们的模型权重（原始向量后来已恢复，见附录）。",
     f"Grad-CAM 遮挡导致的分数下降大于随机遮挡的比例：{s3['frac_top_cam_beats_random']:.0%}（核心 {s3['frac_by_kind']['core']:.0%}，边界 {s3['frac_by_kind']['boundary']:.0%}）；"
     f"下降中位数 {s3['median_drop_top']:.3f}，随机为 {s3['median_drop_random']:.3f}。最后一块随机化后与原热图的 Spearman 中位数为 {s3['sanity_spearman_vs_randomised_last_block_median']:.2f}（热图依赖权重，检查通过）。"
     "<img src='results/exp3_gradcam_cases.png' alt='Grad-CAM cases'><p>上图是固定规则选出的 8 例（4 个最大簇各取核心、边界各 1 张）。例如 c0 核心一例中，热点在图片上方的背景，而不在花序上。</p>",
@@ -138,12 +140,23 @@ cs = s7["cases"]
 pick = ["centroid c14", "centroid c5", "centroid c0", "centroid c13", "PC1 -2SD", "PC1 +2SD"]
 html7 = "".join(f"<h4>{p}</h4>{strip(cs[p], cap=lambda r: f'{r['organ']} · {r['shot_scale']} · cos {r['cos']:.2f}')}" for p in pick)
 secs.append(section(7, "反演：检索最近的真实图片", "某个簇中心 / 某个轴方向上的点“长什么样”？",
-    "不训练生成模型。在完整的 1,280 维空间中，用余弦相似度检索离以下潜在点最近的 6 张真实图片：20 个 EfficientNet K=20 簇中心，以及 PC1 / PC2 的 均值 ± 2SD 点（重新归一化）。",
+    "不训练生成模型。在完整的 1,280 维 EfficientNet 空间中，用余弦相似度检索离以下潜在点最近的 6 张真实图片：20 个 EfficientNet K=20 簇中心，以及 PC1 / PC2 的 均值 ± 2SD 点（重新归一化）。",
     table(r7[r7.point.str.startswith("centroid")], ["point", "cluster_size", "cluster_dominant_organ", "cluster_dominant_share", "top1_cos",
                                                     "top6_in_cluster", "top6_share_dominant_organ", "top6_n_species"], d=2) + html7,
     f"簇中心的近邻平均有 {s7['mean_top6_in_cluster']:.1f}/6 张属于该簇，主导器官占比 {s7['mean_top6_share_dominant_organ']:.0%}，高于簇整体的 {s7['mean_cluster_dominant_share']:.0%}："
     "检索出的是该簇的“典型”图片（会夸大簇的纯度，展示时需注意）。PC1 −2SD → 近景叶片，+2SD → 远景整树，与第 5 项一致。这是检索，不是图像生成。",
     ["v", "e"]))
+
+cm = crossmodel.rows()
+appendix = ""
+if len(cm) > 1:
+    axes_html = "".join(f"<h4>{n}：PC1–3</h4>" + table(crossmodel.axes(n).head(3)[["pc", "var", "rho_scale_close", "rho_brightness", "reading"]], d=2)
+                        for n in crossmodel.DIRS if (crossmodel.DIRS[n] / "exp5_axis_table.csv").exists())
+    appendix = (f"<section id=e8><h2>附：同样的纯向量实验在 BioCLIP 2.5 和 DINOv3 上的结果</h2><div>{BADGE['v']}</div>"
+                "<p>主实验跑完后，从 Drive 恢复了 BioCLIP 2.5（1,641 × 1,024）和 DINOv3（1,641 × 768）的原始向量，记录了 SHA-256，并核对了 image_id 顺序和 split 与 manifest 一致。"
+                "第 1、4、5、6、7 项用 <code>FGV_MODEL=bioclip|dinov3</code> 原样重跑，结果在 results/bioclip/ 和 results/dinov3/。"
+                "第 3 项仍需要 BioCLIP / DINOv3 的模型权重。NSC 的分组任务和检索使用各模型自己已有的 K=20 簇。熵对错误的 AUROC 只有 EfficientNet 有，因为其他模型的逐图预测不在 Git 中。</p>"
+                + table(cm) + axes_html + "<p>" + crossmodel.NOTE_ZH + "</p></section>")
 
 css = """
 :root{--bg:#fbfaf7;--fg:#1d1f1c;--mut:#5c6159;--line:#dcdcd4;--card:#fff;--v:#1f6f43;--e:#8a5a00;--x:#9b2c2c;--r:#3b5b92}
@@ -161,14 +174,15 @@ head = f"""<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=vie
 <title>Minimal Meeting Experiments</title><style>{css}</style></head><body><main>
 <h1>七个方向的最小实验 · 2026-10-30</h1>
 <p class=note>主数据：EfficientNet-B0 原始向量（Git，SHA-256 已校验，1,641 个 image_id 与 individual_disjoint.csv 的划分逐一核对一致）。
-BioCLIP / DINOv3 原始向量不在 Git 中——只使用它们已有的 cluster ID（第 2 项），其余依赖原始向量的部分记为受阻，待原始 embedding 上传后可直接复跑。
+第 1–7 项在 EfficientNet 上运行；BioCLIP / DINOv3 在第 2 项中通过已有的 cluster ID 参与，文末附录用恢复的原始向量重跑了纯向量实验。
 图片按 URL 从 bioimages.vanderbilt.edu 加载。标签：器官 = BioImages organ_category（单标签）；尺度 = BioImages + Gemma（暂定）。</p>
 <p>{' '.join(BADGE.values())}</p>
 <p class=note><b>经验证</b> = 有预先固定的协议、held-out 或重采样对照、可从脚本复现的数值。<b>探索演示</b> = 个例图片、未经独立标签验证的解读。</p>
-<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}</nav>"""
+<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}{'<a href=#e8>附：三模型</a>' if appendix else ''}</nav>"""
 foot = """<section><h2>复现</h2><pre>cd botanical-computer-vision/meeting_minimal
 bash fetch_images.sh          # 下载 1,641 张原图 + 缩略图到 /home/user/imgcache（不进 Git）
-bash run_all.sh               # 依次运行 exp1–exp7 并生成本页</pre>
+bash run_all.sh               # 在 EfficientNet 上依次运行 exp1–exp7 并生成本页
+bash run_models.sh            # 在 BioCLIP / DINOv3 上跑纯向量实验，并重新生成两份报告</pre>
 <p class=note>依赖：python 3、numpy、pandas、scikit-learn 1.9、scipy、matplotlib、torch/torchvision 2.x（CPU）。所有随机种子为 42。逐项输出见 results/。</p></section></main></body></html>"""
-(H / "index.html").write_text(head + "".join(secs) + foot)
+(H / "index.html").write_text(head + "".join(secs) + appendix + foot)
 print("wrote", H / "index.html")

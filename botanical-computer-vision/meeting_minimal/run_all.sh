@@ -6,3 +6,4 @@ for e in exp1_nsc exp2_enrichment exp3_activation exp4_soft exp5_axes exp6_pca_f
   echo "== $e"; python3 "$e.py"
 done
 python3 build_report.py
+python3 build_report_en.py

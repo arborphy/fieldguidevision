@@ -1,0 +1,539 @@
+{
+  "inputs": {
+    "model": "bioclip",
+    "embeddings_npz": "data/embeddings/bioclip25_strict/embeddings.npz",
+    "sha256": "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "recovered_ae_source": "hosted site scale/meeting/ (Experiment 6 table)",
+  "linear_ae_sanity": {
+    "pca32_test_mse": 0.0002837954380083829,
+    "linear_ae32_test_mse": 0.00028370285872370005,
+    "ratio": 0.9996737816318241,
+    "epochs": 3000
+  },
+  "axes": [
+    {
+      "pc": 1,
+      "var": 0.0870225727558136,
+      "rho_scale_close": 0.033109136648373345,
+      "rho_brightness": -0.0012104966135357445,
+      "rho_leaf": 0.05114320956268082,
+      "rho_whole tree": -0.125813401614908,
+      "rho_inflorescence": 0.14223049405321672,
+      "rho_fruit": 0.12076474827617081,
+      "rho_twig": -0.02691701915434033,
+      "rho_bark": -0.16405058693279947,
+      "reading": "no clear organ correlate (all |rho|<0.2)"
+    },
+    {
+      "pc": 2,
+      "var": 0.04903504252433777,
+      "rho_scale_close": 0.11526189913391358,
+      "rho_brightness": -0.046150620931888535,
+      "rho_leaf": -0.19382670216799525,
+      "rho_whole tree": -0.09810805793043455,
+      "rho_inflorescence": 0.18753201396281424,
+      "rho_fruit": 0.06539285519494734,
+      "rho_twig": 0.06908178414450668,
+      "rho_bark": -0.0009136610980781122,
+      "reading": "no clear organ correlate (all |rho|<0.2)"
+    },
+    {
+      "pc": 3,
+      "var": 0.035432491451501846,
+      "rho_scale_close": -0.45250350052182,
+      "rho_brightness": 0.3394527417062488,
+      "rho_leaf": -0.24714043013593817,
+      "rho_whole tree": 0.47951731412312787,
+      "rho_inflorescence": -0.10073071643305322,
+      "rho_fruit": -0.06265320055469167,
+      "rho_twig": -0.17129975294767286,
+      "rho_bark": 0.11645179101679462,
+      "reading": "low end ~ leaf, high end ~ whole tree"
+    },
+    {
+      "pc": 4,
+      "var": 0.034587591886520386,
+      "rho_scale_close": 0.39600916799940983,
+      "rho_brightness": -0.279603922147303,
+      "rho_leaf": 0.2733492920240006,
+      "rho_whole tree": -0.3661669287802216,
+      "rho_inflorescence": 0.022752071063686118,
+      "rho_fruit": 0.03467013653900996,
+      "rho_twig": 0.13039059234954567,
+      "rho_bark": -0.10407736720457536,
+      "reading": "low end ~ whole tree, high end ~ leaf"
+    },
+    {
+      "pc": 5,
+      "var": 0.0287026260048151,
+      "rho_scale_close": -0.10376272638985673,
+      "rho_brightness": 0.11323059408283484,
+      "rho_leaf": 0.1433044856095447,
+      "rho_whole tree": 0.10152124705030985,
+      "rho_inflorescence": -0.11441630182004028,
+      "rho_fruit": -0.08781943655996968,
+      "rho_twig": 0.02854145733654104,
+      "rho_bark": -0.06692883324907684,
+      "reading": "no clear organ correlate (all |rho|<0.2)"
+    }
+  ],
+  "ends": {
+    "1": {
+      "low": [
+        {
+          "image_id": "baskauf/90718",
+          "thumb": "baskauf_90718.jpg",
+          "species": "Quercus muehlenbergii",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/12318",
+          "thumb": "baskauf_12318.jpg",
+          "species": "Quercus muehlenbergii",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/90876",
+          "thumb": "baskauf_90876.jpg",
+          "species": "Aesculus glabra",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "kirchoff/em2577",
+          "thumb": "kirchoff_em2577.jpg",
+          "species": "Quercus palustris",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "ssmv/2-886-02",
+          "thumb": "ssmv_2-886-02.jpg",
+          "species": "Acer saccharum",
+          "organ": "bark",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/90950",
+          "thumb": "baskauf_90950.jpg",
+          "species": "Quercus muehlenbergii",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        }
+      ],
+      "high": [
+        {
+          "image_id": "baskauf/15951",
+          "thumb": "baskauf_15951.jpg",
+          "species": "Toxicodendron radicans",
+          "organ": "fruit",
+          "shot_scale": "mid-range"
+        },
+        {
+          "image_id": "baskauf/28649",
+          "thumb": "baskauf_28649.jpg",
+          "species": "Cephalanthus occidentalis",
+          "organ": "inflorescence",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/20454",
+          "thumb": "baskauf_20454.jpg",
+          "species": "Toxicodendron radicans",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/15729",
+          "thumb": "baskauf_15729.jpg",
+          "species": "Lindera benzoin",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/26705",
+          "thumb": "baskauf_26705.jpg",
+          "species": "Sambucus nigra",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/15734",
+          "thumb": "baskauf_15734.jpg",
+          "species": "Cephalanthus occidentalis",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        }
+      ]
+    },
+    "2": {
+      "low": [
+        {
+          "image_id": "kirchoff/em2343",
+          "thumb": "kirchoff_em2343.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/em2598",
+          "thumb": "kirchoff_em2598.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/12448",
+          "thumb": "baskauf_12448.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/12447",
+          "thumb": "baskauf_12447.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/em2321",
+          "thumb": "kirchoff_em2321.jpg",
+          "species": "Quercus palustris",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/em1971",
+          "thumb": "kirchoff_em1971.jpg",
+          "species": "Quercus palustris",
+          "organ": "twig",
+          "shot_scale": "mid-range"
+        }
+      ],
+      "high": [
+        {
+          "image_id": "baskauf/58506",
+          "thumb": "baskauf_58506.jpg",
+          "species": "Ilex verticillata",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/33651",
+          "thumb": "baskauf_33651.jpg",
+          "species": "Gymnocladus dioicus",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/26493",
+          "thumb": "baskauf_26493.jpg",
+          "species": "Viburnum lantanoides",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/33649",
+          "thumb": "baskauf_33649.jpg",
+          "species": "Gymnocladus dioicus",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/51691",
+          "thumb": "baskauf_51691.jpg",
+          "species": "Gymnocladus dioicus",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/51704",
+          "thumb": "baskauf_51704.jpg",
+          "species": "Gymnocladus dioicus",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        }
+      ]
+    },
+    "3": {
+      "low": [
+        {
+          "image_id": "baskauf/32173",
+          "thumb": "baskauf_32173.jpg",
+          "species": "Rhus aromatica",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/10942",
+          "thumb": "baskauf_10942.jpg",
+          "species": "Rhus copallinum",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/12583",
+          "thumb": "baskauf_12583.jpg",
+          "species": "Rhus copallinum",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/em2610",
+          "thumb": "kirchoff_em2610.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "mid-range"
+        },
+        {
+          "image_id": "baskauf/35731",
+          "thumb": "baskauf_35731.jpg",
+          "species": "Zanthoxylum americanum",
+          "organ": "bark",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/em2070",
+          "thumb": "kirchoff_em2070.jpg",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        }
+      ],
+      "high": [
+        {
+          "image_id": "baskauf/24520",
+          "thumb": "baskauf_24520.jpg",
+          "species": "Carpinus caroliniana",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/91143",
+          "thumb": "baskauf_91143.jpg",
+          "species": "Fagus grandifolia",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/91107",
+          "thumb": "baskauf_91107.jpg",
+          "species": "Ulmus americana",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/38151",
+          "thumb": "baskauf_38151.jpg",
+          "species": "Betula lenta",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/90762",
+          "thumb": "baskauf_90762.jpg",
+          "species": "Ulmus americana",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/38156",
+          "thumb": "baskauf_38156.jpg",
+          "species": "Betula lenta",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        }
+      ]
+    },
+    "4": {
+      "low": [
+        {
+          "image_id": "baskauf/10978",
+          "thumb": "baskauf_10978.jpg",
+          "species": "Ailanthus altissima",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/10997",
+          "thumb": "baskauf_10997.jpg",
+          "species": "Ailanthus altissima",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/90955",
+          "thumb": "baskauf_90955.jpg",
+          "species": "Juglans nigra",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/11106",
+          "thumb": "baskauf_11106.jpg",
+          "species": "Ailanthus altissima",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/90959",
+          "thumb": "baskauf_90959.jpg",
+          "species": "Ailanthus altissima",
+          "organ": "whole tree",
+          "shot_scale": "distant"
+        },
+        {
+          "image_id": "baskauf/11102",
+          "thumb": "baskauf_11102.jpg",
+          "species": "Ailanthus altissima",
+          "organ": "inflorescence",
+          "shot_scale": "mid-range"
+        }
+      ],
+      "high": [
+        {
+          "image_id": "baskauf/38140",
+          "thumb": "baskauf_38140.jpg",
+          "species": "Betula lenta",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/11510",
+          "thumb": "baskauf_11510.jpg",
+          "species": "Betula alleghaniensis",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/38139",
+          "thumb": "baskauf_38139.jpg",
+          "species": "Betula lenta",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/15692",
+          "thumb": "baskauf_15692.jpg",
+          "species": "Carpinus caroliniana",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/38144",
+          "thumb": "baskauf_38144.jpg",
+          "species": "Betula lenta",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/15078",
+          "thumb": "baskauf_15078.jpg",
+          "species": "Carpinus caroliniana",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        }
+      ]
+    },
+    "5": {
+      "low": [
+        {
+          "image_id": "baskauf/10377",
+          "thumb": "baskauf_10377.jpg",
+          "species": "Cornus florida",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/10471",
+          "thumb": "baskauf_10471.jpg",
+          "species": "Cornus florida",
+          "organ": "bark",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/10603",
+          "thumb": "baskauf_10603.jpg",
+          "species": "Cornus florida",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "kirchoff/b5093",
+          "thumb": "kirchoff_b5093.jpg",
+          "species": "Cornus florida",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/34165",
+          "thumb": "baskauf_34165.jpg",
+          "species": "Amelanchier arborea",
+          "organ": "fruit",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/10535",
+          "thumb": "baskauf_10535.jpg",
+          "species": "Cornus florida",
+          "organ": "inflorescence",
+          "shot_scale": "close-up"
+        }
+      ],
+      "high": [
+        {
+          "image_id": "baskauf/55877",
+          "thumb": "baskauf_55877.jpg",
+          "species": "Juglans cinerea",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/12501",
+          "thumb": "baskauf_12501.jpg",
+          "species": "Fraxinus americana",
+          "organ": "leaf",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/55876",
+          "thumb": "baskauf_55876.jpg",
+          "species": "Juglans cinerea",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/11843",
+          "thumb": "baskauf_11843.jpg",
+          "species": "Juglans cinerea",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/11840",
+          "thumb": "baskauf_11840.jpg",
+          "species": "Juglans cinerea",
+          "organ": "twig",
+          "shot_scale": "close-up"
+        },
+        {
+          "image_id": "baskauf/10688",
+          "thumb": "baskauf_10688.jpg",
+          "species": "Juglans nigra",
+          "organ": "inflorescence",
+          "shot_scale": "mid-range"
+        }
+      ]
+    }
+  }
+}

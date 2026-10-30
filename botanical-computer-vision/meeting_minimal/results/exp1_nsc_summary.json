@@ -1,6 +1,7 @@
 {
   "inputs": {
-    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "model": "efficientnet",
+    "embeddings_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
     "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
     "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
     "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
@@ -107,7 +108,7 @@
       },
       "ratio_F1_1se_over_delta0": 0.9710080719032922
     },
-    "grouping approximation: EfficientNet K=20 cluster ID": {
+    "grouping approximation: own K=20 cluster ID": {
       "n_train": 1181,
       "n_test": 211,
       "n_classes": 20,
