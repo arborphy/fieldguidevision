@@ -59,3 +59,29 @@ NOTE_ZH = ("解读：(1) 恢复的向量就是之前用的那批：三个模型�
            "(5) 三个模型的 GMM 软归属都接近硬分配（最大归属 &lt;0.6 的图片 ≤1.3%）。"
            "(6) 簇中心检索出的近邻中，主导器官占比在 DINOv3 / EfficientNet 为 90–91%，在 BioCLIP 只有 50%，因为 BioCLIP 的簇不是器官簇。"
            "单次划分，每个设置单个种子；标注为描述性的部分只作描述。")
+
+
+def nsc_details(lang, strip, table):
+    """Collapsible block for item 1: 3-model NSC curve, EfficientNet organ fingerprint, real images per kept PC."""
+    p = R / "exp1b_nsc_viz.json"
+    if not p.exists():
+        return ""
+    v = json.loads(p.read_text())
+    zh = lang == "zh"
+    rows = "".join(
+        f"<h4>PC{a['pc']} · {'用于' if zh else 'used by'}: {a['used_by']} · {a['reading']} · "
+        f"ρ {'尺度' if zh else 'scale'} {a['rho_scale_close']:.2f}, ρ {'亮度' if zh else 'brightness'} {a['rho_brightness']:.2f}</h4>"
+        f"<div class=ends><div><small>− {'端' if zh else 'end'}</small>{strip(a['low'])}</div>"
+        f"<div><small>+ {'端' if zh else 'end'}</small>{strip(a['high'])}</div></div>" for a in v["axes"])
+    t = (("三模型对比：器官任务的准确率—稀疏度曲线", "EfficientNet 保留的 22 个维度长什么样",
+          "热图：行是器官，列是 NSC 保留的主方向；红色 = 该器官偏向这个方向的正端，蓝色 = 偏向负端，白色 = 对该器官不重要（被压成 0）。"
+          "下面每行是一个方向两端各 4 张真实照片。只有前 7 个方向与器官有明显相关（|ρ|≥0.2），其余方向只对个别器官有用，含义需要看照片判断。"
+          "BioCLIP / DINOv3 在 1-SE Δ 下全部 64 个维度都保留，因此只画曲线、不画热图。方向是数学方向，名称由照片和相关性推断。")
+         if zh else
+         ("3-model comparison: accuracy vs sparsity, organ task", "What the 22 EfficientNet coordinates look like",
+          "Heatmap: rows = organs, columns = PCs kept by NSC; red = organ sits at the + end, blue = − end, white = dropped for that organ. "
+          "Below, each row shows 4 real images at each end of one PC. Only the first 7 PCs correlate clearly with an organ (|ρ|≥0.2); the rest matter "
+          "for one or two organs and have to be read from the images. BioCLIP / DINOv3 keep all 64 coordinates at the 1-SE Δ, so they get the curve but "
+          "no heatmap. PCs are mathematical directions; names are inferred from images and correlations."))
+    return (f"<details><summary>{t[0]}</summary><img src='results/exp1b_nsc_3models.png' alt='NSC 3 models'></details>"
+            f"<details><summary>{t[1]}</summary><p>{t[2]}</p><img src='results/exp1b_nsc_heatmap.png' alt='NSC heatmap'>{rows}</details>")

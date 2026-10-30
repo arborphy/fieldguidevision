@@ -56,7 +56,7 @@ nsc_tab = pd.DataFrame([dict(task=t, n_train=r["n_train"], n_test=r["n_test"], c
 secs.append(section(1, "NSC：性能—保留坐标数曲线", "用很少的 PCA 坐标能否保持器官区分 / 复现现有聚类分组？",
     "EfficientNet-B0 原始向量 → PCA-64（仅 train 拟合，白化）。自写 NSC（Tibshirani 2002）；Δ 网格 33 点；train 上按个体 GroupKFold 5 折选 Δ（1-SE 规则），test 只评估一次。"
     "任务 A：外部器官标签（BioImages organ_category，7 类）。任务 B：<b>分组近似任务</b>——目标是已有 EfficientNet K=20 cluster ID，与输入同源，具循环性。",
-    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>",
+    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>" + crossmodel.nsc_details("zh", strip, table),
     f"器官：1-SE Δ={o['one_se_delta']} 时只剩 {o['test']['delta_1se']['coords_any_class']}/64 个坐标（每类平均 {o['test']['delta_1se']['coords_mean_per_class']:.1f} 个），"
     f"test macro-F1 {o['test']['delta_1se']['test_macroF1']:.3f}，Δ=0 为 {o['test']['delta0']['test_macroF1']:.3f}（保留 {o['ratio_F1_1se_over_delta0']:.0%}）。"
     f"而分组近似任务几乎不能稀疏化（{g['test']['delta_1se']['coords_any_class']}/64）——K-means 分组是分散在多数主成分上的。"
@@ -168,7 +168,7 @@ dt{font-weight:600;margin-top:10px}dd{margin:2px 0 0}img{max-width:100%;height:a
 .b{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid currentColor;margin-right:4px}.v{color:var(--v)}.e{color:var(--e)}.x{color:var(--x)}.r{color:var(--r)}
 .tw{overflow-x:auto}table{border-collapse:collapse;font-size:12px;margin:6px 0}td,th{border-bottom:1px solid var(--line);padding:3px 7px;text-align:left;white-space:nowrap}
 .strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}figure{margin:0;flex:0 0 120px}figure img{width:120px;height:90px;object-fit:cover;margin:0;border-radius:4px}
-figcaption{font-size:10.5px;color:var(--mut);line-height:1.3}nav a{margin-right:10px;color:var(--fg)}.note{color:var(--mut);font-size:13px}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600}.ends{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ends>div{min-width:0}@media(max-width:700px){.ends{grid-template-columns:1fr}}figcaption{font-size:10.5px;color:var(--mut);line-height:1.3}nav a{margin-right:10px;color:var(--fg)}.note{color:var(--mut);font-size:13px}
 """
 head = f"""<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>Minimal Meeting Experiments</title><style>{css}</style></head><body><main>

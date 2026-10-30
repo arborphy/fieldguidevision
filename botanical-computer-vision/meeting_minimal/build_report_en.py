@@ -59,7 +59,7 @@ secs.append(section(1, "NSC: performance vs number of retained coordinates",
     "5-fold GroupKFold on train (groups = individual plant) with the one-standard-error rule; test evaluated once. "
     "Task A: external organ label (BioImages organ_category, 7 classes). Task B: <b>grouping-approximation task</b>, where the target is the "
     "existing EfficientNet K=20 cluster ID. That target comes from the same vectors, so the task is circular.",
-    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>",
+    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>" + crossmodel.nsc_details("en", strip, table),
     f"Organ: at the 1-SE Δ={o['one_se_delta']} only {o['test']['delta_1se']['coords_any_class']}/64 coordinates remain "
     f"({o['test']['delta_1se']['coords_mean_per_class']:.1f} per class on average). Test macro-F1 is {o['test']['delta_1se']['test_macroF1']:.3f} "
     f"vs {o['test']['delta0']['test_macroF1']:.3f} at Δ=0 ({o['ratio_F1_1se_over_delta0']:.0%} retained). "
