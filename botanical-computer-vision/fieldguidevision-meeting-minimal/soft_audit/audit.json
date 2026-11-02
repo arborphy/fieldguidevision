@@ -1,0 +1,68 @@
+{
+  "selected_by": "minimum train BIC among converged 32-D candidates; no validation/test tuning",
+  "selected": {
+    "dim": 32,
+    "k": 5,
+    "covariance": "full",
+    "seed": 45,
+    "converged": true,
+    "n_iter": 13,
+    "train_BIC": -80191.76173356522,
+    "val_loglik": 40.03609303726046,
+    "val_mean_entropy": 0.02028114341038011,
+    "val_pmax_lt06": 0.008032128514056224,
+    "val_pmax_lt08": 0.028112449799196786,
+    "val_pmax_lt09": 0.04417670682730924,
+    "val_mean_effective_components": 1.0423011344137942,
+    "min_train_effective_membership": 142.99760513841832,
+    "train_components_effective_lt10": 0,
+    "val_organ_error_AUC": 0.768816588383549,
+    "val_midrange_AUC": 0.6052227342549923,
+    "warnings": ""
+  },
+  "organ_reference_probe": {
+    "model": "fixed C=10 balanced multinomial logistic regression on raw embeddings; train fit only",
+    "n_train": 1169,
+    "n_val": 246,
+    "n_val_wrong": 43,
+    "val_macroF1": 0.7515271707520433
+  },
+  "val_organ_error_AUC_CI95": [
+    0.6621273207843618,
+    0.866056740045156
+  ],
+  "val_midrange_AUC_CI95": [
+    0.4828109421734796,
+    0.7317373451385123
+  ],
+  "old_setting_reproduced": {
+    "frac_pmax_lt06": 0.014625228519195612,
+    "mean_seed_ARI": 0.6296525752059494,
+    "mean_entropy_rank_rho": 0.7442324880610075,
+    "original_error_target": "species classification (all_predictions.csv), not organ classification",
+    "rerun_note": "Same configuration, current sklearn 1.8.0/float64; archived report names sklearn 1.9 and float32 inputs. Not an exact numeric reproduction."
+  },
+  "multilabel_audit_filled_cells": {
+    "visible_leaf": 0,
+    "visible_twig": 0,
+    "visible_bark": 0,
+    "visible_flower": 0,
+    "visible_fruit": 0,
+    "visible_cone": 0,
+    "visible_seed": 0,
+    "visible_whole_plant": 0,
+    "ambiguous": 0,
+    "acceptable_labels": 0
+  },
+  "pca_train_variance": {
+    "8": 0.3452691530740657,
+    "16": 0.4543708372983319,
+    "32": 0.5699241205453531
+  },
+  "n_train": 1181,
+  "n_val": 249,
+  "test_used": false,
+  "input_sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+  "sklearn": "1.8.0",
+  "python": "3.12.14"
+}
