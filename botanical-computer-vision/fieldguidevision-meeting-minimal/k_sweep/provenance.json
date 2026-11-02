@@ -1,0 +1,25 @@
+{
+  "input_sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+  "k": [
+    5,
+    10,
+    15,
+    20,
+    30,
+    50
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "n_train": 1181,
+  "n_val": 249,
+  "test_used": false,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "sklearn": "1.8.0",
+  "protocol": "Reproduce K sensitivity from checked-in vectors. Run from any directory.\nKMeans: raw L2-normalized EfficientNet vectors; fit train, freeze and assign val.\nFive seeds x ten initializations. No test use; no automatic K selection.\nNSC approximates each seed-42 partition using PCA-64 fit separately in each\ntraining-group CV fold. Teacher partition fixed from all train (descriptive\npartition approximation, not independent biological-label validation).\n"
+}
