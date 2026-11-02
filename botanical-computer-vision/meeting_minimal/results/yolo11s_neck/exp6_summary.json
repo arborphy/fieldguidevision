@@ -1,0 +1,101 @@
+{
+  "inputs": {
+    "model": "yolo11s_neck",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/yolo11s_strict/yolo11s_neck_multiscale_embeddings.npz",
+    "sha256": "c96c5c0b37803bca759ea403e8ca4d38b3cf6192d2ddf256737e97bb88dcbf15",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "d_star_rule": "smallest d with val 15-NN>=0.85 and species probe within 1pp of full",
+  "d_star": 128,
+  "two_d_all_images": {
+    "knn15_overlap_all1641": 0.16286816981515334,
+    "trustworthiness_all1641": 0.9150554384241673
+  },
+  "table": [
+    {
+      "d": 2,
+      "train_explained_var": 0.5920228958129883,
+      "val_recon_r2": 0.5575535297393799,
+      "val_knn15_overlap": 0.4508701472556894,
+      "val_trustworthiness": 0.9250476833588039,
+      "probe_species_macroF1": 0.004838150689679074,
+      "probe_organ_macroF1": 0.26807357986748054,
+      "kmeans20_ARI_vs_full": 0.2856029568934806
+    },
+    {
+      "d": 8,
+      "train_explained_var": 0.7938499450683594,
+      "val_recon_r2": 0.7613381147384644,
+      "val_knn15_overlap": 0.7764390896921017,
+      "val_trustworthiness": 0.990357891743967,
+      "probe_species_macroF1": 0.020758478592579975,
+      "probe_organ_macroF1": 0.42288961038961037,
+      "kmeans20_ARI_vs_full": 0.4920896363399939
+    },
+    {
+      "d": 16,
+      "train_explained_var": 0.8586969375610352,
+      "val_recon_r2": 0.8333173990249634,
+      "val_knn15_overlap": 0.8634538152610443,
+      "val_trustworthiness": 0.9964601769911504,
+      "probe_species_macroF1": 0.030786679173775946,
+      "probe_organ_macroF1": 0.5021200106724386,
+      "kmeans20_ARI_vs_full": 0.5671549975393405
+    },
+    {
+      "d": 32,
+      "train_explained_var": 0.9118185639381409,
+      "val_recon_r2": 0.8906291723251343,
+      "val_knn15_overlap": 0.9167336010709506,
+      "val_trustworthiness": 0.9986305102415562,
+      "probe_species_macroF1": 0.04981085469807274,
+      "probe_organ_macroF1": 0.5350042937568865,
+      "kmeans20_ARI_vs_full": 0.5819198955887356
+    },
+    {
+      "d": 64,
+      "train_explained_var": 0.9513061046600342,
+      "val_recon_r2": 0.9347442984580994,
+      "val_knn15_overlap": 0.948326639892905,
+      "val_trustworthiness": 0.9993579035907643,
+      "probe_species_macroF1": 0.060315133149392706,
+      "probe_organ_macroF1": 0.6206581967563436,
+      "kmeans20_ARI_vs_full": 0.5606579015926498
+    },
+    {
+      "d": 128,
+      "train_explained_var": 0.9780920147895813,
+      "val_recon_r2": 0.9650644659996033,
+      "val_knn15_overlap": 0.974029451137885,
+      "val_trustworthiness": 0.9998080818850624,
+      "probe_species_macroF1": 0.0734591666558681,
+      "probe_organ_macroF1": 0.5618862862283915,
+      "kmeans20_ARI_vs_full": 0.548021627703463
+    },
+    {
+      "d": 256,
+      "train_explained_var": 0.9930621385574341,
+      "val_recon_r2": 0.9839416146278381,
+      "val_knn15_overlap": 0.9898259705488622,
+      "val_trustworthiness": 0.99994195069363,
+      "probe_species_macroF1": 0.07345906702333484,
+      "probe_organ_macroF1": 0.5574689908485777,
+      "kmeans20_ARI_vs_full": 0.6245678099867211
+    },
+    {
+      "d": "full",
+      "train_explained_var": 1.0,
+      "val_recon_r2": 1.0,
+      "val_knn15_overlap": 1.0,
+      "val_trustworthiness": 1.0,
+      "probe_species_macroF1": 0.07354585387482758,
+      "probe_organ_macroF1": 0.6199930970087822,
+      "kmeans20_ARI_vs_full": 1.0
+    }
+  ]
+}

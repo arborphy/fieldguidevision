@@ -1,0 +1,589 @@
+{
+  "inputs": {
+    "model": "yolo11s_neck",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/yolo11s_strict/yolo11s_neck_multiscale_embeddings.npz",
+    "sha256": "c96c5c0b37803bca759ea403e8ca4d38b3cf6192d2ddf256737e97bb88dcbf15",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "per_k": [
+    {
+      "K": 3.0,
+      "top6_in_cluster": 6.0,
+      "top6_share_dominant_organ": 0.5555555555555555,
+      "cluster_dominant_share": 0.3890177478105867
+    },
+    {
+      "K": 7.0,
+      "top6_in_cluster": 6.0,
+      "top6_share_dominant_organ": 0.6666666666666667,
+      "cluster_dominant_share": 0.5111744778729072
+    },
+    {
+      "K": 20.0,
+      "top6_in_cluster": 6.0,
+      "top6_share_dominant_organ": 0.7166666666666667,
+      "cluster_dominant_share": 0.6014996768353659
+    }
+  ],
+  "main_k": 7,
+  "mean_top6_in_cluster": 6.0,
+  "mean_top6_share_dominant_organ": 0.6666666666666669,
+  "mean_cluster_dominant_share": 0.5111744778729072,
+  "cases": {
+    "K7 centroid c0": [
+      {
+        "image_id": "baskauf/15912",
+        "thumb": "baskauf_15912.jpg",
+        "species": "Ulmus rubra",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.992387056350708
+      },
+      {
+        "image_id": "baskauf/15276",
+        "thumb": "baskauf_15276.jpg",
+        "species": "Ostrya virginiana",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.9923701286315918
+      },
+      {
+        "image_id": "baskauf/49250",
+        "thumb": "baskauf_49250.jpg",
+        "species": "Betula alleghaniensis",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9922918081283569
+      },
+      {
+        "image_id": "baskauf/15363",
+        "thumb": "baskauf_15363.jpg",
+        "species": "Platanus occidentalis",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9920089244842529
+      },
+      {
+        "image_id": "baskauf/38139",
+        "thumb": "baskauf_38139.jpg",
+        "species": "Betula lenta",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.991756796836853
+      },
+      {
+        "image_id": "baskauf/15607",
+        "thumb": "baskauf_15607.jpg",
+        "species": "Ginkgo biloba",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9914224147796631
+      }
+    ],
+    "K7 centroid c1": [
+      {
+        "image_id": "baskauf/11958",
+        "thumb": "baskauf_11958.jpg",
+        "species": "Ginkgo biloba",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9966886043548584
+      },
+      {
+        "image_id": "baskauf/12460",
+        "thumb": "baskauf_12460.jpg",
+        "species": "Fraxinus americana",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9958392381668091
+      },
+      {
+        "image_id": "baskauf/10987",
+        "thumb": "baskauf_10987.jpg",
+        "species": "Nyssa sylvatica",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9957271218299866
+      },
+      {
+        "image_id": "baskauf/31288",
+        "thumb": "baskauf_31288.jpg",
+        "species": "Pyrus calleryana",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9955007433891296
+      },
+      {
+        "image_id": "baskauf/15549",
+        "thumb": "baskauf_15549.jpg",
+        "species": "Sassafras albidum",
+        "organ": "bark",
+        "shot_scale": "mid-range",
+        "cos": 0.995206356048584
+      },
+      {
+        "image_id": "baskauf/15988",
+        "thumb": "baskauf_15988.jpg",
+        "species": "Gymnocladus dioicus",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9949996471405029
+      }
+    ],
+    "K7 centroid c2": [
+      {
+        "image_id": "baskauf/39273",
+        "thumb": "baskauf_39273.jpg",
+        "species": "Fagus grandifolia",
+        "organ": "inflorescence",
+        "shot_scale": "mid-range",
+        "cos": 0.9935102462768555
+      },
+      {
+        "image_id": "baskauf/50745",
+        "thumb": "baskauf_50745.jpg",
+        "species": "Ginkgo biloba",
+        "organ": "cone",
+        "shot_scale": "close-up",
+        "cos": 0.9932628273963928
+      },
+      {
+        "image_id": "baskauf/35968",
+        "thumb": "baskauf_35968.jpg",
+        "species": "Pyrus calleryana",
+        "organ": "fruit",
+        "shot_scale": "close-up",
+        "cos": 0.9932465553283691
+      },
+      {
+        "image_id": "baskauf/16418",
+        "thumb": "baskauf_16418.jpg",
+        "species": "Toxicodendron radicans",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.9931994080543518
+      },
+      {
+        "image_id": "baskauf/15387",
+        "thumb": "baskauf_15387.jpg",
+        "species": "Quercus alba",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.9931191205978394
+      },
+      {
+        "image_id": "baskauf/10504",
+        "thumb": "baskauf_10504.jpg",
+        "species": "Fagus grandifolia",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9927350282669067
+      }
+    ],
+    "K7 centroid c3": [
+      {
+        "image_id": "thomas/0014-01-06",
+        "thumb": "thomas_0014-01-06.jpg",
+        "species": "Aesculus glabra",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9951612949371338
+      },
+      {
+        "image_id": "baskauf/10981",
+        "thumb": "baskauf_10981.jpg",
+        "species": "Nyssa sylvatica",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9948708415031433
+      },
+      {
+        "image_id": "baskauf/15227",
+        "thumb": "baskauf_15227.jpg",
+        "species": "Ulmus americana",
+        "organ": "leaf",
+        "shot_scale": "mid-range",
+        "cos": 0.9947978258132935
+      },
+      {
+        "image_id": "baskauf/11920",
+        "thumb": "baskauf_11920.jpg",
+        "species": "Acer rubrum",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.994785726070404
+      },
+      {
+        "image_id": "baskauf/51814",
+        "thumb": "baskauf_51814.jpg",
+        "species": "Zanthoxylum americanum",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.994670033454895
+      },
+      {
+        "image_id": "baskauf/51815",
+        "thumb": "baskauf_51815.jpg",
+        "species": "Zanthoxylum americanum",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9944078326225281
+      }
+    ],
+    "K7 centroid c4": [
+      {
+        "image_id": "baskauf/35633",
+        "thumb": "baskauf_35633.jpg",
+        "species": "Ilex verticillata",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9925405383110046
+      },
+      {
+        "image_id": "baskauf/51398",
+        "thumb": "baskauf_51398.jpg",
+        "species": "Nyssa sylvatica",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9905630350112915
+      },
+      {
+        "image_id": "baskauf/31425",
+        "thumb": "baskauf_31425.jpg",
+        "species": "Amelanchier arborea",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9901431798934937
+      },
+      {
+        "image_id": "baskauf/26493",
+        "thumb": "baskauf_26493.jpg",
+        "species": "Viburnum lantanoides",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9900262355804443
+      },
+      {
+        "image_id": "baskauf/51013",
+        "thumb": "baskauf_51013.jpg",
+        "species": "Sassafras albidum",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9895980358123779
+      },
+      {
+        "image_id": "baskauf/11294",
+        "thumb": "baskauf_11294.jpg",
+        "species": "Acer saccharum",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.9895550608634949
+      }
+    ],
+    "K7 centroid c5": [
+      {
+        "image_id": "baskauf/19354",
+        "thumb": "baskauf_19354.jpg",
+        "species": "Ginkgo biloba",
+        "organ": "cone",
+        "shot_scale": "close-up",
+        "cos": 0.9939436912536621
+      },
+      {
+        "image_id": "baskauf/10515",
+        "thumb": "baskauf_10515.jpg",
+        "species": "Tsuga canadensis",
+        "organ": "cone",
+        "shot_scale": "mid-range",
+        "cos": 0.9935376644134521
+      },
+      {
+        "image_id": "thomas/0486-01-08",
+        "thumb": "thomas_0486-01-08.jpg",
+        "species": "Robinia pseudoacacia",
+        "organ": "fruit",
+        "shot_scale": "mid-range",
+        "cos": 0.9934424161911011
+      },
+      {
+        "image_id": "baskauf/10890",
+        "thumb": "baskauf_10890.jpg",
+        "species": "Sassafras albidum",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "cos": 0.9933480620384216
+      },
+      {
+        "image_id": "baskauf/35372",
+        "thumb": "baskauf_35372.jpg",
+        "species": "Ilex verticillata",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.993296205997467
+      },
+      {
+        "image_id": "baskauf/12462",
+        "thumb": "baskauf_12462.jpg",
+        "species": "Fraxinus americana",
+        "organ": "leaf",
+        "shot_scale": "mid-range",
+        "cos": 0.9932817220687866
+      }
+    ],
+    "K7 centroid c6": [
+      {
+        "image_id": "baskauf/15335",
+        "thumb": "baskauf_15335.jpg",
+        "species": "Populus deltoides",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.99773108959198
+      },
+      {
+        "image_id": "baskauf/91122",
+        "thumb": "baskauf_91122.jpg",
+        "species": "Celtis occidentalis",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9975836873054504
+      },
+      {
+        "image_id": "baskauf/11427",
+        "thumb": "baskauf_11427.jpg",
+        "species": "Picea rubens",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9973827600479126
+      },
+      {
+        "image_id": "baskauf/90972",
+        "thumb": "baskauf_90972.jpg",
+        "species": "Quercus rubra",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9972932934761047
+      },
+      {
+        "image_id": "baskauf/90969",
+        "thumb": "baskauf_90969.jpg",
+        "species": "Quercus rubra",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9970672726631165
+      },
+      {
+        "image_id": "baskauf/38151",
+        "thumb": "baskauf_38151.jpg",
+        "species": "Betula lenta",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9969617128372192
+      }
+    ],
+    "PC1 -2SD": [
+      {
+        "image_id": "baskauf/15742",
+        "thumb": "baskauf_15742.jpg",
+        "species": "Cephalanthus occidentalis",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9871360659599304
+      },
+      {
+        "image_id": "baskauf/16026",
+        "thumb": "baskauf_16026.jpg",
+        "species": "Quercus bicolor",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9870571494102478
+      },
+      {
+        "image_id": "baskauf/15912",
+        "thumb": "baskauf_15912.jpg",
+        "species": "Ulmus rubra",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9868228435516357
+      },
+      {
+        "image_id": "baskauf/31917",
+        "thumb": "baskauf_31917.jpg",
+        "species": "Pyrus calleryana",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9851808547973633
+      },
+      {
+        "image_id": "baskauf/50474",
+        "thumb": "baskauf_50474.jpg",
+        "species": "Prunus serotina",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9851123690605164
+      },
+      {
+        "image_id": "baskauf/55877",
+        "thumb": "baskauf_55877.jpg",
+        "species": "Juglans cinerea",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "cos": 0.9845844507217407
+      }
+    ],
+    "PC1 +2SD": [
+      {
+        "image_id": "baskauf/65653",
+        "thumb": "baskauf_65653.jpg",
+        "species": "Dirca palustris",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9830363392829895
+      },
+      {
+        "image_id": "baskauf/23020",
+        "thumb": "baskauf_23020.jpg",
+        "species": "Salix nigra",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9824318885803223
+      },
+      {
+        "image_id": "baskauf/11213",
+        "thumb": "baskauf_11213.jpg",
+        "species": "Prunus serotina",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.981609046459198
+      },
+      {
+        "image_id": "baskauf/12460",
+        "thumb": "baskauf_12460.jpg",
+        "species": "Fraxinus americana",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9814995527267456
+      },
+      {
+        "image_id": "baskauf/28672",
+        "thumb": "baskauf_28672.jpg",
+        "species": "Cephalanthus occidentalis",
+        "organ": "bark",
+        "shot_scale": "close-up",
+        "cos": 0.9813504219055176
+      },
+      {
+        "image_id": "baskauf/13589",
+        "thumb": "baskauf_13589.jpg",
+        "species": "Salix nigra",
+        "organ": "bark",
+        "shot_scale": "mid-range",
+        "cos": 0.9806158542633057
+      }
+    ],
+    "PC2 -2SD": [
+      {
+        "image_id": "baskauf/18483",
+        "thumb": "baskauf_18483.jpg",
+        "species": "Ulmus americana",
+        "organ": "fruit",
+        "shot_scale": "close-up",
+        "cos": 0.9837884306907654
+      },
+      {
+        "image_id": "baskauf/18150",
+        "thumb": "baskauf_18150.jpg",
+        "species": "Fraxinus americana",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9820036292076111
+      },
+      {
+        "image_id": "baskauf/16094",
+        "thumb": "baskauf_16094.jpg",
+        "species": "Quercus muehlenbergii",
+        "organ": "fruit",
+        "shot_scale": "close-up",
+        "cos": 0.9819552302360535
+      },
+      {
+        "image_id": "baskauf/31991",
+        "thumb": "baskauf_31991.jpg",
+        "species": "Pyrus calleryana",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9810608625411987
+      },
+      {
+        "image_id": "baskauf/35177",
+        "thumb": "baskauf_35177.jpg",
+        "species": "Yucca filamentosa",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9810094833374023
+      },
+      {
+        "image_id": "baskauf/28670",
+        "thumb": "baskauf_28670.jpg",
+        "species": "Cephalanthus occidentalis",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "cos": 0.9803726077079773
+      }
+    ],
+    "PC2 +2SD": [
+      {
+        "image_id": "baskauf/10374",
+        "thumb": "baskauf_10374.jpg",
+        "species": "Acer saccharum",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.989531397819519
+      },
+      {
+        "image_id": "baskauf/11515",
+        "thumb": "baskauf_11515.jpg",
+        "species": "Betula alleghaniensis",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9894843101501465
+      },
+      {
+        "image_id": "baskauf/16498",
+        "thumb": "baskauf_16498.jpg",
+        "species": "Juglans cinerea",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9884002208709717
+      },
+      {
+        "image_id": "baskauf/91159",
+        "thumb": "baskauf_91159.jpg",
+        "species": "Cornus florida",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9879826307296753
+      },
+      {
+        "image_id": "baskauf/11498",
+        "thumb": "baskauf_11498.jpg",
+        "species": "Robinia pseudoacacia",
+        "organ": "bark",
+        "shot_scale": "distant",
+        "cos": 0.9878054857254028
+      },
+      {
+        "image_id": "baskauf/12413",
+        "thumb": "baskauf_12413.jpg",
+        "species": "Quercus macrocarpa",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "cos": 0.9877517223358154
+      }
+    ]
+  }
+}

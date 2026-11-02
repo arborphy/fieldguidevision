@@ -102,15 +102,12 @@ if len(cm) > 1:
 css = (H / "index.html").read_text().split("<style>")[1].split("</style>")[0]
 head = f"""<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>FieldGuideVision Minimal Experiments</title><style>{css}</style></head><body><main>
-<h1>Seven minimal experiments · 2026-10-30</h1>
-<p class=note>Main data: EfficientNet-B0 raw vectors (Git, SHA-256 checked; all 1,641 image_ids and splits matched row by row against
-individual_disjoint.csv). Items 1–7 below were run on EfficientNet; BioCLIP / DINOv3 enter item 2 through their existing cluster IDs, and the
-appendix reruns the vector-only items on their recovered raw vectors. Images load from bioimages.vanderbilt.edu.
-Labels: organ = BioImages organ_category (single label); scale = BioImages + Gemma (provisional).</p>
+<h1>Seven minimal experiments · updated 2026-11-02</h1>
+{sections.header("en", table)}
 <p>{' '.join(BADGE.values())}</p>
 <p class=note><b>Verified</b> = fixed protocol, held-out data or resampling control, numbers reproducible from the scripts.
 <b>Exploratory demo</b> = individual images and readings not validated against independent labels.</p>
-<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}{'<a href=#e8>appendix</a>' if appendix else ''}</nav>"""
+<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}{'<a href=#e8>appendix: models</a>' if appendix else ''}</nav>"""
 foot = """<section><h2>Reproduce</h2><pre>cd botanical-computer-vision/meeting_minimal
 bash fetch_images.sh          # 1,641 originals + thumbnails -> /home/user/imgcache (not committed)
 bash run_all.sh               # exp1–exp7 on EfficientNet

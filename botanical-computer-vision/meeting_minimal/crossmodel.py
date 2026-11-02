@@ -85,5 +85,4 @@ def nsc_details(lang, strip, table):
           "Below, each row shows 4 real images at each end of one PC. Only the first 7 PCs correlate clearly with an organ (|ρ|≥0.2); the rest matter "
           "for one or two organs and have to be read from the images. BioCLIP / DINOv3 keep all 64 coordinates at the 1-SE Δ, so they get the curve but "
           "no heatmap. PCs are mathematical directions; names are inferred from images and correlations."))
-    return (f"<details><summary>{t[0]}</summary><img src='results/exp1b_nsc_3models.png' alt='NSC 3 models'></details>"
-            f"<details><summary>{t[1]}</summary><p>{t[2]}</p><img src='results/exp1b_nsc_heatmap.png' alt='NSC heatmap'>{rows}</details>")
+    return (f"<details><summary>{t[1]}</summary><p>{t[2]}</p><img src='results/exp1b_nsc_heatmap.png' alt='NSC heatmap'>{rows}</details>")

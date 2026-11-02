@@ -42,6 +42,52 @@ def _t(lang, zh, en):
     return zh if lang == "zh" else en
 
 
+def _det(title, body, open_=False):
+    return f"<details{' open' if open_ else ''}><summary>{title}</summary>{body}</details>"
+
+
+COVER = [(1, "exp1_nsc_summary.json"), (2, "exp2_enrichment_summary.json"), (4, "exp4_soft_summary.json"),
+         (5, "exp5_axes_summary.json"), (6, "exp6_summary.json"), (7, "exp7_retrieval_summary.json")]
+
+
+def header(lang, table):
+    """Key conclusions + which model is covered in which section (computed from the result files)."""
+    cov = []
+    for m, d in MODELS.items():
+        r = {"model": m}
+        for n, f in COVER:
+            r[str(n)] = "✓" if (d / f).exists() else "—"
+        r["3"] = "✓ (K=20)" if m == "EfficientNet-B0" else "—"
+        cov.append(r)
+    cov = pd.DataFrame(cov)[["model", "1", "2", "3", "4", "5", "6", "7"]]
+    dom = {m: next((r["share_clusters_dominant_ge_0_6"] for r in s["summary"] if r["K"] == MAIN_K and r["label"] == "organ"), None)
+           for m, s in _ms("exp2_enrichment_summary.json").items()}
+    dtxt = ", ".join(f"{m} {v:.0%}" for m, v in dom.items() if v is not None)
+    e = _ms("exp4_soft_summary.json")["EfficientNet-B0"]["results"][f"K{MAIN_K}"]
+    if lang == "zh":
+        pts = [f"<b>分组按什么组织</b>：K={MAIN_K} 时由单一器官主导（≥60%）的组所占比例：{dtxt}。通用视觉模型（EfficientNet、DINOv3）按器官和拍摄距离分组；BioCLIP 按物种；"
+               "YOLO11s 是 COCO 通用检测模型、未在植物上训练，器官信息明显更弱。",
+               "<b>K 是选择</b>：K=3 对应拍摄距离，K=7 对应器官；NSC 中“要近 64 个坐标才能复现分组”是 K 大造成的（第 1 部分）。",
+               f"<b>软聚类</b>：含混真实存在且可重复（EfficientNet K={MAIN_K}：{e['frac_max_lt_0_8']:.0%} 的照片）；按照片自己的标签分为“两个器官都合理 / 偏向错的器官 / 两个都不对 / 同器官内部”（第 4 部分）；不能预测认错物种。",
+               "<b>二维图不可信</b>：只保留约 10–14% 的近邻关系（第 6 部分）。",
+               "<b>尚未完成</b>：Grad-CAM 只有早期 K=20 的 EfficientNet 结果；YOLO 的 K 扫描、软聚类、主轴未跑；多器官标签未导出。"]
+        return ("<section class=summary><h2>结论摘要</h2><ul>" + "".join(f"<li>{x}</li>" for x in pts) + "</ul>"
+                "<p class=note>各部分覆盖的模型（✓ = 有结果）：</p>" + table(cov) +
+                "<p class=note>K 统一取 3 / 7 / 20（拍摄距离数 / 器官数 / 旧默认），示例图用 K=7。器官标签 = BioImages organ_category（单标签）；距离标签为暂定。"
+                "图片从 bioimages.vanderbilt.edu 加载（自包含版已内嵌）。</p></section>")
+    pts = [f"<b>What the grouping follows</b>: share of groups dominated by one organ (≥60%) at K={MAIN_K}: {dtxt}. General vision models "
+           "(EfficientNet, DINOv3) group by organ and shot scale; BioCLIP by species; YOLO11s (COCO detector, not trained on plants) carries clearly less organ information.",
+           "<b>K is a choice</b>: K=3 matches shot scale, K=7 matches organ; needing almost all 64 NSC coordinates is a large-K effect (section 1).",
+           f"<b>Soft clustering</b>: ambiguity is real and repeatable (EfficientNet K={MAIN_K}: {e['frac_max_lt_0_8']:.0%} of photos), sorted by the photo's own label into "
+           "both plausible / leaning wrong / neither / same organ (section 4); it does not predict species errors.",
+           "<b>2-D plots are unreliable</b>: they keep only about 10–14% of neighbour relations (section 6).",
+           "<b>Not done yet</b>: Grad-CAM only as the earlier EfficientNet K=20 run; YOLO K scan, soft clustering and axes not run; multi-organ labels not exported."]
+    return ("<section class=summary><h2>Key conclusions</h2><ul>" + "".join(f"<li>{x}</li>" for x in pts) + "</ul>"
+            "<p class=note>Models covered per section (✓ = results):</p>" + table(cov) +
+            "<p class=note>K = 3 / 7 / 20 everywhere (shot scales / organs / old default); examples at K=7. Organ label = BioImages organ_category "
+            "(single label); scale labels provisional. Images load from bioimages.vanderbilt.edu (embedded in the standalone copy).</p></section>")
+
+
 # ---------------------------------------------------------------- 1 NSC
 def sec1(lang, section, table, strip):
     S = _ms("exp1_nsc_summary.json")
@@ -69,11 +115,19 @@ def sec1(lang, section, table, strip):
                  "Each model's vectors → PCA-64 (fit on train only, whitened). Own NSC (Tibshirani 2002), 33-point Δ grid, Δ by 5-fold CV grouped by "
                  "individual plant + one-standard-error rule, test evaluated once. Task A: external organ label (7 classes). Task B: <b>grouping "
                  "approximation</b>, the model's own K-means IDs for K = 3 / 7 / 20 (circular: same vectors). NSC is supervised; used here to explain."),
-        table(t, d=3) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>" + crossmodel.nsc_details(lang, strip, table),
-        _t(lang, f"器官：EfficientNet 用 {org.iloc[4]}/64 个坐标保留 {org.iloc[-1]:.0%} 的 F1；BioCLIP / DINOv3 压不下来。"
+        "<img src='results/exp1c_nsc_organ_models.png' alt='NSC organ, all models'>"
+        + _t(lang, "<p>每个模型：器官任务（黑色虚线）与分组近似任务 K=3/7/20。圆点 = 按一倍标准误规则选出的 Δ；横轴向右 = 保留的坐标越少。</p>",
+                   "<p>Per model: organ task (black dashed) and grouping task K=3/7/20. Dot = Δ chosen by the 1-SE rule; to the right = fewer coordinates kept.</p>")
+        + "<img src='results/exp1c_nsc_grouping_models.png' alt='NSC grouping per model'>"
+        + table(t.pivot_table(index="model", columns="task", values=t.columns[4], sort=False).reset_index(), d=0)
+        + _t(lang, "<p class=note>上表：按一倍标准误规则选出 Δ 后保留的坐标数（共 64，越少越精简）。</p>",
+                   "<p class=note>Above: coordinates kept at the 1-SE Δ (of 64; fewer = sparser).</p>")
+        + _det(_t(lang, "完整数值表（F1、Δ、每类平均坐标）", "Full table (F1, Δ, coordinates per class)"), table(t, d=3))
+        + crossmodel.nsc_details(lang, strip, table),
+        _t(lang, f"器官：EfficientNet 用 {org.iloc[4]}/64 个坐标保留 {org.iloc[-1]:.0%} 的 F1；BioCLIP、DINOv3 和两个 YOLO 版本都压不下来（64/64）。"
                  f"分组近似任务保留的坐标数（共 64）：{kept}。<b>“要近 64 个坐标才能复现分组”是 K 大造成的</b>：组越少，需要的坐标越少；EfficientNet 在 K=7 时只要约 20 个，和器官标签任务相当；K=20 时各模型都要用到几乎全部坐标。"
                  "<b>坐标是 PCA 主成分，不是生物学特征。</b>",
-                 f"Organ: EfficientNet keeps {org.iloc[-1]:.0%} of F1 with {org.iloc[4]}/64 coordinates; BioCLIP / DINOv3 do not sparsify. "
+                 f"Organ: EfficientNet keeps {org.iloc[-1]:.0%} of F1 with {org.iloc[4]}/64 coordinates; BioCLIP, DINOv3 and both YOLO versions do not sparsify (64/64). "
                  f"Coordinates kept for the grouping task (of 64): {kept}. <b>Needing almost all 64 is a large-K effect</b>: fewer groups need fewer "
                  "coordinates; EfficientNet at K=7 needs about 20, close to the organ-label task; at K=20 the models need nearly all of them. "
                  "<b>Coordinates are PCA components, not biological features.</b>"),
@@ -101,10 +155,13 @@ def sec2(lang, section, table, strip, s6):
                  "images are nested in 465 individuals and 63 species, so independence fails."),
         _t(lang, f"PCA（EfficientNet）：2 维保留方差 {s6['table'][0]['train_explained_var']:.1%}，64 维 {s6['table'][4]['train_explained_var']:.1%}。",
                  f"PCA (EfficientNet): 2-D keeps {s6['table'][0]['train_explained_var']:.1%} of variance, 64-D {s6['table'][4]['train_explained_var']:.1%}.")
-        + table(sm.drop(columns=["clusters_lt5_individuals"]), d=2)
-        + _t(lang, f"<p>K={MAIN_K} 时每组的组成（名字规则：≥80% 直接用器官名；50–80% 写“大多是…”并列出第二成分；&lt;50% 写“混合”；距离同理）：</p>",
-                   f"<p>Groups at K={MAIN_K} (naming: ≥80% organ name; 50–80% \"mostly …\" with the second part; &lt;50% \"mixed\"; same for scale):</p>")
-        + desc + figs,
+        + table(sm[sm.label == "organ"].pivot_table(index="model", columns="K", values=sm.columns[4], sort=False).reset_index(), d=2)
+        + _t(lang, "<p class=note>上表：由单一器官主导（≥60%）的组所占比例。</p>", "<p class=note>Above: share of groups dominated by one organ (≥60%).</p>")
+        + _det(_t(lang, "完整表（器官 / 距离 × K，富集与物种校正）", "Full table (organ / scale × K, enrichment, species-adjusted)"),
+               table(sm.drop(columns=["clusters_lt5_individuals"]), d=2))
+        + _t(lang, "<p class=note>组名规则：≥80% 直接用器官名；50–80% 写“大多是…”并列出第二成分；&lt;50% 写“混合”；距离同理。</p>",
+                   "<p class=note>Group naming: ≥80% organ name; 50–80% \"mostly …\" with the second part; &lt;50% \"mixed\"; same for scale.</p>")
+        + _det(_t(lang, f"K={MAIN_K} 每组的组成（各模型）", f"Group make-up at K={MAIN_K} (each model)"), desc + figs),
         _t(lang, "描述性结果，按 K 读上表：DINOv3 / EfficientNet 的组在每个 K 下都以单一器官为主，且按物种校正后仍然富集；BioCLIP 的组以物种为主。"
                  "K 越大，同一器官会被拆成多个组（例如多个“近拍叶子”组）。标签：器官为单标签 organ_category，距离标签为暂定。",
                  "Descriptive; read the table per K. DINOv3 / EfficientNet groups are dominated by one organ at every K and stay enriched after species "
@@ -118,7 +175,7 @@ def sec3(lang, section, table, s3):
     pk = (pd.DataFrame([r for r in s3["per_k"] if r["K"] in K_LIST]) if "per_k" in s3 else  # per-K rerun pending: earlier K=20 run
           pd.DataFrame([dict(K=20, n=s3["n_cases"], frac_top_beats_random=s3["frac_top_cam_beats_random"],
                              median_drop_top=s3["median_drop_top"], median_drop_random=s3["median_drop_random"])]))
-    return section(3, _t(lang, "Activation mapping（Grad-CAM ＋ 遮挡对照）", "Activation mapping (Grad-CAM + occlusion control)"),
+    return section(3, _t(lang, "Activation mapping（Grad-CAM ＋ 遮挡对照）· 早期结果，未重跑", "Activation mapping (Grad-CAM + occlusion) · earlier run, not redone"),
         _t(lang, "EfficientNet 把照片推向某一组时依赖哪块区域？热图是否忠实于分数？", "Which image regions push EfficientNet towards a group? Is the map faithful?"),
         _t(lang, f"EfficientNet-B0 真实计算（CPU fp32）。先复核：重新嵌入 40 张图，与库存向量余弦中位数 {s3['reembed_cosine_median']:.4f}。目标分数 = 嵌入与组中心的余弦。"
                  "每个 K（3 / 7 / 20）每组取 2 个核心 + 2 个边界样本（seed 42，非手选）。遮挡：Grad-CAM 最高的 12/49 格 vs 10 次随机 12 格。合理性检查：重置最后一块后热图应改变。"
@@ -188,7 +245,7 @@ def sec4(lang, section, table, strip):
                  "categories using the photo's <b>own</b> organ label (explained below)."),
         _t(lang, "<p>各 K 的分组与标签一致性（含 K=5/10/15 的扫描在 results/*/exp4b_k_sweep.csv）：</p>", "<p>Agreement of groups with labels per K (scan incl. K=5/10/15 in results/*/exp4b_k_sweep.csv):</p>")
         + table(kt, d=2)
-        + _t(lang, "<p>旧方法的维度假象（EfficientNet，对角 GMM，K=20）：</p>", "<p>Dimension artefact of the old method (EfficientNet, diagonal GMM, K=20):</p>") + table(art, d=3)
+        + _det(_t(lang, "旧方法为什么作废：对角 GMM 的维度假象（EfficientNet，K=20）", "Why the old method is withdrawn: diagonal-GMM dimension artefact (EfficientNet, K=20)"), table(art, d=3))
         + _t(lang, "<p>软归属：含混比例与含混照片的类别构成（每行各类之和为 1）：</p>", "<p>Soft membership: share ambiguous and what kind of ambiguity (categories sum to 1 per row):</p>")
         + table(st, d=2)
         + f"<details open><summary>{_t(lang, f'EfficientNet K={MAIN_K}：每一组长什么样（离组中心最近的 4 张）', f'EfficientNet K={MAIN_K}: what each group looks like (4 photos nearest the centre)')}</summary>{faces}</details>"
@@ -219,9 +276,11 @@ def sec7(lang, section, table, strip, s7):
         _t(lang, "某一组的中心、某条轴上的点“长什么样”？", "What does a group centre, or a point along an axis, look like?"),
         _t(lang, "不训练生成模型。在完整向量空间里，用余弦相似度找离以下点最近的 6 张真实照片：每个模型、每个 K（3 / 7 / 20）的各组中心，以及 PC1 / PC2 的 均值 ± 2SD 点。",
                  "No generative model. In the full space, the 6 nearest real photos (cosine) to: every group centre for each model and K (3 / 7 / 20), and the mean ± 2 SD points on PC1 / PC2."),
-        table(pk.rename(columns={"top6_in_cluster": _t(lang, "前6张属于该组", "top-6 in group"),
+        table(pk.pivot_table(index="model", columns="K", values="top6_share_dominant_organ", sort=False).reset_index(), d=2)
+        + _t(lang, "<p class=note>上表：检索出的前 6 张中，属于该组主导器官的比例。</p>", "<p class=note>Above: share of the top-6 retrieved photos showing the group's dominant organ.</p>")
+        + _det(_t(lang, "完整表", "Full table"), table(pk.rename(columns={"top6_in_cluster": _t(lang, "前6张属于该组", "top-6 in group"),
                                  "top6_share_dominant_organ": _t(lang, "前6张主导器官占比", "top-6 dominant organ"),
-                                 "cluster_dominant_share": _t(lang, "整组主导器官占比", "group dominant organ")}), d=2)
+                                 "cluster_dominant_share": _t(lang, "整组主导器官占比", "group dominant organ")}), d=2))
         + _t(lang, f"<p>示例：EfficientNet K={MAIN_K} 的前 4 个组中心，以及 PC1 两端。</p>", f"<p>Examples: EfficientNet K={MAIN_K}, first 4 centres, and both ends of PC1.</p>") + html,
         _t(lang, "每个 K 下，检索出的照片几乎都属于该组，且主导器官占比高于整组平均：检索给出的是最典型的成员，会让组看起来比实际更整齐。PC1 −2SD → 近拍叶子，+2SD → 远景整树。这是检索，不是生成。",
                  "At every K the retrieved photos almost all belong to the group and show its dominant organ more often than the group overall: retrieval "

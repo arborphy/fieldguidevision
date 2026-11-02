@@ -101,17 +101,15 @@ dt{font-weight:600;margin-top:10px}dd{margin:2px 0 0}img{max-width:100%;height:a
 .b{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid currentColor;margin-right:4px}.v{color:var(--v)}.e{color:var(--e)}.x{color:var(--x)}.r{color:var(--r)}
 .tw{overflow-x:auto}table{border-collapse:collapse;font-size:12px;margin:6px 0}td,th{border-bottom:1px solid var(--line);padding:3px 7px;text-align:left;white-space:nowrap}
 .strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}figure{margin:0;flex:0 0 120px}figure img{width:120px;height:90px;object-fit:cover;margin:0;border-radius:4px}
-details{margin:8px 0}summary{cursor:pointer;font-weight:600}.ends{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ends>div{min-width:0}@media(max-width:700px){.ends{grid-template-columns:1fr}}figcaption{font-size:10.5px;color:var(--mut);line-height:1.3}nav a{margin-right:10px;color:var(--fg)}.note{color:var(--mut);font-size:13px}
+details{margin:8px 0}.summary{border-color:var(--v)}.summary li{margin:4px 0}summary{cursor:pointer;font-weight:600}.ends{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ends>div{min-width:0}@media(max-width:700px){.ends{grid-template-columns:1fr}}figcaption{font-size:10.5px;color:var(--mut);line-height:1.3}nav a{margin-right:10px;color:var(--fg)}.note{color:var(--mut);font-size:13px}
 """
 head = f"""<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>Minimal Meeting Experiments</title><style>{css}</style></head><body><main>
-<h1>七个方向的最小实验 · 2026-10-30</h1>
-<p class=note>主数据：EfficientNet-B0 原始向量（Git，SHA-256 已校验，1,641 个 image_id 与 individual_disjoint.csv 的划分逐一核对一致）。
-第 1–7 项在 EfficientNet 上运行；BioCLIP / DINOv3 在第 2 项中通过已有的 cluster ID 参与，文末附录用恢复的原始向量重跑了纯向量实验。
-图片按 URL 从 bioimages.vanderbilt.edu 加载。标签：器官 = BioImages organ_category（单标签）；尺度 = BioImages + Gemma（暂定）。</p>
+<h1>七个方向的最小实验 · 2026-11-02 更新</h1>
+{sections.header("zh", table)}
 <p>{' '.join(BADGE.values())}</p>
 <p class=note><b>经验证</b> = 有预先固定的协议、held-out 或重采样对照、可从脚本复现的数值。<b>探索演示</b> = 个例图片、未经独立标签验证的解读。</p>
-<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}{'<a href=#e8>附：三模型</a>' if appendix else ''}</nav>"""
+<nav>{''.join(f'<a href=#e{i}>{i}</a>' for i in range(1, 8))}{'<a href=#e8>附：多模型对照</a>' if appendix else ''}</nav>"""
 foot = """<section><h2>复现</h2><pre>cd botanical-computer-vision/meeting_minimal
 bash fetch_images.sh          # 下载 1,641 张原图 + 缩略图到 /home/user/imgcache（不进 Git）
 bash run_all.sh               # 在 EfficientNet 上依次运行 exp1–exp7 并生成本页
