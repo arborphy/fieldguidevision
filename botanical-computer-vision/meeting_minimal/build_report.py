@@ -33,7 +33,7 @@ def strip(recs, cap=lambda r: f"{r['organ']} · {r['shot_scale']}"):
     return "<div class=strip>" + "".join(
         f"<figure><a href='{url[r['image_id']].replace('/tn/', '/gq/').replace('/t', '/g', 1) if False else url[r['image_id']]}' target=_blank>"
         f"<img loading=lazy src='{url[r['image_id']]}' alt='{escape(r['image_id'])}'></a>"
-        f"<figcaption>{escape(r['image_id'])}<br>{escape(r['species'])}<br>{escape(cap(r))}</figcaption></figure>" for r in recs) + "</div>"
+        f"<figcaption>{escape(r['image_id'])}<br>{escape(r['species'])}<br>{cap(r)}</figcaption></figure>" for r in recs) + "</div>"
 
 
 BADGE = {"v": "<span class='b v'>经验证结论</span>", "e": "<span class='b e'>探索演示</span>",

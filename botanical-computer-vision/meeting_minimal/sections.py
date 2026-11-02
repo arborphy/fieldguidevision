@@ -219,12 +219,26 @@ def sec4(lang, section, table, strip):
     E = S["EfficientNet-B0"]
     main, art = E["main"], pd.DataFrame(E["gmm_dimension_artifact"])
     name = {c["cluster"]: c["name"] for c in main["clusters"]}
-    cap = lambda r: (f"{_t(lang, '标签', 'label')}: {r['organ']} · {r['shot_scale']}<br>c{r['c1']} {r['p1']:.2f} / c{r['c2']} {r['p2']:.2f}")
-    faces = "".join(f"<h4>c{c} · {name[int(c)]}</h4>" + strip(v, cap=lambda r: f"{r['organ']} · {r['shot_scale']}")
+    org = {c["cluster"]: c["top_organ"] for c in main["clusters"]}
+    short = {c["cluster"]: f"{c['top_organ']} {c['top_organ_share']:.0%}" for c in main["clusters"]}
+    cap = lambda r: (f"<b>{_t(lang, '照片标签', 'photo label')}: {r['organ']}</b> · {r['shot_scale']}<br>"
+                     f"{_t(lang, '候选1', 'candidate 1')}: {_t(lang, '组', 'group ')}{r['c1']}（{short[r['c1']]}）{r['p1']:.2f}<br>"
+                     f"{_t(lang, '候选2', 'candidate 2')}: {_t(lang, '组', 'group ')}{r['c2']}（{short[r['c2']]}）{r['p2']:.2f}")
+    # which two organs is each ambiguous photo between? (EfficientNet, MAIN_K)
+    from common import load as _load
+    mm = pd.read_csv(R / "exp4_soft_memberships.csv")
+    mm = mm[(mm.K == MAIN_K) & mm.category_if_ambiguous.notna() & (mm.category_if_ambiguous != "")]
+    mm["pair"] = [" ↔ ".join(sorted((org[a], org[b]))) for a, b in zip(mm.top1, mm.top2)]
+    pt = pd.crosstab(mm.pair, mm.category_if_ambiguous).reindex(columns=list(CAT), fill_value=0)
+    pt.insert(0, "n", pt.sum(1)); pt.insert(1, _t(lang, "占含混照片", "share of ambiguous"), pt.n / pt.n.sum())
+    pt = pt.sort_values("n", ascending=False).rename(columns={c: CAT[c][0 if zh else 1] for c in CAT}).reset_index()
+    pt = pt.rename(columns={"pair": _t(lang, "在哪两种器官之间（两个候选组的主要器官）", "between which two organs (main organ of the two candidate groups)")})
+    faces = "".join(f"<h4>{_t(lang, '组', 'group ')}{c} · {name[int(c)]}</h4>" + strip(v, cap=lambda r: f"{r['organ']} · {r['shot_scale']}")
                     for c, v in main["faces"].items())
     cats = "".join(f"<h4>{CAT[c][0 if zh else 1]} — {CAT_EXPL[c][0 if zh else 1]}</h4>"
                    + (strip(v, cap=cap) if v else _t(lang, "<p>无</p>", "<p>none</p>")) for c, v in main["by_category"].items())
-    pairs = "".join(f"<h4>c{p['pair'][0]} ({name[p['pair'][0]]}) ↔ c{p['pair'][1]} ({name[p['pair'][1]]}) · n={p['n']}</h4>"
+    pairs = "".join(f"<h4>{org[p['pair'][0]]} ↔ {org[p['pair'][1]]} · {_t(lang, '组', 'group ')}{p['pair'][0]}「{name[p['pair'][0]]}」 ↔ "
+                    f"{_t(lang, '组', 'group ')}{p['pair'][1]}「{name[p['pair'][1]]}」 · n={p['n']}</h4>"
                     + strip(p["cases"], cap=cap) for p in main["by_pair"])
     e7 = E["results"][f"K{MAIN_K}"]
     sh = e7["category_share"]
@@ -248,6 +262,14 @@ def sec4(lang, section, table, strip):
         + _det(_t(lang, "旧方法为什么作废：对角 GMM 的维度假象（EfficientNet，K=20）", "Why the old method is withdrawn: diagonal-GMM dimension artefact (EfficientNet, K=20)"), table(art, d=3))
         + _t(lang, "<p>软归属：含混比例与含混照片的类别构成（每行各类之和为 1）：</p>", "<p>Soft membership: share ambiguous and what kind of ambiguity (categories sum to 1 per row):</p>")
         + table(st, d=2)
+        + _t(lang, f"<p><b>含混照片在哪两种器官之间</b>（EfficientNet K={MAIN_K}，共 {int(pt.n.sum())} 张；后几列是这些照片按类别的张数）：</p>",
+                   f"<p><b>Which two organs the ambiguous photos sit between</b> (EfficientNet K={MAIN_K}, {int(pt.n.sum())} photos; last columns = count per category):</p>")
+        + table(pt, d=2)
+        + _t(lang, "<p class=note>读法：“果实 ↔ 小枝”表示两个候选组的主要器官分别是果实和小枝；“叶 ↔ 叶”是两个不同的叶子组（例如纯近拍叶 vs 混有果实/中景的叶），属于“同器官内部”。"
+                   "下面每张示例照片都写明：照片自己的标签、两个候选组（组号 + 主要器官及其占比）和归属概率。</p>",
+                   "<p class=note>Reading: \"fruit ↔ twig\" means the two candidate groups are mainly fruit and mainly twig; \"leaf ↔ leaf\" is two different leaf groups "
+                   "(e.g. pure close-up leaves vs leaves mixed with fruit / mid-range), i.e. within one organ. Each example photo below states its own label, both "
+                   "candidate groups (number + main organ and its share) and the membership.</p>")
         + f"<details open><summary>{_t(lang, f'EfficientNet K={MAIN_K}：每一组长什么样（离组中心最近的 4 张）', f'EfficientNet K={MAIN_K}: what each group looks like (4 photos nearest the centre)')}</summary>{faces}</details>"
         + f"<details open><summary>{_t(lang, '最常见的 5 对“夹在中间”的组合（每对 6 张）', 'The 5 most common in-between pairs (6 photos each)')}</summary>{pairs}</details>"
         + f"<details><summary>{_t(lang, '按类别看含混照片（每类最多 8 张）', 'Ambiguous photos by category (up to 8 each)')}</summary>{cats}</details>",
