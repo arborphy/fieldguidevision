@@ -5,8 +5,9 @@ from pathlib import Path
 import pandas as pd
 
 R = Path(__file__).resolve().parent / "results"
-DIRS = {"BioCLIP 2.5": R / "bioclip", "DINOv3": R / "dinov3", "EfficientNet-B0": R, "YOLO": R / "yolo"}
-SITE_PCA32_MSE = {"BioCLIP 2.5": 0.000284, "DINOv3": 0.000498, "EfficientNet-B0": 0.000296, "YOLO": float("nan")}  # hosted-site AE table
+DIRS = {"BioCLIP 2.5": R / "bioclip", "DINOv3": R / "dinov3", "EfficientNet-B0": R,
+        "YOLO11s backbone": R / "yolo11s_backbone", "YOLO11s neck": R / "yolo11s_neck"}
+SITE_PCA32_MSE = {"BioCLIP 2.5": 0.000284, "DINOv3": 0.000498, "EfficientNet-B0": 0.000296}  # hosted-site AE table
 
 
 def rows():
@@ -33,7 +34,7 @@ def rows():
             "K=7 entropy split-half ρ": s4["results"]["K7"]["entropy_split_half_spearman"],
             "K=7 entropy AUROC error": s4["results"]["K7"]["auroc_entropy_species_probe_error_test"],
             "PC1 ρ scale": s5["axes"][0]["rho_scale_close"],
-            "PCA-32 test MSE (site)": f'{s5["linear_ae_sanity"]["pca32_test_mse"]:.6f} ({SITE_PCA32_MSE[name]:.6f})',
+            "PCA-32 test MSE (site)": f'{s5["linear_ae_sanity"]["pca32_test_mse"]:.6f} (' + (f"{SITE_PCA32_MSE[name]:.6f}" if name in SITE_PCA32_MSE else "—") + ")",
             "linear AE / PCA": s5["linear_ae_sanity"]["ratio"],
             "centroid top-6 dominant organ": s7["mean_top6_share_dominant_organ"],
         })

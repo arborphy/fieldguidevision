@@ -44,274 +44,1058 @@
     }
   ],
   "results": {
+    "K3": {
+      "frac_max_lt_0_8": 0.2413162705667276,
+      "frac_max_lt_0_6": 0.06946983546617916,
+      "entropy_split_half_spearman": 0.7749446486331185,
+      "entropy_vs_d1_d2_spearman": 0.3617876239375193,
+      "auroc_entropy_species_probe_error_test": 0.39588859416445626,
+      "probe_C": 100.0,
+      "auroc_entropy_midrange": 0.5102244551742137,
+      "n_ambiguous": 396,
+      "category_counts": {
+        "same_organ": 0,
+        "both_plausible": 0,
+        "leaning_wrong": 0,
+        "neither": 0,
+        "mixed_group": 396
+      },
+      "category_share": {
+        "same_organ": 0.0,
+        "both_plausible": 0.0,
+        "leaning_wrong": 0.0,
+        "neither": 0.0,
+        "mixed_group": 1.0
+      }
+    },
     "K7": {
       "frac_max_lt_0_8": 0.570993296770262,
       "frac_max_lt_0_6": 0.2979890310786106,
-      "mean_norm_entropy": 0.39811093626224825,
       "entropy_split_half_spearman": 0.8900970733954483,
       "entropy_vs_d1_d2_spearman": 0.49534358572280085,
       "auroc_entropy_species_probe_error_test": 0.3196286472148541,
       "probe_C": 100.0,
-      "test_error_rate": 0.13744075829383887,
       "auroc_entropy_midrange": 0.5581821740832572,
-      "ambiguous_between_different_organ_clusters": 0.4386339381003202,
-      "ambiguous_entropy_by_organ": {
-        "bark": 0.323,
-        "cone": 0.425,
-        "fruit": 0.414,
-        "inflorescence": 0.442,
-        "leaf": 0.407,
-        "other": 0.401,
-        "twig": 0.393,
-        "whole tree": 0.379
+      "n_ambiguous": 937,
+      "category_counts": {
+        "same_organ": 0,
+        "both_plausible": 3,
+        "leaning_wrong": 4,
+        "neither": 0,
+        "mixed_group": 930
       },
-      "ambiguous_entropy_by_scale": {
-        "close-up": 0.396,
-        "distant": 0.384,
-        "mid-range": 0.427,
-        "uncertain": 0.505
+      "category_share": {
+        "same_organ": 0.0,
+        "both_plausible": 0.003,
+        "leaning_wrong": 0.004,
+        "neither": 0.0,
+        "mixed_group": 0.993
       }
     },
     "K20": {
       "frac_max_lt_0_8": 0.7458866544789763,
       "frac_max_lt_0_6": 0.48689823278488725,
-      "mean_norm_entropy": 0.38130368137222775,
       "entropy_split_half_spearman": 0.8576523732651372,
       "entropy_vs_d1_d2_spearman": 0.38775855809326465,
       "auroc_entropy_species_probe_error_test": 0.37078438802576735,
       "probe_C": 100.0,
-      "test_error_rate": 0.13744075829383887,
       "auroc_entropy_midrange": 0.48050154421679936,
-      "ambiguous_between_different_organ_clusters": 0.6936274509803921,
-      "ambiguous_entropy_by_organ": {
-        "bark": 0.399,
-        "cone": 0.518,
-        "fruit": 0.407,
-        "inflorescence": 0.4,
-        "leaf": 0.365,
-        "other": 0.342,
-        "twig": 0.397,
-        "whole tree": 0.338
+      "n_ambiguous": 1224,
+      "category_counts": {
+        "same_organ": 0,
+        "both_plausible": 3,
+        "leaning_wrong": 0,
+        "neither": 6,
+        "mixed_group": 1215
       },
-      "ambiguous_entropy_by_scale": {
-        "close-up": 0.392,
-        "distant": 0.345,
-        "mid-range": 0.37,
-        "uncertain": 0.468
+      "category_share": {
+        "same_organ": 0.0,
+        "both_plausible": 0.002,
+        "leaning_wrong": 0.0,
+        "neither": 0.005,
+        "mixed_group": 0.993
+      }
+    },
+    "K63": {
+      "frac_max_lt_0_8": 0.6087751371115173,
+      "frac_max_lt_0_6": 0.3668494820231566,
+      "entropy_split_half_spearman": 0.8914734491818768,
+      "entropy_vs_d1_d2_spearman": 0.6992023038814641,
+      "auroc_entropy_species_probe_error_test": 0.7624100037893141,
+      "probe_C": 100.0,
+      "auroc_entropy_midrange": 0.38730697290008265,
+      "n_ambiguous": 999,
+      "category_counts": {
+        "same_organ": 196,
+        "both_plausible": 39,
+        "leaning_wrong": 14,
+        "neither": 24,
+        "mixed_group": 726
+      },
+      "category_share": {
+        "same_organ": 0.196,
+        "both_plausible": 0.039,
+        "leaning_wrong": 0.014,
+        "neither": 0.024,
+        "mixed_group": 0.727
       }
     }
   },
-  "cases": {
-    "K7": [
+  "main": {
+    "K": 7,
+    "clusters": [
       {
-        "image_id": "baskauf/11124",
-        "species": "Platanus occidentalis",
-        "organ": "leaf",
-        "shot_scale": "close-up",
-        "c1": 4,
-        "p1": 0.24,
-        "c1_organ": "leaf",
-        "c2": 3,
-        "p2": 0.16,
-        "c2_organ": "inflorescence",
-        "entropy": 0.9749443469856288
+        "cluster": 0,
+        "n": 209,
+        "name": "mixed leaf 43% / inflorescence 18% \u00b7 close-up",
+        "top_organ": "leaf",
+        "top_organ_share": 0.430622009569378,
+        "organs": "leaf 43%, inflorescence 18%, twig 16%",
+        "scales": "close-up 83%, mid-range 8%, distant 7%",
+        "n_species": 23,
+        "top_species_share": 0.1722488038277512
       },
       {
-        "image_id": "baskauf/31433",
-        "species": "Populus deltoides",
-        "organ": "inflorescence",
-        "shot_scale": "mid-range",
-        "c1": 3,
-        "p1": 0.24,
-        "c1_organ": "inflorescence",
-        "c2": 2,
-        "p2": 0.22,
-        "c2_organ": "leaf",
-        "entropy": 0.9097270364262482
+        "cluster": 1,
+        "n": 157,
+        "name": "mixed inflorescence 23% / leaf 22% \u00b7 mixed scale",
+        "top_organ": "inflorescence",
+        "top_organ_share": 0.22929936305732485,
+        "organs": "inflorescence 23%, leaf 22%, fruit 16%",
+        "scales": "close-up 57%, mid-range 23%, distant 18%",
+        "n_species": 11,
+        "top_species_share": 0.31210191082802546
       },
       {
-        "image_id": "baskauf/15339",
-        "species": "Populus deltoides",
-        "organ": "leaf",
-        "shot_scale": "close-up",
-        "c1": 0,
-        "p1": 0.28,
-        "c1_organ": "leaf",
-        "c2": 2,
-        "p2": 0.24,
-        "c2_organ": "leaf",
-        "entropy": 0.9061857844072332
+        "cluster": 2,
+        "n": 167,
+        "name": "mixed leaf 31% / inflorescence 19% \u00b7 mixed scale",
+        "top_organ": "leaf",
+        "top_organ_share": 0.30538922155688625,
+        "organs": "leaf 31%, inflorescence 19%, fruit 17%",
+        "scales": "close-up 73%, mid-range 13%, distant 11%",
+        "n_species": 23,
+        "top_species_share": 0.2275449101796407
       },
       {
-        "image_id": "baskauf/13397",
-        "species": "Fraxinus pennsylvanica",
-        "organ": "fruit",
-        "shot_scale": "close-up",
-        "c1": 0,
-        "p1": 0.36,
-        "c1_organ": "leaf",
-        "c2": 3,
-        "p2": 0.18,
-        "c2_organ": "inflorescence",
-        "entropy": 0.8661910432865473
+        "cluster": 3,
+        "n": 401,
+        "name": "mixed inflorescence 24% / leaf 24% \u00b7 mixed scale",
+        "top_organ": "inflorescence",
+        "top_organ_share": 0.24189526184538654,
+        "organs": "inflorescence 24%, leaf 24%, whole tree 18%",
+        "scales": "close-up 68%, distant 21%, mid-range 10%",
+        "n_species": 33,
+        "top_species_share": 0.06234413965087282
       },
       {
-        "image_id": "baskauf/15347",
-        "species": "Populus deltoides",
-        "organ": "twig",
-        "shot_scale": "close-up",
-        "c1": 0,
-        "p1": 0.32,
-        "c1_organ": "leaf",
-        "c2": 2,
-        "p2": 0.22,
-        "c2_organ": "leaf",
-        "entropy": 0.8618632526579303
+        "cluster": 4,
+        "n": 337,
+        "name": "mixed leaf 21% / twig 20% \u00b7 close-up",
+        "top_organ": "leaf",
+        "top_organ_share": 0.21364985163204747,
+        "organs": "leaf 21%, twig 20%, inflorescence 19%",
+        "scales": "close-up 91%, mid-range 5%, distant 4%",
+        "n_species": 60,
+        "top_species_share": 0.08902077151335312
       },
       {
-        "image_id": "baskauf/15200",
-        "species": "Juglans nigra",
-        "organ": "twig",
-        "shot_scale": "close-up",
-        "c1": 1,
-        "p1": 0.36,
-        "c1_organ": "inflorescence",
-        "c2": 0,
-        "p2": 0.24,
-        "c2_organ": "leaf",
-        "entropy": 0.8495102853823782
+        "cluster": 5,
+        "n": 134,
+        "name": "mostly leaf 51% (+twig 13%) \u00b7 mixed scale",
+        "top_organ": "leaf",
+        "top_organ_share": 0.5149253731343284,
+        "organs": "leaf 51%, twig 13%, fruit 13%",
+        "scales": "close-up 80%, mid-range 12%, distant 7%",
+        "n_species": 3,
+        "top_species_share": 0.746268656716418
       },
       {
-        "image_id": "baskauf/31447",
-        "species": "Populus deltoides",
-        "organ": "inflorescence",
-        "shot_scale": "close-up",
-        "c1": 3,
-        "p1": 0.28,
-        "c1_organ": "inflorescence",
-        "c2": 2,
-        "p2": 0.24,
-        "c2_organ": "leaf",
-        "entropy": 0.8324614721424201
-      },
-      {
-        "image_id": "baskauf/13594",
-        "species": "Salix nigra",
-        "organ": "whole tree",
-        "shot_scale": "distant",
-        "c1": 6,
-        "p1": 0.3,
-        "c1_organ": "whole tree",
-        "c2": 3,
-        "p2": 0.24,
-        "c2_organ": "inflorescence",
-        "entropy": 0.8306447551635388
+        "cluster": 6,
+        "n": 236,
+        "name": "mostly whole tree 74% (+bark 20%) \u00b7 mixed scale",
+        "top_organ": "whole tree",
+        "top_organ_share": 0.7372881355932204,
+        "organs": "whole tree 74%, bark 20%, inflorescence 3%",
+        "scales": "distant 78%, close-up 15%, mid-range 4%",
+        "n_species": 39,
+        "top_species_share": 0.08050847457627118
       }
     ],
-    "K20": [
+    "faces": {
+      "0": [
+        {
+          "image_id": "kirchoff/em2094",
+          "species": "Quercus alba",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.44,
+          "c2": 5,
+          "p2": 0.26,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "kirchoff/em2101",
+          "species": "Quercus alba",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.44,
+          "c2": 5,
+          "p2": 0.3,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/12366",
+          "species": "Quercus bicolor",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.46,
+          "c2": 5,
+          "p2": 0.28,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/18850",
+          "species": "Quercus macrocarpa",
+          "organ": "inflorescence",
+          "shot_scale": "mid-range",
+          "c1": 0,
+          "p1": 0.44,
+          "c2": 5,
+          "p2": 0.26,
+          "category": "mixed_group"
+        }
+      ],
+      "1": [
+        {
+          "image_id": "baskauf/66153",
+          "species": "Gleditsia triacanthos",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 1,
+          "p1": 0.74,
+          "c2": 3,
+          "p2": 0.22,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/51771",
+          "species": "Gleditsia triacanthos",
+          "organ": "inflorescence",
+          "shot_scale": "close-up",
+          "c1": 1,
+          "p1": 0.74,
+          "c2": 3,
+          "p2": 0.22,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/66141",
+          "species": "Gleditsia triacanthos",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 1,
+          "p1": 0.74,
+          "c2": 3,
+          "p2": 0.22,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/66144",
+          "species": "Gleditsia triacanthos",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 1,
+          "p1": 0.74,
+          "c2": 3,
+          "p2": 0.22,
+          "category": "mixed_group"
+        }
+      ],
+      "2": [
+        {
+          "image_id": "baskauf/12037",
+          "species": "Carpinus caroliniana",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 2,
+          "p1": 0.72,
+          "c2": 3,
+          "p2": 0.26,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15691",
+          "species": "Carpinus caroliniana",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 2,
+          "p1": 0.8,
+          "c2": 3,
+          "p2": 0.18,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15076",
+          "species": "Carpinus caroliniana",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 2,
+          "p1": 0.72,
+          "c2": 3,
+          "p2": 0.26,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15696",
+          "species": "Carpinus caroliniana",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 2,
+          "p1": 0.78,
+          "c2": 3,
+          "p2": 0.2,
+          "category": "mixed_group"
+        }
+      ],
+      "3": [
+        {
+          "image_id": "baskauf/15105",
+          "species": "Cornus florida",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 3,
+          "p1": 0.82,
+          "c2": 2,
+          "p2": 0.14,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15104",
+          "species": "Cornus florida",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 3,
+          "p1": 0.82,
+          "c2": 2,
+          "p2": 0.14,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/51409",
+          "species": "Nyssa sylvatica",
+          "organ": "inflorescence",
+          "shot_scale": "close-up",
+          "c1": 3,
+          "p1": 0.84,
+          "c2": 2,
+          "p2": 0.08,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/11722",
+          "species": "Sassafras albidum",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 3,
+          "p1": 0.84,
+          "c2": 2,
+          "p2": 0.1,
+          "category": "mixed_group"
+        }
+      ],
+      "4": [
+        {
+          "image_id": "baskauf/30990",
+          "species": "Celtis occidentalis",
+          "organ": "bark",
+          "shot_scale": "close-up",
+          "c1": 4,
+          "p1": 0.92,
+          "c2": 6,
+          "p2": 0.08,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/25625",
+          "species": "Sambucus nigra",
+          "organ": "bark",
+          "shot_scale": "close-up",
+          "c1": 4,
+          "p1": 0.92,
+          "c2": 6,
+          "p2": 0.08,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/63783",
+          "species": "Gymnocladus dioicus",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 4,
+          "p1": 0.92,
+          "c2": 6,
+          "p2": 0.06,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/39144",
+          "species": "Acer saccharum",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 4,
+          "p1": 0.92,
+          "c2": 6,
+          "p2": 0.08,
+          "category": "mixed_group"
+        }
+      ],
+      "5": [
+        {
+          "image_id": "kirchoff/em2343",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 5,
+          "p1": 1.0,
+          "c2": 6,
+          "p2": 0.0,
+          "category": "both_plausible"
+        },
+        {
+          "image_id": "kirchoff/em2070",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 5,
+          "p1": 1.0,
+          "c2": 6,
+          "p2": 0.0,
+          "category": "both_plausible"
+        },
+        {
+          "image_id": "kirchoff/em2598",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 5,
+          "p1": 1.0,
+          "c2": 6,
+          "p2": 0.0,
+          "category": "both_plausible"
+        },
+        {
+          "image_id": "kirchoff/em2566",
+          "species": "Quercus palustris",
+          "organ": "leaf",
+          "shot_scale": "mid-range",
+          "c1": 5,
+          "p1": 1.0,
+          "c2": 6,
+          "p2": 0.0,
+          "category": "both_plausible"
+        }
+      ],
+      "6": [
+        {
+          "image_id": "baskauf/90792",
+          "species": "Fraxinus pennsylvanica",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.84,
+          "c2": 4,
+          "p2": 0.14,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/12318",
+          "species": "Quercus muehlenbergii",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.84,
+          "c2": 4,
+          "p2": 0.14,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/91140",
+          "species": "Quercus alba",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.84,
+          "c2": 4,
+          "p2": 0.12,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/91152",
+          "species": "Fraxinus pennsylvanica",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.84,
+          "c2": 4,
+          "p2": 0.14,
+          "category": "mixed_group"
+        }
+      ]
+    },
+    "by_category": {
+      "same_organ": [],
+      "both_plausible": [
+        {
+          "image_id": "kirchoff/em2338",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.6,
+          "c2": 5,
+          "p2": 0.4,
+          "category": "both_plausible"
+        },
+        {
+          "image_id": "kirchoff/em1968",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.7,
+          "c2": 5,
+          "p2": 0.3,
+          "category": "both_plausible"
+        },
+        {
+          "image_id": "kirchoff/em2605",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.7,
+          "c2": 5,
+          "p2": 0.3,
+          "category": "both_plausible"
+        }
+      ],
+      "leaning_wrong": [
+        {
+          "image_id": "baskauf/15823",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 5,
+          "p1": 0.68,
+          "c2": 6,
+          "p2": 0.14,
+          "category": "leaning_wrong"
+        },
+        {
+          "image_id": "kirchoff/em2604",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 5,
+          "p1": 0.56,
+          "c2": 6,
+          "p2": 0.44,
+          "category": "leaning_wrong"
+        },
+        {
+          "image_id": "kirchoff/em2559",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 5,
+          "p1": 0.56,
+          "c2": 6,
+          "p2": 0.44,
+          "category": "leaning_wrong"
+        },
+        {
+          "image_id": "kirchoff/em2312",
+          "species": "Quercus palustris",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 5,
+          "p1": 0.64,
+          "c2": 6,
+          "p2": 0.36,
+          "category": "leaning_wrong"
+        }
+      ],
+      "neither": [],
+      "mixed_group": [
+        {
+          "image_id": "baskauf/11124",
+          "species": "Platanus occidentalis",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 4,
+          "p1": 0.24,
+          "c2": 3,
+          "p2": 0.16,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/31433",
+          "species": "Populus deltoides",
+          "organ": "inflorescence",
+          "shot_scale": "mid-range",
+          "c1": 3,
+          "p1": 0.24,
+          "c2": 2,
+          "p2": 0.22,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15339",
+          "species": "Populus deltoides",
+          "organ": "leaf",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.28,
+          "c2": 2,
+          "p2": 0.24,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/13397",
+          "species": "Fraxinus pennsylvanica",
+          "organ": "fruit",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.36,
+          "c2": 3,
+          "p2": 0.18,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15347",
+          "species": "Populus deltoides",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 0,
+          "p1": 0.32,
+          "c2": 2,
+          "p2": 0.22,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/15200",
+          "species": "Juglans nigra",
+          "organ": "twig",
+          "shot_scale": "close-up",
+          "c1": 1,
+          "p1": 0.36,
+          "c2": 0,
+          "p2": 0.24,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/31447",
+          "species": "Populus deltoides",
+          "organ": "inflorescence",
+          "shot_scale": "close-up",
+          "c1": 3,
+          "p1": 0.28,
+          "c2": 2,
+          "p2": 0.24,
+          "category": "mixed_group"
+        },
+        {
+          "image_id": "baskauf/13594",
+          "species": "Salix nigra",
+          "organ": "whole tree",
+          "shot_scale": "distant",
+          "c1": 6,
+          "p1": 0.3,
+          "c2": 3,
+          "p2": 0.24,
+          "category": "mixed_group"
+        }
+      ]
+    },
+    "by_pair": [
       {
-        "image_id": "baskauf/30988",
-        "species": "Celtis occidentalis",
-        "organ": "bark",
-        "shot_scale": "close-up",
-        "c1": 13,
-        "p1": 0.18,
-        "c1_organ": "whole tree",
-        "c2": 2,
-        "p2": 0.14,
-        "c2_organ": "leaf",
-        "entropy": 0.8046086409378642
+        "pair": [
+          1,
+          3
+        ],
+        "n": 246,
+        "cases": [
+          {
+            "image_id": "baskauf/11174",
+            "species": "Ginkgo biloba",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 1,
+            "p1": 0.42,
+            "c2": 3,
+            "p2": 0.18,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/49341",
+            "species": "Sorbus americana",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 1,
+            "p1": 0.36,
+            "c2": 3,
+            "p2": 0.2,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/11726",
+            "species": "Yucca filamentosa",
+            "organ": "whole tree",
+            "shot_scale": "distant",
+            "c1": 3,
+            "p1": 0.4,
+            "c2": 1,
+            "p2": 0.24,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/11053",
+            "species": "Populus deltoides",
+            "organ": "fruit",
+            "shot_scale": "close-up",
+            "c1": 3,
+            "p1": 0.4,
+            "c2": 1,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/49344",
+            "species": "Sorbus americana",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 1,
+            "p1": 0.36,
+            "c2": 3,
+            "p2": 0.22,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/11054",
+            "species": "Populus deltoides",
+            "organ": "fruit",
+            "shot_scale": "distant",
+            "c1": 3,
+            "p1": 0.42,
+            "c2": 1,
+            "p2": 0.26,
+            "category": "mixed_group"
+          }
+        ]
       },
       {
-        "image_id": "baskauf/11727",
-        "species": "Yucca filamentosa",
-        "organ": "inflorescence",
-        "shot_scale": "close-up",
-        "c1": 16,
-        "p1": 0.18,
-        "c1_organ": "inflorescence",
-        "c2": 10,
-        "p2": 0.12,
-        "c2_organ": "inflorescence",
-        "entropy": 0.7990404385458745
+        "pair": [
+          2,
+          3
+        ],
+        "n": 216,
+        "cases": [
+          {
+            "image_id": "baskauf/31433",
+            "species": "Populus deltoides",
+            "organ": "inflorescence",
+            "shot_scale": "mid-range",
+            "c1": 3,
+            "p1": 0.24,
+            "c2": 2,
+            "p2": 0.22,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/31447",
+            "species": "Populus deltoides",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 3,
+            "p1": 0.28,
+            "c2": 2,
+            "p2": 0.24,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/51741",
+            "species": "Lonicera morrowii",
+            "organ": "whole tree",
+            "shot_scale": "distant",
+            "c1": 3,
+            "p1": 0.26,
+            "c2": 2,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/35376",
+            "species": "Ilex verticillata",
+            "organ": "twig",
+            "shot_scale": "close-up",
+            "c1": 3,
+            "p1": 0.32,
+            "c2": 2,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/15346",
+            "species": "Populus deltoides",
+            "organ": "twig",
+            "shot_scale": "close-up",
+            "c1": 3,
+            "p1": 0.3,
+            "c2": 2,
+            "p2": 0.24,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/14027",
+            "species": "Populus tremuloides",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 3,
+            "p1": 0.38,
+            "c2": 2,
+            "p2": 0.24,
+            "category": "mixed_group"
+          }
+        ]
       },
       {
-        "image_id": "kirchoff/em2003",
-        "species": "Fagus grandifolia",
-        "organ": "leaf",
-        "shot_scale": "close-up",
-        "c1": 2,
-        "p1": 0.22,
-        "c1_organ": "leaf",
-        "c2": 15,
-        "p2": 0.14,
-        "c2_organ": "cone",
-        "entropy": 0.7917924384048225
+        "pair": [
+          0,
+          2
+        ],
+        "n": 100,
+        "cases": [
+          {
+            "image_id": "baskauf/15339",
+            "species": "Populus deltoides",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.28,
+            "c2": 2,
+            "p2": 0.24,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/15347",
+            "species": "Populus deltoides",
+            "organ": "twig",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.32,
+            "c2": 2,
+            "p2": 0.22,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/55877",
+            "species": "Juglans cinerea",
+            "organ": "twig",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.36,
+            "c2": 2,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/12411",
+            "species": "Quercus alba",
+            "organ": "whole tree",
+            "shot_scale": "distant",
+            "c1": 0,
+            "p1": 0.38,
+            "c2": 2,
+            "p2": 0.22,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/13386",
+            "species": "Fraxinus pennsylvanica",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.44,
+            "c2": 2,
+            "p2": 0.18,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/51578",
+            "species": "Carya cordiformis",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 2,
+            "p1": 0.4,
+            "c2": 0,
+            "p2": 0.22,
+            "category": "mixed_group"
+          }
+        ]
       },
       {
-        "image_id": "kirchoff/em2198",
-        "species": "Fagus grandifolia",
-        "organ": "leaf",
-        "shot_scale": "close-up",
-        "c1": 4,
-        "p1": 0.22,
-        "c1_organ": "leaf",
-        "c2": 19,
-        "p2": 0.12,
-        "c2_organ": "cone",
-        "entropy": 0.7884927836834007
+        "pair": [
+          0,
+          4
+        ],
+        "n": 78,
+        "cases": [
+          {
+            "image_id": "kirchoff/em2198",
+            "species": "Fagus grandifolia",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.32,
+            "c2": 4,
+            "p2": 0.24,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/11125",
+            "species": "Platanus occidentalis",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 4,
+            "p1": 0.48,
+            "c2": 0,
+            "p2": 0.16,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/12467",
+            "species": "Fraxinus americana",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.44,
+            "c2": 4,
+            "p2": 0.16,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/54538",
+            "species": "Zanthoxylum americanum",
+            "organ": "fruit",
+            "shot_scale": "close-up",
+            "c1": 4,
+            "p1": 0.36,
+            "c2": 0,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/23025",
+            "species": "Juglans nigra",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.32,
+            "c2": 4,
+            "p2": 0.28,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/13403",
+            "species": "Fraxinus pennsylvanica",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.38,
+            "c2": 4,
+            "p2": 0.34,
+            "category": "mixed_group"
+          }
+        ]
       },
       {
-        "image_id": "baskauf/11726",
-        "species": "Yucca filamentosa",
-        "organ": "whole tree",
-        "shot_scale": "distant",
-        "c1": 16,
-        "p1": 0.16,
-        "c1_organ": "inflorescence",
-        "c2": 10,
-        "p2": 0.14,
-        "c2_organ": "inflorescence",
-        "entropy": 0.7823238974201828
-      },
-      {
-        "image_id": "baskauf/11961",
-        "species": "Prunus serotina",
-        "organ": "leaf",
-        "shot_scale": "mid-range",
-        "c1": 13,
-        "p1": 0.16,
-        "c1_organ": "whole tree",
-        "c2": 10,
-        "p2": 0.16,
-        "c2_organ": "inflorescence",
-        "entropy": 0.7819358620923862
-      },
-      {
-        "image_id": "kirchoff/em2194",
-        "species": "Fagus grandifolia",
-        "organ": "leaf",
-        "shot_scale": "close-up",
-        "c1": 2,
-        "p1": 0.22,
-        "c1_organ": "leaf",
-        "c2": 15,
-        "p2": 0.12,
-        "c2_organ": "cone",
-        "entropy": 0.7792376551573441
-      },
-      {
-        "image_id": "baskauf/50993",
-        "species": "Celtis occidentalis",
-        "organ": "inflorescence",
-        "shot_scale": "close-up",
-        "c1": 2,
-        "p1": 0.24,
-        "c1_organ": "leaf",
-        "c2": 13,
-        "p2": 0.12,
-        "c2_organ": "whole tree",
-        "entropy": 0.7769173539125056
+        "pair": [
+          0,
+          5
+        ],
+        "n": 57,
+        "cases": [
+          {
+            "image_id": "baskauf/19366",
+            "species": "Quercus muehlenbergii",
+            "organ": "inflorescence",
+            "shot_scale": "mid-range",
+            "c1": 0,
+            "p1": 0.38,
+            "c2": 5,
+            "p2": 0.3,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/18836",
+            "species": "Quercus bicolor",
+            "organ": "inflorescence",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.4,
+            "c2": 5,
+            "p2": 0.34,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "kirchoff/em2119",
+            "species": "Quercus alba",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.4,
+            "c2": 5,
+            "p2": 0.28,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/15624",
+            "species": "Quercus macrocarpa",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.42,
+            "c2": 5,
+            "p2": 0.26,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/79657",
+            "species": "Quercus macrocarpa",
+            "organ": "leaf",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.4,
+            "c2": 5,
+            "p2": 0.32,
+            "category": "mixed_group"
+          },
+          {
+            "image_id": "baskauf/16299",
+            "species": "Quercus bicolor",
+            "organ": "fruit",
+            "shot_scale": "close-up",
+            "c1": 0,
+            "p1": 0.36,
+            "c2": 5,
+            "p2": 0.26,
+            "category": "mixed_group"
+          }
+        ]
       }
     ]
   },

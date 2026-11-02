@@ -1,6 +1,7 @@
 {
   "inputs": {
-    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "model": "efficientnet",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/efficientnet_b0_strict/embeddings.npz",
     "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
     "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
     "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
@@ -9,57 +10,176 @@
       "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
     ]
   },
-  "bootstrap": 500,
+  "bootstrap": 200,
   "unit": "individual plant",
-  "no_p_values_reason": "images nested in individuals/species; independence assumption fails",
-  "summary": {
-    "bioclip/organ": {
-      "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 2,
-      "clusters_fe_ci_lo_gt_1_5": 4,
-      "clusters_species_adjusted_fe_gt_1_5": 5,
-      "median_top_species_share": 0.3266798418972332,
+  "summary": [
+    {
+      "model": "efficientnet",
+      "K": 3,
+      "label": "organ",
+      "clusters": 3,
+      "share_clusters_dominant_ge_0_6": 0.6666666666666666,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.6666666666666666,
+      "share_clusters_species_adj_fe_gt_1_5": 0.6666666666666666,
+      "median_top_species_share": 0.07211538461538461,
       "clusters_lt5_individuals": 0
     },
-    "bioclip/shot_scale": {
-      "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 8,
-      "clusters_fe_ci_lo_gt_1_5": 2,
-      "clusters_species_adjusted_fe_gt_1_5": 2,
-      "median_top_species_share": 0.3266798418972332,
+    {
+      "model": "efficientnet",
+      "K": 3,
+      "label": "shot_scale",
+      "clusters": 3,
+      "share_clusters_dominant_ge_0_6": 0.6666666666666666,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.6666666666666666,
+      "share_clusters_species_adj_fe_gt_1_5": 0.6666666666666666,
+      "median_top_species_share": 0.07211538461538461,
       "clusters_lt5_individuals": 0
     },
-    "dinov3/organ": {
-      "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 17,
-      "clusters_fe_ci_lo_gt_1_5": 19,
-      "clusters_species_adjusted_fe_gt_1_5": 19,
-      "median_top_species_share": 0.1153480636730815,
+    {
+      "model": "efficientnet",
+      "K": 7,
+      "label": "organ",
+      "clusters": 7,
+      "share_clusters_dominant_ge_0_6": 0.8571428571428571,
+      "share_clusters_fe_ci_lo_gt_1_5": 1.0,
+      "share_clusters_species_adj_fe_gt_1_5": 1.0,
+      "median_top_species_share": 0.07109004739336493,
       "clusters_lt5_individuals": 0
     },
-    "dinov3/shot_scale": {
-      "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 13,
-      "clusters_fe_ci_lo_gt_1_5": 6,
-      "clusters_species_adjusted_fe_gt_1_5": 9,
-      "median_top_species_share": 0.1153480636730815,
+    {
+      "model": "efficientnet",
+      "K": 7,
+      "label": "shot_scale",
+      "clusters": 7,
+      "share_clusters_dominant_ge_0_6": 0.7142857142857143,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.42857142857142855,
+      "share_clusters_species_adj_fe_gt_1_5": 0.42857142857142855,
+      "median_top_species_share": 0.07109004739336493,
       "clusters_lt5_individuals": 0
     },
-    "eff/organ": {
+    {
+      "model": "efficientnet",
+      "K": 20,
+      "label": "organ",
       "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 17,
-      "clusters_fe_ci_lo_gt_1_5": 19,
-      "clusters_species_adjusted_fe_gt_1_5": 20,
-      "median_top_species_share": 0.08765027322404371,
+      "share_clusters_dominant_ge_0_6": 0.75,
+      "share_clusters_fe_ci_lo_gt_1_5": 1.0,
+      "share_clusters_species_adj_fe_gt_1_5": 0.95,
+      "median_top_species_share": 0.09056122448979592,
       "clusters_lt5_individuals": 0
     },
-    "eff/shot_scale": {
+    {
+      "model": "efficientnet",
+      "K": 20,
+      "label": "shot_scale",
       "clusters": 20,
-      "clusters_dominant_share_ge_0_6": 14,
-      "clusters_fe_ci_lo_gt_1_5": 8,
-      "clusters_species_adjusted_fe_gt_1_5": 8,
-      "median_top_species_share": 0.08765027322404371,
+      "share_clusters_dominant_ge_0_6": 0.75,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.35,
+      "share_clusters_species_adj_fe_gt_1_5": 0.45,
+      "median_top_species_share": 0.09056122448979592,
       "clusters_lt5_individuals": 0
+    },
+    {
+      "model": "efficientnet",
+      "K": 63,
+      "label": "organ",
+      "clusters": 62,
+      "share_clusters_dominant_ge_0_6": 0.8064516129032258,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.8064516129032258,
+      "share_clusters_species_adj_fe_gt_1_5": 1.0,
+      "median_top_species_share": 0.17752100840336135,
+      "clusters_lt5_individuals": 3
+    },
+    {
+      "model": "efficientnet",
+      "K": 63,
+      "label": "shot_scale",
+      "clusters": 63,
+      "share_clusters_dominant_ge_0_6": 0.7301587301587301,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.3492063492063492,
+      "share_clusters_species_adj_fe_gt_1_5": 0.4444444444444444,
+      "median_top_species_share": 0.17857142857142858,
+      "clusters_lt5_individuals": 3
     }
-  }
+  ],
+  "clusters_main_k": [
+    {
+      "cluster": 0,
+      "n": 218,
+      "name": "leaf \u00b7 close-up",
+      "top_organ": "leaf",
+      "top_organ_share": 0.9862385321100917,
+      "organs": "leaf 99%, twig 1%, fruit 0%",
+      "scales": "close-up 97%, mid-range 3%",
+      "n_species": 51,
+      "top_species_share": 0.21559633027522937
+    },
+    {
+      "cluster": 1,
+      "n": 211,
+      "name": "mostly twig 76% (+inflorescence 8%) \u00b7 close-up",
+      "top_organ": "twig",
+      "top_organ_share": 0.7582938388625592,
+      "organs": "twig 76%, inflorescence 8%, fruit 6%",
+      "scales": "close-up 89%, mid-range 11%, distant 0%",
+      "n_species": 63,
+      "top_species_share": 0.07109004739336493
+    },
+    {
+      "cluster": 2,
+      "n": 291,
+      "name": "whole tree \u00b7 distant",
+      "top_organ": "whole tree",
+      "top_organ_share": 0.8900343642611683,
+      "organs": "whole tree 89%, inflorescence 4%, fruit 3%",
+      "scales": "distant 94%, mid-range 4%, uncertain 2%",
+      "n_species": 56,
+      "top_species_share": 0.05154639175257732
+    },
+    {
+      "cluster": 3,
+      "n": 316,
+      "name": "mostly inflorescence 68% (+fruit 16%) \u00b7 close-up",
+      "top_organ": "inflorescence",
+      "top_organ_share": 0.680379746835443,
+      "organs": "inflorescence 68%, fruit 16%, leaf 7%",
+      "scales": "close-up 86%, mid-range 11%, distant 2%",
+      "n_species": 57,
+      "top_species_share": 0.04746835443037975
+    },
+    {
+      "cluster": 4,
+      "n": 194,
+      "name": "bark \u00b7 mixed scale",
+      "top_organ": "bark",
+      "top_organ_share": 0.8092783505154639,
+      "organs": "bark 81%, whole tree 15%, leaf 2%",
+      "scales": "close-up 61%, distant 19%, mid-range 12%",
+      "n_species": 60,
+      "top_species_share": 0.07731958762886598
+    },
+    {
+      "cluster": 5,
+      "n": 241,
+      "name": "mostly leaf 64% (+fruit 12%) \u00b7 mixed scale",
+      "top_organ": "leaf",
+      "top_organ_share": 0.6390041493775933,
+      "organs": "leaf 64%, fruit 12%, inflorescence 11%",
+      "scales": "close-up 64%, mid-range 22%, distant 12%",
+      "n_species": 58,
+      "top_species_share": 0.05394190871369295
+    },
+    {
+      "cluster": 6,
+      "n": 170,
+      "name": "mostly fruit 63% (+twig 15%) \u00b7 close-up",
+      "top_organ": "fruit",
+      "top_organ_share": 0.6294117647058823,
+      "organs": "fruit 63%, twig 15%, other 8%",
+      "scales": "close-up 94%, mid-range 3%, distant 2%",
+      "n_species": 48,
+      "top_species_share": 0.10588235294117647
+    }
+  ],
+  "no_p_values_reason": "images nested in individuals/species; independence fails"
 }

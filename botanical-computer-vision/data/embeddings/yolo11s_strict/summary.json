@@ -1,0 +1,43 @@
+{
+  "products": [
+    {
+      "file": "yolo11s_backbone_embeddings.npz",
+      "shape": [
+        1641,
+        512
+      ],
+      "sha256": "ade72e94f74ba81ec7145beb96a6e8d1f4a5e0cf1e6ee35892ad6a62609df353"
+    },
+    {
+      "file": "yolo11s_neck_multiscale_embeddings.npz",
+      "shape": [
+        1641,
+        896
+      ],
+      "sha256": "c96c5c0b37803bca759ea403e8ca4d38b3cf6192d2ddf256737e97bb88dcbf15"
+    }
+  ],
+  "images": 1641,
+  "device": "0",
+  "hardware": "NVIDIA A10",
+  "torch": "2.7.1+cu126",
+  "ultralytics": "8.4.198",
+  "python": "3.11.13",
+  "weights_sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+  "reference_sha256": "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee",
+  "image_archive_sha256": "8c9122f3472a1d7ba16f328e3bce67b20d1d50484cd9e4d1a644fe3a19be90da",
+  "image_source": "Original bioimages-ne-trees archive; no report thumbnails",
+  "input_size": 640,
+  "rect": false,
+  "precision": "float32",
+  "training": false,
+  "layers": {
+    "10": 512,
+    "16": 128,
+    "19": 256,
+    "22": 512
+  },
+  "backbone_pooling": "layer 10 global average pooling then L2 normalization",
+  "neck_pooling": "global average pool layers 16,19,22; L2 each block, concatenate, L2 normalize",
+  "total_seconds": 23.785080258
+}

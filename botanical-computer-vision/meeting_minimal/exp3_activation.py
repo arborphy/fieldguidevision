@@ -18,7 +18,7 @@ from PIL import Image
 from scipy.stats import spearmanr
 from torchvision.models import efficientnet_b0, EfficientNet_B0_Weights
 
-from common import IMG_DIR, OUT, SEED, load, save_json, input_record
+from common import IMG_DIR, K_LIST, MAIN_K, OUT, SEED, clusters, load, save_json, input_record
 
 torch.manual_seed(SEED)
 torch.set_num_threads(4)
@@ -47,9 +47,6 @@ with torch.no_grad():
 repro = (E * X[chk]).sum(1)
 print("re-embed cosine vs stored: median %.4f min %.4f" % (np.median(repro), repro.min()))
 
-cent = np.stack([X[meta.eff_k20 == c].mean(0) for c in range(20)])
-cent = cent / np.linalg.norm(cent, axis=1, keepdims=True)
-cent_t = torch.tensor(cent)
 
 
 def cam_and_score(x, c, m=model):
@@ -81,34 +78,37 @@ def score(x, c):
         return float((embed(x) * cent_t[c]).sum())
 
 
-# 1. sample
-dist = 1 - (X * cent[meta.eff_k20.values]).sum(1)
-rows = []
-for c in range(20):
-    idx = np.where(meta.eff_k20 == c)[0]
-    order = idx[np.argsort(dist[idx])]
-    q = max(1, len(order) // 4)
-    core = rng.choice(order[:q], min(2, q), replace=False)
-    bnd = rng.choice(order[-q:], min(2, q), replace=False)
-    rows += [(i, c, "core") for i in core] + [(i, c, "boundary") for i in bnd]
-
+# 1. sample: for every K, 2 core + 2 boundary images per cluster (by distance to the centroid), seed 42
 K = 12  # top 25% of 49 cells
-res = []
-cams = {}
-for i, c, kind in rows:
-    x = img_tensor(i)
-    cam, s0 = cam_and_score(x, c)
-    flat = np.argsort(cam.ravel())[::-1]
-    top = [divmod(int(j), 7) for j in flat[:K]]
-    d_top = s0 - score(occlude(x, top), c)
-    d_rand = [s0 - score(occlude(x, [divmod(int(j), 7) for j in rng.choice(49, K, replace=False)]), c) for _ in range(10)]
-    own = int(np.argmax(cent @ X[i]))
-    res.append(dict(image_id=meta.image_id[i], cluster=c, kind=kind, organ=meta.organ[i], scale=meta.shot_scale[i],
-                    species=meta.species[i], score=s0, nearest_centroid_is_cluster=own == c,
-                    drop_top_cam=d_top, drop_random_mean=float(np.mean(d_rand)), drop_random_sd=float(np.std(d_rand)),
-                    top_beats_random=d_top > np.mean(d_rand),
-                    cam_center_mass=float(cam[2:5, 2:5].sum() / (cam.sum() + 1e-12))))
-    cams[meta.image_id[i]] = cam
+res, cams, rows_main = [], {}, []
+for kk in K_LIST:
+    lab = clusters(X, kk)
+    cent = np.stack([X[lab == c].mean(0) for c in range(kk)])
+    cent = cent / np.linalg.norm(cent, axis=1, keepdims=True)
+    cent_t = torch.tensor(cent)
+    dist = 1 - (X * cent[lab]).sum(1)
+    rows = []
+    for c in range(kk):
+        idx = np.where(lab == c)[0]
+        order = idx[np.argsort(dist[idx])]
+        q = max(1, len(order) // 4)
+        rows += [(i, c, "core") for i in rng.choice(order[:q], min(2, q), replace=False)]
+        rows += [(i, c, "boundary") for i in rng.choice(order[-q:], min(2, q), replace=False)]
+    for i, c, kind in rows:
+        x = img_tensor(i)
+        cam, s0 = cam_and_score(x, c)
+        top = [divmod(int(j), 7) for j in np.argsort(cam.ravel())[::-1][:K]]
+        d_top = s0 - score(occlude(x, top), c)
+        d_rand = [s0 - score(occlude(x, [divmod(int(j), 7) for j in rng.choice(49, K, replace=False)]), c) for _ in range(10)]
+        res.append(dict(K=kk, image_id=meta.image_id[i], cluster=c, kind=kind, organ=meta.organ[i], scale=meta.shot_scale[i],
+                        species=meta.species[i], score=s0, nearest_centroid_is_cluster=int(np.argmax(cent @ X[i])) == c,
+                        drop_top_cam=d_top, drop_random_mean=float(np.mean(d_rand)), drop_random_sd=float(np.std(d_rand)),
+                        top_beats_random=d_top > np.mean(d_rand), cam_center_mass=float(cam[2:5, 2:5].sum() / (cam.sum() + 1e-12))))
+        cams[(kk, meta.image_id[i])] = cam
+    if kk == MAIN_K:
+        rows_main, cent_main = rows, cent_t
+    print(kk, len(rows))
+cent_t = cent_main
 df = pd.DataFrame(res)
 df.to_csv(OUT / "exp3_activation_cases.csv", index=False)
 
@@ -119,14 +119,17 @@ for mod in rmodel.features[-1].modules():
     if hasattr(mod, "reset_parameters"):
         mod.reset_parameters()
 san = []
-for i, c, kind in rows[:24]:
+for i, c, kind in rows_main[:24]:
     x = img_tensor(i)
     cr, _ = cam_and_score(x, c, rmodel)
-    san.append(spearmanr(cams[meta.image_id[i]].ravel(), cr.ravel())[0])
+    san.append(spearmanr(cams[(MAIN_K, meta.image_id[i])].ravel(), cr.ravel())[0])
 san = np.nan_to_num(np.array(san))
 
 summary = dict(inputs=input_record(), model=str(weights), n_cases=len(df),
                reembed_cosine_median=float(np.median(repro)), reembed_cosine_min=float(repro.min()),
+               main_k=MAIN_K, per_k=df.groupby("K").agg(n=("image_id", "size"), frac_top_beats_random=("top_beats_random", "mean"),
+                                                         median_drop_top=("drop_top_cam", "median"),
+                                                         median_drop_random=("drop_random_mean", "median")).reset_index().to_dict("records"),
                frac_top_cam_beats_random=float(df.top_beats_random.mean()),
                frac_by_kind=df.groupby("kind").top_beats_random.mean().to_dict(),
                median_drop_top=float(df.drop_top_cam.median()), median_drop_random=float(df.drop_random_mean.median()),
@@ -135,21 +138,22 @@ summary = dict(inputs=input_record(), model=str(weights), n_cases=len(df),
                note="Sampled 2 core + 2 boundary per cluster, seed 42, not hand-picked. No organ masks: "
                     "says whether the map is faithful to the score, not whether it is on the organ.")
 save_json("exp3_activation_summary.json", summary)
-np.savez_compressed(OUT / "exp3_cams.npz", ids=np.array(list(cams)), cams=np.stack(list(cams.values())))
+np.savez_compressed(OUT / "exp3_cams.npz", keys=np.array([f"K{k}|{i}" for k, i in cams]), cams=np.stack(list(cams.values())))
 print(summary)
 
 # figure: 8 showcase cases (first core + first boundary of 4 clusters with most images)
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-big = meta.eff_k20.value_counts().index[:4]
-show = pd.concat([df[(df.cluster == c)].groupby("kind").head(1) for c in big])
+dm = df[df.K == MAIN_K]
+big = pd.Series(clusters(X, MAIN_K)).value_counts().index[:4]
+show = pd.concat([dm[(dm.cluster == c)].groupby("kind").head(1) for c in big])
 fig, ax = plt.subplots(2, len(show), figsize=(2.3 * len(show), 5))
 for j, r in enumerate(show.itertuples()):
     i = int(np.where(meta.image_id == r.image_id)[0][0])
     im = Image.open(IMG_DIR / "gq" / meta.thumb[i]).convert("RGB").resize((224, 224))
-    ax[0, j].imshow(im); ax[0, j].set_title(f"c{r.cluster} {r.kind}\n{r.organ}, {r.scale}", fontsize=8)
-    ax[1, j].imshow(im); ax[1, j].imshow(np.kron(cams[r.image_id], np.ones((32, 32))), alpha=.5, cmap="jet")
+    ax[0, j].imshow(im); ax[0, j].set_title(f"K={MAIN_K} c{r.cluster} {r.kind}\n{r.organ}, {r.scale}", fontsize=8)
+    ax[1, j].imshow(im); ax[1, j].imshow(np.kron(cams[(MAIN_K, r.image_id)], np.ones((32, 32))), alpha=.5, cmap="jet")
     ax[1, j].set_title(f"drop top {r.drop_top_cam:.3f}\nrandom {r.drop_random_mean:.3f}", fontsize=8)
 for a in ax.ravel():
     a.axis("off")

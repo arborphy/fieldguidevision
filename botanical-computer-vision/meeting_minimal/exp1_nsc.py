@@ -15,7 +15,7 @@ from sklearn.decomposition import PCA
 from sklearn.metrics import f1_score
 from sklearn.model_selection import GroupKFold
 
-from common import OUT, SEED, load, save_json, input_record
+from common import K_LIST, OUT, SEED, clusters, load, save_json, input_record
 
 meta, X = load()
 D = 64
@@ -53,7 +53,10 @@ Z = pca.transform(X)
 grid = np.round(np.concatenate([[0], np.linspace(0.25, 8, 32)]), 3)
 gkf = GroupKFold(5)
 results, curves = {}, []
-for task, ycol in [("organ (external label)", "organ"), ("grouping approximation: own K=20 cluster ID", "own_k20")]:
+for k in K_LIST:
+    meta[f"k{k}"] = clusters(X, k)
+TASKS = [("organ (external label)", "organ")] + [(f"grouping approximation: K={k} cluster ID", f"k{k}") for k in K_LIST]
+for task, ycol in TASKS:
     y = meta[ycol].astype(str).values
     keep = y != "other"
     trk, tek = tr & keep, te & keep
@@ -91,12 +94,13 @@ save_json("exp1_nsc_summary.json", dict(inputs=input_record(), basis=f"PCA-{D} w
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 cv = pd.DataFrame(curves)
 fig, axes = plt.subplots(1, 2, figsize=(10, 3.8))
-for ax, (task, g) in zip(axes, cv.groupby("task", sort=False)):
-    ax.errorbar(g.coords_any_class, g.cv_macroF1, yerr=g.cv_se, marker="o", ms=3, lw=1)
-    r = results[task]
-    ax.axhline(g.cv_macroF1.iloc[0], color="grey", ls=":", label="Δ=0 (all 64)")
-    sel = g[g.delta == r["one_se_delta"]].iloc[0]
-    ax.scatter([sel.coords_any_class], [sel.cv_macroF1], color="red", zorder=5, label=f"1-SE Δ={sel.delta}")
-    ax.set_xlabel("PCA coordinates retained by ≥1 class"); ax.set_ylabel("5-fold group-CV macro-F1 (train)")
-    ax.set_title(task, fontsize=9); ax.legend(fontsize=7)
+for task, g in cv.groupby("task", sort=False):
+    ax = axes[0] if task.startswith("organ") else axes[1]
+    sel = g[g.delta == results[task]["one_se_delta"]].iloc[0]
+    line = ax.plot(g.coords_any_class, g.cv_macroF1 / g.cv_macroF1.iloc[0], marker="o", ms=3, lw=1,
+                   label=task.replace("grouping approximation: ", "").replace(" cluster ID", ""))[0]
+    ax.scatter([sel.coords_any_class], [sel.cv_macroF1 / g.cv_macroF1.iloc[0]], color=line.get_color(), s=60, edgecolor="k", zorder=5)
+for ax, t in zip(axes, ["organ (external label)", "grouping approximation (circular): own K-means cluster IDs"]):
+    ax.axhline(0.9, color="grey", ls=":", lw=1); ax.invert_xaxis(); ax.legend(fontsize=7)
+    ax.set_xlabel("PCA coordinates retained by ≥1 class (of 64)"); ax.set_ylabel("CV macro-F1 / F1 at Δ=0"); ax.set_title(t, fontsize=9)
 plt.tight_layout(); plt.savefig(OUT / "exp1_nsc_curve.png", dpi=120)

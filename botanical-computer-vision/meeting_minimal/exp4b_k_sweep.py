@@ -16,7 +16,7 @@ from sklearn.metrics import adjusted_mutual_info_score as ami, adjusted_rand_sco
 from common import MODEL, OUT, SEED, load, save_json, input_record
 
 meta, X = load()
-KS = [3, 5, 7, 10, 15, 20, 30, 50, 63, 100]
+KS = [3, 5, 7, 10, 15, 20]  # large K left out
 rng = np.random.default_rng(SEED)
 uind = meta.individual_id.unique()
 rows_by_ind = meta.groupby("individual_id").indices

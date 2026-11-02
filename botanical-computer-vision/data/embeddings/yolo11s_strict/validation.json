@@ -1,0 +1,24 @@
+[
+  {
+    "file": "yolo11s_backbone_embeddings.npz",
+    "shape": [
+      1641,
+      512
+    ],
+    "dtype": "float32",
+    "ids_match": true,
+    "splits_match": true,
+    "finite_and_unit_norm": true
+  },
+  {
+    "file": "yolo11s_neck_multiscale_embeddings.npz",
+    "shape": [
+      1641,
+      896
+    ],
+    "dtype": "float32",
+    "ids_match": true,
+    "splits_match": true,
+    "finite_and_unit_norm": true
+  }
+]

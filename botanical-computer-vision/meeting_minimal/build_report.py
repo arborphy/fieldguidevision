@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 import crossmodel
-import ksoft
+import sections
 
 from common import OUT, load
 
@@ -47,54 +47,11 @@ def section(n, title, ask, did, result, means, badges):
 
 
 secs = []
-# 1 NSC
-o = s1["results"]["organ (external label)"]; g = [v for k, v in s1["results"].items() if k.startswith("grouping")][0]
-nsc_tab = pd.DataFrame([dict(task=t, n_train=r["n_train"], n_test=r["n_test"], classes=r["n_classes"],
-                             delta_1se=r["one_se_delta"], coords_1se=r["test"]["delta_1se"]["coords_any_class"],
-                             coords_per_class_1se=r["test"]["delta_1se"]["coords_mean_per_class"],
-                             test_F1_delta0=r["test"]["delta0"]["test_macroF1"], test_F1_1se=r["test"]["delta_1se"]["test_macroF1"],
-                             ratio=r["ratio_F1_1se_over_delta0"]) for t, r in s1["results"].items()])
-secs.append(section(1, "NSC：性能—保留坐标数曲线", "用很少的 PCA 坐标能否保持器官区分 / 复现现有聚类分组？",
-    "EfficientNet-B0 原始向量 → PCA-64（仅 train 拟合，白化）。自写 NSC（Tibshirani 2002）；Δ 网格 33 点；train 上按个体 GroupKFold 5 折选 Δ（1-SE 规则），test 只评估一次。"
-    "任务 A：外部器官标签（BioImages organ_category，7 类）。任务 B：<b>分组近似任务</b>——目标是已有 EfficientNet K=20 cluster ID，与输入同源，具循环性。",
-    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>" + crossmodel.nsc_details("zh", strip, table),
-    f"器官：1-SE Δ={o['one_se_delta']} 时只剩 {o['test']['delta_1se']['coords_any_class']}/64 个坐标（每类平均 {o['test']['delta_1se']['coords_mean_per_class']:.1f} 个），"
-    f"test macro-F1 {o['test']['delta_1se']['test_macroF1']:.3f}，Δ=0 为 {o['test']['delta0']['test_macroF1']:.3f}（保留 {o['ratio_F1_1se_over_delta0']:.0%}）。"
-    f"而分组近似任务几乎不能稀疏化（{g['test']['delta_1se']['coords_any_class']}/64）——K-means 分组是分散在多数主成分上的。"
-    "<b>这些坐标是 PCA 主成分，不是生物学特征</b>；单次 split、单个模型；未做跨折稳定性（Jaccard）。", ["v", "e"]))
-
-# 2 PCA + enrichment
-sm = pd.DataFrame(s2["summary"]).T.reset_index().rename(columns={"index": "representation/label"})
-top = pd.read_csv(OUT / "exp2_enrichment_top_per_cluster.csv")
-ex = top[(top.label_type == "organ")].sort_values("species_adjusted_fe", ascending=False).groupby("representation").head(3)
-secs.append(section(2, "PCA 保留信息 ＋ 已有 cluster 的组成与富集", "降维丢了多少？已有 K=20 聚类各自是什么器官 / 尺度 / 物种组成？",
-    "PCA 保留量见第 6 项表（EfficientNet，train 拟合 / val 报告）。富集：BioCLIP、DINOv3、EfficientNet 已有的 K=20 cluster ID（全 1,641 张）× 器官 / 拍摄尺度。"
-    "报告 count、基线、fold enrichment（FE）、<b>按个体植株</b>的 bootstrap 95% CI（500 次）、物种校正 FE（观测 / 按该簇物种构成的期望），以及最大物种占比。"
-    "<b>不报告 p 值</b>：图片嵌套在 465 个个体与 63 个物种内，Fisher/卡方的独立性假设不成立。",
-    f"PCA（EfficientNet，val）：2 维保留方差 {s6['table'][0]['train_explained_var']:.1%}，64 维 {s6['table'][4]['train_explained_var']:.1%}，256 维 {s6['table'][6]['train_explained_var']:.1%}。"
-    + table(sm) + "<p>各模型物种校正 FE 最高的 3 个器官簇：</p>" +
-    table(ex, ["representation", "cluster", "label", "n_images", "cluster_share", "fold_enrichment", "fe_ci_lo", "fe_ci_hi",
-               "species_adjusted_fe", "n_individuals", "n_species", "top_species_share"]) +
-    "<img src='results/exp2_organ_composition.png' alt='organ composition'>",
-    "描述性效应：DINOv3 / EfficientNet 有 19–20/20 个簇的主导器官 FE 下界 &gt;1.5，且按物种构成校正后仍 &gt;1.5，单一物种在簇内占比中位数仅 9–12%——器官簇不是“某个物种的簇”。"
-    "BioCLIP 只有 4–5/20 个簇如此，最大物种占比中位数 33%（物种簇）。此结论与 README §2 的 NMI 一致，现在额外通过了个体重采样与物种校正。标签为单标签 organ_category，尺度标签为暂定。",
-    ["v"]))
-
-# 3 activation
-cases = pd.read_csv(OUT / "exp3_activation_cases.csv")
-secs.append(section(3, "Activation mapping（Grad-CAM ＋ 遮挡对照）", "EfficientNet 把图片推向某个簇时，依赖的是图片的哪个区域？热图是否忠实于分数？",
-    f"EfficientNet-B0 权重 + 1,641 张原图均可得，因此做了真实计算（CPU fp32）。先复核：重新嵌入 40 张图与库存向量余弦中位数 {s3['reembed_cosine_median']:.4f}（最低 {s3['reembed_cosine_min']:.4f}）。"
-    "目标分数 = 图像嵌入与 K=20 簇中心的余弦。每簇按到中心距离抽 2 个核心 + 2 个边界（seed 42，非手选，共 80 张）。"
-    "遮挡对照：把 Grad-CAM 最高的 12/49 格换成均值灰，对比 10 次随机 12 格。合理性检查：重置最后一个特征块后热图应改变。"
-    "<b>BioCLIP / DINOv3 未做</b>：需要加载它们的模型权重（原始向量后来已恢复，见附录）。",
-    f"Grad-CAM 遮挡导致的分数下降大于随机遮挡的比例：{s3['frac_top_cam_beats_random']:.0%}（核心 {s3['frac_by_kind']['core']:.0%}，边界 {s3['frac_by_kind']['boundary']:.0%}）；"
-    f"下降中位数 {s3['median_drop_top']:.3f}，随机为 {s3['median_drop_random']:.3f}。最后一块随机化后与原热图的 Spearman 中位数为 {s3['sanity_spearman_vs_randomised_last_block_median']:.2f}（热图依赖权重，检查通过）。"
-    "<img src='results/exp3_gradcam_cases.png' alt='Grad-CAM cases'><p>上图是固定规则选出的 8 例（4 个最大簇各取核心、边界各 1 张）。例如 c0 核心一例中，热点在图片上方的背景，而不在花序上。</p>",
-    "热图对目标分数是<b>忠实的</b>（遮挡对照）。但<b>它是否落在器官上尚未验证</b>：没有器官掩膜，所以不能得出“簇看的是叶片而非背景”之类的结论。可视化的个例仅为探索演示。",
-    ["v", "e"]))
-
-# 4 K choice + soft clustering (redone)
-secs.append(ksoft.section4("zh", section, table, strip))
+# 1-4 (K-dependent sections)
+secs.append(sections.sec1("zh", section, table, strip))
+secs.append(sections.sec2("zh", section, table, strip, s6))
+secs.append(sections.sec3("zh", section, table, s3))
+secs.append(sections.sec4("zh", section, table, strip))
 
 # 5 AE / axes
 rec = pd.read_csv(OUT / "exp5_recovered_ae_table.csv")
@@ -121,17 +78,7 @@ secs.append(section(6, "可视化保真度", "二维 / 较高维 PCA 图在多�
     "（物种探针在 val 上本来就很低：EfficientNet 不是物种模型。）", ["v"]))
 
 # 7 retrieval
-r7 = pd.read_csv(OUT / "exp7_retrieval.csv")
-cs = s7["cases"]
-pick = ["centroid c14", "centroid c5", "centroid c0", "centroid c13", "PC1 -2SD", "PC1 +2SD"]
-html7 = "".join(f"<h4>{p}</h4>{strip(cs[p], cap=lambda r: f'{r['organ']} · {r['shot_scale']} · cos {r['cos']:.2f}')}" for p in pick)
-secs.append(section(7, "反演：检索最近的真实图片", "某个簇中心 / 某个轴方向上的点“长什么样”？",
-    "不训练生成模型。在完整的 1,280 维 EfficientNet 空间中，用余弦相似度检索离以下潜在点最近的 6 张真实图片：20 个 EfficientNet K=20 簇中心，以及 PC1 / PC2 的 均值 ± 2SD 点（重新归一化）。",
-    table(r7[r7.point.str.startswith("centroid")], ["point", "cluster_size", "cluster_dominant_organ", "cluster_dominant_share", "top1_cos",
-                                                    "top6_in_cluster", "top6_share_dominant_organ", "top6_n_species"], d=2) + html7,
-    f"簇中心的近邻平均有 {s7['mean_top6_in_cluster']:.1f}/6 张属于该簇，主导器官占比 {s7['mean_top6_share_dominant_organ']:.0%}，高于簇整体的 {s7['mean_cluster_dominant_share']:.0%}："
-    "检索出的是该簇的“典型”图片（会夸大簇的纯度，展示时需注意）。PC1 −2SD → 近景叶片，+2SD → 远景整树，与第 5 项一致。这是检索，不是图像生成。",
-    ["v", "e"]))
+secs.append(sections.sec7("zh", section, table, strip, s7))
 
 cm = crossmodel.rows()
 appendix = ""

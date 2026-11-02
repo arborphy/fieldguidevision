@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 import crossmodel
-import ksoft
+import sections
 from common import OUT, load
 
 H = Path(__file__).resolve().parent
@@ -46,70 +46,11 @@ def section(n, title, ask, did, result, means, badges):
 
 
 secs = []
-# 1 NSC
-o = s1["results"]["organ (external label)"]
-g = [v for k, v in s1["results"].items() if k.startswith("grouping")][0]
-nsc_tab = pd.DataFrame([dict(task=t, n_train=r["n_train"], n_test=r["n_test"], classes=r["n_classes"],
-                             delta_1se=r["one_se_delta"], coords_1se=r["test"]["delta_1se"]["coords_any_class"],
-                             coords_per_class_1se=r["test"]["delta_1se"]["coords_mean_per_class"],
-                             test_F1_delta0=r["test"]["delta0"]["test_macroF1"], test_F1_1se=r["test"]["delta_1se"]["test_macroF1"],
-                             ratio=r["ratio_F1_1se_over_delta0"]) for t, r in s1["results"].items()])
-secs.append(section(1, "NSC: performance vs number of retained coordinates",
-    "Can a few PCA coordinates keep organ separation, or reproduce the existing cluster grouping?",
-    "EfficientNet-B0 raw vectors → PCA-64 (fit on train only, whitened). Own NSC implementation (Tibshirani 2002); 33-point Δ grid; Δ chosen by "
-    "5-fold GroupKFold on train (groups = individual plant) with the one-standard-error rule; test evaluated once. "
-    "Task A: external organ label (BioImages organ_category, 7 classes). Task B: <b>grouping-approximation task</b>, where the target is the "
-    "existing EfficientNet K=20 cluster ID. That target comes from the same vectors, so the task is circular.",
-    table(nsc_tab) + "<img src='results/exp1_nsc_curve.png' alt='NSC curve'>" + crossmodel.nsc_details("en", strip, table),
-    f"Organ: at the 1-SE Δ={o['one_se_delta']} only {o['test']['delta_1se']['coords_any_class']}/64 coordinates remain "
-    f"({o['test']['delta_1se']['coords_mean_per_class']:.1f} per class on average). Test macro-F1 is {o['test']['delta_1se']['test_macroF1']:.3f} "
-    f"vs {o['test']['delta0']['test_macroF1']:.3f} at Δ=0 ({o['ratio_F1_1se_over_delta0']:.0%} retained). "
-    f"The grouping-approximation task barely sparsifies ({g['test']['delta_1se']['coords_any_class']}/64): K-means groups are spread over most components. "
-    "<b>These coordinates are PCA components, not biological features.</b> Single split, single model; cross-fold stability (Jaccard) not done.",
-    ["v", "e"]))
-
-# 2 PCA + enrichment
-sm = pd.DataFrame(s2["summary"]).T.reset_index().rename(columns={"index": "representation/label"})
-top = pd.read_csv(OUT / "exp2_enrichment_top_per_cluster.csv")
-ex = top[(top.label_type == "organ")].sort_values("species_adjusted_fe", ascending=False).groupby("representation").head(3)
-secs.append(section(2, "Information kept by PCA + composition and enrichment of existing clusters",
-    "How much does dimensionality reduction lose? What organ / scale / species mix does each existing K=20 cluster have?",
-    "PCA retention: see the table in item 6 (EfficientNet, fit on train / reported on val). Enrichment: existing K=20 cluster IDs of BioCLIP, DINOv3 "
-    "and EfficientNet (all 1,641 images) × organ / shot scale. Reported: count, base rate, fold enrichment (FE), 95% CI from a bootstrap over "
-    "<b>individual plants</b> (500 resamples), species-adjusted FE (observed / expected from the cluster's species mix), and top-species share. "
-    "<b>No p-values</b>: images are nested in 465 individuals and 63 species, so the independence assumption of Fisher / chi-square tests fails.",
-    f"PCA (EfficientNet, val): 2-D keeps {s6['table'][0]['train_explained_var']:.1%} of variance, 64-D {s6['table'][4]['train_explained_var']:.1%}, "
-    f"256-D {s6['table'][6]['train_explained_var']:.1%}." + table(sm) + "<p>Top 3 organ clusters per model by species-adjusted FE:</p>" +
-    table(ex, ["representation", "cluster", "label", "n_images", "cluster_share", "fold_enrichment", "fe_ci_lo", "fe_ci_hi",
-               "species_adjusted_fe", "n_individuals", "n_species", "top_species_share"]) +
-    "<img src='results/exp2_organ_composition.png' alt='organ composition'>",
-    "Descriptive effects. In DINOv3 / EfficientNet, 19–20 of 20 clusters have a dominant organ with FE CI lower bound &gt;1.5, still &gt;1.5 after "
-    "adjusting for species mix, and the median top-species share is only 9–12%. These organ clusters are not single-species clusters. "
-    "BioCLIP has 4–5 such clusters out of 20, with a median top-species share of 33%, so it clusters by species. This matches the NMI in README §2 "
-    "and now also survives individual resampling and species adjustment. Labels: single-label organ_category; scale labels are provisional.",
-    ["v"]))
-
-# 3 activation
-secs.append(section(3, "Activation mapping (Grad-CAM + occlusion control)",
-    "When EfficientNet pushes an image towards a cluster, which image regions does it rely on? Is the map faithful to the score?",
-    f"EfficientNet-B0 weights and all 1,641 original images are available, so this is a real computation (CPU, fp32). Check first: re-embedding 40 images "
-    f"gives median cosine {s3['reembed_cosine_median']:.4f} to the stored vectors (min {s3['reembed_cosine_min']:.4f}). "
-    "Target score = cosine between the image embedding and its K=20 cluster centroid. Per cluster, 2 core + 2 boundary images by distance to the centroid "
-    "(seed 42, not hand-picked; 80 images). Occlusion control: replace the top 12/49 Grad-CAM cells with mean grey vs 10 random sets of 12 cells. "
-    "Sanity check: re-initialising the last feature block should change the map. "
-    "<b>BioCLIP / DINOv3 not run</b>: this needs their model weights and a GPU-scale run, which this round did not do (their raw vectors were recovered later, see appendix).",
-    f"Fraction of cases where Grad-CAM occlusion drops the score more than random occlusion: {s3['frac_top_cam_beats_random']:.0%} "
-    f"(core {s3['frac_by_kind']['core']:.0%}, boundary {s3['frac_by_kind']['boundary']:.0%}). Median drop {s3['median_drop_top']:.3f} vs random "
-    f"{s3['median_drop_random']:.3f}. Spearman between the original map and the map after randomising the last block: median "
-    f"{s3['sanity_spearman_vs_randomised_last_block_median']:.2f} (the map depends on the weights; check passed)."
-    "<img src='results/exp3_gradcam_cases.png' alt='Grad-CAM cases'><p>The 8 cases above follow a fixed rule (first core and first boundary image "
-    "of the 4 largest clusters). In the c0 core case the hot area is background at the top of the image, not the inflorescence.</p>",
-    "The maps are <b>faithful</b> to the target score (occlusion control). Whether they fall <b>on the organ is not tested</b>: there are no organ masks, "
-    "so no claim such as \"the cluster looks at the leaf, not the background\" is supported. Individual maps are exploratory.",
-    ["v", "e"]))
-
-# 4 K choice + soft clustering (redone)
-secs.append(ksoft.section4("en", section, table, strip))
+# 1-4 (K-dependent sections)
+secs.append(sections.sec1("en", section, table, strip))
+secs.append(sections.sec2("en", section, table, strip, s6))
+secs.append(sections.sec3("en", section, table, s3))
+secs.append(sections.sec4("en", section, table, strip))
 
 # 5 AE / axes
 rec = pd.read_csv(OUT / "exp5_recovered_ae_table.csv")
@@ -143,20 +84,7 @@ secs.append(section(6, "Visualisation fidelity",
     "(The species probe is low on val to begin with: EfficientNet is not a species model.)", ["v"]))
 
 # 7 retrieval
-r7 = pd.read_csv(OUT / "exp7_retrieval.csv")
-cs = s7["cases"]
-pick = ["centroid c14", "centroid c5", "centroid c0", "centroid c13", "PC1 -2SD", "PC1 +2SD"]
-html7 = "".join(f"<h4>{p}</h4>{strip(cs[p], cap=lambda r: f'{r['organ']} · {r['shot_scale']} · cos {r['cos']:.2f}')}" for p in pick)
-secs.append(section(7, "Inversion: retrieve the nearest real images",
-    "What does a cluster centroid, or a point along an axis, look like?",
-    "No generative model is trained. In the full embedding space, retrieve the 6 nearest real images (cosine) to: the 20 EfficientNet K=20 centroids, "
-    "and the mean ± 2 SD points along PC1 / PC2 (re-normalised).",
-    table(r7[r7.point.str.startswith("centroid")], ["point", "cluster_size", "cluster_dominant_organ", "cluster_dominant_share", "top1_cos",
-                                                    "top6_in_cluster", "top6_share_dominant_organ", "top6_n_species"], d=2) + html7,
-    f"On average {s7['mean_top6_in_cluster']:.1f}/6 neighbours of a centroid belong to that cluster, and {s7['mean_top6_share_dominant_organ']:.0%} show "
-    f"its dominant organ vs {s7['mean_cluster_dominant_share']:.0%} across the whole cluster. Retrieval returns the cluster's typical members, which "
-    "overstates cluster purity when shown. PC1 −2SD → close-up leaves, +2SD → distant whole trees, consistent with item 5. This is retrieval, not image generation.",
-    ["v", "e"]))
+secs.append(sections.sec7("en", section, table, strip, s7))
 
 # appendix: three models
 cm = crossmodel.rows()
