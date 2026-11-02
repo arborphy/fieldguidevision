@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 import crossmodel
+import ksoft
 
 from common import OUT, load
 
@@ -92,23 +93,8 @@ secs.append(section(3, "Activation mapping（Grad-CAM ＋ 遮挡对照）", "Eff
     "热图对目标分数是<b>忠实的</b>（遮挡对照）。但<b>它是否落在器官上尚未验证</b>：没有器官掩膜，所以不能得出“簇看的是叶片而非背景”之类的结论。可视化的个例仅为探索演示。",
     ["v", "e"]))
 
-# 4 soft
-km = pd.read_csv(OUT / "exp4_existing_k_comparison.csv")
-amb = pd.read_csv(OUT / "exp4_ambiguous_cases.csv").head(8)
-recs = [dict(image_id=r.image_id, species=r.species, organ=r.organ, shot_scale=r.shot_scale,
-             cap=f"{r.organ}·{r.shot_scale}<br>p1={r.gmm_max:.2f}({r.top1_component_main_organ}) p2={r.gmm_p2:.2f}({r.top2_component_main_organ})") for r in amb.itertuples()]
-secs.append(section(4, "Soft clustering ／ K", "K 选多少？有没有图片真正“夹在两个簇之间”，这种含混是否有含义？",
-    "复用已有 K=10/20/50 × 10 个种子的结果（species/organ NMI、种子间 ARI）。新增：EfficientNet PCA-32 上的对角 GMM（K=20），5 个种子；"
-    "计算每张图的最大归属概率与熵；BIC 取 K∈{5,10,20,30,50}；检验熵是否能预测 test 上的探针错误，以及是否能预测 mid-range 尺度。",
-    table(km, d=3) +
-    f"<p>GMM 的 BIC：{', '.join(f'K={k}: {v:,.0f}' for k, v in s4['bic'].items())}（K=30 最低，K=20–30 之间趋于平缓）。"
-    f"种子间标签 ARI 均值 {s4['seed_label_ari_mean']:.2f}，熵排序 Spearman {s4['seed_entropy_spearman_mean']:.2f}；与已有 K-means 的 ARI 为 {s4['ari_gmm_vs_existing_kmeans20']:.2f}。"
-    f"最大归属 &lt;0.6 的图片仅占 {s4['frac_images_max_membership_lt_0_6']:.1%}。熵对探针错误的 AUROC 为 <b>{s4['auroc_entropy_vs_probe_error_test211']:.2f}</b>（test 211 张，错 {s4['n_test_wrong']} 张）；"
-    f"对 mid-range 尺度的 AUROC 为 {s4['auroc_entropy_vs_midrange_scale']:.2f}。</p><p>熵最高的 8 张真实图片（p1/p2 = 前两个成分的概率，括号内为该成分的主导器官）：</p>" +
-    strip(recs, cap=lambda r: r["cap"]).replace("&lt;br&gt;", "<br>"),
-    "对角 GMM 在 32 维下非常“硬”，含混图片很少；熵不能预测分类错误（0.51≈随机），对 mid-range 尺度有弱信号（0.64）。"
-    "<b>软概率不等于多器官</b>：多器官 AUROC 无法计算，因为 Git 中没有多标签（Gemma 多标签 / Human Gold 尚未导出）。上面的个例是探索演示。",
-    ["v", "e", "x"]))
+# 4 K choice + soft clustering (redone)
+secs.append(ksoft.section4("zh", section, table, strip))
 
 # 5 AE / axes
 rec = pd.read_csv(OUT / "exp5_recovered_ae_table.csv")

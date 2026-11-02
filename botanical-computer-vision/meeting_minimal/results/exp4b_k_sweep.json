@@ -1,0 +1,282 @@
+{
+  "inputs": {
+    "model": "efficientnet",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "ks": [
+    3,
+    5,
+    7,
+    10,
+    15,
+    20,
+    30,
+    50,
+    63,
+    100
+  ],
+  "rows": [
+    {
+      "model": "efficientnet",
+      "K": 3,
+      "ami_organ": 0.4140931759317224,
+      "ari_organ": 0.23452867793651155,
+      "ami_scale": 0.4364906099454612,
+      "ari_scale": 0.5220213713500804,
+      "ami_species": 0.011289175742807314,
+      "ari_species": 0.0017334766827512501,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": 0.7954122752634842,
+      "matched_acc_species": NaN,
+      "silhouette": 0.16615566611289978,
+      "stability_ari_mean": 0.6593098863223286,
+      "stability_ari_sd": 0.26698443827514473
+    },
+    {
+      "model": "efficientnet",
+      "K": 5,
+      "ami_organ": 0.5664593563514312,
+      "ari_organ": 0.5419525596699069,
+      "ami_scale": 0.3088507385034963,
+      "ari_scale": 0.20324097420926646,
+      "ami_species": 0.03361966238546661,
+      "ari_species": 0.008241238795369622,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.1562378704547882,
+      "stability_ari_mean": 0.6831643638422574,
+      "stability_ari_sd": 0.15483101447420095
+    },
+    {
+      "model": "efficientnet",
+      "K": 7,
+      "ami_organ": 0.555178002240171,
+      "ari_organ": 0.5029432047848058,
+      "ami_scale": 0.27296173714626293,
+      "ari_scale": 0.13966500905550747,
+      "ami_species": 0.05354273740698625,
+      "ari_species": 0.013832691532623636,
+      "matched_acc_organ": 0.6806825106642291,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.15042175352573395,
+      "stability_ari_mean": 0.7186980879510789,
+      "stability_ari_sd": 0.09504044411659371
+    },
+    {
+      "model": "efficientnet",
+      "K": 10,
+      "ami_organ": 0.5225439067756957,
+      "ari_organ": 0.40669479529191876,
+      "ami_scale": 0.27691754283915093,
+      "ari_scale": 0.11075903448462493,
+      "ami_species": 0.07039144057825164,
+      "ari_species": 0.01633198472114087,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.13817675411701202,
+      "stability_ari_mean": 0.6848019472938882,
+      "stability_ari_sd": 0.0721567841663207
+    },
+    {
+      "model": "efficientnet",
+      "K": 15,
+      "ami_organ": 0.5099106827250429,
+      "ari_organ": 0.33499688793988536,
+      "ami_scale": 0.2700569178006033,
+      "ari_scale": 0.08296748354699839,
+      "ami_species": 0.09868244726893884,
+      "ari_species": 0.03050893425638566,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.1277637779712677,
+      "stability_ari_mean": 0.6110399899579454,
+      "stability_ari_sd": 0.05978013215639462
+    },
+    {
+      "model": "efficientnet",
+      "K": 20,
+      "ami_organ": 0.4863939833987122,
+      "ari_organ": 0.2566456847175034,
+      "ami_scale": 0.2607071573730408,
+      "ari_scale": 0.0589141967910659,
+      "ami_species": 0.10871977005447257,
+      "ari_species": 0.03659060089216811,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.09389827400445938,
+      "stability_ari_mean": 0.518549136972475,
+      "stability_ari_sd": 0.04645881032989017
+    },
+    {
+      "model": "efficientnet",
+      "K": 30,
+      "ami_organ": 0.4568454803613115,
+      "ari_organ": 0.19120774755557954,
+      "ami_scale": 0.22788157004768048,
+      "ari_scale": 0.038615358829671896,
+      "ami_species": 0.12112645414851549,
+      "ari_species": 0.03769382910894953,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.10428006947040558,
+      "stability_ari_mean": 0.46412667263787266,
+      "stability_ari_sd": 0.017334475828325986
+    },
+    {
+      "model": "efficientnet",
+      "K": 50,
+      "ami_organ": 0.43736384433603204,
+      "ari_organ": 0.13611108725166854,
+      "ami_scale": 0.20823797544033115,
+      "ari_scale": 0.024713583369117924,
+      "ami_species": 0.13323704296295535,
+      "ari_species": 0.041906288524622935,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.09235289692878723,
+      "stability_ari_mean": 0.42765376837689245,
+      "stability_ari_sd": 0.01939977979200086
+    },
+    {
+      "model": "efficientnet",
+      "K": 63,
+      "ami_organ": 0.4180358325234933,
+      "ari_organ": 0.11402119466906621,
+      "ami_scale": 0.20549358551664393,
+      "ari_scale": 0.021215190364716117,
+      "ami_species": 0.14153114098413208,
+      "ari_species": 0.044749505389881726,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": 0.14381474710542352,
+      "silhouette": 0.09224938601255417,
+      "stability_ari_mean": 0.4110414190698791,
+      "stability_ari_sd": 0.02222303250061811
+    },
+    {
+      "model": "efficientnet",
+      "K": 100,
+      "ami_organ": 0.3906892588376779,
+      "ari_organ": 0.08952206653037964,
+      "ami_scale": 0.18922579001945672,
+      "ari_scale": 0.01585266776677606,
+      "ami_species": 0.15230243359220816,
+      "ari_species": 0.04909474848480533,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.09974294155836105,
+      "stability_ari_mean": 0.4018423605156176,
+      "stability_ari_sd": 0.029670976316484108
+    }
+  ],
+  "composition": {
+    "3": {
+      "0": {
+        "close-up": 129,
+        "distant": 39,
+        "mid-range": 25,
+        "uncertain": 15
+      },
+      "1": {
+        "close-up": 3,
+        "distant": 285,
+        "mid-range": 17,
+        "uncertain": 5
+      },
+      "2": {
+        "close-up": 973,
+        "distant": 26,
+        "mid-range": 116,
+        "uncertain": 8
+      }
+    },
+    "7": {
+      "0": {
+        "bark": 0,
+        "cone": 0,
+        "fruit": 1,
+        "inflorescence": 0,
+        "leaf": 215,
+        "other": 0,
+        "twig": 2,
+        "whole tree": 0
+      },
+      "1": {
+        "bark": 8,
+        "cone": 1,
+        "fruit": 12,
+        "inflorescence": 17,
+        "leaf": 12,
+        "other": 0,
+        "twig": 160,
+        "whole tree": 1
+      },
+      "2": {
+        "bark": 2,
+        "cone": 3,
+        "fruit": 10,
+        "inflorescence": 11,
+        "leaf": 6,
+        "other": 0,
+        "twig": 0,
+        "whole tree": 259
+      },
+      "3": {
+        "bark": 0,
+        "cone": 17,
+        "fruit": 50,
+        "inflorescence": 215,
+        "leaf": 23,
+        "other": 1,
+        "twig": 6,
+        "whole tree": 4
+      },
+      "4": {
+        "bark": 157,
+        "cone": 0,
+        "fruit": 0,
+        "inflorescence": 0,
+        "leaf": 4,
+        "other": 0,
+        "twig": 3,
+        "whole tree": 30
+      },
+      "5": {
+        "bark": 0,
+        "cone": 4,
+        "fruit": 29,
+        "inflorescence": 26,
+        "leaf": 154,
+        "other": 0,
+        "twig": 5,
+        "whole tree": 23
+      },
+      "6": {
+        "bark": 4,
+        "cone": 8,
+        "fruit": 107,
+        "inflorescence": 8,
+        "leaf": 2,
+        "other": 14,
+        "twig": 25,
+        "whole tree": 2
+      }
+    }
+  },
+  "note": "AMI corrects for chance; plain NMI rises with K by itself. Stability resamples individuals."
+}

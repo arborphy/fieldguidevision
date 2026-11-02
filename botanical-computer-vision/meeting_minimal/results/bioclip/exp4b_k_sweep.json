@@ -1,0 +1,282 @@
+{
+  "inputs": {
+    "model": "bioclip",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/bioclip25_strict/embeddings.npz",
+    "sha256": "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "ks": [
+    3,
+    5,
+    7,
+    10,
+    15,
+    20,
+    30,
+    50,
+    63,
+    100
+  ],
+  "rows": [
+    {
+      "model": "bioclip",
+      "K": 3,
+      "ami_organ": 0.03463355398435883,
+      "ari_organ": 0.016916531793018115,
+      "ami_scale": 0.019649319826056697,
+      "ari_scale": -0.005801120955581585,
+      "ami_species": 0.17205916628955364,
+      "ari_species": 0.03019597058465881,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": 0.43831370117792934,
+      "matched_acc_species": NaN,
+      "silhouette": 0.10556603968143463,
+      "stability_ari_mean": 0.8368962144227001,
+      "stability_ari_sd": 0.06238925221067232
+    },
+    {
+      "model": "bioclip",
+      "K": 5,
+      "ami_organ": 0.07683091180187376,
+      "ari_organ": 0.04237491633076666,
+      "ami_scale": 0.07167800485173333,
+      "ari_scale": 0.04210313029362228,
+      "ami_species": 0.26743304238643023,
+      "ari_species": 0.0635480992257321,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.09550977498292923,
+      "stability_ari_mean": 0.5733233502239893,
+      "stability_ari_sd": 0.11739843520003151
+    },
+    {
+      "model": "bioclip",
+      "K": 7,
+      "ami_organ": 0.1273251488379157,
+      "ari_organ": 0.08220015988120076,
+      "ami_scale": 0.12711644083876347,
+      "ari_scale": 0.07743254040545487,
+      "ami_species": 0.33907248890871095,
+      "ari_species": 0.09670592793022983,
+      "matched_acc_organ": 0.2894576477757465,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.0964520052075386,
+      "stability_ari_mean": 0.5471186599802187,
+      "stability_ari_sd": 0.051807369385067234
+    },
+    {
+      "model": "bioclip",
+      "K": 10,
+      "ami_organ": 0.11669974717902507,
+      "ari_organ": 0.07389900978123182,
+      "ami_scale": 0.10955065835544776,
+      "ari_scale": 0.0517395826183775,
+      "ami_species": 0.4128462648477255,
+      "ari_species": 0.14276497137016037,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.11828707903623581,
+      "stability_ari_mean": 0.5170652646425324,
+      "stability_ari_sd": 0.05232626254529157
+    },
+    {
+      "model": "bioclip",
+      "K": 15,
+      "ami_organ": 0.12657108174147813,
+      "ari_organ": 0.08482304044611245,
+      "ami_scale": 0.1172950948042831,
+      "ari_scale": 0.050190273945708665,
+      "ami_species": 0.5067281722266234,
+      "ari_species": 0.2197171272666949,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.13280265033245087,
+      "stability_ari_mean": 0.5182265202965731,
+      "stability_ari_sd": 0.05613609132347576
+    },
+    {
+      "model": "bioclip",
+      "K": 20,
+      "ami_organ": 0.13791922340393156,
+      "ari_organ": 0.06595741193712666,
+      "ami_scale": 0.09939863827944562,
+      "ari_scale": 0.03497617595142166,
+      "ami_species": 0.5376559403789335,
+      "ari_species": 0.2305698055381163,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.13815417885780334,
+      "stability_ari_mean": 0.4793580109505579,
+      "stability_ari_sd": 0.036422558925045354
+    },
+    {
+      "model": "bioclip",
+      "K": 30,
+      "ami_organ": 0.14284457583064564,
+      "ari_organ": 0.06342711506780967,
+      "ami_scale": 0.10052492029097147,
+      "ari_scale": 0.027273024950865844,
+      "ami_species": 0.6105784389635223,
+      "ari_species": 0.3829605492714141,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.19101865589618683,
+      "stability_ari_mean": 0.47864720103380975,
+      "stability_ari_sd": 0.04311814935671493
+    },
+    {
+      "model": "bioclip",
+      "K": 50,
+      "ami_organ": 0.17505695888967665,
+      "ari_organ": 0.06322614717000946,
+      "ami_scale": 0.08955469383483558,
+      "ari_scale": 0.01559158595868633,
+      "ami_species": 0.653594029105661,
+      "ari_species": 0.4242724256311634,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.22861804068088531,
+      "stability_ari_mean": 0.5238322978333704,
+      "stability_ari_sd": 0.045028483610860766
+    },
+    {
+      "model": "bioclip",
+      "K": 63,
+      "ami_organ": 0.15645574161325762,
+      "ari_organ": 0.03896795306713474,
+      "ami_scale": 0.08264063272564927,
+      "ari_scale": 0.010868706323308518,
+      "ami_species": 0.6956267859420879,
+      "ari_species": 0.5102482800415982,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": 0.6459475929311396,
+      "silhouette": 0.2594006359577179,
+      "stability_ari_mean": 0.5504372601814945,
+      "stability_ari_sd": 0.017471256197417573
+    },
+    {
+      "model": "bioclip",
+      "K": 100,
+      "ami_organ": 0.18959839302107317,
+      "ari_organ": 0.031046321011089156,
+      "ami_scale": 0.08910114916181701,
+      "ari_scale": 0.006575956947067194,
+      "ami_species": 0.6784761675016109,
+      "ari_species": 0.4715928931128625,
+      "matched_acc_organ": NaN,
+      "matched_acc_scale": NaN,
+      "matched_acc_species": NaN,
+      "silhouette": 0.2603893578052521,
+      "stability_ari_mean": 0.5901410069677082,
+      "stability_ari_sd": 0.018210831930444742
+    }
+  ],
+  "composition": {
+    "3": {
+      "0": {
+        "close-up": 435,
+        "distant": 194,
+        "mid-range": 37,
+        "uncertain": 11
+      },
+      "1": {
+        "close-up": 181,
+        "distant": 26,
+        "mid-range": 24,
+        "uncertain": 5
+      },
+      "2": {
+        "close-up": 489,
+        "distant": 130,
+        "mid-range": 97,
+        "uncertain": 12
+      }
+    },
+    "7": {
+      "0": {
+        "bark": 10,
+        "cone": 0,
+        "fruit": 22,
+        "inflorescence": 38,
+        "leaf": 90,
+        "other": 4,
+        "twig": 33,
+        "whole tree": 12
+      },
+      "1": {
+        "bark": 12,
+        "cone": 0,
+        "fruit": 25,
+        "inflorescence": 36,
+        "leaf": 35,
+        "other": 0,
+        "twig": 25,
+        "whole tree": 24
+      },
+      "2": {
+        "bark": 17,
+        "cone": 1,
+        "fruit": 29,
+        "inflorescence": 31,
+        "leaf": 51,
+        "other": 0,
+        "twig": 23,
+        "whole tree": 15
+      },
+      "3": {
+        "bark": 18,
+        "cone": 16,
+        "fruit": 67,
+        "inflorescence": 97,
+        "leaf": 96,
+        "other": 0,
+        "twig": 33,
+        "whole tree": 74
+      },
+      "4": {
+        "bark": 50,
+        "cone": 16,
+        "fruit": 46,
+        "inflorescence": 64,
+        "leaf": 72,
+        "other": 10,
+        "twig": 69,
+        "whole tree": 10
+      },
+      "5": {
+        "bark": 16,
+        "cone": 0,
+        "fruit": 17,
+        "inflorescence": 5,
+        "leaf": 69,
+        "other": 0,
+        "twig": 17,
+        "whole tree": 10
+      },
+      "6": {
+        "bark": 48,
+        "cone": 0,
+        "fruit": 3,
+        "inflorescence": 6,
+        "leaf": 3,
+        "other": 1,
+        "twig": 1,
+        "whole tree": 174
+      }
+    }
+  },
+  "note": "AMI corrects for chance; plain NMI rises with K by itself. Stability resamples individuals."
+}

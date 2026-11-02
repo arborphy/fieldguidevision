@@ -1,6 +1,7 @@
 {
   "inputs": {
-    "efficientnet_npz": "data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "model": "efficientnet",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/efficientnet_b0_strict/embeddings.npz",
     "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
     "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
     "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
@@ -9,22 +10,310 @@
       "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
     ]
   },
-  "space": "PCA-32 (all 1,641, descriptive)",
-  "model": "GaussianMixture diag K=20",
-  "bic": {
-    "5": -99357.96877625,
-    "10": -102657.1507023464,
-    "20": -105955.79898599672,
-    "30": -106381.92103978865,
-    "50": -103057.56023556832
+  "method": "bootstrap consensus, B=50, resampling individuals",
+  "gmm_dimension_artifact": [
+    {
+      "pca_dim": 2,
+      "frac_max_lt_0_6": 0.22242535039609995,
+      "median_max": 0.7746250033378601
+    },
+    {
+      "pca_dim": 4,
+      "frac_max_lt_0_6": 0.1170018281535649,
+      "median_max": 0.9156809449195862
+    },
+    {
+      "pca_dim": 8,
+      "frac_max_lt_0_6": 0.062157221206581355,
+      "median_max": 0.9813258051872253
+    },
+    {
+      "pca_dim": 16,
+      "frac_max_lt_0_6": 0.02681291895185862,
+      "median_max": 0.9994221925735474
+    },
+    {
+      "pca_dim": 32,
+      "frac_max_lt_0_6": 0.01340645947592931,
+      "median_max": 0.9998894333839417
+    },
+    {
+      "pca_dim": 64,
+      "frac_max_lt_0_6": 0.009140767824497258,
+      "median_max": 0.9999770522117615
+    }
+  ],
+  "results": {
+    "K7": {
+      "frac_max_lt_0_8": 0.32480195003046924,
+      "frac_max_lt_0_6": 0.1761121267519805,
+      "mean_norm_entropy": 0.2754141727451787,
+      "entropy_split_half_spearman": 0.8402140545496954,
+      "entropy_vs_d1_d2_spearman": 0.7127325895661047,
+      "auroc_entropy_species_probe_error_test": 0.4276729559748427,
+      "probe_C": 100.0,
+      "test_error_rate": 0.7535545023696683,
+      "auroc_entropy_midrange": 0.5838901213623906,
+      "ambiguous_between_different_organ_clusters": 0.8273921200750469,
+      "ambiguous_entropy_by_organ": {
+        "bark": 0.083,
+        "cone": 0.41,
+        "fruit": 0.434,
+        "inflorescence": 0.242,
+        "leaf": 0.309,
+        "other": 0.53,
+        "twig": 0.32,
+        "whole tree": 0.206
+      },
+      "ambiguous_entropy_by_scale": {
+        "close-up": 0.285,
+        "distant": 0.23,
+        "mid-range": 0.327,
+        "uncertain": 0.163
+      }
+    },
+    "K20": {
+      "frac_max_lt_0_8": 0.7471054235222425,
+      "frac_max_lt_0_6": 0.3930530164533821,
+      "mean_norm_entropy": 0.32395727525181933,
+      "entropy_split_half_spearman": 0.7948893055411416,
+      "entropy_vs_d1_d2_spearman": 0.6673763934616984,
+      "auroc_entropy_species_probe_error_test": 0.47925737784228345,
+      "probe_C": 100.0,
+      "test_error_rate": 0.7535545023696683,
+      "auroc_entropy_midrange": 0.6656161642524685,
+      "ambiguous_between_different_organ_clusters": 0.22593800978792822,
+      "ambiguous_entropy_by_organ": {
+        "bark": 0.238,
+        "cone": 0.427,
+        "fruit": 0.369,
+        "inflorescence": 0.368,
+        "leaf": 0.308,
+        "other": 0.302,
+        "twig": 0.301,
+        "whole tree": 0.328
+      },
+      "ambiguous_entropy_by_scale": {
+        "close-up": 0.312,
+        "distant": 0.331,
+        "mid-range": 0.397,
+        "uncertain": 0.282
+      }
+    }
   },
-  "seed_label_ari_mean": 0.6569262921383456,
-  "seed_label_ari_min": 0.5911141986312328,
-  "seed_entropy_spearman_mean": 0.7647774758945889,
-  "ari_gmm_vs_existing_kmeans20": 0.535270668758456,
-  "frac_images_max_membership_lt_0_6": 0.01340645947592931,
-  "auroc_entropy_vs_probe_error_test211": 0.5098814229249011,
-  "n_test_wrong": 165,
-  "auroc_entropy_vs_midrange_scale": 0.6391448083866197,
-  "multi_organ_auroc": "NOT COMPUTED - no multi-organ labels in Git (Gemma multi-label / Human Gold not exported)"
+  "cases": {
+    "K7": [
+      {
+        "image_id": "baskauf/16192",
+        "species": "Carya ovata",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 0,
+        "p1": 0.42,
+        "c1_organ": "leaf",
+        "c2": 1,
+        "p2": 0.22,
+        "c2_organ": "twig",
+        "entropy": 0.7489576401318822
+      },
+      {
+        "image_id": "baskauf/16722",
+        "species": "Sassafras albidum",
+        "organ": "leaf",
+        "shot_scale": "distant",
+        "c1": 2,
+        "p1": 0.36,
+        "c1_organ": "whole tree",
+        "c2": 6,
+        "p2": 0.28,
+        "c2_organ": "fruit",
+        "entropy": 0.7426733314626794
+      },
+      {
+        "image_id": "baskauf/10498",
+        "species": "Quercus rubra",
+        "organ": "inflorescence",
+        "shot_scale": "mid-range",
+        "c1": 6,
+        "p1": 0.32,
+        "c1_organ": "fruit",
+        "c2": 5,
+        "p2": 0.28,
+        "c2_organ": "leaf",
+        "entropy": 0.7411192359341935
+      },
+      {
+        "image_id": "baskauf/49252",
+        "species": "Betula alleghaniensis",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "c1": 0,
+        "p1": 0.4,
+        "c1_organ": "leaf",
+        "c2": 5,
+        "p2": 0.24,
+        "c2_organ": "leaf",
+        "entropy": 0.7404885591474955
+      },
+      {
+        "image_id": "baskauf/31778",
+        "species": "Pyrus calleryana",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 3,
+        "p1": 0.38,
+        "c1_organ": "inflorescence",
+        "c2": 1,
+        "p2": 0.24,
+        "c2_organ": "twig",
+        "entropy": 0.7404358522301594
+      },
+      {
+        "image_id": "baskauf/12382",
+        "species": "Quercus bicolor",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 1,
+        "p1": 0.38,
+        "c1_organ": "twig",
+        "c2": 3,
+        "p2": 0.26,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7160170892832631
+      },
+      {
+        "image_id": "baskauf/16506",
+        "species": "Juglans cinerea",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "c1": 4,
+        "p1": 0.4,
+        "c1_organ": "bark",
+        "c2": 6,
+        "p2": 0.3,
+        "c2_organ": "fruit",
+        "entropy": 0.7152355433616032
+      },
+      {
+        "image_id": "baskauf/31433",
+        "species": "Populus deltoides",
+        "organ": "inflorescence",
+        "shot_scale": "mid-range",
+        "c1": 6,
+        "p1": 0.46,
+        "c1_organ": "fruit",
+        "c2": 5,
+        "p2": 0.24,
+        "c2_organ": "leaf",
+        "entropy": 0.7124992869682796
+      }
+    ],
+    "K20": [
+      {
+        "image_id": "baskauf/11916",
+        "species": "Acer rubrum",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 1,
+        "p1": 0.3,
+        "c1_organ": "leaf",
+        "c2": 11,
+        "p2": 0.12,
+        "c2_organ": "leaf",
+        "entropy": 0.7761126233034665
+      },
+      {
+        "image_id": "baskauf/17313",
+        "species": "Platanus occidentalis",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "c1": 17,
+        "p1": 0.2,
+        "c1_organ": "inflorescence",
+        "c2": 6,
+        "p2": 0.2,
+        "c2_organ": "fruit",
+        "entropy": 0.763933177519912
+      },
+      {
+        "image_id": "baskauf/10993",
+        "species": "Quercus alba",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 1,
+        "p1": 0.26,
+        "c1_organ": "leaf",
+        "c2": 7,
+        "p2": 0.18,
+        "c2_organ": "leaf",
+        "entropy": 0.7567999842537773
+      },
+      {
+        "image_id": "baskauf/12493",
+        "species": "Quercus macrocarpa",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 1,
+        "p1": 0.28,
+        "c1_organ": "leaf",
+        "c2": 12,
+        "p2": 0.16,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7444539780207012
+      },
+      {
+        "image_id": "baskauf/35184",
+        "species": "Yucca filamentosa",
+        "organ": "leaf",
+        "shot_scale": "mid-range",
+        "c1": 12,
+        "p1": 0.24,
+        "c1_organ": "inflorescence",
+        "c2": 17,
+        "p2": 0.2,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7368235615280049
+      },
+      {
+        "image_id": "baskauf/12407",
+        "species": "Quercus alba",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 1,
+        "p1": 0.34,
+        "c1_organ": "leaf",
+        "c2": 7,
+        "p2": 0.2,
+        "c2_organ": "leaf",
+        "entropy": 0.7310481885156996
+      },
+      {
+        "image_id": "baskauf/11732",
+        "species": "Yucca filamentosa",
+        "organ": "leaf",
+        "shot_scale": "distant",
+        "c1": 17,
+        "p1": 0.24,
+        "c1_organ": "inflorescence",
+        "c2": 19,
+        "p2": 0.18,
+        "c2_organ": "whole tree",
+        "entropy": 0.7270743222999986
+      },
+      {
+        "image_id": "baskauf/12528",
+        "species": "Quercus alba",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 6,
+        "p1": 0.22,
+        "c1_organ": "fruit",
+        "c2": 11,
+        "p2": 0.18,
+        "c2_organ": "leaf",
+        "entropy": 0.7176445709053962
+      }
+    ]
+  },
+  "multi_organ": "NOT TESTED - no multi-organ labels in Git"
 }

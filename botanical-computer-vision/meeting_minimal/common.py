@@ -30,7 +30,11 @@ EMB = {"efficientnet": ("data/embeddings/efficientnet_b0_strict/embeddings.npz",
                    "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee"),
        "dinov3": ("data/embeddings/dinov3_strict/embeddings.npz",
                   "63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6")}
-EFF_NPZ, EFF_SHA = BCV / EMB[MODEL][0], EMB[MODEL][1]
+# any other model (e.g. FGV_MODEL=yolo): data/embeddings/<model>_strict/embeddings.npz or FGV_EMB_PATH;
+# same npz layout (image_ids, embeddings, splits); SHA-256 is recorded, not checked, until it is pinned in EMB.
+EFF_NPZ = Path(os.environ["FGV_EMB_PATH"]) if "FGV_EMB_PATH" in os.environ else BCV / EMB.get(
+    MODEL, (f"data/embeddings/{MODEL}_strict/embeddings.npz", None))[0]
+EFF_SHA = EMB[MODEL][1] if MODEL in EMB else None
 MANIFEST = BCV / "organ_benchmark/split_manifests/individual_disjoint.csv"
 SCALE = BCV / "scale_conditioned_analysis/data/image_visual_groups.csv"
 CLUSTERS_BD = BCV / "representation_analysis/data/cluster_assignments.csv"
@@ -47,10 +51,12 @@ def sha256(path: Path) -> str:
 
 def load():
     """Return (meta DataFrame aligned to rows of X, X float32 L2-normalised vectors of FGV_MODEL)."""
-    assert sha256(EFF_NPZ) == EFF_SHA, f"{MODEL} npz SHA-256 mismatch"
+    if EFF_SHA:
+        assert sha256(EFF_NPZ) == EFF_SHA, f"{MODEL} npz SHA-256 mismatch"
     d = np.load(EFF_NPZ, allow_pickle=False)
     ids = d["image_ids"].astype(str)
     X = d["embeddings"].astype(np.float32)
+    X /= np.linalg.norm(X, axis=1, keepdims=True)  # no-op for the stored (already normalised) vectors
     man = pd.read_csv(MANIFEST).set_index("image_id")
     assert set(ids) == set(man.index) and len(ids) == 1641
     meta = man.loc[ids].reset_index()
@@ -63,13 +69,18 @@ def load():
     bd = pd.read_csv(CLUSTERS_BD)
     for (rep, k), g in bd.groupby(["representation", "k"]):
         meta[f"{rep}_k{k}"] = g.set_index("image_id").loc[meta["image_id"], "cluster_id"].values
-    meta["own_k20"] = meta[{"efficientnet": "eff_k20", "bioclip": "bioclip_k20", "dinov3": "dinov3_k20"}[MODEL]]
+    existing = {"efficientnet": "eff_k20", "bioclip": "bioclip_k20", "dinov3": "dinov3_k20"}
+    if MODEL in existing:
+        meta["own_k20"] = meta[existing[MODEL]]
+    else:  # no stored clustering for a new model: same recipe (K-means K=20, all images, seed 42)
+        from sklearn.cluster import KMeans
+        meta["own_k20"] = KMeans(20, n_init=10, random_state=SEED).fit_predict(X)
     meta["thumb"] = meta["image_id"].str.replace("/", "_") + ".jpg"
     return meta, X
 
 
 def input_record():
-    return {"model": MODEL, "embeddings_npz": str(EFF_NPZ.relative_to(BCV)), "sha256": EFF_SHA,
+    return {"model": MODEL, "embeddings_npz": str(EFF_NPZ), "sha256": EFF_SHA or sha256(EFF_NPZ),
             "manifest": str(MANIFEST.relative_to(BCV)), "scale_labels": str(SCALE.relative_to(BCV)),
             "clusters": [str(CLUSTERS_BD.relative_to(BCV)), str(CLUSTERS_EFF.relative_to(BCV))]}
 

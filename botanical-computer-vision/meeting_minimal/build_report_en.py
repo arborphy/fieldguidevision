@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 import crossmodel
+import ksoft
 from common import OUT, load
 
 H = Path(__file__).resolve().parent
@@ -107,26 +108,8 @@ secs.append(section(3, "Activation mapping (Grad-CAM + occlusion control)",
     "so no claim such as \"the cluster looks at the leaf, not the background\" is supported. Individual maps are exploratory.",
     ["v", "e"]))
 
-# 4 soft
-km = pd.read_csv(OUT / "exp4_existing_k_comparison.csv")
-amb = pd.read_csv(OUT / "exp4_ambiguous_cases.csv").head(8)
-recs = [dict(image_id=r.image_id, species=r.species, organ=r.organ, shot_scale=r.shot_scale,
-             cap=f"{r.organ}·{r.shot_scale}<br>p1={r.gmm_max:.2f}({r.top1_component_main_organ}) p2={r.gmm_p2:.2f}({r.top2_component_main_organ})") for r in amb.itertuples()]
-secs.append(section(4, "Soft clustering / K",
-    "Which K? Do some images really sit between two clusters, and does that ambiguity mean anything?",
-    "Reused the existing K=10/20/50 × 10 seeds results (species/organ NMI, between-seed ARI). New: diagonal GMM (K=20) on EfficientNet PCA-32, 5 seeds; "
-    "per image the maximum membership and membership entropy; BIC over K∈{5,10,20,30,50}; whether entropy predicts probe errors on test, and mid-range scale.",
-    table(km, d=3) +
-    f"<p>GMM BIC: {', '.join(f'K={k}: {v:,.0f}' for k, v in s4['bic'].items())} (lowest at K=30; flattens between K=20 and 30). "
-    f"Between-seed label ARI {s4['seed_label_ari_mean']:.2f}, entropy-rank Spearman {s4['seed_entropy_spearman_mean']:.2f}; ARI vs existing K-means "
-    f"{s4['ari_gmm_vs_existing_kmeans20']:.2f}. Only {s4['frac_images_max_membership_lt_0_6']:.1%} of images have maximum membership &lt;0.6. "
-    f"AUROC of entropy for probe errors: <b>{s4['auroc_entropy_vs_probe_error_test211']:.2f}</b> (211 test images, {s4['n_test_wrong']} wrong); "
-    f"for mid-range scale: {s4['auroc_entropy_vs_midrange_scale']:.2f}.</p><p>The 8 highest-entropy real images (p1/p2 = probabilities of the top two "
-    "components; in brackets, that component's dominant organ):</p>" + strip(recs, cap=lambda r: r["cap"]),
-    "In 32-D the diagonal GMM is very hard: ambiguous images are rare. Entropy does not predict classification errors (0.51 ≈ chance) and carries a weak "
-    "signal for mid-range scale (0.64). <b>Soft probability is not multi-organ evidence.</b> Multi-organ AUROC cannot be computed: no multi-label "
-    "organ labels are in Git (Gemma multi-label / Human Gold not exported). The example images are exploratory.",
-    ["v", "e", "x"]))
+# 4 K choice + soft clustering (redone)
+secs.append(ksoft.section4("en", section, table, strip))
 
 # 5 AE / axes
 rec = pd.read_csv(OUT / "exp5_recovered_ae_table.csv")

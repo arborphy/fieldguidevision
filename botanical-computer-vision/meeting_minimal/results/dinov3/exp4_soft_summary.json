@@ -1,7 +1,7 @@
 {
   "inputs": {
     "model": "dinov3",
-    "embeddings_npz": "data/embeddings/dinov3_strict/embeddings.npz",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/dinov3_strict/embeddings.npz",
     "sha256": "63f07c51a39b5b50dd4d23bd97610879a844e4ed0f97111da75d04c523d89cb6",
     "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
     "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
@@ -10,22 +10,310 @@
       "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
     ]
   },
-  "space": "PCA-32 (all 1,641, descriptive)",
-  "model": "GaussianMixture diag K=20",
-  "bic": {
-    "5": -91252.66423370849,
-    "10": -95857.93427549703,
-    "20": -100891.3749137311,
-    "30": -101940.4840280699,
-    "50": -100567.01421506051
+  "method": "bootstrap consensus, B=50, resampling individuals",
+  "gmm_dimension_artifact": [
+    {
+      "pca_dim": 2,
+      "frac_max_lt_0_6": 0.19683120048750763,
+      "median_max": 0.8166329264640808
+    },
+    {
+      "pca_dim": 4,
+      "frac_max_lt_0_6": 0.11212675198049969,
+      "median_max": 0.9392983317375183
+    },
+    {
+      "pca_dim": 8,
+      "frac_max_lt_0_6": 0.0517976843388178,
+      "median_max": 0.9945375323295593
+    },
+    {
+      "pca_dim": 16,
+      "frac_max_lt_0_6": 0.021937842778793418,
+      "median_max": 0.9998483657836914
+    },
+    {
+      "pca_dim": 32,
+      "frac_max_lt_0_6": 0.007921998781230956,
+      "median_max": 0.9999886155128479
+    },
+    {
+      "pca_dim": 64,
+      "frac_max_lt_0_6": 0.001218769043266301,
+      "median_max": 1.0
+    }
+  ],
+  "results": {
+    "K7": {
+      "frac_max_lt_0_8": 0.46130408287629493,
+      "frac_max_lt_0_6": 0.15234613040828762,
+      "mean_norm_entropy": 0.26341408170653735,
+      "entropy_split_half_spearman": 0.8974886719893929,
+      "entropy_vs_d1_d2_spearman": 0.7892999189656285,
+      "auroc_entropy_species_probe_error_test": 0.503010424155284,
+      "probe_C": 100.0,
+      "test_error_rate": 0.4928909952606635,
+      "auroc_entropy_midrange": 0.5611401104876245,
+      "ambiguous_between_different_organ_clusters": 0.76221928665786,
+      "ambiguous_entropy_by_organ": {
+        "bark": 0.128,
+        "cone": 0.466,
+        "fruit": 0.429,
+        "inflorescence": 0.252,
+        "leaf": 0.215,
+        "other": 0.395,
+        "twig": 0.32,
+        "whole tree": 0.237
+      },
+      "ambiguous_entropy_by_scale": {
+        "close-up": 0.262,
+        "distant": 0.255,
+        "mid-range": 0.301,
+        "uncertain": 0.224
+      }
+    },
+    "K20": {
+      "frac_max_lt_0_8": 0.6684948202315661,
+      "frac_max_lt_0_6": 0.4101157830591103,
+      "mean_norm_entropy": 0.32015336688666424,
+      "entropy_split_half_spearman": 0.8420773435356622,
+      "entropy_vs_d1_d2_spearman": 0.5358988509682745,
+      "auroc_entropy_species_probe_error_test": 0.40267792954708853,
+      "probe_C": 100.0,
+      "test_error_rate": 0.4928909952606635,
+      "auroc_entropy_midrange": 0.557681934838401,
+      "ambiguous_between_different_organ_clusters": 0.4822242479489517,
+      "ambiguous_entropy_by_organ": {
+        "bark": 0.273,
+        "cone": 0.469,
+        "fruit": 0.427,
+        "inflorescence": 0.384,
+        "leaf": 0.257,
+        "other": 0.264,
+        "twig": 0.346,
+        "whole tree": 0.274
+      },
+      "ambiguous_entropy_by_scale": {
+        "close-up": 0.328,
+        "distant": 0.289,
+        "mid-range": 0.355,
+        "uncertain": 0.225
+      }
+    }
   },
-  "seed_label_ari_mean": 0.5659462745053838,
-  "seed_label_ari_min": 0.5319223571652903,
-  "seed_entropy_spearman_mean": 0.6904349605353779,
-  "ari_gmm_vs_existing_kmeans20": 0.42975229920044594,
-  "frac_images_max_membership_lt_0_6": 0.007921998781230956,
-  "auroc_entropy_vs_probe_error_test211": null,
-  "n_test_wrong": null,
-  "auroc_entropy_vs_midrange_scale": 0.6188611944843185,
-  "multi_organ_auroc": "NOT COMPUTED - no multi-organ labels in Git (Gemma multi-label / Human Gold not exported)"
+  "cases": {
+    "K7": [
+      {
+        "image_id": "baskauf/11534",
+        "species": "Castanea dentata",
+        "organ": "bark",
+        "shot_scale": "distant",
+        "c1": 1,
+        "p1": 0.34,
+        "c1_organ": "bark",
+        "c2": 3,
+        "p2": 0.26,
+        "c2_organ": "leaf",
+        "entropy": 0.7518933498295901
+      },
+      {
+        "image_id": "ssmv/2-185-04",
+        "species": "Ginkgo biloba",
+        "organ": "leaf",
+        "shot_scale": "mid-range",
+        "c1": 0,
+        "p1": 0.42,
+        "c1_organ": "twig",
+        "c2": 4,
+        "p2": 0.26,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7453930780400456
+      },
+      {
+        "image_id": "baskauf/22184",
+        "species": "Acer saccharum",
+        "organ": "fruit",
+        "shot_scale": "close-up",
+        "c1": 4,
+        "p1": 0.38,
+        "c1_organ": "inflorescence",
+        "c2": 3,
+        "p2": 0.22,
+        "c2_organ": "leaf",
+        "entropy": 0.7435453784766157
+      },
+      {
+        "image_id": "baskauf/16506",
+        "species": "Juglans cinerea",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "c1": 1,
+        "p1": 0.46,
+        "c1_organ": "bark",
+        "c2": 3,
+        "p2": 0.22,
+        "c2_organ": "leaf",
+        "entropy": 0.7362250378806782
+      },
+      {
+        "image_id": "kirchoff/b5095",
+        "species": "Cornus florida",
+        "organ": "fruit",
+        "shot_scale": "mid-range",
+        "c1": 2,
+        "p1": 0.42,
+        "c1_organ": "leaf",
+        "c2": 4,
+        "p2": 0.24,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7186896462834588
+      },
+      {
+        "image_id": "baskauf/10207",
+        "species": "Cercis canadensis",
+        "organ": "fruit",
+        "shot_scale": "mid-range",
+        "c1": 2,
+        "p1": 0.32,
+        "c1_organ": "leaf",
+        "c2": 0,
+        "p2": 0.32,
+        "c2_organ": "twig",
+        "entropy": 0.7093055332833469
+      },
+      {
+        "image_id": "baskauf/10206",
+        "species": "Cercis canadensis",
+        "organ": "fruit",
+        "shot_scale": "mid-range",
+        "c1": 0,
+        "p1": 0.36,
+        "c1_organ": "twig",
+        "c2": 2,
+        "p2": 0.3,
+        "c2_organ": "leaf",
+        "entropy": 0.7043456562761637
+      },
+      {
+        "image_id": "baskauf/11469",
+        "species": "Tilia americana",
+        "organ": "whole tree",
+        "shot_scale": "distant",
+        "c1": 1,
+        "p1": 0.34,
+        "c1_organ": "bark",
+        "c2": 3,
+        "p2": 0.26,
+        "c2_organ": "leaf",
+        "entropy": 0.6951787540364418
+      }
+    ],
+    "K20": [
+      {
+        "image_id": "thomas/0440-04-06",
+        "species": "Cephalanthus occidentalis",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "c1": 6,
+        "p1": 0.2,
+        "c1_organ": "inflorescence",
+        "c2": 16,
+        "p2": 0.16,
+        "c2_organ": "inflorescence",
+        "entropy": 0.7245245785912727
+      },
+      {
+        "image_id": "baskauf/13981",
+        "species": "Populus tremuloides",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 4,
+        "p1": 0.2,
+        "c1_organ": "leaf",
+        "c2": 17,
+        "p2": 0.16,
+        "c2_organ": "cone",
+        "entropy": 0.7234934715407526
+      },
+      {
+        "image_id": "baskauf/11632",
+        "species": "Robinia pseudoacacia",
+        "organ": "twig",
+        "shot_scale": "close-up",
+        "c1": 12,
+        "p1": 0.24,
+        "c1_organ": "leaf",
+        "c2": 8,
+        "p2": 0.22,
+        "c2_organ": "twig",
+        "entropy": 0.7050770897937113
+      },
+      {
+        "image_id": "baskauf/d0997",
+        "species": "Nyssa sylvatica",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 0,
+        "p1": 0.22,
+        "c1_organ": "leaf",
+        "c2": 12,
+        "p2": 0.16,
+        "c2_organ": "leaf",
+        "entropy": 0.6962099965954512
+      },
+      {
+        "image_id": "baskauf/51734",
+        "species": "Lonicera morrowii",
+        "organ": "leaf",
+        "shot_scale": "close-up",
+        "c1": 0,
+        "p1": 0.3,
+        "c1_organ": "leaf",
+        "c2": 7,
+        "p2": 0.18,
+        "c2_organ": "leaf",
+        "entropy": 0.6903669810536032
+      },
+      {
+        "image_id": "thomas/0486-01-01",
+        "species": "Robinia pseudoacacia",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "c1": 11,
+        "p1": 0.32,
+        "c1_organ": "fruit",
+        "c2": 12,
+        "p2": 0.16,
+        "c2_organ": "leaf",
+        "entropy": 0.6861597845760249
+      },
+      {
+        "image_id": "baskauf/11733",
+        "species": "Tilia americana",
+        "organ": "inflorescence",
+        "shot_scale": "close-up",
+        "c1": 9,
+        "p1": 0.28,
+        "c1_organ": "inflorescence",
+        "c2": 4,
+        "p2": 0.2,
+        "c2_organ": "leaf",
+        "entropy": 0.6843988093850959
+      },
+      {
+        "image_id": "baskauf/52471",
+        "species": "Fagus grandifolia",
+        "organ": "fruit",
+        "shot_scale": "close-up",
+        "c1": 8,
+        "p1": 0.34,
+        "c1_organ": "twig",
+        "c2": 14,
+        "p2": 0.2,
+        "c2_organ": "leaf",
+        "entropy": 0.6843104120041417
+      }
+    ]
+  },
+  "multi_organ": "NOT TESTED - no multi-organ labels in Git"
 }
