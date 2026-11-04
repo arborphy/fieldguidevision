@@ -185,6 +185,7 @@ def build(lang):
     gem_rows = "".join(f"<h4>{T(zh_, en_)}</h4>" + strip(main["by_category"][c][:8], cap_soft) for c, zh_, en_ in
                        [("both_plausible", "两个器官都合理", "Both organs plausible"), ("leaning_wrong", "偏向错的器官", "Leaning to the other organ"),
                         ("neither", "两个都不对", "Neither matches")] if main["by_category"].get(c))
+    nb = json.loads((R / "exp1d_nsc_bars.json").read_text())
     E, B, D = eff_f.loc["EfficientNet-B0"], eff_f.loc["BioCLIP 2.5"], eff_f.loc["DINOv3"]
     kE, kD = kt.set_index("model").loc["EfficientNet-B0"], kt.set_index("model").loc["DINOv3"]
     en = enr.set_index("model").share_clusters_dominant_ge_0_6
@@ -194,8 +195,8 @@ def build(lang):
     CLAIM = {
         1: T(f"三维 PCA 图丢失 {lo3}–{hi3} 的器官信息；分析在 64 维 PCA 空间中进行",
              f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis is done in 64-D PCA space"),
-        2: T("K = 3 对应拍摄远近，K = 5 最稳定，K = 7 对应器官；通用视觉模型按器官分组；处于相邻器官之间的照片常含两种器官（Gemma 标注比例约为两倍）",
-             "K = 3 captures camera distance, K = 5 is most stable, K = 7 matches organs; general vision models group by organ; photos between adjacent organs often show both organs (twice the Gemma two-organ rate)"),
+        2: T("K = 5 时分组最稳定，且由器官而非物种决定；约三分之一的照片处于相邻器官之间，常同时含两种器官",
+             "Groups are most stable at K = 5 and driven by organ, not species; about a third of photos lie between adjacent organs and often show both"),
         3: T("只有 EfficientNet 能用少数维度区分器官；YOLO 有清楚的结构，但不是按器官组织的",
              "Only EfficientNet tells organs apart with few dimensions; YOLO has clear structure, but not organised by organ"),
         4: T("Autoencoder 不优于 PCA；照片空间中变化最大的方向是拍摄远近，其次是器官",
@@ -314,10 +315,14 @@ def build(lang):
           "Determine the number of groups K numerically (replacing the arbitrary K = 20), show what structure each K captures, and use soft clustering to find photos lying between two groups."),
         T("K-means（无监督）在完整向量空间中分别取 K = 3–100。<b>稳定性</b>（0–1）：随机换掉一部分植株后重新分组，看分出的组是否与原来一致；越高说明这些组是数据中真实存在的结构。"
           "<b>对应程度</b>（%）：把 K 个组与拍摄距离或器官标签一一配对后，照片落在配对组里的比例；标签只用于解释，不参与分组。"
+          "<b>富集分析</b>："
+          f"富集倍数（标准的过度代表分析）= 组内该器官的照片数 ÷（组大小 × 该器官在全部照片中的比例），即“实际数 ÷ 随机分组时的期望数”。超几何检验（单侧 Fisher 检验，BH 校正）下，所有富集 ≥ 2 倍的组 p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}；但同一植株的多张照片并不独立，这些 p 值明显偏小，只作参考。判定规则（本项目约定）：单一物种占组内 30% 以上为“物种决定”；某器官富集 ≥ 2 倍、且按组内物种构成校正后仍 ≥ 2 倍为“器官决定”；否则远景或中景比例达到全体的 2 倍以上为“距离决定”；其余为“混合”（多为混有几种器官的近景组）。"
           "<b>软聚类</b>：按植株重采样 50 次、每次重新分组，照片落入各组的比例即其归属；最大归属低于 0.8 记为“处于两组之间”。",
           "K-means (unsupervised) in the full embedding space for K = 3–100. <b>Stability</b> (0–1): swap part of the plants, regroup, and check whether the groups stay "
           "the same; higher means the groups are real structure. <b>Match</b> (%): after pairing the K groups one-to-one with shot-scale or organ labels, the share of "
-          "photos in the paired group; labels only interpret, never form groups. <b>Soft clustering</b>: resample plants 50 times and regroup; the share of runs a "
+          "photos in the paired group; labels only interpret, never form groups. <b>Enrichment</b>: "
+          f"Fold enrichment (standard over-representation analysis) = photos of the organ in the group ÷ (group size × the organ's overall share), i.e. observed ÷ expected under random grouping. Under the hypergeometric test (one-sided Fisher, BH-adjusted) every group enriched ≥ 2-fold has p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}; photos of the same plant are not independent, so these p-values are clearly too small and are given for reference only. Rule (project convention): a group is species-driven if one species exceeds 30% of it; organ-driven if one organ is enriched at least 2-fold, also after adjusting for the group's species mix; otherwise distance-driven if the distant or mid-range share is at least twice the overall share; else mixed (mostly close-up groups mixing several organs). "
+          "<b>Soft clustering</b>: resample plants 50 times and regroup; the share of runs a "
           "photo falls in each group is its membership; a maximum below 0.8 means the photo lies between two groups."),
         T("EfficientNet、DINOv3、BioCLIP、YOLO backbone；稳定性重采样 10 次。软聚类第一版用高斯混合模型，其“几乎没有含混照片”的结果是维度造成的假象，已作废。",
           "EfficientNet, DINOv3, BioCLIP, YOLO backbone; stability from 10 resamples. A first soft-clustering version (Gaussian mixture) reported almost no ambiguous "
@@ -339,15 +344,10 @@ def build(lang):
                   "distance; at K = 5 the close-ups split into inflorescence, twig and leaf; at K = 7 fruit separates and leaves split into two groups."))
         + panel(T("2.4 各组由什么决定：富集分析（五个模型，K = 5）", "2.4 What drives the groups: enrichment (five models, K = 5)"),
                 img(R / "exp10_drivers.png", "drivers") + img(R / "exp9d_models_k5.png", "models K=5"),
-                T(f"富集倍数（标准的过度代表分析）= 组内该器官的照片数 ÷（组大小 × 该器官在全部照片中的比例），即“实际数 ÷ 随机分组时的期望数”。超几何检验（单侧 Fisher 检验，BH 校正）下，所有富集 ≥ 2 倍的组 p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}；但同一植株的多张照片并不独立，这些 p 值明显偏小，只作参考。判定规则（本项目约定）：单一物种占组内 30% 以上为“物种决定”；某器官富集 ≥ 2 倍、且按组内物种构成校正后仍 ≥ 2 倍为“器官决定”；"
-                  "否则远景或中景比例达到全体的 2 倍以上为“距离决定”；其余为“混合”（多为混有几种器官的近景组）。"
-                  f"结果：EfficientNet 与 DINOv3 分别有 {pct(drv['EfficientNet-B0']['share']['organ'])} 与 {pct(drv['DINOv3']['share']['organ'])} 的照片落在器官决定的组中，"
+                T(f"EfficientNet 与 DINOv3 分别有 {pct(drv['EfficientNet-B0']['share']['organ'])} 与 {pct(drv['DINOv3']['share']['organ'])} 的照片落在器官决定的组中，"
                   f"排除物种因素后仍然成立（DINOv3 的混合组是近拍的花、果、枝合在一起）；YOLO 的器官决定组只占 {pct(drv['YOLO11s backbone']['share']['organ'])}（backbone）与 {pct(drv['YOLO11s neck']['share']['organ'])}（neck），其余混有多种器官；"
                   f"BioCLIP 的组与器官基本无关，它按物种组织（K = 63 时与物种对应 {pct(KS4['BioCLIP 2.5'].loc[63, 'matched_acc_species'])}）。",
-                  f"Fold enrichment (standard over-representation analysis) = photos of the organ in the group ÷ (group size × the organ's overall share), i.e. observed ÷ expected under random grouping. Under the hypergeometric test (one-sided Fisher, BH-adjusted) every group enriched ≥ 2-fold has p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}; photos of the same plant are not independent, so these p-values are clearly too small and are given for reference only. Rule (project convention): a group is species-driven if one species exceeds "
-                  "30% of it; organ-driven if one organ is enriched at least 2-fold, also after adjusting for the group's species mix; otherwise distance-driven if "
-                  "the distant or mid-range share is at least twice the overall share; else mixed (mostly close-up groups mixing several organs). "
-                  f"Result: {pct(drv['EfficientNet-B0']['share']['organ'])} (EfficientNet) and {pct(drv['DINOv3']['share']['organ'])} (DINOv3) of photos fall in organ-driven groups, "
+                  f"{pct(drv['EfficientNet-B0']['share']['organ'])} (EfficientNet) and {pct(drv['DINOv3']['share']['organ'])} (DINOv3) of photos fall in organ-driven groups, "
                   f"also after controlling for species (DINOv3's mixed group combines close-up flowers, fruit and twigs); YOLO has only {pct(drv['YOLO11s backbone']['share']['organ'])} (backbone) and {pct(drv['YOLO11s neck']['share']['organ'])} (neck), its other groups mix organs; "
                   f"BioCLIP's groups are unrelated to organ because it is organised by species (match to species at K = 63: {pct(KS4['BioCLIP 2.5'].loc[63, 'matched_acc_species'])})."))
         + panel(T("2.5 处于两组之间的照片（软聚类，EfficientNet，K = 7）", "2.5 Photos between two groups (soft clustering, EfficientNet, K = 7)"), table(pairs_t, pct=True) + pairs_html,
@@ -369,7 +369,6 @@ def build(lang):
           "organ-level analysis and soft clustering</b> (one group per organ); drop K = 20 and above. Photos between two groups concentrate between adjacent organs "
           "and are confirmed against Gemma multi-labels as candidates for multi-label annotation."), "done"))
 
-    nb = json.loads((R / "exp1d_nsc_bars.json").read_text())
     vz = json.loads((R / "exp1b_nsc_viz.json").read_text())
     pc_name = [T("PC1 · 近拍叶 ↔ 远景整树", "PC1 · close-up leaf ↔ distant whole tree"), T("PC2 · 树皮 ↔ 整树", "PC2 · bark ↔ whole tree"),
                T("PC3 · 花序 ↔ 叶与树皮", "PC3 · inflorescence ↔ leaf and bark")]
@@ -497,25 +496,33 @@ def build(lang):
           "The latent space can be read by retrieving real photos: group centres correspond to typical photos and paths between groups to gradual organ changes, "
           "which is more direct and reliable than generating images. Activation maps are a preliminary reference only and are paused."), "part"))
 
-    yt = pd.DataFrame([{"model": m, T("器官 F1", "organ F1"): eff_f.loc[m, "organ_f1"], T("物种 F1", "species F1"): eff_f.loc[m, "species_f1"],
-                        T("NSC 器官每类坐标", "NSC organ coords / class"): nt.loc[m, "per_class"],
-                        T(f"K={MAIN_K} 单一器官主导的组", f"K={MAIN_K} organ-dominated groups"): en[m]} for m in M5])
-    S.append(sec(6, T("YOLO 对比（团队新方向）", "YOLO comparison (team direction)"),
-        T("评估 YOLO 的整图 embedding 是否适合器官结构分析，为是否换用 YOLO 提供依据。", "Assess whether YOLO whole-image embeddings support organ-structure analysis, to inform the decision on switching to YOLO."),
-        T("YOLO11s（COCO 通用检测模型，未在植物上训练）的整图 embedding，两个版本：backbone（512 维）和 neck 多尺度（896 维），分别放进与其他模型相同的分析。",
-          "Whole-image embeddings of YOLO11s (COCO general detector, not trained on plants), two versions: backbone (512-D) and multi-scale neck (896-D), "
-          "run through the same analyses as the other models."),
-        T("器官 / 物种探针、NSC、分组构成、检索。", "Organ / species probes, NSC, group make-up, retrieval."),
-        table(yt, 2),
-        T(f"YOLO 的器官信息最弱（器官 F1：backbone {yb['organ_f1']:.2f}、neck {yn['organ_f1']:.2f}），也无法压缩；它的分组有清楚结构，但不是按器官组织。"
-          "<b>若换用 YOLO，需要用我们的器官标签训练，不能直接用现成 embedding。</b>这不代表 YOLO 训练后画器官框的能力差。",
-          f"YOLO carries the least organ information (organ F1: backbone {yb['organ_f1']:.2f}, neck {yn['organ_f1']:.2f}) and cannot be compressed; its "
-          "groups have clear structure, but not by organ. <b>If we switch to YOLO, it needs training on our organ labels; raw embeddings are not enough.</b> "
-          "This says nothing about YOLO's box detection after training."), "done"))
+    o3 = im_org.set_index("model")["PCA-3"]
+    yt = pd.DataFrame([[m, eff_f.loc[m, "organ_f1"], 1 - o3[m], drv[m]["share"]["organ"], nb[m]["organ"], eff_f.loc[m, "species_f1"]] for m in
+                       ["EfficientNet-B0", "DINOv3", "YOLO11s neck", "YOLO11s backbone", "BioCLIP 2.5"]],
+                      columns=[T("模型", "Model"), T("器官识别 F1", "Organ F1"), T("三维图丢失的器官信息（§1）", "Organ info lost in 3-D (§1)"),
+                               T("器官决定的组（§2.4）", "Organ-driven groups (§2.4)"), T("区分器官所需维度（§3）", "Dimensions for organs (§3)"), T("物种识别 F1", "Species F1")])
+    S.append(sec(6, T("YOLO 与其他模型的比较", "YOLO compared with the other models"),
+        T("汇总前几节的结果，评估 YOLO 现成的整图 embedding 是否适合器官结构分析，为是否换用 YOLO 提供依据。",
+          "Combine the results of the previous sections to assess whether off-the-shelf YOLO whole-image embeddings support organ-structure analysis."),
+        T("YOLO11s 为 COCO 通用物体检测模型，未在植物上训练；取两种整图 embedding：backbone（512 维）与 neck 多尺度（896 维），与其他模型走同一套分析。"
+          "器官 / 物种识别 F1 为线性分类器（有监督，仅用于评估）在验证集上的结果。",
+          "YOLO11s is a COCO general object detector, not trained on plants; two whole-image embeddings are used, backbone (512-D) and multi-scale neck "
+          "(896-D), through the same analyses as the other models. Organ / species F1 come from a linear classifier (supervised, evaluation only) on the validation set."),
+        T("本节不做新计算，所有数值来自第 1–3 节。", "No new computation; all numbers come from sections 1–3."),
+        panel(T("6.1 五个模型的关键指标", "6.1 Key indicators, five models"), table(yt, 2),
+              T(f"YOLO 的器官识别 F1 最低（neck {eff_f.loc['YOLO11s neck','organ_f1']:.2f}、backbone {eff_f.loc['YOLO11s backbone','organ_f1']:.2f}，DINOv3 为 {eff_f.loc['DINOv3','organ_f1']:.2f}），"
+                f"由器官决定的组较少，区分器官需要的维度较多；neck 版本略好于 backbone。BioCLIP 的优势在物种（F1 {eff_f.loc['BioCLIP 2.5','species_f1']:.2f}）。",
+                f"YOLO has the lowest organ F1 (neck {eff_f.loc['YOLO11s neck','organ_f1']:.2f}, backbone {eff_f.loc['YOLO11s backbone','organ_f1']:.2f}; DINOv3 {eff_f.loc['DINOv3','organ_f1']:.2f}), "
+                f"fewer organ-driven groups and needs more dimensions to separate organs; the neck version is slightly better than the backbone. BioCLIP's strength is species (F1 {eff_f.loc['BioCLIP 2.5','species_f1']:.2f}).")),
+        T("YOLO 现成的 embedding 有清楚的结构，但不是按器官组织的。<b>若换用 YOLO，应在我们的器官标注（器官框）上训练后再评估</b>；本结果只针对整图 embedding，不代表 YOLO 训练后检测器官的能力。"
+          "器官结构分析目前以 DINOv3 / EfficientNet 为基准。",
+          "Off-the-shelf YOLO embeddings have clear structure, but not organised by organ. <b>If YOLO is adopted, it should be trained on our organ annotations "
+          "(organ boxes) before evaluation</b>; this result concerns whole-image embeddings only, not YOLO's detection ability after training. DINOv3 / "
+          "EfficientNet remain the reference for organ-structure analysis."), "done"))
 
-    nxt = T(["导出多标签器官数据（Human Gold），验证“两个器官都合理”候选。", "做器官掩膜，检验热图是否落在植物器官上。",
+    nxt = T(["用人工多标签（Human Gold）复核 Gemma 多标签与“两个器官都合理”的候选。", "做器官掩膜，检验热图是否落在植物器官上。",
              "若采用 YOLO：用器官框标注做微调，再用同一套分析复验。", "从隐空间生成图像：以组中心为条件，用 Stable Diffusion unCLIP 生成示意图（MVP 进行中）。", "在 Pound Ridge 外部野外照片上复验以上结论。"],
-            ["Export multi-label organ data (Human Gold) and verify the \"both plausible\" candidates.", "Build organ masks to test whether heatmaps land on the organ.",
+            ["Check the Gemma multi-labels and the \"both plausible\" candidates against human multi-labels (Human Gold).", "Build organ masks to test whether heatmaps land on the organ.",
              "If YOLO is adopted: fine-tune on organ boxes, then rerun the same analyses.", "Image generation from the latent space: Stable Diffusion unCLIP conditioned on group centres (MVP in progress).", "Re-test the conclusions on external Pound Ridge field photos."])
 
     css = """
@@ -585,9 +592,9 @@ figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:bl
               "knowledge-graph reasoning\"; BioCLIP fits the species level better.", "<b>Visualisation</b>: 2-D and 3-D plots are for display only; every conclusion is computed in 64 dimensions.",
               "<b>Limitations</b>: one data split; single-label organ annotation; provisional shot-scale labels; heatmaps not compared with organ masks; "
               "no external field-photo validation yet."])
-    concl = T(["分析空间统一为 64 维 PCA；展示图用 t-SNE。", "聚类数取 K = 5–7（与器官数相符、最稳定）。",
+    concl = T(["分析空间统一为 64 维 PCA；展示图用 t-SNE。", "日常分组用 K = 5（最稳定）；器官层面的分析与软聚类用 K = 7。",
                "器官结构分析优先使用 DINOv3 / EfficientNet；物种层面使用 BioCLIP。", "YOLO 需先在器官标签上训练，再纳入同一套分析。"],
-              ["Use 64-D PCA as the analysis space; t-SNE for display.", "Use K = 5–7 (matches the number of organs, most stable).",
+              ["Use 64-D PCA as the analysis space; t-SNE for display.", "Use K = 5 for routine grouping (most stable) and K = 7 for organ-level analysis and soft clustering.",
                "Use DINOv3 / EfficientNet for organ structure and BioCLIP for species.", "Train YOLO on organ labels before including it in the same analyses."])
     keyf = "".join(f"<li><a class=kl href=#s{n}>{CLAIM[n]}</a></li>" for n in range(1, 7))
     html = (f"<!doctype html><html lang={'zh' if zh else 'en'}><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
