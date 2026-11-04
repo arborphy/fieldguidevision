@@ -50,6 +50,20 @@
       "organ_kept": 0.9882297246903357,
       "scale_kept": 0.9915850786422942,
       "species_kept": 0.938258702468044
+    },
+    {
+      "view": "UMAP-2",
+      "neighbours_kept": 0.41677838716229937,
+      "organ_kept": 0.9706133896651135,
+      "scale_kept": 1.0000130598882946,
+      "species_kept": 0.603464908754723
+    },
+    {
+      "view": "UMAP-16",
+      "neighbours_kept": 0.47808247003859433,
+      "organ_kept": 0.9757538134486172,
+      "scale_kept": 1.0028122292793993,
+      "species_kept": 0.7972371841251977
     }
   ],
   "pc_eta2": [
