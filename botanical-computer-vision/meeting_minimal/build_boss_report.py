@@ -108,7 +108,7 @@ def build(lang):
     def sec(n, title, ask, method, tried, result, take, status):
         st = {"done": T("已完成", "Done"), "part": T("部分完成", "Partial"), "next": T("下一步", "Next")}[status]
         return (f"<section id=s{n}><div class=hd><span class=num>{n}</span><h2>{title}</h2><span class='st {status}'>{st}</span></div>"
-                f"<dl><dt>{T('检验什么', 'What we tested')}</dt><dd>{ask}</dd><dt>{T('方法', 'Method')}</dt><dd>{method}</dd>"
+                f"<dl><dt>{T('目的', 'Objective')}</dt><dd>{ask}</dd><dt>{T('方法', 'Method')}</dt><dd>{method}</dd>"
                 f"<dt>{T('尝试', 'What we tried')}</dt><dd>{tried}</dd><dt>{T('结果', 'Result')}</dt><dd>{result}</dd></dl>"
                 f"<p class=take><b>{T('结论 / 下一步', 'Decision / next step')}：</b>{take}</p></section>")
 
@@ -167,8 +167,8 @@ def build(lang):
 
     S = []
     S.append(sec(1, T("在什么空间里分析：降维保留了什么信息", "Which space to analyse in: what dimension reduction keeps"),
-        T("画成二维 / 三维图、或降到更低维度后，器官、拍摄距离、物种的信息还剩多少？每个主成分主要承载什么？",
-          "After reducing to a 2-D / 3-D plot or a lower dimension, how much organ, shot-scale and species information is left? What does each principal component carry?"),
+        T("量化不同降维方式（二维 / 三维图、16 / 64 维）对器官、拍摄距离、物种信息的保留程度，并确定各主成分承载的信息类型，据此选定分析空间。",
+          "Quantify how much organ, shot-scale and species information each reduction (2-D / 3-D plots, 16 / 64 dimensions) retains, identify the information carried by each principal component, and select the analysis space accordingly."),
         T("每张照片是一个高维向量（EfficientNet 1,280 维、BioCLIP 1,024、DINOv3 768、YOLO 512 / 896）。对每种降维方式算两件事：<br>"
           "<b>近邻保留</b>：原空间里最像的 15 张照片，降维后还剩几张；<br>"
           "<b>信息保留</b>：在降维后的空间里用“最近邻投票”判断器官 / 距离 / 物种（按植株分组交叉验证），准确率占原空间的百分比，100% = 没丢信息。<br>"
@@ -179,7 +179,10 @@ def build(lang):
           "percentage of the full-space accuracy; 100% = nothing lost.<br>Also how much of each principal component's variation is explained by organ / "
           "scale / species (η², 0–1). All reductions are unsupervised; labels are used only to evaluate."),
         T("PCA 2 / 3 / 16 / 64 维和 t-SNE 二维，五个模型。", "PCA to 2 / 3 / 16 / 64 dimensions and 2-D t-SNE, five models."),
-        T("<p class=cap>EfficientNet：</p>", "<p class=cap>EfficientNet:</p>") + table(im_t[im_t.model == "EfficientNet-B0"].drop(columns="model").rename(columns={
+        img(R / "exp8_info_kept.png", "information kept")
+        + T("<p class=cap>粗线 = 五个模型平均，细线 = 各模型；灰带 = 三维图。拍摄距离几乎不受降维影响；器官约需 16 维；物种需要 64 维。</p>",
+            "<p class=cap>Bold = mean of five models, thin = each model; grey band = a 3-D plot. Shot scale survives any reduction; organ needs about 16 dimensions; species needs 64.</p>")
+        + T("<p class=cap>EfficientNet：</p>", "<p class=cap>EfficientNet:</p>") + table(im_t[im_t.model == "EfficientNet-B0"].drop(columns="model").rename(columns={
             "view": T("看法", "view"), "neighbours_kept": T("近邻保留", "neighbours kept"), "organ_kept": T("器官信息", "organ info kept"),
             "scale_kept": T("距离信息", "scale info kept"), "species_kept": T("物种信息", "species info kept")}), 2)
         + T("<p class=cap>五个模型：三维 PCA 图 vs 64 维（物种信息保留）</p>", "<p class=cap>Five models: 3-D PCA plot vs 64-D (species information kept)</p>")
@@ -188,15 +191,15 @@ def build(lang):
         + table(pc_t.assign(main=pc_t["main"].map(lambda v: {"organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species")}[v])).rename(columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"),
                                      "main": T("主要承载", "mainly carries")}), 2),
         T(f"三维 PCA 图基本只显示拍摄距离和器官，物种信息只剩约 {pct(im_t[(im_t.model=='EfficientNet-B0')&(im_t.view=='PCA-3')].iloc[0,-1])}，近邻关系不到 20%，"
-          "所以<b>三维图不能用来判断物种或聚类结构</b>。PCA 64 维几乎不丢信息，<b>后续所有分析都在 64 维里做</b>；需要画图时用 t-SNE（保留分组，但距离和位置没有含义）。",
+          "所以<b>三维图不能用来判断物种或聚类结构</b>。PCA 64 维几乎不丢信息，<b>后续所有分析都在 64 维里做</b>；可视化采用 t-SNE：二维 t-SNE 保留 88–100% 的器官、距离与物种信息（二维 PCA 的物种信息仅 13–39%，器官信息 48–77%），因为它专门保留每张照片的近邻；但图中的距离、簇大小和位置不具有含义，只用于展示分组。",
           f"A 3-D PCA plot shows mainly shot scale and organ; species information drops to about "
           f"{pct(im_t[(im_t.model=='EfficientNet-B0')&(im_t.view=='PCA-3')].iloc[0,-1])} and fewer than 20% of neighbour relations survive, so <b>3-D plots "
-          "cannot be used to judge species or cluster structure</b>. 64-D PCA loses almost nothing: <b>all further analysis runs in 64 dimensions</b>; for "
-          "pictures, use t-SNE (keeps groups, but distances and positions carry no meaning)."), "done"))
+          "cannot be used to judge species or cluster structure</b>. 64-D PCA loses almost nothing: <b>all further analysis runs in 64 dimensions</b>; Figures use t-SNE: "
+          "2-D t-SNE retains 88–100% of organ, scale and species information (2-D PCA keeps only 13–39% of species and 48–77% of organ information) because it is "
+          "built to keep each photo's nearest neighbours; distances, cluster sizes and positions in a t-SNE plot carry no meaning and are used for display only."), "done"))
 
-    S.append(sec(2, T("分几组？软聚类", "How many groups? Soft clustering"),
-        T("“Numeric method / clustering metrics to decide the number of clusters”；“Soft cluster”",
-          "\"Soft cluster, numeric method / clustering matrices to decide the number of clusters\""),
+    S.append(sec(2, T("聚类数 K 的选择与软聚类", "Choice of K and soft clustering"),
+        T("以数值指标选定聚类数 K，并用软归属识别处于两组之间的照片。", "Select the number of clusters K with numerical criteria, and identify photos lying between two groups with soft membership."),
         T("K 不是给定的，取有含义的值：K=3（3 种拍摄距离）、K=7（7 种器官）、K=20（旧默认）。看分组和标签能否一一对上，以及按植株重采样后是否稳定。"
           "<br>软归属：按植株重采样 50 次、每次重新聚类，照片落入各组的比例就是它的归属；最大归属 &lt;0.8 记为“含混”。",
           "K is a choice; we use meaningful values: K=3 (three shot scales), K=7 (seven organs), K=20 (old default). Do groups match labels one-to-one, and "
@@ -215,7 +218,7 @@ def build(lang):
           "K=3 corresponds to shot scale, K=7 to organ; K=20 has no basis. The ambiguity is real and repeatable, mostly between neighbouring organs "
           "(fruit ↔ twig, inflorescence ↔ leaf), but it does not predict species errors."), "done"))
 
-    S.append(sec(3, T("每组里是什么？Enrichment", "What is inside each group? Enrichment"), "“Enrichment score”" if zh else "\"Enrichment score\"",
+    S.append(sec(3, T("各组构成：富集分析", "Group composition: enrichment analysis"), T("量化每组的器官、拍摄距离与物种构成，判断各组由何种因素驱动。", "Quantify the organ, shot-scale and species make-up of each group and determine what drives it."),
         T("对每组计算各器官 / 距离的占比与全体平均的倍数（富集倍数），并按物种构成校正；置信区间按植株重采样得到。照片嵌套在植株和物种内，不满足独立性假设，所以只报告效应大小，不报 p 值。",
           "For every group: share of each organ / scale relative to the overall rate (fold enrichment), adjusted for species mix, with intervals from "
           "resampling plants. Photos are nested in plants and species, so independence fails: effect sizes only, no p-values."),
@@ -225,7 +228,7 @@ def build(lang):
           f"EfficientNet ({pct(en['EfficientNet-B0'])}) and DINOv3 ({pct(en['DINOv3'])}) groups are mostly dominated by one organ and are not single-species "
           f"groups; BioCLIP ({pct(en['BioCLIP 2.5'])}) groups follow species; YOLO about a third."), "done"))
 
-    S.append(sec(4, T("哪些维度决定分组？NSC", "Which dimensions define the groups? NSC"), "“Shrunk and centroid – k means before training”" if zh else "\"Shrunk and centroid – k means before training\"",
+    S.append(sec(4, T("决定分组的维度：收缩质心（NSC）", "Dimensions that define the groups: shrunken centroids (NSC)"), T("找出区分器官、以及复现聚类所需的最少维度，衡量信息的集中程度。", "Find the fewest dimensions needed to separate organs and to reproduce the clusters, as a measure of how concentrated the information is."),
         T("NSC（最近收缩质心）：给每类算中心，看它在每个坐标上偏离平均多少；<b>Δ 是门槛</b>，偏离小于 Δ 的坐标对这一类删掉。Δ=0 全保留，Δ 越大越精简。"
           "用按植株分组的 5 折交叉验证 + “一倍标准误”规则选 Δ（统计上和最好一样好的最精简模型），测试集只评估一次。坐标是 PCA 方向，不是生物学特征。",
           "NSC (nearest shrunken centroids): a centre per class and its deviation on every coordinate; <b>Δ is a threshold</b>, coordinates deviating less "
@@ -244,7 +247,7 @@ def build(lang):
           f"Only EfficientNet compresses organ to ~{nt.loc['EfficientNet-B0','per_class']:.0f} coordinates per class with almost no loss; elsewhere organ "
           "information is spread out. Coordinates needed to reproduce the groups grow with K; \"almost all 64\" was a K=20 effect."), "done"))
 
-    S.append(sec(5, T("Autoencoder 与主轴", "Autoencoder and axes"), "“Autoencoder & extension of axis and PCAs”" if zh else "\"Autoencoder & extension of axis and PCAs\"",
+    S.append(sec(5, T("Autoencoder 与主轴", "Autoencoder and axes"), T("比较非线性降维（Autoencoder）与 PCA，并解释主要主成分的含义。", "Compare non-linear reduction (autoencoder) with PCA and interpret the main principal components."),
         T("32 维 Autoencoder 与 PCA 比较重建误差和近邻保留；再取 PCA 主轴两端的真实照片，并计算主轴与拍摄距离、器官的相关。",
           "A 32-D autoencoder vs PCA on reconstruction error and neighbour retention; then real photos at both ends of each principal axis and its "
           "correlation with shot scale and organ."),
@@ -258,8 +261,7 @@ def build(lang):
           "leaves at one end, distant whole trees at the other."), "done"))
 
     S.append(sec(6, T("从隐空间回到图片", "Back from the latent space to images"),
-        T("“Do reverse from latent space out”；“Activation mapping back approach with resnet etc., use cluster as tag”",
-          "\"Do reverse from latent space out\"; \"Activation mapping back approach with resnet etc., use cluster as tag\""),
+        T("由隐空间中的点检索对应的真实图片，并以激活热图定位模型依赖的图像区域。", "Map points in the latent space back to real photos, and locate the image regions the model relies on with activation maps."),
         T("反演：对每组中心，检索最相似的真实照片。热图：在 EfficientNet（与 ResNet 同类的卷积网络）上，以“属于某组”为目标做 Grad-CAM，并用遮挡对照检验热图是否可信。",
           "Inversion: for each group centre, retrieve the most similar real photos. Heatmaps: Grad-CAM on EfficientNet (a CNN like ResNet) with "
           "\"belongs to group c\" as the target, checked by occlusion."),
@@ -276,7 +278,7 @@ def build(lang):
           "but <b>whether they land on the organ is not yet tested</b>; that needs organ masks."), "part"))
 
     S.append(sec(7, T("每张图多个标签", "Multiple labels per image"),
-        T("“Multiple labels supply, each image can include multiple labels”", "\"Multiple labels supply, each image can include multiple labels\""),
+        T("利用软聚类结果，筛选可能含有多个器官、需要多标签标注的照片。", "Use soft-clustering results to shortlist photos that may contain several organs and need multi-label annotation."),
         T("目前器官标签是单标签。软聚类中，照片落在自己器官的组、但第二候选是另一种器官，记为“两个器官都合理”，作为多标签候选。",
           "Organ labels are single-label today. In soft clustering, a photo in its own organ's group whose second candidate is another organ is marked "
           "\"both organs plausible\": a multi-label candidate."),
@@ -289,7 +291,7 @@ def build(lang):
                         T("NSC 器官每类坐标", "NSC organ coords / class"): nt.loc[m, "per_class"],
                         T(f"K={MAIN_K} 单一器官主导的组", f"K={MAIN_K} organ-dominated groups"): en[m]} for m in M5])
     S.append(sec(8, T("YOLO 对比（团队新方向）", "YOLO comparison (team direction)"),
-        T("团队考虑换用 YOLO：它的 embedding 适不适合做器官结构分析？", "The team is considering YOLO: are its embeddings suited to organ-structure analysis?"),
+        T("评估 YOLO 的整图 embedding 是否适合器官结构分析，为是否换用 YOLO 提供依据。", "Assess whether YOLO whole-image embeddings support organ-structure analysis, to inform the decision on switching to YOLO."),
         T("YOLO11s（COCO 通用检测模型，未在植物上训练）的整图 embedding，两个版本：backbone（512 维）和 neck 多尺度（896 维），分别放进与其他模型相同的分析。",
           "Whole-image embeddings of YOLO11s (COCO general detector, not trained on plants), two versions: backbone (512-D) and multi-scale neck (896-D), "
           "run through the same analyses as the other models."),
