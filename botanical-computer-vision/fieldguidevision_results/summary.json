@@ -1,0 +1,162 @@
+{
+  "real_images": 1641,
+  "species": 63,
+  "generated_images": 68,
+  "group_hits": 43,
+  "group_generated": 48,
+  "groups": [
+    {
+      "id": "k5_g0",
+      "majority_organ": "leaf",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "leaf"
+    },
+    {
+      "id": "k5_g1",
+      "majority_organ": "twig",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "twig"
+    },
+    {
+      "id": "k5_g2",
+      "majority_organ": "whole tree (or vine)",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "whole tree (or vine)"
+    },
+    {
+      "id": "k5_g3",
+      "majority_organ": "bark",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "bark"
+    },
+    {
+      "id": "k5_g4",
+      "majority_organ": "inflorescence",
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "target_top10_majority_organ": "inflorescence"
+    },
+    {
+      "id": "k7_g0",
+      "majority_organ": "twig",
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "target_top10_majority_organ": "twig"
+    },
+    {
+      "id": "k7_g1",
+      "majority_organ": "leaf",
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "target_top10_majority_organ": "leaf"
+    },
+    {
+      "id": "k7_g2",
+      "majority_organ": "whole tree (or vine)",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "whole tree (or vine)"
+    },
+    {
+      "id": "k7_g3",
+      "majority_organ": "leaf",
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "target_top10_majority_organ": "leaf"
+    },
+    {
+      "id": "k7_g4",
+      "majority_organ": "bark",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "bark"
+    },
+    {
+      "id": "k7_g5",
+      "majority_organ": "inflorescence",
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "target_top10_majority_organ": "inflorescence"
+    },
+    {
+      "id": "k7_g6",
+      "majority_organ": "leaf",
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0,
+      "target_top10_majority_organ": "leaf"
+    }
+  ],
+  "walk": [
+    {
+      "id": "walk_0",
+      "alpha": 0.0,
+      "endpoint_group_shares": {
+        "1": 0.75,
+        "0": 0.0
+      },
+      "target_top10_majority_organ": "leaf",
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335
+    },
+    {
+      "id": "walk_1",
+      "alpha": 0.25,
+      "endpoint_group_shares": {
+        "1": 0.5,
+        "0": 0.0
+      },
+      "target_top10_majority_organ": "leaf",
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335
+    },
+    {
+      "id": "walk_2",
+      "alpha": 0.5,
+      "endpoint_group_shares": {
+        "1": 0.0,
+        "0": 0.0
+      },
+      "target_top10_majority_organ": "leaf",
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335
+    },
+    {
+      "id": "walk_3",
+      "alpha": 0.75,
+      "endpoint_group_shares": {
+        "1": 0.25,
+        "0": 0.0
+      },
+      "target_top10_majority_organ": "twig",
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335
+    },
+    {
+      "id": "walk_4",
+      "alpha": 1.0,
+      "endpoint_group_shares": {
+        "1": 0.0,
+        "0": 0.75
+      },
+      "target_top10_majority_organ": "twig",
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335
+    }
+  ]
+}

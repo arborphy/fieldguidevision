@@ -1,0 +1,188 @@
+{
+  "status": "newly recomputed; original meeting labels unavailable",
+  "fit_scope": "all 1641 photos, descriptive only; no held-out score",
+  "source_sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+  "manifest_sha256": "de1c3f1906b94b61bd7eac4c2cd0518eb23525e0d6e8d646e4e384e95de32d9d",
+  "algorithm": "sklearn KMeans, Euclidean on existing L2-normalized EfficientNet features",
+  "random_state": 42,
+  "n_init": 20,
+  "max_iter": 300,
+  "tol": 0.0001,
+  "versions": {
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1"
+  },
+  "partitions": {
+    "5": {
+      "inertia": 1068.862060546875,
+      "iterations": 12,
+      "sha256": "8bb578c57753d8b144669b8140dde62a799d3d60b8b03cd471ea1262664f8bee",
+      "groups": [
+        {
+          "group": 0,
+          "size": 371,
+          "majority_organ": "leaf",
+          "organ_counts": {
+            "fruit": 9,
+            "inflorescence": 7,
+            "leaf": 339,
+            "twig": 9,
+            "whole tree (or vine)": 7
+          }
+        },
+        {
+          "group": 1,
+          "size": 370,
+          "majority_organ": "twig",
+          "organ_counts": {
+            "bark": 12,
+            "cone": 6,
+            "fruit": 109,
+            "inflorescence": 21,
+            "leaf": 21,
+            "seed": 11,
+            "stem": 1,
+            "twig": 185,
+            "unspecified": 2,
+            "whole tree (or vine)": 2
+          }
+        },
+        {
+          "group": 2,
+          "size": 303,
+          "majority_organ": "whole tree (or vine)",
+          "organ_counts": {
+            "bark": 2,
+            "cone": 3,
+            "fruit": 9,
+            "inflorescence": 13,
+            "leaf": 9,
+            "whole tree": 18,
+            "whole tree (or vine)": 249
+          }
+        },
+        {
+          "group": 3,
+          "size": 196,
+          "majority_organ": "bark",
+          "organ_counts": {
+            "bark": 157,
+            "leaf": 5,
+            "seed": 1,
+            "twig": 2,
+            "whole tree (or vine)": 31
+          }
+        },
+        {
+          "group": 4,
+          "size": 401,
+          "majority_organ": "inflorescence",
+          "organ_counts": {
+            "cone": 24,
+            "fruit": 82,
+            "inflorescence": 236,
+            "leaf": 42,
+            "twig": 5,
+            "whole plant": 1,
+            "whole tree (or vine)": 11
+          }
+        }
+      ]
+    },
+    "7": {
+      "inertia": 1023.8850708007812,
+      "iterations": 25,
+      "sha256": "0f410c68bc86b2bd62fe01bf0f8ef6732efe89f1cd49ac9767e2ca8a6838a1c8",
+      "groups": [
+        {
+          "group": 0,
+          "size": 360,
+          "majority_organ": "twig",
+          "organ_counts": {
+            "bark": 12,
+            "cone": 8,
+            "fruit": 111,
+            "inflorescence": 18,
+            "leaf": 14,
+            "seed": 12,
+            "stem": 1,
+            "twig": 179,
+            "unspecified": 2,
+            "whole tree (or vine)": 3
+          }
+        },
+        {
+          "group": 1,
+          "size": 95,
+          "majority_organ": "leaf",
+          "organ_counts": {
+            "leaf": 94,
+            "twig": 1
+          }
+        },
+        {
+          "group": 2,
+          "size": 283,
+          "majority_organ": "whole tree (or vine)",
+          "organ_counts": {
+            "bark": 2,
+            "cone": 2,
+            "fruit": 9,
+            "inflorescence": 11,
+            "leaf": 4,
+            "whole tree": 18,
+            "whole tree (or vine)": 237
+          }
+        },
+        {
+          "group": 3,
+          "size": 243,
+          "majority_organ": "leaf",
+          "organ_counts": {
+            "cone": 5,
+            "fruit": 32,
+            "inflorescence": 31,
+            "leaf": 138,
+            "twig": 8,
+            "whole tree (or vine)": 29
+          }
+        },
+        {
+          "group": 4,
+          "size": 191,
+          "majority_organ": "bark",
+          "organ_counts": {
+            "bark": 157,
+            "leaf": 3,
+            "twig": 2,
+            "whole tree (or vine)": 29
+          }
+        },
+        {
+          "group": 5,
+          "size": 314,
+          "majority_organ": "inflorescence",
+          "organ_counts": {
+            "cone": 18,
+            "fruit": 57,
+            "inflorescence": 215,
+            "leaf": 17,
+            "twig": 4,
+            "whole plant": 1,
+            "whole tree (or vine)": 2
+          }
+        },
+        {
+          "group": 6,
+          "size": 155,
+          "majority_organ": "leaf",
+          "organ_counts": {
+            "inflorescence": 2,
+            "leaf": 146,
+            "twig": 7
+          }
+        }
+      ]
+    }
+  }
+}

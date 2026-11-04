@@ -1,0 +1,27 @@
+{
+  "inputs": {
+    "organ_benchmark/split_manifests/individual_disjoint.csv": "de1c3f1906b94b61bd7eac4c2cd0518eb23525e0d6e8d646e4e384e95de32d9d",
+    "data/embeddings/efficientnet_b0_strict/embeddings.npz": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "unclip_mvp/groups/clusters_k5.npy": "8bb578c57753d8b144669b8140dde62a799d3d60b8b03cd471ea1262664f8bee",
+    "unclip_mvp/groups/clusters_k7.npy": "0f410c68bc86b2bd62fe01bf0f8ef6732efe89f1cd49ac9767e2ca8a6838a1c8"
+  },
+  "encoder": "ViT-H-14",
+  "weights": "laion2b_s32b_b79k",
+  "decoder": "sd2-community/stable-diffusion-2-1-unclip",
+  "decoder_revision": "ac4aaff4a67d57bdab2e9faf277c33d8e49f4df4",
+  "seeds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "steps": 30,
+  "noise_level": 0,
+  "prompt": "",
+  "guidance_scale": 7.5,
+  "resolution": 768,
+  "fruit_fallback": true,
+  "image_loader": "Pillow LOAD_TRUNCATED_IMAGES=True (matches existing repo extraction)",
+  "centres": "arithmetic mean of raw unnormalized projected features",
+  "retrieval": "cosine over all 1641 real photos; descriptive, not held-out evaluation"
+}

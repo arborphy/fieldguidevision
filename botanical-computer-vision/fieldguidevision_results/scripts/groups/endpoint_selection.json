@@ -1,0 +1,10 @@
+{
+  "id": "walk_4",
+  "k": 7,
+  "group": 0,
+  "alpha": 1.0,
+  "leaf_group": 1,
+  "fruit_group": 0,
+  "fruit_endpoint_majority_organ": "twig",
+  "fruit_endpoint_fruit_share": 0.30833333333333335
+}

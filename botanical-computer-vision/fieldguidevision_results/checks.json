@@ -1,0 +1,1974 @@
+{
+  "config": {
+    "inputs": {
+      "organ_benchmark/split_manifests/individual_disjoint.csv": "de1c3f1906b94b61bd7eac4c2cd0518eb23525e0d6e8d646e4e384e95de32d9d",
+      "data/embeddings/efficientnet_b0_strict/embeddings.npz": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+      "unclip_mvp/groups/clusters_k5.npy": "8bb578c57753d8b144669b8140dde62a799d3d60b8b03cd471ea1262664f8bee",
+      "unclip_mvp/groups/clusters_k7.npy": "0f410c68bc86b2bd62fe01bf0f8ef6732efe89f1cd49ac9767e2ca8a6838a1c8"
+    },
+    "encoder": "ViT-H-14",
+    "weights": "laion2b_s32b_b79k",
+    "decoder": "sd2-community/stable-diffusion-2-1-unclip",
+    "decoder_revision": "ac4aaff4a67d57bdab2e9faf277c33d8e49f4df4",
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "steps": 30,
+    "noise_level": 0,
+    "prompt": "",
+    "guidance_scale": 7.5,
+    "resolution": 768,
+    "fruit_fallback": true,
+    "image_loader": "Pillow LOAD_TRUNCATED_IMAGES=True (matches existing repo extraction)",
+    "centres": "arithmetic mean of raw unnormalized projected features",
+    "retrieval": "cosine over all 1641 real photos; descriptive, not held-out evaluation"
+  },
+  "gpu": "NVIDIA L40S",
+  "photo_recovery": null,
+  "versions": {
+    "torch": "2.5.1",
+    "open_clip_torch": "2.29.0",
+    "diffusers": "0.30.3",
+    "transformers": "4.44.2"
+  },
+  "walk_note": "Interior points have no prescribed target group; share=null; both endpoint shares reported.",
+  "points": [
+    {
+      "id": "k5_g0",
+      "k": 5,
+      "group": 0,
+      "majority_organ": "leaf",
+      "organ_counts": {
+        "fruit": 9,
+        "inflorescence": 7,
+        "leaf": 339,
+        "twig": 9,
+        "whole tree (or vine)": 7
+      },
+      "size": 371,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/14027",
+          "nearest_group": 0,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/14027",
+            "baskauf/11070",
+            "baskauf/13392",
+            "baskauf/12768",
+            "baskauf/11644",
+            "baskauf/15395",
+            "baskauf/11751",
+            "baskauf/58506",
+            "baskauf/15175",
+            "baskauf/15412"
+          ],
+          "target_cosine": 0.8460690379142761
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/11751",
+          "nearest_group": 0,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11751",
+            "baskauf/31775",
+            "baskauf/26502",
+            "baskauf/35448",
+            "baskauf/11695",
+            "baskauf/11208",
+            "baskauf/11070",
+            "baskauf/11644",
+            "baskauf/11614",
+            "baskauf/11643"
+          ],
+          "target_cosine": 0.8324003219604492
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/15573",
+          "nearest_group": 0,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15573",
+            "baskauf/24251",
+            "baskauf/11751",
+            "baskauf/65645",
+            "baskauf/11695",
+            "baskauf/11920",
+            "baskauf/35448",
+            "baskauf/11644",
+            "baskauf/15313",
+            "baskauf/31775"
+          ],
+          "target_cosine": 0.8833006620407104
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/11695",
+          "nearest_group": 0,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11695",
+            "baskauf/29705",
+            "baskauf/15412",
+            "baskauf/29805",
+            "baskauf/54682",
+            "baskauf/12467",
+            "baskauf/65645",
+            "baskauf/52744",
+            "baskauf/12583",
+            "baskauf/15395"
+          ],
+          "target_cosine": 0.878395676612854
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k5_g1",
+      "k": 5,
+      "group": 1,
+      "majority_organ": "twig",
+      "organ_counts": {
+        "bark": 12,
+        "cone": 6,
+        "fruit": 109,
+        "inflorescence": 21,
+        "leaf": 21,
+        "seed": 11,
+        "stem": 1,
+        "twig": 185,
+        "unspecified": 2,
+        "whole tree (or vine)": 2
+      },
+      "size": 370,
+      "target_top10_majority_organ": "twig",
+      "target_top10_organ_counts": {
+        "twig": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/58504",
+          "nearest_group": 1,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "twig": 10
+          },
+          "top10_image_ids": [
+            "baskauf/58504",
+            "baskauf/15620",
+            "baskauf/58502",
+            "baskauf/15994",
+            "baskauf/16083",
+            "baskauf/13576",
+            "baskauf/15203",
+            "baskauf/26147",
+            "baskauf/11696",
+            "baskauf/15288"
+          ],
+          "target_cosine": 0.8527125120162964
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15652",
+          "nearest_group": 1,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "inflorescence": 2,
+            "leaf": 1,
+            "twig": 7
+          },
+          "top10_image_ids": [
+            "baskauf/15652",
+            "baskauf/15235",
+            "baskauf/15241",
+            "baskauf/35372",
+            "baskauf/12469",
+            "baskauf/15994",
+            "baskauf/15691",
+            "baskauf/58502",
+            "baskauf/11078",
+            "baskauf/19392"
+          ],
+          "target_cosine": 0.8364184498786926
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/14034",
+          "nearest_group": 1,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "leaf": 3,
+            "twig": 7
+          },
+          "top10_image_ids": [
+            "baskauf/14034",
+            "baskauf/13576",
+            "kirchoff/em2096",
+            "baskauf/51734",
+            "baskauf/15994",
+            "kirchoff/em2112",
+            "baskauf/65649",
+            "baskauf/32123",
+            "baskauf/14031",
+            "baskauf/15742"
+          ],
+          "target_cosine": 0.8443385362625122
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/15994",
+          "nearest_group": 1,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "twig": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15994",
+            "baskauf/12469",
+            "baskauf/27886",
+            "baskauf/11653",
+            "baskauf/58502",
+            "baskauf/15620",
+            "baskauf/13576",
+            "baskauf/15363",
+            "baskauf/15216",
+            "baskauf/58504"
+          ],
+          "target_cosine": 0.8850980997085571
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k5_g2",
+      "k": 5,
+      "group": 2,
+      "majority_organ": "whole tree (or vine)",
+      "organ_counts": {
+        "bark": 2,
+        "cone": 3,
+        "fruit": 9,
+        "inflorescence": 13,
+        "leaf": 9,
+        "whole tree": 18,
+        "whole tree (or vine)": 249
+      },
+      "size": 303,
+      "target_top10_majority_organ": "whole tree (or vine)",
+      "target_top10_organ_counts": {
+        "whole tree (or vine)": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/91083",
+            "baskauf/90799",
+            "baskauf/91139",
+            "baskauf/79649",
+            "baskauf/91119",
+            "baskauf/90812",
+            "baskauf/27901",
+            "baskauf/54881",
+            "baskauf/90820"
+          ],
+          "target_cosine": 0.8534173369407654
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/91119",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/91119",
+            "baskauf/91139",
+            "baskauf/91083",
+            "baskauf/27901",
+            "baskauf/90799",
+            "baskauf/35439",
+            "baskauf/91105",
+            "baskauf/12318",
+            "baskauf/90876",
+            "baskauf/90899"
+          ],
+          "target_cosine": 0.897716760635376
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/90799",
+            "baskauf/91119",
+            "baskauf/90812",
+            "baskauf/91083",
+            "baskauf/27901",
+            "baskauf/90899",
+            "baskauf/91139",
+            "baskauf/54881",
+            "baskauf/11111"
+          ],
+          "target_cosine": 0.8746029138565063
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/91119",
+            "baskauf/91083",
+            "baskauf/11111",
+            "baskauf/91105",
+            "baskauf/90815",
+            "baskauf/27901",
+            "baskauf/12318",
+            "baskauf/90899",
+            "baskauf/90809"
+          ],
+          "target_cosine": 0.8834196925163269
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k5_g3",
+      "k": 5,
+      "group": 3,
+      "majority_organ": "bark",
+      "organ_counts": {
+        "bark": 157,
+        "leaf": 5,
+        "seed": 1,
+        "twig": 2,
+        "whole tree (or vine)": 31
+      },
+      "size": 196,
+      "target_top10_majority_organ": "bark",
+      "target_top10_organ_counts": {
+        "bark": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/23020",
+          "nearest_group": 3,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 9,
+            "whole tree (or vine)": 1
+          },
+          "top10_image_ids": [
+            "baskauf/23020",
+            "baskauf/11454",
+            "baskauf/13161",
+            "baskauf/16715",
+            "baskauf/11958",
+            "baskauf/11251",
+            "baskauf/11960",
+            "baskauf/10861",
+            "baskauf/11341",
+            "baskauf/11458"
+          ],
+          "target_cosine": 0.8609088659286499
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/11404",
+          "nearest_group": 3,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11404",
+            "baskauf/12021",
+            "baskauf/11458",
+            "baskauf/11505",
+            "baskauf/16502",
+            "baskauf/13712",
+            "baskauf/16715",
+            "baskauf/11449",
+            "baskauf/11958",
+            "baskauf/11690"
+          ],
+          "target_cosine": 0.9118200540542603
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/11958",
+          "nearest_group": 3,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11958",
+            "baskauf/13585",
+            "baskauf/11454",
+            "baskauf/11331",
+            "baskauf/12021",
+            "baskauf/10987",
+            "baskauf/11505",
+            "baskauf/11227",
+            "baskauf/24245",
+            "baskauf/12460"
+          ],
+          "target_cosine": 0.92930006980896
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/13585",
+          "nearest_group": 3,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/13585",
+            "baskauf/11505",
+            "baskauf/11404",
+            "baskauf/11690",
+            "baskauf/11902",
+            "baskauf/11449",
+            "baskauf/11458",
+            "baskauf/11454",
+            "baskauf/12050",
+            "baskauf/11812"
+          ],
+          "target_cosine": 0.9019864797592163
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k5_g4",
+      "k": 5,
+      "group": 4,
+      "majority_organ": "inflorescence",
+      "organ_counts": {
+        "cone": 24,
+        "fruit": 82,
+        "inflorescence": 236,
+        "leaf": 42,
+        "twig": 5,
+        "whole plant": 1,
+        "whole tree (or vine)": 11
+      },
+      "size": 401,
+      "target_top10_majority_organ": "inflorescence",
+      "target_top10_organ_counts": {
+        "fruit": 1,
+        "inflorescence": 9
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/51416",
+          "nearest_group": 4,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "inflorescence": 8,
+            "leaf": 1,
+            "twig": 1
+          },
+          "top10_image_ids": [
+            "baskauf/51416",
+            "baskauf/51414",
+            "baskauf/11926",
+            "baskauf/51411",
+            "baskauf/35249",
+            "baskauf/51418",
+            "baskauf/51409",
+            "baskauf/11916",
+            "baskauf/51013",
+            "hessd/e5381"
+          ],
+          "target_cosine": 0.8453083038330078
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/11966",
+          "nearest_group": 4,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "fruit": 2,
+            "inflorescence": 7,
+            "twig": 1
+          },
+          "top10_image_ids": [
+            "baskauf/11966",
+            "baskauf/51414",
+            "baskauf/51416",
+            "baskauf/33644",
+            "baskauf/51578",
+            "baskauf/35251",
+            "baskauf/51397",
+            "baskauf/51771",
+            "baskauf/51813",
+            "baskauf/51816"
+          ],
+          "target_cosine": 0.8355534672737122
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/11926",
+          "nearest_group": 1,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "fruit": 1,
+            "inflorescence": 7,
+            "leaf": 1,
+            "twig": 1
+          },
+          "top10_image_ids": [
+            "baskauf/11926",
+            "baskauf/15051",
+            "thomas/0301-02-03",
+            "baskauf/35249",
+            "baskauf/51414",
+            "baskauf/49293",
+            "baskauf/50606",
+            "baskauf/51416",
+            "baskauf/17569",
+            "baskauf/51578"
+          ],
+          "target_cosine": 0.8484959006309509
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/35249",
+          "nearest_group": 4,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "fruit": 2,
+            "inflorescence": 4,
+            "leaf": 2,
+            "twig": 2
+          },
+          "top10_image_ids": [
+            "baskauf/35249",
+            "baskauf/19402",
+            "baskauf/51816",
+            "baskauf/12363",
+            "baskauf/33644",
+            "baskauf/11916",
+            "baskauf/11966",
+            "baskauf/19373",
+            "baskauf/51771",
+            "baskauf/12450"
+          ],
+          "target_cosine": 0.807560920715332
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75
+    },
+    {
+      "id": "k7_g0",
+      "k": 7,
+      "group": 0,
+      "majority_organ": "twig",
+      "organ_counts": {
+        "bark": 12,
+        "cone": 8,
+        "fruit": 111,
+        "inflorescence": 18,
+        "leaf": 14,
+        "seed": 12,
+        "stem": 1,
+        "twig": 179,
+        "unspecified": 2,
+        "whole tree (or vine)": 3
+      },
+      "size": 360,
+      "target_top10_majority_organ": "twig",
+      "target_top10_organ_counts": {
+        "bark": 1,
+        "twig": 9
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/16083",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "leaf": 1,
+            "twig": 9
+          },
+          "top10_image_ids": [
+            "baskauf/16083",
+            "baskauf/15620",
+            "baskauf/15994",
+            "baskauf/58504",
+            "baskauf/15347",
+            "baskauf/58502",
+            "baskauf/15388",
+            "baskauf/16026",
+            "baskauf/13576",
+            "baskauf/15216"
+          ],
+          "target_cosine": 0.826526403427124
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15652",
+          "nearest_group": 6,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "leaf": 3,
+            "twig": 7
+          },
+          "top10_image_ids": [
+            "baskauf/15652",
+            "baskauf/15276",
+            "baskauf/15241",
+            "baskauf/15235",
+            "baskauf/12761",
+            "baskauf/15180",
+            "baskauf/15994",
+            "baskauf/15742",
+            "baskauf/15172",
+            "baskauf/15691"
+          ],
+          "target_cosine": 0.8413968086242676
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/13576",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "inflorescence": 1,
+            "leaf": 3,
+            "twig": 6
+          },
+          "top10_image_ids": [
+            "baskauf/13576",
+            "baskauf/51734",
+            "baskauf/32123",
+            "baskauf/14034",
+            "baskauf/32482",
+            "baskauf/15994",
+            "baskauf/15742",
+            "baskauf/51736",
+            "baskauf/65649",
+            "baskauf/51814"
+          ],
+          "target_cosine": 0.8243051767349243
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/15994",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "twig": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15994",
+            "baskauf/13576",
+            "baskauf/11653",
+            "baskauf/27886",
+            "baskauf/58502",
+            "baskauf/12469",
+            "baskauf/15363",
+            "baskauf/58504",
+            "thomas/0440-04-01",
+            "baskauf/15347"
+          ],
+          "target_cosine": 0.8769799470901489
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75
+    },
+    {
+      "id": "k7_g1",
+      "k": 7,
+      "group": 1,
+      "majority_organ": "leaf",
+      "organ_counts": {
+        "leaf": 94,
+        "twig": 1
+      },
+      "size": 95,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/13132",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/13132",
+            "kirchoff/em2408",
+            "baskauf/15358",
+            "baskauf/11920",
+            "baskauf/29666",
+            "kirchoff/em2414",
+            "baskauf/11124",
+            "kirchoff/em2396",
+            "kirchoff/em2343",
+            "kirchoff/em2422"
+          ],
+          "target_cosine": 0.85087651014328
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "kirchoff/em2153",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "kirchoff/em2153",
+            "kirchoff/em2329",
+            "kirchoff/em2597",
+            "kirchoff/em2408",
+            "kirchoff/em2152",
+            "kirchoff/em2328",
+            "kirchoff/em2598",
+            "kirchoff/em2623",
+            "baskauf/12511",
+            "kirchoff/em2154"
+          ],
+          "target_cosine": 0.8061237335205078
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "kirchoff/em2354",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "kirchoff/em2354",
+            "kirchoff/em2599",
+            "kirchoff/em2408",
+            "kirchoff/em2424",
+            "kirchoff/em2329",
+            "kirchoff/em2328",
+            "kirchoff/em2071",
+            "baskauf/12511",
+            "kirchoff/em2597",
+            "kirchoff/em2153"
+          ],
+          "target_cosine": 0.6969456672668457
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/11920",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11920",
+            "kirchoff/em2353",
+            "baskauf/15358",
+            "baskauf/11124",
+            "baskauf/29666",
+            "kirchoff/em2354",
+            "kirchoff/em2408",
+            "baskauf/52480",
+            "kirchoff/em2071",
+            "baskauf/52472"
+          ],
+          "target_cosine": 0.8419756889343262
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75
+    },
+    {
+      "id": "k7_g2",
+      "k": 7,
+      "group": 2,
+      "majority_organ": "whole tree (or vine)",
+      "organ_counts": {
+        "bark": 2,
+        "cone": 2,
+        "fruit": 9,
+        "inflorescence": 11,
+        "leaf": 4,
+        "whole tree": 18,
+        "whole tree (or vine)": 237
+      },
+      "size": 283,
+      "target_top10_majority_organ": "whole tree (or vine)",
+      "target_top10_organ_counts": {
+        "whole tree (or vine)": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/91083",
+            "baskauf/91139",
+            "baskauf/90799",
+            "baskauf/91119",
+            "baskauf/90820",
+            "baskauf/79649",
+            "baskauf/27901",
+            "baskauf/90812",
+            "baskauf/54881"
+          ],
+          "target_cosine": 0.8582155108451843
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/91139",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree": 1,
+            "whole tree (or vine)": 9
+          },
+          "top10_image_ids": [
+            "baskauf/91139",
+            "baskauf/91119",
+            "baskauf/27901",
+            "baskauf/91083",
+            "baskauf/90799",
+            "baskauf/35439",
+            "baskauf/90876",
+            "baskauf/91105",
+            "baskauf/91000",
+            "baskauf/90899"
+          ],
+          "target_cosine": 0.8985950946807861
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/91119",
+            "baskauf/90799",
+            "baskauf/91083",
+            "baskauf/90899",
+            "baskauf/27901",
+            "baskauf/90812",
+            "baskauf/91139",
+            "baskauf/54881",
+            "baskauf/91105"
+          ],
+          "target_cosine": 0.8726016283035278
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/35439",
+          "nearest_group": 2,
+          "top10_majority_organ": "whole tree (or vine)",
+          "top10_organ_counts": {
+            "whole tree (or vine)": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35439",
+            "baskauf/91119",
+            "baskauf/91083",
+            "baskauf/91105",
+            "baskauf/90809",
+            "baskauf/11111",
+            "baskauf/90899",
+            "baskauf/27901",
+            "baskauf/90815",
+            "baskauf/90799"
+          ],
+          "target_cosine": 0.8836511969566345
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k7_g3",
+      "k": 7,
+      "group": 3,
+      "majority_organ": "leaf",
+      "organ_counts": {
+        "cone": 5,
+        "fruit": 32,
+        "inflorescence": 31,
+        "leaf": 138,
+        "twig": 8,
+        "whole tree (or vine)": 29
+      },
+      "size": 243,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 9,
+        "whole tree (or vine)": 1
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/11019",
+          "nearest_group": 3,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "inflorescence": 1,
+            "leaf": 8,
+            "whole tree (or vine)": 1
+          },
+          "top10_image_ids": [
+            "baskauf/11019",
+            "baskauf/65637",
+            "baskauf/35369",
+            "baskauf/20454",
+            "baskauf/65631",
+            "baskauf/12764",
+            "thomas/0506-01-06",
+            "baskauf/13537",
+            "baskauf/11248",
+            "baskauf/29805"
+          ],
+          "target_cosine": 0.8812392950057983
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15197",
+          "nearest_group": 3,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 9,
+            "whole tree (or vine)": 1
+          },
+          "top10_image_ids": [
+            "baskauf/15197",
+            "baskauf/13383",
+            "thomas/0014-01-03",
+            "thomas/0014-01-08",
+            "baskauf/11030",
+            "baskauf/11086",
+            "baskauf/11961",
+            "baskauf/15199",
+            "baskauf/15076",
+            "baskauf/13386"
+          ],
+          "target_cosine": 0.870297372341156
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/11916",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11916",
+            "baskauf/11920",
+            "baskauf/12703",
+            "baskauf/15076",
+            "baskauf/15313",
+            "baskauf/11288",
+            "thomas/0014-01-03",
+            "baskauf/35448",
+            "baskauf/15358",
+            "baskauf/11687"
+          ],
+          "target_cosine": 0.8561835885047913
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/65637",
+          "nearest_group": 3,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/65637",
+            "baskauf/35369",
+            "baskauf/65633",
+            "baskauf/11695",
+            "baskauf/65634",
+            "baskauf/11243",
+            "baskauf/10766",
+            "baskauf/65631",
+            "baskauf/11019",
+            "baskauf/11206"
+          ],
+          "target_cosine": 0.8136153221130371
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75
+    },
+    {
+      "id": "k7_g4",
+      "k": 7,
+      "group": 4,
+      "majority_organ": "bark",
+      "organ_counts": {
+        "bark": 157,
+        "leaf": 3,
+        "twig": 2,
+        "whole tree (or vine)": 29
+      },
+      "size": 191,
+      "target_top10_majority_organ": "bark",
+      "target_top10_organ_counts": {
+        "bark": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/13161",
+          "nearest_group": 4,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 9,
+            "whole tree (or vine)": 1
+          },
+          "top10_image_ids": [
+            "baskauf/13161",
+            "baskauf/11958",
+            "baskauf/11960",
+            "baskauf/11454",
+            "baskauf/16715",
+            "baskauf/79653",
+            "baskauf/23020",
+            "baskauf/11251",
+            "baskauf/10861",
+            "baskauf/11227"
+          ],
+          "target_cosine": 0.8626185655593872
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/11404",
+          "nearest_group": 4,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11404",
+            "baskauf/12021",
+            "baskauf/11458",
+            "baskauf/11505",
+            "baskauf/11958",
+            "baskauf/11251",
+            "baskauf/13712",
+            "baskauf/79653",
+            "baskauf/16502",
+            "baskauf/16715"
+          ],
+          "target_cosine": 0.9195817112922668
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/11958",
+          "nearest_group": 4,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11958",
+            "baskauf/12021",
+            "baskauf/13585",
+            "baskauf/10987",
+            "baskauf/11227",
+            "baskauf/11690",
+            "baskauf/11331",
+            "baskauf/11505",
+            "baskauf/24245",
+            "baskauf/11454"
+          ],
+          "target_cosine": 0.929162323474884
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/11404",
+          "nearest_group": 4,
+          "top10_majority_organ": "bark",
+          "top10_organ_counts": {
+            "bark": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11404",
+            "baskauf/13585",
+            "baskauf/11505",
+            "baskauf/11458",
+            "baskauf/11690",
+            "baskauf/11454",
+            "baskauf/12021",
+            "baskauf/11449",
+            "baskauf/11902",
+            "baskauf/12050"
+          ],
+          "target_cosine": 0.9008725881576538
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "k7_g5",
+      "k": 7,
+      "group": 5,
+      "majority_organ": "inflorescence",
+      "organ_counts": {
+        "cone": 18,
+        "fruit": 57,
+        "inflorescence": 215,
+        "leaf": 17,
+        "twig": 4,
+        "whole plant": 1,
+        "whole tree (or vine)": 2
+      },
+      "size": 314,
+      "target_top10_majority_organ": "inflorescence",
+      "target_top10_organ_counts": {
+        "fruit": 1,
+        "inflorescence": 9
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/51815",
+          "nearest_group": 5,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "fruit": 1,
+            "inflorescence": 9
+          },
+          "top10_image_ids": [
+            "baskauf/51815",
+            "baskauf/35251",
+            "baskauf/51169",
+            "baskauf/51574",
+            "baskauf/51813",
+            "baskauf/66135",
+            "baskauf/51575",
+            "baskauf/66170",
+            "baskauf/66137",
+            "baskauf/34172"
+          ],
+          "target_cosine": 0.8407799601554871
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/51416",
+          "nearest_group": 5,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "inflorescence": 10
+          },
+          "top10_image_ids": [
+            "baskauf/51416",
+            "baskauf/32173",
+            "baskauf/51013",
+            "baskauf/51813",
+            "baskauf/35251",
+            "baskauf/10574",
+            "baskauf/51578",
+            "baskauf/51815",
+            "baskauf/18096",
+            "baskauf/18150"
+          ],
+          "target_cosine": 0.8683301210403442
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "kirchoff/em2112",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "fruit": 1,
+            "inflorescence": 2,
+            "twig": 7
+          },
+          "top10_image_ids": [
+            "kirchoff/em2112",
+            "baskauf/12405",
+            "baskauf/15994",
+            "baskauf/66137",
+            "baskauf/15641",
+            "baskauf/15216",
+            "baskauf/51771",
+            "baskauf/58502",
+            "kirchoff/em2096",
+            "baskauf/51736"
+          ],
+          "target_cosine": 0.8672937750816345
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/35251",
+          "nearest_group": 5,
+          "top10_majority_organ": "inflorescence",
+          "top10_organ_counts": {
+            "inflorescence": 10
+          },
+          "top10_image_ids": [
+            "baskauf/35251",
+            "baskauf/34172",
+            "baskauf/18096",
+            "baskauf/51813",
+            "baskauf/32173",
+            "baskauf/17771",
+            "baskauf/51013",
+            "thomas/0506-01-02",
+            "baskauf/51578",
+            "baskauf/18855"
+          ],
+          "target_cosine": 0.8580294251441956
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75
+    },
+    {
+      "id": "k7_g6",
+      "k": 7,
+      "group": 6,
+      "majority_organ": "leaf",
+      "organ_counts": {
+        "inflorescence": 2,
+        "leaf": 146,
+        "twig": 7
+      },
+      "size": 155,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/12520",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/12520",
+            "baskauf/65645",
+            "baskauf/58506",
+            "baskauf/15381",
+            "baskauf/35725",
+            "thomas/0440-04-03",
+            "baskauf/12507",
+            "baskauf/12382",
+            "baskauf/15946",
+            "baskauf/15417"
+          ],
+          "target_cosine": 0.8884554505348206
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15573",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15573",
+            "baskauf/15395",
+            "baskauf/15381",
+            "baskauf/12520",
+            "baskauf/13392",
+            "baskauf/24251",
+            "baskauf/35725",
+            "baskauf/15412",
+            "baskauf/12507",
+            "baskauf/11644"
+          ],
+          "target_cosine": 0.9158438444137573
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/65645",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/65645",
+            "baskauf/15946",
+            "baskauf/15573",
+            "baskauf/15212",
+            "baskauf/11208",
+            "baskauf/11695",
+            "baskauf/12509",
+            "baskauf/12396",
+            "baskauf/13392",
+            "baskauf/15211"
+          ],
+          "target_cosine": 0.8428813815116882
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/14027",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/14027",
+            "baskauf/13392",
+            "baskauf/12368",
+            "baskauf/15212",
+            "baskauf/12396",
+            "baskauf/52747",
+            "baskauf/15573",
+            "thomas/0440-04-03",
+            "baskauf/15417",
+            "baskauf/65645"
+          ],
+          "target_cosine": 0.8824472427368164
+        }
+      ],
+      "target_group_hits": 4,
+      "generated_count": 4,
+      "target_group_share": 1.0
+    },
+    {
+      "id": "walk_0",
+      "k": 7,
+      "group": 1,
+      "alpha": 0.0,
+      "leaf_group": 1,
+      "fruit_group": 0,
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/13132",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/13132",
+            "kirchoff/em2408",
+            "baskauf/15358",
+            "baskauf/11920",
+            "baskauf/29666",
+            "kirchoff/em2414",
+            "baskauf/11124",
+            "kirchoff/em2396",
+            "kirchoff/em2343",
+            "kirchoff/em2422"
+          ],
+          "target_cosine": 0.85087651014328
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "kirchoff/em2153",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "kirchoff/em2153",
+            "kirchoff/em2329",
+            "kirchoff/em2597",
+            "kirchoff/em2408",
+            "kirchoff/em2152",
+            "kirchoff/em2328",
+            "kirchoff/em2598",
+            "kirchoff/em2623",
+            "baskauf/12511",
+            "kirchoff/em2154"
+          ],
+          "target_cosine": 0.8061237335205078
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "kirchoff/em2354",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "kirchoff/em2354",
+            "kirchoff/em2599",
+            "kirchoff/em2408",
+            "kirchoff/em2424",
+            "kirchoff/em2329",
+            "kirchoff/em2328",
+            "kirchoff/em2071",
+            "baskauf/12511",
+            "kirchoff/em2597",
+            "kirchoff/em2153"
+          ],
+          "target_cosine": 0.6969456672668457
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/11920",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/11920",
+            "kirchoff/em2353",
+            "baskauf/15358",
+            "baskauf/11124",
+            "baskauf/29666",
+            "kirchoff/em2354",
+            "kirchoff/em2408",
+            "baskauf/52480",
+            "kirchoff/em2071",
+            "baskauf/52472"
+          ],
+          "target_cosine": 0.8419756889343262
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "endpoint_group_shares": {
+        "1": 0.75,
+        "0": 0.0
+      }
+    },
+    {
+      "id": "walk_1",
+      "k": 7,
+      "group": null,
+      "alpha": 0.25,
+      "leaf_group": 1,
+      "fruit_group": 0,
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/52472",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/52472",
+            "baskauf/15358",
+            "kirchoff/em2408",
+            "baskauf/29666",
+            "baskauf/52480",
+            "kirchoff/em2358",
+            "kirchoff/em2409",
+            "baskauf/12368",
+            "baskauf/12328",
+            "baskauf/12507"
+          ],
+          "target_cosine": 0.8417474031448364
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15358",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15358",
+            "kirchoff/em2353",
+            "kirchoff/em2354",
+            "kirchoff/em2071",
+            "kirchoff/em2421",
+            "kirchoff/em2070",
+            "kirchoff/em2010",
+            "kirchoff/em2571",
+            "kirchoff/em2072",
+            "kirchoff/em2598"
+          ],
+          "target_cosine": 0.8622506856918335
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/29666",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/29666",
+            "baskauf/11920",
+            "kirchoff/em2358",
+            "baskauf/15358",
+            "kirchoff/em2408",
+            "baskauf/52480",
+            "kirchoff/em2409",
+            "baskauf/11124",
+            "baskauf/11916",
+            "kirchoff/em2414"
+          ],
+          "target_cosine": 0.8456207513809204
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "kirchoff/em2021",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "kirchoff/em2021",
+            "baskauf/12407",
+            "kirchoff/em2102",
+            "kirchoff/em2094",
+            "kirchoff/em2069",
+            "kirchoff/em2116",
+            "baskauf/29666",
+            "baskauf/15358",
+            "kirchoff/em2409",
+            "kirchoff/em2062"
+          ],
+          "target_cosine": 0.8550301194190979
+        }
+      ],
+      "target_group_share": null,
+      "endpoint_group_shares": {
+        "1": 0.5,
+        "0": 0.0
+      }
+    },
+    {
+      "id": "walk_2",
+      "k": 7,
+      "group": null,
+      "alpha": 0.5,
+      "leaf_group": 1,
+      "fruit_group": 0,
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335,
+      "target_top10_majority_organ": "leaf",
+      "target_top10_organ_counts": {
+        "leaf": 7,
+        "twig": 3
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/14027",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/14027",
+            "baskauf/15395",
+            "baskauf/32482",
+            "baskauf/11644",
+            "baskauf/15339",
+            "baskauf/15172",
+            "baskauf/15412",
+            "baskauf/12768",
+            "baskauf/51734",
+            "baskauf/15576"
+          ],
+          "target_cosine": 0.837509274482727
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15358",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15358",
+            "baskauf/52480",
+            "baskauf/15576",
+            "kirchoff/em2353",
+            "baskauf/15624",
+            "baskauf/12328",
+            "kirchoff/em2071",
+            "kirchoff/em2408",
+            "kirchoff/em2571",
+            "baskauf/29666"
+          ],
+          "target_cosine": 0.8335146903991699
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/51734",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/51734",
+            "baskauf/15412",
+            "baskauf/32482",
+            "baskauf/15395",
+            "baskauf/29805",
+            "baskauf/30099",
+            "baskauf/29787",
+            "baskauf/14031",
+            "baskauf/11695",
+            "baskauf/35369"
+          ],
+          "target_cosine": 0.8129919767379761
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/14027",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 10
+          },
+          "top10_image_ids": [
+            "baskauf/14027",
+            "baskauf/15358",
+            "baskauf/15395",
+            "baskauf/15316",
+            "baskauf/10890",
+            "baskauf/11695",
+            "kirchoff/em2021",
+            "baskauf/11208",
+            "baskauf/11124",
+            "baskauf/15412"
+          ],
+          "target_cosine": 0.788383960723877
+        }
+      ],
+      "target_group_share": null,
+      "endpoint_group_shares": {
+        "1": 0.0,
+        "0": 0.0
+      }
+    },
+    {
+      "id": "walk_3",
+      "k": 7,
+      "group": null,
+      "alpha": 0.75,
+      "leaf_group": 1,
+      "fruit_group": 0,
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335,
+      "target_top10_majority_organ": "twig",
+      "target_top10_organ_counts": {
+        "twig": 10
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/15395",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 9,
+            "twig": 1
+          },
+          "top10_image_ids": [
+            "baskauf/15395",
+            "baskauf/11644",
+            "baskauf/32482",
+            "baskauf/14027",
+            "baskauf/12520",
+            "baskauf/13576",
+            "baskauf/15172",
+            "baskauf/15576",
+            "baskauf/26510",
+            "baskauf/15388"
+          ],
+          "target_cosine": 0.8470005989074707
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/35729",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 6,
+            "twig": 4
+          },
+          "top10_image_ids": [
+            "baskauf/35729",
+            "baskauf/11644",
+            "baskauf/15395",
+            "baskauf/14034",
+            "baskauf/14031",
+            "kirchoff/em2096",
+            "baskauf/15276",
+            "baskauf/51736",
+            "baskauf/12382",
+            "baskauf/35726"
+          ],
+          "target_cosine": 0.8505862951278687
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/51734",
+          "nearest_group": 6,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 5,
+            "twig": 5
+          },
+          "top10_image_ids": [
+            "baskauf/51734",
+            "baskauf/13576",
+            "baskauf/32123",
+            "baskauf/32482",
+            "baskauf/14034",
+            "baskauf/15412",
+            "baskauf/15994",
+            "baskauf/11849",
+            "baskauf/65649",
+            "baskauf/24251"
+          ],
+          "target_cosine": 0.795976996421814
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/12407",
+          "nearest_group": 1,
+          "top10_majority_organ": "leaf",
+          "top10_organ_counts": {
+            "leaf": 8,
+            "twig": 2
+          },
+          "top10_image_ids": [
+            "baskauf/12407",
+            "kirchoff/em2021",
+            "baskauf/14027",
+            "kirchoff/em2102",
+            "baskauf/13403",
+            "kirchoff/em2096",
+            "baskauf/15412",
+            "kirchoff/em2095",
+            "baskauf/12363",
+            "baskauf/12507"
+          ],
+          "target_cosine": 0.8349229097366333
+        }
+      ],
+      "target_group_share": null,
+      "endpoint_group_shares": {
+        "1": 0.25,
+        "0": 0.0
+      }
+    },
+    {
+      "id": "walk_4",
+      "k": 7,
+      "group": 0,
+      "alpha": 1.0,
+      "leaf_group": 1,
+      "fruit_group": 0,
+      "fruit_endpoint_majority_organ": "twig",
+      "fruit_endpoint_fruit_share": 0.30833333333333335,
+      "target_top10_majority_organ": "twig",
+      "target_top10_organ_counts": {
+        "bark": 1,
+        "twig": 9
+      },
+      "samples": [
+        {
+          "seed": 0,
+          "nearest_image_id": "baskauf/16083",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "leaf": 1,
+            "twig": 9
+          },
+          "top10_image_ids": [
+            "baskauf/16083",
+            "baskauf/15620",
+            "baskauf/15994",
+            "baskauf/58504",
+            "baskauf/15347",
+            "baskauf/58502",
+            "baskauf/15388",
+            "baskauf/16026",
+            "baskauf/13576",
+            "baskauf/15216"
+          ],
+          "target_cosine": 0.8264672756195068
+        },
+        {
+          "seed": 1,
+          "nearest_image_id": "baskauf/15652",
+          "nearest_group": 6,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "leaf": 3,
+            "twig": 7
+          },
+          "top10_image_ids": [
+            "baskauf/15652",
+            "baskauf/15276",
+            "baskauf/15241",
+            "baskauf/15235",
+            "baskauf/12761",
+            "baskauf/15180",
+            "baskauf/15994",
+            "baskauf/15742",
+            "baskauf/15172",
+            "baskauf/15691"
+          ],
+          "target_cosine": 0.8413447141647339
+        },
+        {
+          "seed": 2,
+          "nearest_image_id": "baskauf/13576",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "inflorescence": 1,
+            "leaf": 3,
+            "twig": 6
+          },
+          "top10_image_ids": [
+            "baskauf/13576",
+            "baskauf/51734",
+            "baskauf/32123",
+            "baskauf/14034",
+            "baskauf/32482",
+            "baskauf/15994",
+            "baskauf/15742",
+            "baskauf/51736",
+            "baskauf/65649",
+            "baskauf/51814"
+          ],
+          "target_cosine": 0.8243058919906616
+        },
+        {
+          "seed": 3,
+          "nearest_image_id": "baskauf/15994",
+          "nearest_group": 0,
+          "top10_majority_organ": "twig",
+          "top10_organ_counts": {
+            "twig": 10
+          },
+          "top10_image_ids": [
+            "baskauf/15994",
+            "baskauf/13576",
+            "baskauf/11653",
+            "baskauf/27886",
+            "baskauf/58502",
+            "baskauf/12469",
+            "baskauf/15363",
+            "baskauf/58504",
+            "thomas/0440-04-01",
+            "baskauf/15347"
+          ],
+          "target_cosine": 0.8770018219947815
+        }
+      ],
+      "target_group_hits": 3,
+      "generated_count": 4,
+      "target_group_share": 0.75,
+      "endpoint_group_shares": {
+        "1": 0.0,
+        "0": 0.75
+      }
+    }
+  ]
+}

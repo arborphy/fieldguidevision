@@ -1,0 +1,13 @@
+torch==2.5.1
+torchvision==0.20.1
+open_clip_torch==2.29.0
+diffusers==0.30.3
+transformers==4.44.2
+accelerate==0.34.2
+huggingface-hub==0.25.2
+numpy==1.26.4
+Pillow==10.4.0
+safetensors==0.4.5
+scipy==1.14.1
+httpx[socks]==0.27.2
+gdown==5.2.0
