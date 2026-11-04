@@ -124,17 +124,32 @@ def build(lang):
                           f"{T('候选', 'cand.')}1 {short[r['c1']]} ({r['p1']:.2f})<br>{T('候选', 'cand.')}2 {short[r['c2']]} ({r['p2']:.2f})")
 
     def sec(n, title, ask, method, tried, result, take, status):
-        st = {"done": T("已完成", "Done"), "part": T("部分完成", "Partial"), "next": T("下一步", "Next")}[status]
-        return (f"<section id=s{n}><div class=hd><span class=num>{n}</span><h2>{title}</h2><span class='st {status}'>{st}</span></div>"
-                f"<dl><dt>{T('目的', 'Objective')}</dt><dd>{ask}</dd><dt>{T('方法', 'Method')}</dt><dd>{method}</dd>"
-                f"<dt>{T('尝试', 'What we tried')}</dt><dd>{tried}</dd></dl><h4 class=rh>{T('结果', 'Results')}</h4><div class=res>{result}</div>"
-                f"<p class=take><b>{T('结论 / 下一步', 'Decision / next step')}：</b>{take}</p></section>")
+        return (f"<section id=s{n}><div class=topic>{n} · {title}</div><h2>{CLAIM[n]}</h2><p class=aim>{ask}</p>"
+                f"<div class=res>{result}</div><p class=take><b>{T('解读', 'Interpretation')}.</b> {take}</p>"
+                f"<p class=meth><b>{T('方法', 'Method')}.</b> {method} <b>{T('过程', 'Procedure')}.</b> {tried}</p></section>")
 
     E, B, D = eff_f.loc["EfficientNet-B0"], eff_f.loc["BioCLIP 2.5"], eff_f.loc["DINOv3"]
     kE, kD = kt.set_index("model").loc["EfficientNet-B0"], kt.set_index("model").loc["DINOv3"]
     en = enr.set_index("model").share_clusters_dominant_ge_0_6
     nt = nsc_t.set_index("model")
     yb, yn = eff_f.loc["YOLO11s backbone"], eff_f.loc["YOLO11s neck"]
+    lo3, hi3 = pct(1 - im_org["PCA-3"].max()), pct(1 - im_org["PCA-3"].min())
+    CLAIM = {
+        1: T(f"三维 PCA 图丢失 {lo3}–{hi3} 的器官信息；分析需在 64 维 PCA 空间中进行",
+             f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis must run in 64-dimensional PCA space"),
+        2: T(f"K = 5–7 时分组最稳定并与器官对应；约 {pct(e7['frac_max_lt_0_8'])} 的照片处于两组之间",
+             f"Groupings are most stable and organ-aligned at K = 5–7; about {pct(e7['frac_max_lt_0_8'])} of photos lie between two groups"),
+        3: T("通用视觉模型按器官分组，BioCLIP 按物种分组", "General vision models group photos by organ; BioCLIP groups them by species"),
+        4: T(f"只有 EfficientNet 的器官信息集中在少数维度（每类约 {nt.loc['EfficientNet-B0','per_class']:.0f} 个）",
+             f"Only EfficientNet concentrates organ information in few dimensions (about {nt.loc['EfficientNet-B0','per_class']:.0f} per class)"),
+        5: T("Autoencoder 不优于 PCA；第一主成分对应拍摄距离", "An autoencoder does not improve on PCA; the first principal component is camera distance"),
+        6: T("组中心可由真实照片直观呈现；热图对模型可信，是否对准器官尚待检验",
+             "Group centres can be shown with real photos; heatmaps are faithful to the model, alignment with organs is untested"),
+        7: T(f"软聚类筛出 {n_pl} 张可能含多个器官的照片，可作为多标签标注的候选",
+             f"Soft clustering shortlists {n_pl} photos that may contain several organs, as candidates for multi-label annotation"),
+        8: T("YOLO 现成 embedding 的器官信息最弱，需在器官标签上训练后才适用",
+             "Off-the-shelf YOLO embeddings carry the least organ information and need training on organ labels"),
+    }
 
     rows = [
         (1, T("可视化的可信度", "Reliability of visualisation"), T("信息保留矩阵：各降维方式保留多少器官 / 距离 / 物种信息", "Information-retention matrix: organ / scale / species kept by each reduction"),
@@ -372,23 +387,69 @@ th{text-align:left;font-weight:600;border-bottom:1.5px solid var(--fg);padding:5
 .strip{display:flex;gap:8px;overflow-x:auto;margin:8px 0 4px;padding-bottom:4px}figure{margin:0;flex:0 0 128px}
 figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:block}figcaption{font-size:11px;line-height:1.35;color:var(--mut);margin-top:3px}
 .cap{font-size:13px;color:var(--mut);margin:14px 0 4px}
+.topic{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--acc);text-transform:uppercase;margin-bottom:4px}
+.aim{color:var(--mut);margin:6px 0 16px}.meth{font-size:12.5px;color:var(--mut);margin:12px 0 0;line-height:1.55}
+.abs{background:var(--soft);padding:14px 18px;border-radius:4px;margin:8px 0 10px}.ch{font-size:22px;margin:46px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--fg)}
+.chn{color:var(--acc);margin-right:6px}.setup{font-size:13.5px;color:var(--mut);margin:0 0 14px}.kf{margin:8px 0 0;padding-left:20px}.kf li{margin:3px 0}.kl{color:inherit;text-decoration:none}.kl:hover{text-decoration:underline}section h2{font-size:18px;line-height:1.35}
 .panel{margin:4px 0 26px}.lead{margin:0 0 18px;font-size:14px;color:var(--mut)}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
 .finding{margin:8px 0 0;padding-left:10px;border-left:2px solid var(--acc);font-size:14px}th.n,td.n{text-align:right}.duo{display:grid;grid-template-columns:auto minmax(0,300px);gap:24px;align-items:start}
 .duo .fig{margin:10px 0;max-width:300px}@media(max-width:760px){.duo{grid-template-columns:1fr}}.rh{font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px;border-top:1px dashed var(--line);padding-top:14px}ol li{margin:4px 0}
 """
-    title = T("Field Guide Vision · 无监督结构分析进展", "Field Guide Vision · Unsupervised Structure Update")
+    title = T("Field Guide Vision：植物照片 embedding 的无监督结构分析", "Field Guide Vision: Unsupervised Structure of Plant-Photo Embeddings")
+    models_t = pd.DataFrame([[ "EfficientNet-B0", T("ImageNet 通用图像", "ImageNet, general images"), "1,280"],
+                             ["BioCLIP 2.5", T("生物图像-文本（物种）", "Biological image-text (species)"), "1,024"],
+                             ["DINOv3", T("自监督通用图像", "Self-supervised, general images"), "768"],
+                             ["YOLO11s backbone / neck", T("COCO 物体检测", "COCO object detection"), "512 / 896"]],
+                            columns=[T("模型", "Model"), T("预训练数据", "Pre-training"), T("维度", "Dimensions")])
+    U, S_, E_ = T("无监督", "unsupervised"), T("有监督", "supervised"), T("描述 / 评估", "descriptive / evaluation")
+    meth_t = pd.DataFrame([["PCA", U, T("降维、主轴解读", "Reduction, axis reading"), "4.1, 4.5"],
+                           ["t-SNE / UMAP", U, T("仅用于展示与检查", "Display and inspection only"), "4.1"],
+                           ["K-means", U, T("分组（K = 3 / 7 / 20）", "Grouping (K = 3 / 7 / 20)"), "4.2–4.4"],
+                           [T("重采样共识软归属", "Bootstrap-consensus soft membership"), U, T("照片在各组间的归属", "Membership across groups"), "4.2, 4.7"],
+                           ["Autoencoder", U, T("非线性降维对照", "Non-linear reduction baseline"), "4.5"],
+                           [T("最近邻检索", "Nearest-neighbour retrieval"), U, T("隐空间 → 真实照片", "Latent point → real photos"), "4.6"],
+                           [T("富集分析", "Enrichment"), E_, T("各组构成", "Group composition"), "4.3"],
+                           [T("近邻投票、线性探针", "Neighbour vote, linear probe"), S_, T("评估信息保留", "Evaluating information kept"), "4.1, 4.8"],
+                           ["NSC", S_, T("解释哪些维度起作用", "Explaining which dimensions matter"), "4.4"],
+                           ["Grad-CAM", T("基于模型梯度", "Model-gradient based"), T("定位依赖的图像区域", "Locating image regions used"), "4.6"]],
+                          columns=[T("方法", "Method"), T("类型", "Type"), T("用途", "Purpose"), T("章节", "Section")])
+    aims_t = pd.DataFrame([[f"4.{n}", a, c, st_lbl[st]] for n, a, b_, c, st in rows],
+                          columns=[T("章节", "Section"), T("主题", "Topic"), T("主要结果", "Main result"), T("状态", "Status")])
+    abstract = T(f"我们用 1,641 张 BioImages 照片（63 个物种）检验了五种预训练模型的 embedding 空间在无监督条件下如何组织植物照片。三维 PCA 图会丢失 {lo3}–{hi3} 的器官信息，"
+                 f"因此分析在 64 维中进行。K = 5–7 时分组最稳定且与器官对应；通用视觉模型（EfficientNet、DINOv3）按器官分组，BioCLIP 按物种分组。约 {pct(e7['frac_max_lt_0_8'])} 的照片处于两组之间，"
+                 f"其中 {n_pl} 张可作为多器官标注候选。YOLO 的现成 embedding 器官信息最弱。",
+                 f"We examined how the embedding spaces of five pre-trained models organise 1,641 BioImages photos (63 species) without supervision. 3-D PCA plots "
+                 f"lose {lo3}–{hi3} of organ information, so analysis runs in 64 dimensions. Groupings are most stable and organ-aligned at K = 5–7; general vision models "
+                 f"(EfficientNet, DINOv3) group by organ and BioCLIP by species. About {pct(e7['frac_max_lt_0_8'])} of photos lie between two groups, {n_pl} of which are "
+                 "candidates for multi-organ annotation. Off-the-shelf YOLO embeddings carry the least organ information.")
+    disc = T([f"<b>意义</b>：器官结构可以在无监督条件下从通用视觉模型的 embedding 中读出，适合作为“照片 → 器官 / 性状 → 知识图谱推理”的第一步；BioCLIP 更适合物种层面。",
+              "<b>可视化</b>：二维、三维图只用于展示，所有结论基于 64 维计算。",
+              "<b>局限</b>：单次数据划分；器官标签为单标签；拍摄距离标签为暂定；热图未与器官掩膜比对；结论尚未在外部野外照片上复验。"],
+             ["<b>Implication</b>: organ structure can be read without supervision from general vision embeddings, a suitable first step for \"photo → organ / trait → "
+              "knowledge-graph reasoning\"; BioCLIP fits the species level better.", "<b>Visualisation</b>: 2-D and 3-D plots are for display only; every conclusion is computed in 64 dimensions.",
+              "<b>Limitations</b>: one data split; single-label organ annotation; provisional shot-scale labels; heatmaps not compared with organ masks; "
+              "no external field-photo validation yet."])
+    concl = T(["分析空间统一为 64 维 PCA；展示图用 t-SNE。", "聚类数取 K = 5–7（与器官数相符、最稳定）。",
+               "器官结构分析优先使用 DINOv3 / EfficientNet；物种层面使用 BioCLIP。", "YOLO 需先在器官标签上训练，再纳入同一套分析。"],
+              ["Use 64-D PCA as the analysis space; t-SNE for display.", "Use K = 5–7 (matches the number of organs, most stable).",
+               "Use DINOv3 / EfficientNet for organ structure and BioCLIP for species.", "Train YOLO on organ labels before including it in the same analyses."])
+    keyf = "".join(f"<li><a class=kl href=#s{n}>{CLAIM[n]}</a></li>" for n in range(1, 9))
     html = (f"<!doctype html><html lang={'zh' if zh else 'en'}><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
             f"<title>{title}</title><style>{css}</style></head><body><main>"
-            f"<h1>{title}</h1><p class=sub>{T('2026 年 11 月 · 1,641 张 BioImages 照片 · 63 个物种 · 按个体植株划分训练 / 验证 / 测试', 'November 2026 · 1,641 BioImages photos · 63 species · train / validation / test split by individual plant')}</p>"
-            f"<h3>{T('上次讲到哪', 'Where we left off')}</h3>"
-            + T("<p>拍摄距离是照片空间的第一层结构：BioCLIP 主要按物种组织，DINOv3 和 EfficientNet 更受拍摄距离和器官影响。您据此提出了以下方向，本报告逐条汇报。</p>",
-                "<p>Shot scale is the first layer of structure: BioCLIP is organised mainly by species, while DINOv3 and EfficientNet respond more to shot scale "
-                "and organ. Based on this you suggested the directions below; this report answers them one by one.</p>")
-            + img(BCV / "scale_conditioned_analysis/assets/representation_by_scale.png", "scale")
-            + f"<h3>{T('总览', 'Overview')}</h3>" + overview + "".join(S)
-            + f"<section><div class=hd><span class=num>9</span><h2>{T('下一步', 'Next steps')}</h2></div><ol>" + "".join(f"<li>{x}</li>" for x in nxt) + "</ol>"
-            + T("<p class=cap>说明：单次数据划分；器官标签为 BioImages 单标签，拍摄距离标签为暂定。代码与全部数值在仓库 meeting_minimal/。</p>",
-                "<p class=cap>Notes: one data split; organ labels are single-label BioImages categories, shot-scale labels are provisional. Code and all numbers in meeting_minimal/.</p>")
+            f"<h1>{title}</h1><p class=sub>{T('组会进展汇报 · 2026 年 11 月', 'Group meeting update · November 2026')}</p>"
+            + T("<p class=setup>数据：1,641 张 BioImages 照片，63 个物种，465 株个体；训练 / 验证 / 测试按个体植株划分（1,181 / 249 / 211）。模型：EfficientNet-B0、BioCLIP 2.5、DINOv3、YOLO11s（backbone / neck），均冻结使用。"
+                "标签（器官、拍摄距离、物种）只用于解释与评估，不参与无监督分组。</p>",
+                "<p class=setup>Data: 1,641 BioImages photos, 63 species, 465 individual plants; train / validation / test split by individual plant (1,181 / 249 / 211). "
+                "Models: EfficientNet-B0, BioCLIP 2.5, DINOv3, YOLO11s (backbone / neck), all frozen. Labels (organ, shot scale, species) are used only to explain and "
+                "evaluate, never to form the unsupervised groups.</p>")
+            + f"<div class=abs><b>{T('本期主要发现', 'Key findings')}</b><ol class=kf>{keyf}</ol></div>"
+            + "".join(S)
+            + f"<section><div class=topic>{T('下一步', 'Next steps')}</div><h2>{T('待决事项与后续工作', 'Decisions and follow-up')}</h2>"
+            + f"<p class=aim>{T('建议决定', 'Proposed decisions')}</p><ol>" + "".join(f"<li>{x}</li>" for x in concl) + "</ol>"
+            + f"<p class=aim>{T('后续工作', 'Follow-up work')}</p><ol>" + "".join(f"<li>{x}</li>" for x in nxt) + "</ol></section>"
+            + f"<section><div class=topic>{T('附录', 'Appendix')}</div><h2>{T('方法一览', 'Methods at a glance')}</h2>" + table(meth_t.assign(**{meth_t.columns[3]: meth_t.iloc[:, 3].str.replace("4.", "", regex=False)}))
+            + T("<p class=cap>代码、配置与全部数值见仓库 botanical-computer-vision/meeting_minimal/。</p>",
+                "<p class=cap>Code, configuration and all numbers: botanical-computer-vision/meeting_minimal/.</p>")
             + "</section></main></body></html>")
     (H / f"boss_report_{lang}.html").write_text(html)
     print(lang, f"{len(html) / 1e6:.1f} MB")
