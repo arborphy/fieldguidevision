@@ -1,0 +1,117 @@
+{
+  "inputs": {
+    "model": "yolo11s_backbone",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/yolo11s_strict/yolo11s_backbone_embeddings.npz",
+    "sha256": "ade72e94f74ba81ec7145beb96a6e8d1f4a5e0cf1e6ee35892ad6a62609df353",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "full_space_knn_accuracy": {
+    "organ": 0.7233078804952182,
+    "scale": 0.8840643809011018,
+    "species": 0.10236303654829862
+  },
+  "rows": [
+    {
+      "view": "PCA-2",
+      "neighbours_kept": 0.12549258582165346,
+      "organ_kept": 0.5408821630264332,
+      "scale_kept": 0.9467046591551745,
+      "species_kept": 0.38684796581629877
+    },
+    {
+      "view": "PCA-3",
+      "neighbours_kept": 0.23205362583790373,
+      "organ_kept": 0.6756459663615773,
+      "scale_kept": 0.9796689433157871,
+      "species_kept": 0.44042295087903527
+    },
+    {
+      "view": "PCA-16",
+      "neighbours_kept": 0.6917326833231768,
+      "organ_kept": 0.9831782262445296,
+      "scale_kept": 0.9971962413538087,
+      "species_kept": 0.8749796310043272
+    },
+    {
+      "view": "PCA-64",
+      "neighbours_kept": 0.8944546008531384,
+      "organ_kept": 0.9991749259483228,
+      "scale_kept": 1.0014029668943316,
+      "species_kept": 0.9107023229707953
+    },
+    {
+      "view": "t-SNE-2",
+      "neighbours_kept": 0.45565711964249445,
+      "organ_kept": 0.9899094980884933,
+      "scale_kept": 1.0049005959890374,
+      "species_kept": 0.9345476272383262
+    }
+  ],
+  "pc_eta2": [
+    {
+      "pc": 1,
+      "organ": 0.27608276779782875,
+      "scale": 0.18774253671427812,
+      "species": 0.15804396117988387
+    },
+    {
+      "pc": 2,
+      "organ": 0.4516622233268797,
+      "scale": 0.4806437869999224,
+      "species": 0.09334575226605966
+    },
+    {
+      "pc": 3,
+      "organ": 0.3355014960344339,
+      "scale": 0.07675717893291109,
+      "species": 0.07963441234931448
+    },
+    {
+      "pc": 4,
+      "organ": 0.3021213444288936,
+      "scale": 0.0030078022936940044,
+      "species": 0.09578236359472551
+    },
+    {
+      "pc": 5,
+      "organ": 0.3142685743203822,
+      "scale": 0.007595808544541593,
+      "species": 0.10815438846920794
+    },
+    {
+      "pc": 6,
+      "organ": 0.15394146081822294,
+      "scale": 0.012443900942529207,
+      "species": 0.1823040572648406
+    },
+    {
+      "pc": 7,
+      "organ": 0.023487648318559134,
+      "scale": 0.02156181651757086,
+      "species": 0.1124475597420861
+    },
+    {
+      "pc": 8,
+      "organ": 0.1434125268934352,
+      "scale": 0.07185227788870432,
+      "species": 0.12489900844228487
+    },
+    {
+      "pc": 9,
+      "organ": 0.06863971737643004,
+      "scale": 0.024094395608572548,
+      "species": 0.0912401262233682
+    },
+    {
+      "pc": 10,
+      "organ": 0.12187916453086732,
+      "scale": 0.0016752814285034623,
+      "species": 0.16785798419836814
+    }
+  ]
+}

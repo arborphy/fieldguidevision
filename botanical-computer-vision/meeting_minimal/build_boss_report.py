@@ -77,6 +77,11 @@ nsc_t = pd.DataFrame([{"model": m, "organ": r["organ (external label)"]["test"][
                        "ratio": r["organ (external label)"]["ratio_F1_1se_over_delta0"],
                        **{f"K{k}": r[f"grouping approximation: K={k} cluster ID"]["test"]["delta_1se"]["coords_any_class"] for k in (3, 7, 20)}}
                       for m, r in nsc.items()])
+im = pd.concat([pd.read_csv(d / "exp8_info_matrix.csv").assign(model=m) for m, d in M5.items() if (d / "exp8_info_matrix.csv").exists()])
+im_t = im[["model", "view", "neighbours_kept", "organ_kept", "scale_kept", "species_kept"]]
+im_sp = im[im.view.isin(["PCA-3", "PCA-64"])].pivot_table(index="model", columns="view", values="species_kept", sort=False).reset_index()
+pc_t = pd.read_csv(R / "exp8_pc_information.csv").head(6)
+pc_t["main"] = pc_t[["organ", "scale", "species"]].idxmax(axis=1)
 s5 = J(R, "exp5_axes_summary.json")
 ae = pd.read_csv(R / "exp5_recovered_ae_table.csv")
 s3 = J(R, "exp3_activation_summary.json")
@@ -103,9 +108,9 @@ def build(lang):
     def sec(n, title, ask, method, tried, result, take, status):
         st = {"done": T("已完成", "Done"), "part": T("部分完成", "Partial"), "next": T("下一步", "Next")}[status]
         return (f"<section id=s{n}><div class=hd><span class=num>{n}</span><h2>{title}</h2><span class='st {status}'>{st}</span></div>"
-                f"<blockquote>{ask}</blockquote>"
-                f"<dl><dt>{T('方法', 'Method')}</dt><dd>{method}</dd><dt>{T('尝试', 'What we tried')}</dt><dd>{tried}</dd>"
-                f"<dt>{T('结果', 'Result')}</dt><dd>{result}</dd></dl><p class=take>{take}</p></section>")
+                f"<dl><dt>{T('检验什么', 'What we tested')}</dt><dd>{ask}</dd><dt>{T('方法', 'Method')}</dt><dd>{method}</dd>"
+                f"<dt>{T('尝试', 'What we tried')}</dt><dd>{tried}</dd><dt>{T('结果', 'Result')}</dt><dd>{result}</dd></dl>"
+                f"<p class=take><b>{T('结论 / 下一步', 'Decision / next step')}：</b>{take}</p></section>")
 
     E, B, D = eff_f.loc["EfficientNet-B0"], eff_f.loc["BioCLIP 2.5"], eff_f.loc["DINOv3"]
     kE, kD = kt.set_index("model").loc["EfficientNet-B0"], kt.set_index("model").loc["DINOv3"]
@@ -114,32 +119,32 @@ def build(lang):
     yb, yn = eff_f.loc["YOLO11s backbone"], eff_f.loc["YOLO11s neck"]
 
     rows = [
-        (1, T("“简单可视化不准确”", "\"Simple visualization is not accurate\""), T("量化二维图丢掉多少近邻关系", "Measured how many neighbours a 2-D plot loses"),
+        (1, T("可视化的可信度", "Reliability of visualisation"), T("信息保留矩阵：各降维方式保留多少器官 / 距离 / 物种信息", "Information-retention matrix: organ / scale / species kept by each reduction"),
          T(f"二维只保留 {pct(fid['2-D'].min())}–{pct(fid['2-D'].max())}", f"2-D keeps only {pct(fid['2-D'].min())}–{pct(fid['2-D'].max())}"), "done"),
-        (1, T("“PCA 只做降维，要保留信息”", "\"PCA just for dimension reduction, still preserve information\""), T("测不同维数保留的信息", "Measured information kept per dimension"),
+        (1, T("降维保留了什么信息", "What dimension reduction keeps"), T("测不同维数保留的信息", "Measured information kept per dimension"),
          T(f"64 维保留 {pct(fid['64-D'].min())}–{pct(fid['64-D'].max())} 的近邻", f"64-D keeps {pct(fid['64-D'].min())}–{pct(fid['64-D'].max())} of neighbours"), "done"),
-        (2, T("“用数值方法决定聚类数”", "\"Numeric method to decide the number of clusters\""), T("K=3/7/20 对比 + 稳定性", "K = 3 / 7 / 20 with stability"),
+        (2, T("聚类数 K 的选择", "Choosing the number of clusters K"), T("K=3/7/20 对比 + 稳定性", "K = 3 / 7 / 20 with stability"),
          T("K=3 对应拍摄距离，K=7 对应器官", "K=3 matches shot scale, K=7 matches organ"), "done"),
-        (2, T("“软聚类”", "\"Soft cluster\""), T("重采样共识软归属", "Bootstrap-consensus soft membership"),
+        (2, T("软聚类", "Soft clustering"), T("重采样共识软归属", "Bootstrap-consensus soft membership"),
          T(f"{pct(e7['frac_max_lt_0_8'])} 的照片夹在两组之间", f"{pct(e7['frac_max_lt_0_8'])} of photos sit between two groups"), "done"),
-        (3, T("“Enrichment score”", "\"Enrichment score\""), T("每组的器官 / 距离 / 物种构成", "Organ / scale / species make-up of each group"),
+        (3, T("富集分析", "Enrichment"), T("每组的器官 / 距离 / 物种构成", "Organ / scale / species make-up of each group"),
          T("通用模型按器官分组，BioCLIP 按物种", "General models group by organ, BioCLIP by species"), "done"),
-        (4, T("“Shrunken centroid”", "\"Shrunk and centroid\""), "NSC",
+        (4, T("收缩质心（NSC）", "Shrunken centroids (NSC)"), "NSC",
          T(f"EfficientNet 每个器官约 {nt.loc['EfficientNet-B0','per_class']:.0f} 个坐标就够；其他模型不行", f"EfficientNet needs ~{nt.loc['EfficientNet-B0','per_class']:.0f} coordinates per organ; others cannot be compressed"), "done"),
-        (5, T("“Autoencoder 与轴的延伸”", "\"Autoencoder & extension of axes\""), T("AE vs PCA；主轴两端的真实照片", "AE vs PCA; real photos at both ends of each axis"),
+        (5, T("Autoencoder 与主轴", "Autoencoder and axes"), T("AE vs PCA；主轴两端的真实照片", "AE vs PCA; real photos at both ends of each axis"),
          T("AE 没有提升；PC1 = 拍摄远近", "AE adds nothing; PC1 = camera distance"), "done"),
-        (6, T("“从隐空间反推回去”", "\"Do reverse from latent space out\""), T("检索最近的真实照片", "Retrieve the nearest real photos"),
+        (6, T("从隐空间回到图片", "Back from latent space to images"), T("检索最近的真实照片", "Retrieve the nearest real photos"),
          T("能展示每组的典型样子；生成图片不可行", "Shows each group's typical look; generation did not work"), "done"),
-        (6, T("“Activation mapping，以聚类为标签”", "\"Activation mapping, use cluster as tag\""), T("EfficientNet 上做 Grad-CAM + 遮挡对照", "Grad-CAM + occlusion on EfficientNet"),
+        (6, T("激活热图", "Activation mapping"), T("EfficientNet 上做 Grad-CAM + 遮挡对照", "Grad-CAM + occlusion on EfficientNet"),
          T("热图可信；是否落在器官上尚未验证", "Maps are faithful; whether they land on the organ is not yet tested"), "part"),
-        (7, T("“每张图可以有多个标签”", "\"Multiple labels per image\""), T("用软聚类找出“两个器官都合理”的候选", "Soft clustering lists \"both organs plausible\" candidates"),
+        (7, T("多标签", "Multiple labels"), T("用软聚类找出“两个器官都合理”的候选", "Soft clustering lists \"both organs plausible\" candidates"),
          T(f"{n_pl} 张候选已列出，需多标签数据验证", f"{n_pl} candidates listed; needs multi-label data to verify"), "next"),
         (8, T("团队新方向：YOLO", "Team direction: YOLO"), T("两个版本放进同样的分析", "Both versions through the same analyses"),
          T("器官信息弱，不建议直接用现成 embedding", "Weak organ information; raw embeddings not recommended"), "done"),
     ]
     st_lbl = {"done": T("已完成", "Done"), "part": T("部分", "Partial"), "next": T("下一步", "Next")}
     overview = ("<div class=tw><table class=ov><tr>" + "".join(f"<th>{h}</th>" for h in
-                [T("您的意见", "Your request"), T("我做了什么", "What I did"), T("一句话结果", "Result in one line"), T("状态", "Status"), "§"]) + "</tr>"
+                [T("主题", "Topic"), T("做了什么", "What we did"), T("一句话结果", "Result in one line"), T("状态", "Status"), "§"]) + "</tr>"
                 + "".join(f"<tr><td>{a}</td><td>{b}</td><td>{c}</td><td><span class='st {s}'>{st_lbl[s]}</span></td><td><a href=#s{n}>{n}</a></td></tr>"
                           for n, a, b, c, s in rows) + "</table></div>")
 
@@ -161,19 +166,33 @@ def build(lang):
     cent = [n for n in s7["cases"] if n.startswith(f"K{MAIN_K} ")]
 
     S = []
-    S.append(sec(1, T("可视化可信吗？PCA 保留了多少信息？", "Can we trust the plots? How much does PCA keep?"),
-        T("“Simple visualization is not accurate”；“PCA just for dimension reduction, still preserve information”",
-          "\"Simply visualization is not accurate\"; \"PCA just for dimension reduction, still preserve information\""),
-        T("每张照片是一个高维向量（EfficientNet 1,280 维、BioCLIP 1,024、DINOv3 768、YOLO 512/896）。PCA 把空间旋转，按差异大小排出方向；只在训练集上拟合。"
-          "对每个维数 d 测：近邻保留（某张照片在原空间最像的 15 张，压缩后还剩几张）和线性探针准确率（压缩后还能不能分出器官 / 物种）。",
-          "Each photo is a high-dimensional vector (EfficientNet 1,280, BioCLIP 1,024, DINOv3 768, YOLO 512 / 896). PCA rotates the space and orders "
-          "directions by variation; fitted on training photos only. For each dimension d: neighbour retention (of a photo's 15 most similar photos in the "
-          "full space, how many remain after reduction) and a linear probe (can organ / species still be read)."),
-        T("d = 2, 8, 16, 32, 64, 128, 256，五个模型。", "d = 2, 8, 16, 32, 64, 128, 256 for five models."),
-        table(fid_t, 2) + img(R / "exp6_pca_fidelity.png", "PCA fidelity"),
-        T(f"二维散点图只保留 {pct(fid['2-D'].min())}–{pct(fid['2-D'].max())} 的近邻关系，<b>不能用来下结论</b>；所有后续分析都在 64 维以上的空间里做。",
-          f"A 2-D plot keeps only {pct(fid['2-D'].min())}–{pct(fid['2-D'].max())} of neighbour relations, <b>so no conclusion is drawn from 2-D plots</b>; all "
-          "later analyses run in 64 dimensions or more."), "done"))
+    S.append(sec(1, T("在什么空间里分析：降维保留了什么信息", "Which space to analyse in: what dimension reduction keeps"),
+        T("画成二维 / 三维图、或降到更低维度后，器官、拍摄距离、物种的信息还剩多少？每个主成分主要承载什么？",
+          "After reducing to a 2-D / 3-D plot or a lower dimension, how much organ, shot-scale and species information is left? What does each principal component carry?"),
+        T("每张照片是一个高维向量（EfficientNet 1,280 维、BioCLIP 1,024、DINOv3 768、YOLO 512 / 896）。对每种降维方式算两件事：<br>"
+          "<b>近邻保留</b>：原空间里最像的 15 张照片，降维后还剩几张；<br>"
+          "<b>信息保留</b>：在降维后的空间里用“最近邻投票”判断器官 / 距离 / 物种（按植株分组交叉验证），准确率占原空间的百分比，100% = 没丢信息。<br>"
+          "另算每个主成分的差异中有多少能被器官 / 距离 / 物种解释（η²，0–1）。全部是无监督降维，标签只用来评估。",
+          "Each photo is a high-dimensional vector (EfficientNet 1,280, BioCLIP 1,024, DINOv3 768, YOLO 512 / 896). For each reduction we measure:<br>"
+          "<b>Neighbours kept</b>: of each photo's 15 most similar photos in the full space, how many remain;<br>"
+          "<b>Information kept</b>: nearest-neighbour vote for organ / scale / species in the reduced space (cross-validated, grouped by plant), as a "
+          "percentage of the full-space accuracy; 100% = nothing lost.<br>Also how much of each principal component's variation is explained by organ / "
+          "scale / species (η², 0–1). All reductions are unsupervised; labels are used only to evaluate."),
+        T("PCA 2 / 3 / 16 / 64 维和 t-SNE 二维，五个模型。", "PCA to 2 / 3 / 16 / 64 dimensions and 2-D t-SNE, five models."),
+        T("<p class=cap>EfficientNet：</p>", "<p class=cap>EfficientNet:</p>") + table(im_t[im_t.model == "EfficientNet-B0"].drop(columns="model").rename(columns={
+            "view": T("看法", "view"), "neighbours_kept": T("近邻保留", "neighbours kept"), "organ_kept": T("器官信息", "organ info kept"),
+            "scale_kept": T("距离信息", "scale info kept"), "species_kept": T("物种信息", "species info kept")}), 2)
+        + T("<p class=cap>五个模型：三维 PCA 图 vs 64 维（物种信息保留）</p>", "<p class=cap>Five models: 3-D PCA plot vs 64-D (species information kept)</p>")
+        + table(im_sp, 2)
+        + T("<p class=cap>EfficientNet 前 6 个主成分主要承载什么（η²）：</p>", "<p class=cap>What EfficientNet's first 6 principal components carry (η²):</p>")
+        + table(pc_t.rename(columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"),
+                                     "main": T("主要承载", "mainly carries")}), 2),
+        T(f"三维 PCA 图基本只显示拍摄距离和器官，物种信息只剩约 {pct(im_t[(im_t.model=='EfficientNet-B0')&(im_t.view=='PCA-3')].iloc[0,-1])}，近邻关系不到 20%，"
+          "所以<b>三维图不能用来判断物种或聚类结构</b>。PCA 64 维几乎不丢信息，<b>后续所有分析都在 64 维里做</b>；需要画图时用 t-SNE（保留分组，但距离和位置没有含义）。",
+          f"A 3-D PCA plot shows mainly shot scale and organ; species information drops to about "
+          f"{pct(im_t[(im_t.model=='EfficientNet-B0')&(im_t.view=='PCA-3')].iloc[0,-1])} and fewer than 20% of neighbour relations survive, so <b>3-D plots "
+          "cannot be used to judge species or cluster structure</b>. 64-D PCA loses almost nothing: <b>all further analysis runs in 64 dimensions</b>; for "
+          "pictures, use t-SNE (keeps groups, but distances and positions carry no meaning)."), "done"))
 
     S.append(sec(2, T("分几组？软聚类", "How many groups? Soft clustering"),
         T("“Numeric method / clustering metrics to decide the number of clusters”；“Soft cluster”",
@@ -301,11 +320,11 @@ section{border-top:1px solid var(--line);padding-top:26px;margin-top:34px}
 blockquote{margin:10px 0 14px;padding:6px 14px;border-left:3px solid var(--acc);color:var(--mut);background:var(--soft)}
 dl{display:grid;grid-template-columns:110px 1fr;gap:6px 16px;margin:0}dt{font-weight:600;color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
 dd{margin:0;min-width:0}@media(max-width:640px){dl{grid-template-columns:1fr}}
-.take{margin:16px 0 0;padding:10px 14px;background:var(--soft);border-radius:4px}.take::before{content:"→ ";color:var(--acc);font-weight:700}
+.take{margin:16px 0 0;padding:10px 14px;background:var(--soft);border-radius:4px}
 .st{font-size:12px;padding:1px 8px;border:1px solid currentColor;border-radius:3px;white-space:nowrap}.done{color:var(--ok)}.part{color:var(--warn)}.next{color:var(--next)}
 .tw{overflow-x:auto;margin:10px 0}table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
 th{text-align:left;font-weight:600;border-bottom:1.5px solid var(--fg);padding:5px 10px 5px 0}td{border-bottom:1px solid var(--line);padding:5px 10px 5px 0;vertical-align:top}
-.ov td:first-child{font-style:italic}a{color:var(--acc)}
+.ov td:first-child{font-weight:600}a{color:var(--acc)}
 .fig{max-width:100%;height:auto;display:block;margin:12px 0;border:1px solid var(--line);background:#fff}
 .strip{display:flex;gap:8px;overflow-x:auto;margin:8px 0 4px;padding-bottom:4px}figure{margin:0;flex:0 0 128px}
 figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:block}figcaption{font-size:11px;line-height:1.35;color:var(--mut);margin-top:3px}
