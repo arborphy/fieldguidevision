@@ -1,0 +1,268 @@
+{
+  "leaf -> fruit": {
+    "start_group": 0,
+    "end_group": 6,
+    "start_share": 0.9862385321100917,
+    "end_share": 0.6294117647058823,
+    "steps": [
+      {
+        "t": 0.0,
+        "photos": [
+          {
+            "image_id": "thomas/0506-01-09",
+            "species": "Toxicodendron radicans",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/12366",
+            "species": "Quercus bicolor",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "kirchoff/em2102",
+            "species": "Quercus alba",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 1.0,
+        "share_end": 0.0
+      },
+      {
+        "t": 0.25,
+        "photos": [
+          {
+            "image_id": "baskauf/15339",
+            "species": "Populus deltoides",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/52430",
+            "species": "Carya cordiformis",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/52472",
+            "species": "Quercus palustris",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 1.0,
+        "share_end": 0.0
+      },
+      {
+        "t": 0.5,
+        "photos": [
+          {
+            "image_id": "baskauf/15388",
+            "species": "Quercus alba",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/35728",
+            "species": "Zanthoxylum americanum",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/11920",
+            "species": "Acer rubrum",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 0.95,
+        "share_end": 0.0
+      },
+      {
+        "t": 0.75,
+        "photos": [
+          {
+            "image_id": "baskauf/15276",
+            "species": "Ostrya virginiana",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/35372",
+            "species": "Ilex verticillata",
+            "organ": "twig",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/27929",
+            "species": "Nyssa sylvatica",
+            "organ": "fruit",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 0.35,
+        "share_end": 0.1
+      },
+      {
+        "t": 1.0,
+        "photos": [
+          {
+            "image_id": "baskauf/15598",
+            "species": "Ginkgo biloba",
+            "organ": "cone",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/29400",
+            "species": "Nyssa sylvatica",
+            "organ": "fruit",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/16240",
+            "species": "Tilia americana",
+            "organ": "twig",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 0.0,
+        "share_end": 0.6
+      }
+    ]
+  },
+  "leaf -> whole tree": {
+    "start_group": 0,
+    "end_group": 2,
+    "start_share": 0.9862385321100917,
+    "end_share": 0.8900343642611683,
+    "steps": [
+      {
+        "t": 0.0,
+        "photos": [
+          {
+            "image_id": "thomas/0506-01-09",
+            "species": "Toxicodendron radicans",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/12366",
+            "species": "Quercus bicolor",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "kirchoff/em2102",
+            "species": "Quercus alba",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 1.0,
+        "share_end": 0.0
+      },
+      {
+        "t": 0.25,
+        "photos": [
+          {
+            "image_id": "baskauf/11695",
+            "species": "Lindera benzoin",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "baskauf/15339",
+            "species": "Populus deltoides",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          },
+          {
+            "image_id": "kirchoff/ac1479",
+            "species": "Quercus bicolor",
+            "organ": "leaf",
+            "shot_scale": "close-up"
+          }
+        ],
+        "share_start": 1.0,
+        "share_end": 0.0
+      },
+      {
+        "t": 0.5,
+        "photos": [
+          {
+            "image_id": "baskauf/91126",
+            "species": "Ginkgo biloba",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "baskauf/90661",
+            "species": "Quercus macrocarpa",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "ssmv/2-185-01",
+            "species": "Ginkgo biloba",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          }
+        ],
+        "share_start": 0.4,
+        "share_end": 0.6
+      },
+      {
+        "t": 0.75,
+        "photos": [
+          {
+            "image_id": "baskauf/91105",
+            "species": "Quercus rubra",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "baskauf/10992",
+            "species": "Quercus alba",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "baskauf/11335",
+            "species": "Juglans nigra",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          }
+        ],
+        "share_start": 0.0,
+        "share_end": 1.0
+      },
+      {
+        "t": 1.0,
+        "photos": [
+          {
+            "image_id": "baskauf/90876",
+            "species": "Aesculus glabra",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "baskauf/91107",
+            "species": "Ulmus americana",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          },
+          {
+            "image_id": "baskauf/91150",
+            "species": "Fraxinus americana",
+            "organ": "whole tree",
+            "shot_scale": "distant"
+          }
+        ],
+        "share_start": 0.0,
+        "share_end": 1.0
+      }
+    ]
+  }
+}

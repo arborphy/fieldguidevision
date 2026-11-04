@@ -190,8 +190,8 @@ def build(lang):
              "Only EfficientNet tells organs apart with few dimensions; YOLO has clear structure, but not organised by organ"),
         4: T("Autoencoder 不优于 PCA；照片空间中变化最大的方向是拍摄远近，其次是器官",
              "An autoencoder does not improve on PCA; the largest variation in the photo space is camera distance, then organ"),
-        5: T("组中心可由真实照片直观呈现；热图对模型可信，是否对准器官尚待检验",
-             "Group centres can be shown with real photos; heatmaps are faithful to the model, alignment with organs is untested"),
+        5: T("隐空间中两组之间的路径对应可见的器官渐变（叶 → 果实，叶 → 整树）；激活热图为初步结果",
+             "Paths between groups in the latent space correspond to visible organ transitions (leaf → fruit, leaf → whole tree); activation maps are preliminary"),
         6: T(f"软聚类筛出 {n_pl} 张可能含多个器官的照片，可作为多标签标注的候选",
              f"Soft clustering shortlists {n_pl} photos that may contain several organs, as candidates for multi-label annotation"),
         7: T("YOLO 现成 embedding 的器官信息最弱，需在器官标签上训练后才适用",
@@ -441,22 +441,46 @@ def build(lang):
           "Non-linear reduction brings no gain: <b>keep PCA and close the autoencoder line</b>. The largest variation in the photo space is camera distance, then "
           "organ; comparisons between photos should take shot distance into account."), "done"))
 
-    S.append(sec(5, T("从隐空间回到图片", "Back from the latent space to images"),
-        T("由隐空间中的点检索对应的真实图片，并以激活热图定位模型依赖的图像区域。", "Map points in the latent space back to real photos, and locate the image regions the model relies on with activation maps."),
-        T("反演：对每组中心，检索最相似的真实照片。热图：在 EfficientNet（与 ResNet 同类的卷积网络）上，以“属于某组”为目标做 Grad-CAM，并用遮挡对照检验热图是否可信。",
-          "Inversion: for each group centre, retrieve the most similar real photos. Heatmaps: Grad-CAM on EfficientNet (a CNN like ResNet) with "
-          "\"belongs to group c\" as the target, checked by occlusion."),
-        T(f"上一轮从噪声生成图片，只得到彩色噪点，改为检索。热图在 80 张按规则抽样的照片上做，遮挡热区比随机遮挡掉分更多的比例为 {pct(s3['frac_top_cam_beats_random'])}。",
-          f"Generating images from noise (previous round) gave coloured noise; replaced by retrieval. Heatmaps on 80 rule-sampled photos: hiding the hot area "
-          f"hurts the score more than a random area in {pct(s3['frac_top_cam_beats_random'])} of cases."),
-        table(ret.rename(columns={c: T(f"{c} 检索结果为主导器官", f"{c} retrieved = dominant organ") for c in ["K3", "K7", "K20"]}), 2)
-        + T("<p class=cap>两个组中心的最近真实照片：</p>", "<p class=cap>Nearest real photos to two group centres:</p>")
-        + strip(s7["cases"][cent[0]], cap_photo) + strip(s7["cases"][cent[2]], cap_photo)
-        + img(R / "exp3_gradcam_cases.png", "Grad-CAM")
-        + T("<p class=cap>Grad-CAM（早期 K=20 结果）：越红 = 模型越依赖该区域。</p>", "<p class=cap>Grad-CAM (earlier K=20 run): red = relied on most.</p>"),
-        T("检索能直观展示每组“长什么样”（展示的是最典型成员，会显得比实际整齐）。热图对模型是可信的，但<b>还没验证是否落在植物器官上</b>，需要器官掩膜。",
-          "Retrieval shows what each group looks like (its most typical members, so groups look tidier than they are). Heatmaps are faithful to the model, "
-          "but <b>whether they land on the organ is not yet tested</b>; that needs organ masks."), "part"))
+    wk = json.loads((R / "exp11_walk.json").read_text())
+
+    def walk_html(key, a_, b_):
+        w = wk[key]
+        cols = "".join(
+            f"<div class=step><small>{T('第', 'Step ')}{i + 1}{T(' 步', '')} · {on(a_)} {st['share_start']:.0%} / {on(b_)} {st['share_end']:.0%}</small>"
+            + "".join(f"<img src='{thumb(ph['image_id'])}' alt='{escape(ph['image_id'])}' title='{escape(ph['species'])}'>"
+                      f"<span>{on(ph['organ'])} · {escape(ph['species'])}</span>" for ph in st["photos"]) + "</div>"
+            for i, st in enumerate(w["steps"]))
+        return f"<h4>{on(a_)} → {on(b_)}</h4><div class=walk>{cols}</div>"
+    wlf, wlt = wk["leaf -> fruit"]["steps"], wk["leaf -> whole tree"]["steps"]
+    S.append(sec(5, T("从隐空间回到图片", "From the latent space back to images"),
+        T("把隐空间中的点（组中心及其间的路径）用真实照片呈现，并检查模型依赖照片的哪些区域。",
+          "Show points of the latent space (group centres and the path between them) with real photos, and check which image regions the model relies on."),
+        T("<b>隐空间漫步</b>（无监督）：以 EfficientNet 自己分出的组（K = 7）的中心为起点和终点，在两点之间等距取 5 个点，"
+          "对每个点检索余弦相似度最高的真实照片（不重复）；并统计每一步最近 20 张照片的器官构成。"
+          "<b>激活热图</b>：Grad-CAM，以“照片属于某一组”为目标，显示模型主要依据的图像区域。",
+          "<b>Latent walk</b> (unsupervised): start and end at the centres of EfficientNet's own groups (K = 7), take 5 equally spaced points between them and "
+          "retrieve the most similar real photos for each (cosine, no repeats); also count the organs among the 20 nearest photos at each step. "
+          "<b>Activation map</b>: Grad-CAM with \"photo belongs to group c\" as the target, showing the image regions the model relies on."),
+        T("上一阶段尝试从噪声直接生成图像，只得到彩色噪点，因此改用检索真实照片。热图为上一阶段的初步结果（K = 20），本阶段未重做。",
+          "Generating images from noise in the previous stage produced only coloured noise, so real photos are retrieved instead. The heatmaps are the "
+          "previous stage's preliminary result (K = 20) and were not redone."),
+        T("<p class=lead>论证顺序：5.1 隐空间中的路径对应怎样的照片 → 5.2 模型依赖照片的哪些区域（初步）</p>",
+          "<p class=lead>Line of argument: 5.1 what photos a path through the latent space corresponds to → 5.2 which image regions the model relies on (preliminary)</p>")
+        + panel(T("5.1 隐空间漫步：叶 → 果实，叶 → 整树（EfficientNet）", "5.1 Latent walk: leaf → fruit, leaf → whole tree (EfficientNet)"),
+                walk_html("leaf -> fruit", "leaf", "fruit") + walk_html("leaf -> whole tree", "leaf", "whole tree"),
+                T(f"每一步上方为最近 20 张照片中起点与终点器官的比例。从叶走向果实，叶的比例由 {wlf[0]['share_start']:.0%} 降到 {wlf[-1]['share_start']:.0%}，果实升到 {wlf[-1]['share_end']:.0%}；"
+                  f"从叶走向整树，在第 3 步出现转折，最后整树占 {wlt[-1]['share_end']:.0%}。隐空间中的位置与可见的器官变化一一对应。",
+                  f"Above each step: share of the start and end organ among the 20 nearest photos. Walking from leaf to fruit, leaf falls from "
+                  f"{wlf[0]['share_start']:.0%} to {wlf[-1]['share_start']:.0%} and fruit rises to {wlf[-1]['share_end']:.0%}; from leaf to whole tree the switch happens at step 3 "
+                  f"and whole tree ends at {wlt[-1]['share_end']:.0%}. Positions in the latent space map onto visible organ changes."))
+        + panel(T("5.2 激活热图（EfficientNet，初步结果）", "5.2 Activation maps (EfficientNet, preliminary)"), img(R / "exp3_gradcam_cases.png", "Grad-CAM"),
+                T(f"越红表示模型越依赖该区域。遮挡红色区域比随机遮挡更能改变分组结果（{pct(s3['frac_top_cam_beats_random'])} 的样例），说明热图反映了模型的依据；"
+                  "但人眼可见部分热区落在背景上，是否对准器官尚待验证。",
+                  f"Red = relied on most. Hiding the red area changes the grouping more than hiding a random area ({pct(s3['frac_top_cam_beats_random'])} of cases), "
+                  "so the maps reflect what the model uses; but some hot areas visibly fall on the background, so alignment with organs is not yet established.")),
+        T("隐空间可以通过检索真实照片来“读”：组中心对应典型照片，两组之间的路径对应器官的渐变，这比生成图像更直观可靠。激活热图仅作初步参考，暂不推进。",
+          "The latent space can be read by retrieving real photos: group centres correspond to typical photos and paths between groups to gradual organ changes, "
+          "which is more direct and reliable than generating images. Activation maps are a preliminary reference only and are paused."), "part"))
 
     S.append(sec(6, T("每张图多个标签", "Multiple labels per image"),
         T("利用软聚类结果，筛选可能含有多个器官、需要多标签标注的照片。", "Use soft-clustering results to shortlist photos that may contain several organs and need multi-label annotation."),
@@ -519,7 +543,9 @@ figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:bl
 .aim{color:var(--mut);margin:6px 0 16px}.meth{font-size:12.5px;color:var(--mut);margin:12px 0 0;line-height:1.55}
 .abs{background:var(--soft);padding:14px 18px;border-radius:4px;margin:8px 0 10px}.ch{font-size:22px;margin:46px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--fg)}
 .chn{color:var(--acc);margin-right:6px}.setup{font-size:13.5px;color:var(--mut);margin:0 0 14px}.kf{margin:8px 0 0;padding-left:20px}.kf li{margin:3px 0}.kl{color:inherit;text-decoration:none}.kl:hover{text-decoration:underline}section h2{font-size:18px;line-height:1.35}
-.panel{margin:4px 0 26px}.ends{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ends>div{min-width:0}.ends small{color:var(--mut);font-size:11px}@media(max-width:700px){.ends{grid-template-columns:1fr}}.lead{margin:0 0 18px;font-size:14px;color:var(--mut)}.ps{font-size:12px;color:var(--mut);margin:6px 0 0}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
+.panel{margin:4px 0 26px}.walk{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:6px 0 14px}
+.step small{display:block;font-size:11px;color:var(--mut);margin-bottom:4px}.step img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;display:block}
+.step span{display:block;font-size:10.5px;color:var(--mut);line-height:1.3;margin:2px 0 6px}@media(max-width:700px){.walk{grid-template-columns:repeat(2,minmax(0,1fr))}}.ends{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ends>div{min-width:0}.ends small{color:var(--mut);font-size:11px}@media(max-width:700px){.ends{grid-template-columns:1fr}}.lead{margin:0 0 18px;font-size:14px;color:var(--mut)}.ps{font-size:12px;color:var(--mut);margin:6px 0 0}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
 .finding{margin:8px 0 0;padding-left:10px;border-left:2px solid var(--acc);font-size:14px}th.n,td.n{text-align:right}.duo{display:grid;grid-template-columns:auto minmax(0,300px);gap:24px;align-items:start}
 .duo .fig{margin:10px 0;max-width:300px}@media(max-width:760px){.duo{grid-template-columns:1fr}}.rh{font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px;border-top:1px dashed var(--line);padding-top:14px}ol li{margin:4px 0}
 """
