@@ -103,6 +103,7 @@ pc_t["main"] = pc_t[["organ", "scale", "species"]].idxmax(axis=1)
 K9 = {m: pd.read_csv(d / "exp9_k_metrics.csv") for m, d in M5.items() if (d / "exp9_k_metrics.csv").exists()}
 k9e = K9["EfficientNet-B0"].set_index("K")
 sil_lo, sil_hi = min(t.silhouette.min() for t in K9.values()), max(t.silhouette.max() for t in K9.values())
+gm = json.loads((R / "exp12_gemma.json").read_text())
 drv = json.loads((R / "exp10_drivers.json").read_text()) if (R / "exp10_drivers.json").exists() else None
 KS4 = {m: pd.read_csv(d / "exp4b_k_sweep.csv").set_index("K") for m, d in M3.items()}
 stab = {m: t.stability_ari_mean.to_dict() for m, t in KS4.items()}
@@ -111,7 +112,7 @@ k5sp_lo = min(r["n_species"] for r in k5full["efficientnet"]); k5sp_hi = max(r["
 k5top_hi = max(r["top_species_share"] for r in k5full["efficientnet"])
 s5 = J(R, "exp5_axes_summary.json")
 ae = pd.read_csv(R / "exp5_recovered_ae_table.csv")
-s3 = J(R, "exp3_activation_summary.json")
+s3 = J(R / "k5", "exp3_activation_summary.json")
 s7 = J(R, "exp7_retrieval_summary.json")
 ret = pd.DataFrame([{"model": m, **{f"K{r['K']:.0f}": r["top6_share_dominant_organ"] for r in J(d, "exp7_retrieval_summary.json")["per_k"]}}
                     for m, d in M3.items()])
@@ -175,6 +176,15 @@ def build(lang):
                              for mk, nm in [("efficientnet", "EfficientNet-B0"), ("dinov3", "DINOv3")] for i, r in enumerate(k5full[mk])],
                             columns=[T("模型", "Model"), T("组", "Group"), T("照片数", "Photos"), T("主要器官", "Main organs"), T("近景", "Close-up"),
                                      T("远景", "Distant"), T("物种数", "Species"), T("最大物种占比", "Top species")])
+    gem_t = pd.DataFrame([[T("处于两种器官之间", "Between two organs"), gm["ambiguous"]["n"], gm["ambiguous"]["both_tagged"]],
+                          [T("归属明确", "Clearly assigned"), gm["clear"]["n"], gm["clear"]["both_tagged"]]]
+                         + [[T({"both_plausible": "  其中：两个器官都合理", "leaning_wrong": "  其中：偏向错的器官", "neither": "  其中：两个都不对"}[c],
+                               {"both_plausible": "  of which: both plausible", "leaning_wrong": "  of which: leaning to the other organ", "neither": "  of which: neither matches"}[c]),
+                             v["n"], v["both_tagged"]] for c, v in gm["by_category"].items()],
+                         columns=[T("照片", "Photos"), "n", T("Gemma 同时标出两种器官", "Gemma tags both organs")])
+    gem_rows = "".join(f"<h4>{T(zh_, en_)}</h4>" + strip(main["by_category"][c][:8], cap_soft) for c, zh_, en_ in
+                       [("both_plausible", "两个器官都合理", "Both organs plausible"), ("leaning_wrong", "偏向错的器官", "Leaning to the other organ"),
+                        ("neither", "两个都不对", "Neither matches")] if main["by_category"].get(c))
     E, B, D = eff_f.loc["EfficientNet-B0"], eff_f.loc["BioCLIP 2.5"], eff_f.loc["DINOv3"]
     kE, kD = kt.set_index("model").loc["EfficientNet-B0"], kt.set_index("model").loc["DINOv3"]
     en = enr.set_index("model").share_clusters_dominant_ge_0_6
@@ -184,17 +194,15 @@ def build(lang):
     CLAIM = {
         1: T(f"三维 PCA 图丢失 {lo3}–{hi3} 的器官信息；分析在 64 维 PCA 空间中进行",
              f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis is done in 64-D PCA space"),
-        2: T("K = 3 对应拍摄远近，K = 5 最稳定，K = 7 对应器官；通用视觉模型的组由器官决定（排除物种因素后仍成立），约三分之一的照片处于相邻器官之间",
-             "K = 3 captures camera distance, K = 5 is most stable, K = 7 matches organs; general vision models group by organ even after controlling for species, and about a third of photos lie between adjacent organs"),
+        2: T("K = 3 对应拍摄远近，K = 5 最稳定，K = 7 对应器官；通用视觉模型按器官分组；处于相邻器官之间的照片常含两种器官（Gemma 标注比例约为两倍）",
+             "K = 3 captures camera distance, K = 5 is most stable, K = 7 matches organs; general vision models group by organ; photos between adjacent organs often show both organs (twice the Gemma two-organ rate)"),
         3: T("只有 EfficientNet 能用少数维度区分器官；YOLO 有清楚的结构，但不是按器官组织的",
              "Only EfficientNet tells organs apart with few dimensions; YOLO has clear structure, but not organised by organ"),
         4: T("Autoencoder 不优于 PCA；照片空间中变化最大的方向是拍摄远近，其次是器官",
              "An autoencoder does not improve on PCA; the largest variation in the photo space is camera distance, then organ"),
         5: T("隐空间中两组之间的路径对应可见的器官渐变（叶 → 果实，叶 → 整树）；激活热图为初步结果",
              "Paths between groups in the latent space correspond to visible organ transitions (leaf → fruit, leaf → whole tree); activation maps are preliminary"),
-        6: T(f"软聚类筛出 {n_pl} 张可能含多个器官的照片，可作为多标签标注的候选",
-             f"Soft clustering shortlists {n_pl} photos that may contain several organs, as candidates for multi-label annotation"),
-        7: T("YOLO 现成 embedding 的器官信息最弱，需在器官标签上训练后才适用",
+        6: T("YOLO 现成 embedding 的器官信息最弱，需在器官标签上训练后才适用",
              "Off-the-shelf YOLO embeddings carry the least organ information and need training on organ labels"),
     }
 
@@ -301,7 +309,7 @@ def build(lang):
           "relations, so <b>it cannot be used to judge organ structure or clusters</b>. 64-D PCA keeps organ, scale and species information almost completely: "
           "<b>all further analysis runs in 64 dimensions</b>. Display figures use 2-D t-SNE: its grouping is reliable, but distances, cluster sizes and positions carry no meaning."), "done"))
 
-    S.append(sec(2, T("聚类数 K、各组构成与软聚类", "Number of groups K, group make-up and soft clustering"),
+    S.append(sec(2, T("聚类数 K、各组构成、软聚类与多标签", "Number of groups K, group make-up, soft clustering and multiple labels"),
         T("用数值确定分组数 K（代替先前随意设定的 K = 20），说明不同 K 分出的是什么结构，并用软聚类找出处于两组之间的照片。",
           "Determine the number of groups K numerically (replacing the arbitrary K = 20), show what structure each K captures, and use soft clustering to find photos lying between two groups."),
         T("K-means（无监督）在完整向量空间中分别取 K = 3–100。<b>稳定性</b>（0–1）：随机换掉一部分植株后重新分组，看分出的组是否与原来一致；越高说明这些组是数据中真实存在的结构。"
@@ -314,8 +322,8 @@ def build(lang):
         T("EfficientNet、DINOv3、BioCLIP、YOLO backbone；稳定性重采样 10 次。软聚类第一版用高斯混合模型，其“几乎没有含混照片”的结果是维度造成的假象，已作废。",
           "EfficientNet, DINOv3, BioCLIP, YOLO backbone; stability from 10 resamples. A first soft-clustering version (Gaussian mixture) reported almost no ambiguous "
           "photos; this was a dimension artefact and is withdrawn."),
-        T("<p class=lead>论证顺序：2.1 K 取多少时分组可靠 → 2.2 不同 K 分出的是什么 → 2.3 各组的内容 → 2.4 各组由什么决定（富集分析）→ 2.5 处于两组之间的照片</p>",
-          "<p class=lead>Line of argument: 2.1 which K gives reliable groups → 2.2 what each K captures → 2.3 what the groups contain → 2.4 what drives them (enrichment) → 2.5 photos between two groups</p>")
+        T("<p class=lead>论证顺序：2.1 K 取多少时分组可靠 → 2.2 不同 K 分出的是什么 → 2.3 各组的内容 → 2.4 各组由什么决定（富集分析）→ 2.5 处于两组之间的照片 → 2.6 多标签检验</p>",
+          "<p class=lead>Line of argument: 2.1 which K gives reliable groups → 2.2 what each K captures → 2.3 what the groups contain → 2.4 what drives them (enrichment) → 2.5 photos between two groups → 2.6 multi-label check</p>")
         + panel(T("2.1 稳定性随 K 的变化", "2.1 Stability across K"), img(R / "exp9c_stability.png", "stability"),
                 T(f"分组在 K = 5–7 时最可靠（DINOv3 在 K = 5 达到 {stab['DINOv3'][5]:.2f}），K 超过 10 后明显下降。",
                   f"Groups are most reliable at K = 5–7 (DINOv3 reaches {stab['DINOv3'][5]:.2f} at K = 5) and drop clearly beyond K = 10.")
@@ -331,12 +339,12 @@ def build(lang):
                   "distance; at K = 5 the close-ups split into inflorescence, twig and leaf; at K = 7 fruit separates and leaves split into two groups."))
         + panel(T("2.4 各组由什么决定：富集分析（五个模型，K = 5）", "2.4 What drives the groups: enrichment (five models, K = 5)"),
                 img(R / "exp10_drivers.png", "drivers") + img(R / "exp9d_models_k5.png", "models K=5"),
-                T("富集倍数 = 某器官在组内的比例 ÷ 它在全部照片中的比例。判定规则：单一物种占组内 30% 以上为“物种决定”；某器官富集 ≥ 2 倍、且按组内物种构成校正后仍 ≥ 2 倍为“器官决定”；"
+                T(f"富集倍数（标准的过度代表分析）= 组内该器官的照片数 ÷（组大小 × 该器官在全部照片中的比例），即“实际数 ÷ 随机分组时的期望数”。超几何检验（单侧 Fisher 检验，BH 校正）下，所有富集 ≥ 2 倍的组 p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}；但同一植株的多张照片并不独立，这些 p 值明显偏小，只作参考。判定规则（本项目约定）：单一物种占组内 30% 以上为“物种决定”；某器官富集 ≥ 2 倍、且按组内物种构成校正后仍 ≥ 2 倍为“器官决定”；"
                   "否则远景或中景比例达到全体的 2 倍以上为“距离决定”；其余为“混合”（多为混有几种器官的近景组）。"
                   f"结果：EfficientNet 与 DINOv3 分别有 {pct(drv['EfficientNet-B0']['share']['organ'])} 与 {pct(drv['DINOv3']['share']['organ'])} 的照片落在器官决定的组中，"
                   f"排除物种因素后仍然成立（DINOv3 的混合组是近拍的花、果、枝合在一起）；YOLO 的器官决定组只占 {pct(drv['YOLO11s backbone']['share']['organ'])}（backbone）与 {pct(drv['YOLO11s neck']['share']['organ'])}（neck），其余混有多种器官；"
                   f"BioCLIP 的组与器官基本无关，它按物种组织（K = 63 时与物种对应 {pct(KS4['BioCLIP 2.5'].loc[63, 'matched_acc_species'])}）。",
-                  "Fold enrichment = an organ's share within a group divided by its share across all photos. Rule: a group is species-driven if one species exceeds "
+                  f"Fold enrichment (standard over-representation analysis) = photos of the organ in the group ÷ (group size × the organ's overall share), i.e. observed ÷ expected under random grouping. Under the hypergeometric test (one-sided Fisher, BH-adjusted) every group enriched ≥ 2-fold has p < {gm['hypergeom']['max_p_bh_fold_ge_2']:.0e}; photos of the same plant are not independent, so these p-values are clearly too small and are given for reference only. Rule (project convention): a group is species-driven if one species exceeds "
                   "30% of it; organ-driven if one organ is enriched at least 2-fold, also after adjusting for the group's species mix; otherwise distance-driven if "
                   "the distant or mid-range share is at least twice the overall share; else mixed (mostly close-up groups mixing several organs). "
                   f"Result: {pct(drv['EfficientNet-B0']['share']['organ'])} (EfficientNet) and {pct(drv['DINOv3']['share']['organ'])} (DINOv3) of photos fall in organ-driven groups, "
@@ -347,12 +355,19 @@ def build(lang):
                   f"{pct(e7['frac_max_lt_0_8'])} 的照片处于两组之间，最常见的是果实 ↔ 小枝、花序 ↔ 叶、果实 ↔ 整树，都是视觉上相邻、在同一画面中常一起出现的器官。",
                   f"Soft clustering uses K = 7 so that each group roughly matches one organ (K = 5 groups merge organs, so ambiguity there mostly falls between mixed groups "
                   f"and cannot name two organs). {pct(e7['frac_max_lt_0_8'])} of photos lie between two groups; the most common pairs, fruit ↔ twig, inflorescence ↔ leaf "
-                  "and fruit ↔ whole tree, are visually adjacent organs that often appear in the same frame.")),
+                  "and fruit ↔ whole tree, are visually adjacent organs that often appear in the same frame."))
+        + panel(T("2.6 多标签检验：处于两组之间的照片是否含两种器官（参照 Gemma 多标签）", "2.6 Multi-label check: do photos between two groups contain two organs? (Gemma multi-labels as reference)"),
+                table(gem_t, pct=True) + gem_rows,
+                T(f"处于两种器官之间的照片中，{pct(gm['ambiguous']['both_tagged'])} 被 Gemma 同时标出这两种器官；归属明确的照片只有 {pct(gm['clear']['both_tagged'])}，约为两倍。"
+                  "因此软聚类可以自动找出画面中含两种器官、需要多标签的照片。“偏向错的器官”一类比例最高，说明其中许多照片并非认错，而是本身含两种器官。Gemma 标签为模型输出，仅作参照。",
+                  f"Of the photos between two organs, {pct(gm['ambiguous']['both_tagged'])} are tagged by Gemma with both organs, against {pct(gm['clear']['both_tagged'])} of clearly "
+                  "assigned photos, about twice as many. Soft clustering therefore finds photos that contain two organs and need multiple labels. The \"leaning to the "
+                  "other organ\" category has the highest share, so many of these photos are not errors but genuinely show two organs. Gemma tags are model output, used as reference only.")),
         T("K 没有唯一答案，不同的 K 揭示不同层次的结构。<b>日常分组采用 K = 5</b>（最稳定，各组有清楚的器官含义）；<b>器官层面的分析与软聚类用 K = 7</b>（一组对应一种器官）；"
-          "K = 20 及以上不再使用。处于两组之间的照片集中在相邻器官之间，是多标签标注的候选（第 6 节）。",
+          "K = 20 及以上不再使用。处于两组之间的照片集中在相邻器官之间，并经 Gemma 多标签验证，可作为多标签标注的候选。",
           "K has no single answer; different K reveal different layers. <b>Use K = 5 for routine grouping</b> (most stable, clear organ meaning) and <b>K = 7 for "
           "organ-level analysis and soft clustering</b> (one group per organ); drop K = 20 and above. Photos between two groups concentrate between adjacent organs "
-          "and are candidates for multi-label annotation (section 6)."), "done"))
+          "and are confirmed against Gemma multi-labels as candidates for multi-label annotation."), "done"))
 
     nb = json.loads((R / "exp1d_nsc_bars.json").read_text())
     vz = json.loads((R / "exp1b_nsc_viz.json").read_text())
@@ -461,9 +476,9 @@ def build(lang):
           "<b>Latent walk</b> (unsupervised): start and end at the centres of EfficientNet's own groups (K = 7), take 5 equally spaced points between them and "
           "retrieve the most similar real photos for each (cosine, no repeats); also count the organs among the 20 nearest photos at each step. "
           "<b>Activation map</b>: Grad-CAM with \"photo belongs to group c\" as the target, showing the image regions the model relies on."),
-        T("上一阶段尝试从噪声直接生成图像，只得到彩色噪点，因此改用检索真实照片。热图为上一阶段的初步结果（K = 20），本阶段未重做。",
-          "Generating images from noise in the previous stage produced only coloured noise, so real photos are retrieved instead. The heatmaps are the "
-          "previous stage's preliminary result (K = 20) and were not redone."),
+        T("上一阶段尝试从噪声直接生成图像，只得到彩色噪点，因此改用检索真实照片。热图在 EfficientNet 的 K = 5 分组上重新计算（每组 2 张典型、2 张边缘照片）。",
+          "Generating images from noise in the previous stage produced only coloured noise, so real photos are retrieved instead. Heatmaps were recomputed on "
+          "EfficientNet's K = 5 groups (two typical and two borderline photos per group)."),
         T("<p class=lead>论证顺序：5.1 隐空间中的路径对应怎样的照片 → 5.2 模型依赖照片的哪些区域（初步）</p>",
           "<p class=lead>Line of argument: 5.1 what photos a path through the latent space corresponds to → 5.2 which image regions the model relies on (preliminary)</p>")
         + panel(T("5.1 隐空间漫步：叶 → 果实，叶 → 整树（EfficientNet）", "5.1 Latent walk: leaf → fruit, leaf → whole tree (EfficientNet)"),
@@ -473,7 +488,7 @@ def build(lang):
                   f"Above each step: share of the start and end organ among the 20 nearest photos. Walking from leaf to fruit, leaf falls from "
                   f"{wlf[0]['share_start']:.0%} to {wlf[-1]['share_start']:.0%} and fruit rises to {wlf[-1]['share_end']:.0%}; from leaf to whole tree the switch happens at step 3 "
                   f"and whole tree ends at {wlt[-1]['share_end']:.0%}. Positions in the latent space map onto visible organ changes."))
-        + panel(T("5.2 激活热图（EfficientNet，初步结果）", "5.2 Activation maps (EfficientNet, preliminary)"), img(R / "exp3_gradcam_cases.png", "Grad-CAM"),
+        + panel(T("5.2 激活热图（EfficientNet，K = 5，初步结果）", "5.2 Activation maps (EfficientNet, K = 5, preliminary)"), img(R / "k5" / "exp3_gradcam_cases.png", "Grad-CAM"),
                 T(f"越红表示模型越依赖该区域。遮挡红色区域比随机遮挡更能改变分组结果（{pct(s3['frac_top_cam_beats_random'])} 的样例），说明热图反映了模型的依据；"
                   "但人眼可见部分热区落在背景上，是否对准器官尚待验证。",
                   f"Red = relied on most. Hiding the red area changes the grouping more than hiding a random area ({pct(s3['frac_top_cam_beats_random'])} of cases), "
@@ -482,23 +497,10 @@ def build(lang):
           "The latent space can be read by retrieving real photos: group centres correspond to typical photos and paths between groups to gradual organ changes, "
           "which is more direct and reliable than generating images. Activation maps are a preliminary reference only and are paused."), "part"))
 
-    S.append(sec(6, T("每张图多个标签", "Multiple labels per image"),
-        T("利用软聚类结果，筛选可能含有多个器官、需要多标签标注的照片。", "Use soft-clustering results to shortlist photos that may contain several organs and need multi-label annotation."),
-        T("目前器官标签是单标签。软聚类中，照片落在自己器官的组、但第二候选是另一种器官，记为“两个器官都合理”，作为多标签候选。",
-          "Organ labels are single-label today. In soft clustering, a photo in its own organ's group whose second candidate is another organ is marked "
-          "\"both organs plausible\": a multi-label candidate."),
-        T(f"EfficientNet K={MAIN_K}：{n_pl} 张候选（占含混照片 {pct(n_pl / n_amb)}）。软聚类用重采样共识得到（第一版高斯混合模型的结果为维度假象，已作废）。",
-          f"EfficientNet K={MAIN_K}: {n_pl} candidates ({pct(n_pl / n_amb)} of ambiguous photos). Soft membership from bootstrap consensus (the first Gaussian-mixture version was a dimension artefact and is withdrawn)."),
-        panel(T("6.1 “两个器官都合理”的候选照片", "6.1 \"Both organs plausible\" candidates"), strip(main["by_category"]["both_plausible"], cap_soft),
-                T("每张照片标出自身标签与两个候选组的主要器官；画面中是否确有两种器官需人工确认。",
-                  "Each photo shows its own label and the main organ of both candidate groups; whether two organs are visible needs manual confirmation.")),
-        T("候选清单已经可以交给标注；要确认画面里是否真有两种器官，需要导出多标签数据（Human Gold / Gemma 多标签）后验证。",
-          "The candidate list is ready for annotation; confirming two organs in the frame needs the multi-label data (Human Gold / Gemma multi-label) exported."), "next"))
-
     yt = pd.DataFrame([{"model": m, T("器官 F1", "organ F1"): eff_f.loc[m, "organ_f1"], T("物种 F1", "species F1"): eff_f.loc[m, "species_f1"],
                         T("NSC 器官每类坐标", "NSC organ coords / class"): nt.loc[m, "per_class"],
                         T(f"K={MAIN_K} 单一器官主导的组", f"K={MAIN_K} organ-dominated groups"): en[m]} for m in M5])
-    S.append(sec(7, T("YOLO 对比（团队新方向）", "YOLO comparison (team direction)"),
+    S.append(sec(6, T("YOLO 对比（团队新方向）", "YOLO comparison (team direction)"),
         T("评估 YOLO 的整图 embedding 是否适合器官结构分析，为是否换用 YOLO 提供依据。", "Assess whether YOLO whole-image embeddings support organ-structure analysis, to inform the decision on switching to YOLO."),
         T("YOLO11s（COCO 通用检测模型，未在植物上训练）的整图 embedding，两个版本：backbone（512 维）和 neck 多尺度（896 维），分别放进与其他模型相同的分析。",
           "Whole-image embeddings of YOLO11s (COCO general detector, not trained on plants), two versions: backbone (512-D) and multi-scale neck (896-D), "
@@ -512,9 +514,9 @@ def build(lang):
           "This says nothing about YOLO's box detection after training."), "done"))
 
     nxt = T(["导出多标签器官数据（Human Gold），验证“两个器官都合理”候选。", "做器官掩膜，检验热图是否落在植物器官上。",
-             "若采用 YOLO：用器官框标注做微调，再用同一套分析复验。", "在 Pound Ridge 外部野外照片上复验以上结论。"],
+             "若采用 YOLO：用器官框标注做微调，再用同一套分析复验。", "从隐空间生成图像：以组中心为条件，用 Stable Diffusion unCLIP 生成示意图（MVP 进行中）。", "在 Pound Ridge 外部野外照片上复验以上结论。"],
             ["Export multi-label organ data (Human Gold) and verify the \"both plausible\" candidates.", "Build organ masks to test whether heatmaps land on the organ.",
-             "If YOLO is adopted: fine-tune on organ boxes, then rerun the same analyses.", "Re-test the conclusions on external Pound Ridge field photos."])
+             "If YOLO is adopted: fine-tune on organ boxes, then rerun the same analyses.", "Image generation from the latent space: Stable Diffusion unCLIP conditioned on group centres (MVP in progress).", "Re-test the conclusions on external Pound Ridge field photos."])
 
     css = """
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#e3e3e3;--soft:#f6f6f4;--acc:#1f3a5f;--ok:#2e6b3a;--warn:#8a5a00;--next:#4a4a8a}
@@ -559,11 +561,11 @@ figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:bl
     meth_t = pd.DataFrame([["PCA", U, T("降维、主轴解读", "Reduction, axis reading"), "1, 4"],
                            ["t-SNE / UMAP", U, T("仅用于展示与检查", "Display and inspection only"), "1"],
                            ["K-means", U, T("分组（K = 3–20，推荐 K = 5）", "Grouping (K = 3–20, K = 5 recommended)"), "2"],
-                           [T("重采样共识软归属", "Bootstrap-consensus soft membership"), U, T("照片在各组间的归属", "Membership across groups"), "2, 6"],
+                           [T("重采样共识软归属", "Bootstrap-consensus soft membership"), U, T("照片在各组间的归属", "Membership across groups"), "2"],
                            ["Autoencoder", U, T("非线性降维对照", "Non-linear reduction baseline"), "4"],
                            [T("最近邻检索", "Nearest-neighbour retrieval"), U, T("隐空间 → 真实照片", "Latent point → real photos"), "5"],
                            [T("富集分析", "Enrichment"), E_, T("各组构成", "Group composition"), "2"],
-                           [T("近邻投票、线性探针", "Neighbour vote, linear probe"), S_, T("评估信息保留", "Evaluating information kept"), "1, 7"],
+                           [T("近邻投票、线性探针", "Neighbour vote, linear probe"), S_, T("评估信息保留", "Evaluating information kept"), "1, 6"],
                            ["NSC", S_, T("解释哪些维度起作用", "Explaining which dimensions matter"), "3"],
                            ["Grad-CAM", T("基于模型梯度", "Model-gradient based"), T("定位依赖的图像区域", "Locating image regions used"), "5"]],
                           columns=[T("方法", "Method"), T("类型", "Type"), T("用途", "Purpose"), T("章节", "Section")])
@@ -587,7 +589,7 @@ figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:bl
                "器官结构分析优先使用 DINOv3 / EfficientNet；物种层面使用 BioCLIP。", "YOLO 需先在器官标签上训练，再纳入同一套分析。"],
               ["Use 64-D PCA as the analysis space; t-SNE for display.", "Use K = 5–7 (matches the number of organs, most stable).",
                "Use DINOv3 / EfficientNet for organ structure and BioCLIP for species.", "Train YOLO on organ labels before including it in the same analyses."])
-    keyf = "".join(f"<li><a class=kl href=#s{n}>{CLAIM[n]}</a></li>" for n in range(1, 8))
+    keyf = "".join(f"<li><a class=kl href=#s{n}>{CLAIM[n]}</a></li>" for n in range(1, 7))
     html = (f"<!doctype html><html lang={'zh' if zh else 'en'}><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
             f"<title>{title}</title><style>{css}</style></head><body><main>"
             f"<h1>{title}</h1><p class=sub>{T('组会进展汇报 · 2026 年 11 月', 'Group meeting update · November 2026')}</p>"

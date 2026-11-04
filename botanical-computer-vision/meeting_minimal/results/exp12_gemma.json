@@ -1,0 +1,59 @@
+{
+  "ambiguous": {
+    "n": 441,
+    "both_tagged": 0.42403628117913833
+  },
+  "clear": {
+    "n": 929,
+    "both_tagged": 0.22282023681377824
+  },
+  "by_category": {
+    "both_plausible": {
+      "n": 181,
+      "both_tagged": 0.44751381215469616
+    },
+    "leaning_wrong": {
+      "n": 123,
+      "both_tagged": 0.5853658536585366
+    },
+    "neither": {
+      "n": 137,
+      "both_tagged": 0.24817518248175183
+    }
+  },
+  "by_pair": {
+    "fruit <-> inflorescence": {
+      "n": 24,
+      "both_tagged": 0.16666666666666666
+    },
+    "fruit <-> twig": {
+      "n": 156,
+      "both_tagged": 0.5128205128205128
+    },
+    "fruit <-> whole tree": {
+      "n": 57,
+      "both_tagged": 0.15789473684210525
+    },
+    "inflorescence <-> leaf": {
+      "n": 66,
+      "both_tagged": 0.36363636363636365
+    },
+    "inflorescence <-> twig": {
+      "n": 56,
+      "both_tagged": 0.39285714285714285
+    },
+    "leaf <-> twig": {
+      "n": 26,
+      "both_tagged": 0.8076923076923077
+    },
+    "leaf <-> whole tree": {
+      "n": 21,
+      "both_tagged": 0.6190476190476191
+    }
+  },
+  "hypergeom": {
+    "n_tests": 25,
+    "max_p_bh_fold_ge_2": 1.0453697242973502e-10,
+    "min_p": 1.4993783874314605e-231
+  }
+}

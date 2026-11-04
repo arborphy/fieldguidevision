@@ -1,0 +1,38 @@
+{
+  "inputs": {
+    "model": "efficientnet",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/efficientnet_b0_strict/embeddings.npz",
+    "sha256": "b1b6e4f21f8b6ceb3e08f90ac8766e63a9dcce0caa82857068e85dc71679730b",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "model": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+  "n_cases": 20,
+  "reembed_cosine_median": 0.9994300603866577,
+  "reembed_cosine_min": 0.9976018071174622,
+  "main_k": 5,
+  "per_k": [
+    {
+      "K": 5,
+      "n": 20,
+      "frac_top_beats_random": 0.95,
+      "median_drop_top": 0.04121711850166321,
+      "median_drop_random": 0.004820946604013443
+    }
+  ],
+  "frac_top_cam_beats_random": 0.95,
+  "frac_by_kind": {
+    "boundary": 1.0,
+    "core": 0.9
+  },
+  "median_drop_top": 0.04121711850166321,
+  "median_drop_random": 0.004820946604013443,
+  "sanity_spearman_vs_randomised_last_block_median": 0.3811122087545116,
+  "mean_cam_center_mass_3x3": 0.18687378078466282,
+  "center_mass_uniform_expectation": 0.1836734693877551,
+  "note": "Sampled 2 core + 2 boundary per cluster, seed 42, not hand-picked. No organ masks: says whether the map is faithful to the score, not whether it is on the organ."
+}
