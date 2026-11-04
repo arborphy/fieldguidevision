@@ -47,6 +47,11 @@ def table(df, d=2, pct=False):
     return f"<div class=tw><table><tr>{h}</tr>{b}</table></div>"
 
 
+def duo(left, right):
+    """Table and its companion figure side by side (stacked on narrow screens)."""
+    return f"<div class=duo><div>{left}</div><div>{right}</div></div>"
+
+
 def panel(label, body, finding):
     """Numbered figure / table with a one-sentence finding underneath."""
     return f"<div class=panel><div class=plabel>{label}</div>{body}<p class=finding>{finding}</p></div>"
@@ -193,25 +198,28 @@ def build(lang):
                 "Shot scale survives any reduction; organ information needs about 16 dimensions; species needs 64. In a 3-D plot species information falls to 32% on average."))
         + panel(T("图 1.2 · 同一批照片的三种二维画法（EfficientNet，按器官着色）", "Figure 1.2 · The same photos drawn three ways (EfficientNet, coloured by organ)"),
                 img(R / "exp8_maps_effnet.png", "maps"),
-                T(f"二维 PCA 中叶、花序、果实、小枝混在一起；t-SNE 与 UMAP 都能把器官分开。t-SNE 还保留了物种信息（{pct(effm.loc['t-SNE-2','species_kept'])}，UMAP 为 {pct(effm.loc['UMAP-2','species_kept'])}），因此展示统一用 t-SNE。",
+                T(f"二维 PCA 中叶、花序、果实、小枝混在一起；t-SNE 与 UMAP 都能把器官分开。t-SNE 还保留了物种信息（{pct(effm.loc['t-SNE-2','species_kept'])}，UMAP 为 {pct(effm.loc['UMAP-2','species_kept'])}），因此展示统一用 t-SNE。t-SNE 只用于展示和检查：看各组是否分开、找出落在别的器官堆里的照片（可能是标签错误或多器官照片）；距离和聚类都在 64 维中计算。",
                   f"In 2-D PCA leaf, inflorescence, fruit and twig overlap; t-SNE and UMAP both separate organs. t-SNE also keeps species information "
-                  f"({pct(effm.loc['t-SNE-2','species_kept'])} vs {pct(effm.loc['UMAP-2','species_kept'])} for UMAP), so figures use t-SNE."))
+                  f"({pct(effm.loc['t-SNE-2','species_kept'])} vs {pct(effm.loc['UMAP-2','species_kept'])} for UMAP), so figures use t-SNE. t-SNE is used only to display and inspect: whether groups separate, and which photos sit inside another organ's group (possible label errors or multi-organ photos); distances and clustering are computed in 64 dimensions."))
         + panel(T("表 1.1 · EfficientNet 各降维方式的信息保留", "Table 1.1 · Information kept by each reduction, EfficientNet"),
-                table(im_t[im_t.model == "EfficientNet-B0"].drop(columns="model").rename(columns={
+                duo(table(im_t[im_t.model == "EfficientNet-B0"].drop(columns="model").rename(columns={
                     "view": T("降维方式", "view"), "neighbours_kept": T("近邻保留", "neighbours kept"), "organ_kept": T("器官信息", "organ"),
-                    "scale_kept": T("距离信息", "shot scale"), "species_kept": T("物种信息", "species")}), pct=True),
+                    "scale_kept": T("距离信息", "shot scale"), "species_kept": T("物种信息", "species")}), pct=True), img(R / "exp8_side_heatmap.png", "heatmap")),
                 T(f"PCA 64 维在三类信息上都接近完整，且近邻关系保留最多（{pct(effm.loc['PCA-64','neighbours_kept'])}）；二维图在任何方法下近邻都不到一半。",
                   f"64-D PCA keeps all three kinds of information almost completely and the most neighbour relations ({pct(effm.loc['PCA-64','neighbours_kept'])}); "
                   "every 2-D view keeps fewer than half."))
-        + panel(T("表 1.2 · 五个模型的器官信息保留", "Table 1.2 · Organ information kept, five models"), table(im_org.rename(columns={"model": T("模型", "model")}), pct=True),
+        + panel(T("表 1.2 · 五个模型的器官信息保留", "Table 1.2 · Organ information kept, five models"), duo(table(im_org.rename(columns={"model": T("模型", "model")}), pct=True), img(R / "exp8_side_dumbbell.png", "dumbbell")),
                 T(f"所有模型的三维图都丢掉 {pct(1 - im_org['PCA-3'].max())}–{pct(1 - im_org['PCA-3'].min())} 的器官信息；64 维时全部恢复到 {pct(im_org['PCA-64'].min())} 以上。",
                   f"Every model's 3-D plot loses {pct(1 - im_org['PCA-3'].max())}–{pct(1 - im_org['PCA-3'].min())} of organ information; at 64 dimensions all "
                   f"recover to at least {pct(im_org['PCA-64'].min())}."))
         + panel(T("表 1.3 · EfficientNet 前 6 个主成分承载的信息（η²，0–1）", "Table 1.3 · Information carried by EfficientNet's first 6 components (η², 0–1)"),
-                table(pc_t.assign(main=pc_t["main"].map(lambda v: {"organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species")}[v])).rename(
-                    columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"), "main": T("主要承载", "mainly carries")}), 2),
-                T("前三个主成分主要区分器官（PC1 同时区分拍摄远近），物种信息分散在后面的成分中，所以只看前三维时看不到物种。",
-                  "The first three components mainly separate organs (PC1 also camera distance); species information is spread over later components, so it is invisible in the first three.")),
+                duo(table(pc_t.assign(main=pc_t["main"].map(lambda v: {"organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species")}[v])).rename(
+                    columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"), "main": T("主要承载", "mainly carries")}), 2), img(R / "exp8_side_pcbars.png", "PC bars")),
+                T("η² 的算法：对每个主成分，把照片按器官（或距离、物种）分组，计算“组与组之间的差别”占这个主成分全部差别的比例；1 表示该方向完全由这一标签决定，0 表示无关。"
+                  "结果：前三个主成分主要区分器官（PC1 同时区分拍摄远近），物种信息分散在后面的成分中，所以只看前三维时看不到物种。",
+                  "How η² is computed: for each component, photos are grouped by organ (or scale, species), and η² is the share of the component's variation that lies "
+                  "between groups; 1 = the direction is fully determined by that label, 0 = unrelated. Result: the first three components mainly separate organs (PC1 also "
+                  "camera distance); species information is spread over later components, so it is invisible in the first three.")),
         T(f"三维 PCA 图丢掉 {pct(1 - im_org['PCA-3'].max())}–{pct(1 - im_org['PCA-3'].min())} 的器官信息、保留的近邻关系不到 30%，<b>不能用来判断器官结构或聚类</b>。"
           "PCA 64 维对器官、距离、物种信息都接近完整保留，<b>后续所有分析都在 64 维中进行</b>。展示用二维图统一采用 t-SNE：图中的分组可信，但距离、簇大小和位置不具有含义。",
           f"A 3-D PCA plot loses {pct(1 - im_org['PCA-3'].max())}–{pct(1 - im_org['PCA-3'].min())} of organ information and keeps fewer than 30% of neighbour "
@@ -352,7 +360,8 @@ th{text-align:left;font-weight:600;border-bottom:1.5px solid var(--fg);padding:5
 figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:block}figcaption{font-size:11px;line-height:1.35;color:var(--mut);margin-top:3px}
 .cap{font-size:13px;color:var(--mut);margin:14px 0 4px}
 .panel{margin:4px 0 26px}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
-.finding{margin:8px 0 0;padding-left:10px;border-left:2px solid var(--acc);font-size:14px}th.n,td.n{text-align:right}.rh{font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px;border-top:1px dashed var(--line);padding-top:14px}ol li{margin:4px 0}
+.finding{margin:8px 0 0;padding-left:10px;border-left:2px solid var(--acc);font-size:14px}th.n,td.n{text-align:right}.duo{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:24px;align-items:start}
+.duo .fig{margin:10px 0}@media(max-width:760px){.duo{grid-template-columns:1fr}}.rh{font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px;border-top:1px dashed var(--line);padding-top:14px}ol li{margin:4px 0}
 """
     title = T("Field Guide Vision · 无监督结构分析进展", "Field Guide Vision · Unsupervised Structure Update")
     html = (f"<!doctype html><html lang={'zh' if zh else 'en'}><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
