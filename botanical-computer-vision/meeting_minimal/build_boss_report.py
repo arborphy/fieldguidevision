@@ -186,8 +186,8 @@ def build(lang):
              f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis is done in 64-D PCA space"),
         2: T("K = 3 对应拍摄远近，K = 5 最稳定，K = 7 对应器官；通用视觉模型的组由器官决定（排除物种因素后仍成立），约三分之一的照片处于相邻器官之间",
              "K = 3 captures camera distance, K = 5 is most stable, K = 7 matches organs; general vision models group by organ even after controlling for species, and about a third of photos lie between adjacent organs"),
-        3: T(f"只有 EfficientNet 的器官信息集中在少数维度（每类约 {nt.loc['EfficientNet-B0','per_class']:.0f} 个）",
-             f"Only EfficientNet concentrates organ information in few dimensions (about {nt.loc['EfficientNet-B0','per_class']:.0f} per class)"),
+        3: T("只有 EfficientNet 能用少数维度区分器官；YOLO 有清楚的结构，但不是按器官组织的",
+             "Only EfficientNet tells organs apart with few dimensions; YOLO has clear structure, but not organised by organ"),
         4: T("Autoencoder 不优于 PCA；第一主成分对应拍摄距离", "An autoencoder does not improve on PCA; the first principal component is camera distance"),
         5: T("组中心可由真实照片直观呈现；热图对模型可信，是否对准器官尚待检验",
              "Group centres can be shown with real photos; heatmaps are faithful to the model, alignment with organs is untested"),
@@ -353,24 +353,46 @@ def build(lang):
           "organ-level analysis and soft clustering</b> (one group per organ); drop K = 20 and above. Photos between two groups concentrate between adjacent organs "
           "and are candidates for multi-label annotation (section 6)."), "done"))
 
-    S.append(sec(3, T("决定分组的维度：收缩质心（NSC）", "Dimensions that define the groups: shrunken centroids (NSC)"), T("找出区分器官、以及复现聚类所需的最少维度，衡量信息的集中程度。", "Find the fewest dimensions needed to separate organs and to reproduce the clusters, as a measure of how concentrated the information is."),
-        T("NSC（最近收缩质心）：给每类算中心，看它在每个坐标上偏离平均多少；<b>Δ 是门槛</b>，偏离小于 Δ 的坐标对这一类删掉。Δ=0 全保留，Δ 越大越精简。"
-          "用按植株分组的 5 折交叉验证 + “一倍标准误”规则选 Δ（统计上和最好一样好的最精简模型），测试集只评估一次。坐标是 PCA 方向，不是生物学特征。",
-          "NSC (nearest shrunken centroids): a centre per class and its deviation on every coordinate; <b>Δ is a threshold</b>, coordinates deviating less "
-          "than Δ are dropped for that class. Δ=0 keeps all; larger Δ is sparser. Δ chosen by 5-fold CV grouped by plant and the one-standard-error rule "
-          "(sparsest model statistically as good as the best); test set used once. Coordinates are PCA directions, not biological traits."),
-        T("两个任务：(a) 外部器官标签；(b) 复现模型自己 K=3/7/20 的分组。五个模型。", "Two tasks: (a) external organ labels; (b) reproducing the model's own K = 3 / 7 / 20 groups. Five models."),
-        img(R / "exp1c_nsc_organ_models.png", "organ") + img(R / "exp1c_nsc_grouping_models.png", "grouping") + table(nsc_tt, 2)
-        + T("<p class=cap>读图：横轴向右 = 保留的坐标越少；纵轴 = 相对全部坐标的准确率；圆点 = 选出的 Δ。先平后断崖 = 信息集中；一开始就下滑 = 信息分散。</p>",
-            "<p class=cap>Reading: to the right = fewer coordinates; y = accuracy relative to all coordinates; dot = chosen Δ. Flat then a cliff = concentrated; "
-            "sliding from the start = spread out.</p>")
-        + img(R / "exp1b_nsc_heatmap.png", "heatmap")
-        + T("<p class=cap>EfficientNet：每个器官靠哪些方向识别（红 / 蓝 = 偏向方向的两端，白 = 不用）。</p>",
-            "<p class=cap>EfficientNet: which directions identify each organ (red / blue = the two ends, white = not used).</p>"),
-        T(f"只有 EfficientNet 能把器官压缩到每类约 {nt.loc['EfficientNet-B0','per_class']:.0f} 个坐标且几乎不掉准确率；其他模型的器官信息分散。"
-          "复现分组需要的坐标随 K 增大而增多，之前“要用近 64 个坐标”是 K=20 造成的。",
-          f"Only EfficientNet compresses organ to ~{nt.loc['EfficientNet-B0','per_class']:.0f} coordinates per class with almost no loss; elsewhere organ "
-          "information is spread out. Coordinates needed to reproduce the groups grow with K; \"almost all 64\" was a K=20 effect."), "done"))
+    nb = json.loads((R / "exp1d_nsc_bars.json").read_text())
+    vz = json.loads((R / "exp1b_nsc_viz.json").read_text())
+    pc_name = [T("PC1 · 近拍叶 ↔ 远景整树", "PC1 · close-up leaf ↔ distant whole tree"), T("PC2 · 树皮 ↔ 整树", "PC2 · bark ↔ whole tree"),
+               T("PC3 · 花序 ↔ 叶与树皮", "PC3 · inflorescence ↔ leaf and bark")]
+    pcs = "".join(f"<h4>{pc_name[i]}</h4>"
+                  f"<div class=ends><div><small>{T('一端', 'one end')}</small>{strip(a_['low'][:3], cap_photo)}</div>"
+                  f"<div><small>{T('另一端', 'other end')}</small>{strip(a_['high'][:3], cap_photo)}</div></div>" for i, a_ in enumerate(vz["axes"][:3]))
+    S.append(sec(3, T("区分器官需要多少维度：收缩质心（NSC）", "How many dimensions organs need: shrunken centroids (NSC)"),
+        T("确定区分器官最少需要多少个维度，以衡量器官信息是集中在少数方向上，还是分散在许多方向上。",
+          "Determine how few dimensions are needed to tell organs apart, as a measure of whether organ information is concentrated in a few directions or spread over many."),
+        T("NSC（最近收缩质心，有监督，只用于解释）在 64 维 PCA 空间中为每种器官计算中心，并删去与平均差别不大的维度。"
+          "<b>Δ</b> 是删除门槛：Δ 越大，删去的维度越多。<b>圆点</b>：按交叉验证，在统计上与最好结果一样好的前提下能删到的最少维度。",
+          "NSC (nearest shrunken centroids; supervised, used only to explain) computes a centre for each organ in 64-D PCA space and drops dimensions in which "
+          "the organ hardly differs from the average. <b>Δ</b> is the dropping threshold: larger Δ drops more dimensions. <b>Dot</b>: the fewest dimensions that "
+          "are statistically as good as the best result under cross-validation."),
+        T("五个模型；交叉验证按个体植株分组，测试集只评估一次。另以模型自己的 K = 7 分组为目标做同样的计算，作为对照。",
+          "Five models; cross-validation grouped by individual plant, test set evaluated once. The same computation with the model's own K = 7 groups as target serves as a reference."),
+        T("<p class=lead>论证顺序：3.1 各模型的器官信息有多集中 → 3.2 器官与模型自身分组的对比 → 3.3 EfficientNet 用到的维度</p>",
+          "<p class=lead>Line of argument: 3.1 how concentrated organ information is → 3.2 organs versus the model's own groups → 3.3 the dimensions EfficientNet uses</p>")
+        + panel(T("3.1 删减维度后的器官识别准确率（五个模型）", "3.1 Organ accuracy as dimensions are dropped (five models)"), img(R / "exp1c_nsc_organ_models.png", "NSC organ"),
+                T("横轴向右 = 保留的维度越少，纵轴 = 相对于全部维度的准确率。EfficientNet 一直保持平稳，每类只需约 3 个维度即保留 90% 的准确率；其他模型从一开始就下降，器官信息分散在许多维度中。",
+                  "Rightwards = fewer dimensions kept; y = accuracy relative to all dimensions. EfficientNet stays flat and keeps 90% accuracy with about 3 dimensions per class; "
+                  "the other models decline from the start, so their organ information is spread over many dimensions."))
+        + panel(T("3.2 区分器官 vs 复现模型自己的分组：各需多少维度", "3.2 Telling organs apart vs reproducing the model's own groups: dimensions needed"),
+                img(R / "exp1d_nsc_bars.png", "NSC bars"),
+                T(f"两根柱都短，说明模型有清楚的结构，且这个结构就是器官（EfficientNet，{nb['EfficientNet-B0']['organ']:.0f} vs {nb['EfficientNet-B0']['own_k7']:.0f}）。"
+                  f"灰柱短、橙柱长，说明模型有清楚的结构，但不是按器官组织的：YOLO backbone 复现自身分组只需 {nb['YOLO11s backbone']['own_k7']:.0f} 个维度，区分器官却需要 {nb['YOLO11s backbone']['organ']:.0f} 个。",
+                  f"Both bars short: the model has clear structure and that structure is organ (EfficientNet, {nb['EfficientNet-B0']['organ']:.0f} vs {nb['EfficientNet-B0']['own_k7']:.0f}). "
+                  f"Grey short and orange long: clear structure, but not organised by organ; YOLO backbone reproduces its own groups with {nb['YOLO11s backbone']['own_k7']:.0f} "
+                  f"dimensions but needs {nb['YOLO11s backbone']['organ']:.0f} to tell organs apart."))
+        + panel(T("3.3 EfficientNet 区分器官用到的维度", "3.3 Dimensions EfficientNet uses to tell organs apart"),
+                img(R / "exp1b_nsc_heatmap.png", "heatmap") + pcs,
+                T("热图：行是器官，列是保留下来的主方向；颜色越深越重要（红、蓝表示偏向方向的两端），白色表示该器官不用这个方向。"
+                  "前三个主方向承担了大部分区分：PC1 区分近拍叶与远景整树，PC2 区分树皮与整树，PC3 一端是花序、另一端是叶与树皮。照片为每个方向两端的真实照片。",
+                  "Heatmap: rows are organs, columns the directions kept; darker = more important (red and blue are the two ends), white = not used for that organ. "
+                  "The first three directions do most of the work: PC1 separates close-up leaf from distant whole tree, PC2 bark from whole tree, PC3 inflorescence from leaf and bark. Photos "
+                  "show real images at both ends of each direction.")),
+        T("只有 EfficientNet 把器官信息集中在少数维度中，适合作为“照片 → 器官”提取的起点。YOLO 的空间有清楚的结构，但这种结构不是按器官组织的。所用维度是数学方向，不等同于植物学性状。",
+          "Only EfficientNet concentrates organ information in a few dimensions, making it a good starting point for photo → organ extraction. YOLO's space has "
+          "clear structure, but not organised by organ. The dimensions are mathematical directions, not botanical traits."), "done"))
 
     S.append(sec(4, T("Autoencoder 与主轴", "Autoencoder and axes"), T("比较非线性降维（Autoencoder）与 PCA，并解释主要主成分的含义。", "Compare non-linear reduction (autoencoder) with PCA and interpret the main principal components."),
         T("32 维 Autoencoder 与 PCA 比较重建误差和近邻保留；再取 PCA 主轴两端的真实照片，并计算主轴与拍摄距离、器官的相关。",
@@ -463,7 +485,7 @@ figure img{width:128px;height:96px;object-fit:cover;border-radius:3px;display:bl
 .aim{color:var(--mut);margin:6px 0 16px}.meth{font-size:12.5px;color:var(--mut);margin:12px 0 0;line-height:1.55}
 .abs{background:var(--soft);padding:14px 18px;border-radius:4px;margin:8px 0 10px}.ch{font-size:22px;margin:46px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--fg)}
 .chn{color:var(--acc);margin-right:6px}.setup{font-size:13.5px;color:var(--mut);margin:0 0 14px}.kf{margin:8px 0 0;padding-left:20px}.kf li{margin:3px 0}.kl{color:inherit;text-decoration:none}.kl:hover{text-decoration:underline}section h2{font-size:18px;line-height:1.35}
-.panel{margin:4px 0 26px}.lead{margin:0 0 18px;font-size:14px;color:var(--mut)}.ps{font-size:12px;color:var(--mut);margin:6px 0 0}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
+.panel{margin:4px 0 26px}.ends{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ends>div{min-width:0}.ends small{color:var(--mut);font-size:11px}@media(max-width:700px){.ends{grid-template-columns:1fr}}.lead{margin:0 0 18px;font-size:14px;color:var(--mut)}.ps{font-size:12px;color:var(--mut);margin:6px 0 0}.plabel{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--acc);margin-bottom:4px}
 .finding{margin:8px 0 0;padding-left:10px;border-left:2px solid var(--acc);font-size:14px}th.n,td.n{text-align:right}.duo{display:grid;grid-template-columns:auto minmax(0,300px);gap:24px;align-items:start}
 .duo .fig{margin:10px 0;max-width:300px}@media(max-width:760px){.duo{grid-template-columns:1fr}}.rh{font-size:13px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:22px 0 8px;border-top:1px dashed var(--line);padding-top:14px}ol li{margin:4px 0}
 """
