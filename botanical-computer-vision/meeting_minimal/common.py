@@ -19,7 +19,7 @@ import pandas as pd
 BCV = Path(__file__).resolve().parents[1]
 import os
 MODEL = os.environ.get("FGV_MODEL", "efficientnet")  # efficientnet | bioclip | dinov3
-OUT = Path(__file__).resolve().parent / ("results" if MODEL == "efficientnet" else f"results/{MODEL}")
+OUT = Path(__file__).resolve().parent / ("results" if MODEL == "efficientnet" else f"results/{MODEL}") / os.environ.get("FGV_OUTSUB", "")
 OUT.mkdir(parents=True, exist_ok=True)
 IMG_DIR = Path("/home/user/imgcache")  # local cache, rebuilt by fetch_images.sh; images are never committed
 
@@ -107,8 +107,8 @@ def knn_overlap(A: np.ndarray, B: np.ndarray, k: int = 15) -> float:
 
 # K is a choice, not a given: every clustering experiment runs on these values (why: 3 shot scales, 7 organs,
 # 20 = the earlier default; large K left out to keep runs short). Figures and examples use MAIN_K = 7 (organ question).
-K_LIST = [3, 7, 20]
-MAIN_K = 7
+K_LIST = [int(k) for k in os.environ.get("FGV_KLIST", "3,7,20").split(",")]
+MAIN_K = int(os.environ.get("FGV_MAINK", "7"))
 
 
 def clusters(X, k):
