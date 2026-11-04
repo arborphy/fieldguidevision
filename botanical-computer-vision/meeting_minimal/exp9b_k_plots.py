@@ -27,14 +27,14 @@ for ax, (col, title) in zip(axes.ravel(), MET):
         ax.plot(t.K, y, color=MCOL[m], lw=1.6, marker="o", ms=3, label=m)
         kb = B[m][col]
         ax.scatter([kb], [y[t.K == kb].iloc[0]], s=55, facecolor="white", edgecolor=MCOL[m], lw=1.8, zorder=5)
-    ax.axvspan(4.5, 7.5, color="#f1efe8", zorder=0)
-    ax.set_title(title, fontsize=9.5, loc="left"); ax.set_xticks([3, 5, 7, 10, 15, 20]); ax.tick_params(labelsize=7.5)
+    ax.axvspan(3.5, 6.5, color="#f1efe8", zorder=0)
+    ax.set_title(title, fontsize=9.5, loc="left"); ax.set_xticks([3, 4, 5, 6, 7, 8, 10, 15]); ax.tick_params(labelsize=7.5)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     if col in ("calinski_harabasz", "bic"):
         ax.set_ylabel("relative to max |value|", fontsize=7)
 axes[0, 0].legend(fontsize=7, frameon=False)
-fig.supxlabel("K (number of groups); open dot = best K for that model; shaded band = K 5–7", fontsize=9)
+fig.supxlabel("K (number of groups); open dot = best K for that model; shaded band = K 4–6", fontsize=9)
 plt.tight_layout(); plt.savefig(R / "exp9_k_metrics.png", dpi=140); plt.close()
 
 votes = pd.DataFrame(B).T[[c for c, _ in MET]]
@@ -65,3 +65,16 @@ for ax, m in zip(axes, ["EfficientNet-B0", "DINOv3"]):
 axes[1].legend(fontsize=7, frameon=False, bbox_to_anchor=(1, 1), loc="upper left")
 plt.tight_layout(); plt.savefig(R / "exp9_k5_groups.png", dpi=140); plt.close()
 print(votes)
+
+# simple version for the report: stability and organ agreement only
+fig, axes = plt.subplots(1, 2, figsize=(9, 3.2))
+for ax, (col, title) in zip(axes, [("stability", "Stability: same groups after resampling plants ↑"), ("organ_ami", "Agreement with organ labels ↑")]):
+    for m, t in D.items():
+        ax.plot(t.K, t[col], color=MCOL[m], lw=1.8, marker="o", ms=3.5, label=m)
+    ax.axvline(5, color="#c0392b", lw=1.2, ls="--"); ax.text(5.15, ax.get_ylim()[1] * 0.98, "K = 5", color="#c0392b", fontsize=9, va="top")
+    ax.set_title(title, fontsize=9.5, loc="left"); ax.set_xticks([3, 4, 5, 6, 7, 8, 10, 15]); ax.tick_params(labelsize=8)
+    ax.set_xlabel("K (number of groups)", fontsize=8.5)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+axes[0].legend(fontsize=7.5, frameon=False, loc="lower left")
+plt.tight_layout(); plt.savefig(R / "exp9_k_simple.png", dpi=140); plt.close()
