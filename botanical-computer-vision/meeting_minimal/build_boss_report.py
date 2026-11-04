@@ -185,7 +185,7 @@ def build(lang):
         + T("<p class=cap>五个模型：三维 PCA 图 vs 64 维（物种信息保留）</p>", "<p class=cap>Five models: 3-D PCA plot vs 64-D (species information kept)</p>")
         + table(im_sp, 2)
         + T("<p class=cap>EfficientNet 前 6 个主成分主要承载什么（η²）：</p>", "<p class=cap>What EfficientNet's first 6 principal components carry (η²):</p>")
-        + table(pc_t.rename(columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"),
+        + table(pc_t.assign(main=pc_t["main"].map(lambda v: {"organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species")}[v])).rename(columns={"pc": "PC", "organ": T("器官", "organ"), "scale": T("距离", "scale"), "species": T("物种", "species"),
                                      "main": T("主要承载", "mainly carries")}), 2),
         T(f"三维 PCA 图基本只显示拍摄距离和器官，物种信息只剩约 {pct(im_t[(im_t.model=='EfficientNet-B0')&(im_t.view=='PCA-3')].iloc[0,-1])}，近邻关系不到 20%，"
           "所以<b>三维图不能用来判断物种或聚类结构</b>。PCA 64 维几乎不丢信息，<b>后续所有分析都在 64 维里做</b>；需要画图时用 t-SNE（保留分组，但距离和位置没有含义）。",
