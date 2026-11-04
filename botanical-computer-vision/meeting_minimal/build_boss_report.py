@@ -188,7 +188,8 @@ def build(lang):
              "K = 3 captures camera distance, K = 5 is most stable, K = 7 matches organs; general vision models group by organ even after controlling for species, and about a third of photos lie between adjacent organs"),
         3: T("只有 EfficientNet 能用少数维度区分器官；YOLO 有清楚的结构，但不是按器官组织的",
              "Only EfficientNet tells organs apart with few dimensions; YOLO has clear structure, but not organised by organ"),
-        4: T("Autoencoder 不优于 PCA；第一主成分对应拍摄距离", "An autoencoder does not improve on PCA; the first principal component is camera distance"),
+        4: T("Autoencoder 不优于 PCA；照片空间中变化最大的方向是拍摄远近，其次是器官",
+             "An autoencoder does not improve on PCA; the largest variation in the photo space is camera distance, then organ"),
         5: T("组中心可由真实照片直观呈现；热图对模型可信，是否对准器官尚待检验",
              "Group centres can be shown with real photos; heatmaps are faithful to the model, alignment with organs is untested"),
         6: T(f"软聚类筛出 {n_pl} 张可能含多个器官的照片，可作为多标签标注的候选",
@@ -384,28 +385,61 @@ def build(lang):
                   f"Grey short and orange long: clear structure, but not organised by organ; YOLO backbone reproduces its own groups with {nb['YOLO11s backbone']['own_k7']:.0f} "
                   f"dimensions but needs {nb['YOLO11s backbone']['organ']:.0f} to tell organs apart."))
         + panel(T("3.3 EfficientNet 区分器官用到的维度", "3.3 Dimensions EfficientNet uses to tell organs apart"),
-                img(R / "exp1b_nsc_heatmap.png", "heatmap") + pcs,
+                img(R / "exp1b_nsc_heatmap.png", "heatmap"),
                 T("热图：行是器官，列是保留下来的主方向；颜色越深越重要（红、蓝表示偏向方向的两端），白色表示该器官不用这个方向。"
-                  "前三个主方向承担了大部分区分：PC1 区分近拍叶与远景整树，PC2 区分树皮与整树，PC3 一端是花序、另一端是叶与树皮。照片为每个方向两端的真实照片。",
+                  "前三个主方向承担了大部分区分：PC1 区分近拍叶与远景整树，PC2 区分树皮与整树，PC3 区分花序与叶、树皮。各方向两端的真实照片见 4.2。",
                   "Heatmap: rows are organs, columns the directions kept; darker = more important (red and blue are the two ends), white = not used for that organ. "
-                  "The first three directions do most of the work: PC1 separates close-up leaf from distant whole tree, PC2 bark from whole tree, PC3 inflorescence from leaf and bark. Photos "
-                  "show real images at both ends of each direction.")),
+                  "The first three directions do most of the work: PC1 separates close-up leaf from distant whole tree, PC2 bark from whole tree, PC3 inflorescence from leaf and bark. Photos at both ends of "
+                  "each direction are shown in 4.2.")),
         T("只有 EfficientNet 把器官信息集中在少数维度中，适合作为“照片 → 器官”提取的起点。YOLO 的空间有清楚的结构，但这种结构不是按器官组织的。所用维度是数学方向，不等同于植物学性状。",
           "Only EfficientNet concentrates organ information in a few dimensions, making it a good starting point for photo → organ extraction. YOLO's space has "
           "clear structure, but not organised by organ. The dimensions are mathematical directions, not botanical traits."), "done"))
 
-    S.append(sec(4, T("Autoencoder 与主轴", "Autoencoder and axes"), T("比较非线性降维（Autoencoder）与 PCA，并解释主要主成分的含义。", "Compare non-linear reduction (autoencoder) with PCA and interpret the main principal components."),
-        T("32 维 Autoencoder 与 PCA 比较重建误差和近邻保留；再取 PCA 主轴两端的真实照片，并计算主轴与拍摄距离、器官的相关。",
-          "A 32-D autoencoder vs PCA on reconstruction error and neighbour retention; then real photos at both ends of each principal axis and its "
-          "correlation with shot scale and organ."),
-        T("AE 结果从上次网站恢复，并用线性 AE 复核（与 PCA 一致，说明代码和数据对齐）。", "AE results recovered from the previous site and checked with a linear AE (matches PCA, so code and data line up)."),
-        table(ae, 6)
-        + T(f"<p class=cap>EfficientNet PC1 两端（与拍摄距离相关 ρ = {s5['axes'][0]['rho_scale_close']:.2f}）：</p>",
-            f"<p class=cap>EfficientNet PC1, both ends (correlation with shot scale ρ = {s5['axes'][0]['rho_scale_close']:.2f}):</p>")
-        + strip(pc1["low"], cap_photo) + strip(pc1["high"], cap_photo),
-        T("AE 的误差和 PCA 几乎一样、近邻保留更差，非线性方法没带来收益，不再继续。第一主轴就是“拍得多远”：一端近拍叶子，一端远景整树。",
-          "The AE matches PCA on error and is worse on neighbours: no gain from non-linearity, line closed. The first axis is camera distance: close-up "
-          "leaves at one end, distant whole trees at the other."), "done"))
+    AX = {m: pd.read_csv(d / "exp5_axis_table.csv").head(3) for m, d in M3.items()}
+    def pc1_reads(t):
+        r = t.reading[0]
+        if "~" not in r:
+            return T("无明显器官对应", "no clear organ")
+        lo_, hi_ = r.split("low end ~ ")[1].split(", high end ~ ")
+        return f"{on(lo_.strip())} ↔ {on(hi_.strip())}"
+    ax_t = pd.DataFrame([[m, f"PC{int(t.loc[t.rho_scale_close.abs().idxmax(), 'pc'])}", t.rho_scale_close.abs().max(), pc1_reads(t)] for m, t in AX.items()],
+                        columns=[T("模型", "Model"), T("与拍摄远近最相关的主轴", "Axis most related to camera distance"), T("相关强度 |ρ|", "Strength |ρ|"),
+                                 T("PC1 区分的是", "What PC1 separates")])
+    ends3 = "".join(f"<h4>{nm}</h4><div class=ends><div><small>{T('一端', 'one end')}</small>{strip(s5['ends'][str(k)]['low'][:3], cap_photo)}</div>"
+                    f"<div><small>{T('另一端', 'other end')}</small>{strip(s5['ends'][str(k)]['high'][:3], cap_photo)}</div></div>"
+                    for k, nm in [(1, T("PC1 · 近拍叶 ↔ 远景整树", "PC1 · close-up leaf ↔ distant whole tree")), (2, T("PC2 · 树皮 ↔ 整树", "PC2 · bark ↔ whole tree")),
+                                  (3, T("PC3 · 花序 ↔ 叶与树皮", "PC3 · inflorescence ↔ leaf and bark"))])
+    aer = ae.set_index(["model", "method"])
+    S.append(sec(4, T("Autoencoder 与主轴的含义", "Autoencoder and the meaning of the main axes"),
+        T("检验非线性降维（Autoencoder）能否比 PCA 保留更多信息，并说明 PCA 主要方向（主轴）各代表什么。",
+          "Test whether non-linear reduction (autoencoder) keeps more information than PCA, and state what the main PCA directions (axes) represent."),
+        T("<b>Autoencoder</b>（无监督）：一个小型神经网络，先把向量压缩到 32 维再还原（输入 → 128 → 32 → 128 → 输入，ReLU 激活），"
+          "在 1,181 张训练照片上训练 40 轮（Adam，学习率 0.001），在 211 张测试照片上与同为 32 维的 PCA 比较两项：还原误差，以及近邻关系保留了多少。"
+          "<b>主轴两端</b>：把所有照片按某一主方向上的得分排序，取两端的照片；并计算主轴得分与拍摄远近的相关（|ρ|，0–1）。",
+          "<b>Autoencoder</b> (unsupervised): a small neural network that compresses each vector to 32 dimensions and reconstructs it (input → 128 → 32 → 128 → "
+          "input, ReLU), trained for 40 epochs on 1,181 training photos (Adam, learning rate 0.001) and compared on 211 test photos with 32-D PCA on two counts: "
+          "reconstruction error and neighbour relations kept. <b>Ends of an axis</b>: sort all photos by their score on one principal direction and take the "
+          "photos at both ends; also correlate the score with camera distance (|ρ|, 0–1)."),
+        T("AE 结果来自上一阶段，并以线性 AE 复核：线性 AE 与 PCA 一致，说明代码与数据对齐。", "AE results come from the previous stage and were checked with a linear AE, which matches PCA, so code and data line up."),
+        T("<p class=lead>论证顺序：4.1 非线性降维是否更好 → 4.2 主轴代表什么</p>", "<p class=lead>Line of argument: 4.1 whether non-linear reduction is better → 4.2 what the axes represent</p>")
+        + panel(T("4.1 Autoencoder 与 PCA（32 维，测试照片）", "4.1 Autoencoder vs PCA (32 dimensions, test photos)"),
+                duo(table(ae.assign(knn15_retention=ae.knn15_retention.map(lambda v: f"{v:.0%}"), model=ae.model.map({"bioclip25": "BioCLIP 2.5", "dinov3": "DINOv3", "efficientnet_b0": "EfficientNet-B0"})).rename(columns={
+                    "model": T("模型", "Model"), "method": T("方法", "Method"), "test_mse": T("还原误差", "Reconstruction error"),
+                    "knn15_retention": T("近邻保留", "Neighbours kept")}), 6), img(R / "exp5b_ae.png", "AE")),
+                T(f"三个模型中，Autoencoder 的还原误差与 PCA 几乎相同，近邻保留反而低 1–5 个百分点（EfficientNet："
+                  f"{aer.loc[('efficientnet_b0', 'Autoencoder'), 'knn15_retention']:.0%} vs {aer.loc[('efficientnet_b0', 'PCA'), 'knn15_retention']:.0%}）。",
+                  f"For all three models the autoencoder's reconstruction error matches PCA, and it keeps 1–5 points fewer neighbours (EfficientNet: "
+                  f"{aer.loc[('efficientnet_b0', 'Autoencoder'), 'knn15_retention']:.0%} vs {aer.loc[('efficientnet_b0', 'PCA'), 'knn15_retention']:.0%})."))
+        + panel(T("4.2 主轴代表什么：EfficientNet 前三个主轴两端的照片，以及各模型中与拍摄远近最相关的主轴", "4.2 What the axes represent: EfficientNet's first three axes, and the axis most related to camera distance per model"),
+                ends3 + table(ax_t, 2),
+                T("EfficientNet 的第一主轴就是拍摄远近（一端近拍叶，另一端远景整树），第二主轴区分树皮与整树，第三主轴一端是花序、另一端是叶与树皮。"
+                  "DINOv3 同样在第一、二主轴上体现拍摄远近；BioCLIP 到第三主轴才出现，与其按物种组织的结构一致。",
+                  "EfficientNet's first axis is camera distance (close-up leaf at one end, distant whole tree at the other); the second separates bark from whole tree, "
+                  "the third inflorescence from leaf and bark. DINOv3 also shows camera distance on its first two axes; in BioCLIP it appears only on the third, consistent "
+                  "with its species-based structure.")),
+        T("非线性降维没有带来收益，<b>继续使用 PCA，Autoencoder 方向不再推进</b>。照片空间中变化最大的方向是拍摄远近，其次才是器官；比较照片时需要考虑拍摄距离的影响。",
+          "Non-linear reduction brings no gain: <b>keep PCA and close the autoencoder line</b>. The largest variation in the photo space is camera distance, then "
+          "organ; comparisons between photos should take shot distance into account."), "done"))
 
     S.append(sec(5, T("从隐空间回到图片", "Back from the latent space to images"),
         T("由隐空间中的点检索对应的真实图片，并以激活热图定位模型依赖的图像区域。", "Map points in the latent space back to real photos, and locate the image regions the model relies on with activation maps."),
