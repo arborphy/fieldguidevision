@@ -91,7 +91,7 @@ for k in K_LIST:
         order = np.argsort(-H)
         by_cat = {ct_: [rec(i) for i in order if amb[i] and cat[i] == ct_][:8] for ct_ in CATS}
         pairs = pd.Series([tuple(sorted((int(a[i]), int(b2[i])))) for i in np.where(amb)[0]]).value_counts().head(5)
-        by_pair = [dict(pair=list(p_), n=int(n_), cases=[rec(i) for i in order if amb[i] and tuple(sorted((a[i], b2[i]))) == p_][:6])
+        by_pair = [dict(pair=list(p_), n=int(n_), cases=[rec(i) for i in order if amb[i] and tuple(sorted((a[i], b2[i]))) == p_][:8])
                    for p_, n_ in pairs.items()]
         detail = dict(K=k, clusters=desc.reset_index().to_dict("records"), faces=faces, by_category=by_cat, by_pair=by_pair)
     allm.append(pd.DataFrame({"image_id": meta.image_id, "K": k, "max_membership": P.max(1), "norm_entropy": H,

@@ -69,12 +69,12 @@ kt = pd.DataFrame([{"model": m,
                     "K3": g[g.K == 3].matched_acc_scale.iloc[0], "K7": g[g.K == 7].matched_acc_organ.iloc[0],
                     "stab3": g[g.K == 3].stability_ari_mean.iloc[0], "stab7": g[g.K == 7].stability_ari_mean.iloc[0],
                     "stab20": g[g.K == 20].stability_ari_mean.iloc[0]} for m, g in ks.groupby("model", sort=False)])
-soft = J(R, "exp4_soft_summary.json")
+soft = J(R / "k7", "exp4_soft_summary.json")
 e7 = soft["results"][f"K{MAIN_K}"]
 main = soft["main"]
 org = {c["cluster"]: c["top_organ"] for c in main["clusters"]}
 short = {c["cluster"]: f"{c['top_organ']} {c['top_organ_share']:.0%}" for c in main["clusters"]}
-mm = pd.read_csv(R / "exp4_soft_memberships.csv")
+mm = pd.read_csv(R / "k7" / "exp4_soft_memberships.csv")
 mm = mm[(mm.K == MAIN_K) & mm.category_if_ambiguous.notna() & (mm.category_if_ambiguous != "")]
 mm["pair"] = [" ↔ ".join(sorted((org[a], org[b]))) for a, b in zip(mm.top1, mm.top2)]
 pairs = mm.groupby("pair").agg(n=("image_id", "size"), plausible=("category_if_ambiguous", lambda s: (s == "both_plausible").sum()))
@@ -181,10 +181,10 @@ def build(lang):
     yb, yn = eff_f.loc["YOLO11s backbone"], eff_f.loc["YOLO11s neck"]
     lo3, hi3 = pct(1 - im_org["PCA-3"].max()), pct(1 - im_org["PCA-3"].min())
     CLAIM = {
-        1: T(f"三维 PCA 图丢失 {lo3}–{hi3} 的器官信息；分析需在 64 维 PCA 空间中进行",
-             f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis must run in 64-dimensional PCA space"),
-        2: T("不同的 K 对应不同层次的结构：K = 3 区分拍摄远近，K = 5 最稳定，K = 7 对应器官；约三分之一的照片处于相邻器官之间",
-             "Different K capture different layers: K = 3 separates camera distance, K = 5 is most stable, K = 7 matches organs; about a third of photos lie between adjacent organs"),
+        1: T(f"三维 PCA 图丢失 {lo3}–{hi3} 的器官信息；分析在 64 维 PCA 空间中进行",
+             f"3-D PCA plots lose {lo3}–{hi3} of organ information; analysis is done in 64-D PCA space"),
+        2: T("K = 3 对应拍摄远近，K = 5 最稳定，K = 7 对应器官；约三分之一的照片处于相邻器官之间",
+             "K = 3 captures camera distance, K = 5 is the most stable, K = 7 matches organs; about a third of photos lie between adjacent organs"),
         3: T("通用视觉模型按器官分组，BioCLIP 按物种分组", "General vision models group photos by organ; BioCLIP groups them by species"),
         4: T(f"只有 EfficientNet 的器官信息集中在少数维度（每类约 {nt.loc['EfficientNet-B0','per_class']:.0f} 个）",
              f"Only EfficientNet concentrates organ information in few dimensions (about {nt.loc['EfficientNet-B0','per_class']:.0f} per class)"),
@@ -313,8 +313,8 @@ def build(lang):
         T("EfficientNet、DINOv3、BioCLIP、YOLO backbone；稳定性重采样 10 次。软聚类第一版用高斯混合模型，其“几乎没有含混照片”的结果是维度造成的假象，已作废。",
           "EfficientNet, DINOv3, BioCLIP, YOLO backbone; stability from 10 resamples. A first soft-clustering version (Gaussian mixture) reported almost no ambiguous "
           "photos; this was a dimension artefact and is withdrawn."),
-        T("<p class=lead>论证顺序：2.1 K 取多少时分组可靠 → 2.2 不同 K 分出的是什么 → 2.3 各组的内容 → 2.4 处于两组之间的照片</p>",
-          "<p class=lead>Line of argument: 2.1 which K gives reliable groups → 2.2 what each K captures → 2.3 what the groups contain → 2.4 photos between two groups</p>")
+        T("<p class=lead>论证顺序：2.1 K 取多少时分组可靠 → 2.2 不同 K 分出的是什么 → 2.3–2.4 各组的内容（EfficientNet 与其他模型）→ 2.5 处于两组之间的照片</p>",
+          "<p class=lead>Line of argument: 2.1 which K gives reliable groups → 2.2 what each K captures → 2.3–2.4 what the groups contain (EfficientNet, other models) → 2.5 photos between two groups</p>")
         + panel(T("2.1 稳定性随 K 的变化", "2.1 Stability across K"), img(R / "exp9c_stability.png", "stability"),
                 T(f"分组在 K = 5–7 时最可靠（DINOv3 在 K = 5 达到 {stab['DINOv3'][5]:.2f}），K 超过 10 后明显下降。",
                   f"Groups are most reliable at K = 5–7 (DINOv3 reaches {stab['DINOv3'][5]:.2f} at K = 5) and drop clearly beyond K = 10.")
@@ -328,16 +328,12 @@ def build(lang):
                 T("K = 3 时三组为：所有近拍器官（叶、花、果、枝混在一起）、远景整树（92% 为远景）、树皮，即按拍摄远近划分；K = 5 时近拍部分再分为花序、小枝、叶三类；K = 7 时进一步分出果实，并把叶分成两组。",
                   "At K = 3 the groups are all close-up organs (leaf, flower, fruit, twig together), distant whole trees (92% distant) and bark, i.e. a split by camera "
                   "distance; at K = 5 the close-ups split into inflorescence, twig and leaf; at K = 7 fruit separates and leaves split into two groups."))
-        + panel(T("2.3b 各组的内容：其他模型在 K = 5", "2.3b What the groups contain: other models at K = 5"), img(R / "exp9d_models_k5.png", "models K=5"),
+        + panel(T("2.4 各组的内容：其他模型在 K = 5", "2.4 What the groups contain: other models at K = 5"), img(R / "exp9d_models_k5.png", "models K=5"),
                 T(f"DINOv3 与 EfficientNet 类似，按器官分组；YOLO 的组混有多种器官，说明它的结构不是按器官组织的；BioCLIP 的组与器官基本无关，"
                   f"它按物种组织（K = 63 时与物种对应 {pct(KS4['BioCLIP 2.5'].loc[63, 'matched_acc_species'])}）。",
                   f"DINOv3 groups by organ like EfficientNet; YOLO's groups mix several organs, so its structure is not organised by organ; BioCLIP's groups are "
                   f"unrelated to organ because it is organised by species (match to species at K = 63: {pct(KS4['BioCLIP 2.5'].loc[63, 'matched_acc_species'])})."))
-        + panel(T("2.3c EfficientNet K = 5 各组：器官、远近与物种分散程度，以及代表照片", "2.3c EfficientNet K = 5 groups: organ, distance, species spread and typical photos"),
-                table(k5full_t[k5full_t.iloc[:, 0] == "EfficientNet-B0"].drop(columns=k5full_t.columns[0]), pct=True) + faces5,
-                T(f"每组包含 {k5sp_lo}–{k5sp_hi} 个物种，最大物种占比不超过 {pct(k5top_hi)}：分组依据的是器官与拍摄距离，而不是物种。",
-                  f"Each group contains {k5sp_lo}–{k5sp_hi} species and no species exceeds {pct(k5top_hi)} of a group: the grouping follows organ and shot scale, not species."))
-        + panel(T("2.4 处于两组之间的照片（软聚类，EfficientNet，K = 7）", "2.4 Photos between two groups (soft clustering, EfficientNet, K = 7)"), table(pairs_t, pct=True) + pairs_html,
+        + panel(T("2.5 处于两组之间的照片（软聚类，EfficientNet，K = 7）", "2.5 Photos between two groups (soft clustering, EfficientNet, K = 7)"), table(pairs_t, pct=True) + pairs_html,
                 T(f"软聚类用 K = 7，使每组约对应一种器官（K = 5 的组是合并后的器官大类，含混照片多半落在混合组之间，无法说明是哪两种器官）。"
                   f"{pct(e7['frac_max_lt_0_8'])} 的照片处于两组之间，最常见的是果实 ↔ 小枝、花序 ↔ 叶、果实 ↔ 整树，都是视觉上相邻、在同一画面中常一起出现的器官。",
                   f"Soft clustering uses K = 7 so that each group roughly matches one organ (K = 5 groups merge organs, so ambiguity there mostly falls between mixed groups "
