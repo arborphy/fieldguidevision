@@ -1,0 +1,97 @@
+{
+  "inputs": {
+    "model": "bioclip",
+    "embeddings_npz": "/home/user/fieldguidevision/botanical-computer-vision/data/embeddings/bioclip25_strict/embeddings.npz",
+    "sha256": "c548c87c868e30cbee85d8b1b33283d4fd787a85aed3a5a3ff9fa823ec721dee",
+    "manifest": "organ_benchmark/split_manifests/individual_disjoint.csv",
+    "scale_labels": "scale_conditioned_analysis/data/image_visual_groups.csv",
+    "clusters": [
+      "representation_analysis/data/cluster_assignments.csv",
+      "representation_analysis/data/efficientnet_k20_cluster_assignments.csv"
+    ]
+  },
+  "bootstrap": 200,
+  "unit": "individual plant",
+  "summary": [
+    {
+      "model": "bioclip",
+      "K": 5,
+      "label": "organ",
+      "clusters": 5,
+      "share_clusters_dominant_ge_0_6": 0.0,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.6,
+      "share_clusters_species_adj_fe_gt_1_5": 0.4,
+      "median_top_species_share": 0.11384615384615385,
+      "clusters_lt5_individuals": 0
+    },
+    {
+      "model": "bioclip",
+      "K": 5,
+      "label": "shot_scale",
+      "clusters": 5,
+      "share_clusters_dominant_ge_0_6": 0.2,
+      "share_clusters_fe_ci_lo_gt_1_5": 0.2,
+      "share_clusters_species_adj_fe_gt_1_5": 0.2,
+      "median_top_species_share": 0.11384615384615385,
+      "clusters_lt5_individuals": 0
+    }
+  ],
+  "clusters_main_k": [
+    {
+      "cluster": 0,
+      "n": 394,
+      "name": "mixed leaf 20% / inflorescence 19% \u00b7 close-up",
+      "top_organ": "leaf",
+      "top_organ_share": 0.20050761421319796,
+      "organs": "leaf 20%, inflorescence 19%, twig 18%",
+      "scales": "close-up 83%, distant 9%, mid-range 6%",
+      "n_species": 63,
+      "top_species_share": 0.06852791878172589
+    },
+    {
+      "cluster": 1,
+      "n": 526,
+      "name": "mixed leaf 24% / inflorescence 23% \u00b7 mixed scale",
+      "top_organ": "leaf",
+      "top_organ_share": 0.23954372623574144,
+      "organs": "leaf 24%, inflorescence 23%, fruit 18%",
+      "scales": "close-up 65%, distant 20%, mid-range 14%",
+      "n_species": 39,
+      "top_species_share": 0.08935361216730038
+    },
+    {
+      "cluster": 2,
+      "n": 264,
+      "name": "mostly whole tree 56% (+leaf 16%) \u00b7 mixed scale",
+      "top_organ": "whole tree",
+      "top_organ_share": 0.5643939393939394,
+      "organs": "whole tree 56%, leaf 16%, bark 14%",
+      "scales": "distant 59%, close-up 34%, mid-range 5%",
+      "n_species": 37,
+      "top_species_share": 0.17803030303030304
+    },
+    {
+      "cluster": 3,
+      "n": 325,
+      "name": "mixed leaf 30% / inflorescence 18% \u00b7 mixed scale",
+      "top_organ": "leaf",
+      "top_organ_share": 0.30153846153846153,
+      "organs": "leaf 30%, inflorescence 18%, twig 16%",
+      "scales": "close-up 73%, distant 15%, mid-range 9%",
+      "n_species": 42,
+      "top_species_share": 0.11384615384615385
+    },
+    {
+      "cluster": 4,
+      "n": 132,
+      "name": "mostly leaf 53% (+twig 13%) \u00b7 close-up",
+      "top_organ": "leaf",
+      "top_organ_share": 0.5303030303030303,
+      "organs": "leaf 53%, twig 13%, fruit 13%",
+      "scales": "close-up 81%, mid-range 12%, distant 6%",
+      "n_species": 3,
+      "top_species_share": 0.7424242424242424
+    }
+  ],
+  "no_p_values_reason": "images nested in individuals/species; independence fails"
+}

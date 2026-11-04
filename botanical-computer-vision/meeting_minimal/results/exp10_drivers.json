@@ -1,0 +1,302 @@
+{
+  "EfficientNet-B0": {
+    "groups": [
+      {
+        "cluster": 0,
+        "n": 304,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 4.518097261178023,
+        "fe_species_adj": 3.510203376846783,
+        "organ_share": 0.8782894736842105,
+        "top_species_share": 0.0493421052631578
+      },
+      {
+        "cluster": 1,
+        "n": 372,
+        "type": "organ",
+        "organ": "twig",
+        "fe": 4.060142834216017,
+        "fe_species_adj": 3.6127576691252905,
+        "organ_share": 0.4973118279569892,
+        "top_species_share": 0.0779569892473118
+      },
+      {
+        "cluster": 2,
+        "n": 371,
+        "type": "organ",
+        "organ": "leaf",
+        "fe": 3.604466877462161,
+        "fe_species_adj": 3.005887174411922,
+        "organ_share": 0.9137466307277629,
+        "top_species_share": 0.1320754716981132
+      },
+      {
+        "cluster": 3,
+        "n": 398,
+        "type": "organ",
+        "organ": "inflorescence",
+        "fe": 3.512834932786677,
+        "fe_species_adj": 2.7573180566399915,
+        "organ_share": 0.592964824120603,
+        "top_species_share": 0.050251256281407
+      },
+      {
+        "cluster": 4,
+        "n": 196,
+        "type": "organ",
+        "organ": "bark",
+        "fe": 7.686985320443966,
+        "fe_species_adj": 6.133775040320914,
+        "organ_share": 0.8010204081632653,
+        "top_species_share": 0.0765306122448979
+      }
+    ],
+    "share": {
+      "organ": 1.0,
+      "distance": 0.0,
+      "species": 0.0,
+      "mixed": 0.0
+    }
+  },
+  "DINOv3": {
+    "groups": [
+      {
+        "cluster": 0,
+        "n": 365,
+        "type": "organ",
+        "organ": "leaf",
+        "fe": 2.572168071654373,
+        "fe_species_adj": 2.609296150028096,
+        "organ_share": 0.6520547945205479,
+        "top_species_share": 0.0438356164383561
+      },
+      {
+        "cluster": 1,
+        "n": 157,
+        "type": "species",
+        "organ": "leaf",
+        "fe": 3.3165727584517395,
+        "fe_species_adj": 2.180433999223708,
+        "organ_share": 0.8407643312101911,
+        "top_species_share": 0.3821656050955414
+      },
+      {
+        "cluster": 2,
+        "n": 256,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 4.822688087774295,
+        "fe_species_adj": 3.552013111177879,
+        "organ_share": 0.9375,
+        "top_species_share": 0.05859375
+      },
+      {
+        "cluster": 3,
+        "n": 201,
+        "type": "organ",
+        "organ": "bark",
+        "fe": 7.782229204852928,
+        "fe_species_adj": 6.085148475303813,
+        "organ_share": 0.8109452736318408,
+        "top_species_share": 0.0696517412935323
+      },
+      {
+        "cluster": 4,
+        "n": 662,
+        "type": "mixed",
+        "organ": "cone",
+        "fe": 2.328618511397967,
+        "fe_species_adj": 1.4754955478320095,
+        "organ_share": 0.0468277945619335,
+        "top_species_share": 0.0498489425981873
+      }
+    ],
+    "share": {
+      "organ": 0.5009140767824497,
+      "distance": 0.0,
+      "species": 0.09567336989640463,
+      "mixed": 0.4034125533211456
+    }
+  },
+  "YOLO11s backbone": {
+    "groups": [
+      {
+        "cluster": 0,
+        "n": 358,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 3.405518292148999,
+        "fe_species_adj": 2.717770293568589,
+        "organ_share": 0.6620111731843575,
+        "top_species_share": 0.0754189944134078
+      },
+      {
+        "cluster": 1,
+        "n": 366,
+        "type": "mixed",
+        "organ": "fruit",
+        "fe": 1.6304023845007451,
+        "fe_species_adj": 1.5303651848734672,
+        "organ_share": 0.2076502732240437,
+        "top_species_share": 0.0491803278688524
+      },
+      {
+        "cluster": 2,
+        "n": 434,
+        "type": "mixed",
+        "organ": "inflorescence",
+        "fe": 2.1567319369811506,
+        "fe_species_adj": 1.84456398618368,
+        "organ_share": 0.3640552995391705,
+        "top_species_share": 0.0437788018433179
+      },
+      {
+        "cluster": 3,
+        "n": 165,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 2.244742091764035,
+        "fe_species_adj": 2.3496983456281755,
+        "organ_share": 0.4363636363636363,
+        "top_species_share": 0.0909090909090909
+      },
+      {
+        "cluster": 4,
+        "n": 318,
+        "type": "mixed",
+        "organ": "leaf",
+        "fe": 1.9351415094339623,
+        "fe_species_adj": 1.671140073220352,
+        "organ_share": 0.490566037735849,
+        "top_species_share": 0.2075471698113207
+      }
+    ],
+    "share": {
+      "organ": 0.3187081048141377,
+      "distance": 0.0,
+      "species": 0.0,
+      "mixed": 0.6812918951858623
+    }
+  },
+  "YOLO11s neck": {
+    "groups": [
+      {
+        "cluster": 0,
+        "n": 264,
+        "type": "distance",
+        "organ": "twig",
+        "fe": 1.9482700135685207,
+        "fe_species_adj": 1.935433464527325,
+        "organ_share": 0.2386363636363636,
+        "top_species_share": 0.053030303030303
+      },
+      {
+        "cluster": 1,
+        "n": 288,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 4.536899164054336,
+        "fe_species_adj": 3.5694757949514373,
+        "organ_share": 0.8819444444444444,
+        "top_species_share": 0.0659722222222222
+      },
+      {
+        "cluster": 2,
+        "n": 363,
+        "type": "organ",
+        "organ": "twig",
+        "fe": 2.6089387771884383,
+        "fe_species_adj": 2.4110767434991867,
+        "organ_share": 0.3195592286501377,
+        "top_species_share": 0.09366391184573
+      },
+      {
+        "cluster": 3,
+        "n": 363,
+        "type": "mixed",
+        "organ": "inflorescence",
+        "fe": 1.583047408777635,
+        "fe_species_adj": 1.5575630503274656,
+        "organ_share": 0.2672176308539944,
+        "top_species_share": 0.0909090909090909
+      },
+      {
+        "cluster": 4,
+        "n": 363,
+        "type": "organ",
+        "organ": "bark",
+        "fe": 3.145957179450002,
+        "fe_species_adj": 2.901147902051871,
+        "organ_share": 0.3278236914600551,
+        "top_species_share": 0.0495867768595041
+      }
+    ],
+    "share": {
+      "organ": 0.6179159049360147,
+      "distance": 0.16087751371115175,
+      "species": 0.0,
+      "mixed": 0.22120658135283364
+    }
+  },
+  "BioCLIP 2.5": {
+    "groups": [
+      {
+        "cluster": 0,
+        "n": 394,
+        "type": "mixed",
+        "organ": "cone",
+        "fe": 1.7669589293954775,
+        "fe_species_adj": 0.983574564969914,
+        "organ_share": 0.0355329949238578,
+        "top_species_share": 0.0685279187817258
+      },
+      {
+        "cluster": 1,
+        "n": 526,
+        "type": "mixed",
+        "organ": "cone",
+        "fe": 1.5126166609056342,
+        "fe_species_adj": 1.4270002439894147,
+        "organ_share": 0.0304182509505703,
+        "top_species_share": 0.0893536121673003
+      },
+      {
+        "cluster": 2,
+        "n": 264,
+        "type": "organ",
+        "organ": "whole tree",
+        "fe": 2.9033556568823027,
+        "fe_species_adj": 2.177316962806702,
+        "organ_share": 0.5643939393939394,
+        "top_species_share": 0.178030303030303
+      },
+      {
+        "cluster": 3,
+        "n": 325,
+        "type": "mixed",
+        "organ": "twig",
+        "fe": 1.2811481056257177,
+        "fe_species_adj": 1.198333696272031,
+        "organ_share": 0.1569230769230769,
+        "top_species_share": 0.1138461538461538
+      },
+      {
+        "cluster": 4,
+        "n": 132,
+        "type": "species",
+        "organ": "leaf",
+        "fe": 2.0918924825174825,
+        "fe_species_adj": 1.2222327994478688,
+        "organ_share": 0.5303030303030303,
+        "top_species_share": 0.7424242424242424
+      }
+    ],
+    "share": {
+      "organ": 0.16087751371115175,
+      "distance": 0.0,
+      "species": 0.08043875685557587,
+      "mixed": 0.7586837294332724
+    }
+  }
+}
