@@ -1,0 +1,31 @@
+{
+  "n": 262,
+  "share": 0.16113161131611317,
+  "top_pairs": [
+    {
+      "label": "fruit",
+      "sits_among": "inflorescence",
+      "n": 28
+    },
+    {
+      "label": "inflorescence",
+      "sits_among": "fruit",
+      "n": 25
+    },
+    {
+      "label": "leaf",
+      "sits_among": "whole tree",
+      "n": 18
+    },
+    {
+      "label": "inflorescence",
+      "sits_among": "leaf",
+      "n": 15
+    },
+    {
+      "label": "fruit",
+      "sits_among": "twig",
+      "n": 14
+    }
+  ]
+}

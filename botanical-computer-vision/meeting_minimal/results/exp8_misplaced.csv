@@ -1,0 +1,263 @@
+image_id,species,organ,shot_scale,neighbours_organ
+baskauf/13159,Acer negundo,fruit,close-up,leaf
+baskauf/16046,Acer negundo,twig,mid-range,bark
+baskauf/31637,Acer negundo,inflorescence,distant,whole tree
+baskauf/28499,Acer negundo,fruit,mid-range,leaf
+baskauf/18234,Acer negundo,fruit,close-up,twig
+baskauf/10897,Acer negundo,whole tree,distant,leaf
+baskauf/18225,Acer rubrum,fruit,close-up,inflorescence
+baskauf/00000,Acer rubrum,inflorescence,distant,whole tree
+baskauf/10492,Acer rubrum,fruit,close-up,inflorescence
+baskauf/10495,Acer rubrum,fruit,mid-range,leaf
+baskauf/19269,Acer rubrum,fruit,distant,whole tree
+baskauf/50713,Acer saccharum,inflorescence,distant,whole tree
+baskauf/10564,Acer saccharum,fruit,mid-range,inflorescence
+baskauf/10565,Acer saccharum,fruit,close-up,inflorescence
+baskauf/10570,Acer saccharum,fruit,close-up,inflorescence
+baskauf/16741,Acer saccharum,leaf,distant,whole tree
+baskauf/27139,Yucca filamentosa,bark,close-up,twig
+baskauf/11730,Yucca filamentosa,inflorescence,mid-range,whole tree
+baskauf/11726,Yucca filamentosa,whole tree,distant,fruit
+baskauf/35167,Yucca filamentosa,inflorescence,close-up,whole tree
+baskauf/35163,Yucca filamentosa,whole tree,distant,inflorescence
+baskauf/21894,Rhus aromatica,fruit,close-up,inflorescence
+baskauf/32173,Rhus aromatica,inflorescence,close-up,fruit
+baskauf/13537,Rhus copallinum,inflorescence,mid-range,leaf
+baskauf/16724,Rhus copallinum,leaf,mid-range,whole tree
+baskauf/54519,Rhus copallinum,inflorescence,distant,whole tree
+baskauf/10419,Rhus copallinum,fruit,close-up,inflorescence
+baskauf/10420,Rhus copallinum,fruit,distant,inflorescence
+baskauf/15445,Rhus copallinum,fruit,mid-range,inflorescence
+baskauf/15448,Rhus copallinum,fruit,close-up,inflorescence
+baskauf/10936,Rhus glabra,leaf,mid-range,inflorescence
+baskauf/10937,Rhus glabra,twig,close-up,other
+baskauf/13515,Rhus glabra,fruit,distant,whole tree
+baskauf/13516,Rhus glabra,fruit,distant,inflorescence
+baskauf/10834,Toxicodendron radicans,bark,distant,whole tree
+baskauf/10832,Toxicodendron radicans,inflorescence,close-up,leaf
+baskauf/10833,Toxicodendron radicans,whole tree,distant,bark
+thomas/0506-01-07,Toxicodendron radicans,inflorescence,close-up,fruit
+thomas/0506-01-08,Toxicodendron radicans,leaf,mid-range,whole tree
+thomas/0506-01-06,Toxicodendron radicans,whole tree,distant,leaf
+baskauf/15948,Toxicodendron radicans,fruit,close-up,inflorescence
+baskauf/16418,Toxicodendron radicans,leaf,close-up,bark
+baskauf/10893,Toxicodendron radicans,whole tree,distant,leaf
+baskauf/30771,Ilex verticillata,twig,close-up,fruit
+baskauf/35372,Ilex verticillata,twig,close-up,inflorescence
+baskauf/35376,Ilex verticillata,twig,close-up,inflorescence
+baskauf/49252,Betula alleghaniensis,twig,close-up,leaf
+baskauf/37293,Betula lenta,bark,close-up,twig
+kirchoff/b5071,Carpinus caroliniana,fruit,mid-range,whole tree
+kirchoff/b5064,Carpinus caroliniana,fruit,close-up,leaf
+baskauf/15728,Carpinus caroliniana,bark,distant,whole tree
+baskauf/15719,Carpinus caroliniana,fruit,close-up,twig
+baskauf/15075,Carpinus caroliniana,inflorescence,mid-range,fruit
+baskauf/15074,Carpinus caroliniana,leaf,close-up,bark
+baskauf/25478,Carpinus caroliniana,fruit,close-up,leaf
+baskauf/18748,Ostrya virginiana,inflorescence,mid-range,whole tree
+baskauf/16278,Ostrya virginiana,fruit,close-up,twig
+baskauf/15276,Ostrya virginiana,leaf,close-up,twig
+baskauf/15288,Ostrya virginiana,twig,close-up,inflorescence
+baskauf/12190,Sambucus nigra,inflorescence,close-up,whole tree
+baskauf/15687,Sambucus nigra,fruit,mid-range,leaf
+baskauf/15688,Sambucus nigra,fruit,close-up,twig
+baskauf/26540,Sambucus racemosa,inflorescence,mid-range,fruit
+baskauf/11471,Sambucus racemosa,whole tree,distant,leaf
+baskauf/26495,Viburnum lantanoides,whole tree,uncertain,leaf
+baskauf/35221,Cornus amomum,twig,close-up,inflorescence
+baskauf/54555,Cornus amomum,fruit,close-up,twig
+baskauf/54680,Cornus amomum,twig,close-up,fruit
+baskauf/10603,Cornus florida,fruit,close-up,inflorescence
+baskauf/17559,Cornus florida,twig,close-up,fruit
+baskauf/15104,Cornus florida,twig,close-up,fruit
+baskauf/15105,Cornus florida,twig,close-up,fruit
+kirchoff/b5089,Cornus florida,fruit,distant,leaf
+kirchoff/b5090,Cornus florida,whole tree,distant,leaf
+kirchoff/b5091,Cornus florida,whole tree,distant,leaf
+baskauf/11613,Cornus florida,leaf,mid-range,whole tree
+baskauf/10981,Nyssa sylvatica,inflorescence,close-up,leaf
+baskauf/51398,Nyssa sylvatica,inflorescence,close-up,twig
+baskauf/51406,Nyssa sylvatica,inflorescence,mid-range,leaf
+baskauf/51409,Nyssa sylvatica,inflorescence,close-up,leaf
+baskauf/15141,Nyssa sylvatica,leaf,distant,whole tree
+baskauf/d0997,Nyssa sylvatica,leaf,close-up,whole tree
+baskauf/10791,Juniperus virginiana,cone,close-up,inflorescence
+baskauf/10793,Juniperus virginiana,cone,close-up,inflorescence
+baskauf/10794,Juniperus virginiana,cone,close-up,whole tree
+baskauf/50707,Juniperus virginiana,cone,close-up,twig
+baskauf/50587,Juniperus virginiana,cone,mid-range,whole tree
+baskauf/50588,Juniperus virginiana,cone,close-up,inflorescence
+baskauf/11202,Juniperus virginiana,leaf,close-up,twig
+baskauf/11166,Juniperus virginiana,twig,close-up,leaf
+baskauf/10739,Cercis canadensis,fruit,close-up,twig
+baskauf/11211,Cercis canadensis,fruit,close-up,twig
+baskauf/15521,Gleditsia triacanthos,bark,mid-range,whole tree
+baskauf/15537,Gleditsia triacanthos,leaf,mid-range,whole tree
+baskauf/d1104,Gleditsia triacanthos,bark,mid-range,whole tree
+baskauf/d1112,Gleditsia triacanthos,bark,mid-range,whole tree
+baskauf/66137,Gleditsia triacanthos,inflorescence,close-up,fruit
+baskauf/66134,Gleditsia triacanthos,inflorescence,close-up,fruit
+baskauf/66138,Gleditsia triacanthos,inflorescence,mid-range,leaf
+baskauf/66140,Gleditsia triacanthos,inflorescence,mid-range,leaf
+baskauf/66159,Gleditsia triacanthos,twig,mid-range,leaf
+baskauf/66190,Gleditsia triacanthos,twig,close-up,inflorescence
+baskauf/51771,Gleditsia triacanthos,inflorescence,close-up,fruit
+baskauf/66166,Gleditsia triacanthos,fruit,mid-range,inflorescence
+baskauf/66167,Gleditsia triacanthos,fruit,close-up,inflorescence
+baskauf/66168,Gleditsia triacanthos,fruit,mid-range,inflorescence
+baskauf/66169,Gleditsia triacanthos,fruit,close-up,inflorescence
+baskauf/51704,Gymnocladus dioicus,inflorescence,close-up,fruit
+baskauf/24227,Gymnocladus dioicus,fruit,mid-range,twig
+baskauf/24270,Gymnocladus dioicus,fruit,mid-range,whole tree
+baskauf/51695,Gymnocladus dioicus,fruit,close-up,inflorescence
+baskauf/24261,Gymnocladus dioicus,fruit,close-up,twig
+baskauf/11498,Robinia pseudoacacia,bark,distant,whole tree
+thomas/0486-01-05,Robinia pseudoacacia,inflorescence,close-up,leaf
+thomas/0486-01-07,Robinia pseudoacacia,twig,close-up,bark
+thomas/0486-01-09,Robinia pseudoacacia,twig,close-up,bark
+baskauf/11508,Robinia pseudoacacia,leaf,mid-range,whole tree
+baskauf/11534,Castanea dentata,bark,distant,whole tree
+baskauf/11535,Castanea dentata,bark,distant,whole tree
+baskauf/26253,Castanea dentata,bark,close-up,whole tree
+kirchoff/ac1518,Fagus grandifolia,fruit,close-up,cone
+kirchoff/ac1519,Fagus grandifolia,twig,close-up,inflorescence
+kirchoff/em1993,Fagus grandifolia,twig,close-up,fruit
+kirchoff/em1998,Fagus grandifolia,twig,mid-range,leaf
+baskauf/39270,Fagus grandifolia,inflorescence,close-up,fruit
+baskauf/10459,Fagus grandifolia,inflorescence,mid-range,whole tree
+baskauf/10460,Fagus grandifolia,inflorescence,mid-range,whole tree
+baskauf/10474,Fagus grandifolia,inflorescence,close-up,twig
+baskauf/16720,Fagus grandifolia,leaf,uncertain,whole tree
+ssmv/2-161-03,Quercus alba,leaf,mid-range,whole tree
+baskauf/16838,Quercus alba,leaf,distant,whole tree
+vanderbilt/mcgaw-p137-old-central-porch,Quercus macrocarpa,bark,distant,whole tree
+baskauf/18859,Quercus macrocarpa,inflorescence,close-up,fruit
+baskauf/19373,Quercus muehlenbergii,inflorescence,close-up,fruit
+baskauf/12323,Quercus muehlenbergii,leaf,mid-range,fruit
+baskauf/12055,Quercus muehlenbergii,whole tree,distant,inflorescence
+baskauf/12450,Quercus palustris,twig,close-up,leaf
+baskauf/50985,Quercus palustris,inflorescence,close-up,twig
+baskauf/18096,Quercus rubra,inflorescence,close-up,fruit
+baskauf/10498,Quercus rubra,inflorescence,mid-range,fruit
+kirchoff/em2413,Quercus rubra,bark,mid-range,whole tree
+baskauf/11960,Ginkgo biloba,bark,mid-range,whole tree
+ssmv/2-185-03,Ginkgo biloba,leaf,close-up,whole tree
+ssmv/2-185-04,Ginkgo biloba,leaf,mid-range,whole tree
+baskauf/12307,Ginkgo biloba,cone,close-up,leaf
+baskauf/12309,Ginkgo biloba,cone,close-up,fruit
+baskauf/15598,Ginkgo biloba,cone,close-up,fruit
+baskauf/15604,Ginkgo biloba,cone,close-up,fruit
+baskauf/19346,Ginkgo biloba,cone,close-up,fruit
+baskauf/19361,Ginkgo biloba,cone,close-up,twig
+baskauf/50745,Ginkgo biloba,cone,close-up,inflorescence
+baskauf/50996,Ginkgo biloba,cone,close-up,twig
+baskauf/50998,Ginkgo biloba,cone,close-up,twig
+baskauf/10554,Ginkgo biloba,cone,close-up,inflorescence
+baskauf/10556,Ginkgo biloba,leaf,close-up,twig
+baskauf/10502,Ginkgo biloba,twig,close-up,inflorescence
+baskauf/10557,Ginkgo biloba,twig,close-up,inflorescence
+baskauf/11176,Ginkgo biloba,leaf,close-up,fruit
+baskauf/10689,Aesculus glabra,inflorescence,distant,leaf
+baskauf/51420,Aesculus glabra,fruit,close-up,inflorescence
+thomas/0014-01-01,Aesculus glabra,whole tree,distant,leaf
+baskauf/39880,Aesculus glabra,fruit,close-up,inflorescence
+baskauf/27882,Carya cordiformis,twig,close-up,inflorescence
+baskauf/11997,Carya cordiformis,twig,close-up,fruit
+baskauf/11996,Carya cordiformis,whole tree,distant,leaf
+baskauf/50556,Juglans cinerea,whole tree,distant,bark
+baskauf/70869,Juglans cinerea,fruit,close-up,other
+baskauf/70870,Juglans cinerea,fruit,close-up,other
+baskauf/70792,Juglans cinerea,fruit,mid-range,whole tree
+baskauf/16500,Juglans cinerea,whole tree,distant,bark
+baskauf/11188,Juglans nigra,leaf,mid-range,whole tree
+baskauf/10674,Juglans nigra,inflorescence,mid-range,leaf
+baskauf/29699,Juglans nigra,twig,close-up,fruit
+baskauf/50467,Lindera benzoin,whole tree,distant,inflorescence
+baskauf/11086,Lindera benzoin,whole tree,distant,leaf
+baskauf/15112,Sassafras albidum,fruit,close-up,twig
+baskauf/16722,Sassafras albidum,leaf,distant,inflorescence
+kirchoff/b5149,Sassafras albidum,leaf,mid-range,whole tree
+baskauf/12462,Fraxinus americana,leaf,mid-range,fruit
+baskauf/13393,Fraxinus pennsylvanica,fruit,close-up,twig
+baskauf/13380,Fraxinus pennsylvanica,leaf,distant,whole tree
+baskauf/13403,Fraxinus pennsylvanica,leaf,close-up,twig
+baskauf/30439,Fraxinus quadrangulata,fruit,close-up,whole tree
+baskauf/2014-08-23-16-39-52,Fraxinus quadrangulata,whole tree,distant,bark
+baskauf/11432,Picea rubens,twig,close-up,leaf
+baskauf/10225,Pinus strobus,cone,distant,whole tree
+baskauf/11091,Pinus strobus,cone,close-up,leaf
+baskauf/17546,Pinus strobus,bark,mid-range,whole tree
+baskauf/17542,Pinus strobus,twig,close-up,leaf
+baskauf/13417,Pinus strobus,cone,close-up,leaf
+baskauf/13418,Pinus strobus,cone,close-up,inflorescence
+baskauf/15225,Pinus strobus,cone,close-up,inflorescence
+baskauf/34222,Pinus strobus,cone,close-up,inflorescence
+baskauf/34216,Pinus strobus,cone,mid-range,whole tree
+baskauf/34219,Pinus strobus,cone,close-up,inflorescence
+baskauf/10515,Tsuga canadensis,cone,mid-range,inflorescence
+baskauf/15626,Tsuga canadensis,twig,close-up,bark
+baskauf/10485,Tsuga canadensis,cone,close-up,inflorescence
+baskauf/10464,Platanus occidentalis,fruit,distant,whole tree
+baskauf/19402,Platanus occidentalis,inflorescence,close-up,fruit
+baskauf/11125,Platanus occidentalis,inflorescence,close-up,leaf
+baskauf/11127,Platanus occidentalis,inflorescence,close-up,fruit
+baskauf/19392,Platanus occidentalis,inflorescence,close-up,fruit
+baskauf/16835,Platanus occidentalis,fruit,mid-range,inflorescence
+baskauf/15360,Platanus occidentalis,twig,mid-range,leaf
+baskauf/17313,Platanus occidentalis,twig,close-up,whole tree
+baskauf/31404,Amelanchier arborea,inflorescence,distant,whole tree
+baskauf/31400,Amelanchier arborea,whole tree,distant,bark
+baskauf/32481,Amelanchier arborea,fruit,close-up,leaf
+baskauf/11964,Prunus serotina,fruit,mid-range,leaf
+baskauf/31996,Pyrus calleryana,inflorescence,close-up,fruit
+baskauf/32633,Pyrus calleryana,fruit,close-up,twig
+baskauf/38731,Pyrus calleryana,fruit,close-up,other
+baskauf/15013,Sorbus americana,whole tree,distant,leaf
+baskauf/28649,Cephalanthus occidentalis,inflorescence,distant,leaf
+baskauf/15734,Cephalanthus occidentalis,fruit,close-up,inflorescence
+baskauf/15756,Cephalanthus occidentalis,fruit,close-up,inflorescence
+thomas/0440-04-02,Cephalanthus occidentalis,bark,close-up,twig
+thomas/0440-04-06,Cephalanthus occidentalis,inflorescence,close-up,fruit
+thomas/0104-01-01,Cephalanthus occidentalis,inflorescence,close-up,fruit
+baskauf/35726,Zanthoxylum americanum,leaf,close-up,twig
+baskauf/51816,Zanthoxylum americanum,twig,close-up,inflorescence
+baskauf/11066,Populus deltoides,bark,distant,whole tree
+baskauf/11064,Populus deltoides,fruit,mid-range,inflorescence
+baskauf/31457,Populus deltoides,inflorescence,mid-range,fruit
+baskauf/31433,Populus deltoides,inflorescence,mid-range,fruit
+baskauf/31468,Populus deltoides,inflorescence,close-up,cone
+baskauf/11054,Populus deltoides,fruit,distant,whole tree
+baskauf/11053,Populus deltoides,fruit,close-up,inflorescence
+baskauf/13981,Populus tremuloides,leaf,close-up,inflorescence
+baskauf/14031,Populus tremuloides,leaf,close-up,twig
+baskauf/21465,Salix nigra,fruit,close-up,inflorescence
+baskauf/23997,Salix nigra,fruit,mid-range,inflorescence
+baskauf/24001,Salix nigra,fruit,close-up,inflorescence
+baskauf/10999,Ailanthus altissima,inflorescence,mid-range,whole tree
+baskauf/13165,Ailanthus altissima,fruit,distant,whole tree
+baskauf/17534,Ailanthus altissima,twig,mid-range,fruit
+baskauf/10980,Ailanthus altissima,leaf,mid-range,inflorescence
+baskauf/10904,Ailanthus altissima,whole tree,distant,leaf
+baskauf/65654,Dirca palustris,bark,close-up,twig
+eickmeierwg/we565,Dirca palustris,inflorescence,mid-range,leaf
+baskauf/11733,Tilia americana,inflorescence,close-up,leaf
+baskauf/11744,Tilia americana,inflorescence,close-up,leaf
+baskauf/15581,Tilia americana,fruit,close-up,twig
+baskauf/11753,Tilia americana,leaf,close-up,whole tree
+baskauf/16240,Tilia americana,twig,close-up,fruit
+baskauf/d0426,Celtis occidentalis,leaf,mid-range,whole tree
+baskauf/50993,Celtis occidentalis,inflorescence,close-up,fruit
+baskauf/50992,Celtis occidentalis,inflorescence,close-up,fruit
+ssmv/2-253-03,Celtis occidentalis,leaf,distant,inflorescence
+baskauf/16195,Ulmus americana,bark,close-up,twig
+baskauf/10343,Ulmus americana,inflorescence,mid-range,fruit
+baskauf/10344,Ulmus americana,inflorescence,mid-range,fruit
+baskauf/10380,Ulmus americana,fruit,close-up,twig
+baskauf/20950,Ulmus americana,fruit,uncertain,whole tree
+baskauf/55141,Ulmus americana,leaf,close-up,twig
+baskauf/15235,Ulmus americana,leaf,close-up,twig
+baskauf/15241,Ulmus americana,twig,close-up,leaf
+baskauf/16201,Ulmus rubra,bark,close-up,twig
+baskauf/19579,Ulmus rubra,fruit,distant,whole tree
+baskauf/15172,Ulmus rubra,leaf,close-up,twig
+baskauf/15912,Ulmus rubra,twig,close-up,leaf
