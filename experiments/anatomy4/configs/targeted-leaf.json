@@ -1,0 +1,21 @@
+{
+ "contract": "anatomy4-v1",
+ "class_name": "leaf",
+ "variants": [
+  {
+   "class_name": "leaf",
+   "prompt": "leaf",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "leaf",
+   "prompt": "leaf blade",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "leaf",
+   "prompt": "broadleaf",
+   "box_threshold": 0.05
+  }
+ ]
+}

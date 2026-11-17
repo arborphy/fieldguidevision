@@ -1,0 +1,620 @@
+{
+  "schema": "arq.anatomy4_specialists.metrics/v1",
+  "target": {
+    "target_id": "leaf_margin",
+    "feature_name": "leaf_shape_margins",
+    "dirr_feature_names": [
+      "leaf_shape_margins"
+    ],
+    "classes": [
+      "Entire",
+      "Serrate",
+      "Lobed"
+    ],
+    "anatomy_classes": [
+      "leaf"
+    ],
+    "expert": "leaf",
+    "description": "Optional config-driven leaf margin expert. Run only after the required simple/compound expert is validated.",
+    "allow_multi_value": false
+  },
+  "checkpoint": "/srv/fast/anatomy4-specialists/leaf_margin/runs_species/best.pt",
+  "dataset_root": "/srv/fast/anatomy4-specialists/leaf_margin/dataset_species",
+  "imgsz": 224,
+  "device": "cuda:0",
+  "class_order": {
+    "model_names": [
+      "Entire",
+      "Lobed",
+      "Serrate"
+    ],
+    "target_classes": [
+      "Entire",
+      "Serrate",
+      "Lobed"
+    ],
+    "reordered_to_target": true,
+    "assertion": "set(model.names) == set(target.classes)"
+  },
+  "memory": {
+    "requested_device": "cuda",
+    "device": "cuda:0",
+    "max_vram_fraction": 0.3,
+    "min_free_vram_gb": 0.5,
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 4060 Ti",
+    "free_gb_before": 3.322,
+    "total_gb": 7.625,
+    "process_budget_gb": 2.287,
+    "required_free_gb": 2.787,
+    "headroom_note": "The cap is enforced per process; BioCLIP on .245 is reported at ~4.3 GB, so the default 0.30 fraction leaves the rest of the card for it."
+  },
+  "abstain_selection": {
+    "selected_on": "val",
+    "target_precision": 0.9,
+    "min_coverage": 0.3,
+    "confidence_threshold": 0.95,
+    "margin_threshold": 0.0,
+    "target_met": false,
+    "chosen": {
+      "confidence_threshold": 0.95,
+      "coverage": 0.11462450592885376,
+      "selective_precision": 0.5862068965517241,
+      "selective_macro_f1": 0.5014005602240896,
+      "abstained": 224,
+      "target_precision": 0.9,
+      "min_coverage": 0.3,
+      "margin_threshold": 0.0,
+      "target_met": false,
+      "rule": "max coverage s.t. selective precision >= target and coverage >= min; fallback max selective macro-F1 then coverage"
+    },
+    "curve": [
+      {
+        "confidence_threshold": 0.0,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.05,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.1,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.15,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.2,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.25,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.3,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.35,
+        "coverage": 1.0,
+        "selective_precision": 0.44664031620553357,
+        "selective_macro_f1": 0.4186068282453825,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.4,
+        "coverage": 0.9683794466403162,
+        "selective_precision": 0.4489795918367347,
+        "selective_macro_f1": 0.419427022841657,
+        "abstained": 8
+      },
+      {
+        "confidence_threshold": 0.45,
+        "coverage": 0.9090909090909091,
+        "selective_precision": 0.44782608695652176,
+        "selective_macro_f1": 0.40994798580691866,
+        "abstained": 23
+      },
+      {
+        "confidence_threshold": 0.5,
+        "coverage": 0.83399209486166,
+        "selective_precision": 0.44075829383886256,
+        "selective_macro_f1": 0.4007502291641214,
+        "abstained": 42
+      },
+      {
+        "confidence_threshold": 0.55,
+        "coverage": 0.7035573122529645,
+        "selective_precision": 0.43820224719101125,
+        "selective_macro_f1": 0.3789636708420779,
+        "abstained": 75
+      },
+      {
+        "confidence_threshold": 0.6,
+        "coverage": 0.6600790513833992,
+        "selective_precision": 0.437125748502994,
+        "selective_macro_f1": 0.37156177156177156,
+        "abstained": 86
+      },
+      {
+        "confidence_threshold": 0.65,
+        "coverage": 0.5889328063241107,
+        "selective_precision": 0.47651006711409394,
+        "selective_macro_f1": 0.3939896755162242,
+        "abstained": 104
+      },
+      {
+        "confidence_threshold": 0.7,
+        "coverage": 0.5217391304347826,
+        "selective_precision": 0.49242424242424243,
+        "selective_macro_f1": 0.40616246498599445,
+        "abstained": 121
+      },
+      {
+        "confidence_threshold": 0.75,
+        "coverage": 0.43873517786561267,
+        "selective_precision": 0.4954954954954955,
+        "selective_macro_f1": 0.4070488955075701,
+        "abstained": 142
+      },
+      {
+        "confidence_threshold": 0.8,
+        "coverage": 0.32806324110671936,
+        "selective_precision": 0.5542168674698795,
+        "selective_macro_f1": 0.45058479532163737,
+        "abstained": 170
+      },
+      {
+        "confidence_threshold": 0.85,
+        "coverage": 0.28063241106719367,
+        "selective_precision": 0.5633802816901409,
+        "selective_macro_f1": 0.46160232461602324,
+        "abstained": 182
+      },
+      {
+        "confidence_threshold": 0.9,
+        "coverage": 0.2134387351778656,
+        "selective_precision": 0.5925925925925926,
+        "selective_macro_f1": 0.4930555555555555,
+        "abstained": 199
+      },
+      {
+        "confidence_threshold": 0.95,
+        "coverage": 0.11462450592885376,
+        "selective_precision": 0.5862068965517241,
+        "selective_macro_f1": 0.5014005602240896,
+        "abstained": 224
+      }
+    ]
+  },
+  "requested_split": "test",
+  "splits_evaluated": [
+    "val",
+    "test"
+  ],
+  "dataset": {
+    "split_mode": "species",
+    "prefer_test_unseen": true,
+    "stage1_overlap_counts": {
+      "train": {
+        "in_train_val": 44,
+        "unseen": 927
+      },
+      "val": {
+        "in_train_val": 56,
+        "unseen": 197
+      },
+      "test": {
+        "unseen": 225
+      }
+    }
+  },
+  "val": {
+    "n": 253,
+    "accuracy": 0.44664031620553357,
+    "top_k_accuracy": {
+      "2": 0.6679841897233202
+    },
+    "macro_prf_present_classes": {
+      "precision": 0.46030858846253286,
+      "recall": 0.5460428719774514,
+      "f1": 0.4186068282453825,
+      "n_classes": 3,
+      "classes": [
+        "Entire",
+        "Serrate",
+        "Lobed"
+      ]
+    },
+    "macro_prf_all_classes": {
+      "precision": 0.46030858846253286,
+      "recall": 0.5460428719774514,
+      "f1": 0.4186068282453825,
+      "n_classes": 3,
+      "classes": [
+        "Entire",
+        "Serrate",
+        "Lobed"
+      ]
+    },
+    "per_class": {
+      "Entire": {
+        "precision": 0.3225806451612903,
+        "recall": 0.9523809523809523,
+        "f1": 0.4819277108433735,
+        "support": 42,
+        "tp": 40,
+        "fp": 84,
+        "fn": 2
+      },
+      "Serrate": {
+        "precision": 0.594059405940594,
+        "recall": 0.5607476635514018,
+        "f1": 0.5769230769230769,
+        "support": 107,
+        "tp": 60,
+        "fp": 41,
+        "fn": 47
+      },
+      "Lobed": {
+        "precision": 0.4642857142857143,
+        "recall": 0.125,
+        "f1": 0.19696969696969696,
+        "support": 104,
+        "tp": 13,
+        "fp": 15,
+        "fn": 91
+      }
+    },
+    "per_class_recall": {
+      "Entire": 0.9523809523809523,
+      "Serrate": 0.5607476635514018,
+      "Lobed": 0.125
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Entire",
+        "Serrate",
+        "Lobed"
+      ],
+      "rows_actual_columns_predicted": [
+        [
+          40,
+          2,
+          0
+        ],
+        [
+          32,
+          60,
+          15
+        ],
+        [
+          52,
+          39,
+          13
+        ]
+      ]
+    },
+    "abstention": {
+      "n": 253,
+      "coverage": 0.11462450592885376,
+      "abstained": 224,
+      "unknown_rate": 0.8853754940711462,
+      "confidence_threshold": 0.95,
+      "margin_threshold": 0.0,
+      "overall_accuracy_treating_abstain_as_error": 0.06719367588932806,
+      "selective_accuracy": 0.5862068965517241,
+      "selective_macro_prf": {
+        "precision": 0.49275362318840576,
+        "recall": 0.5833333333333334,
+        "f1": 0.5014005602240896,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "recall_semantics": {
+        "all_rows": "abstained predictions count as false negatives",
+        "covered_only": "abstained rows are excluded from the denominator"
+      },
+      "per_class_recall_all_rows": {
+        "Entire": 0.2619047619047619,
+        "Serrate": 0.056074766355140186,
+        "Lobed": 0.0
+      },
+      "per_class_recall_covered": {
+        "Entire": 1.0,
+        "Serrate": 0.75,
+        "Lobed": 0.0
+      },
+      "per_class_recall_covered_only": {
+        "Entire": 1.0,
+        "Serrate": 0.75,
+        "Lobed": 0.0
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.4782608695652174,
+          "recall": 1.0,
+          "f1": 0.6470588235294118,
+          "support": 11,
+          "tp": 11,
+          "fp": 12,
+          "fn": 0
+        },
+        "Serrate": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571428571428571,
+          "support": 8,
+          "tp": 6,
+          "fp": 0,
+          "fn": 2
+        },
+        "Lobed": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 10,
+          "tp": 0,
+          "fp": 0,
+          "fn": 10
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed",
+          "abstain"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            11,
+            0,
+            0,
+            31
+          ],
+          [
+            2,
+            6,
+            0,
+            99
+          ],
+          [
+            10,
+            0,
+            0,
+            94
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "mean_confidence": 0.7035517733794427,
+      "mean_margin": 0.4894240801056972
+    }
+  },
+  "test": {
+    "n": 225,
+    "accuracy": 0.4222222222222222,
+    "top_k_accuracy": {
+      "2": 0.8177777777777778
+    },
+    "macro_prf_present_classes": {
+      "precision": 0.45695260067114096,
+      "recall": 0.43392857142857144,
+      "f1": 0.4204467648065731,
+      "n_classes": 2,
+      "classes": [
+        "Entire",
+        "Serrate"
+      ]
+    },
+    "macro_prf_all_classes": {
+      "precision": 0.304635067114094,
+      "recall": 0.2892857142857143,
+      "f1": 0.28029784320438206,
+      "n_classes": 3,
+      "classes": [
+        "Entire",
+        "Serrate",
+        "Lobed"
+      ]
+    },
+    "per_class": {
+      "Entire": {
+        "precision": 0.484375,
+        "recall": 0.25833333333333336,
+        "f1": 0.3369565217391305,
+        "support": 120,
+        "tp": 31,
+        "fp": 33,
+        "fn": 89
+      },
+      "Serrate": {
+        "precision": 0.42953020134228187,
+        "recall": 0.6095238095238096,
+        "f1": 0.5039370078740157,
+        "support": 105,
+        "tp": 64,
+        "fp": 85,
+        "fn": 41
+      },
+      "Lobed": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0,
+        "tp": 0,
+        "fp": 12,
+        "fn": 0
+      }
+    },
+    "per_class_recall": {
+      "Entire": 0.25833333333333336,
+      "Serrate": 0.6095238095238096,
+      "Lobed": 0.0
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Entire",
+        "Serrate",
+        "Lobed"
+      ],
+      "rows_actual_columns_predicted": [
+        [
+          31,
+          85,
+          4
+        ],
+        [
+          33,
+          64,
+          8
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "abstention": {
+      "n": 225,
+      "coverage": 0.08888888888888889,
+      "abstained": 205,
+      "unknown_rate": 0.9111111111111111,
+      "confidence_threshold": 0.95,
+      "margin_threshold": 0.0,
+      "overall_accuracy_treating_abstain_as_error": 0.02666666666666667,
+      "selective_accuracy": 0.3,
+      "selective_macro_prf": {
+        "precision": 0.35714285714285715,
+        "recall": 0.35714285714285715,
+        "f1": 0.3,
+        "n_classes": 2,
+        "classes": [
+          "Entire",
+          "Serrate"
+        ]
+      },
+      "recall_semantics": {
+        "all_rows": "abstained predictions count as false negatives",
+        "covered_only": "abstained rows are excluded from the denominator"
+      },
+      "per_class_recall_all_rows": {
+        "Entire": 0.025,
+        "Serrate": 0.02857142857142857,
+        "Lobed": 0.0
+      },
+      "per_class_recall_covered": {
+        "Entire": 0.21428571428571427,
+        "Serrate": 0.5,
+        "Lobed": 0.0
+      },
+      "per_class_recall_covered_only": {
+        "Entire": 0.21428571428571427,
+        "Serrate": 0.5,
+        "Lobed": 0.0
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.5,
+          "recall": 0.21428571428571427,
+          "f1": 0.3,
+          "support": 14,
+          "tp": 3,
+          "fp": 3,
+          "fn": 11
+        },
+        "Serrate": {
+          "precision": 0.21428571428571427,
+          "recall": 0.5,
+          "f1": 0.3,
+          "support": 6,
+          "tp": 3,
+          "fp": 11,
+          "fn": 3
+        },
+        "Lobed": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed",
+          "abstain"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            3,
+            11,
+            0,
+            106
+          ],
+          [
+            3,
+            3,
+            0,
+            99
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "mean_confidence": 0.7511977137459649,
+      "mean_margin": 0.5535028058642315
+    }
+  },
+  "n_val": 253,
+  "n_test": 225
+}

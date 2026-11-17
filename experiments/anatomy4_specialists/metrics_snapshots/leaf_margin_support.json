@@ -1,0 +1,73 @@
+{
+  "audit": {
+    "anatomy_gate": {
+      "eligible": 3163,
+      "rejected": 1080
+    },
+    "claims_skipped_no_species": 6,
+    "claims_total": 2604,
+    "eligible_by_label": {
+      "Entire": 690,
+      "Lobed": 229,
+      "Serrate": 530
+    },
+    "feature": "leaf_shape_margins",
+    "reasons": {
+      "ambiguous_claim": 651,
+      "anatomy_mismatch:flower": 186,
+      "anatomy_mismatch:inflorescence": 214,
+      "anatomy_mismatch:needle": 680,
+      "claim_outside_target": 230,
+      "eligible": 1449,
+      "no_claim": 801,
+      "no_species_key": 32
+    },
+    "rows_eligible": 1449,
+    "rows_ineligible": 2794,
+    "rows_total": 4243,
+    "rule": "A Dirr claim is attached only when the crop's anatomy_class is in ['leaf'] and the species has exactly one in-target value (unless allow_multi_value).",
+    "target": "leaf_margin"
+  },
+  "by_anatomy": {
+    "flower": 186,
+    "inflorescence": 214,
+    "leaf": 3163,
+    "needle": 680
+  },
+  "by_split_label": {
+    "test": {
+      "Entire": 86,
+      "Lobed": 38,
+      "Serrate": 62
+    },
+    "train": {
+      "Entire": 468,
+      "Lobed": 167,
+      "Serrate": 365
+    },
+    "val": {
+      "Entire": 136,
+      "Lobed": 24,
+      "Serrate": 103
+    }
+  },
+  "rows": 4243,
+  "target": {
+    "allow_multi_value": false,
+    "anatomy_classes": [
+      "leaf"
+    ],
+    "classes": [
+      "Entire",
+      "Serrate",
+      "Lobed"
+    ],
+    "description": "Optional config-driven leaf margin expert. Run only after the required simple/compound expert is validated.",
+    "dirr_feature_names": [
+      "leaf_shape_margins"
+    ],
+    "expert": "leaf",
+    "feature_name": "leaf_shape_margins",
+    "target_id": "leaf_margin"
+  }
+}

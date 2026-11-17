@@ -1,0 +1,63 @@
+{
+  "by_class": {
+    "flower": 186,
+    "inflorescence": 214,
+    "leaf": 3163,
+    "needle": 680
+  },
+  "by_split": {
+    "test": 630,
+    "train": 2837,
+    "val": 776
+  },
+  "conf": 0.14,
+  "contract": "anatomy4-specialists/v1",
+  "crops_written": 4243,
+  "detections_total": 5877,
+  "device": "cuda:0",
+  "dirr_manifest": "/srv/fast/anatomy4-specialists/dirr-images-manifest.jsonl",
+  "excluded_null_license": 0,
+  "images_total": 1072,
+  "images_with_detections": 948,
+  "images_without_crops": 125,
+  "images_without_detections": 124,
+  "imgsz": 640,
+  "iou": 0.45,
+  "max_crops_per_image": 6,
+  "max_vram_fraction": 0.36,
+  "min_crop_px": 48,
+  "model_class_order": [
+    "leaf",
+    "needle",
+    "flower",
+    "inflorescence"
+  ],
+  "padding": 0.18,
+  "padding_mode": "relative",
+  "schema": "arq.anatomy4_specialists.detect_crops/v1",
+  "skip_reasons": {
+    "crop_below_min_size": 21,
+    "excluded_null_license": 0
+  },
+  "skipped_rows": 21,
+  "stage1_classes": [
+    "leaf",
+    "needle",
+    "flower",
+    "inflorescence"
+  ],
+  "stage1_dataset": "/srv/fast/anatomy4-shenandoah/datasets/anatomy4-train-6batch/dataset.json",
+  "stage1_overlap": {
+    "crops": {
+      "in_stage1_train_val": 472,
+      "unseen": 3771
+    },
+    "images": {
+      "in_stage1_train_val": 103,
+      "unseen": 969
+    }
+  },
+  "stage1_overlap_known": true,
+  "unlocalized_images": 124,
+  "weights": "/srv/fast/anatomy4-shenandoah/runs/anatomy4-yolo11s-6b/runs/anatomy4/weights/best.pt"
+}

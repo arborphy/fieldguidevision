@@ -1,0 +1,66 @@
+{
+  "contract": "anatomy4-v1",
+  "classes": [
+    {
+      "id": 0,
+      "name": "leaf",
+      "prompts": [
+        "leaf",
+        "leaves"
+      ],
+      "box_threshold": 0.08,
+      "text_threshold": 0.0
+    },
+    {
+      "id": 1,
+      "name": "needle",
+      "prompts": [
+        "pine needles",
+        "needle",
+        "conifer needle",
+        "pine needle"
+      ],
+      "box_threshold": 0.1,
+      "text_threshold": 0.0
+    },
+    {
+      "id": 2,
+      "name": "flower",
+      "prompts": [
+        "single flower",
+        "flower",
+        "blossom"
+      ],
+      "box_threshold": 0.1,
+      "text_threshold": 0.0
+    },
+    {
+      "id": 3,
+      "name": "inflorescence",
+      "prompts": [
+        "cluster of flowers",
+        "inflorescence",
+        "flower cluster",
+        "flower head"
+      ],
+      "box_threshold": 0.1,
+      "text_threshold": 0.0
+    }
+  ],
+  "models": {
+    "detector": "IDEA-Research/grounding-dino-tiny",
+    "segmenter": "facebook/sam2.1-hiera-tiny"
+  },
+  "runtime": {
+    "max_image_side": 1536,
+    "nms_iou": 0.5,
+    "polygon_epsilon": 0.003,
+    "multimask_output": false,
+    "min_polygon_points": 3,
+    "empty_cache_each_image": true,
+    "max_box_area": 0.92,
+    "min_box_area": 0.0004
+  },
+  "name": "anatomy4-v1-yoloe2",
+  "description": "YOLOE-26s with single-object phrases to separate flower from inflorescence."
+}

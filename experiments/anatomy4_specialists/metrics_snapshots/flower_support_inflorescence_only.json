@@ -1,0 +1,76 @@
+{
+  "audit": {
+    "anatomy_gate": {
+      "eligible": 214,
+      "rejected": 4029
+    },
+    "claims_skipped_no_species": 6,
+    "claims_total": 2604,
+    "eligible_by_label": {
+      "Corymb": 60,
+      "Cyme": 18,
+      "Panicle": 14,
+      "Raceme": 12
+    },
+    "feature": "inflorescences",
+    "reasons": {
+      "anatomy_mismatch:flower": 186,
+      "anatomy_mismatch:leaf": 3163,
+      "anatomy_mismatch:needle": 680,
+      "claim_outside_target": 6,
+      "eligible": 104,
+      "no_claim": 97,
+      "no_species_key": 7
+    },
+    "rows_eligible": 104,
+    "rows_ineligible": 4139,
+    "rows_total": 4243,
+    "rule": "A Dirr claim is attached only when the crop's anatomy_class is in ['inflorescence'] and the species has exactly one in-target value (unless allow_multi_value).",
+    "target": "flower_inflorescence_type"
+  },
+  "by_anatomy": {
+    "flower": 186,
+    "inflorescence": 214,
+    "leaf": 3163,
+    "needle": 680
+  },
+  "by_split_label": {
+    "test": {
+      "Corymb": 2,
+      "Cyme": 5,
+      "Panicle": 4,
+      "Raceme": 1
+    },
+    "train": {
+      "Corymb": 49,
+      "Cyme": 8,
+      "Panicle": 9,
+      "Raceme": 11
+    },
+    "val": {
+      "Corymb": 9,
+      "Cyme": 5,
+      "Panicle": 1
+    }
+  },
+  "rows": 4243,
+  "target": {
+    "allow_multi_value": false,
+    "anatomy_classes": [
+      "inflorescence"
+    ],
+    "classes": [
+      "Raceme",
+      "Corymb",
+      "Cyme",
+      "Panicle"
+    ],
+    "description": "Inflorescence arrangement type (Dirr inflorescences), only on inflorescence crops; an isolated flower does not carry arrangement evidence.",
+    "dirr_feature_names": [
+      "inflorescences"
+    ],
+    "expert": "flower",
+    "feature_name": "inflorescences",
+    "target_id": "flower_inflorescence_type"
+  }
+}

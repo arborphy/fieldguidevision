@@ -1,0 +1,21 @@
+{
+ "contract": "anatomy4-v1",
+ "class_name": "inflorescence",
+ "variants": [
+  {
+   "class_name": "inflorescence",
+   "prompt": "cluster of flowers",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "inflorescence",
+   "prompt": "flower spike",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "inflorescence",
+   "prompt": "umbel of flowers",
+   "box_threshold": 0.05
+  }
+ ]
+}

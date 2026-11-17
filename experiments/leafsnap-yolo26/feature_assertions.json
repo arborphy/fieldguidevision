@@ -1,0 +1,6791 @@
+{
+  "meta": {
+    "analysis": "leafsnap-dirr-feature-assertions",
+    "version": 1,
+    "source": "dirr",
+    "value_key": "Feature -> values use the Dirr tag-matrix column names (e.g. 'Acute (base)', 'Pinnate (venation)') because they are the assertion keys; display labels are in the feature metadata.",
+    "matched_species": 165,
+    "n_matched_species_with_no_assertions": 6,
+    "matched_species_with_no_assertions": [
+      "Larix decidua",
+      "Malus floribunda",
+      "Malus hupehensis",
+      "Malus pumila",
+      "Pinus parviflora",
+      "Pinus peucea"
+    ],
+    "unmatched_species": 20,
+    "dirr_species_level_rows": 967,
+    "inputs": {
+      "tags_sha256": "b650afac6d4f4da2def30d5db4f985d538af1ca4d64ff605959258f5024e665b",
+      "vocab_sha256": "a69144b9eaf3fd955b14897b99aeb0f3876dd84a6a9ac5c36cdab99f7a4786ed",
+      "manifest_sha256": "d2bcc3878a77d691011c233b5743e8d7502e668b08d83cef450a584ff2672845"
+    }
+  },
+  "feature_metadata": {
+    "compound_leaf_type": {
+      "label": "Compound Leaf Type",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Pinnate (compound)",
+          "display_label": "Pinnate",
+          "definition": "compounded with the leaflets or segments along each side of a common axis or rachis; feather-like."
+        },
+        {
+          "value": "Palmate (compound)",
+          "display_label": "Palmate",
+          "definition": "A compound leaf arrangement in which all leaflets radiate from a single common point, like fan blades, rather than from a central axis, like a feather"
+        }
+      ]
+    },
+    "growth_habit_types": {
+      "label": "Growth Habit Types",
+      "section": "CLASSIFICATION SYSTEMS",
+      "required_organ": "whole plant",
+      "views": [
+        "whole_plant"
+      ],
+      "values": [
+        {
+          "value": "Tree",
+          "display_label": "Tree",
+          "definition": "Woody plant with a single central axis, branching 6 feet or more from the ground."
+        },
+        {
+          "value": "Shrub",
+          "display_label": "Shrub",
+          "definition": "Woody plant with several stems branching from or near the ground."
+        },
+        {
+          "value": "Vine",
+          "display_label": "Vine",
+          "definition": "Twining, clasping, or self-clinging growth habit."
+        },
+        {
+          "value": "Ground Cover",
+          "display_label": "Ground Cover",
+          "definition": "Low-growing, spreading or mat-forming woody or semi-woody plant; spreads by stolons, rhizomes, or rooting stems rather than growing upright."
+        }
+      ]
+    },
+    "inflorescences": {
+      "label": "Inflorescences",
+      "section": "PLANT MORPHOLOGY / FLORAL MORPHOLOGY",
+      "required_organ": "flower",
+      "views": [
+        "flower"
+      ],
+      "values": [
+        {
+          "value": "Raceme",
+          "display_label": "Raceme",
+          "definition": "An unbranched inflorescence with flowers attached to the central axis on individual stalks."
+        },
+        {
+          "value": "Panicle",
+          "display_label": "Panicle",
+          "definition": "A branched inflorescence with repeated branching from the main axis, often composed of smaller racemes, spikes, or corymbs."
+        },
+        {
+          "value": "Cyme",
+          "display_label": "Cyme",
+          "definition": "A flat-topped or convex inflorescence in which the main axis ends in a flower, with branches arising from below. Outer flowers open last."
+        },
+        {
+          "value": "Corymb",
+          "display_label": "Corymb",
+          "definition": "A flat-topped inflorescence in which flower stalks attach at different levels along the main axis but reach approximately the same height."
+        },
+        {
+          "value": "Catkin",
+          "display_label": "Catkin",
+          "definition": "A slim, cylindrical cluster of small flowers that typically hang from tree branches; flowers are unisexual (male or female) and wind-pollinated."
+        },
+        {
+          "value": "Umbel",
+          "display_label": "Umbel",
+          "definition": "An inflorescence in which all flower stalks radiate from a single point at the top of the main stem, like the spokes of an umbrella."
+        },
+        {
+          "value": "Head",
+          "display_label": "Head",
+          "definition": "A dense, compact inflorescence of many small flowers crowded together on a short axis."
+        },
+        {
+          "value": "Solitary",
+          "display_label": "Solitary",
+          "definition": "A single flower, not grouped with others."
+        },
+        {
+          "value": "Spike",
+          "display_label": "Spike",
+          "definition": "An unbranched inflorescence with flowers attached directly to the elongated central axis, without individual stalks."
+        },
+        {
+          "value": "Spadix",
+          "display_label": "Spadix",
+          "definition": "A spike-like inflorescence with small flowers crowded on a fleshy central axis, typically partially enclosed by a spathe, a large petal-like leaf surrounding the spike."
+        }
+      ]
+    },
+    "leaf_arrangement": {
+      "label": "Leaf Arrangement",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Opposite",
+          "display_label": "Opposite",
+          "definition": "Leaves and buds directly across from each other on the stem, two per node."
+        },
+        {
+          "value": "Alternate",
+          "display_label": "Alternate",
+          "definition": "Leaves and buds staggered along the stem, one per node, never directly across from each other."
+        },
+        {
+          "value": "Whorled",
+          "display_label": "Whorled",
+          "definition": "Three or more leaves radiating from a single node, encircling the stem."
+        },
+        {
+          "value": "Subopposite",
+          "display_label": "Subopposite",
+          "definition": "Leaves and buds paired close together on the stem but not at exactly the same level, neither opposite nor fully alternatating."
+        }
+      ]
+    },
+    "leaf_shape_apex": {
+      "label": "Leaf Blade Shape: Apex",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Acuminate",
+          "display_label": "Acuminate",
+          "definition": "having an apex whose sides are gradually concave and tapering to a point."
+        },
+        {
+          "value": "Emarginate",
+          "display_label": "Emarginate",
+          "definition": "with a shallow notch at the apex."
+        },
+        {
+          "value": "Mucronate",
+          "display_label": "Mucronate",
+          "definition": "abruptly terminated by a mucro."
+        },
+        {
+          "value": "Cuspidate",
+          "display_label": "Cuspidate",
+          "definition": "with an apex somewhat abruptly and concavely constricted into an elongated sharp-pointed tip."
+        },
+        {
+          "value": "Obcordate",
+          "display_label": "Obcordate",
+          "definition": "the apex being cordate."
+        },
+        {
+          "value": "Obtuse",
+          "display_label": "Obtuse",
+          "definition": "rounded, approaching the semi-circular."
+        },
+        {
+          "value": "Acute (apex)",
+          "display_label": "Acute",
+          "definition": "having an apex whose sides are straight and taper to a point."
+        },
+        {
+          "value": "Rounded (apex)",
+          "display_label": "Rounded",
+          "definition": ""
+        },
+        {
+          "value": "Truncate (apex)",
+          "display_label": "Truncate",
+          "definition": "as if cut off at right angles to the primary axis; a term applicable to bases or apices."
+        }
+      ]
+    },
+    "leaf_shape_base": {
+      "label": "Leaf Blade Shape: Base",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Cuneate",
+          "display_label": "Cuneate",
+          "definition": "wedge-shaped with essentially straight side, the structure attached at the narrow end."
+        },
+        {
+          "value": "Cordate",
+          "display_label": "Cordate",
+          "definition": "heart-shaped, with a sinus and rounded lobes; properly a term applied only to bases of leaves and bracts, but frequently employed to designate a structure of ovate outline and heart-shaped base."
+        },
+        {
+          "value": "Hastate",
+          "display_label": "Hastate",
+          "definition": "having the shape of an arrow-head and the basal lobes pointed outwards at or nearly at right angles to the mid-rib."
+        },
+        {
+          "value": "Oblique",
+          "display_label": "Oblique",
+          "definition": "lop-sided, as one side of a leaf base larger, wider or more rounded than the other."
+        },
+        {
+          "value": "Sagittate",
+          "display_label": "Sagittate",
+          "definition": "shaped like an arrow-head with the basal lobes pointing directly downward (backward) or inward."
+        },
+        {
+          "value": "Auriculate",
+          "display_label": "Auriculate",
+          "definition": "bearing ear-like appendages, as the projections of some leaf and petal bases."
+        },
+        {
+          "value": "Acute (base)",
+          "display_label": "Acute",
+          "definition": "having an apex whose sides are straight and taper to a point."
+        },
+        {
+          "value": "Rounded (base)",
+          "display_label": "Rounded",
+          "definition": "A base with a smoothly curved outline, neither pointed nor flat."
+        },
+        {
+          "value": "Truncate (base)",
+          "display_label": "Truncate",
+          "definition": "as if cut off at right angles to the primary axis; a term applicable to bases or apices."
+        }
+      ]
+    },
+    "leaf_shape_lobe_type": {
+      "label": "Leaf Blade Shape: Lobe Type",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Pinnately Lobed",
+          "display_label": "Pinnately Lobed",
+          "definition": "Lobes arranged symmetrically along a central midrib, each corresponding to a lateral vein. Characteristic of oaks (Quercus), alders (Alnus), and similar genera."
+        },
+        {
+          "value": "Palmately Lobed",
+          "display_label": "Palmately Lobed",
+          "definition": "Lobes radiating from a central basal point, each corresponding to a primary vein from the petiole attachment. Characteristic of maples (Acer), sweetgum (Liquidambar), and similar genera."
+        }
+      ]
+    },
+    "leaf_shape_margins": {
+      "label": "Leaf Blade Shape: Margins",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Serrate",
+          "display_label": "Serrate",
+          "definition": "saw-toothed, the teeth pointing forward."
+        },
+        {
+          "value": "Dentate",
+          "display_label": "Dentate",
+          "definition": "Toothed margin with teeth pointing outward rather than forward, perpendicular to the leaf edge."
+        },
+        {
+          "value": "Entire",
+          "display_label": "Entire",
+          "definition": "A margin with no teeth, lobes, or indentations; unbroken from base to tip."
+        },
+        {
+          "value": "Crenate",
+          "display_label": "Crenate",
+          "definition": "A margin with shallow, rounded scallops."
+        },
+        {
+          "value": "Lobed",
+          "display_label": "Lobed",
+          "definition": "A margin divided into rounded or pointed projections cut roughly halfway to the center of the leaf."
+        },
+        {
+          "value": "Sinuate",
+          "display_label": "Sinuate",
+          "definition": "A margin with pronounced wave-like curves in the plane of the leaf."
+        },
+        {
+          "value": "Undulate",
+          "display_label": "Undulate",
+          "definition": "A margin with a wavy, rippled edge curving up and down out of the plane of the leaf."
+        },
+        {
+          "value": "Doubly-Serrate",
+          "display_label": "Doubly-Serrate",
+          "definition": "Serrate with a secondary set of smaller teeth on each larger tooth."
+        }
+      ]
+    },
+    "leaf_shape_overall": {
+      "label": "Leaf Blade Shape: Overall",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Ovate",
+          "display_label": "Ovate",
+          "definition": "Rounded at the base and tapering to a pointed tip."
+        },
+        {
+          "value": "Obovate",
+          "display_label": "Obovate",
+          "definition": "Rounded at the tip and tapering toward the base (the reverse or \"ob\" of an ovate leaf)"
+        },
+        {
+          "value": "Elliptic",
+          "display_label": "Elliptic",
+          "definition": ""
+        },
+        {
+          "value": "Lanceolate",
+          "display_label": "Lanceolate",
+          "definition": "Narrow and elongated, widest just below the middle and tapering to a pointed tip; lance-like."
+        },
+        {
+          "value": "Oblong",
+          "display_label": "Oblong",
+          "definition": "Longer than wide with nearly parallel sides, like a rectangle with rounded corners."
+        },
+        {
+          "value": "Heart-shaped",
+          "display_label": "Heart-shaped",
+          "definition": "Broadly ovate with a cordate base giving an overall heart-like outline; as in Cercis. Dirr uses 'heart-shaped' as a plain-English descriptor for this form, distinct from the technical base term cordate."
+        },
+        {
+          "value": "Orbicular",
+          "display_label": "Orbicular",
+          "definition": "circular or disk-shaped."
+        },
+        {
+          "value": "Deltoid",
+          "display_label": "Deltoid",
+          "definition": ""
+        },
+        {
+          "value": "Linear",
+          "display_label": "Linear",
+          "definition": "Narrow and elongated along its full length, with roughly parallel sides."
+        },
+        {
+          "value": "Rhombic",
+          "display_label": "Rhombic",
+          "definition": ""
+        },
+        {
+          "value": "Suborbicular",
+          "display_label": "Suborbicular",
+          "definition": "Nearly circular in outline; approaching orbicular but slightly longer or wider than a perfect circle."
+        },
+        {
+          "value": "Spatulate",
+          "display_label": "Spatulate",
+          "definition": "Rounded and widest at the tip, tapering to a narrow base, like a spoon."
+        },
+        {
+          "value": "Oblanceolate",
+          "display_label": "Oblanceolate",
+          "definition": "Narrow and elongated, widest just above the middle and tapering toward a \"sharp\" base."
+        },
+        {
+          "value": "Peltate",
+          "display_label": "Peltate",
+          "definition": "Shield-shaped, with the leaf stalk attached to the underside of the blade rather than at the margin."
+        },
+        {
+          "value": "Reniform",
+          "display_label": "Reniform",
+          "definition": "Broadly rounded in outline with a shallow notch at the base, kidney-shaped."
+        }
+      ]
+    },
+    "leaf_surface_bottom": {
+      "label": "Leaf Surface: Bottom",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_reverse"
+      ],
+      "values": [
+        {
+          "value": "Pale",
+          "display_label": "Pale",
+          "definition": "Lower surface pale or light green, noticeably lighter than the upper surface."
+        },
+        {
+          "value": "Whitish",
+          "display_label": "Whitish",
+          "definition": "Lower surface whitish or nearly white in color."
+        },
+        {
+          "value": "Silvery",
+          "display_label": "Silvery",
+          "definition": "Lower surface silvery in appearance."
+        },
+        {
+          "value": "Yellowish",
+          "display_label": "Yellowish",
+          "definition": "Lower surface with a yellow-green cast."
+        },
+        {
+          "value": "Powdery",
+          "display_label": "Powdery",
+          "definition": "Lower surface covered with a waxy bloom or whitish material that rubs off readily; glaucous. Example: the bloom on many sorts of grape."
+        },
+        {
+          "value": "Woolly",
+          "display_label": "Woolly",
+          "definition": "Lower surface densely woolly; hairs soft and matted. Includes tomentose and felted forms."
+        },
+        {
+          "value": "Shaggy",
+          "display_label": "Shaggy",
+          "definition": "Lower surface shaggy with soft loose hairs; not matted. Includes pilose, villous (long soft shaggy), and silky forms."
+        }
+      ]
+    },
+    "leaf_surface_top": {
+      "label": "Leaf Surface: Top",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Dark Green",
+          "display_label": "Dark Green",
+          "definition": "Upper surface dark green in color."
+        },
+        {
+          "value": "Medium Green",
+          "display_label": "Medium Green",
+          "definition": "Upper surface medium green in color."
+        },
+        {
+          "value": "Bright Green",
+          "display_label": "Bright Green",
+          "definition": "Upper surface bright green in color."
+        },
+        {
+          "value": "Bluish",
+          "display_label": "Bluish",
+          "definition": "Upper surface with a bluish or blue-green cast."
+        },
+        {
+          "value": "Grayish",
+          "display_label": "Grayish",
+          "definition": "Upper surface with a grayish or gray-green cast."
+        },
+        {
+          "value": "Lustrous",
+          "display_label": "Lustrous",
+          "definition": "Upper surface with a slight metallic gloss, less reflective than glossy."
+        },
+        {
+          "value": "Dull",
+          "display_label": "Dull",
+          "definition": "Upper surface lacking luster or sheen."
+        },
+        {
+          "value": "Glabrous",
+          "display_label": "Glabrous",
+          "definition": "Upper surface not hairy. A glabrous surface need not be smooth — it may be bullate or rugose."
+        },
+        {
+          "value": "Pubescent",
+          "display_label": "Pubescent",
+          "definition": "Upper surface covered with short soft hairs; a general term encompassing strigose and hispid modifier forms."
+        }
+      ]
+    },
+    "leaf_texture": {
+      "label": "Leaf Texture",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Leathery",
+          "display_label": "Leathery",
+          "definition": "Of leathery texture; coriaceous."
+        },
+        {
+          "value": "Rugose",
+          "display_label": "Rugose",
+          "definition": "Wrinkled surface; covered with wrinkles. Includes bullate (puckered/blistered) forms."
+        },
+        {
+          "value": "Waxy",
+          "display_label": "Waxy",
+          "definition": "Having a waxy surface coating."
+        },
+        {
+          "value": "Glandular",
+          "display_label": "Glandular",
+          "definition": "Bearing glands; includes glandular-hirsute forms where gland-tipped stiff hairs are present."
+        }
+      ]
+    },
+    "leaf_type": {
+      "label": "Leaf Type",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Simple",
+          "display_label": "Simple",
+          "definition": "A leaf consisting of a single, undivided blade — not divided into leaflets."
+        },
+        {
+          "value": "Compound",
+          "display_label": "Compound",
+          "definition": "A leaf composed of two or more leaflets — individual leaf-like units attached to a common stalk rather than directly to the stem."
+        }
+      ]
+    },
+    "leaf_type_conifer": {
+      "label": "Conifer Leaf Types",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Needle-like",
+          "display_label": "Needle-like",
+          "definition": "A long, slender conifer leaf, roughly uniform in width along its length and flat or angular in cross-section."
+        },
+        {
+          "value": "Awl-like",
+          "display_label": "Awl-like",
+          "definition": "A needle-like gymnosperm leaf tapering to a slender, stiff point; usually sharp to the touch."
+        },
+        {
+          "value": "Scale-like",
+          "display_label": "Scale-like",
+          "definition": "Scale-like foliage overlaps like the shingles on a roof or the scales on a fish. This type of foliage is relatively soft to the touch."
+        }
+      ]
+    },
+    "leaf_venation": {
+      "label": "Leaf Venation",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Pinnate (venation)",
+          "display_label": "Pinnate",
+          "definition": "A leaf venation pattern in which secondary veins branch from a single prominent central vein (midrib), giving a feather or fishbone-like appearance."
+        },
+        {
+          "value": "Palmate (venation)",
+          "display_label": "Palmate",
+          "definition": "A leaf venation pattern in which several main veins of similar size radiate from the base of the leaf, fan-like."
+        },
+        {
+          "value": "Parallel",
+          "display_label": "Parallel",
+          "definition": "A venation pattern in which veins run side by side along the length of the leaf from base to tip. Unusual for woody plants."
+        },
+        {
+          "value": "Reticulate",
+          "display_label": "Reticulate",
+          "definition": ""
+        }
+      ]
+    },
+    "phenology_types": {
+      "label": "Phenology Types",
+      "section": "CLASSIFICATION SYSTEMS",
+      "required_organ": "whole plant",
+      "views": [
+        "whole_plant"
+      ],
+      "values": [
+        {
+          "value": "Evergreen",
+          "display_label": "Evergreen",
+          "definition": "Retains leaves year-round."
+        },
+        {
+          "value": "Deciduous",
+          "display_label": "Deciduous",
+          "definition": "Leafless for part of the year."
+        },
+        {
+          "value": "Semievergreen",
+          "display_label": "Semievergreen",
+          "definition": "Holds leaves most of the year, generally into winter."
+        }
+      ]
+    },
+    "pinnate_types": {
+      "label": "Pinnate Types",
+      "section": "PLANT MORPHOLOGY / LEAF MORPHOLOGY",
+      "required_organ": "leaf blade",
+      "views": [
+        "leaf_obverse"
+      ],
+      "values": [
+        {
+          "value": "Bipinnate",
+          "display_label": "Bipinnate",
+          "definition": "A compound leaf divided twice: the primary leaflets of a pinnate leaf are themselves further divided into secondary leaflets (pinnae), each bearing its own leaflets along a secondary rachis/axis."
+        },
+        {
+          "value": "Tripinnate",
+          "display_label": "Tripinnate",
+          "definition": "A compound leaf divided three times: each pinna of a bipinnate leaf is itself further divided, its secondary leaflets becoming stalks bearing tertiary leaflets."
+        }
+      ]
+    }
+  },
+  "species": [
+    {
+      "leafsnap_species": "Abies concolor",
+      "dirr_species": "Abies concolor",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 12,
+      "lab_images": 200,
+      "field_images": 51,
+      "total_images": 251,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Abies nordmanniana",
+      "dirr_species": "Abies nordmanniana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 15,
+      "lab_images": 124,
+      "field_images": 35,
+      "total_images": 159,
+      "features": {
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Acer campestre",
+      "dirr_species": "Acer campestre",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 20,
+      "lab_images": 108,
+      "field_images": 36,
+      "total_images": 144,
+      "features": {
+        "inflorescences": [
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 5
+    },
+    {
+      "leafsnap_species": "Acer griseum",
+      "dirr_species": "Acer griseum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 24,
+      "lab_images": 80,
+      "field_images": 46,
+      "total_images": 126,
+      "features": {
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acute (apex)"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Bluish"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Acer negundo",
+      "dirr_species": "Acer negundo",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 30,
+      "lab_images": 196,
+      "field_images": 33,
+      "total_images": 229,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme",
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Bright Green"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Acer palmatum",
+      "dirr_species": "Acer palmatum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 32,
+      "lab_images": 120,
+      "field_images": 92,
+      "total_images": 212,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Corymb",
+          "Umbel"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Acer pensylvanicum",
+      "dirr_species": "Acer pensylvanicum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 40,
+      "lab_images": 120,
+      "field_images": 35,
+      "total_images": 155,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Raceme"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Obovate"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Acer platanoides",
+      "dirr_species": "Acer platanoides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 45,
+      "lab_images": 120,
+      "field_images": 20,
+      "total_images": 140,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Lobed"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Acer pseudoplatanus",
+      "dirr_species": "Acer pseudoplatanus",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 48,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Crenate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_bottom": [
+          "Whitish"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Acer rubrum",
+      "dirr_species": "Acer rubrum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 49,
+      "lab_images": 252,
+      "field_images": 45,
+      "total_images": 297,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_bottom": [
+          "Silvery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Acer saccharinum",
+      "dirr_species": "Acer saccharinum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 56,
+      "lab_images": 148,
+      "field_images": 39,
+      "total_images": 187,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_surface_bottom": [
+          "Whitish"
+        ],
+        "leaf_surface_top": [
+          "Medium Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Acer saccharum",
+      "dirr_species": "Acer saccharum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 58,
+      "lab_images": 159,
+      "field_images": 24,
+      "total_images": 183,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Truncate (base)"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_surface_bottom": [
+          "Yellowish",
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Medium Green",
+          "Grayish",
+          "Dull"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 14
+    },
+    {
+      "leafsnap_species": "Aesculus flava",
+      "dirr_species": "Aesculus flava",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 81,
+      "lab_images": 116,
+      "field_images": 15,
+      "total_images": 131,
+      "features": {
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Aesculus glabra",
+      "dirr_species": "Aesculus glabra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 79,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "compound_leaf_type": [
+          "Palmate (compound)"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate",
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Lanceolate"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Aesculus hippocastamon",
+      "dirr_species": "Aesculus hippocastanum",
+      "match_rule": "curated_synonym",
+      "match_confidence": "high",
+      "match_note": "Misspelling of Aesculus hippocastanum in the LeafSnap manifest (three letters differ; no other Dirr row is close).",
+      "dirr_book_page": 82,
+      "lab_images": 120,
+      "field_images": 19,
+      "total_images": 139,
+      "features": {
+        "compound_leaf_type": [
+          "Palmate (compound)"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Doubly-Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Aesculus pavi",
+      "dirr_species": "Aesculus pavia",
+      "match_rule": "single_character_typo",
+      "match_confidence": "medium",
+      "match_note": "",
+      "dirr_book_page": 87,
+      "lab_images": 124,
+      "field_images": 101,
+      "total_images": 225,
+      "features": {
+        "compound_leaf_type": [
+          "Palmate (compound)"
+        ],
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Doubly-Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 14
+    },
+    {
+      "leafsnap_species": "Ailanthus altissima",
+      "dirr_species": "Ailanthus altissima",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 89,
+      "lab_images": 104,
+      "field_images": 16,
+      "total_images": 120,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Truncate (base)"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Albizia julibrissin",
+      "dirr_species": "Albizia julibrissin",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 93,
+      "lab_images": 116,
+      "field_images": 28,
+      "total_images": 144,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Head"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Oblique"
+        ],
+        "leaf_shape_overall": [
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Amelanchier arborea",
+      "dirr_species": "Amelanchier arborea",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 101,
+      "lab_images": 88,
+      "field_images": 43,
+      "total_images": 131,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Raceme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Amelanchier canadensis",
+      "dirr_species": "Amelanchier canadensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 106,
+      "lab_images": 120,
+      "field_images": 35,
+      "total_images": 155,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Amelanchier laevis",
+      "dirr_species": "Amelanchier laevis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 106,
+      "lab_images": 120,
+      "field_images": 31,
+      "total_images": 151,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Betula alleghaniensis",
+      "dirr_species": "Betula alleghaniensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 143,
+      "lab_images": 120,
+      "field_images": 33,
+      "total_images": 153,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong",
+          "Heart-shaped"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Dull"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 4,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Betula lenta",
+      "dirr_species": "Betula lenta",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 141,
+      "lab_images": 120,
+      "field_images": 11,
+      "total_images": 131,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Betula nigra",
+      "dirr_species": "Betula nigra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 143,
+      "lab_images": 120,
+      "field_images": 20,
+      "total_images": 140,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Rhombic"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Betula populifolia",
+      "dirr_species": "Betula populifolia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 152,
+      "lab_images": 120,
+      "field_images": 26,
+      "total_images": 146,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Truncate (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Deltoid"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Broussonettia papyrifera",
+      "dirr_species": "Broussonetia papyrifera",
+      "match_rule": "single_character_typo",
+      "match_confidence": "medium",
+      "match_note": "",
+      "dirr_book_page": 159,
+      "lab_images": 240,
+      "field_images": 54,
+      "total_images": 294,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Catkin",
+          "Head"
+        ],
+        "leaf_arrangement": [
+          "Opposite",
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Carpinus caroliniana",
+      "dirr_species": "Carpinus caroliniana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 206,
+      "lab_images": 148,
+      "field_images": 31,
+      "total_images": 179,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong",
+          "Heart-shaped"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Carya cordiformis",
+      "dirr_species": "Carya cordiformis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 211,
+      "lab_images": 148,
+      "field_images": 52,
+      "total_images": 200,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Glabrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Carya glabra",
+      "dirr_species": "Carya glabra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 211,
+      "lab_images": 100,
+      "field_images": 77,
+      "total_images": 177,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Carya ovata",
+      "dirr_species": "Carya ovata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 213,
+      "lab_images": 120,
+      "field_images": 35,
+      "total_images": 155,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Carya tomentosa",
+      "dirr_species": "Carya tomentosa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 214,
+      "lab_images": 120,
+      "field_images": 53,
+      "total_images": 173,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Silvery"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Castanea dentata",
+      "dirr_species": "Castanea dentata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 218,
+      "lab_images": 120,
+      "field_images": 41,
+      "total_images": 161,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Catalpa bignonioides",
+      "dirr_species": "Catalpa bignonioides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 220,
+      "lab_images": 172,
+      "field_images": 45,
+      "total_images": 217,
+      "features": {
+        "leaf_arrangement": [
+          "Opposite",
+          "Whorled"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Truncate (base)"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Catalpa speciosa",
+      "dirr_species": "Catalpa speciosa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 219,
+      "lab_images": 120,
+      "field_images": 72,
+      "total_images": 192,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite",
+          "Whorled"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Cedrus atlantica",
+      "dirr_species": "Cedrus atlantica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 224,
+      "lab_images": 80,
+      "field_images": 79,
+      "total_images": 159,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Cedrus deodara",
+      "dirr_species": "Cedrus deodara",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 225,
+      "lab_images": 80,
+      "field_images": 40,
+      "total_images": 120,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Cedrus libani",
+      "dirr_species": "Cedrus libani",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 227,
+      "lab_images": 120,
+      "field_images": 47,
+      "total_images": 167,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 3,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Celtis occidentalis",
+      "dirr_species": "Celtis occidentalis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 229,
+      "lab_images": 112,
+      "field_images": 21,
+      "total_images": 133,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Oblique"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Cercidiphyllum japonicum",
+      "dirr_species": "Cercidiphyllum japonicum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 236,
+      "lab_images": 119,
+      "field_images": 23,
+      "total_images": 142,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Opposite",
+          "Subopposite"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Suborbicular"
+        ],
+        "leaf_surface_top": [
+          "Bluish"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Cercis canadensis",
+      "dirr_species": "Cercis canadensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 238,
+      "lab_images": 172,
+      "field_images": 44,
+      "total_images": 216,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Heart-shaped",
+          "Suborbicular"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Chamaecyparis pisifera",
+      "dirr_species": "Chamaecyparis pisifera",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 251,
+      "lab_images": 120,
+      "field_images": 52,
+      "total_images": 172,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Chamaecyparis thyoides",
+      "dirr_species": "Chamaecyparis thyoides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 253,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_type_conifer": [
+          "Scale-like"
+        ]
+      },
+      "n_asserted_features": 3,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Chionanthus retusus",
+      "dirr_species": "Chionanthus retusus",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 261,
+      "lab_images": 120,
+      "field_images": 23,
+      "total_images": 143,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Opposite",
+          "Alternate",
+          "Subopposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 14
+    },
+    {
+      "leafsnap_species": "Chionanthus virginicus",
+      "dirr_species": "Chionanthus virginicus",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 259,
+      "lab_images": 172,
+      "field_images": 45,
+      "total_images": 217,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite",
+          "Subopposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Cladrastis lutea",
+      "dirr_species": "Cladrastis kentukea",
+      "match_rule": "curated_synonym",
+      "match_confidence": "high",
+      "match_note": "Cladrastis lutea is a synonym of C. kentukea (accepted name).",
+      "dirr_book_page": 264,
+      "lab_images": 119,
+      "field_images": 51,
+      "total_images": 170,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Cornus florida",
+      "dirr_species": "Cornus florida",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 288,
+      "lab_images": 124,
+      "field_images": 51,
+      "total_images": 175,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Cyme",
+          "Umbel",
+          "Head"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Cornus kousa",
+      "dirr_species": "Cornus kousa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 296,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "inflorescences": [
+          "Umbel"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_bottom": [
+          "Shaggy"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Cornus mas",
+      "dirr_species": "Cornus mas",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 305,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Umbel"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Corylus colurna",
+      "dirr_species": "Corylus colurna",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 320,
+      "lab_images": 48,
+      "field_images": 36,
+      "total_images": 84,
+      "features": {
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Crataegus crus-galli",
+      "dirr_species": "Crataegus crusgalli",
+      "match_rule": "orthographic_variant",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 334,
+      "lab_images": 103,
+      "field_images": 13,
+      "total_images": 116,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Crataegus laevigata",
+      "dirr_species": "Crataegus laevigata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 336,
+      "lab_images": 120,
+      "field_images": 23,
+      "total_images": 143,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Crataegus phaenopyrum",
+      "dirr_species": "Crataegus phaenopyrum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 339,
+      "lab_images": 120,
+      "field_images": 22,
+      "total_images": 142,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_top": [
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Crataegus viridis",
+      "dirr_species": "Crataegus viridis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 340,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Cryptomeria japonica",
+      "dirr_species": "Cryptomeria japonica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 342,
+      "lab_images": 80,
+      "field_images": 132,
+      "total_images": 212,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_type_conifer": [
+          "Awl-like"
+        ],
+        "phenology_types": [
+          "Evergreen"
+        ]
+      },
+      "n_asserted_features": 4,
+      "n_asserted_values": 4
+    },
+    {
+      "leafsnap_species": "Diospyros virginiana",
+      "dirr_species": "Diospyros virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 378,
+      "lab_images": 200,
+      "field_images": 48,
+      "total_images": 248,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Eucommia ulmoides",
+      "dirr_species": "Eucommia ulmoides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 404,
+      "lab_images": 120,
+      "field_images": 71,
+      "total_images": 191,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_texture": [
+          "Rugose"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Evodia daniellii",
+      "dirr_species": "Tetradium daniellii",
+      "match_rule": "curated_synonym",
+      "match_confidence": "high",
+      "match_note": "Evodia daniellii is the former name of Tetradium daniellii.",
+      "dirr_book_page": 1132,
+      "lab_images": 80,
+      "field_images": 35,
+      "total_images": 115,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "inflorescences": [
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Fagus grandifolia",
+      "dirr_species": "Fagus grandifolia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 422,
+      "lab_images": 116,
+      "field_images": 38,
+      "total_images": 154,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Head",
+          "Spike"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Ficus carica",
+      "dirr_species": "Ficus carica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 430,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Orbicular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Fraxinus americana",
+      "dirr_species": "Fraxinus americana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 447,
+      "lab_images": 88,
+      "field_images": 15,
+      "total_images": 103,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Fraxinus nigra",
+      "dirr_species": "Fraxinus nigra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 453,
+      "lab_images": 120,
+      "field_images": 85,
+      "total_images": 205,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Ginkgo biloba",
+      "dirr_species": "Ginkgo biloba",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 463,
+      "lab_images": 120,
+      "field_images": 21,
+      "total_images": 141,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme",
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple",
+          "Compound"
+        ],
+        "pinnate_types": [
+          "Bipinnate"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Gymnocladus dioicus",
+      "dirr_species": "Gymnocladus dioicus",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 469,
+      "lab_images": 120,
+      "field_images": 28,
+      "total_images": 148,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Halesia tetraptera",
+      "dirr_species": "Halesia carolina",
+      "match_rule": "curated_synonym",
+      "match_confidence": "medium",
+      "match_note": "Halesia tetraptera and H. carolina are treated as the same species in Dirr's usage; epithet chosen by Dirr.",
+      "dirr_book_page": 471,
+      "lab_images": 120,
+      "field_images": 24,
+      "total_images": 144,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Juglans cinerea",
+      "dirr_species": "Juglans cinerea",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 573,
+      "lab_images": 120,
+      "field_images": 97,
+      "total_images": 217,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Juglans nigra",
+      "dirr_species": "Juglans nigra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 574,
+      "lab_images": 148,
+      "field_images": 15,
+      "total_images": 163,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Juniperus virginiana",
+      "dirr_species": "Juniperus virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 595,
+      "lab_images": 48,
+      "field_images": 65,
+      "total_images": 113,
+      "features": {
+        "leaf_texture": [
+          "Waxy",
+          "Glandular"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like",
+          "Scale-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 4
+    },
+    {
+      "leafsnap_species": "Koelreuteria paniculata",
+      "dirr_species": "Koelreuteria paniculata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 606,
+      "lab_images": 120,
+      "field_images": 74,
+      "total_images": 194,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Crenate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Larix decidua",
+      "dirr_species": "Larix decidua",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 623,
+      "lab_images": 120,
+      "field_images": 30,
+      "total_images": 150,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Liquidambar styraciflua",
+      "dirr_species": "Liquidambar styraciflua",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 645,
+      "lab_images": 120,
+      "field_images": 46,
+      "total_images": 166,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle",
+          "Head"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Liriodendron tulipifera",
+      "dirr_species": "Liriodendron tulipifera",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 650,
+      "lab_images": 184,
+      "field_images": 51,
+      "total_images": 235,
+      "features": {
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Bright Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Maclura pomifera",
+      "dirr_species": "Maclura pomifera",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 673,
+      "lab_images": 424,
+      "field_images": 24,
+      "total_images": 448,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme",
+          "Head"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 14
+    },
+    {
+      "leafsnap_species": "Magnolia acuminata",
+      "dirr_species": "Magnolia acuminata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 676,
+      "lab_images": 120,
+      "field_images": 28,
+      "total_images": 148,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Acute (base)"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Magnolia denudata",
+      "dirr_species": "Magnolia denudata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 681,
+      "lab_images": 120,
+      "field_images": 60,
+      "total_images": 180,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "leaf_venation": [
+          "Reticulate"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Magnolia grandiflora",
+      "dirr_species": "Magnolia grandiflora",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 681,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous",
+          "Pubescent"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "phenology_types": [
+          "Evergreen"
+        ]
+      },
+      "n_asserted_features": 11,
+      "n_asserted_values": 16
+    },
+    {
+      "leafsnap_species": "Magnolia macrophylla",
+      "dirr_species": "Magnolia macrophylla",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 691,
+      "lab_images": 120,
+      "field_images": 24,
+      "total_images": 144,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Auriculate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Magnolia soulangiana",
+      "dirr_species": "Magnolia xsoulangeana",
+      "match_rule": "single_character_typo",
+      "match_confidence": "medium",
+      "match_note": "",
+      "dirr_book_page": 695,
+      "lab_images": 40,
+      "field_images": 16,
+      "total_images": 56,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Magnolia stellata",
+      "dirr_species": "Magnolia stellata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 700,
+      "lab_images": 120,
+      "field_images": 47,
+      "total_images": 167,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "leaf_venation": [
+          "Reticulate"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Magnolia tripetala",
+      "dirr_species": "Magnolia tripetala",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 702,
+      "lab_images": 120,
+      "field_images": 32,
+      "total_images": 152,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Magnolia virginiana",
+      "dirr_species": "Magnolia virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 0,
+      "lab_images": 120,
+      "field_images": 58,
+      "total_images": 178,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "phenology_types": [
+          "Evergreen",
+          "Deciduous",
+          "Semievergreen"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 16
+    },
+    {
+      "leafsnap_species": "Malus angustifolia",
+      "dirr_species": "Malus angustifolia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 719,
+      "lab_images": 56,
+      "field_images": 29,
+      "total_images": 85,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Malus baccata",
+      "dirr_species": "Malus baccata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 720,
+      "lab_images": 120,
+      "field_images": 35,
+      "total_images": 155,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Malus coronaria",
+      "dirr_species": "Malus coronaria",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 724,
+      "lab_images": 120,
+      "field_images": 31,
+      "total_images": 151,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Malus floribunda",
+      "dirr_species": "Malus floribunda",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 726,
+      "lab_images": 120,
+      "field_images": 31,
+      "total_images": 151,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Malus hupehensis",
+      "dirr_species": "Malus hupehensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 729,
+      "lab_images": 120,
+      "field_images": 32,
+      "total_images": 152,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Malus pumila",
+      "dirr_species": "Malus pumila",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 736,
+      "lab_images": 120,
+      "field_images": 53,
+      "total_images": 173,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Metasequoia glyptostroboides",
+      "dirr_species": "Metasequoia glyptostroboides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 748,
+      "lab_images": 120,
+      "field_images": 52,
+      "total_images": 172,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme",
+          "Panicle",
+          "Solitary"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_overall": [
+          "Linear"
+        ],
+        "phenology_types": [
+          "Deciduous"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Morus alba",
+      "dirr_species": "Morus alba",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 753,
+      "lab_images": 128,
+      "field_images": 14,
+      "total_images": 142,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Dentate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Morus rubra",
+      "dirr_species": "Morus rubra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 755,
+      "lab_images": 124,
+      "field_images": 15,
+      "total_images": 139,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Nyssa sylvatica",
+      "dirr_species": "Nyssa sylvatica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 767,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Ostrya virginiana",
+      "dirr_species": "Ostrya virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 779,
+      "lab_images": 184,
+      "field_images": 25,
+      "total_images": 209,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Heart-shaped"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Oxydendrum arboreum",
+      "dirr_species": "Oxydendrum arboreum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 780,
+      "lab_images": 120,
+      "field_images": 47,
+      "total_images": 167,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme",
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 14
+    },
+    {
+      "leafsnap_species": "Paulownia tomentosa",
+      "dirr_species": "Paulownia tomentosa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 794,
+      "lab_images": 120,
+      "field_images": 22,
+      "total_images": 142,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Phellodendron amurense",
+      "dirr_species": "Phellodendron amurense",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 798,
+      "lab_images": 120,
+      "field_images": 27,
+      "total_images": 147,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Picea abies",
+      "dirr_species": "Picea abies",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 812,
+      "lab_images": 120,
+      "field_images": 48,
+      "total_images": 168,
+      "features": {
+        "leaf_shape_overall": [
+          "Rhombic"
+        ],
+        "leaf_type_conifer": [
+          "Scale-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Picea orientalis",
+      "dirr_species": "Picea orientalis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 817,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Picea pungens",
+      "dirr_species": "Picea pungens",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 818,
+      "lab_images": 120,
+      "field_images": 49,
+      "total_images": 169,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Pinus bungeana",
+      "dirr_species": "Pinus bungeana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 828,
+      "lab_images": 120,
+      "field_images": 54,
+      "total_images": 174,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Pinus densiflora",
+      "dirr_species": "Pinus densiflora",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 830,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_shape_apex": [
+          "Acute (apex)"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 3,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Pinus echinata",
+      "dirr_species": "Pinus echinata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 831,
+      "lab_images": 120,
+      "field_images": 42,
+      "total_images": 162,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Pinus flexilis",
+      "dirr_species": "Pinus flexilis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 831,
+      "lab_images": 124,
+      "field_images": 46,
+      "total_images": 170,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 3,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Pinus parviflora",
+      "dirr_species": "Pinus parviflora",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 835,
+      "lab_images": 120,
+      "field_images": 51,
+      "total_images": 171,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Pinus peucea",
+      "dirr_species": "Pinus peuce",
+      "match_rule": "single_character_typo",
+      "match_confidence": "medium",
+      "match_note": "",
+      "dirr_book_page": 836,
+      "lab_images": 124,
+      "field_images": 36,
+      "total_images": 160,
+      "features": {},
+      "n_asserted_features": 0,
+      "n_asserted_values": 0
+    },
+    {
+      "leafsnap_species": "Pinus resinosa",
+      "dirr_species": "Pinus resinosa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 838,
+      "lab_images": 120,
+      "field_images": 50,
+      "total_images": 170,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Solitary"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 3,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Pinus rigida",
+      "dirr_species": "Pinus rigida",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 839,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Pinus strobus",
+      "dirr_species": "Pinus strobus",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 840,
+      "lab_images": 120,
+      "field_images": 20,
+      "total_images": 140,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Pinus sylvestris",
+      "dirr_species": "Pinus sylvestris",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 842,
+      "lab_images": 120,
+      "field_images": 33,
+      "total_images": 153,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Pinus taeda",
+      "dirr_species": "Pinus taeda",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 843,
+      "lab_images": 120,
+      "field_images": 43,
+      "total_images": 163,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Pinus thunbergii",
+      "dirr_species": "Pinus thunbergii",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 845,
+      "lab_images": 120,
+      "field_images": 10,
+      "total_images": 130,
+      "features": {
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 2,
+      "n_asserted_values": 3
+    },
+    {
+      "leafsnap_species": "Pinus virginiana",
+      "dirr_species": "Pinus virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 846,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Pinus wallichiana",
+      "dirr_species": "Pinus wallichiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 846,
+      "lab_images": 120,
+      "field_images": 40,
+      "total_images": 160,
+      "features": {
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 1
+    },
+    {
+      "leafsnap_species": "Platanus acerifolia",
+      "dirr_species": "Platanus xacerifolia",
+      "match_rule": "hybrid_name_form",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 851,
+      "lab_images": 120,
+      "field_images": 20,
+      "total_images": 140,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 5
+    },
+    {
+      "leafsnap_species": "Platanus occidentalis",
+      "dirr_species": "Platanus occidentalis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 853,
+      "lab_images": 168,
+      "field_images": 20,
+      "total_images": 188,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Populus deltoides",
+      "dirr_species": "Populus deltoides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 862,
+      "lab_images": 120,
+      "field_images": 46,
+      "total_images": 166,
+      "features": {
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Entire",
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Deltoid"
+        ],
+        "leaf_surface_top": [
+          "Medium Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Populus grandidentata",
+      "dirr_species": "Populus grandidentata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 864,
+      "lab_images": 120,
+      "field_images": 42,
+      "total_images": 162,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate",
+          "Mucronate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Sinuate"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Populus tremuloides",
+      "dirr_species": "Populus tremuloides",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 866,
+      "lab_images": 120,
+      "field_images": 41,
+      "total_images": 161,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Orbicular"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Prunus sargentii",
+      "dirr_species": "Prunus sargentii",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 888,
+      "lab_images": 120,
+      "field_images": 168,
+      "total_images": 288,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Prunus serotina",
+      "dirr_species": "Prunus serotina",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 890,
+      "lab_images": 128,
+      "field_images": 21,
+      "total_images": 149,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Prunus serrulata",
+      "dirr_species": "Prunus serrulata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 890,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Prunus subhirtella",
+      "dirr_species": "Prunus subhirtella",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 892,
+      "lab_images": 120,
+      "field_images": 47,
+      "total_images": 167,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Prunus virginiana",
+      "dirr_species": "Prunus virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 894,
+      "lab_images": 120,
+      "field_images": 183,
+      "total_images": 303,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Grayish"
+        ],
+        "leaf_texture": [
+          "Glandular"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Prunus yedoensis",
+      "dirr_species": "Prunus xyedoensis",
+      "match_rule": "hybrid_name_form",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 895,
+      "lab_images": 120,
+      "field_images": 17,
+      "total_images": 137,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Pseudolarix amabilis",
+      "dirr_species": "Pseudolarix amabilis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 896,
+      "lab_images": 116,
+      "field_images": 37,
+      "total_images": 153,
+      "features": {
+        "inflorescences": [
+          "Catkin",
+          "Solitary"
+        ]
+      },
+      "n_asserted_features": 1,
+      "n_asserted_values": 2
+    },
+    {
+      "leafsnap_species": "Ptelea trifoliata",
+      "dirr_species": "Ptelea trifoliata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 899,
+      "lab_images": 220,
+      "field_images": 50,
+      "total_images": 270,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Panicle",
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Oblique"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Pyrus calleryana",
+      "dirr_species": "Pyrus calleryana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 909,
+      "lab_images": 120,
+      "field_images": 52,
+      "total_images": 172,
+      "features": {
+        "inflorescences": [
+          "Corymb"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate",
+          "Truncate (base)"
+        ],
+        "leaf_shape_margins": [
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Quercus acutissima",
+      "dirr_species": "Quercus acutissima",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 916,
+      "lab_images": 120,
+      "field_images": 49,
+      "total_images": 169,
+      "features": {
+        "inflorescences": [
+          "Catkin"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "leaf_venation": [
+          "Parallel"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Quercus alba",
+      "dirr_species": "Quercus alba",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 918,
+      "lab_images": 160,
+      "field_images": 15,
+      "total_images": 175,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Catkin",
+          "Solitary",
+          "Spike"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Bluish"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Quercus bicolor",
+      "dirr_species": "Quercus bicolor",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 919,
+      "lab_images": 124,
+      "field_images": 21,
+      "total_images": 145,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Lobed",
+          "Sinuate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Quercus cerris",
+      "dirr_species": "Quercus cerris",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 920,
+      "lab_images": 120,
+      "field_images": 16,
+      "total_images": 136,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_lobe_type": [
+          "Pinnately Lobed"
+        ],
+        "leaf_shape_margins": [
+          "Dentate",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Quercus coccinea",
+      "dirr_species": "Quercus coccinea",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 933,
+      "lab_images": 120,
+      "field_images": 22,
+      "total_images": 142,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Quercus falcata",
+      "dirr_species": "Quercus falcata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 920,
+      "lab_images": 7,
+      "field_images": 53,
+      "total_images": 60,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Quercus imbricaria",
+      "dirr_species": "Quercus imbricaria",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 923,
+      "lab_images": 116,
+      "field_images": 27,
+      "total_images": 143,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acute (apex)"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Quercus macrocarpa",
+      "dirr_species": "Quercus macrocarpa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 925,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Quercus marilandica",
+      "dirr_species": "Quercus marilandica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 926,
+      "lab_images": 120,
+      "field_images": 57,
+      "total_images": 177,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Obovate"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Quercus montana",
+      "dirr_species": "Quercus montana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 927,
+      "lab_images": 188,
+      "field_images": 59,
+      "total_images": 247,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate",
+          "Mucronate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Quercus muehlenbergii",
+      "dirr_species": "Quercus muehlenbergii",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 928,
+      "lab_images": 120,
+      "field_images": 106,
+      "total_images": 226,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate",
+          "Mucronate"
+        ],
+        "leaf_shape_base": [
+          "Rounded (base)"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Quercus nigra",
+      "dirr_species": "Quercus nigra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 931,
+      "lab_images": 120,
+      "field_images": 44,
+      "total_images": 164,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_lobe_type": [
+          "Pinnately Lobed"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Obovate"
+        ],
+        "leaf_surface_bottom": [
+          "Pale"
+        ],
+        "leaf_surface_top": [
+          "Dark Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Quercus palustris",
+      "dirr_species": "Quercus palustris",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 932,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Quercus phellos",
+      "dirr_species": "Quercus phellos",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 936,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Quercus robur",
+      "dirr_species": "Quercus robur",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 937,
+      "lab_images": 116,
+      "field_images": 27,
+      "total_images": 143,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Rounded (apex)"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Auriculate",
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Bluish"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Quercus rubra",
+      "dirr_species": "Quercus rubra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 940,
+      "lab_images": 40,
+      "field_images": 31,
+      "total_images": 71,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_bottom": [
+          "Yellowish"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Quercus shumardii",
+      "dirr_species": "Quercus shumardii",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 935,
+      "lab_images": 120,
+      "field_images": 38,
+      "total_images": 158,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 5,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Quercus stellata",
+      "dirr_species": "Quercus stellata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 942,
+      "lab_images": 120,
+      "field_images": 52,
+      "total_images": 172,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Obovate"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 6
+    },
+    {
+      "leafsnap_species": "Quercus virginiana",
+      "dirr_species": "Quercus virginiana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 943,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Catkin",
+          "Umbel"
+        ],
+        "leaf_arrangement": [
+          "Alternate",
+          "Subopposite"
+        ],
+        "leaf_shape_base": [
+          "Cuneate",
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_texture": [
+          "Leathery"
+        ],
+        "leaf_type": [
+          "Simple"
+        ],
+        "phenology_types": [
+          "Evergreen"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 19
+    },
+    {
+      "leafsnap_species": "Robinia pseudo-acacia",
+      "dirr_species": "Robinia pseudoacacia",
+      "match_rule": "orthographic_variant",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1013,
+      "lab_images": 124,
+      "field_images": 21,
+      "total_images": 145,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Raceme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Mucronate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Salix babylonica",
+      "dirr_species": "Salix babylonica",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1037,
+      "lab_images": 120,
+      "field_images": 51,
+      "total_images": 171,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Lanceolate",
+          "Linear"
+        ],
+        "leaf_surface_top": [
+          "Grayish"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Sassafras albidum",
+      "dirr_species": "Sassafras albidum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1052,
+      "lab_images": 112,
+      "field_images": 20,
+      "total_images": 132,
+      "features": {
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Raceme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire",
+          "Lobed"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_bottom": [
+          "Powdery"
+        ],
+        "leaf_surface_top": [
+          "Medium Green"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 13
+    },
+    {
+      "leafsnap_species": "Staphylea trifolia",
+      "dirr_species": "Staphylea trifolia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1084,
+      "lab_images": 168,
+      "field_images": 45,
+      "total_images": 213,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "growth_habit_types": [
+          "Tree",
+          "Shrub"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Opposite"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Stewartia pseudocamellia",
+      "dirr_species": "Stewartia pseudocamellia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1089,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Crenate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Elliptic",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 10
+    },
+    {
+      "leafsnap_species": "Styrax japonica",
+      "dirr_species": "Styrax japonicus",
+      "match_rule": "curated_synonym",
+      "match_confidence": "high",
+      "match_note": "Epithet gender agreement with the masculine genus Styrax.",
+      "dirr_book_page": 1094,
+      "lab_images": 120,
+      "field_images": 108,
+      "total_images": 228,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cuneate"
+        ],
+        "leaf_shape_margins": [
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Lustrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Styrax obassia",
+      "dirr_species": "Styrax obassia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1097,
+      "lab_images": 40,
+      "field_images": 39,
+      "total_images": 79,
+      "features": {
+        "growth_habit_types": [
+          "Shrub"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Suborbicular"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Taxodium distichum",
+      "dirr_species": "Taxodium distichum",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1119,
+      "lab_images": 116,
+      "field_images": 60,
+      "total_images": 176,
+      "features": {
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_shape_overall": [
+          "Lanceolate",
+          "Linear"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ],
+        "phenology_types": [
+          "Deciduous"
+        ]
+      },
+      "n_asserted_features": 4,
+      "n_asserted_values": 5
+    },
+    {
+      "leafsnap_species": "Tilia americana",
+      "dirr_species": "Tilia americana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1145,
+      "lab_images": 144,
+      "field_images": 15,
+      "total_images": 159,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Cyme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Truncate (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 9,
+      "n_asserted_values": 12
+    },
+    {
+      "leafsnap_species": "Tilia cordata",
+      "dirr_species": "Tilia cordata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1147,
+      "lab_images": 120,
+      "field_images": 77,
+      "total_images": 197,
+      "features": {
+        "inflorescences": [
+          "Cyme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Suborbicular"
+        ],
+        "leaf_surface_top": [
+          "Lustrous",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Tilia europaea",
+      "dirr_species": "Tilia xeuropaea",
+      "match_rule": "hybrid_name_form",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1150,
+      "lab_images": 120,
+      "field_images": 15,
+      "total_images": 135,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Tilia tomentosa",
+      "dirr_species": "Tilia tomentosa",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1152,
+      "lab_images": 120,
+      "field_images": 25,
+      "total_images": 145,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "inflorescences": [
+          "Cyme"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate",
+          "Truncate (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Suborbicular"
+        ],
+        "leaf_surface_bottom": [
+          "Woolly"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 10,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Toona sinensis",
+      "dirr_species": "Toona sinensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1154,
+      "lab_images": 40,
+      "field_images": 24,
+      "total_images": 64,
+      "features": {
+        "compound_leaf_type": [
+          "Pinnate (compound)"
+        ],
+        "inflorescences": [
+          "Panicle"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Compound"
+        ]
+      },
+      "n_asserted_features": 8,
+      "n_asserted_values": 9
+    },
+    {
+      "leafsnap_species": "Tsuga canadensis",
+      "dirr_species": "Tsuga canadensis",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1160,
+      "lab_images": 120,
+      "field_images": 69,
+      "total_images": 189,
+      "features": {
+        "leaf_shape_apex": [
+          "Obtuse"
+        ],
+        "leaf_shape_overall": [
+          "Linear"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous"
+        ],
+        "leaf_type_conifer": [
+          "Needle-like"
+        ]
+      },
+      "n_asserted_features": 4,
+      "n_asserted_values": 5
+    },
+    {
+      "leafsnap_species": "Ulmus americana",
+      "dirr_species": "Ulmus americana",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1164,
+      "lab_images": 200,
+      "field_images": 15,
+      "total_images": 215,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Ulmus glabra",
+      "dirr_species": "Ulmus glabra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1168,
+      "lab_images": 104,
+      "field_images": 56,
+      "total_images": 160,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Lobed",
+          "Doubly-Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Elliptic",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Ulmus parvifolia",
+      "dirr_species": "Ulmus parvifolia",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1172,
+      "lab_images": 120,
+      "field_images": 45,
+      "total_images": 165,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_base": [
+          "Rounded (base)"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Obovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Dark Green",
+          "Lustrous",
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 11
+    },
+    {
+      "leafsnap_species": "Ulmus procera",
+      "dirr_species": "Ulmus procera",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1178,
+      "lab_images": 120,
+      "field_images": 0,
+      "total_images": 120,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Oblique"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Elliptic"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Ulmus pumila",
+      "dirr_species": "Ulmus pumila",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1178,
+      "lab_images": 120,
+      "field_images": 145,
+      "total_images": 265,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate",
+          "Entire"
+        ],
+        "leaf_shape_overall": [
+          "Elliptic",
+          "Lanceolate"
+        ],
+        "leaf_surface_top": [
+          "Glabrous"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 8
+    },
+    {
+      "leafsnap_species": "Ulmus rubra",
+      "dirr_species": "Ulmus rubra",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1166,
+      "lab_images": 268,
+      "field_images": 49,
+      "total_images": 317,
+      "features": {
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Obovate",
+          "Oblong"
+        ],
+        "leaf_surface_top": [
+          "Pubescent"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 6,
+      "n_asserted_values": 7
+    },
+    {
+      "leafsnap_species": "Zelkova serrata",
+      "dirr_species": "Zelkova serrata",
+      "match_rule": "exact",
+      "match_confidence": "high",
+      "match_note": "",
+      "dirr_book_page": 1249,
+      "lab_images": 120,
+      "field_images": 63,
+      "total_images": 183,
+      "features": {
+        "growth_habit_types": [
+          "Tree"
+        ],
+        "leaf_arrangement": [
+          "Alternate"
+        ],
+        "leaf_shape_apex": [
+          "Acuminate"
+        ],
+        "leaf_shape_base": [
+          "Cordate"
+        ],
+        "leaf_shape_margins": [
+          "Serrate"
+        ],
+        "leaf_shape_overall": [
+          "Ovate",
+          "Oblong"
+        ],
+        "leaf_type": [
+          "Simple"
+        ]
+      },
+      "n_asserted_features": 7,
+      "n_asserted_values": 8
+    }
+  ],
+  "unmatched": [
+    {
+      "leafsnap_species": "Acer ginnala",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": {
+        "dirr_species": "Acer tataricum",
+        "reason": "Acer ginnala is treated as Acer tataricum subsp. ginnala; the Dirr row is the parent species, whose leaf shape differs, so the mapping would lose the three-lobed Amur maple distinction."
+      }
+    },
+    {
+      "leafsnap_species": "Asimina triloba",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Betula jacqemontii",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Carpinus betulus",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Celtis tenuifolia",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Crataegus pruinosa",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Fraxinus pennsylvanica",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Gleditsia triacanthos",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Ilex opaca",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Pinus cembra",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Pinus koraiensis",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Pinus nigra",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Pinus pungens",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Prunus pensylvanica",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Quercus michauxii",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Quercus velutina",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Salix caroliniana",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Salix matsudana",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Salix nigra",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    },
+    {
+      "leafsnap_species": "Syringa reticulata",
+      "reason": "no Dirr row at any join rung",
+      "same_genus_near_misses": [],
+      "suggestion_not_applied": null
+    }
+  ],
+  "ambiguous": [],
+  "many_to_one": [],
+  "match_audit": [
+    {
+      "leafsnap_species": "Aesculus hippocastamon",
+      "dirr_species": "Aesculus hippocastanum",
+      "rule": "curated_synonym",
+      "confidence": "high",
+      "note": "Misspelling of Aesculus hippocastanum in the LeafSnap manifest (three letters differ; no other Dirr row is close)."
+    },
+    {
+      "leafsnap_species": "Aesculus pavi",
+      "dirr_species": "Aesculus pavia",
+      "rule": "single_character_typo",
+      "confidence": "medium",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Broussonettia papyrifera",
+      "dirr_species": "Broussonetia papyrifera",
+      "rule": "single_character_typo",
+      "confidence": "medium",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Cladrastis lutea",
+      "dirr_species": "Cladrastis kentukea",
+      "rule": "curated_synonym",
+      "confidence": "high",
+      "note": "Cladrastis lutea is a synonym of C. kentukea (accepted name)."
+    },
+    {
+      "leafsnap_species": "Crataegus crus-galli",
+      "dirr_species": "Crataegus crusgalli",
+      "rule": "orthographic_variant",
+      "confidence": "high",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Evodia daniellii",
+      "dirr_species": "Tetradium daniellii",
+      "rule": "curated_synonym",
+      "confidence": "high",
+      "note": "Evodia daniellii is the former name of Tetradium daniellii."
+    },
+    {
+      "leafsnap_species": "Halesia tetraptera",
+      "dirr_species": "Halesia carolina",
+      "rule": "curated_synonym",
+      "confidence": "medium",
+      "note": "Halesia tetraptera and H. carolina are treated as the same species in Dirr's usage; epithet chosen by Dirr."
+    },
+    {
+      "leafsnap_species": "Magnolia soulangiana",
+      "dirr_species": "Magnolia xsoulangeana",
+      "rule": "single_character_typo",
+      "confidence": "medium",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Pinus peucea",
+      "dirr_species": "Pinus peuce",
+      "rule": "single_character_typo",
+      "confidence": "medium",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Platanus acerifolia",
+      "dirr_species": "Platanus xacerifolia",
+      "rule": "hybrid_name_form",
+      "confidence": "high",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Prunus yedoensis",
+      "dirr_species": "Prunus xyedoensis",
+      "rule": "hybrid_name_form",
+      "confidence": "high",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Robinia pseudo-acacia",
+      "dirr_species": "Robinia pseudoacacia",
+      "rule": "orthographic_variant",
+      "confidence": "high",
+      "note": ""
+    },
+    {
+      "leafsnap_species": "Styrax japonica",
+      "dirr_species": "Styrax japonicus",
+      "rule": "curated_synonym",
+      "confidence": "high",
+      "note": "Epithet gender agreement with the masculine genus Styrax."
+    },
+    {
+      "leafsnap_species": "Tilia europaea",
+      "dirr_species": "Tilia xeuropaea",
+      "rule": "hybrid_name_form",
+      "confidence": "high",
+      "note": ""
+    }
+  ]
+}

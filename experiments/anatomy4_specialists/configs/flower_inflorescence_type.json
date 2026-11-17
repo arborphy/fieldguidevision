@@ -1,0 +1,65 @@
+{
+  "contract": "anatomy4-specialists/v1",
+  "target": {
+    "target_id": "flower_inflorescence_type",
+    "expert": "flower",
+    "feature_name": "inflorescences",
+    "dirr_feature_names": [
+      "inflorescences"
+    ],
+    "classes": [
+      "Raceme",
+      "Corymb",
+      "Cyme",
+      "Panicle"
+    ],
+    "anatomy_classes": [
+      "inflorescence"
+    ],
+    "description": "Inflorescence arrangement type (Dirr inflorescences), only on inflorescence crops; an isolated flower does not carry arrangement evidence."
+  },
+  "dataset_root": "/srv/fast/anatomy4-specialists/flower_inflorescence_type/dataset",
+  "output_dir": "/srv/fast/anatomy4-specialists/flower_inflorescence_type/runs",
+  "training": {
+    "model": "yolo26n-cls.pt",
+    "epochs": 40,
+    "patience": 10,
+    "imgsz": 224,
+    "batch": 24,
+    "workers": 2,
+    "seed": 26,
+    "cache": "disk",
+    "amp": true,
+    "device": "auto",
+    "max_vram_fraction": 0.3,
+    "min_free_vram_gb": 0.5,
+    "target_precision": 0.9,
+    "min_coverage": 0.25
+  },
+  "measured_support": {
+    "source": "local app DB, Shenandoah area inst-osm-relation-5548542, species joined to Dirr devo_taxa on binomial (measured 2026-11-12)",
+    "note": "Species/observation support for choosing targets; NOT crop support and NOT a model metric.",
+    "species_with_observations": 3431,
+    "species_joined_to_dirr": 107,
+    "observations_joined": 798,
+    "by_class": {
+      "Raceme": {
+        "species": 7,
+        "observations": 77
+      },
+      "Corymb": {
+        "species": 7,
+        "observations": 74
+      },
+      "Cyme": {
+        "species": 8,
+        "observations": 76
+      },
+      "Panicle": {
+        "species": 11,
+        "observations": 55
+      }
+    },
+    "warning": "Support is thin and overlapping (a species may carry more than one inflorescence claim); the join excludes multi-value species. Expect a small, imbalanced dataset."
+  }
+}

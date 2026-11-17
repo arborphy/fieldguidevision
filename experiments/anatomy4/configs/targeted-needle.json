@@ -1,0 +1,26 @@
+{
+ "contract": "anatomy4-v1",
+ "class_name": "needle",
+ "variants": [
+  {
+   "class_name": "needle",
+   "prompt": "pine needles",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "needle",
+   "prompt": "spruce needles",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "needle",
+   "prompt": "conifer foliage",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "needle",
+   "prompt": "needle-bearing branch",
+   "box_threshold": 0.05
+  }
+ ]
+}

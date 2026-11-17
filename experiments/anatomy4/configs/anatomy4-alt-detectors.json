@@ -1,0 +1,63 @@
+{
+ "name": "anatomy4-alt-detectors",
+ "description": "Operating settings for the alternate open-vocab proposal generators (development data only).",
+ "development_only": true,
+ "classes": {
+  "leaf": {
+   "recommended_backend": "yoloe-26s-seg",
+   "reason": "OWLv2 leaf precision 45.8-50.0% vs YOLOE 77.3% and OWLv2 floods 9.2 proposals/image",
+   "owlv2_prompts": ["leaf", "leaf blade", "broadleaf"],
+   "owlv2_threshold": 0.25,
+   "owlv2_expected_precision": 0.625,
+   "auto_accept": false
+  },
+  "needle": {
+   "recommended_backend": "owlv2-base-patch16-ensemble",
+   "owlv2_prompts": ["spruce needles", "conifer foliage", "pine needles"],
+   "owlv2_threshold": 0.10,
+   "owlv2_expected_precision_class_pool": 0.667,
+   "owlv2_expected_precision_full_pool": 0.333,
+   "owlv2_correct_tight_rate_full_pool": 0.333,
+   "review_only": true,
+   "auto_accept": false,
+   "note": "All 12 true positives had box area <= 0.60; the highest-scoring proposal was moss. Never treat an empty result as absence."
+  },
+  "flower": {
+   "recommended_backend": "owlv2-base-patch16-ensemble",
+   "owlv2_prompts": ["single flower"],
+   "owlv2_threshold": 0.15,
+   "owlv2_expected_precision": 0.846,
+   "owlv2_expected_precision_full_pool": 0.781,
+   "auto_accept": false,
+   "review_only": true,
+   "note": "0.25+ reaches 0.875 precision on 8 reviewed proposals; still review before labeling."
+  },
+  "inflorescence": {
+   "recommended_backend": "owlv2-base-patch16-ensemble",
+   "owlv2_prompts": ["umbel of flowers", "cluster of flowers"],
+   "owlv2_threshold": 0.15,
+   "owlv2_expected_precision": 0.75,
+   "owlv2_expected_precision_full_pool": 0.531,
+   "auto_accept": false,
+   "review_only": true,
+   "note": "Highest-scoring boxes are not the best; the 0.15-0.25 band was strongest."
+  }
+ },
+ "runtime": {
+  "device": "cuda",
+  "owlv2_precision": "fp16",
+  "owlv2_peak_gpu_mb": 948.7,
+  "owlv2_seconds_per_image": 0.25,
+  "yolo_world_v2_peak_gpu_mb": 257.2,
+  "yolo_world_v2_seconds_per_image": 0.034,
+  "resident_baseline_gpu_mb": 4258,
+  "host": "10.0.0.245 RTX 4060 Ti 8GB"
+ },
+ "proposal_guards": {
+  "max_box_area": 0.92,
+  "review_max_box_area": 0.60,
+  "min_box_area": 0.0004,
+  "per_class_cap_per_image": 10,
+  "nms_iou": 0.5
+ }
+}

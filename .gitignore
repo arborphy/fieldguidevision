@@ -6,3 +6,7 @@ newcomb_wildflower_guide/experiment_repro/output/
 .env
 trials/local_batches/
 scratch/
+
+experiments/**/artifacts/
+artifacts/
+.pytest_cache/

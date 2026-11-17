@@ -1,0 +1,21 @@
+{
+ "contract": "anatomy4-v1",
+ "class_name": "flower",
+ "variants": [
+  {
+   "class_name": "flower",
+   "prompt": "single flower",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "flower",
+   "prompt": "flower with petals",
+   "box_threshold": 0.05
+  },
+  {
+   "class_name": "flower",
+   "prompt": "flower head",
+   "box_threshold": 0.05
+  }
+ ]
+}

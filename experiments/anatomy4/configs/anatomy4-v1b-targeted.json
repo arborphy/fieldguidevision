@@ -1,0 +1,67 @@
+{
+  "contract": "anatomy4-v1",
+  "classes": [
+    {
+      "id": 0,
+      "name": "leaf",
+      "prompts": [
+        "leaf",
+        "leaf blade",
+        "green leaves"
+      ],
+      "box_threshold": 0.24,
+      "text_threshold": 0.2
+    },
+    {
+      "id": 1,
+      "name": "needle",
+      "prompts": [
+        "pine needles",
+        "conifer needles",
+        "evergreen needles",
+        "needle cluster"
+      ],
+      "box_threshold": 0.25,
+      "text_threshold": 0.2
+    },
+    {
+      "id": 2,
+      "name": "flower",
+      "prompts": [
+        "flower",
+        "single flower",
+        "flower blossom"
+      ],
+      "box_threshold": 0.28,
+      "text_threshold": 0.22
+    },
+    {
+      "id": 3,
+      "name": "inflorescence",
+      "prompts": [
+        "cluster of flowers",
+        "flower head",
+        "flower spike",
+        "inflorescence"
+      ],
+      "box_threshold": 0.25,
+      "text_threshold": 0.2
+    }
+  ],
+  "models": {
+    "detector": "IDEA-Research/grounding-dino-tiny",
+    "segmenter": "facebook/sam2.1-hiera-tiny"
+  },
+  "runtime": {
+    "max_image_side": 1536,
+    "nms_iou": 0.5,
+    "polygon_epsilon": 0.003,
+    "multimask_output": false,
+    "min_polygon_points": 3,
+    "empty_cache_each_image": true,
+    "max_box_area": 0.92,
+    "min_box_area": 0.0004
+  },
+  "name": "anatomy4-v1b-targeted",
+  "description": "Targeted prompt set after baseline contact-sheet audit; same runtime and area guards."
+}

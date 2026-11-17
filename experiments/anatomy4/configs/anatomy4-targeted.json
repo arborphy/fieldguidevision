@@ -1,0 +1,66 @@
+{
+ "contract": "anatomy4-v1",
+ "classes": [
+  {
+   "id": 0,
+   "name": "leaf",
+   "prompts": [
+    "leaf",
+    "leaf blade",
+    "broadleaf"
+   ],
+   "box_threshold": 0.05,
+   "text_threshold": 0
+  },
+  {
+   "id": 1,
+   "name": "needle",
+   "prompts": [
+    "pine needles",
+    "spruce needles",
+    "conifer foliage",
+    "needle-bearing branch"
+   ],
+   "box_threshold": 0.05,
+   "text_threshold": 0
+  },
+  {
+   "id": 2,
+   "name": "flower",
+   "prompts": [
+    "single flower",
+    "flower with petals",
+    "flower head"
+   ],
+   "box_threshold": 0.05,
+   "text_threshold": 0
+  },
+  {
+   "id": 3,
+   "name": "inflorescence",
+   "prompts": [
+    "cluster of flowers",
+    "flower spike",
+    "umbel of flowers"
+   ],
+   "box_threshold": 0.05,
+   "text_threshold": 0
+  }
+ ],
+ "models": {
+  "detector": "yoloe-26s-seg.pt",
+  "segmenter": "facebook/sam2.1-hiera-tiny"
+ },
+ "runtime": {
+  "max_image_side": 1536,
+  "nms_iou": 0.5,
+  "polygon_epsilon": 0.003,
+  "multimask_output": false,
+  "min_polygon_points": 3,
+  "empty_cache_each_image": false,
+  "max_box_area": 0.92,
+  "min_box_area": 0.0004
+ },
+ "name": "anatomy4-targeted",
+ "description": "Class-specific prompt-variant audit; per-variant thresholds applied at review time."
+}

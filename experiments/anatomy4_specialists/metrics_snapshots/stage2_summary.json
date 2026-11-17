@@ -1,0 +1,1266 @@
+{
+  "leaf_simple_vs_compound|species": {
+    "epochs_run": 13,
+    "epochs_req": 35,
+    "minutes": 0.57,
+    "batch": 32,
+    "vram_fraction": 0.36,
+    "n_val": 446,
+    "n_test": 452,
+    "threshold": 0.0,
+    "target_met": true,
+    "test": {
+      "accuracy": 0.8163716814159292,
+      "macro_prf": {
+        "precision": 0.4081858407079646,
+        "recall": 0.5,
+        "f1": 0.44945188794153473,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.4081858407079646,
+        "recall": 0.5,
+        "f1": 0.44945188794153473,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.8163716814159292,
+          "recall": 1.0,
+          "f1": 0.8989037758830695,
+          "support": 369,
+          "tp": 369,
+          "fp": 83,
+          "fn": 0
+        },
+        "Compound": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 83,
+          "tp": 0,
+          "fp": 0,
+          "fn": 83
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Simple",
+          "Compound"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            369,
+            0
+          ],
+          [
+            83,
+            0
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 1.0,
+        "abstained": 0,
+        "unknown_rate": 0.0,
+        "selective_accuracy": 0.8163716814159292
+      },
+      "recall_all_rows": {
+        "Simple": 1.0,
+        "Compound": 0.0
+      },
+      "recall_covered": {
+        "Simple": 1.0,
+        "Compound": 0.0
+      }
+    },
+    "val": {
+      "accuracy": 0.9506726457399103,
+      "macro_prf": {
+        "precision": 0.47533632286995514,
+        "recall": 0.5,
+        "f1": 0.4873563218390804,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.9506726457399103,
+          "recall": 1.0,
+          "f1": 0.9747126436781608,
+          "support": 424,
+          "tp": 424,
+          "fp": 22,
+          "fn": 0
+        },
+        "Compound": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 22,
+          "tp": 0,
+          "fp": 0,
+          "fn": 22
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Simple",
+          "Compound"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            424,
+            0
+          ],
+          [
+            22,
+            0
+          ]
+        ]
+      },
+      "coverage": 1.0
+    },
+    "stage1_unseen_test": {
+      "n": 452,
+      "correct": 369,
+      "accuracy": 0.8163716814159292
+    },
+    "dataset_counts": {
+      "total": 2999,
+      "by_split": {
+        "train": 2101,
+        "val": 446,
+        "test": 452
+      },
+      "by_split_label": {
+        "train": {
+          "Compound": 449,
+          "Simple": 1652
+        },
+        "val": {
+          "Compound": 22,
+          "Simple": 424
+        },
+        "test": {
+          "Compound": 83,
+          "Simple": 369
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:flower": 186,
+        "anatomy_not_in_target:inflorescence": 214,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:no_claim": 132,
+        "weak_label_ineligible:no_species_key": 32
+      }
+    }
+  },
+  "leaf_simple_vs_compound|observation": {
+    "epochs_run": 9,
+    "epochs_req": 35,
+    "minutes": 0.4,
+    "batch": 32,
+    "vram_fraction": 0.3,
+    "n_val": 449,
+    "n_test": 454,
+    "threshold": 0.0,
+    "target_met": false,
+    "test": {
+      "accuracy": 0.8149779735682819,
+      "macro_prf": {
+        "precision": 0.6934686442883164,
+        "recall": 0.5698581227097623,
+        "f1": 0.5786822219276151,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.6934686442883164,
+        "recall": 0.5698581227097623,
+        "f1": 0.5786822219276151,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.8313817330210773,
+          "recall": 0.9673024523160763,
+          "f1": 0.8942065491183879,
+          "support": 367,
+          "tp": 355,
+          "fp": 72,
+          "fn": 12
+        },
+        "Compound": {
+          "precision": 0.5555555555555556,
+          "recall": 0.1724137931034483,
+          "f1": 0.26315789473684215,
+          "support": 87,
+          "tp": 15,
+          "fp": 12,
+          "fn": 72
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Simple",
+          "Compound"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            355,
+            12
+          ],
+          [
+            72,
+            15
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 1.0,
+        "abstained": 0,
+        "unknown_rate": 0.0,
+        "selective_accuracy": 0.8149779735682819
+      },
+      "recall_all_rows": {
+        "Simple": 0.9673024523160763,
+        "Compound": 0.1724137931034483
+      },
+      "recall_covered": {
+        "Simple": 0.9673024523160763,
+        "Compound": 0.1724137931034483
+      }
+    },
+    "val": {
+      "accuracy": 0.821826280623608,
+      "macro_prf": {
+        "precision": 0.7933355585224744,
+        "recall": 0.5809288476886242,
+        "f1": 0.5919665576154126,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.8247663551401869,
+          "recall": 0.9860335195530726,
+          "f1": 0.8982188295165395,
+          "support": 358,
+          "tp": 353,
+          "fp": 75,
+          "fn": 5
+        },
+        "Compound": {
+          "precision": 0.7619047619047619,
+          "recall": 0.17582417582417584,
+          "f1": 0.28571428571428575,
+          "support": 91,
+          "tp": 16,
+          "fp": 5,
+          "fn": 75
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Simple",
+          "Compound"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            353,
+            5
+          ],
+          [
+            75,
+            16
+          ]
+        ]
+      },
+      "coverage": 1.0
+    },
+    "stage1_unseen_test": {
+      "n": 454,
+      "correct": 370,
+      "accuracy": 0.8149779735682819
+    },
+    "dataset_counts": {
+      "total": 2999,
+      "by_split": {
+        "train": 2096,
+        "val": 449,
+        "test": 454
+      },
+      "by_split_label": {
+        "train": {
+          "Compound": 376,
+          "Simple": 1720
+        },
+        "val": {
+          "Compound": 91,
+          "Simple": 358
+        },
+        "test": {
+          "Compound": 87,
+          "Simple": 367
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:flower": 186,
+        "anatomy_not_in_target:inflorescence": 214,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:no_claim": 132,
+        "weak_label_ineligible:no_species_key": 32
+      }
+    }
+  },
+  "leaf_margin|observation": {
+    "epochs_run": 14,
+    "epochs_req": 35,
+    "minutes": 0.31,
+    "batch": 32,
+    "vram_fraction": 0.3,
+    "n_val": 216,
+    "n_test": 229,
+    "threshold": 0.9,
+    "target_met": false,
+    "test": {
+      "accuracy": 0.6462882096069869,
+      "macro_prf": {
+        "precision": 0.6339177719386052,
+        "recall": 0.5927826653633105,
+        "f1": 0.5914548680416943,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.6339177719386052,
+        "recall": 0.5927826653633105,
+        "f1": 0.5914548680416943,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.5859375,
+          "recall": 0.8522727272727273,
+          "f1": 0.6944444444444444,
+          "support": 88,
+          "tp": 75,
+          "fp": 53,
+          "fn": 13
+        },
+        "Serrate": {
+          "precision": 0.7972972972972973,
+          "recall": 0.6344086021505376,
+          "f1": 0.7065868263473054,
+          "support": 93,
+          "tp": 59,
+          "fp": 15,
+          "fn": 34
+        },
+        "Lobed": {
+          "precision": 0.5185185185185185,
+          "recall": 0.2916666666666667,
+          "f1": 0.37333333333333335,
+          "support": 48,
+          "tp": 14,
+          "fp": 13,
+          "fn": 34
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            75,
+            5,
+            8
+          ],
+          [
+            29,
+            59,
+            5
+          ],
+          [
+            24,
+            10,
+            14
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 0.4847161572052402,
+        "abstained": 118,
+        "unknown_rate": 0.5152838427947598,
+        "selective_accuracy": 0.7837837837837838
+      },
+      "recall_all_rows": {
+        "Entire": 0.5681818181818182,
+        "Serrate": 0.34408602150537637,
+        "Lobed": 0.10416666666666667
+      },
+      "recall_covered": {
+        "Entire": 0.9615384615384616,
+        "Serrate": 0.6808510638297872,
+        "Lobed": 0.4166666666666667
+      }
+    },
+    "val": {
+      "accuracy": 0.6944444444444444,
+      "macro_prf": {
+        "precision": 0.5651310530522949,
+        "recall": 0.5849547325102881,
+        "f1": 0.5567193675889328,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.7410071942446043,
+          "recall": 0.824,
+          "f1": 0.7803030303030303,
+          "support": 125,
+          "tp": 103,
+          "fp": 36,
+          "fn": 22
+        },
+        "Serrate": {
+          "precision": 0.7543859649122807,
+          "recall": 0.5308641975308642,
+          "f1": 0.6231884057971014,
+          "support": 81,
+          "tp": 43,
+          "fp": 14,
+          "fn": 38
+        },
+        "Lobed": {
+          "precision": 0.2,
+          "recall": 0.4,
+          "f1": 0.26666666666666666,
+          "support": 10,
+          "tp": 4,
+          "fp": 16,
+          "fn": 6
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            103,
+            14,
+            8
+          ],
+          [
+            30,
+            43,
+            8
+          ],
+          [
+            6,
+            0,
+            4
+          ]
+        ]
+      },
+      "coverage": 0.5972222222222222
+    },
+    "stage1_unseen_test": {
+      "n": 229,
+      "correct": 87,
+      "accuracy": 0.3799126637554585
+    },
+    "dataset_counts": {
+      "total": 1449,
+      "by_split": {
+        "train": 1004,
+        "val": 216,
+        "test": 229
+      },
+      "by_split_label": {
+        "train": {
+          "Entire": 477,
+          "Lobed": 171,
+          "Serrate": 356
+        },
+        "val": {
+          "Entire": 125,
+          "Lobed": 10,
+          "Serrate": 81
+        },
+        "test": {
+          "Entire": 88,
+          "Lobed": 48,
+          "Serrate": 93
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:flower": 186,
+        "anatomy_not_in_target:inflorescence": 214,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:ambiguous_claim": 651,
+        "weak_label_ineligible:claim_outside_target": 230,
+        "weak_label_ineligible:no_claim": 801,
+        "weak_label_ineligible:no_species_key": 32
+      }
+    }
+  },
+  "leaf_margin|species": {
+    "epochs_run": 10,
+    "epochs_req": 35,
+    "minutes": 0.24,
+    "batch": 32,
+    "vram_fraction": 0.3,
+    "n_val": 253,
+    "n_test": 225,
+    "threshold": 0.95,
+    "target_met": false,
+    "test": {
+      "accuracy": 0.4222222222222222,
+      "macro_prf": {
+        "precision": 0.45695260067114096,
+        "recall": 0.43392857142857144,
+        "f1": 0.4204467648065731,
+        "n_classes": 2,
+        "classes": [
+          "Entire",
+          "Serrate"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.304635067114094,
+        "recall": 0.2892857142857143,
+        "f1": 0.28029784320438206,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.484375,
+          "recall": 0.25833333333333336,
+          "f1": 0.3369565217391305,
+          "support": 120,
+          "tp": 31,
+          "fp": 33,
+          "fn": 89
+        },
+        "Serrate": {
+          "precision": 0.42953020134228187,
+          "recall": 0.6095238095238096,
+          "f1": 0.5039370078740157,
+          "support": 105,
+          "tp": 64,
+          "fp": 85,
+          "fn": 41
+        },
+        "Lobed": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 12,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            31,
+            85,
+            4
+          ],
+          [
+            33,
+            64,
+            8
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 0.08888888888888889,
+        "abstained": 205,
+        "unknown_rate": 0.9111111111111111,
+        "selective_accuracy": 0.3
+      },
+      "recall_all_rows": {
+        "Entire": 0.025,
+        "Serrate": 0.02857142857142857,
+        "Lobed": 0.0
+      },
+      "recall_covered": {
+        "Entire": 0.21428571428571427,
+        "Serrate": 0.5,
+        "Lobed": 0.0
+      }
+    },
+    "val": {
+      "accuracy": 0.44664031620553357,
+      "macro_prf": {
+        "precision": 0.46030858846253286,
+        "recall": 0.5460428719774514,
+        "f1": 0.4186068282453825,
+        "n_classes": 3,
+        "classes": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ]
+      },
+      "per_class": {
+        "Entire": {
+          "precision": 0.3225806451612903,
+          "recall": 0.9523809523809523,
+          "f1": 0.4819277108433735,
+          "support": 42,
+          "tp": 40,
+          "fp": 84,
+          "fn": 2
+        },
+        "Serrate": {
+          "precision": 0.594059405940594,
+          "recall": 0.5607476635514018,
+          "f1": 0.5769230769230769,
+          "support": 107,
+          "tp": 60,
+          "fp": 41,
+          "fn": 47
+        },
+        "Lobed": {
+          "precision": 0.4642857142857143,
+          "recall": 0.125,
+          "f1": 0.19696969696969696,
+          "support": 104,
+          "tp": 13,
+          "fp": 15,
+          "fn": 91
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Entire",
+          "Serrate",
+          "Lobed"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            40,
+            2,
+            0
+          ],
+          [
+            32,
+            60,
+            15
+          ],
+          [
+            52,
+            39,
+            13
+          ]
+        ]
+      },
+      "coverage": 0.11462450592885376
+    },
+    "stage1_unseen_test": {
+      "n": 225,
+      "correct": 6,
+      "accuracy": 0.02666666666666667
+    },
+    "dataset_counts": {
+      "total": 1449,
+      "by_split": {
+        "train": 971,
+        "val": 253,
+        "test": 225
+      },
+      "by_split_label": {
+        "train": {
+          "Entire": 528,
+          "Lobed": 125,
+          "Serrate": 318
+        },
+        "val": {
+          "Entire": 42,
+          "Lobed": 104,
+          "Serrate": 107
+        },
+        "test": {
+          "Entire": 120,
+          "Serrate": 105
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:flower": 186,
+        "anatomy_not_in_target:inflorescence": 214,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:ambiguous_claim": 651,
+        "weak_label_ineligible:claim_outside_target": 230,
+        "weak_label_ineligible:no_claim": 801,
+        "weak_label_ineligible:no_species_key": 32
+      }
+    }
+  },
+  "flower_inflorescence_type_bloom|observation": {
+    "epochs_run": 18,
+    "epochs_req": 40,
+    "minutes": 0.1,
+    "batch": 24,
+    "vram_fraction": 0.3,
+    "n_val": 19,
+    "n_test": 20,
+    "threshold": 0.95,
+    "target_met": false,
+    "test": {
+      "accuracy": 0.6,
+      "macro_prf": {
+        "precision": 0.47142857142857136,
+        "recall": 0.45021645021645024,
+        "f1": 0.4603174603174603,
+        "n_classes": 3,
+        "classes": [
+          "Raceme",
+          "Corymb",
+          "Cyme"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.35357142857142854,
+        "recall": 0.33766233766233766,
+        "f1": 0.34523809523809523,
+        "n_classes": 4,
+        "classes": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ]
+      },
+      "per_class": {
+        "Raceme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2,
+          "tp": 0,
+          "fp": 1,
+          "fn": 2
+        },
+        "Corymb": {
+          "precision": 0.7,
+          "recall": 0.6363636363636364,
+          "f1": 0.6666666666666666,
+          "support": 11,
+          "tp": 7,
+          "fp": 3,
+          "fn": 4
+        },
+        "Cyme": {
+          "precision": 0.7142857142857143,
+          "recall": 0.7142857142857143,
+          "f1": 0.7142857142857143,
+          "support": 7,
+          "tp": 5,
+          "fp": 2,
+          "fn": 2
+        },
+        "Panicle": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 2,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            7,
+            2,
+            2
+          ],
+          [
+            1,
+            1,
+            5,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 0.4,
+        "abstained": 12,
+        "unknown_rate": 0.6,
+        "selective_accuracy": 0.75
+      },
+      "recall_all_rows": {
+        "Raceme": 0.0,
+        "Corymb": 0.45454545454545453,
+        "Cyme": 0.14285714285714285,
+        "Panicle": 0.0
+      },
+      "recall_covered": {
+        "Raceme": 0.0,
+        "Corymb": 1.0,
+        "Cyme": 0.5,
+        "Panicle": 0.0
+      }
+    },
+    "val": {
+      "accuracy": 0.5789473684210527,
+      "macro_prf": {
+        "precision": 0.5071428571428571,
+        "recall": 0.5625,
+        "f1": 0.4375,
+        "n_classes": 4,
+        "classes": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ]
+      },
+      "per_class": {
+        "Raceme": {
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.7499999999999999,
+          "support": 6,
+          "tp": 6,
+          "fp": 4,
+          "fn": 0
+        },
+        "Corymb": {
+          "precision": 0.42857142857142855,
+          "recall": 1.0,
+          "f1": 0.6,
+          "support": 3,
+          "tp": 3,
+          "fp": 4,
+          "fn": 0
+        },
+        "Cyme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2,
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        },
+        "Panicle": {
+          "precision": 1.0,
+          "recall": 0.25,
+          "f1": 0.4,
+          "support": 8,
+          "tp": 2,
+          "fp": 0,
+          "fn": 6
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            6,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            2,
+            0,
+            2
+          ]
+        ]
+      },
+      "coverage": 0.5789473684210527
+    },
+    "stage1_unseen_test": {
+      "n": 20,
+      "correct": 6,
+      "accuracy": 0.3
+    },
+    "dataset_counts": {
+      "total": 128,
+      "by_split": {
+        "train": 89,
+        "val": 19,
+        "test": 20
+      },
+      "by_split_label": {
+        "train": {
+          "Corymb": 50,
+          "Cyme": 13,
+          "Panicle": 7,
+          "Raceme": 19
+        },
+        "val": {
+          "Corymb": 3,
+          "Cyme": 2,
+          "Panicle": 8,
+          "Raceme": 6
+        },
+        "test": {
+          "Corymb": 11,
+          "Cyme": 7,
+          "Raceme": 2
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:leaf": 3163,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:ambiguous_claim": 1,
+        "weak_label_ineligible:claim_outside_target": 16,
+        "weak_label_ineligible:no_claim": 236,
+        "weak_label_ineligible:no_species_key": 19
+      }
+    }
+  },
+  "flower_inflorescence_type_bloom|species": {
+    "epochs_run": 11,
+    "epochs_req": 40,
+    "minutes": 0.07,
+    "batch": 24,
+    "vram_fraction": 0.3,
+    "n_val": 17,
+    "n_test": 23,
+    "threshold": 0.45,
+    "target_met": false,
+    "test": {
+      "accuracy": 0.5217391304347826,
+      "macro_prf": {
+        "precision": 1.0,
+        "recall": 0.5217391304347826,
+        "f1": 0.6857142857142856,
+        "n_classes": 1,
+        "classes": [
+          "Corymb"
+        ]
+      },
+      "macro_prf_all": {
+        "precision": 0.25,
+        "recall": 0.13043478260869565,
+        "f1": 0.1714285714285714,
+        "n_classes": 4,
+        "classes": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ]
+      },
+      "per_class": {
+        "Raceme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "Corymb": {
+          "precision": 1.0,
+          "recall": 0.5217391304347826,
+          "f1": 0.6857142857142856,
+          "support": 23,
+          "tp": 12,
+          "fp": 0,
+          "fn": 11
+        },
+        "Cyme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 7,
+          "fn": 0
+        },
+        "Panicle": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "tp": 0,
+          "fp": 4,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            12,
+            7,
+            4
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "abstention": {
+        "coverage": 0.391304347826087,
+        "abstained": 14,
+        "unknown_rate": 0.6086956521739131,
+        "selective_accuracy": 0.8888888888888888
+      },
+      "recall_all_rows": {
+        "Raceme": 0.0,
+        "Corymb": 0.34782608695652173,
+        "Cyme": 0.0,
+        "Panicle": 0.0
+      },
+      "recall_covered": {
+        "Raceme": 0.0,
+        "Corymb": 0.8888888888888888,
+        "Cyme": 0.0,
+        "Panicle": 0.0
+      }
+    },
+    "val": {
+      "accuracy": 0.35294117647058826,
+      "macro_prf": {
+        "precision": 0.1875,
+        "recall": 0.11538461538461539,
+        "f1": 0.14285714285714285,
+        "n_classes": 4,
+        "classes": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ]
+      },
+      "per_class": {
+        "Raceme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1
+        },
+        "Corymb": {
+          "precision": 0.75,
+          "recall": 0.46153846153846156,
+          "f1": 0.5714285714285714,
+          "support": 13,
+          "tp": 6,
+          "fp": 2,
+          "fn": 7
+        },
+        "Cyme": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1,
+          "tp": 0,
+          "fp": 4,
+          "fn": 1
+        },
+        "Panicle": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2,
+          "tp": 0,
+          "fp": 5,
+          "fn": 2
+        }
+      },
+      "confusion": {
+        "labels": [
+          "Raceme",
+          "Corymb",
+          "Cyme",
+          "Panicle"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            6,
+            2,
+            5
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "coverage": 0.11764705882352941
+    },
+    "stage1_unseen_test": {
+      "n": 23,
+      "correct": 8,
+      "accuracy": 0.34782608695652173
+    },
+    "dataset_counts": {
+      "total": 128,
+      "by_split": {
+        "train": 88,
+        "val": 17,
+        "test": 23
+      },
+      "by_split_label": {
+        "train": {
+          "Corymb": 28,
+          "Cyme": 21,
+          "Panicle": 13,
+          "Raceme": 26
+        },
+        "val": {
+          "Corymb": 13,
+          "Cyme": 1,
+          "Panicle": 2,
+          "Raceme": 1
+        },
+        "test": {
+          "Corymb": 23
+        }
+      },
+      "excluded": {
+        "anatomy_not_in_target:leaf": 3163,
+        "anatomy_not_in_target:needle": 680,
+        "weak_label_ineligible:ambiguous_claim": 1,
+        "weak_label_ineligible:claim_outside_target": 16,
+        "weak_label_ineligible:no_claim": 236,
+        "weak_label_ineligible:no_species_key": 19
+      }
+    }
+  }
+}

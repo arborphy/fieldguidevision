@@ -1,0 +1,56 @@
+{
+  "contract": "anatomy4-specialists/v1",
+  "target": {
+    "target_id": "leaf_margin",
+    "expert": "leaf",
+    "feature_name": "leaf_shape_margins",
+    "dirr_feature_names": [
+      "leaf_shape_margins"
+    ],
+    "classes": [
+      "Entire",
+      "Serrate",
+      "Lobed"
+    ],
+    "anatomy_classes": [
+      "leaf"
+    ],
+    "description": "Optional config-driven leaf margin expert. Run only after the required simple/compound expert is validated."
+  },
+  "dataset_root": "/srv/fast/anatomy4-specialists/leaf_margin/dataset",
+  "output_dir": "/srv/fast/anatomy4-specialists/leaf_margin/runs",
+  "training": {
+    "model": "yolo26n-cls.pt",
+    "epochs": 30,
+    "patience": 8,
+    "imgsz": 224,
+    "batch": 32,
+    "workers": 2,
+    "seed": 26,
+    "cache": "disk",
+    "amp": true,
+    "device": "auto",
+    "max_vram_fraction": 0.3,
+    "min_free_vram_gb": 0.5,
+    "target_precision": 0.9,
+    "min_coverage": 0.3
+  },
+  "measured_support": {
+    "source": "local app DB, Shenandoah area inst-osm-relation-5548542, species joined to Dirr devo_taxa on binomial (measured 2026-11-12)",
+    "note": "Species/observation support only; categories overlap and multi-value species are excluded by the join.",
+    "by_class": {
+      "Entire": {
+        "species": 29,
+        "observations": 231
+      },
+      "Serrate": {
+        "species": 32,
+        "observations": 224
+      },
+      "Lobed": {
+        "species": 16,
+        "observations": 122
+      }
+    }
+  }
+}

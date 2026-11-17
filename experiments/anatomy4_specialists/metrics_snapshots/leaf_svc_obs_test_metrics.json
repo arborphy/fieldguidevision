@@ -1,0 +1,533 @@
+{
+  "schema": "arq.anatomy4_specialists.metrics/v1",
+  "target": {
+    "target_id": "leaf_simple_vs_compound",
+    "feature_name": "leaf_type",
+    "dirr_feature_names": [
+      "leaf_type"
+    ],
+    "classes": [
+      "Simple",
+      "Compound"
+    ],
+    "anatomy_classes": [
+      "leaf"
+    ],
+    "expert": "leaf",
+    "description": "Leaf blade simple vs compound (Dirr leaf_type). Required leaf expert for the anatomy4 sprint.",
+    "allow_multi_value": false
+  },
+  "checkpoint": "/srv/fast/anatomy4-specialists/leaf_svc/runs_obs/best.pt",
+  "dataset_root": "/srv/fast/anatomy4-specialists/leaf_svc/dataset_obs",
+  "imgsz": 224,
+  "device": "cuda:0",
+  "class_order": {
+    "model_names": [
+      "Compound",
+      "Simple"
+    ],
+    "target_classes": [
+      "Simple",
+      "Compound"
+    ],
+    "reordered_to_target": true,
+    "assertion": "set(model.names) == set(target.classes)"
+  },
+  "memory": {
+    "requested_device": "cuda",
+    "device": "cuda:0",
+    "max_vram_fraction": 0.3,
+    "min_free_vram_gb": 0.5,
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 4060 Ti",
+    "free_gb_before": 3.322,
+    "total_gb": 7.625,
+    "process_budget_gb": 2.287,
+    "required_free_gb": 2.787,
+    "headroom_note": "The cap is enforced per process; BioCLIP on .245 is reported at ~4.3 GB, so the default 0.30 fraction leaves the rest of the card for it."
+  },
+  "abstain_selection": {
+    "selected_on": "val",
+    "target_precision": 0.95,
+    "min_coverage": 0.3,
+    "confidence_threshold": 0.0,
+    "margin_threshold": 0.0,
+    "target_met": false,
+    "chosen": {
+      "confidence_threshold": 0.0,
+      "coverage": 1.0,
+      "selective_precision": 0.821826280623608,
+      "selective_macro_f1": 0.5919665576154126,
+      "abstained": 0,
+      "target_precision": 0.95,
+      "min_coverage": 0.3,
+      "margin_threshold": 0.0,
+      "target_met": false,
+      "rule": "max coverage s.t. selective precision >= target and coverage >= min; fallback max selective macro-F1 then coverage"
+    },
+    "curve": [
+      {
+        "confidence_threshold": 0.0,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.05,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.1,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.15,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.2,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.25,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.3,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.35,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.4,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.45,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.5,
+        "coverage": 1.0,
+        "selective_precision": 0.821826280623608,
+        "selective_macro_f1": 0.5919665576154126,
+        "abstained": 0
+      },
+      {
+        "confidence_threshold": 0.55,
+        "coverage": 0.9443207126948775,
+        "selective_precision": 0.8349056603773585,
+        "selective_macro_f1": 0.5649369686309,
+        "abstained": 25
+      },
+      {
+        "confidence_threshold": 0.6,
+        "coverage": 0.89086859688196,
+        "selective_precision": 0.84,
+        "selective_macro_f1": 0.5234904325813416,
+        "abstained": 49
+      },
+      {
+        "confidence_threshold": 0.65,
+        "coverage": 0.8329621380846325,
+        "selective_precision": 0.8502673796791443,
+        "selective_macro_f1": 0.5215643274853801,
+        "abstained": 75
+      },
+      {
+        "confidence_threshold": 0.7,
+        "coverage": 0.7683741648106904,
+        "selective_precision": 0.8521739130434782,
+        "selective_macro_f1": 0.49620615604867574,
+        "abstained": 104
+      },
+      {
+        "confidence_threshold": 0.75,
+        "coverage": 0.7060133630289532,
+        "selective_precision": 0.8580441640378549,
+        "selective_macro_f1": 0.4617996604414261,
+        "abstained": 132
+      },
+      {
+        "confidence_threshold": 0.8,
+        "coverage": 0.6169265033407573,
+        "selective_precision": 0.8664259927797834,
+        "selective_macro_f1": 0.4642166344294004,
+        "abstained": 172
+      },
+      {
+        "confidence_threshold": 0.85,
+        "coverage": 0.5167037861915368,
+        "selective_precision": 0.8663793103448276,
+        "selective_macro_f1": 0.46420323325635104,
+        "abstained": 217
+      },
+      {
+        "confidence_threshold": 0.9,
+        "coverage": 0.3986636971046771,
+        "selective_precision": 0.9050279329608939,
+        "selective_macro_f1": 0.4750733137829912,
+        "abstained": 270
+      },
+      {
+        "confidence_threshold": 0.95,
+        "coverage": 0.24721603563474387,
+        "selective_precision": 0.8828828828828829,
+        "selective_macro_f1": 0.4688995215311005,
+        "abstained": 338
+      }
+    ]
+  },
+  "requested_split": "test",
+  "splits_evaluated": [
+    "val",
+    "test"
+  ],
+  "dataset": {
+    "split_mode": "observation",
+    "prefer_test_unseen": true,
+    "stage1_overlap_counts": {
+      "train": {
+        "in_train_val": 141,
+        "unseen": 1955
+      },
+      "val": {
+        "in_train_val": 21,
+        "unseen": 428
+      },
+      "test": {
+        "unseen": 454
+      }
+    }
+  },
+  "val": {
+    "n": 449,
+    "accuracy": 0.821826280623608,
+    "top_k_accuracy": {
+      "2": 1.0
+    },
+    "macro_prf_present_classes": {
+      "precision": 0.7933355585224744,
+      "recall": 0.5809288476886242,
+      "f1": 0.5919665576154126,
+      "n_classes": 2,
+      "classes": [
+        "Simple",
+        "Compound"
+      ]
+    },
+    "macro_prf_all_classes": {
+      "precision": 0.7933355585224744,
+      "recall": 0.5809288476886242,
+      "f1": 0.5919665576154126,
+      "n_classes": 2,
+      "classes": [
+        "Simple",
+        "Compound"
+      ]
+    },
+    "per_class": {
+      "Simple": {
+        "precision": 0.8247663551401869,
+        "recall": 0.9860335195530726,
+        "f1": 0.8982188295165395,
+        "support": 358,
+        "tp": 353,
+        "fp": 75,
+        "fn": 5
+      },
+      "Compound": {
+        "precision": 0.7619047619047619,
+        "recall": 0.17582417582417584,
+        "f1": 0.28571428571428575,
+        "support": 91,
+        "tp": 16,
+        "fp": 5,
+        "fn": 75
+      }
+    },
+    "per_class_recall": {
+      "Simple": 0.9860335195530726,
+      "Compound": 0.17582417582417584
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Simple",
+        "Compound"
+      ],
+      "rows_actual_columns_predicted": [
+        [
+          353,
+          5
+        ],
+        [
+          75,
+          16
+        ]
+      ]
+    },
+    "abstention": {
+      "n": 449,
+      "coverage": 1.0,
+      "abstained": 0,
+      "unknown_rate": 0.0,
+      "confidence_threshold": 0.0,
+      "margin_threshold": 0.0,
+      "overall_accuracy_treating_abstain_as_error": 0.821826280623608,
+      "selective_accuracy": 0.821826280623608,
+      "selective_macro_prf": {
+        "precision": 0.7933355585224744,
+        "recall": 0.5809288476886242,
+        "f1": 0.5919665576154126,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "recall_semantics": {
+        "all_rows": "abstained predictions count as false negatives",
+        "covered_only": "abstained rows are excluded from the denominator"
+      },
+      "per_class_recall_all_rows": {
+        "Simple": 0.9860335195530726,
+        "Compound": 0.17582417582417584
+      },
+      "per_class_recall_covered": {
+        "Simple": 0.9860335195530726,
+        "Compound": 0.17582417582417584
+      },
+      "per_class_recall_covered_only": {
+        "Simple": 0.9860335195530726,
+        "Compound": 0.17582417582417584
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.8247663551401869,
+          "recall": 0.9860335195530726,
+          "f1": 0.8982188295165395,
+          "support": 358,
+          "tp": 353,
+          "fp": 75,
+          "fn": 5
+        },
+        "Compound": {
+          "precision": 0.7619047619047619,
+          "recall": 0.17582417582417584,
+          "f1": 0.28571428571428575,
+          "support": 91,
+          "tp": 16,
+          "fp": 5,
+          "fn": 75
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Simple",
+          "Compound",
+          "abstain"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            353,
+            5,
+            0
+          ],
+          [
+            75,
+            16,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "mean_confidence": 0.8221309807624477,
+      "mean_margin": 0.6442619599731233
+    }
+  },
+  "test": {
+    "n": 454,
+    "accuracy": 0.8149779735682819,
+    "top_k_accuracy": {
+      "2": 1.0
+    },
+    "macro_prf_present_classes": {
+      "precision": 0.6934686442883164,
+      "recall": 0.5698581227097623,
+      "f1": 0.5786822219276151,
+      "n_classes": 2,
+      "classes": [
+        "Simple",
+        "Compound"
+      ]
+    },
+    "macro_prf_all_classes": {
+      "precision": 0.6934686442883164,
+      "recall": 0.5698581227097623,
+      "f1": 0.5786822219276151,
+      "n_classes": 2,
+      "classes": [
+        "Simple",
+        "Compound"
+      ]
+    },
+    "per_class": {
+      "Simple": {
+        "precision": 0.8313817330210773,
+        "recall": 0.9673024523160763,
+        "f1": 0.8942065491183879,
+        "support": 367,
+        "tp": 355,
+        "fp": 72,
+        "fn": 12
+      },
+      "Compound": {
+        "precision": 0.5555555555555556,
+        "recall": 0.1724137931034483,
+        "f1": 0.26315789473684215,
+        "support": 87,
+        "tp": 15,
+        "fp": 12,
+        "fn": 72
+      }
+    },
+    "per_class_recall": {
+      "Simple": 0.9673024523160763,
+      "Compound": 0.1724137931034483
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Simple",
+        "Compound"
+      ],
+      "rows_actual_columns_predicted": [
+        [
+          355,
+          12
+        ],
+        [
+          72,
+          15
+        ]
+      ]
+    },
+    "abstention": {
+      "n": 454,
+      "coverage": 1.0,
+      "abstained": 0,
+      "unknown_rate": 0.0,
+      "confidence_threshold": 0.0,
+      "margin_threshold": 0.0,
+      "overall_accuracy_treating_abstain_as_error": 0.8149779735682819,
+      "selective_accuracy": 0.8149779735682819,
+      "selective_macro_prf": {
+        "precision": 0.6934686442883164,
+        "recall": 0.5698581227097623,
+        "f1": 0.5786822219276151,
+        "n_classes": 2,
+        "classes": [
+          "Simple",
+          "Compound"
+        ]
+      },
+      "recall_semantics": {
+        "all_rows": "abstained predictions count as false negatives",
+        "covered_only": "abstained rows are excluded from the denominator"
+      },
+      "per_class_recall_all_rows": {
+        "Simple": 0.9673024523160763,
+        "Compound": 0.1724137931034483
+      },
+      "per_class_recall_covered": {
+        "Simple": 0.9673024523160763,
+        "Compound": 0.1724137931034483
+      },
+      "per_class_recall_covered_only": {
+        "Simple": 0.9673024523160763,
+        "Compound": 0.1724137931034483
+      },
+      "per_class": {
+        "Simple": {
+          "precision": 0.8313817330210773,
+          "recall": 0.9673024523160763,
+          "f1": 0.8942065491183879,
+          "support": 367,
+          "tp": 355,
+          "fp": 72,
+          "fn": 12
+        },
+        "Compound": {
+          "precision": 0.5555555555555556,
+          "recall": 0.1724137931034483,
+          "f1": 0.26315789473684215,
+          "support": 87,
+          "tp": 15,
+          "fp": 12,
+          "fn": 72
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Simple",
+          "Compound",
+          "abstain"
+        ],
+        "rows_actual_columns_predicted": [
+          [
+            355,
+            12,
+            0
+          ],
+          [
+            72,
+            15,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "mean_confidence": 0.8394439581469817,
+      "mean_margin": 0.6788879148605678
+    }
+  },
+  "n_val": 449,
+  "n_test": 454
+}
