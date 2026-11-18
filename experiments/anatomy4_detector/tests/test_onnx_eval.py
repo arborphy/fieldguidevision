@@ -69,3 +69,36 @@ def test_nms_keeps_highest_score() -> None:
     boxes = np.array([[0, 0, 10, 10], [1, 1, 11, 11], [50, 50, 60, 60]], dtype=np.float32)
     scores = np.array([0.6, 0.9, 0.5], dtype=np.float32)
     assert nms_indices(boxes, scores, 0.5) == [1, 2]
+
+
+def test_cross_stack_golden_vectors_match_arq_api_kernel() -> None:
+    import json
+    from pathlib import Path
+
+    fixture_path = Path(__file__).resolve().parent / "fixtures" / "yolo26_onnx_golden_vectors.json"
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    meta = fixture["meta"]
+    classes = fixture["classes"]
+    expected = fixture["expected_detections"]
+
+    img = Image.new("RGB", (int(meta["orig_w"]), int(meta["orig_h"])), (80, 120, 60))
+    _tensor, computed_meta = letterbox_rgb(img, int(meta["input_size"]))
+    for key, val in meta.items():
+        assert computed_meta[key] == pytest.approx(val)
+
+    anchors_rm = np.asarray(fixture["anchors_row_major"], dtype=np.float32)
+    for raw in (anchors_rm.T[None, :, :], anchors_rm[None, :, :]):
+        dets = decode_detections(
+            raw,
+            meta,
+            classes,
+            threshold=fixture["threshold"],
+            iou_threshold=fixture["iou_threshold"],
+        )
+        assert len(dets) == len(expected)
+        for det, exp in zip(dets, expected):
+            assert det["class"] == exp["class"]
+            assert det["class_id"] == exp["class_id"]
+            assert det["confidence"] == pytest.approx(exp["confidence"], abs=1e-6)
+            assert det["bbox"] == pytest.approx(exp["bbox"], abs=1e-6)
+            assert det["bbox_pixels"] == pytest.approx(exp["bbox_pixels"], abs=1e-2)

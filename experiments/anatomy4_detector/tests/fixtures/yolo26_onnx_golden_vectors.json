@@ -1,0 +1,51 @@
+{
+  "schema": "arq.yolo26_onnx_golden_vectors/v1",
+  "description": "Deterministic cross-stack golden vector locking Python (arq-api yolo_onnx_kernel, fieldguidevision onnx_eval) and JS/WASM (arq-mobile ondevice-yolo) letterbox unpadding, orientation, class-wise greedy NMS, and pad-boundary clamping.",
+  "classes": ["leaf", "bud", "flower", "twig", "branch"],
+  "threshold": 0.25,
+  "iou_threshold": 0.45,
+  "meta": {
+    "orig_w": 640.0,
+    "orig_h": 360.0,
+    "input_size": 320.0,
+    "pad_x": 0.0,
+    "pad_y": 70.0,
+    "scale_x": 0.5,
+    "scale_y": 0.5,
+    "new_w": 320.0,
+    "new_h": 180.0
+  },
+  "anchors_row_major": [
+    [160.0, 160.0, 80.0, 54.0, 0.92, 0.02, 0.03, 0.01, 0.01],
+    [162.0, 161.0, 80.0, 54.0, 0.78, 0.01, 0.02, 0.01, 0.01],
+    [64.0, 115.0, 32.0, 36.0, 0.03, 0.04, 0.81, 0.02, 0.01],
+    [240.0, 160.0, 16.0, 18.0, 0.02, 0.21, 0.01, 0.01, 0.01],
+    [256.0, 97.0, 64.0, 72.0, 0.01, 0.01, 0.02, 0.05, 0.64]
+  ],
+  "expected_detections": [
+    {
+      "class": "leaf",
+      "class_id": 0,
+      "confidence": 0.92,
+      "bbox": [0.375, 0.35, 0.625, 0.65],
+      "bbox_pixels": [240.0, 126.0, 400.0, 234.0],
+      "bbox_area": 0.075
+    },
+    {
+      "class": "flower",
+      "class_id": 2,
+      "confidence": 0.81,
+      "bbox": [0.15, 0.15, 0.25, 0.35],
+      "bbox_pixels": [96.0, 54.0, 160.0, 126.0],
+      "bbox_area": 0.02
+    },
+    {
+      "class": "branch",
+      "class_id": 4,
+      "confidence": 0.64,
+      "bbox": [0.7, 0.0, 0.9, 0.35],
+      "bbox_pixels": [448.0, 0.0, 576.0, 126.0],
+      "bbox_area": 0.07
+    }
+  ]
+}

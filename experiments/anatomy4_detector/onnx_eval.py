@@ -1,9 +1,8 @@
 """Exact arq-api ONNX inference for held-out evaluation.
 
-# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT role=canonical
-# Nuance: Third copy of the YOLO26 ONNX letterbox/orient/NMS/decode kernel (alongside
-# `arq-api/fieldvision/anatomy_yolo.py` and `arq-api/photo_library/yolo26_organ_bootstrap.py`).
-# Note: docstring claims cross-check against `arq-api`, but `test_onnx_eval.py` does not import it.
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT role=adapter
+# Nuance: Standalone offline evaluator adapter mirroring `arq-api/fieldvision/yolo_onnx_kernel.py`
+# and locked against drift by `tests/fixtures/yolo26_onnx_golden_vectors.json`.
 
 The production path (`arq-api/fieldvision/anatomy_yolo.py`) serves the exported
 YOLO26 ONNX graph, which decodes the **one2many** head. Ultralytics
@@ -47,7 +46,7 @@ def sha256_file(path: str | Path) -> str:
     return digest.hexdigest()
 
 
-# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-letterbox role=canonical
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-letterbox role=adapter
 def letterbox_rgb(image, imgsz: int = INPUT_SIZE, fill: int = LETTERBOX_FILL):
     from PIL import Image, ImageOps
 
@@ -77,7 +76,7 @@ def letterbox_rgb(image, imgsz: int = INPUT_SIZE, fill: int = LETTERBOX_FILL):
     return np.ascontiguousarray(tensor), meta
 
 
-# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-orient-output role=canonical
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-orient-output role=adapter
 def orient_output(raw: Any, class_count: int) -> np.ndarray:
     array = np.asarray(raw, dtype=np.float32)
     if array.ndim == 3:
@@ -96,7 +95,7 @@ def orient_output(raw: Any, class_count: int) -> np.ndarray:
     )
 
 
-# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-greedy-nms role=canonical
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-greedy-nms role=adapter
 def nms_indices(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> list[int]:
     if boxes.size == 0:
         return []
@@ -125,7 +124,7 @@ def nms_indices(boxes: np.ndarray, scores: np.ndarray, iou_threshold: float) -> 
     return keep
 
 
-# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-decode-detections role=canonical
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT step=yolo-onnx-decode-detections role=adapter
 def decode_detections(
     raw_output: Any,
     meta: Mapping[str, float],
