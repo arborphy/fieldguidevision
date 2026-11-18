@@ -20,17 +20,36 @@ import ast
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 from .contracts import CLASS_NAMES, CONTRACT
 
 EXPORT_IMGSZ = 640
 EXPORT_BATCH = 1
 EXPORT_OPSET = 17
-EXPECTED_INPUT_SHAPE = [1, 3, EXPORT_IMGSZ, EXPORT_IMGSZ]
+
+
+def anchor_count(imgsz: int = EXPORT_IMGSZ) -> int:
+    """YOLO anchor count for a square input: 8400 at 640, 2100 at 320."""
+
+    size = int(imgsz)
+    return (size // 8) ** 2 + (size // 16) ** 2 + (size // 32) ** 2
+
+
+def expected_output_shape(
+    *, imgsz: int = EXPORT_IMGSZ, classes: Sequence[str] = CLASS_NAMES
+) -> list[int]:
+    return [1, 4 + len(classes), anchor_count(imgsz)]
+
+
+def expected_input_shape(imgsz: int = EXPORT_IMGSZ) -> list[int]:
+    return [1, 3, int(imgsz), int(imgsz)]
+
+
+EXPECTED_INPUT_SHAPE = expected_input_shape()
 EXPECTED_OUTPUT_CHANNELS = 4 + len(CLASS_NAMES)  # 8
-EXPECTED_OUTPUT_ANCHORS = 8400
-EXPECTED_OUTPUT_SHAPE = [1, EXPECTED_OUTPUT_CHANNELS, EXPECTED_OUTPUT_ANCHORS]
+EXPECTED_OUTPUT_ANCHORS = anchor_count()
+EXPECTED_OUTPUT_SHAPE = expected_output_shape()
 
 EXPORT_SPEC: dict[str, Any] = {
     "format": "onnx",
@@ -47,15 +66,18 @@ EXPORT_SPEC: dict[str, Any] = {
 FORBIDDEN_EXPORT_KEYS: frozenset[str] = frozenset({"nms", "end2end", "int8", "quantize"})
 
 
-def build_export_kwargs() -> dict[str, Any]:
+def build_export_kwargs(*, imgsz: int = EXPORT_IMGSZ) -> dict[str, Any]:
     """Return a fresh, validated kwargs dict for ``YOLO.export``."""
 
     kwargs = dict(EXPORT_SPEC)
-    assert_export_kwargs(kwargs)
+    kwargs["imgsz"] = int(imgsz)
+    assert_export_kwargs(kwargs, imgsz=imgsz)
     return kwargs
 
 
-def assert_export_kwargs(kwargs: Mapping[str, Any]) -> None:
+def assert_export_kwargs(
+    kwargs: Mapping[str, Any], *, imgsz: int = EXPORT_IMGSZ
+) -> None:
     forbidden = FORBIDDEN_EXPORT_KEYS.intersection(kwargs)
     if forbidden:
         raise ValueError(
@@ -65,7 +87,7 @@ def assert_export_kwargs(kwargs: Mapping[str, Any]) -> None:
         )
     expected = {
         "format": "onnx",
-        "imgsz": 640,
+        "imgsz": int(imgsz),
         "batch": 1,
         "dynamic": False,
         "opset": 17,
@@ -92,6 +114,10 @@ def sha256_file(path: str | Path) -> str:
 def export_onnx(
     weights: str | Path,
     out_path: str | Path | None = None,
+    *,
+    contract: str = CONTRACT,
+    classes: Sequence[str] = CLASS_NAMES,
+    imgsz: int = EXPORT_IMGSZ,
 ) -> dict[str, Any]:
     from ultralytics import YOLO
 
@@ -99,7 +125,7 @@ def export_onnx(
     if not weights_path.is_file():
         raise FileNotFoundError(f"weights not found: {weights_path}")
     model = YOLO(str(weights_path))
-    kwargs = build_export_kwargs()
+    kwargs = build_export_kwargs(imgsz=imgsz)
     exported = Path(model.export(**kwargs)).expanduser().resolve()
     target = (
         Path(out_path).expanduser().resolve()
@@ -116,7 +142,8 @@ def export_onnx(
                 pass
     return {
         "schema": "arq.anatomy4.export/v1",
-        "contract": CONTRACT,
+        "contract": contract,
+        "class_names": list(classes),
         "weights": str(weights_path),
         "onnx": str(target),
         "sha256": sha256_file(target),
@@ -146,12 +173,18 @@ def parse_names_metadata(value: str) -> dict[int, str] | str:
 def verify_onnx(
     path: str | Path,
     *,
-    expected_names: tuple[str, ...] = CLASS_NAMES,
+    expected_names: Sequence[str] = CLASS_NAMES,
+    classes: Sequence[str] | None = None,
+    contract: str = CONTRACT,
+    imgsz: int = EXPORT_IMGSZ,
     run_inference: bool = True,
 ) -> dict[str, Any]:
     import numpy as np
     import onnxruntime as ort
 
+    names_expected = list(classes) if classes is not None else list(expected_names)
+    input_shape_expected = expected_input_shape(imgsz)
+    output_shape_expected = expected_output_shape(imgsz=imgsz, classes=names_expected)
     model_path = Path(path).expanduser().resolve()
     session = ort.InferenceSession(
         str(model_path), providers=["CPUExecutionProvider"]
@@ -176,13 +209,13 @@ def verify_onnx(
     output_shape = list(outputs[0].shape)
     check("single_input", len(inputs) == 1, [item.name for item in inputs])
     check("single_output", len(outputs) == 1, [item.name for item in outputs])
-    check("input_shape", input_shape == EXPECTED_INPUT_SHAPE, input_shape)
-    check("output_shape", output_shape == EXPECTED_OUTPUT_SHAPE, output_shape)
+    check("input_shape", input_shape == input_shape_expected, input_shape)
+    check("output_shape", output_shape == output_shape_expected, output_shape)
     check("input_dtype_fp32", inputs[0].type == "tensor(float)", inputs[0].type)
     check("output_dtype_fp32", outputs[0].type == "tensor(float)", outputs[0].type)
     check(
         "class_order",
-        ordered_names == list(expected_names),
+        ordered_names == names_expected,
         ordered_names,
     )
     check("not_end2end", output_shape != [1, 300, 6], output_shape)
@@ -194,17 +227,17 @@ def verify_onnx(
 
     runtime_output_shape: list[int] | None = None
     if run_inference:
-        dummy = np.zeros(EXPECTED_INPUT_SHAPE, dtype=np.float32)
+        dummy = np.zeros(input_shape_expected, dtype=np.float32)
         result = session.run([outputs[0].name], {inputs[0].name: dummy})[0]
         runtime_output_shape = list(result.shape)
-        check("runtime_output_shape", runtime_output_shape == EXPECTED_OUTPUT_SHAPE, runtime_output_shape)
+        check("runtime_output_shape", runtime_output_shape == output_shape_expected, runtime_output_shape)
         check("runtime_dtype_fp32", str(result.dtype) == "float32", str(result.dtype))
         check("runtime_finite", bool(np.isfinite(result).all()), None)
 
     ok = all(item["ok"] for item in checks)
     return {
         "schema": "arq.anatomy4.onnx-verify/v1",
-        "contract": CONTRACT,
+        "contract": contract,
         "ok": ok,
         "path": str(model_path),
         "sha256": sha256_file(model_path),
@@ -221,7 +254,7 @@ def verify_onnx(
             "runtime_shape": runtime_output_shape,
         },
         "class_names": ordered_names,
-        "expected_class_names": list(expected_names),
+        "expected_class_names": names_expected,
         "metadata": metadata,
         "checks": checks,
         "end2end": output_shape == [1, 300, 6],

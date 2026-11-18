@@ -214,6 +214,24 @@ class ArqClient:
     def get(self, path: str, *, stage: str) -> dict[str, Any]:
         return self._json(self._request("GET", path, stage=stage), stage)
 
+    def get_bytes(
+        self, url: str, *, stage: str, allow_local: bool = True
+    ) -> bytes:
+        """Fetch raw bytes from an absolute URL, API-relative path, or local path."""
+
+        if allow_local and not re.match(r"^https?://", url):
+            candidate = Path(url.replace("file://", "", 1)).expanduser()
+            if candidate.is_file():
+                return candidate.read_bytes()
+        absolute = url
+        if url.startswith("/api/"):
+            root = self.base_url[:-4] if self.base_url.endswith("/api") else self.base_url
+            absolute = root + url
+        elif url.startswith("/"):
+            absolute = self.base_url.rstrip("/") + url
+        response = self._request("GET", absolute, stage=stage)
+        return response.content
+
     def post_json(
         self, path: str, payload: Mapping[str, Any], *, stage: str
     ) -> dict[str, Any]:
@@ -261,7 +279,10 @@ class ArqClient:
     ) -> Any:
         import httpx
 
-        url = path if path.startswith("/") else f"/{path}"
+        if re.match(r"^https?://", path):
+            url = path
+        else:
+            url = path if path.startswith("/") else f"/{path}"
         last_error: Exception | None = None
         for attempt in range(self.retries + 1):
             try:

@@ -24,8 +24,8 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from .contracts import CLASS_NAMES
-from .metrics import PixelDetection
+from .contracts import CLASS_NAMES, CONTRACT
+from .metrics import PixelBox, PixelDetection, evaluate
 
 INPUT_SIZE = 640
 LETTERBOX_FILL = 114
@@ -203,6 +203,27 @@ def decode_detections(
     return detections[:max_detections]
 
 
+def decode_raw_output(
+    raw_output: Any,
+    *,
+    classes: Sequence[str] = CLASS_NAMES,
+    meta: Mapping[str, float],
+    threshold: float = DEFAULT_CONF_FLOOR,
+    iou_threshold: float = DEFAULT_IOU,
+    max_detections: int = DEFAULT_MAX_DET,
+) -> list[dict[str, Any]]:
+    """Named wrapper around :func:`decode_detections` for arbitrary class lists."""
+
+    return decode_detections(
+        raw_output,
+        meta,
+        classes,
+        threshold=threshold,
+        iou_threshold=iou_threshold,
+        max_detections=max_detections,
+    )
+
+
 def load_session(onnx_path: str | Path):
     import onnxruntime as ort
 
@@ -264,6 +285,7 @@ def run_predictions_onnx(
     conf_floor: float = DEFAULT_CONF_FLOOR,
     nms_iou: float = DEFAULT_IOU,
     max_det: int = DEFAULT_MAX_DET,
+    classes: Sequence[str] = CLASS_NAMES,
 ) -> tuple[dict[str, list[PixelDetection]], dict[str, list[dict[str, Any]]]]:
     session = load_session(onnx_path)
     pixels: dict[str, list[PixelDetection]] = {}
@@ -271,8 +293,8 @@ def run_predictions_onnx(
     for record in records:
         image_pixels, rows = predict_image(
             session,
-            record["prepared_image"],
-            CLASS_NAMES,
+            record.get("prepared_image") or record["image"],
+            classes,
             imgsz=imgsz,
             threshold=conf_floor,
             iou_threshold=nms_iou,
@@ -290,3 +312,128 @@ def run_predictions_onnx(
             for row in rows
         ]
     return pixels, serializable
+
+
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT role=adapter
+def _record_ground_truth(
+    record: Mapping[str, Any],
+    classes: Sequence[str],
+    width: float,
+    height: float,
+) -> list[PixelBox]:
+    boxes = record.get("ground_truth")
+    if boxes is None:
+        boxes = record.get("boxes") or []
+    pixels: list[PixelBox] = []
+    for box in boxes:
+        if isinstance(box, PixelBox):
+            pixels.append(box)
+            continue
+        if isinstance(box, Mapping):
+            class_id = box.get("class_id")
+            if class_id is None and box.get("class") is not None:
+                class_id = list(classes).index(str(box["class"]))
+            bbox = box.get("bbox")
+            if bbox is not None:
+                x0, y0, x1, y1 = (float(value) for value in bbox)
+            else:
+                x0 = float(box["x0"])
+                y0 = float(box["y0"])
+                x1 = float(box["x1"])
+                y1 = float(box["y1"])
+            pixels.append(
+                PixelBox(
+                    int(class_id),
+                    x0 * width,
+                    y0 * height,
+                    x1 * width,
+                    y1 * height,
+                )
+            )
+            continue
+        raise OnnxEvalError(f"unsupported ground-truth box: {box!r}")
+    return pixels
+
+
+# @arq feature=F-FAC-YOLO-ANATOMY-LAB process=P-YOLO-TRAIN-EVAL-EXPORT role=adapter
+def evaluate_onnx(
+    *,
+    onnx_path: str | Path,
+    records: Sequence[Mapping[str, Any]],
+    classes: Sequence[str] = CLASS_NAMES,
+    contract: str = CONTRACT,
+    split: str = "test",
+    imgsz: int = INPUT_SIZE,
+    conf_threshold: float = 0.25,
+    conf_floor: float = DEFAULT_CONF_FLOOR,
+    nms_iou: float = DEFAULT_IOU,
+    max_det: int = DEFAULT_MAX_DET,
+) -> dict[str, Any]:
+    """Evaluate an exported ONNX detector over arbitrary Stage-1 classes.
+
+    Returns a metrics payload (dynamic class list) plus per-image records that
+    preserve dataset identity fields so visual samples map back to items.
+    """
+
+    from PIL import Image
+
+    session = load_session(onnx_path)
+    truth: dict[str, list[PixelBox]] = {}
+    pixels: dict[str, list[PixelDetection]] = {}
+    out_records: list[dict[str, Any]] = []
+    for index, record in enumerate(records):
+        key = str(record.get("item_key") or record.get("stem") or index)
+        image_path = record.get("prepared_image") or record["image"]
+        with Image.open(image_path) as opened:
+            width, height = float(opened.width), float(opened.height)
+        image_pixels, rows = predict_image(
+            session,
+            image_path,
+            classes,
+            imgsz=imgsz,
+            threshold=conf_floor,
+            iou_threshold=nms_iou,
+            max_detections=max_det,
+        )
+        image_truth = _record_ground_truth(
+            record,
+            classes,
+            float(record.get("width") or width),
+            float(record.get("height") or height),
+        )
+        truth[key] = image_truth
+        pixels[key] = image_pixels
+        out_records.append(
+            {
+                "item_key": key,
+                "stem": str(record.get("stem") or key),
+                "observation_id": record.get("observation_id"),
+                "photo_url": record.get("photo_url") or record.get("url"),
+                "image": str(image_path),
+                "width": float(record.get("width") or width),
+                "height": float(record.get("height") or height),
+                "ground_truth": list(image_truth),
+                "detections": list(image_pixels),
+                "predictions": rows,
+            }
+        )
+    metrics_payload = evaluate(
+        truth,
+        pixels,
+        split=split,
+        conf_threshold=conf_threshold,
+        iou_threshold=0.5,
+        max_detections=max_det,
+        classes=classes,
+        contract=contract,
+    )
+    return {
+        "schema": "arq.stage1.onnx-eval/v1",
+        "contract": contract,
+        "class_names": list(classes),
+        "metrics": metrics_payload,
+        "records": out_records,
+        "predictions": {
+            record["stem"]: record["predictions"] for record in out_records
+        },
+    }

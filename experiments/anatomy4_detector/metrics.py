@@ -190,12 +190,14 @@ def evaluate(
     iou_threshold: float = 0.5,
     ap_thresholds: Sequence[float] = DEFAULT_AP_THRESHOLDS,
     max_detections: int | None = None,
+    classes: Sequence[str] = CLASS_NAMES,
+    contract: str = CONTRACT,
 ) -> dict:
     """Evaluate all images, including images with no GT (their boxes are FPs)."""
 
     images = sorted(set(ground_truth) | set(detections))
     per_class: dict[str, dict] = {}
-    for class_id, name in enumerate(CLASS_NAMES):
+    for class_id, name in enumerate(classes):
         support = sum(
             1
             for boxes in ground_truth.values()
@@ -268,7 +270,7 @@ def evaluate(
     macro = {
         "classes_with_support": supported,
         "classes_without_support": [
-            name for name in CLASS_NAMES if name not in supported
+            name for name in classes if name not in supported
         ],
         "classes_with_precision": precision_defined,
         "precision": _mean(per_class[name]["precision"] for name in precision_defined),
@@ -283,6 +285,7 @@ def evaluate(
         detections,
         conf_threshold=conf_threshold,
         iou_threshold=iou_threshold,
+        classes=classes,
     )
 
     negative_images = sum(
@@ -292,7 +295,8 @@ def evaluate(
     total_detections = sum(len(boxes) for boxes in detections.values())
     return {
         "schema": "arq.anatomy4.metrics/v1",
-        "contract": CONTRACT,
+        "contract": contract,
+        "class_names": list(classes),
         "split": split,
         "operating_point": {
             "conf": conf_threshold,
@@ -329,10 +333,11 @@ def confusion_matrix(
     *,
     conf_threshold: float,
     iou_threshold: float,
+    classes: Sequence[str] = CLASS_NAMES,
 ) -> dict:
     """Class-agnostic IoU matching so a wrong-class box is a confusion."""
 
-    labels = list(CLASS_NAMES) + [BACKGROUND]
+    labels = list(classes) + [BACKGROUND]
     index = {label: position for position, label in enumerate(labels)}
     matrix = [[0 for _ in labels] for _ in labels]
     for image in sorted(set(ground_truth) | set(detections)):
@@ -344,15 +349,15 @@ def confusion_matrix(
         ]
         match = match_detections(gt, dets, iou_threshold, class_aware=False)
         for det_index, gt_index in enumerate(match.det_to_gt):
-            predicted = CLASS_NAMES[dets[det_index].class_id]
+            predicted = classes[dets[det_index].class_id]
             if gt_index is None:
                 matrix[index[BACKGROUND]][index[predicted]] += 1
             else:
-                truth = CLASS_NAMES[gt[gt_index].class_id]
+                truth = classes[gt[gt_index].class_id]
                 matrix[index[truth]][index[predicted]] += 1
         for gt_index, det_index in enumerate(match.gt_matched):
             if det_index is None:
-                truth = CLASS_NAMES[gt[gt_index].class_id]
+                truth = classes[gt[gt_index].class_id]
                 matrix[index[truth]][index[BACKGROUND]] += 1
     normalized: list[list[float | None]] = []
     for row in matrix:

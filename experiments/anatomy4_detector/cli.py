@@ -15,12 +15,15 @@ export     ONNX with the arq-api contract, then verify it on onnxruntime
 pipeline   validate -> prepare -> train -> evaluate -> export -> manifest
 publish    register the run with arq-api (``--dry-run`` prints planned calls)
 smoke      tiny synthetic end-to-end (``--dry-run`` validates/loads only)
+worker     pull-queue Stage-1 trainer (lease -> train -> eval -> publish)
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
+import socket
 import sys
 from pathlib import Path
 from typing import Any
@@ -742,7 +745,7 @@ def command_publish(args: argparse.Namespace) -> int:
         report_out=Path(args.report_out) if args.report_out else None,
     )
     auth = auth_from_env()
-    base = args.base or __import__("os").environ.get("ARQ_BASE") or "http://localhost:8000"
+    base = args.base or os.environ.get("ARQ_BASE") or "http://localhost:8000"
     result = publish(
         options,
         base=base,
@@ -785,6 +788,37 @@ def command_smoke(args: argparse.Namespace) -> int:
         }
     )
     return 0
+
+
+def command_worker(args: argparse.Namespace) -> int:
+    _configure()
+    from experiments.anatomy4_detector.publish import auth_from_env
+    from experiments.anatomy4_detector.worker import Stage1Worker, WorkerConfig
+
+    contracts = tuple(
+        part.strip() for part in str(args.contracts or "").split(",") if part.strip()
+    )
+    config = WorkerConfig(
+        base=args.base or os.environ.get("ARQ_BASE") or "http://localhost:8000",
+        worker_id=args.worker_id or socket.gethostname(),
+        work_dir=Path(args.work_dir).expanduser(),
+        media_cache_dir=(
+            Path(args.media_cache_dir).expanduser() if args.media_cache_dir else None
+        ),
+        contracts=contracts,
+        device=str(args.device),
+        poll_seconds=float(args.poll_seconds),
+        once=bool(args.once),
+    )
+    worker = Stage1Worker(config, auth=auth_from_env())
+    try:
+        if args.once:
+            result = worker.run_once()
+            _print(result if result is not None else {"status": "idle"})
+            return 0
+        return worker.run_loop()
+    finally:
+        worker.client.close()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -1105,6 +1139,21 @@ def build_parser() -> argparse.ArgumentParser:
     smoke.add_argument("--gpu-budget-gb", type=float, default=3.2)
     smoke.add_argument("--dry-run", action="store_true")
     smoke.set_defaults(func=command_smoke)
+
+    worker = sub.add_parser(
+        "worker", help="pull-queue Stage-1 trainer (lease -> train -> eval -> publish)"
+    )
+    worker.add_argument("--base", default=None, help="arq-api base URL (default ARQ_BASE)")
+    worker.add_argument("--worker-id", default=None, help="defaults to the hostname")
+    worker.add_argument("--work-dir", default="/tmp/arq-stage1-jobs")
+    worker.add_argument("--media-cache-dir", default=None)
+    worker.add_argument("--contracts", default=None, help="comma-separated contract filter")
+    mode = worker.add_mutually_exclusive_group()
+    mode.add_argument("--once", action="store_true", help="process at most one job and exit")
+    mode.add_argument("--loop", action="store_true", help="poll forever (default)")
+    worker.add_argument("--poll-seconds", type=float, default=10.0)
+    worker.add_argument("--device", default="auto", help="0, cpu, or auto")
+    worker.set_defaults(func=command_worker)
     return parser
 
 
